@@ -80,17 +80,17 @@ public class NavigationTimingSeleniumCreator implements NavigationTimingCreator 
 
 			
 			else if (browserName.toLowerCase().contains("chrome")) {
+				// TODO cleanup names
 				timings.put(
 						"wasFetchedViaSpdy",
-						(Long) js.executeScript(SELENIUM + TIMING
-								+ "wasFetchedViaSpdy"));
-				// in seconds.ms, convert it to ms?
-				String time = (String) js.executeScript(SELENIUM + TIMING
-						+ "firstPaintTime");
-				String[] secondsAndMillis = time.split(".");
-
-				timings.put("firstPaintTime", new Long(secondsAndMillis[0])
-						* 1000 + new Long(secondsAndMillis[1]));
+						(Boolean) js
+								.executeScript("return window.chrome.loadTimes().wasFetchedViaSpdy") ? new Long(
+								1) : new Long(0));
+	
+		
+				// TODO: in seconds.ms, convert it to ms!!
+				Double time = (Double) js.executeScript("return window.chrome.loadTimes().firstPaintTime");
+				timings.put("firstPaintTime", time.longValue());
 			}
 
 			return new NavigationTiming(new TestMetaData(url, browserName,
