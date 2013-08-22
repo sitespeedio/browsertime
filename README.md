@@ -5,6 +5,17 @@ Measure your page speed using the Navigation Timing API (using Java). Inspired b
 ## What?
 TBD
 
+## Usage
+
+```
+usage: FetchNavigationTiming [-b <BROWSER>] [-f <FORMAT>] [-i <INCLUDE>] [-t <TIMES>] -u <URL>
+ -b,--browser <BROWSER>   The browser to use [chrome|firefox|ie]. Firefox is the default one.
+ -f,--format <FORMAT>     Choose output format. [xml|json]. xml is default.
+ -i,--include <INCLUDE>   Include individual runs in the data output. [true|false]. Exclude is default.
+ -t,--times <TIMES>       The number of times to run the test. Default is 3 times.
+ -u,--url <URL>           The URL to test
+```
+
 ## How to run 
 
 1. Build the project
