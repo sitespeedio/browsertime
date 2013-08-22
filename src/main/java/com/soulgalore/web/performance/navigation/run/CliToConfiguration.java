@@ -56,7 +56,7 @@ public class CliToConfiguration {
 		} catch (MissingOptionException moe) {
 
 			final HelpFormatter hf = new HelpFormatter();
-			hf.printHelp(this.getClass().getSimpleName(), options, true);
+			hf.printHelp(FetchNavigationTiming.class.getSimpleName(), options, true);
 			throw moe;
 		}
 
@@ -113,7 +113,7 @@ public class CliToConfiguration {
 				+ NavigationTimingConfiguration.CHROME + "|"
 				+ NavigationTimingConfiguration.FIREFOX + "|"
 				+ NavigationTimingConfiguration.INTERNET_EXPLORER
-				+ "]. Fierfox is the default one.");
+				+ "]. Firefox is the default one.");
 		browserOption.setLongOpt(BROWSER);
 		browserOption.setArgName(BROWSER.toUpperCase());
 		browserOption.setRequired(false);
