@@ -3,7 +3,7 @@
 Measure your page speed using the Navigation Timing API (using Java). Inspired by https://github.com/desktoppr/wbench
 
 ## What?
-TBD
+This is a really early version right now, give it a couple of weeks and it will be fully functional :)
 
 ## Usage
 
