@@ -36,14 +36,14 @@
 	</parent>
 
 	<scm>
-		<connection>scm:git:git://github.com/soulgalore/performance.git</connection>
-		<developerConnection>scm:git:git@github.com:soulgalore/performance.git</developerConnection>
-		<url>git@github.com:soulgalore/performance.git</url>
+		<connection>scm:git:git://github.com/soulgalore/navigation-timing.git</connection>
+		<developerConnection>scm:git:git@github.com:soulgalore/navigation-timing.git</developerConnection>
+		<url>git@github.com:soulgalore/navigation-timing.gitt</url>
 	</scm>
 
 	<issueManagement>
 		<system>github</system>
-		<url>http://github.com/soulgalore/performance/issues#issue/</url>
+		<url>https://github.com/soulgalore/navigation-timing/issues#issue/</url>
 	</issueManagement>
 
 	<dependencies>
