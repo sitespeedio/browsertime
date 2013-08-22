@@ -151,7 +151,7 @@
 							<addClasspath>true</addClasspath>
 							<!-- -->
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>com.soulgalore.web.performance.run.FetchNavigationTiming</mainClass>
+							<mainClass>com.soulgalore.web.performance.navigation.run.FetchNavigationTiming</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
