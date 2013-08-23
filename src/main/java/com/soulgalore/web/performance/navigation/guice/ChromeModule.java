@@ -23,27 +23,30 @@ package com.soulgalore.web.performance.navigation.guice;
 
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import com.google.inject.AbstractModule;
-
+import com.google.inject.Provider;
 import com.soulgalore.web.performance.navigation.NavigationTimingCreator;
 import com.soulgalore.web.performance.navigation.NavigationTimingSeleniumCreator;
-import com.soulgalore.web.performance.navigation.result.NavigationTimingResult;
-import com.soulgalore.web.performance.navigation.result.NavigationTimingXMLResult;
 
 /**
- * Setup a module that uses Chrome and outputs XML.
+ * Setup a module that uses Chrome.
  *
  */
-public class ChromeXMLModule extends AbstractModule {
+public class ChromeModule extends AbstractModule {
 
 	/**
 	 * Bind the classes.
 	 */
 	@Override
-	protected void configure() {		
-		bind(WebDriver.class).toProvider(ChromeProvider.class);
-		bind(NavigationTimingResult.class).to(NavigationTimingXMLResult.class);
+	protected void configure() {
+		bind(WebDriver.class).toProvider(new Provider<WebDriver>() {
+			public WebDriver get()
+			{
+				return new ChromeDriver();
+			}
+		});
 		bind(NavigationTimingCreator.class).to(NavigationTimingSeleniumCreator.class);
 	}
 }

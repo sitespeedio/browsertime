@@ -31,7 +31,7 @@ public class NavigationTiming {
 	private final NavigationTimingData timing;
 	private final TestMetaData meta;
 
-	public static final Long UNKNOWN = new Long(-1);
+	public static final Long UNKNOWN = -1l;
 
 	public NavigationTiming(TestMetaData meta, NavigationTimingData timing) {
 
@@ -51,19 +51,17 @@ public class NavigationTiming {
 	// Network data
 	@XmlElement
 	public long getDNSLookupTime() {
-		return timing.getValue("domainLookupEnd")
-				- timing.getValue("domainLookupStart");
+		return getTimeBetweenEvents("domainLookupStart", "domainLookupEnd");
 	}
 
 	@XmlElement
 	public long getRedirectTime() {
-		return timing.getValue("redirectEnd")
-				- timing.getValue("redirectStart");
+		return getTimeBetweenEvents("redirectStart", "redirectEnd");
 	}
 
 	@XmlElement
 	public long getInitialConnection() {
-		return timing.getValue("connectEnd") - timing.getValue("connectStart");
+		return getTimeBetweenEvents("connectStart", "connectEnd");
 	}
 
 	@XmlElement
@@ -77,26 +75,23 @@ public class NavigationTiming {
 	// Backend
 	@XmlElement
 	public long getTTFB() {
-		return timing.getValue("responseStart") - timing.getValue("connectEnd");
+		return getTimeBetweenEvents("connectEnd", "responseStart");
 	}
 
 	@XmlElement
 	public long getBasePage() {
-		return timing.getValue("responseEnd")
-				- timing.getValue("responseStart");
+		return getTimeBetweenEvents("responseStart", "responseEnd");
 	}
 
 	// Frontend
 	@XmlElement
 	public long getDOMProcessing() {
-		return timing.getValue("domInteractive")
-				- timing.getValue("domLoading");
+		return getTimeBetweenEvents("domLoading", "domInteractive");
 	}
 
 	@XmlElement
 	public long getRenderTime() {
-		return timing.getValue("loadEventEnd")
-				- timing.getValue("domContentLoadedEventStart");
+		return getTimeBetweenEvents("domContentLoadedEventStart", "loadEventEnd");
 	}
 
 	// will fetch first paint for IE & Chrome in ms
@@ -113,20 +108,22 @@ public class NavigationTiming {
 	// important timings
 	@XmlElement
 	public long getDomInteractive() {
-		return timing.getValue("domInteractive")
-				- timing.getValue("navigationStart");
+		return getTimeBetweenEvents("navigationStart", "domInteractive");
 	}
 
 	@XmlElement
 	public long getDomComplete() {
-		return timing.getValue("domComplete")
-				- timing.getValue("navigationStart");
+		return getTimeBetweenEvents("navigationStart", "domComplete");
 	}
 
 	@XmlElement
 	public long getNavigationAndPageLoad() {
-		return timing.getValue("loadEventStart")
-				- timing.getValue("navigationStart");
+		return getTimeBetweenEvents("navigationStart", "loadEventStart");
+	}
+
+	private long getTimeBetweenEvents(String startPoint, String endPoint)
+	{
+		return timing.getValue(endPoint) - timing.getValue(startPoint);
 	}
 
 	@Override

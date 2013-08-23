@@ -21,16 +21,28 @@
 package com.soulgalore.web.performance.navigation.guice;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
+import com.google.inject.AbstractModule;
 import com.google.inject.Provider;
+import com.soulgalore.web.performance.navigation.NavigationTimingCreator;
+import com.soulgalore.web.performance.navigation.NavigationTimingSeleniumCreator;
 
-public class ChromeProvider implements Provider<WebDriver> {
+/**
+ * Setup a module that uses Firefox.
+ *
+ */
+public class FireFoxModule extends AbstractModule {
 
 	@Override
-	public WebDriver get() {
-		return new ChromeDriver();
+	protected void configure() {
+		bind(WebDriver.class).toProvider(new Provider<WebDriver>() {
+			public WebDriver get()
+			{
+				return new FirefoxDriver();
+			}
+		});
+		bind(NavigationTimingCreator.class).to(NavigationTimingSeleniumCreator.class);
+		
 	}
-
-	
 }

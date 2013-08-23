@@ -34,7 +34,7 @@ public class CliToConfiguration {
 
 	private static final String URL = "url";
 	private static final String BROWSER = "browser";
-	private static final String FILENAME = "filename";
+	private static final String OUTPUT = "output";
 	private static final String TIMES = "times";
 	private static final String INCLUDE = "include";
 	private static final String FORMAT = "format";
@@ -63,14 +63,13 @@ public class CliToConfiguration {
 		Builder b = NavigationTimingConfiguration.builder();
 		b.setURL(line.getOptionValue(URL));
 		b.setBrowser(line.getOptionValue(BROWSER,
-				NavigationTimingConfiguration.FIREFOX));
-		b.setFilename(line.getOptionValue(FILENAME, ""));
+			NavigationTimingConfiguration.FIREFOX));
+		b.setFilename(line.getOptionValue(OUTPUT, ""));
 		b.setRuns(Integer.parseInt(line.getOptionValue(TIMES, "3")));
-		b.setIncludeIndividualRuns(new Boolean(line.getOptionValue(INCLUDE,"false")));
+		b.setIncludeIndividualRuns(Boolean.valueOf(line.getOptionValue(INCLUDE, "false")));
 		b.setOutputFormat(line.getOptionValue(FORMAT, "xml"));
-		NavigationTimingConfiguration conf = b.build();
 
-		return conf;
+		return b.build();
 
 	}
 
@@ -80,7 +79,7 @@ public class CliToConfiguration {
 		addURLOption(options);
 		addTimesOption(options);
 		addBrowserOption(options);
-		addFileOption(options);
+		addOutputOption(options);
 		addIncludeOption(options);
 		addOutputFormat(options);
 
@@ -88,73 +87,61 @@ public class CliToConfiguration {
 	}
 
 	private void addURLOption(Options options) {
-		final Option urlOption = new Option("u", "The URL to test");
-		urlOption.setLongOpt(URL);
-		urlOption.setArgName(URL.toUpperCase());
-		urlOption.setRequired(true);
-		urlOption.setArgs(1);
+		final Option o = createOption("u", URL, "The URL to test");
+		o.setRequired(true);
 
-		options.addOption(urlOption);
+		options.addOption(o);
 	}
 
 	private void addTimesOption(Options options) {
-		final Option runOption = new Option("t",
-				"The number of times to run the test. Default is 3 times.");
-		runOption.setLongOpt(TIMES);
-		runOption.setArgName(TIMES.toUpperCase());
-		runOption.setRequired(false);
-		runOption.setArgs(1);
+		final Option o = createOption("t", TIMES,
+			"The number of times to run the test. Default is 3 times.");
 
-		options.addOption(runOption);
+		options.addOption(o);
 	}
 
 	private void addBrowserOption(Options options) {
-		final Option browserOption = new Option("b", "The browser to use ["
-				+ NavigationTimingConfiguration.CHROME + "|"
-				+ NavigationTimingConfiguration.FIREFOX + "|"
-				+ NavigationTimingConfiguration.INTERNET_EXPLORER
-				+ "]. Fierfox is the default one.");
-		browserOption.setLongOpt(BROWSER);
-		browserOption.setArgName(BROWSER.toUpperCase());
-		browserOption.setRequired(false);
-		browserOption.setArgs(1);
-		options.addOption(browserOption);
+		final Option o = createOption("b", BROWSER,
+			"The browser to use ["
+			+ NavigationTimingConfiguration.CHROME + "|"
+			+ NavigationTimingConfiguration.FIREFOX + "|"
+			+ NavigationTimingConfiguration.INTERNET_EXPLORER
+			+ "]. Firefox is the default one.");
 
+		options.addOption(o);
 	}
 
-	private void addFileOption(Options options) {
-		final Option fileOption = new Option(
-				"f",
-				"Output the result as a file, give the name of the file. If no filename is given, the result is put on standard out.");
-		fileOption.setLongOpt(FILENAME);
-		fileOption.setArgName(FILENAME.toUpperCase());
-		fileOption.setRequired(false);
-		fileOption.setArgs(1);
+	private void addOutputOption(Options options) {
+		final Option o = createOption("o", OUTPUT,
+			"Output the result as a file, give the name of the file. If no filename is given, the result is put on standard out.");
 
-		options.addOption(fileOption);
+		options.addOption(o);
 	}
 
 	private void addIncludeOption(Options options) {
-		final Option includeIndividualOption = new Option(
-				"i",
-				"Include individual runs in the data output. [true|false]. Exclude is default.");
-		includeIndividualOption.setLongOpt(INCLUDE);
-		includeIndividualOption.setArgName(INCLUDE.toUpperCase());
-		includeIndividualOption.setRequired(false);
-		includeIndividualOption.setArgs(1);
+		final Option o = createOption("i", INCLUDE,
+			"Include individual runs in the data output. [true|false]. Exclude is default.");
 
-		options.addOption(includeIndividualOption);
+		options.addOption(o);
 	}
 
 	private void addOutputFormat(Options options) {
+		final Option o = createOption("f", FORMAT,
+			"Choose output format. [xml|json]. xml is default.");
 
-		final Option formatOption = new Option("f",
-				"Choose output format. [xml|json]. xml is default.");
-		formatOption.setLongOpt(FORMAT);
-		formatOption.setArgName(FORMAT.toUpperCase());
-		formatOption.setRequired(false);
-		formatOption.setArgs(1);
+		options.addOption(o);
+	}
 
-		options.addOption(formatOption);
+	/**
+	 * Create an optional option with one argument.
+	 */
+	private Option createOption(String opt, String longName, String description)
+	{
+		final Option runOption = new Option(opt, description);
+		runOption.setLongOpt(longName);
+		runOption.setArgName(longName.toUpperCase());
+		runOption.setRequired(false);
+		runOption.setArgs(1);
+		return runOption;
 	}
 }

@@ -68,7 +68,7 @@ public class NavigationTimingConfiguration {
 		return includeIndividualRuns;
 	}
 
-	public String getOuputFormat() {
+	public String getOutputFormat() {
 		return format;
 	}
 	
@@ -103,7 +103,7 @@ public class NavigationTimingConfiguration {
 		conf.setIncludeIndividualRuns(includeIndividualRuns());
 		conf.setRuns(getRuns());
 		conf.setURL(getURL());
-		conf.setOutputFormat(getOuputFormat());
+		conf.setOutputFormat(getOutputFormat());
 		return conf;
 
 	}

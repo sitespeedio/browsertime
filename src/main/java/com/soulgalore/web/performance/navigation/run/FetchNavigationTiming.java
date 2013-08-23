@@ -20,6 +20,8 @@
  */
 package com.soulgalore.web.performance.navigation.run;
 
+import static com.soulgalore.web.performance.navigation.run.NavigationTimingConfiguration.OUTPUT_XML;
+
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -28,7 +30,7 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.security.InvalidParameterException;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -40,17 +42,14 @@ import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-
-
+import com.google.inject.Module;
 import com.soulgalore.web.performance.navigation.NavigationTiming;
 import com.soulgalore.web.performance.navigation.NavigationTimingCreator;
-
-import com.soulgalore.web.performance.navigation.guice.ChromeJSONModule;
-import com.soulgalore.web.performance.navigation.guice.ChromeXMLModule;
-import com.soulgalore.web.performance.navigation.guice.FireFoxJSONModule;
-import com.soulgalore.web.performance.navigation.guice.FireFoxXMLModule;
-import com.soulgalore.web.performance.navigation.guice.InternetExplorerJSONModule;
-import com.soulgalore.web.performance.navigation.guice.InternetExplorerXMLModule;
+import com.soulgalore.web.performance.navigation.guice.ChromeModule;
+import com.soulgalore.web.performance.navigation.guice.FireFoxModule;
+import com.soulgalore.web.performance.navigation.guice.InternetExplorerModule;
+import com.soulgalore.web.performance.navigation.guice.JSONResultModule;
+import com.soulgalore.web.performance.navigation.guice.XMLResultModule;
 import com.soulgalore.web.performance.navigation.result.NavigationTimingResult;
 
 public class FetchNavigationTiming {
@@ -80,22 +79,7 @@ public class FetchNavigationTiming {
 		CliToConfiguration cli = new CliToConfiguration(new GnuParser());
 		NavigationTimingConfiguration conf = cli.getConfiguration(args);
 
-		if (!NavigationTimingConfiguration.VALID_BROWSERS.contains(conf
-				.getBrowser())) {
-			String error = "Invalid browser name:" + conf.getBrowser()
-					+ " Valid browsers are:"
-					+ NavigationTimingConfiguration.VALID_BROWSERS;
-			throw new InvalidParameterException(error);
-		}
-
-		if (!NavigationTimingConfiguration.VALID_OUTPUT_FORMATS.contains(conf
-				.getOuputFormat())) {
-
-			String error = "Invalid output format name:"
-					+ conf.getOuputFormat() + " Valid formats are:"
-					+ NavigationTimingConfiguration.VALID_OUTPUT_FORMATS;
-			throw new InvalidParameterException(error);
-		}
+		validateConfiguration(conf);
 
 		Map<String, DescriptiveStatistics> stats = getStatisticsMap();
 
@@ -103,14 +87,13 @@ public class FetchNavigationTiming {
 
 		List<NavigationTiming> timings = new LinkedList<NavigationTiming>();
 
-		for (int i = 0; i < conf.getRuns(); i++) {
+		for (int i = 1; i <= conf.getRuns(); i++) {
 
 			// Create a new creator for each run = new browser
 			NavigationTimingCreator creator = injector
 					.getInstance(NavigationTimingCreator.class);
 
-			NavigationTiming timing = creator.get(conf.getURL(),
-					"run:" + i + 1);
+			NavigationTiming timing = creator.get(conf.getURL(), "run:" + i);
 
 			addStats(timing, stats);
 			timings.add(timing);
@@ -125,38 +108,43 @@ public class FetchNavigationTiming {
 			writeFile(conf.getFilename(), output.build(stats, timings, conf));
 	}
 
+	private void validateConfiguration(NavigationTimingConfiguration conf)
+	{
+		if (!NavigationTimingConfiguration.VALID_BROWSERS.contains(conf
+				.getBrowser())) {
+			String error = "Invalid browser name:" + conf.getBrowser()
+					+ " Valid browsers are:"
+					+ NavigationTimingConfiguration.VALID_BROWSERS;
+			throw new InvalidParameterException(error);
+		}
+
+		if (!NavigationTimingConfiguration.VALID_OUTPUT_FORMATS.contains(conf
+				.getOutputFormat())) {
+
+			String error = "Invalid output format name:"
+					+ conf.getOutputFormat() + " Valid formats are:"
+					+ NavigationTimingConfiguration.VALID_OUTPUT_FORMATS;
+			throw new InvalidParameterException(error);
+		}
+	}
+
 	private Injector getInjector(NavigationTimingConfiguration conf) {
+		List<Module> modules = new ArrayList<Module>();
 
-		// TODO this can be cleaner
+		if (conf.getOutputFormat().toLowerCase().equals(OUTPUT_XML))
+			modules.add(new XMLResultModule());
+		else
+			modules.add(new JSONResultModule());
 
-		Injector injector;
+		String browser = conf.getBrowser().toLowerCase();
+		if (browser.equals(NavigationTimingConfiguration.FIREFOX))
+			modules.add(new FireFoxModule());
+		else if (browser.equals(NavigationTimingConfiguration.INTERNET_EXPLORER))
+			modules.add(new InternetExplorerModule());
+		else
+			modules.add(new ChromeModule());
 
-		if (conf.getOuputFormat().toLowerCase()
-				.equals(NavigationTimingConfiguration.OUTPUT_XML)) {
-
-			if (conf.getBrowser().toLowerCase()
-					.equals(NavigationTimingConfiguration.FIREFOX))
-				injector = Guice.createInjector(new FireFoxXMLModule());
-			else if (conf.getBrowser().toLowerCase()
-					.equals(NavigationTimingConfiguration.INTERNET_EXPLORER))
-				injector = Guice
-						.createInjector(new InternetExplorerXMLModule());
-			else
-				injector = Guice.createInjector(new ChromeXMLModule());
-		}
-
-		else {
-			if (conf.getBrowser().toLowerCase()
-					.equals(NavigationTimingConfiguration.FIREFOX))
-				injector = Guice.createInjector(new FireFoxJSONModule());
-			else if (conf.getBrowser().toLowerCase()
-					.equals(NavigationTimingConfiguration.INTERNET_EXPLORER))
-				injector = Guice
-						.createInjector(new InternetExplorerJSONModule());
-			else
-				injector = Guice.createInjector(new ChromeJSONModule());
-		}
-		return injector;
+		return Guice.createInjector(modules);
 	}
 
 	private void addStats(NavigationTiming timing,

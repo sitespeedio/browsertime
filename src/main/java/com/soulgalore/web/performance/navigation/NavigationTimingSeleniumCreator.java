@@ -25,12 +25,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.google.inject.Inject;
-import com.soulgalore.web.performance.navigation.run.NavigationTimingConfiguration;
 
 /**
  * Selenium backend for getting the Navigation Timing data.
@@ -60,10 +59,11 @@ public class NavigationTimingSeleniumCreator implements NavigationTimingCreator 
 
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 
-			verifyNavigationTiminSupport(js, browserName, browserVersion);
+			verifyNavigationTimingSupport(js, browserName, browserVersion);
 
 			Map<String, Long> timings = new HashMap<String, Long>();
 
+			// Object.getOwnPropertyNames(window.performance.timing)
 			for (String timing : NavigationTimingData.DEFAULT_NAV_TIMINGS) {
 				timings.put(timing,
 						(Long) js.executeScript(SELENIUM + TIMING + timing));
@@ -87,10 +87,13 @@ public class NavigationTimingSeleniumCreator implements NavigationTimingCreator 
 				// in seconds.ms, convert it to ms?
 				String time = (String) js.executeScript(SELENIUM + TIMING
 						+ "firstPaintTime");
-				String[] secondsAndMillis = time.split(".");
+				if (time != null)
+				{
+					String[] secondsAndMillis = time.split(".");
 
-				timings.put("firstPaintTime", new Long(secondsAndMillis[0])
-						* 1000 + new Long(secondsAndMillis[1]));
+					timings.put("firstPaintTime", new Long(secondsAndMillis[0])
+							* 1000 + new Long(secondsAndMillis[1]));
+				}
 			}
 
 			return new NavigationTiming(new TestMetaData(url, browserName,
@@ -104,8 +107,8 @@ public class NavigationTimingSeleniumCreator implements NavigationTimingCreator 
 		}
 	}
 
-	private void verifyNavigationTiminSupport(JavascriptExecutor js,
-			String browserName, String browserVersion) {
+	private void verifyNavigationTimingSupport(JavascriptExecutor js,
+	                                           String browserName, String browserVersion) {
 		Boolean isNavigationTimingSupported = (Boolean) js
 				.executeScript("return !!(window.performance && window.performance.timing);");
 		if (!isNavigationTimingSupported)

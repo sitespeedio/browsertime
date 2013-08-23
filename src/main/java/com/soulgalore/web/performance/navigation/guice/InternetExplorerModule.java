@@ -18,32 +18,33 @@
  *
  *******************************************************
  */
-
 package com.soulgalore.web.performance.navigation.guice;
 
-
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.google.inject.AbstractModule;
-
+import com.google.inject.Provider;
 import com.soulgalore.web.performance.navigation.NavigationTimingCreator;
 import com.soulgalore.web.performance.navigation.NavigationTimingSeleniumCreator;
-import com.soulgalore.web.performance.navigation.result.NavigationTimingJSONResult;
-import com.soulgalore.web.performance.navigation.result.NavigationTimingResult;
 
 /**
- * Setup a module that uses Chrome and outputs JSON.
+ * Setup a module that uses IE.
  *
  */
-public class ChromeJSONModule extends AbstractModule {
+public class InternetExplorerModule extends AbstractModule {
 
 	/**
 	 * Bind the classes.
 	 */
 	@Override
-	protected void configure() {		
-		bind(WebDriver.class).toProvider(ChromeProvider.class);
-		bind(NavigationTimingResult.class).to(NavigationTimingJSONResult.class);
+	protected void configure() {
+		bind(WebDriver.class).toProvider(new Provider<WebDriver>() {
+			public WebDriver get()
+			{
+				return new InternetExplorerDriver();
+			}
+		});
 		bind(NavigationTimingCreator.class).to(NavigationTimingSeleniumCreator.class);
 	}
 }

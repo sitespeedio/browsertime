@@ -36,11 +36,11 @@ public class NavigationTimingJSONResult implements NavigationTimingResult {
 			List<NavigationTiming> allTimings, NavigationTimingConfiguration conf) {
 
 		// create a new Json structure
-		NavigationTimingInfo realData = new NavigationTimingInfo(allTimings
-				.get(0).getMetaData().getURL(), allTimings.get(0).getMetaData()
-				.getBrowser(), allTimings.get(0).getMetaData()
+		NavigationTiming timing = allTimings.get(0);
+		NavigationTimingInfo realData = new NavigationTimingInfo(timing.getMetaData().getURL(), timing.getMetaData()
+				.getBrowser(), timing.getMetaData()
 				.getBrowserVersion(),
-				allTimings.get(0).getMetaData().getWhen(), allTimings.size(),
+				timing.getMetaData().getWhen(), allTimings.size(),
 				allTimings, conf);
 
 		for (String metric : data.keySet()) {
