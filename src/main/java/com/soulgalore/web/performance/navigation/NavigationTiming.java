@@ -43,29 +43,52 @@ public class NavigationTiming {
 		return meta;
 	}
 
+	
+	/**
+	 * Get all specific timings fetched using the navigation timing API.
+	 * @return the raw navigation timing data
+	 */
 	@XmlElement
 	public NavigationTimingData getNavigationTimingData() {
 		return timing;
 	}
 
-	// Network data
+	
+	/**
+	 * Network data. The time spent on DNS lookup. DNSLookupTime =  domainLookupEnd - domainLookupStart. 
+	 * @return the DNS lookup time.
+	 */
 	@XmlElement
 	public long getDNSLookupTime() {
 		return timing.getValue("domainLookupEnd")
 				- timing.getValue("domainLookupStart");
 	}
 
+	
+	/**
+	 * Network data. The time spent on redirects. RedirectTime = redirectEnd - redirectStart.
+	 * @return the redirect time.
+	 */
 	@XmlElement
 	public long getRedirectTime() {
 		return timing.getValue("redirectEnd")
 				- timing.getValue("redirectStart");
 	}
 
+	
+	/**
+	 * Network data. The time spent in the initial connection. InitialConnection = connectEnd - connectStart.
+	 * @return the initial connect time.
+	 */
 	@XmlElement
 	public long getInitialConnection() {
 		return timing.getValue("connectEnd") - timing.getValue("connectStart");
 	}
 
+	/**
+	 * Network data. Is page fetched using SPDY? The check only works for Chrome.
+	 * @return 1 if SPDY is used, else 0. If unknown, {@value #UNKNOWN} is returned.
+	 */
 	@XmlElement
 	public long getUsingSPDY() {
 		if (timing.contains("wasFetchedViaSpdy"))
@@ -74,12 +97,21 @@ public class NavigationTiming {
 			return UNKNOWN;
 	}
 
-	// Backend
+	
 	@XmlElement
+	/**
+	 * Backend time. The time to first byte. TTFB = responseStart - connectEnd.
+	 * @return the ttfb
+	 */
 	public long getTTFB() {
 		return timing.getValue("responseStart") - timing.getValue("connectEnd");
 	}
 
+	
+	/**
+	 * Backend time. The base page time. BasePage = responseEnd - responseStart
+	 * @return the base page time.
+	 */
 	@XmlElement
 	public long getBasePage() {
 		return timing.getValue("responseEnd")
@@ -100,6 +132,10 @@ public class NavigationTiming {
 	}
 
 	// will fetch first paint for IE & Chrome in ms
+	/**
+	 * F<ront end time. The time for first paint. Will be collected in Chrome & IE. Note that Chrome time is converted to ms.
+	 * @return time to first paint in milliseconds
+	 */
 	@XmlElement
 	public long getFirstPaint() {
 		if (timing.contains("msFirstPaint"))
