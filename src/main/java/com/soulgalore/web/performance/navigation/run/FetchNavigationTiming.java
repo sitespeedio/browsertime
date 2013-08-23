@@ -63,7 +63,7 @@ public class FetchNavigationTiming {
 	private static final String RENDER_TIME = "RenderTime";
 	private static final String DOM_INTERACTIVE = "DOMInteractive";
 	private static final String DOM_COMPLETE = "DOMComplete";
-	private static final String NAVIGATION_AND_PAGE_LOAD = "NavigationAndPageLoad";
+	private static final String PAGE_LOAD = "PageLoad";
 	private static final String FIRST_PAINT = "FirstPaint";
 
 	private static final String ENCODING = "UTF-8";
@@ -170,8 +170,8 @@ public class FetchNavigationTiming {
 		stats.get(RENDER_TIME).addValue(timing.getRenderTime());
 		stats.get(DOM_INTERACTIVE).addValue(timing.getDomInteractive());
 		stats.get(DOM_COMPLETE).addValue(timing.getDomComplete());
-		stats.get(NAVIGATION_AND_PAGE_LOAD).addValue(
-				timing.getNavigationAndPageLoad());
+		stats.get(PAGE_LOAD).addValue(
+				timing.getPageLoad());
 		stats.get(FIRST_PAINT).addValue(timing.getFirstPaint());
 	}
 
@@ -186,7 +186,7 @@ public class FetchNavigationTiming {
 		stats.put(RENDER_TIME, new DescriptiveStatistics());
 		stats.put(DOM_INTERACTIVE, new DescriptiveStatistics());
 		stats.put(DOM_COMPLETE, new DescriptiveStatistics());
-		stats.put(NAVIGATION_AND_PAGE_LOAD, new DescriptiveStatistics());
+		stats.put(PAGE_LOAD, new DescriptiveStatistics());
 		stats.put(FIRST_PAINT, new DescriptiveStatistics());
 		return stats;
 	}
