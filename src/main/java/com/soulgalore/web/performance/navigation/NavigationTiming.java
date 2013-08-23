@@ -21,11 +21,15 @@
 package com.soulgalore.web.performance.navigation;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * Get more interesting information from the Navigation Timing Data.
  * 
  */
+// TODO order the timing data as they happens
+@XmlType(propOrder = {"DNSLookupTime","basePage","DOMProcessing","domComplete","domInteractive","firstPaint","initialConnection","pageLoad","redirectTime","renderTime","TTFB","usingSPDY", "navigationTimingData"})
+
 public class NavigationTiming {
 
 	private final NavigationTimingData timing;
