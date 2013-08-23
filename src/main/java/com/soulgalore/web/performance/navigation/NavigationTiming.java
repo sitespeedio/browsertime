@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 // TODO order the timing data as they happens
-@XmlType(propOrder = {"DNSLookupTime","basePage","DOMProcessing","domComplete","domInteractive","firstPaint","initialConnection","pageLoad","redirectTime","renderTime","TTFB","usingSPDY", "navigationTimingData"})
+@XmlType(propOrder = {"DNSLookupTime","basePage","backendTime","frontEndTime","DOMProcessing","domComplete","domInteractive","firstPaint","initialConnection","pageLoad","redirectTime","renderTime","TTFB","usingSPDY", "navigationTimingData"})
 
 public class NavigationTiming {
 
@@ -115,6 +115,15 @@ public class NavigationTiming {
 	}
 
 	
+	@XmlElement
+	/**
+	 * Backend time. Total backend time. Total backend = responseStart - navigationStart.
+	 * @return the ttfb
+	 */
+	public long getBackendTime() {
+		return timing.getValue("responseStart") - timing.getValue("navigationStart");
+	}
+	
 	/**
 	 * Backend time. The base page time. BasePage = responseEnd - responseStart
 	 * @return the base page time.
@@ -144,6 +153,16 @@ public class NavigationTiming {
 	public long getRenderTime() {
 		return timing.getValue("loadEventEnd")
 				- timing.getValue("domContentLoadedEventStart");
+	}
+	
+	/**
+	 * The time spent in front end. FrontEndTime: loadEventStart - responseEnd.
+	 * @return
+	 */
+	@XmlElement
+	public long getFrontEndTime() {
+		return timing.getValue("loadEventStart")
+				- timing.getValue("responseEnd");
 	}
 
 	/**
