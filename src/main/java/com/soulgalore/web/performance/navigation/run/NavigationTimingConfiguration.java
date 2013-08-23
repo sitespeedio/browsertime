@@ -1,6 +1,6 @@
 /******************************************************
  * Navigation timing
- * 
+ *
  *
  * Copyright (C) 2013 by Peter Hedenskog (http://peterhedenskog.com)
  *
@@ -8,7 +8,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in 
  * compliance with the License. You may obtain a copy of the License at
- * 
+ *
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -23,21 +23,22 @@ package com.soulgalore.web.performance.navigation.run;
 import java.util.Arrays;
 import java.util.Collection;
 
-public class NavigationTimingConfiguration {
+public class NavigationTimingConfiguration
+{
 
 	public static final String CHROME = "chrome";
 	public static final String FIREFOX = "firefox";
 	public static final String INTERNET_EXPLORER = "ie";
-	
+
 	public static final Collection<String> VALID_BROWSERS = Arrays.asList(
-			CHROME, FIREFOX, INTERNET_EXPLORER);
+		CHROME, FIREFOX, INTERNET_EXPLORER);
 
 	public static final String OUTPUT_XML = "xml";
 	public static final String OUTPUT_JSON = "json";
-	
+
 	public static final Collection<String> VALID_OUTPUT_FORMATS = Arrays.asList(
-			OUTPUT_JSON,OUTPUT_XML);
-	
+		OUTPUT_JSON, OUTPUT_XML);
+
 	private String url;
 	private int runs;
 	private String browser;
@@ -45,112 +46,89 @@ public class NavigationTimingConfiguration {
 	private boolean includeIndividualRuns;
 	private String format;
 
-	private NavigationTimingConfiguration() {
+	private NavigationTimingConfiguration()
+	{
 	}
 
-	public String getURL() {
+	public String getURL()
+	{
 		return url;
 	}
 
-	public int getRuns() {
+	public int getRuns()
+	{
 		return runs;
 	}
 
-	public String getBrowser() {
+	public String getBrowser()
+	{
 		return browser;
 	}
 
-	public String getFilename() {
+	public String getFilename()
+	{
 		return filename;
 	}
 
-	public boolean includeIndividualRuns() {
+	public boolean includeIndividualRuns()
+	{
 		return includeIndividualRuns;
 	}
 
-	public String getOutputFormat() {
+	public String getOutputFormat()
+	{
 		return format;
 	}
-	
-	private void setURL(String url) {
-		this.url = url;
-	}
 
-	private void setRuns(int runs) {
-		this.runs = runs;
-	}
-
-	private void setBrowser(String browser) {
-		this.browser = browser;
-	}
-
-	private void setFilename(String filename) {
-		this.filename = filename;
-	}
-
-	private void setIncludeIndividualRuns(boolean includeIndividualRuns) {
-		this.includeIndividualRuns = includeIndividualRuns;
-	}
-	
-	private void setOutputFormat(String format) {
-		this.format = format;
-	}
-
-	private NavigationTimingConfiguration copy() {
-		final NavigationTimingConfiguration conf = new NavigationTimingConfiguration();
-		conf.setBrowser(getBrowser());
-		conf.setFilename(getFilename());
-		conf.setIncludeIndividualRuns(includeIndividualRuns());
-		conf.setRuns(getRuns());
-		conf.setURL(getURL());
-		conf.setOutputFormat(getOutputFormat());
-		return conf;
-
-	}
-
-	public static class Builder {
+	public static class Builder
+	{
 		private final NavigationTimingConfiguration configuration = new NavigationTimingConfiguration();
 
-		public Builder() {
+		public NavigationTimingConfiguration build()
+		{
+			return configuration;
 		}
 
-		public NavigationTimingConfiguration build() {
-			return configuration.copy();
-		}
-
-		public Builder setURL(String url) {
-			configuration.setURL(url);
+		public Builder setURL(String url)
+		{
+			configuration.url = url;
 			return this;
 		}
 
-		public Builder setRuns(int runs) {
-			configuration.setRuns(runs);
+		public Builder setRuns(int runs)
+		{
+			configuration.runs = runs;
 			return this;
 		}
 
-		public Builder setBrowser(String browser) {
-			configuration.setBrowser(browser);
+		public Builder setBrowser(String browser)
+		{
+			configuration.browser = browser;
 			return this;
 		}
 
-		public Builder setFilename(String filename) {
-			configuration.setFilename(filename);
+		public Builder setFilename(String filename)
+		{
+			configuration.filename = filename;
 			return this;
 		}
 
-		public Builder setIncludeIndividualRuns(boolean includeIndividualRuns) {
-			configuration.setIncludeIndividualRuns(includeIndividualRuns);
+		public Builder setIncludeIndividualRuns(boolean includeIndividualRuns)
+		{
+			configuration.includeIndividualRuns = includeIndividualRuns;
 			return this;
 		}
-		
-		public Builder setOutputFormat(String format) {
-			configuration.setOutputFormat(format);
+
+		public Builder setOutputFormat(String format)
+		{
+			configuration.format = format;
 			return this;
 		}
 
 	}
 
-	public static Builder builder() {
+	public static Builder builder()
+	{
 		return new Builder();
 	}
 }

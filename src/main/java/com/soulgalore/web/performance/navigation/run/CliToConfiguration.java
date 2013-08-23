@@ -32,7 +32,6 @@ import com.soulgalore.web.performance.navigation.run.NavigationTimingConfigurati
 
 public class CliToConfiguration {
 
-	private static final String URL = "url";
 	private static final String BROWSER = "browser";
 	private static final String OUTPUT = "output";
 	private static final String TIMES = "times";
@@ -49,19 +48,28 @@ public class CliToConfiguration {
 			throws ParseException {
 		CommandLine line;
 
+		String[] urls;
+
 		Options options = setupOptions();
 		try {
 			line = clp.parse(options, args);
-
+			urls = line.getArgs();
+			if (urls.length != 1)
+			{
+				throw new MissingOptionException("One url must be provided as a command line argument.");
+			}
 		} catch (MissingOptionException moe) {
 
 			final HelpFormatter hf = new HelpFormatter();
+			// FIXME URL arg isn't printed
+			hf.setArgName("URL");
 			hf.printHelp(FetchNavigationTiming.class.getSimpleName(), options, true);
 			throw moe;
 		}
 
+
 		Builder b = NavigationTimingConfiguration.builder();
-		b.setURL(line.getOptionValue(URL));
+		b.setURL(urls[0]);
 		b.setBrowser(line.getOptionValue(BROWSER,
 			NavigationTimingConfiguration.FIREFOX));
 		b.setFilename(line.getOptionValue(OUTPUT, ""));
@@ -76,7 +84,6 @@ public class CliToConfiguration {
 	private Options setupOptions() {
 		final Options options = new Options();
 
-		addURLOption(options);
 		addTimesOption(options);
 		addBrowserOption(options);
 		addOutputOption(options);
@@ -84,13 +91,6 @@ public class CliToConfiguration {
 		addOutputFormat(options);
 
 		return options;
-	}
-
-	private void addURLOption(Options options) {
-		final Option o = createOption("u", URL, "The URL to test");
-		o.setRequired(true);
-
-		options.addOption(o);
 	}
 
 	private void addTimesOption(Options options) {
