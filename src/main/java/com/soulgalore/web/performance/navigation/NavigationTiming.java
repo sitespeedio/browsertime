@@ -105,7 +105,8 @@ public class NavigationTiming {
 		if (timing.contains("msFirstPaint"))
 			return timing.getValue("msFirstPaint");
 		else if (timing.contains("firstPaintTime"))
-			return timing.getValue("firstPaintTime");
+			return timing.getValue("firstPaintTime")
+					- timing.getValue("navigationStart");
 		else
 			return UNKNOWN;
 	}
