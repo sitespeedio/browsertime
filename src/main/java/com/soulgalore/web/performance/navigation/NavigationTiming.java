@@ -31,6 +31,9 @@ public class NavigationTiming {
 	private final NavigationTimingData timing;
 	private final TestMetaData meta;
 
+	/**
+	 * Used when data couldn't be fetched.
+	 */
 	public static final Long UNKNOWN = new Long(-1);
 
 	public NavigationTiming(TestMetaData meta, NavigationTimingData timing) {
@@ -118,22 +121,29 @@ public class NavigationTiming {
 				- timing.getValue("responseStart");
 	}
 
-	// Frontend
+
+	/**
+	 * Frontend time. The time to process the DOM. DOMProcessing = domInteractive - domLoading.
+	 * @return
+	 */
 	@XmlElement
 	public long getDOMProcessing() {
 		return timing.getValue("domInteractive")
 				- timing.getValue("domLoading");
 	}
 
+	/**
+	 * Frontend time. The time to render. RenderTime = loadEventEnd - domContentLoadedEventStart
+	 * @return
+	 */
 	@XmlElement
 	public long getRenderTime() {
 		return timing.getValue("loadEventEnd")
 				- timing.getValue("domContentLoadedEventStart");
 	}
 
-	// will fetch first paint for IE & Chrome in ms
 	/**
-	 * F<ront end time. The time for first paint. Will be collected in Chrome & IE. Note that Chrome time is converted to ms.
+	 * Frontend time. The time for first paint. Will be collected in Chrome & IE. Note that Chrome time is converted to ms.
 	 * @return time to first paint in milliseconds
 	 */
 	@XmlElement
@@ -147,21 +157,32 @@ public class NavigationTiming {
 			return UNKNOWN;
 	}
 
-	// important timings
+	/**
+	 * The time until the DOMInteractive. DOMInteractive = domInteractive - navigationStart.
+	 * @return
+	 */
 	@XmlElement
 	public long getDomInteractive() {
 		return timing.getValue("domInteractive")
 				- timing.getValue("navigationStart");
 	}
 
+	/**
+	 * DOMComplete time. DOMComplete = domComplete - navigationStart	
+	 * @return
+	 */
 	@XmlElement
 	public long getDomComplete() {
 		return timing.getValue("domComplete")
 				- timing.getValue("navigationStart");
 	}
 
+	/**
+	 * Get the PageLoad time. PageLoad = loadEventStart - navigationStart.
+	 * @return
+	 */
 	@XmlElement
-	public long getNavigationAndPageLoad() {
+	public long getPageLoad() {
 		return timing.getValue("loadEventStart")
 				- timing.getValue("navigationStart");
 	}
@@ -209,7 +230,7 @@ public class NavigationTiming {
 				+ ", getRenderTime()=" + getRenderTime()
 				+ ", getDomInteractive()=" + getDomInteractive()
 				+ ", getDomComplete()=" + getDomComplete()
-				+ ", getNavigationAndPageLoad()=" + getNavigationAndPageLoad()
+				+ ", getNavigationAndPageLoad()=" + getPageLoad()
 				+ "]";
 	}
 
