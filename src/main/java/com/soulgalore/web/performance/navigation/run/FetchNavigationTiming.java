@@ -64,7 +64,9 @@ public class FetchNavigationTiming {
 	private static final String DOM_INTERACTIVE = "DOMInteractive";
 	private static final String DOM_COMPLETE = "DOMComplete";
 	private static final String NAVIGATION_AND_PAGE_LOAD = "NavigationAndPageLoad";
-
+	// TODO add first paint
+	private static final String FIRST_PAINT = "FirstPaint";
+	
 	private static final String ENCODING = "UTF-8";
 
 	public static void main(String[] args) throws ParseException {

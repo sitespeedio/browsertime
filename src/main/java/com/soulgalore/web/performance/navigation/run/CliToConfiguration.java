@@ -56,7 +56,7 @@ public class CliToConfiguration {
 		} catch (MissingOptionException moe) {
 
 			final HelpFormatter hf = new HelpFormatter();
-			hf.printHelp(this.getClass().getSimpleName(), options, true);
+			hf.printHelp(FetchNavigationTiming.class.getSimpleName(), options, true);
 			throw moe;
 		}
 

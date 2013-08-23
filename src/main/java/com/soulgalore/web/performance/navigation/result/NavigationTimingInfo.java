@@ -47,7 +47,7 @@ class NavigationTimingInfo {
 	/**
 	 * Only to satisfy the Marshaller.
 	 */
-	private NavigationTimingInfo() {
+	public NavigationTimingInfo() {
 
 	}
 
