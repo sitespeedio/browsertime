@@ -88,9 +88,9 @@ public class NavigationTimingSeleniumCreator implements NavigationTimingCreator 
 								1) : new Long(0));
 	
 		
-				// TODO: in seconds.ms, convert it to ms!!
+				// Chrome timing is in s.ms, convert it to ms!!
 				Double time = (Double) js.executeScript("return window.chrome.loadTimes().firstPaintTime");
-				timings.put("firstPaintTime", time.longValue());
+				timings.put("firstPaintTime", ((long)(time*1000)));
 			}
 
 			return new NavigationTiming(new TestMetaData(url, browserName,
