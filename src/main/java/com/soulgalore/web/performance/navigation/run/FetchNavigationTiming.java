@@ -64,9 +64,8 @@ public class FetchNavigationTiming {
 	private static final String DOM_INTERACTIVE = "DOMInteractive";
 	private static final String DOM_COMPLETE = "DOMComplete";
 	private static final String NAVIGATION_AND_PAGE_LOAD = "NavigationAndPageLoad";
-	// TODO add first paint
 	private static final String FIRST_PAINT = "FirstPaint";
-	
+
 	private static final String ENCODING = "UTF-8";
 
 	public static void main(String[] args) throws ParseException {
@@ -162,6 +161,7 @@ public class FetchNavigationTiming {
 		stats.get(DOM_COMPLETE).addValue(timing.getDomComplete());
 		stats.get(NAVIGATION_AND_PAGE_LOAD).addValue(
 				timing.getNavigationAndPageLoad());
+		stats.get(FIRST_PAINT).addValue(timing.getFirstPaint());
 	}
 
 	private Map<String, DescriptiveStatistics> getStatisticsMap() {
@@ -176,6 +176,7 @@ public class FetchNavigationTiming {
 		stats.put(DOM_INTERACTIVE, new DescriptiveStatistics());
 		stats.put(DOM_COMPLETE, new DescriptiveStatistics());
 		stats.put(NAVIGATION_AND_PAGE_LOAD, new DescriptiveStatistics());
+		stats.put(FIRST_PAINT, new DescriptiveStatistics());
 		return stats;
 	}
 
