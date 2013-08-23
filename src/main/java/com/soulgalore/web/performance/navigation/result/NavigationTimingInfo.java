@@ -22,6 +22,8 @@ package com.soulgalore.web.performance.navigation.result;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -35,6 +37,7 @@ import com.soulgalore.web.performance.navigation.run.NavigationTimingConfigurati
  *
  */
 @XmlRootElement(name = "navigation-timing")
+@XmlType(propOrder = {"url", "when","runs","browser","browserVersion","metrics","individualTimings"})
 class NavigationTimingInfo {
 	private String url;
 	private String browser;
@@ -104,6 +107,7 @@ class NavigationTimingInfo {
 		metrics.add(metric);
 	}
 
+	@XmlType(propOrder = {"name", "min", "max", "avg", "median","p60","p70","p80","p90"})
 	static class Metric {
 
 		private String name;
