@@ -26,7 +26,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Provider;
 import com.soulgalore.web.performance.navigation.NavigationTimingCreator;
 import com.soulgalore.web.performance.navigation.NavigationTimingSeleniumCreator;
 
@@ -41,12 +40,7 @@ public class ChromeModule extends AbstractModule {
 	 */
 	@Override
 	protected void configure() {
-		bind(WebDriver.class).toProvider(new Provider<WebDriver>() {
-			public WebDriver get()
-			{
-				return new ChromeDriver();
-			}
-		});
+		bind(WebDriver.class).to(ChromeDriver.class);
 		bind(NavigationTimingCreator.class).to(NavigationTimingSeleniumCreator.class);
 	}
 }

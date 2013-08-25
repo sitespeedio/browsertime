@@ -24,7 +24,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Provider;
 import com.soulgalore.web.performance.navigation.NavigationTimingCreator;
 import com.soulgalore.web.performance.navigation.NavigationTimingSeleniumCreator;
 
@@ -38,13 +37,9 @@ public class InternetExplorerModule extends AbstractModule {
 	 * Bind the classes.
 	 */
 	@Override
-	protected void configure() {
-		bind(WebDriver.class).toProvider(new Provider<WebDriver>() {
-			public WebDriver get()
-			{
-				return new InternetExplorerDriver();
-			}
-		});
+	protected void configure()
+	{
+		bind(WebDriver.class).to(InternetExplorerDriver.class);
 		bind(NavigationTimingCreator.class).to(NavigationTimingSeleniumCreator.class);
 	}
 }

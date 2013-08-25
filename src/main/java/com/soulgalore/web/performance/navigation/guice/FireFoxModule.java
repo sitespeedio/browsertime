@@ -24,7 +24,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Provider;
 import com.soulgalore.web.performance.navigation.NavigationTimingCreator;
 import com.soulgalore.web.performance.navigation.NavigationTimingSeleniumCreator;
 
@@ -36,12 +35,7 @@ public class FireFoxModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
-		bind(WebDriver.class).toProvider(new Provider<WebDriver>() {
-			public WebDriver get()
-			{
-				return new FirefoxDriver();
-			}
-		});
+		bind(WebDriver.class).to(FirefoxDriver.class);
 		bind(NavigationTimingCreator.class).to(NavigationTimingSeleniumCreator.class);
 		
 	}
