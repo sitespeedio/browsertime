@@ -30,17 +30,17 @@ import javax.xml.bind.Marshaller;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
-import com.soulgalore.web.performance.navigation.NavigationTiming;
+import com.soulgalore.web.performance.navigation.TimingSession;
 import com.soulgalore.web.performance.navigation.run.NavigationTimingConfiguration;
 
 public class NavigationTimingXMLResult implements NavigationTimingResult {
 
 	@Override
 	public String build(Map<String, DescriptiveStatistics> data,
-			List<NavigationTiming> allTimings, NavigationTimingConfiguration conf) {
+			List<TimingSession> allTimings, NavigationTimingConfiguration conf) {
 
 		// create a new Json structure
-		NavigationTiming timing = allTimings.get(0);
+		TimingSession timing = allTimings.get(0);
 		NavigationTimingInfo realData = new NavigationTimingInfo(timing.getMetaData().getURL(), timing.getMetaData()
 				.getBrowser(), timing.getMetaData()
 				.getBrowserVersion(),

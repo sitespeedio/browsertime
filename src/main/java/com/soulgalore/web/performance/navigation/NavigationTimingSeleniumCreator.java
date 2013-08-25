@@ -22,6 +22,7 @@ package com.soulgalore.web.performance.navigation;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.Capabilities;
@@ -37,6 +38,12 @@ import com.google.inject.Inject;
  */
 public class NavigationTimingSeleniumCreator implements NavigationTimingCreator {
 
+	public static final String LIST_TIMINGS = "var properties = [];\n" +
+		"for (var x in window.performance.timing) {\n" +
+		"  properties.push(x);\n" +
+		"}\n" +
+		"return properties.sort();";
+
 	private final WebDriver driver;
 
 	private static final String TIMING = "performance.timing.";
@@ -48,7 +55,7 @@ public class NavigationTimingSeleniumCreator implements NavigationTimingCreator 
 		this.driver = driver;
 	}
 
-	public NavigationTiming get(String url, String name) {
+	public TimingSession get(String url, String name) {
 		try {
 			driver.get(url);
 
@@ -63,8 +70,10 @@ public class NavigationTimingSeleniumCreator implements NavigationTimingCreator 
 
 			Map<String, Long> timings = new HashMap<String, Long>();
 
-			// Object.getOwnPropertyNames(window.performance.timing)
-			for (String timing : NavigationTimingData.DEFAULT_NAV_TIMINGS) {
+			// Object.getOwnPropertyNames(window.performance.timing) only works in Chrome =(
+			List<String> allTimings = (List) js.executeScript(LIST_TIMINGS);
+
+			for (String timing : allTimings) {
 				timings.put(timing,
 						(Long) js.executeScript(SELENIUM + TIMING + timing));
 			}
@@ -93,9 +102,9 @@ public class NavigationTimingSeleniumCreator implements NavigationTimingCreator 
 				timings.put("firstPaintTime", ((long)(time*1000)));
 			}
 
-			return new NavigationTiming(new TestMetaData(url, browserName,
+			return new TimingSession(new TestMetaData(url, browserName,
 					browserVersion, new Date(), name),
-					new NavigationTimingData(timings));
+					new TimingMetrics(timings));
 		} finally {
 			if (driver != null) {
 				driver.quit();

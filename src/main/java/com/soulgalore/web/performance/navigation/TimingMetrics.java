@@ -28,8 +28,8 @@ import javax.xml.bind.annotation.XmlElement;
  * The raw data from the navigation timing API.
  * 
  */
-public class NavigationTimingData {
-
+public class TimingMetrics
+{
 	public static final String [] IE_EXTRAS = {"msFirstPaint"};
 	public static final String [] CHROME_EXTRAS = {"firstPaintTime","wasFetchedViaSpdy","secureConnectionStart"};
 	public static final String [] DEFAULT_NAV_TIMINGS = {"connectStart","connectEnd","domComplete","domContentLoadedEventEnd","domContentLoadedEventStart","domInteractive","domLoading","domainLookupStart","domainLookupEnd","fetchStart","loadEventStart","loadEventEnd",
@@ -40,7 +40,7 @@ public class NavigationTimingData {
 	private final Map<String, Long> timings;
 	
 	
-	public NavigationTimingData(Map<String, Long> timings) {
+	public TimingMetrics(Map<String, Long> timings) {
 		this.timings = timings;
 	}
 

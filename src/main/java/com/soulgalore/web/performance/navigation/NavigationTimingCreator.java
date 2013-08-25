@@ -22,6 +22,6 @@ package com.soulgalore.web.performance.navigation;
 
 public interface NavigationTimingCreator {
 
-	public NavigationTiming get(String url, String name);
+	public TimingSession get(String url, String name);
 
 }

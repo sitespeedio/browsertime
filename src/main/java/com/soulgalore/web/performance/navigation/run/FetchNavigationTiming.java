@@ -43,7 +43,7 @@ import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.soulgalore.web.performance.navigation.NavigationTiming;
+import com.soulgalore.web.performance.navigation.TimingSession;
 import com.soulgalore.web.performance.navigation.NavigationTimingCreator;
 import com.soulgalore.web.performance.navigation.guice.ChromeModule;
 import com.soulgalore.web.performance.navigation.guice.FireFoxModule;
@@ -86,7 +86,7 @@ public class FetchNavigationTiming {
 
 		Injector injector = getInjector(conf);
 
-		List<NavigationTiming> timings = new LinkedList<NavigationTiming>();
+		List<TimingSession> timings = new LinkedList<TimingSession>();
 
 		for (int i = 1; i <= conf.getRuns(); i++) {
 
@@ -94,7 +94,7 @@ public class FetchNavigationTiming {
 			NavigationTimingCreator creator = injector
 					.getInstance(NavigationTimingCreator.class);
 
-			NavigationTiming timing = creator.get(conf.getURL(), "run:" + i);
+			TimingSession timing = creator.get(conf.getURL(), "run:" + i);
 
 			addStats(timing, stats);
 			timings.add(timing);
@@ -148,7 +148,7 @@ public class FetchNavigationTiming {
 		return Guice.createInjector(modules);
 	}
 
-	private void addStats(NavigationTiming timing,
+	private void addStats(TimingSession timing,
 			Map<String, DescriptiveStatistics> stats) {
 		stats.get(DNS_LOOKUP_TIME).addValue(timing.getDNSLookupTime());
 		stats.get(REDIRECT_TIME).addValue(timing.getRedirectTime());

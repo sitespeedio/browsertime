@@ -25,11 +25,11 @@ import java.util.Map;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
-import com.soulgalore.web.performance.navigation.NavigationTiming;
+import com.soulgalore.web.performance.navigation.TimingSession;
 import com.soulgalore.web.performance.navigation.run.NavigationTimingConfiguration;
 
 public interface NavigationTimingResult {
 
 	public String build(Map<String, DescriptiveStatistics> data,
-			 List<NavigationTiming> allTimings, NavigationTimingConfiguration conf);
+			 List<TimingSession> allTimings, NavigationTimingConfiguration conf);
 }

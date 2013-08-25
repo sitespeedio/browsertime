@@ -20,36 +20,89 @@
  */
 package com.soulgalore.web.performance.navigation;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.xml.bind.annotation.XmlElement;
+
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+
+import com.soulgalore.web.performance.navigation.metrics.Metrics;
+import com.soulgalore.web.performance.navigation.metrics.NamedMetric;
 
 /**
  * Get more interesting information from the Navigation Timing Data.
  * 
  */
-public class NavigationTiming {
+public class TimingSession
+{
+	private final Map<NamedMetric, DescriptiveStatistics> statistics;
 
-	private final NavigationTimingData timing;
+	private final TimingMetrics timing;
 	private final TestMetaData meta;
+
+	private boolean keepAllTimings;
+	private List<TimingMetrics> allTimings;
 
 	public static final Long UNKNOWN = -1l;
 
-	public NavigationTiming(TestMetaData meta, NavigationTimingData timing) {
+	public TimingSession(TestMetaData meta, TimingMetrics timing) {
+		this(meta, timing, false);
+	}
 
+	public TimingSession(TestMetaData meta, TimingMetrics timing, boolean keepAllTimings) {
 		this.timing = timing;
 		this.meta = meta;
+		this.keepAllTimings = keepAllTimings;
+		if (keepAllTimings)
+		{
+			allTimings = new ArrayList<TimingMetrics>();
+		}
+		this.statistics = new HashMap<NamedMetric, DescriptiveStatistics>();
+	}
+
+	public void addTiming(TimingMetrics timing)
+	{
+		if (keepAllTimings)
+		{
+			allTimings.add(timing);
+		}
+
+		updateStatistics(timing);
 	}
 
 	public TestMetaData getMetaData() {
 		return meta;
 	}
 
-	
+	private void updateStatistics(TimingMetrics timing)
+	{
+		for (NamedMetric metric : Metrics.ALL_METRICS)
+		{
+			DescriptiveStatistics s = getStatistics(metric);
+			s.addValue(metric.calculateMetric(timing));
+		}
+	}
+
+	private DescriptiveStatistics getStatistics(NamedMetric metric)
+	{
+		DescriptiveStatistics s = statistics.get(metric);
+		if (s == null) {
+			s = new DescriptiveStatistics();
+			statistics.put(metric, s);
+		}
+		return s;
+	}
+
+
 	/**
 	 * Get all specific timings fetched using the navigation timing API.
 	 * @return the raw navigation timing data
 	 */
 	@XmlElement
-	public NavigationTimingData getNavigationTimingData() {
+	public TimingMetrics getNavigationTimingData() {
 		return timing;
 	}
 
@@ -128,7 +181,7 @@ public class NavigationTiming {
 
 	// will fetch first paint for IE & Chrome in ms
 	/**
-	 * F<ront end time. The time for first paint. Will be collected in Chrome & IE. Note that Chrome time is converted to ms.
+	 * Front end time. The time for first paint. Will be collected in Chrome & IE. Note that Chrome time is converted to ms.
 	 * @return time to first paint in milliseconds
 	 */
 	@XmlElement
@@ -163,6 +216,11 @@ public class NavigationTiming {
 		return timing.getValue(endPoint) - timing.getValue(startPoint);
 	}
 
+	private long getTimeBetweenEvents(TimingMetrics timing, String startPoint, String endPoint)
+	{
+		return timing.getValue(endPoint) - timing.getValue(startPoint);
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -180,7 +238,7 @@ public class NavigationTiming {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		NavigationTiming other = (NavigationTiming) obj;
+		TimingSession other = (TimingSession) obj;
 		if (meta == null) {
 			if (other.meta != null)
 				return false;
@@ -196,13 +254,14 @@ public class NavigationTiming {
 
 	@Override
 	public String toString() {
-		return "NavigationTiming [timing=" + timing + ", meta=" + meta
+		return "TimingSession [timing=" + timing + ", meta=" + meta
 				+ ", getNavigationTimingData()=" + getNavigationTimingData()
 				+ ", getDNSLookupTime()=" + getDNSLookupTime()
 				+ ", getRedirectTime()=" + getRedirectTime()
 				+ ", getInitialConnection()=" + getInitialConnection()
-				+ ", getTTFB()=" + getTTFB() + ", getBasePage()="
-				+ getBasePage() + ", getDOMProcessing()=" + getDOMProcessing()
+				+ ", getTTFB()=" + getTTFB()
+				+ ", getBasePage()=" + getBasePage()
+				+ ", getDOMProcessing()=" + getDOMProcessing()
 				+ ", getRenderTime()=" + getRenderTime()
 				+ ", getDomInteractive()=" + getDomInteractive()
 				+ ", getDomComplete()=" + getDomComplete()
