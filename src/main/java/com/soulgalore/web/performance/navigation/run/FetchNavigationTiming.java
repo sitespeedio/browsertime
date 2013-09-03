@@ -20,37 +20,22 @@
  */
 package com.soulgalore.web.performance.navigation.run;
 
-import static com.soulgalore.web.performance.navigation.run.NavigationTimingConfiguration.OUTPUT_XML;
-
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
-import java.security.InvalidParameterException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.cli.GnuParser;
-import org.apache.commons.cli.ParseException;
-import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.soulgalore.web.performance.navigation.TimingSession;
-import com.soulgalore.web.performance.navigation.NavigationTimingCreator;
-import com.soulgalore.web.performance.navigation.guice.ChromeModule;
-import com.soulgalore.web.performance.navigation.guice.FireFoxModule;
-import com.soulgalore.web.performance.navigation.guice.InternetExplorerModule;
-import com.soulgalore.web.performance.navigation.guice.JSONResultModule;
-import com.soulgalore.web.performance.navigation.guice.XMLResultModule;
+import com.soulgalore.web.performance.navigation.TimingSessionManager;
+import com.soulgalore.web.performance.navigation.guice.*;
 import com.soulgalore.web.performance.navigation.result.NavigationTimingResult;
+import org.apache.commons.cli.GnuParser;
+import org.apache.commons.cli.ParseException;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+
+import java.io.*;
+import java.security.InvalidParameterException;
+import java.util.*;
+
+import static com.soulgalore.web.performance.navigation.run.NavigationTimingConfiguration.OUTPUT_XML;
 
 public class FetchNavigationTiming {
 
@@ -91,8 +76,8 @@ public class FetchNavigationTiming {
 		for (int i = 1; i <= conf.getRuns(); i++) {
 
 			// Create a new creator for each run = new browser
-			NavigationTimingCreator creator = injector
-					.getInstance(NavigationTimingCreator.class);
+			TimingSessionManager creator = injector
+					.getInstance(TimingSessionManager.class);
 
 			TimingSession timing = creator.get(conf.getURL(), "run:" + i);
 

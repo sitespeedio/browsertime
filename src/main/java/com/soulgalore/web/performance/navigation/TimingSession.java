@@ -20,17 +20,15 @@
  */
 package com.soulgalore.web.performance.navigation;
 
+import com.soulgalore.web.performance.navigation.metrics.NamedMetric;
+import com.soulgalore.web.performance.navigation.metrics.StandardMetrics;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+
+import javax.xml.bind.annotation.XmlElement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.xml.bind.annotation.XmlElement;
-
-import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
-
-import com.soulgalore.web.performance.navigation.metrics.Metrics;
-import com.soulgalore.web.performance.navigation.metrics.NamedMetric;
 
 /**
  * Get more interesting information from the Navigation Timing Data.
@@ -79,7 +77,7 @@ public class TimingSession
 
 	private void updateStatistics(TimingMetrics timing)
 	{
-		for (NamedMetric metric : Metrics.ALL_METRICS)
+		for (NamedMetric metric : new StandardMetrics().getAllMetrics())
 		{
 			DescriptiveStatistics s = getStatistics(metric);
 			s.addValue(metric.calculateMetric(timing));

@@ -22,12 +22,14 @@
 package com.soulgalore.web.performance.navigation.guice;
 
 
+import com.google.inject.AbstractModule;
+import com.soulgalore.web.performance.navigation.*;
+import com.soulgalore.web.performance.navigation.datacollector.ChromeDataCollector;
+import com.soulgalore.web.performance.navigation.datacollector.TimingDataCollector;
+import com.soulgalore.web.performance.navigation.metrics.ChromeMetrics;
+import com.soulgalore.web.performance.navigation.metrics.Metrics;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import com.google.inject.AbstractModule;
-import com.soulgalore.web.performance.navigation.NavigationTimingCreator;
-import com.soulgalore.web.performance.navigation.NavigationTimingSeleniumCreator;
 
 /**
  * Setup a module that uses Chrome.
@@ -41,6 +43,9 @@ public class ChromeModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		bind(WebDriver.class).to(ChromeDriver.class);
-		bind(NavigationTimingCreator.class).to(NavigationTimingSeleniumCreator.class);
-	}
+		bind(TimingSessionManager.class).to(NavigationTimingSeleniumCreator.class);
+        bind(Metrics.class).to(ChromeMetrics.class);
+        bind(TimingRunner.class).to(SeleniumTimingRunner.class);
+        bind(TimingDataCollector.class).to(ChromeDataCollector.class);
+    }
 }

@@ -20,12 +20,14 @@
  */
 package com.soulgalore.web.performance.navigation.guice;
 
+import com.google.inject.AbstractModule;
+import com.soulgalore.web.performance.navigation.*;
+import com.soulgalore.web.performance.navigation.datacollector.InternetExplorerDataCollector;
+import com.soulgalore.web.performance.navigation.datacollector.TimingDataCollector;
+import com.soulgalore.web.performance.navigation.metrics.IeMetrics;
+import com.soulgalore.web.performance.navigation.metrics.Metrics;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-
-import com.google.inject.AbstractModule;
-import com.soulgalore.web.performance.navigation.NavigationTimingCreator;
-import com.soulgalore.web.performance.navigation.NavigationTimingSeleniumCreator;
 
 /**
  * Setup a module that uses IE.
@@ -40,6 +42,8 @@ public class InternetExplorerModule extends AbstractModule {
 	protected void configure()
 	{
 		bind(WebDriver.class).to(InternetExplorerDriver.class);
-		bind(NavigationTimingCreator.class).to(NavigationTimingSeleniumCreator.class);
+		bind(TimingSessionManager.class).to(NavigationTimingSeleniumCreator.class);
+        bind(Metrics.class).to(IeMetrics.class);
+        bind(TimingDataCollector.class).to(InternetExplorerDataCollector.class);
 	}
 }

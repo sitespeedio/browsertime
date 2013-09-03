@@ -20,23 +20,24 @@
  */
 package com.soulgalore.web.performance.navigation;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.google.inject.Inject;
+import com.soulgalore.web.performance.navigation.metrics.Metrics;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.google.inject.Inject;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Selenium backend for getting the Navigation Timing data.
  * 
  */
-public class NavigationTimingSeleniumCreator implements NavigationTimingCreator {
+public class NavigationTimingSeleniumCreator implements TimingSessionManager
+{
 
 	public static final String LIST_TIMINGS = "var properties = [];\n" +
 		"for (var x in window.performance.timing) {\n" +
@@ -44,18 +45,25 @@ public class NavigationTimingSeleniumCreator implements NavigationTimingCreator 
 		"}\n" +
 		"return properties.sort();";
 
-	private final WebDriver driver;
+    private final WebDriver driver;
+    private final Metrics metrics;
 
 	private static final String TIMING = "performance.timing.";
 
 	private static final String SELENIUM = "return window.";
 
 	@Inject
-	public NavigationTimingSeleniumCreator(WebDriver driver) {
+	public NavigationTimingSeleniumCreator(WebDriver driver, Metrics metrics) {
 		this.driver = driver;
-	}
+        this.metrics = metrics;
+    }
 
-	public TimingSession get(String url, String name) {
+    @Override
+    public TimingSession createSession() {
+        return null;
+    }
+
+    public TimingSession get(String url, String name) {
 		try {
 			driver.get(url);
 

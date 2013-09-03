@@ -1,6 +1,6 @@
 /******************************************************
  * Navigation timing
- * 
+ *
  *
  * Copyright (C) 2013 by Peter Hedenskog (http://peterhedenskog.com)
  *
@@ -8,7 +8,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in 
  * compliance with the License. You may obtain a copy of the License at
- * 
+ *
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -18,26 +18,31 @@
  *
  *******************************************************
  */
-package com.soulgalore.web.performance.navigation.guice;
+package com.soulgalore.web.performance.navigation.run;
 
-import com.google.inject.AbstractModule;
-import com.soulgalore.web.performance.navigation.*;
-import com.soulgalore.web.performance.navigation.metrics.Metrics;
-import com.soulgalore.web.performance.navigation.metrics.StandardMetrics;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import com.google.inject.Inject;
+import com.soulgalore.web.performance.navigation.TimingRunner;
+import com.soulgalore.web.performance.navigation.timings.Timing;
 
-/**
- * Setup a module that uses Firefox.
- *
- */
-public class FireFoxModule extends AbstractModule {
+import java.net.MalformedURLException;
+import java.net.URL;
 
-	@Override
-	protected void configure() {
-		bind(WebDriver.class).to(FirefoxDriver.class);
-		bind(TimingSessionManager.class).to(NavigationTimingSeleniumCreator.class);
-        bind(Metrics.class).to(StandardMetrics.class);
-        bind(TimingRunner.class).to(SeleniumTimingRunner.class);
+public class TimingController
+{
+    @Inject
+    private TimingRunner runner;
+
+    public void performTiming(String urlString, String name, int numIterations) {
+
+        Timing timing;
+        try {
+            URL url = new URL(urlString);
+            runner.run(url, numIterations);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
+
+
 }

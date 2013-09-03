@@ -7,14 +7,22 @@ import com.soulgalore.web.performance.navigation.TimingMetrics;
  */
 class SinglePointMetric extends NamedMetric
 {
+    private String property;
+
 	protected SinglePointMetric(String name)
 	{
 		super(name);
+        property = name;
 	}
 
-	@Override
+    SinglePointMetric(String name, String property) {
+        super(name);
+        this.property = property;
+    }
+
+    @Override
 	public long calculateMetric(TimingMetrics timingMetrics)
 	{
-		return timingMetrics.getValue(getName());
+		return timingMetrics.getValue(property);
 	}
 }

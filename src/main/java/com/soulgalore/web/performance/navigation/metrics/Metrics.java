@@ -1,6 +1,5 @@
 package com.soulgalore.web.performance.navigation.metrics;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -8,19 +7,12 @@ import java.util.List;
  */
 public interface Metrics
 {
-	public static final NamedMetric DNS_LOOKUP_TIME = new IntervalMetric("DNSLookupTime", "", "");
-	public static final NamedMetric REDIRECT_TIME = new IntervalMetric("RedirectTime", "", "");
-	public static final NamedMetric INITIAL_CONNECTION = new IntervalMetric("InitialConnection", "", "");
-	public static final NamedMetric TTFB = new IntervalMetric("TTFB", "", "");
-	public static final NamedMetric BASE_PAGE = new IntervalMetric("BasePage", "", "");
-	public static final NamedMetric DOM_PROCESSING = new IntervalMetric("DOMProcessing", "", "");
-	public static final NamedMetric RENDER_TIME = new IntervalMetric("RenderTime", "", "");
-	public static final NamedMetric DOM_INTERACTIVE = new IntervalMetric("DOMInteractive", "", "");
-	public static final NamedMetric DOM_COMPLETE = new IntervalMetric("DOMComplete", "", "");
-	public static final NamedMetric NAVIGATION_AND_PAGE_LOAD = new IntervalMetric("NavigationAndPageLoad", "", "");
-	public static final NamedMetric FIRST_PAINT = new IntervalMetric("FirstPaint", "", "");
+    /*
+        TODO: split timing metrics (to perform statistics on) from single value metrics (e.g. spdy?)
+        TODO: perhaps check metadata (browser version etc) together with single value metrics (need better name)
+        on first launch of browser.
+        TODO: include ability to specify how metrics is captured from browser (possibly in another interface)
+     */
 
-	public static final List<NamedMetric> ALL_METRICS = Arrays.asList(DNS_LOOKUP_TIME, REDIRECT_TIME,
-		INITIAL_CONNECTION, TTFB, BASE_PAGE, DOM_PROCESSING, RENDER_TIME, DOM_INTERACTIVE, DOM_COMPLETE,
-		NAVIGATION_AND_PAGE_LOAD, FIRST_PAINT);
+    List<NamedMetric> getAllMetrics();
 }

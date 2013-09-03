@@ -20,8 +20,10 @@
  */
 package com.soulgalore.web.performance.navigation;
 
-public interface NavigationTimingCreator {
+public interface TimingSessionManager
+{
 
 	public TimingSession get(String url, String name);
 
+    public TimingSession createSession();
 }
