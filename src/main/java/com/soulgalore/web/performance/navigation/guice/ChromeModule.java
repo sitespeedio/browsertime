@@ -43,7 +43,6 @@ public class ChromeModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		bind(WebDriver.class).to(ChromeDriver.class);
-		bind(TimingSessionManager.class).to(NavigationTimingSeleniumCreator.class);
         bind(Metrics.class).to(ChromeMetrics.class);
         bind(TimingRunner.class).to(SeleniumTimingRunner.class);
         bind(TimingDataCollector.class).to(ChromeDataCollector.class);

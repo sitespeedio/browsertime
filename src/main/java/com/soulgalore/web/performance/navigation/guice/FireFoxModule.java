@@ -36,7 +36,6 @@ public class FireFoxModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		bind(WebDriver.class).to(FirefoxDriver.class);
-		bind(TimingSessionManager.class).to(NavigationTimingSeleniumCreator.class);
         bind(Metrics.class).to(StandardMetrics.class);
         bind(TimingRunner.class).to(SeleniumTimingRunner.class);
     }
