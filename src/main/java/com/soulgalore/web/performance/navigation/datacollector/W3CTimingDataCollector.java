@@ -7,8 +7,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import java.util.List;
 import java.util.Map;
 
-import static com.soulgalore.web.performance.navigation.Javascripts.LIST_STANDARD_MARKS;
-import static com.soulgalore.web.performance.navigation.Javascripts.STANDARD_MARK_PREFIX;
+import static com.soulgalore.web.performance.navigation.datacollector.Javascripts.LIST_STANDARD_MARKS;
+import static com.soulgalore.web.performance.navigation.datacollector.Javascripts.STANDARD_MARK_PREFIX;
 
 /**
  * Marks and measurements defined in the w3c timing recommendation.

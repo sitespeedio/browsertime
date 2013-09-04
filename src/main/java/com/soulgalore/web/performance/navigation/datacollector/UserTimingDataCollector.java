@@ -8,8 +8,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import java.util.List;
 import java.util.Map;
 
-import static com.soulgalore.web.performance.navigation.Javascripts.LIST_PAGE_DEFINED_MARKS;
-import static com.soulgalore.web.performance.navigation.Javascripts.LIST_PAGE_DEFINED_MEASUREMENTS;
+import static com.soulgalore.web.performance.navigation.datacollector.Javascripts.LIST_PAGE_DEFINED_MARKS;
+import static com.soulgalore.web.performance.navigation.datacollector.Javascripts.LIST_PAGE_DEFINED_MEASUREMENTS;
 
 /**
  * Marks and measurements defined in the w3c user timing recommendation.

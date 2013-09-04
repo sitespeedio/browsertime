@@ -1,6 +1,6 @@
-package com.soulgalore.web.performance.navigation;
+package com.soulgalore.web.performance.navigation.datacollector;
 
-public class Javascripts {
+class Javascripts {
 
     // http://calendar.perfplanet.com/2012/an-introduction-to-the-resource-timing-api/
 
