@@ -12,11 +12,11 @@ public class TimingMark {
         this.startTime = startTime;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
-    long getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
 }

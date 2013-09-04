@@ -11,7 +11,7 @@ public class TimingMeasurement extends TimingMark {
         this.duration = duration;
     }
 
-    long getDuration() {
+    public long getDuration() {
         return duration;
     }
 }
