@@ -5,7 +5,8 @@ import com.soulgalore.web.performance.navigation.datacollector.BrowserTimeDataCo
 import com.soulgalore.web.performance.navigation.datacollector.TimingDataCollector;
 import com.soulgalore.web.performance.navigation.datacollector.UserTimingDataCollector;
 import com.soulgalore.web.performance.navigation.datacollector.W3CTimingDataCollector;
-import com.soulgalore.web.performance.navigation.timings.Timing;
+import com.soulgalore.web.performance.navigation.timings.TimingRun;
+import com.soulgalore.web.performance.navigation.timings.TimingSession;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
@@ -32,14 +33,14 @@ public class SeleniumTimingRunner implements TimingRunner {
     }
 
     @Override
-    public List<Timing> run(URL url, int numIterations) {
+    public TimingSession run(URL url, int numIterations) {
         try {
-            Map<String, String> pageData = collectPageData(url);
-            List<Timing> timings = new ArrayList<Timing>(numIterations);
-            for (int i = 1; i <= numIterations; i++) {
-                timings.add(collectTimingData(url));
+            TimingSession session = new TimingSession();
+            session.addPageData(collectPageData(url));
+            for (int i = 0; i < numIterations; i++) {
+                session.addTimingRun(collectTimingData(url));
             }
-            return timings;
+            return session;
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {
@@ -62,10 +63,10 @@ public class SeleniumTimingRunner implements TimingRunner {
         return pageInfo;
     }
 
-    private Timing collectTimingData(URL url) {
+    private TimingRun collectTimingData(URL url) {
         JavascriptExecutor js = fetchUrl(url);
 
-        Timing results = new Timing();
+        TimingRun results = new TimingRun();
 
         for (TimingDataCollector collector : dataCollectors) {
             collector.collectMarks(js, results);

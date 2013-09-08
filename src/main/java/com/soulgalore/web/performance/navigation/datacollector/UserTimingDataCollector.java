@@ -1,6 +1,6 @@
 package com.soulgalore.web.performance.navigation.datacollector;
 
-import com.soulgalore.web.performance.navigation.timings.Timing;
+import com.soulgalore.web.performance.navigation.timings.TimingRun;
 import com.soulgalore.web.performance.navigation.timings.TimingMark;
 import com.soulgalore.web.performance.navigation.timings.TimingMeasurement;
 import org.openqa.selenium.JavascriptExecutor;
@@ -17,7 +17,7 @@ import static com.soulgalore.web.performance.navigation.datacollector.Javascript
 public class UserTimingDataCollector extends TimingDataCollector {
     @Override
     @SuppressWarnings("unchecked")
-    public void collectMarks(JavascriptExecutor js, Timing results) {
+    public void collectMarks(JavascriptExecutor js, TimingRun results) {
         if (!isPageDefinedTimingsSupported(js)) {
             return;
         }
@@ -35,7 +35,7 @@ public class UserTimingDataCollector extends TimingDataCollector {
     }
 
     @Override
-    public void collectMeasurements(JavascriptExecutor js, Timing results) {
+    public void collectMeasurements(JavascriptExecutor js, TimingRun results) {
         if (!isPageDefinedTimingsSupported(js)) {
             return;
         }

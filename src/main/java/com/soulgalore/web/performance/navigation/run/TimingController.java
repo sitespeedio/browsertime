@@ -22,7 +22,7 @@ package com.soulgalore.web.performance.navigation.run;
 
 import com.google.inject.Inject;
 import com.soulgalore.web.performance.navigation.TimingRunner;
-import com.soulgalore.web.performance.navigation.timings.Timing;
+import com.soulgalore.web.performance.navigation.timings.TimingSession;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -34,10 +34,9 @@ public class TimingController
 
     public void performTiming(String urlString, String name, int numIterations) {
 
-        Timing timing;
         try {
             URL url = new URL(urlString);
-            runner.run(url, numIterations);
+            TimingSession session = runner.run(url, numIterations);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }

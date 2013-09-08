@@ -20,14 +20,14 @@
  */
 package com.soulgalore.web.performance.navigation.result;
 
-import java.util.List;
-import java.util.Map;
-
+import com.google.gson.Gson;
+import com.soulgalore.web.performance.navigation.run.NavigationTimingConfiguration;
+import com.soulgalore.web.performance.navigation.timings.TimingSession;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
-import com.google.gson.Gson;
-import com.soulgalore.web.performance.navigation.TimingSession;
-import com.soulgalore.web.performance.navigation.run.NavigationTimingConfiguration;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 public class NavigationTimingJSONResult implements NavigationTimingResult {
 
@@ -37,11 +37,9 @@ public class NavigationTimingJSONResult implements NavigationTimingResult {
 
 		// create a new Json structure
 		TimingSession timing = allTimings.get(0);
-		NavigationTimingInfo realData = new NavigationTimingInfo(timing.getMetaData().getURL(), timing.getMetaData()
-				.getBrowser(), timing.getMetaData()
-				.getBrowserVersion(),
-				timing.getMetaData().getWhen(), allTimings.size(),
-				allTimings, conf);
+        NavigationTimingInfo realData = new NavigationTimingInfo("", "", "",
+                new Date(), allTimings.size(),
+                conf);
 
 		for (String metric : data.keySet()) {
 			realData.addMetric(new NavigationTimingInfo.Metric(metric, data

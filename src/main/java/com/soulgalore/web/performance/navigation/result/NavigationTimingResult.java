@@ -20,13 +20,12 @@
  */
 package com.soulgalore.web.performance.navigation.result;
 
-import java.util.List;
-import java.util.Map;
-
+import com.soulgalore.web.performance.navigation.run.NavigationTimingConfiguration;
+import com.soulgalore.web.performance.navigation.timings.TimingSession;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
-import com.soulgalore.web.performance.navigation.TimingSession;
-import com.soulgalore.web.performance.navigation.run.NavigationTimingConfiguration;
+import java.util.List;
+import java.util.Map;
 
 public interface NavigationTimingResult {
 

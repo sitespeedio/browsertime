@@ -18,12 +18,34 @@
  *
  *******************************************************
  */
-package com.soulgalore.web.performance.navigation;
+package com.soulgalore.web.performance.navigation.timings;
 
-public interface TimingSessionManager
+import javax.xml.bind.annotation.XmlElementWrapper;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class TimingSession
 {
+    private final Map<String, String> pageData = new HashMap<String, String>();
+    private final List<TimingRun> timingRuns = new ArrayList<TimingRun>();
 
-	public TimingSession get(String url, String name);
+    public void addPageData(Map<String, String> pageData) {
+        this.pageData.putAll(pageData);
+    }
 
-    public TimingSession createSession();
+    public void addTimingRun(TimingRun run) {
+        timingRuns.add(run);
+    }
+
+    @XmlElementWrapper(name = "pageData")
+    public Map<String, String> getPageData() {
+        return pageData;
+    }
+
+    @XmlElementWrapper(name = "runs")
+    public List<TimingRun> getTimingRuns() {
+        return timingRuns;
+    }
 }

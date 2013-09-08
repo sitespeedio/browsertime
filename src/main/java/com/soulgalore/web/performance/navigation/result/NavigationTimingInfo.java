@@ -20,16 +20,13 @@
  */
 package com.soulgalore.web.performance.navigation.result;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import com.soulgalore.web.performance.navigation.run.NavigationTimingConfiguration;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import com.soulgalore.web.performance.navigation.TimingSession;
-import com.soulgalore.web.performance.navigation.run.NavigationTimingConfiguration;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Info class used for output. The 
@@ -43,9 +40,8 @@ class NavigationTimingInfo {
 	private Date when;
 	private int runs;
 	private Set<Metric> metrics = new HashSet<Metric>();
-	private List<TimingSession> individualTimings = null;
 
-	/**
+    /**
 	 * Only to satisfy the Marshaller.
 	 */
 	public NavigationTimingInfo() {
@@ -53,7 +49,7 @@ class NavigationTimingInfo {
 	}
 
 	NavigationTimingInfo(String url, String browser, String browserVersion, Date when,
-			int runs, List<TimingSession> allTimings, NavigationTimingConfiguration conf) {
+                         int runs, NavigationTimingConfiguration conf) {
 		super();
 		this.url = url;
 		this.browser = browser;
@@ -62,8 +58,7 @@ class NavigationTimingInfo {
 		this.runs = runs;
 
 		if (conf.includeIndividualRuns()) {
-			individualTimings = allTimings;
-		}
+        }
 	}
 
 	@XmlElement
@@ -96,12 +91,7 @@ class NavigationTimingInfo {
 		return metrics;
 	}
 
-	@XmlElement
-	public List<TimingSession> getIndividualTimings() {
-		return individualTimings;
-	}
-
-	void addMetric(Metric metric) {
+    void addMetric(Metric metric) {
 		metrics.add(metric);
 	}
 

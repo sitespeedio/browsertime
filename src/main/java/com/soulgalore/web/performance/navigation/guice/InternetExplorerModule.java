@@ -23,8 +23,6 @@ package com.soulgalore.web.performance.navigation.guice;
 import com.google.inject.AbstractModule;
 import com.soulgalore.web.performance.navigation.datacollector.InternetExplorerDataCollector;
 import com.soulgalore.web.performance.navigation.datacollector.TimingDataCollector;
-import com.soulgalore.web.performance.navigation.metrics.IeMetrics;
-import com.soulgalore.web.performance.navigation.metrics.Metrics;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
@@ -41,7 +39,6 @@ public class InternetExplorerModule extends AbstractModule {
 	protected void configure()
 	{
 		bind(WebDriver.class).to(InternetExplorerDriver.class);
-        bind(Metrics.class).to(IeMetrics.class);
         bind(TimingDataCollector.class).to(InternetExplorerDataCollector.class);
 	}
 }

@@ -21,9 +21,8 @@
 package com.soulgalore.web.performance.navigation.guice;
 
 import com.google.inject.AbstractModule;
-import com.soulgalore.web.performance.navigation.*;
-import com.soulgalore.web.performance.navigation.metrics.Metrics;
-import com.soulgalore.web.performance.navigation.metrics.StandardMetrics;
+import com.soulgalore.web.performance.navigation.SeleniumTimingRunner;
+import com.soulgalore.web.performance.navigation.TimingRunner;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -36,7 +35,6 @@ public class FireFoxModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		bind(WebDriver.class).to(FirefoxDriver.class);
-        bind(Metrics.class).to(StandardMetrics.class);
         bind(TimingRunner.class).to(SeleniumTimingRunner.class);
     }
 }

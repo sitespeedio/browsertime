@@ -1,6 +1,6 @@
 package com.soulgalore.web.performance.navigation.datacollector;
 
-import com.soulgalore.web.performance.navigation.timings.Timing;
+import com.soulgalore.web.performance.navigation.timings.TimingRun;
 import com.soulgalore.web.performance.navigation.timings.TimingMark;
 import org.openqa.selenium.JavascriptExecutor;
 
@@ -22,7 +22,7 @@ public class W3CTimingDataCollector extends TimingDataCollector {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void collectMarks(JavascriptExecutor js, Timing results) {
+    public void collectMarks(JavascriptExecutor js, TimingRun results) {
         if (!isNavigationTimingSupported(js)) {
             return;
         }

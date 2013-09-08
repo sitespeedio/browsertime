@@ -1,15 +1,14 @@
 package com.soulgalore.web.performance.navigation;
 
-import com.soulgalore.web.performance.navigation.timings.Timing;
+import com.soulgalore.web.performance.navigation.timings.TimingSession;
 
 import java.net.URL;
-import java.util.List;
 
 /**
  *
  */
 public interface TimingRunner {
 
-    List<Timing> run(URL url, int numIterations);
+    TimingSession run(URL url, int numIterations);
 
 }
