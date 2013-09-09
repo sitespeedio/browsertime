@@ -20,16 +20,20 @@
  */
 package com.soulgalore.web.performance.navigation.timings;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@XmlRootElement
 public class TimingSession
 {
     private final Map<String, String> pageData = new HashMap<String, String>();
     private final List<TimingRun> timingRuns = new ArrayList<TimingRun>();
+    private final MeasurementStatistics statistics = new MeasurementStatistics();
 
     public void addPageData(Map<String, String> pageData) {
         this.pageData.putAll(pageData);
@@ -37,6 +41,9 @@ public class TimingSession
 
     public void addTimingRun(TimingRun run) {
         timingRuns.add(run);
+        for (TimingMeasurement measurement : run.getMeasurements()) {
+            statistics.addMeasurement(measurement);
+        }
     }
 
     @XmlElementWrapper(name = "pageData")
@@ -45,7 +52,13 @@ public class TimingSession
     }
 
     @XmlElementWrapper(name = "runs")
+    @XmlElement(name = "run")
     public List<TimingRun> getTimingRuns() {
         return timingRuns;
+    }
+
+    @XmlElement
+    public MeasurementStatistics getStatistics() {
+        return statistics;
     }
 }

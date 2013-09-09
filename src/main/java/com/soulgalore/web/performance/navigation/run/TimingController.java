@@ -22,8 +22,10 @@ package com.soulgalore.web.performance.navigation.run;
 
 import com.google.inject.Inject;
 import com.soulgalore.web.performance.navigation.TimingRunner;
+import com.soulgalore.web.performance.navigation.serializer.Serializer;
 import com.soulgalore.web.performance.navigation.timings.TimingSession;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -32,16 +34,16 @@ public class TimingController
     @Inject
     private TimingRunner runner;
 
-    public void performTiming(String urlString, String name, int numIterations) {
+    public void performTiming(String urlString, int numIterations, Serializer serializer) {
 
         try {
             URL url = new URL(urlString);
             TimingSession session = runner.run(url, numIterations);
+            serializer.serialize(session);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-
     }
-
-
 }

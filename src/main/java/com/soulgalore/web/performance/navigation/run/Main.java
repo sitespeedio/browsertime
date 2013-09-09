@@ -4,8 +4,12 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.soulgalore.web.performance.navigation.guice.*;
+import com.soulgalore.web.performance.navigation.serializer.Serializer;
+import com.soulgalore.web.performance.navigation.serializer.SerializerFactory;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.ParseException;
+
+import java.io.*;
 
 /**
  *
@@ -34,15 +38,7 @@ public class Main {
             } else {
                 cliHelper.validateArgValues(line);
 
-                Injector injector = Guice.createInjector(
-                        createFormatModule(line.getOptionValue("f", "xml")),
-                        createBrowserModule(line.getOptionValue("b", "firefox")));
-
-                int numIterations = Integer.parseInt(line.getOptionValue("n", "3"));
-
-                TimingController timer = injector.getInstance(TimingController.class);
-
-                timer.performTiming(line.getArgs()[0], "Navigation test", numIterations);
+                run(line);
             }
         } catch (NumberFormatException e) {
             commandStatus = 1;
@@ -52,6 +48,9 @@ public class Main {
             commandStatus = 1;
             shouldShowUsage = true;
             cliHelper.printSyntaxError("Error parsing command line options: " + e.getMessage());
+        } catch (IOException e) {
+            commandStatus = 1;
+            cliHelper.printSyntaxError("Error creating output file. " + e.getMessage());
         }
 
         if (shouldShowUsage) {
@@ -59,6 +58,33 @@ public class Main {
         }
 
         return commandStatus;
+    }
+
+    private void run(CommandLine line) throws IOException {
+        Injector injector = Guice.createInjector(
+                createFormatModule(line.getOptionValue("f", "xml")),
+                createBrowserModule(line.getOptionValue("b", "firefox")));
+
+        int numIterations = Integer.parseInt(line.getOptionValue("n", "3"));
+
+        Writer writer = parseSerializationWriter(line.getOptionValue("o"));
+
+        SerializerFactory factory = injector.getInstance(SerializerFactory.class);
+        Serializer serializer = factory.create(writer);
+
+        TimingController timer = injector.getInstance(TimingController.class);
+
+        timer.performTiming(line.getArgs()[0], numIterations, serializer);
+    }
+
+    private Writer parseSerializationWriter(String filename) throws IOException {
+        if (filename == null) {
+            return new OutputStreamWriter(System.out);
+        } else {
+            File file = new File(filename);
+            file.createNewFile();
+            return new FileWriter(filename);
+        }
     }
 
     private Module createFormatModule(String format) {

@@ -1,6 +1,5 @@
-package com.soulgalore.web.performance.navigation;
+package com.soulgalore.web.performance.navigation.timings;
 
-import com.soulgalore.web.performance.navigation.timings.TimingMeasurement;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 import java.util.HashMap;

@@ -1,5 +1,6 @@
 package com.soulgalore.web.performance.navigation.timings;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.*;
 
@@ -15,7 +16,8 @@ public class TimingRun {
         return marks.get(name);
     }
 
-    @XmlElementWrapper
+    @XmlElementWrapper(name = "marks")
+    @XmlElement(name = "mark")
     public Collection<TimingMark> getMarks() {
         return Collections.unmodifiableCollection(marks.values());
     }
@@ -24,7 +26,8 @@ public class TimingRun {
         measurements.add(measurement);
     }
 
-    @XmlElementWrapper
+    @XmlElementWrapper(name = "measurements")
+    @XmlElement(name = "measurement")
     public List<TimingMeasurement> getMeasurements() {
         return Collections.unmodifiableList(measurements);
     }

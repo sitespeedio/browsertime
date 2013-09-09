@@ -1,5 +1,7 @@
 package com.soulgalore.web.performance.navigation.timings;
 
+import javax.xml.bind.annotation.XmlAttribute;
+
 /**
  *
  */
@@ -11,6 +13,7 @@ public class TimingMeasurement extends TimingMark {
         this.duration = duration;
     }
 
+    @XmlAttribute
     public long getDuration() {
         return duration;
     }

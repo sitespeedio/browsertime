@@ -1,5 +1,7 @@
 package com.soulgalore.web.performance.navigation.timings;
 
+import javax.xml.bind.annotation.XmlAttribute;
+
 /**
  *
  */
@@ -12,10 +14,12 @@ public class TimingMark {
         this.startTime = startTime;
     }
 
+    @XmlAttribute
     public String getName() {
         return name;
     }
 
+    @XmlAttribute
     public long getStartTime() {
         return startTime;
     }
