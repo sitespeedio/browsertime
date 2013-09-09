@@ -5,8 +5,8 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.*;
 
 public class TimingRun {
-    private Map<String, TimingMark> marks = new HashMap<String, TimingMark>();
-    private List<TimingMeasurement> measurements = new ArrayList<TimingMeasurement>();
+    private final Map<String, TimingMark> marks = new HashMap<String, TimingMark>();
+    private final List<TimingMeasurement> measurements = new ArrayList<TimingMeasurement>();
 
     public void addMark(TimingMark mark) {
         marks.put(mark.getName(), mark);

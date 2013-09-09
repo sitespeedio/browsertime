@@ -8,11 +8,11 @@ import java.util.List;
 /**
  *
  */
-public class CliHelper {
+class CliHelper {
     private static final List<String> VALID_BROWSERS = Arrays.asList("firefox", "chrome", "ie");
     private static final List<String> VALID_FORMATS = Arrays.asList("xml", "json");
 
-    private Options options;
+    private final Options options;
 
     public CliHelper() {
         options = new Options();

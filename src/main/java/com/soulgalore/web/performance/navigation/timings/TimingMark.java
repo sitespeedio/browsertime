@@ -6,8 +6,8 @@ import javax.xml.bind.annotation.XmlAttribute;
  *
  */
 public class TimingMark {
-    private String name;
-    private long startTime;
+    private final String name;
+    private final long startTime;
 
     public TimingMark(String name, long startTime) {
         this.name = name;
