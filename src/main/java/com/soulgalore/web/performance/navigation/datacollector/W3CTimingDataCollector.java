@@ -31,8 +31,9 @@ public class W3CTimingDataCollector extends TimingDataCollector {
 
         for (String markName : markNames) {
             long startTime = (Long) js.executeScript("return " + STANDARD_MARK_PREFIX + markName);
-            // possibly filter out 0 times
-            results.addMark(new TimingMark(markName, startTime));
+            if (startTime > 0) {
+                results.addMark(new TimingMark(markName, startTime));
+            }
         }
     }
 
