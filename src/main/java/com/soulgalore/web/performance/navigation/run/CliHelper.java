@@ -56,11 +56,7 @@ public class CliHelper {
 
     private Option createBrowserOption() {
         return createOption("b", "browser",
-                "The browser to use ["
-                        + NavigationTimingConfiguration.CHROME + "|"
-                        + NavigationTimingConfiguration.FIREFOX + "|"
-                        + NavigationTimingConfiguration.INTERNET_EXPLORER
-                        + "], defaults to firefox.");
+                "The browser to use [chrome|firefox|ie], defaults to firefox.");
     }
 
     private Option createOutputOption() {
