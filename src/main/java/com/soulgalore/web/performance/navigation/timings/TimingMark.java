@@ -23,4 +23,9 @@ public class TimingMark {
     public long getStartTime() {
         return startTime;
     }
+
+    private TimingMark() {
+        name = null;
+        startTime = 0;
+    }
 }

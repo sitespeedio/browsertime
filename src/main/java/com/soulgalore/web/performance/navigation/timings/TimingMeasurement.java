@@ -17,4 +17,9 @@ public class TimingMeasurement extends TimingMark {
     public long getDuration() {
         return duration;
     }
+
+    private TimingMeasurement() {
+        super(null, 0);
+        duration = 0;
+    }
 }
