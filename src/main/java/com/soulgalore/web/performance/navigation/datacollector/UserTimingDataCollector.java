@@ -29,7 +29,6 @@ public class UserTimingDataCollector extends TimingDataCollector {
             String name = (String) mark.get("name");
             double doubleTime = (Double) mark.get("startTime");
             long startTime = Double.valueOf(doubleTime).longValue();
-            // possibly filter out 0 times
             results.addMark(new TimingMark(name, startTime));
         }
     }
@@ -43,13 +42,12 @@ public class UserTimingDataCollector extends TimingDataCollector {
         List measurements = (List) js.executeScript(LIST_PAGE_DEFINED_MEASUREMENTS);
 
         for (Object m : measurements) {
-            Map mark = (Map) m;
-            String name = (String) mark.get("name");
-            double doubleTime = (Double) mark.get("startTime");
+            Map measurement = (Map) m;
+            String name = (String) measurement.get("name");
+            double doubleTime = (Double) measurement.get("startTime");
             long startTime = Double.valueOf(doubleTime).longValue();
-            doubleTime = (Double) mark.get("duration");
+            doubleTime = (Double) measurement.get("duration");
             long duration = Double.valueOf(doubleTime).longValue();
-            // possibly filter out 0 times
             results.addMeasurement(new TimingMeasurement(name, startTime, duration));
         }
     }
