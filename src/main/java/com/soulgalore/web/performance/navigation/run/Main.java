@@ -82,7 +82,7 @@ public class Main {
 
     private void run(CommandLine line) throws IOException {
         Injector injector = Guice.createInjector(
-                createFormatModule(line.getOptionValue("f", "xml")),
+                createFormatModule(line.getOptionValue("f", CliHelper.XML)),
                 createBrowserModule(line.getOptionValue("b", CliHelper.FIREFOX)));
 
         int numIterations = Integer.parseInt(line.getOptionValue("n", "3"));
@@ -108,9 +108,9 @@ public class Main {
     }
 
     private Module createFormatModule(String format) {
-        if ("xml".equals(format)) {
+        if (CliHelper.XML.equals(format)) {
             return new XMLResultModule();
-        } else if ("json".equals(format)) {
+        } else if (CliHelper.JSON.equals(format)) {
             return new JSONResultModule();
         }
         throw new RuntimeException();

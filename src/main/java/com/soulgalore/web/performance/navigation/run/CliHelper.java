@@ -34,8 +34,11 @@ class CliHelper {
 	static final String FIREFOX = "firefox";
 	static final String IE = "ie";
 	
+	static final String XML = "xml";
+	static final String JSON = "json";
+	
     private static final List<String> VALID_BROWSERS = Arrays.asList(FIREFOX,CHROME,IE);
-    private static final List<String> VALID_FORMATS = Arrays.asList("xml", "json");
+    private static final List<String> VALID_FORMATS = Arrays.asList(XML, JSON);
 
     private final Options options;
 
@@ -97,7 +100,7 @@ class CliHelper {
 
     private Option createFormatOption() {
         return createOption("f", "format",
-                "Choose output format. [xml|json], defaults to xml.");
+                "Choose output format. " + VALID_FORMATS + " , defaults to " + XML + ".");
     }
 
     private Option createHelpOption() {
