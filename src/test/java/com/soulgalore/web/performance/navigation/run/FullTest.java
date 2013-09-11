@@ -10,7 +10,7 @@ public class FullTest {
 		public void whenFetchingAPageNoExceptionIsThrown() throws ParseException {
             Main app = new Main();
             int status = app.handleCommandLine(new String[]{"http://peterhedenskog.com"});
-            assert status == 0;
+            assert status == Main.OK;
 		}
 
 }

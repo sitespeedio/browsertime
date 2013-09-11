@@ -35,6 +35,10 @@ import java.io.*;
  *
  */
 public class Main {
+	
+	public static final int ERROR = 1;
+	public static final int OK = 0;
+	
     public static void main(String[] args) {
         Main app = new Main();
         int status = app.handleCommandLine(args);
@@ -43,7 +47,7 @@ public class Main {
     }
 
     int handleCommandLine(String[] args) {
-        int commandStatus = 0;
+        int commandStatus = OK;
         boolean shouldShowUsage = false;
 
         CliHelper cliHelper = new CliHelper();
@@ -61,15 +65,15 @@ public class Main {
                 run(line);
             }
         } catch (NumberFormatException e) {
-            commandStatus = 1;
+            commandStatus = ERROR;
             shouldShowUsage = true;
             cliHelper.printSyntaxError("Error parsing command line options: " + e.getMessage());
         } catch (ParseException e) {
-            commandStatus = 1;
+            commandStatus = ERROR;
             shouldShowUsage = true;
             cliHelper.printSyntaxError("Error parsing command line options: " + e.getMessage());
         } catch (IOException e) {
-            commandStatus = 1;
+            commandStatus = ERROR;
             cliHelper.printSyntaxError("Error creating output file. " + e.getMessage());
         }
 
