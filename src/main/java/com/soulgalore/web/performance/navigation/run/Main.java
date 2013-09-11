@@ -83,7 +83,7 @@ public class Main {
     private void run(CommandLine line) throws IOException {
         Injector injector = Guice.createInjector(
                 createFormatModule(line.getOptionValue("f", "xml")),
-                createBrowserModule(line.getOptionValue("b", "firefox")));
+                createBrowserModule(line.getOptionValue("b", CliHelper.FIREFOX)));
 
         int numIterations = Integer.parseInt(line.getOptionValue("n", "3"));
 
@@ -117,11 +117,11 @@ public class Main {
     }
 
     private Module createBrowserModule(String browser) {
-        if ("chrome".equals(browser)) {
+        if (CliHelper.CHROME.equals(browser)) {
             return new ChromeModule();
-        } else if ("firefox".equals(browser)) {
+        } else if (CliHelper.FIREFOX.equals(browser)) {
             return new FireFoxModule();
-        } else if ("ie".equals(browser)) {
+        } else if (CliHelper.IE.equals(browser)) {
             return new InternetExplorerModule();
         }
         throw new RuntimeException();

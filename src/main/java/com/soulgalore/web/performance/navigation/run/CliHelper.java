@@ -29,7 +29,12 @@ import java.util.List;
  *
  */
 class CliHelper {
-    private static final List<String> VALID_BROWSERS = Arrays.asList("firefox", "chrome", "ie");
+	
+	static final String CHROME = "chrome";
+	static final String FIREFOX = "firefox";
+	static final String IE = "ie";
+	
+    private static final List<String> VALID_BROWSERS = Arrays.asList(FIREFOX,CHROME,IE);
     private static final List<String> VALID_FORMATS = Arrays.asList("xml", "json");
 
     private final Options options;
@@ -76,7 +81,7 @@ class CliHelper {
 
     private Option createBrowserOption() {
         return createOption("b", "browser",
-                "The browser to use [chrome|firefox|ie], defaults to firefox.");
+                "The browser to use " + VALID_BROWSERS + ", defaults to " + FIREFOX + ".");
     }
 
     private Option createOutputOption() {
