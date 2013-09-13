@@ -20,21 +20,24 @@
  */
 package com.soulgalore.web.performance.navigation.datacollector;
 
-import com.soulgalore.web.performance.navigation.timings.TimingRun;
 import com.soulgalore.web.performance.navigation.timings.TimingMark;
 import com.soulgalore.web.performance.navigation.timings.TimingMeasurement;
+import com.soulgalore.web.performance.navigation.timings.TimingRun;
 import org.openqa.selenium.JavascriptExecutor;
 
 import java.util.List;
 import java.util.Map;
 
-import static com.soulgalore.web.performance.navigation.datacollector.Javascripts.LIST_PAGE_DEFINED_MARKS;
-import static com.soulgalore.web.performance.navigation.datacollector.Javascripts.LIST_PAGE_DEFINED_MEASUREMENTS;
-
 /**
  * Marks and measurements defined in the w3c user timing recommendation.
  */
 public class UserTimingDataCollector extends TimingDataCollector {
+    private static final String LIST_PAGE_DEFINED_MARKS =
+            "return window.performance.getEntriesByType('mark');";
+
+    private static final String LIST_PAGE_DEFINED_MEASUREMENTS =
+            "return window.performance.getEntriesByType('measure');";
+
     @Override
     @SuppressWarnings("unchecked")
     public void collectMarks(JavascriptExecutor js, TimingRun results) {

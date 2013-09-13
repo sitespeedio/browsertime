@@ -41,7 +41,7 @@ public class TimingDataCollector {
     public void collectMeasurements(JavascriptExecutor js, TimingRun results) {
     }
 
-    final static class MarkInterval {
+    final static protected class MarkInterval {
         private final String measurementName;
         private final String startMarkName;
         private final String endMarkName;

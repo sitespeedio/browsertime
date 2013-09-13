@@ -32,13 +32,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
  * Setup a module that uses Chrome.
- *
  */
 public class ChromeModule extends AbstractModule {
 
-	/**
-	 * Bind the classes.
-	 */
 	@Override
 	protected void configure() {
 		bind(WebDriver.class).to(ChromeDriver.class);
