@@ -28,7 +28,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Setup a module that uses Firefox.
- *
  */
 public class FireFoxModule extends AbstractModule {
 

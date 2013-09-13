@@ -28,13 +28,9 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 /**
  * Setup a module that uses IE.
- *
  */
 public class InternetExplorerModule extends AbstractModule {
 
-	/**
-	 * Bind the classes.
-	 */
 	@Override
 	protected void configure()
 	{
