@@ -1,4 +1,4 @@
-# Browser Time
+# Browser Time [![Build Status](https://travis-ci.org/soulgalore/browsertime.png?branch=master)](https://travis-ci.org/soulgalore/browsertime)
 
 Guess what? It's browser time! Fetch timings (like the Navigation Timing API data) and other data from your browser (inspired by [wbench](https://github.com/desktoppr/wbench))
 
