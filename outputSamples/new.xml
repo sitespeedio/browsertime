@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<timingSession>
+    <pageData>
+        <entry>
+            <key>platform</key>
+            <value>MAC</value>
+        </entry>
+        <entry>
+            <key>browserVersion</key>
+            <value>29.0.1547.65</value>
+        </entry>
+        <entry>
+            <key>browserName</key>
+            <value>chrome</value>
+        </entry>
+        <entry>
+            <key>redirectCount</key>
+            <value>0</value>
+        </entry>
+        <entry>
+            <key>wasFetchedViaSpdy</key>
+            <value>false</value>
+        </entry>
+        <entry>
+            <key>actualUrl</key>
+            <value>http://www.apple.com/</value>
+        </entry>
+        <entry>
+            <key>url</key>
+            <value>http://www.apple.com</value>
+        </entry>
+    </pageData>
+    <runs>
+        <run>
+            <marks>
+                <mark name="firstPaintTime" startTime="1378767504812"/>
+                <mark name="fetchStart" startTime="1378767504763"/>
+                <mark name="domComplete" startTime="1378767505213"/>
+                <mark name="loadEventStart" startTime="1378767505213"/>
+                <mark name="requestStart" startTime="1378767504763"/>
+                <mark name="navigationStart" startTime="1378767504763"/>
+                <mark name="responseEnd" startTime="1378767504764"/>
+                <mark name="domLoading" startTime="1378767504774"/>
+                <mark name="domInteractive" startTime="1378767504856"/>
+                <mark name="domContentLoadedEventStart" startTime="1378767504856"/>
+                <mark name="domainLookupEnd" startTime="1378767504763"/>
+                <mark name="responseStart" startTime="1378767504764"/>
+                <mark name="connectEnd" startTime="1378767504763"/>
+                <mark name="loadEventEnd" startTime="1378767505231"/>
+                <mark name="unloadEventStart" startTime="1378767504767"/>
+                <mark name="connectStart" startTime="1378767504763"/>
+                <mark name="domContentLoadedEventEnd" startTime="1378767504858"/>
+                <mark name="unloadEventEnd" startTime="1378767504768"/>
+                <mark name="domainLookupStart" startTime="1378767504763"/>
+            </marks>
+            <measurements>
+                <measurement duration="49" name="firstPaint" startTime="1378767504763"/>
+                <measurement duration="0" name="domainLookup" startTime="1378767504763"/>
+                <measurement duration="0" name="initialConnection" startTime="1378767504763"/>
+                <measurement duration="1" name="ttfb" startTime="1378767504763"/>
+                <measurement duration="0" name="basePage" startTime="1378767504764"/>
+                <measurement duration="82" name="domProcessing" startTime="1378767504774"/>
+                <measurement duration="375" name="renderTime" startTime="1378767504856"/>
+                <measurement duration="93" name="domInteractive" startTime="1378767504763"/>
+                <measurement duration="450" name="domComplete" startTime="1378767504763"/>
+                <measurement duration="450" name="navigationAndPageLoad" startTime="1378767504763"/>
+            </measurements>
+        </run>
+    </runs>
+</timingSession>

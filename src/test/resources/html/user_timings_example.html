@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+    <title>User Timing example</title>
+</head>
+<body onload="init()">
+<script>
+    function sleep(delay) {
+        var start = new Date().getTime();
+        while (new Date().getTime() < start + delay);
+    }
+
+    function init()
+    {
+        performance.mark("startTask1");
+        sleep(1000);
+        performance.mark("endTask1");
+
+        performance.mark("startTask2");
+        sleep(2000);
+        performance.mark("endTask2");
+
+        performance.measure("task1", "startTask1", "endTask1");
+        performance.measure("task2", "startTask2", "endTask2");
+
+        measurePerf();
+    }
+
+    function measurePerf()
+    {
+        var perfEntries = performance.getEntriesByType("mark");
+        for (var i = 0; i < perfEntries.length; i++)
+        {
+            if (window.console) console.log("Name: "        + perfEntries[i].name      +
+                    " Entry Type: " + perfEntries[i].entryType +
+                    " Start Time: " + perfEntries[i].startTime +
+                    " Duration: "   + perfEntries[i].duration  + "\n");
+        }
+
+
+        perfEntries = performance.getEntriesByType("measure");
+        for (var i = 0; i < perfEntries.length; i++)
+        {
+            if (window.console) console.log("Name: "        + perfEntries[i].name      +
+                    " Entry Type: " + perfEntries[i].entryType +
+                    " Start Time: " + perfEntries[i].startTime +
+                    " Duration: "   + perfEntries[i].duration  + "\n");
+        }
+    }
+</script>
+</body>
+</html>
