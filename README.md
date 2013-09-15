@@ -1,19 +1,13 @@
-# Measure your page speed
+# Browser Time
 
-Measure your page speed using the Navigation Timing API (using Java). Inspired by https://github.com/desktoppr/wbench
+Guess what? It's browser time! Fetch timings (like the Navigation Timining API data) and other data from your browser (inspired by [wbench](https://github.com/desktoppr/wbench))
 
 ## What?
-TBD
+
 
 ## Usage
 
 ```
-usage: FetchNavigationTiming [-b <BROWSER>] [-f <FORMAT>] [-i <INCLUDE>] [-t <TIMES>] <URL>
- -b,--browser <BROWSER>   The browser to use [chrome|firefox|ie]. Firefox is the default one.
- -f,--format <FORMAT>     Choose output format. [xml|json]. xml is default.
- -i,--include <INCLUDE>   Include individual runs in the data output. [true|false]. Exclude is default.
- -t,--times <TIMES>       The number of times to run the test. Default is 3 times.
- <URL>           The URL to test
 ```
 
 ## How to run 
