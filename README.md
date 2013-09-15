@@ -1,6 +1,6 @@
 # Browser Time
 
-Guess what? It's browser time! Fetch timings (like the Navigation Timining API data) and other data from your browser (inspired by [wbench](https://github.com/desktoppr/wbench))
+Guess what? It's browser time! Fetch timings (like the Navigation Timing API data) and other data from your browser (inspired by [wbench](https://github.com/desktoppr/wbench))
 
 ## Usage
 
