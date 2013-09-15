@@ -153,7 +153,7 @@
 							<addClasspath>true</addClasspath>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>com.soulgalore.web.performance.navigation.run.Main</mainClass>
+							<mainClass>com.soulgalore.web.browsertime.run.Main</mainClass>
 						</manifest>
                     </archive>
 				</configuration>
