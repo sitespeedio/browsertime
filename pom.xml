@@ -7,7 +7,7 @@
 	<name>Browsertime</name>
 
 	<packaging>jar</packaging>
-	<description>Measure page speed using the navigation timing API</description>
+	<description>It-s Browser Time! Fetch timings from the browser</description>
 
 	<licenses>
 		<license>
@@ -42,14 +42,14 @@
 	</parent>
 
 	<scm>
-		<connection>scm:git:git://github.com/soulgalore/navigation-timing.git</connection>
-		<developerConnection>scm:git:git@github.com:soulgalore/navigation-timing.git</developerConnection>
-		<url>git@github.com:soulgalore/navigation-timing.gitt</url>
+		<connection>scm:git:git://github.com/soulgalore/browsertime.git</connection>
+		<developerConnection>scm:git:git@github.com:soulgalore/browsertime.git</developerConnection>
+		<url>git@github.com:soulgalore/browsertime.git</url>
 	</scm>
 
 	<issueManagement>
 		<system>github</system>
-		<url>https://github.com/soulgalore/navigation-timing/issues#issue/</url>
+		<url>https://github.com/soulgalore/browsertime/issues#issue/</url>
 	</issueManagement>
 
 	<dependencies>
