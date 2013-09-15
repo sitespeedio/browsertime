@@ -2,7 +2,11 @@
 Browser Time (it's browser time!) needs help from the users so please contribute!
 
 ## Making changes
-If you want help out, that's great! Check the issue list and see if there's something there you want to do and drop Tobias or Petrer  a note so we know and we  can help you get into the project.
+If you want help out, that's great! Check the issue list and see if there's something there you want to do and drop Tobias or Peter a note so we know and we can help you get into the project.
+ - Create a new branch for your change
+ - Make commits of logical units and write an informative message
+ - Make sure you have added the tests needed for your change
+ - Run all the tests to make sure you haven't broken anything else (it happens to the best!)
 
 ## Add a defect
 First, check the defect/bug list https://github.com/soulgalore/navigation-timing/issues?labels=bug&page=1&state=open to make sure that it hasn't been filed yet.
