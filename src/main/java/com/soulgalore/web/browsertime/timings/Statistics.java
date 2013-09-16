@@ -28,12 +28,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MeasurementStatistics {
+public class Statistics {
     private final Map<String, DescriptiveStatistics> statistics = new HashMap<String, DescriptiveStatistics>();
 
-    public void addMeasurement(TimingMeasurement measurement) {
-        DescriptiveStatistics stats = getStatistics(measurement.getName());
-        stats.addValue(measurement.getDuration());
+    public void add(String name, long value) {
+        DescriptiveStatistics stats = getStatistics(name);
+        stats.addValue(value);
     }
 
     private synchronized DescriptiveStatistics getStatistics(String name) {
