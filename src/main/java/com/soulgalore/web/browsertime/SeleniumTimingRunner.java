@@ -41,6 +41,8 @@ public class SeleniumTimingRunner implements TimingRunner {
     private final WebDriver driver;
 
     private final List<TimingDataCollector> dataCollectors;
+    
+    private static final String URL = "url";
 
     @Inject
     public SeleniumTimingRunner(WebDriver driver, TimingDataCollector browserDataCollector) {
@@ -73,7 +75,7 @@ public class SeleniumTimingRunner implements TimingRunner {
         JavascriptExecutor js = fetchUrl(url);
 
         Map<String, String> pageInfo = new HashMap<String, String>();
-        pageInfo.put("url", url.toString());
+        pageInfo.put(URL, url.toString());
 
         for (TimingDataCollector collector : dataCollectors) {
             collector.collectPageData(js, pageInfo);
