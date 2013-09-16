@@ -36,8 +36,9 @@ public class MeasurementStatistics {
         stats.addValue(measurement.getDuration());
     }
 
-    private DescriptiveStatistics getStatistics(String name) {
-        DescriptiveStatistics stats = statistics.get(name);
+    private synchronized DescriptiveStatistics getStatistics(String name) {
+     
+    	DescriptiveStatistics stats = statistics.get(name);
         if (stats == null) {
             stats = new DescriptiveStatistics();
             statistics.put(name, stats);
