@@ -30,6 +30,6 @@ mvn package
 
 2. Run the full jar like this
 ```
-java -jar browsertime-X.Y-SNAPSHOT-full.jar -u https://github.com
+java -jar browsertime-X.Y-SNAPSHOT-full.jar https://github.com
 ```
 
