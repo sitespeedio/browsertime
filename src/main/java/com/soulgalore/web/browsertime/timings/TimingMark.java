@@ -27,11 +27,11 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 public class TimingMark {
     private final String name;
-    private final long startTime;
+    private final long time;
 
-    public TimingMark(String name, long startTime) {
+    public TimingMark(String name, long time) {
         this.name = name;
-        this.startTime = startTime;
+        this.time = time;
     }
 
     @XmlAttribute
@@ -40,12 +40,12 @@ public class TimingMark {
     }
 
     @XmlAttribute
-    public long getStartTime() {
-        return startTime;
+    public long getTime() {
+        return time;
     }
 
     private TimingMark() {
         name = null;
-        startTime = 0;
+        time = 0;
     }
 }
