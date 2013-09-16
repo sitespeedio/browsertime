@@ -11,8 +11,6 @@ usage: browsertime [options] URL
  -f,--format <FORMAT>     Choose output format. [xml, json] , defaults to
                           xml.
  -h,--help                Show this help message
- -i,--include <INCLUDE>   Include individual runs in the data output.
-                          [true|false], defaults to false.
  -n,--times <TIMES>       The number of times to run the test, defaults to
                           3.
  -o,--output <OUTPUT>     Output the result as a file, give the name of
