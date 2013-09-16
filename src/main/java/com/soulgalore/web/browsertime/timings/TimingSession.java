@@ -36,7 +36,7 @@ public class TimingSession
     private final List<TimingRun> timingRuns = new ArrayList<TimingRun>();
     private final Statistics statistics = new Statistics();
 
-	public static final List<String> NAVIGATION_TIMING_API_ATTRIBUTES = Arrays
+	private static final List<String> NAVIGATION_TIMING_API_ATTRIBUTES = Arrays
 			.asList("fetchStart", "domComplete", "loadEventStart",
 					"requestStart", "navigationStart", "responseEnd",
 					"domLoading", "domInteractive",
