@@ -71,7 +71,6 @@ class CliHelper {
         options.addOption(createTimesOption());
         options.addOption(createBrowserOption());
         options.addOption(createOutputOption());
-        options.addOption(createIncludeOption());
         options.addOption(createFormatOption());
         options.addOption(createHelpOption());
         options.addOption(createVersionOption());
@@ -93,10 +92,6 @@ class CliHelper {
                         "If no filename is given, the result is put on standard out.");
     }
 
-    private Option createIncludeOption() {
-        return createOption("i", "include",
-                "Include individual runs in the data output. [true|false], defaults to false.");
-    }
 
     private Option createFormatOption() {
         return createOption("f", "format",
