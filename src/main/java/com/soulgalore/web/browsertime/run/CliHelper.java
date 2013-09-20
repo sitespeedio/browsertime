@@ -63,12 +63,12 @@ class CliHelper {
         } else {
             validateBrowserOption(line);
             validateFormatOption(line);
-            validateTimesOption(line);
+            validateIterationsOption(line);
         }
     }
 
     private void setupOptions(Options options) {
-        options.addOption(createTimesOption());
+        options.addOption(createIterationsOption());
         options.addOption(createBrowserOption());
         options.addOption(createOutputOption());
         options.addOption(createFormatOption());
@@ -76,7 +76,7 @@ class CliHelper {
         options.addOption(createVersionOption());
     }
 
-    private Option createTimesOption() {
+    private Option createIterationsOption() {
         return createOption("n", "times",
                 "The number of times to run the test, defaults to 3.");
     }
@@ -139,7 +139,7 @@ class CliHelper {
         }
     }
 
-    private void validateTimesOption(CommandLine line) throws ParseException {
+    private void validateIterationsOption(CommandLine line) throws ParseException {
         String times = line.getOptionValue("n");
         if (times != null) {
             try {
