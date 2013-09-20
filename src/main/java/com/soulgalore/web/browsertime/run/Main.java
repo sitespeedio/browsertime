@@ -107,8 +107,7 @@ public class Main {
             return new OutputStreamWriter(System.out);
         } else {
             File file = new File(filename);
-            file.createNewFile();
-            return new FileWriter(filename);
+            return new FileWriter(file);
         }
     }
 
