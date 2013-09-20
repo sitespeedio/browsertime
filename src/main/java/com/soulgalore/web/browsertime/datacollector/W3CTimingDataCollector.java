@@ -29,7 +29,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Marks and measurements defined in the w3c timing recommendation.
+ * Marks defined in the w3c timing recommendation.
+ * http://www.w3.org/TR/navigation-timing/
  */
 public class W3CTimingDataCollector extends TimingDataCollector {
     private static final String STANDARD_MARK_PREFIX = "window.performance.timing.";

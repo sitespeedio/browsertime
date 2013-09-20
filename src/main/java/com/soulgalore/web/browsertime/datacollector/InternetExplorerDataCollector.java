@@ -26,7 +26,7 @@ import com.soulgalore.web.browsertime.timings.TimingRun;
 import org.openqa.selenium.JavascriptExecutor;
 
 /**
- *
+ * http://msdn.microsoft.com/en-us/library/ie/ff974719(v=vs.85).aspx
  */
 public class InternetExplorerDataCollector extends TimingDataCollector {
     @Override
