@@ -31,6 +31,7 @@ import java.util.Map;
 
 /**
  * Marks and measurements defined in the w3c user timing recommendation.
+ * http://www.w3.org/TR/user-timing/
  */
 public class UserTimingDataCollector extends TimingDataCollector {
     private static final String LIST_PAGE_DEFINED_MARKS =
