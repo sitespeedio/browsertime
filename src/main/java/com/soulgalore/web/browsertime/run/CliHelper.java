@@ -76,12 +76,13 @@ class CliHelper {
 
     private Option createIterationsOption() {
         return createOption("n", "times",
-                "The number of times to run the test, defaults to 3.");
+                "The number of times to run the test, default being 3.");
     }
 
     private Option createBrowserOption() {
         return createOption("b", "browser",
-                "The browser to use " + asList(Browser.values()) + ", defaults to " + Browser.firefox + ".");
+                "The browser to use. Supported values are: " + asList(Browser.values()) +
+                        ", default being " + Browser.firefox + ".");
     }
 
     private Option createOutputOption() {
@@ -93,7 +94,8 @@ class CliHelper {
 
     private Option createFormatOption() {
         return createOption("f", "format",
-                "Choose output format. " + asList(Format.values()) + " , defaults to " + Format.xml + ".");
+                "The desired output format. Supported values are: " + asList(Format.values()) +
+                        ", default being " + Format.xml + ".");
     }
 
     private Option createHelpOption() {
