@@ -1,6 +1,6 @@
- /*******************************************************************************************************************************
+/*******************************************************************************************************************************
  * It's Browser Time!
- * 
+ *
  *
  * Copyright (C) 2013 by Tobias Lidskog (https://twitter.com/tobiaslidskog) &  Peter Hedenskog (http://peterhedenskog.com)
  *
@@ -8,7 +8,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in 
  * compliance with the License. You may obtain a copy of the License at
- * 
+ *
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -22,13 +22,24 @@ package com.soulgalore.web.browsertime.datacollector;
 
 import com.soulgalore.web.browsertime.timings.TimingMark;
 import com.soulgalore.web.browsertime.timings.TimingRun;
-
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
  * http://msdn.microsoft.com/en-us/library/ie/ff974719(v=vs.85).aspx
  */
 public class InternetExplorerDataCollector extends TimingDataCollector {
+
+    public Capabilities getCapabilities() {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+
+        capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+
+        return capabilities;
+    }
+
     @Override
     public void collectMarks(JavascriptExecutor js, TimingRun results) {
         super.collectMarks(js, results);
