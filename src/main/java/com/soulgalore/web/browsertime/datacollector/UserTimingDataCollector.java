@@ -52,6 +52,8 @@ public class UserTimingDataCollector extends TimingDataCollector {
         for (Object m : marks) {
             Map mark = (Map) m;
             String name = (String) mark.get("name");
+            // FIXME this is millis
+            // to get start time, add navigationStart time
             double doubleTime = (Double) mark.get("startTime");
             long startTime = Double.valueOf(doubleTime).longValue();
             results.addMark(new TimingMark(name, startTime));
