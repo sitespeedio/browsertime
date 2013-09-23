@@ -20,25 +20,23 @@
  */
 package com.soulgalore.web.browsertime.run;
 
-import org.apache.commons.cli.*;
+import org.apache.commons.cli.BasicParser;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.Parser;
 
-import java.util.Arrays;
-import java.util.List;
+import static java.util.Arrays.asList;
 
 /**
  *
  */
 class CliHelper {
-	
-	static final String CHROME = "chrome";
-	static final String FIREFOX = "firefox";
-	static final String IE = "ie";
-	
-	static final String XML = "xml";
-	static final String JSON = "json";
-	
-    private static final List<String> VALID_BROWSERS = Arrays.asList(FIREFOX,CHROME,IE);
-    private static final List<String> VALID_FORMATS = Arrays.asList(XML, JSON);
+
+    enum Browser { chrome, firefox, ie }
+    enum Format { xml, json }
 
     private final Options options;
 
@@ -78,12 +76,13 @@ class CliHelper {
 
     private Option createIterationsOption() {
         return createOption("n", "times",
-                "The number of times to run the test, defaults to 3.");
+                "The number of times to run the test, default being 3.");
     }
 
     private Option createBrowserOption() {
         return createOption("b", "browser",
-                "The browser to use " + VALID_BROWSERS + ", defaults to " + FIREFOX + ".");
+                "The browser to use. Supported values are: " + asList(Browser.values()) +
+                        ", default being " + Browser.firefox + ".");
     }
 
     private Option createOutputOption() {
@@ -95,7 +94,8 @@ class CliHelper {
 
     private Option createFormatOption() {
         return createOption("f", "format",
-                "Choose output format. " + VALID_FORMATS + " , defaults to " + XML + ".");
+                "The desired output format. Supported values are: " + asList(Format.values()) +
+                        ", default being " + Format.xml + ".");
     }
 
     private Option createHelpOption() {
@@ -124,18 +124,25 @@ class CliHelper {
         return option;
     }
 
-
     void validateBrowserOption(CommandLine line) throws ParseException {
-        String browser = line.getOptionValue("b");
-        if (!(browser == null || VALID_BROWSERS.contains(browser))) {
-            throw new ParseException("Invalid browser: " + browser);
+        if (line.hasOption("b")) {
+            String browser = line.getOptionValue("b");
+            try {
+                Browser.valueOf(browser);
+            } catch (IllegalArgumentException e) {
+                throw new ParseException("Invalid browser: " + browser);
+            }
         }
     }
 
     void validateFormatOption(CommandLine line) throws ParseException {
-        String format = line.getOptionValue("f");
-        if (!(format == null || VALID_FORMATS.contains(format))) {
-            throw new ParseException("Invalid format: " + format);
+        if (line.hasOption("f")) {
+            String format = line.getOptionValue("f");
+            try {
+                Format.valueOf(format);
+            } catch (IllegalArgumentException e) {
+                throw new ParseException("Invalid format: " + format);
+            }
         }
     }
 
