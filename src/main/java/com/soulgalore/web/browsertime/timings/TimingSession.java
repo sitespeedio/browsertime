@@ -24,7 +24,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,16 +35,6 @@ public class TimingSession
     private final List<TimingRun> timingRuns = new ArrayList<TimingRun>();
     private final Statistics statistics = new Statistics();
 
-	private static final List<String> NAVIGATION_TIMING_API_ATTRIBUTES = Arrays
-			.asList("fetchStart", "domComplete", "loadEventStart",
-					"requestStart", "navigationStart", "responseEnd",
-					"domLoading", "domInteractive",
-					"domContentLoadedEventStart", "domainLookupEnd",
-					"responseStart", "connectEnd", "loadEventEnd",
-					"unloadEventStart", "connectStart",
-					"domContentLoadedEventEnd", "unloadEventEnd",
-					"domainLookupStart");
-
     public void addPageData(Map<String, String> pageData) {
         this.pageData.putAll(pageData);
     }
@@ -54,10 +43,6 @@ public class TimingSession
         timingRuns.add(run);
         for (TimingMeasurement measurement : run.getMeasurements()) {
             statistics.add(measurement.getName(),measurement.getDuration());
-        }
-        for (TimingMark mark : run.getMarks()) {
-        	if (!NAVIGATION_TIMING_API_ATTRIBUTES.contains(mark.getName()))
-        		statistics.add(mark.getName(), mark.getTime());
         }
     }
 
