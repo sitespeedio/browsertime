@@ -38,6 +38,9 @@ class CliHelper {
     enum Browser { chrome, firefox, ie }
     enum Format { xml, json }
 
+    public static final Browser DEFAULT_BROWSER = Browser.firefox;
+    public static final Format DEFAULT_FORMAT = Format.xml;
+
     private final Options options;
 
     public CliHelper() {
@@ -82,7 +85,7 @@ class CliHelper {
     private Option createBrowserOption() {
         return createOption("b", "browser",
                 "The browser to use. Supported values are: " + asList(Browser.values()) +
-                        ", default being " + Browser.firefox + ".");
+                        ", default being " + DEFAULT_BROWSER + ".");
     }
 
     private Option createOutputOption() {
@@ -95,7 +98,7 @@ class CliHelper {
     private Option createFormatOption() {
         return createOption("f", "format",
                 "The desired output format. Supported values are: " + asList(Format.values()) +
-                        ", default being " + Format.xml + ".");
+                        ", default being " + DEFAULT_FORMAT + ".");
     }
 
     private Option createHelpOption() {

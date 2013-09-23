@@ -23,19 +23,26 @@ package com.soulgalore.web.browsertime.run;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.soulgalore.web.browsertime.guice.*;
+import com.soulgalore.web.browsertime.guice.ChromeModule;
+import com.soulgalore.web.browsertime.guice.FireFoxModule;
+import com.soulgalore.web.browsertime.guice.InternetExplorerModule;
+import com.soulgalore.web.browsertime.guice.JSONResultModule;
+import com.soulgalore.web.browsertime.guice.XMLResultModule;
 import com.soulgalore.web.browsertime.serializer.Serializer;
 import com.soulgalore.web.browsertime.serializer.SerializerFactory;
-
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.ParseException;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 import static com.soulgalore.web.browsertime.run.CliHelper.Browser;
-import static com.soulgalore.web.browsertime.run.CliHelper.Browser.*;
+import static com.soulgalore.web.browsertime.run.CliHelper.DEFAULT_BROWSER;
+import static com.soulgalore.web.browsertime.run.CliHelper.DEFAULT_FORMAT;
 import static com.soulgalore.web.browsertime.run.CliHelper.Format;
-import static com.soulgalore.web.browsertime.run.CliHelper.Format.*;
 
  /**
  *
@@ -92,8 +99,8 @@ public class Main {
 
     private void run(CommandLine line) throws IOException {
         Injector injector = Guice.createInjector(
-                createFormatModule(line.getOptionValue("f", xml.name())),
-                createBrowserModule(line.getOptionValue("b", chrome.name())));
+                createFormatModule(line.getOptionValue("f", DEFAULT_FORMAT.name())),
+                createBrowserModule(line.getOptionValue("b", DEFAULT_BROWSER.name())));
 
         int numIterations = Integer.parseInt(line.getOptionValue("n", "3"));
 
