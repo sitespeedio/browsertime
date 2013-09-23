@@ -24,12 +24,13 @@ import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 import javax.xml.bind.annotation.XmlElement;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Statistics {
-    private final Map<String, DescriptiveStatistics> statistics = new HashMap<String, DescriptiveStatistics>();
+    // uses LinkedHashMap to be able to add statistics in a given order, and have that order preserved.
+    private final Map<String, DescriptiveStatistics> statistics = new LinkedHashMap<String, DescriptiveStatistics>();
 
     public void add(String name, long value) {
         DescriptiveStatistics stats = getStatistics(name);

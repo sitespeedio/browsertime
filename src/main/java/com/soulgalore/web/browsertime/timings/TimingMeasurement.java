@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 /**
  *
  */
-public class TimingMeasurement extends TimingMark {
+public class TimingMeasurement extends TimingMark implements Comparable<TimingMeasurement> {
     private final long duration;
 
     public TimingMeasurement(String name, long startTime, long duration) {
@@ -38,8 +38,17 @@ public class TimingMeasurement extends TimingMark {
         return duration;
     }
 
+    private long getEndTime() {
+        return getStartTime() + getDuration();
+    }
+
     private TimingMeasurement() {
         super(null, 0);
         duration = 0;
+    }
+
+    @Override
+    public int compareTo(TimingMeasurement o) {
+        return (int) (getEndTime() - o.getEndTime());
     }
 }
