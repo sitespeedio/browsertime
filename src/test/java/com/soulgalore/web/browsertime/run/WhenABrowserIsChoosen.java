@@ -1,71 +1,58 @@
 package com.soulgalore.web.browsertime.run;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.ParseException;
+import org.junit.Before;
 import org.junit.Test;
 
-import com.soulgalore.web.browsertime.run.CliHelper;
+import static com.soulgalore.web.browsertime.run.CliHelper.Browser;
+import static com.soulgalore.web.browsertime.run.CliHelper.Browser.chrome;
+import static com.soulgalore.web.browsertime.run.CliHelper.Browser.firefox;
+import static com.soulgalore.web.browsertime.run.CliHelper.Browser.ie;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 public class WhenABrowserIsChoosen {
+    private CliHelper helper;
 
-	@Test
-	public void aNonValidBrowserShouldFail() {
-		CliHelper helper = new CliHelper();
-		String[] args = { "-b", "nonValidBrowser", "http://www.google.com" };
-		try {
-			CommandLine cl = helper.parse(args);
-			helper.validateArgValues(cl);
-			fail("A non valid browser name should throw an exception");
-		} catch (ParseException e) {
-		}
-	}
+    @Before
+    public void setUp() throws Exception {
+        helper = new CliHelper();
+    }
 
-	@Test
-	public void firefoxShouldBeFirefox() {
+    @Test(expected = ParseException.class)
+    public void invalidBrowserShouldFail() throws ParseException {
+        String[] args = {"-b", "invalidBrowser", "http://www.google.com"};
+        CommandLine cl = helper.parse(args);
+        helper.validateArgValues(cl);
+    }
 
-		CliHelper helper = new CliHelper();
-		String[] args = { "-b", "firefox", "http://www.google.com" };
-		try {
-			CommandLine cl = helper.parse(args);
-			assertThat(CliHelper.FIREFOX, is(cl.getOptionValue("b")));
+    @Test
+    public void firefoxShouldBeFirefox() {
+        testBrowserChoice(firefox);
+    }
 
-		} catch (ParseException e) {
-			fail("firefox should signal a firefox browser");
-		}
+    @Test
+    public void chromeShouldBeChrome() {
+        testBrowserChoice(chrome);
+    }
 
-	}
+    @Test
+    public void ieShouldBeIe() {
+        testBrowserChoice(ie);
+    }
 
-	@Test
-	public void chromeShouldBeChrome() {
+    private void testBrowserChoice(Browser browser) {
+        String[] args = {"-b", browser.name(), "http://www.google.com"};
+        try {
+            CommandLine cl = helper.parse(args);
+            assertThat(browser.name(), is(cl.getOptionValue("b")));
 
-		CliHelper helper = new CliHelper();
-		String[] args = { "-b", "chrome", "http://www.google.com" };
-		try {
-			CommandLine cl = helper.parse(args);
-			assertThat(CliHelper.CHROME, is(cl.getOptionValue("b")));
+        } catch (ParseException e) {
+            fail(browser + " should signal a " + browser + " browser");
+        }
+    }
 
-		} catch (ParseException e) {
-			fail("chrome should signal a chrome browser");
-		}
-
-	}
-
-	@Test
-	public void ieShouldBeIe() {
-
-		CliHelper helper = new CliHelper();
-		String[] args = { "-b", "ie", "http://www.google.com" };
-		try {
-			CommandLine cl = helper.parse(args);
-			assertThat(CliHelper.IE, is(cl.getOptionValue("b")));
-
-		} catch (ParseException e) {
-			fail("ie should signal a ie browser");
-		}
-
-	}
 
 }

@@ -32,7 +32,12 @@ import org.apache.commons.cli.ParseException;
 
 import java.io.*;
 
-/**
+import static com.soulgalore.web.browsertime.run.CliHelper.Browser;
+import static com.soulgalore.web.browsertime.run.CliHelper.Browser.*;
+import static com.soulgalore.web.browsertime.run.CliHelper.Format;
+import static com.soulgalore.web.browsertime.run.CliHelper.Format.*;
+
+ /**
  *
  */
 public class Main {
@@ -87,8 +92,8 @@ public class Main {
 
     private void run(CommandLine line) throws IOException {
         Injector injector = Guice.createInjector(
-                createFormatModule(line.getOptionValue("f", CliHelper.XML)),
-                createBrowserModule(line.getOptionValue("b", CliHelper.FIREFOX)));
+                createFormatModule(line.getOptionValue("f", xml.name())),
+                createBrowserModule(line.getOptionValue("b", chrome.name())));
 
         int numIterations = Integer.parseInt(line.getOptionValue("n", "3"));
 
@@ -111,23 +116,27 @@ public class Main {
         }
     }
 
-    private Module createFormatModule(String format) {
-        if (CliHelper.XML.equals(format)) {
-            return new XMLResultModule();
-        } else if (CliHelper.JSON.equals(format)) {
-            return new JSONResultModule();
+    private Module createFormatModule(String name) {
+        switch (Format.valueOf(name)) {
+            case xml:
+                return new XMLResultModule();
+            case json:
+                return new JSONResultModule();
+            default:
+                throw new RuntimeException();
         }
-        throw new RuntimeException();
     }
 
-    private Module createBrowserModule(String browser) {
-        if (CliHelper.CHROME.equals(browser)) {
-            return new ChromeModule();
-        } else if (CliHelper.FIREFOX.equals(browser)) {
-            return new FireFoxModule();
-        } else if (CliHelper.IE.equals(browser)) {
-            return new InternetExplorerModule();
+    private Module createBrowserModule(String name) {
+        switch (Browser.valueOf(name)) {
+            case chrome:
+                return new ChromeModule();
+            case firefox:
+                return new FireFoxModule();
+            case ie:
+                return new InternetExplorerModule();
+            default:
+                throw new RuntimeException();
         }
-        throw new RuntimeException();
     }
 }
