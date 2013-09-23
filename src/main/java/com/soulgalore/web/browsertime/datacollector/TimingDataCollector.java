@@ -58,7 +58,7 @@ public class TimingDataCollector {
             TimingMark end = timingRun.getMark(endMarkName);
 
             if (start != null && end != null) {
-                long duration = end.getStartTime() - start.getStartTime();
+                double duration = end.getStartTime() - start.getStartTime();
                 TimingMeasurement m = new TimingMeasurement(measurementName, start.getStartTime(), duration);
                 timingRun.addMeasurement(m);
             }

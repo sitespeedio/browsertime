@@ -57,7 +57,7 @@ public class W3CTimingDataCollector extends TimingDataCollector {
         List<String> markNames = (List) js.executeScript(LIST_STANDARD_MARKS);
 
         for (String markName : markNames) {
-            long startTime = (Long) js.executeScript("return " + STANDARD_MARK_PREFIX + markName);
+            double startTime = (Long) js.executeScript("return " + STANDARD_MARK_PREFIX + markName);
             if (startTime > 0) {
                 results.addMark(new TimingMark(markName, startTime));
             }

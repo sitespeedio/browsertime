@@ -51,13 +51,12 @@ public class UserTimingDataCollector extends TimingDataCollector {
 
         List marks = (List) js.executeScript(LIST_PAGE_DEFINED_MARKS);
 
-        long referenceTime = getNavigationStart(results);
+        double referenceTime = getNavigationStart(results);
 
         for (Object m : marks) {
             Map mark = (Map) m;
             String name = (String) mark.get("name");
-            double doubleTime = (Double) mark.get("startTime");
-            long startTime = Double.valueOf(doubleTime).longValue() + referenceTime;
+            double startTime = (Double) mark.get("startTime") + referenceTime;
             results.addMark(new TimingMark(name, startTime));
         }
     }
@@ -70,15 +69,13 @@ public class UserTimingDataCollector extends TimingDataCollector {
 
         List measurements = (List) js.executeScript(LIST_PAGE_DEFINED_MEASUREMENTS);
 
-        long referenceTime = getNavigationStart(results);
+        double referenceTime = getNavigationStart(results);
 
         for (Object m : measurements) {
             Map measurement = (Map) m;
             String name = (String) measurement.get("name");
-            double doubleTime = (Double) measurement.get("startTime");
-            long startTime = Double.valueOf(doubleTime).longValue() + referenceTime;
-            doubleTime = (Double) measurement.get("duration");
-            long duration = Double.valueOf(doubleTime).longValue();
+            double startTime = (Double) measurement.get("startTime") + referenceTime;
+            double duration = (Double) measurement.get("duration");
             results.addMeasurement(new TimingMeasurement(name, startTime, duration));
         }
     }
@@ -88,7 +85,7 @@ public class UserTimingDataCollector extends TimingDataCollector {
                 .executeScript("return !!(window.performance && window.performance.getEntriesByType);");
     }
 
-    private long getNavigationStart(TimingRun results) {
+    private double getNavigationStart(TimingRun results) {
         TimingMark start = results.getMark("navigationStart");
 
         return start != null ? start.getStartTime() : 0;

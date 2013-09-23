@@ -32,7 +32,7 @@ public class Statistics {
     // uses LinkedHashMap to be able to add statistics in a given order, and have that order preserved.
     private final Map<String, DescriptiveStatistics> statistics = new LinkedHashMap<String, DescriptiveStatistics>();
 
-    public void add(String name, long value) {
+    public void add(String name, double value) {
         DescriptiveStatistics stats = getStatistics(name);
         stats.addValue(value);
     }

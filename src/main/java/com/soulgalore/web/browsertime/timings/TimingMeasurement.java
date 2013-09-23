@@ -26,19 +26,19 @@ import javax.xml.bind.annotation.XmlAttribute;
  *
  */
 public class TimingMeasurement extends TimingMark implements Comparable<TimingMeasurement> {
-    private final long duration;
+    private final double duration;
 
-    public TimingMeasurement(String name, long startTime, long duration) {
+    public TimingMeasurement(String name, double startTime, double duration) {
         super(name, startTime);
         this.duration = duration;
     }
 
     @XmlAttribute
-    public long getDuration() {
+    public double getDuration() {
         return duration;
     }
 
-    private long getEndTime() {
+    private double getEndTime() {
         return getStartTime() + getDuration();
     }
 
