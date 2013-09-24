@@ -20,24 +20,29 @@
  */
 package com.soulgalore.web.browsertime;
 
-import com.google.inject.Inject;
-import com.soulgalore.web.browsertime.datacollector.BrowserTimeDataCollector;
-import com.soulgalore.web.browsertime.datacollector.TimingDataCollector;
-import com.soulgalore.web.browsertime.datacollector.UserTimingDataCollector;
-import com.soulgalore.web.browsertime.datacollector.W3CTimingDataCollector;
-import com.soulgalore.web.browsertime.timings.TimingRun;
-import com.soulgalore.web.browsertime.timings.TimingSession;
+ import com.google.inject.Inject;
+ import com.soulgalore.web.browsertime.datacollector.BrowserTimeDataCollector;
+ import com.soulgalore.web.browsertime.datacollector.TimingDataCollector;
+ import com.soulgalore.web.browsertime.datacollector.UserTimingDataCollector;
+ import com.soulgalore.web.browsertime.datacollector.W3CTimingDataCollector;
+ import com.soulgalore.web.browsertime.timings.TimingRun;
+ import com.soulgalore.web.browsertime.timings.TimingSession;
+ import org.openqa.selenium.JavascriptExecutor;
+ import org.openqa.selenium.WebDriver;
+ import org.openqa.selenium.support.ui.ExpectedCondition;
+ import org.openqa.selenium.support.ui.WebDriverWait;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-
-import java.net.URL;
-import java.util.*;
+ import java.net.URL;
+ import java.util.Arrays;
+ import java.util.HashMap;
+ import java.util.List;
+ import java.util.Map;
 
 /**
  *
  */
 public class SeleniumTimingRunner implements TimingRunner {
+    public static final int MAX_WAIT_SECONDS = 30;
     private final WebDriver driver;
 
     private final List<TimingDataCollector> dataCollectors;
@@ -105,6 +110,19 @@ public class SeleniumTimingRunner implements TimingRunner {
     private JavascriptExecutor fetchUrl(URL url) {
         String urlString = url.toString();
         driver.get(urlString);
+        waitForLoad(driver);
         return (JavascriptExecutor) driver;
     }
+
+    private void waitForLoad(WebDriver driver) {
+        ExpectedCondition<Boolean> pageLoadCondition = new
+                ExpectedCondition<Boolean>() {
+                    public Boolean apply(WebDriver driver) {
+                        return ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
+                    }
+                };
+        WebDriverWait wait = new WebDriverWait(driver, MAX_WAIT_SECONDS);
+        wait.until(pageLoadCondition);
+    }
+
 }
