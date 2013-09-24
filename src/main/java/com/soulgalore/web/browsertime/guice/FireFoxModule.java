@@ -46,10 +46,10 @@ public class FireFoxModule extends AbstractModule {
     private static final Provider<WebDriver> DRIVER_PROVIDER = new Provider<WebDriver>() {
         @Override
         public WebDriver get() {
-            return new FirefoxDriver(createNonCacheingProfile());
+            return new FirefoxDriver(createNonCachingProfile());
         }
 
-        private FirefoxProfile createNonCacheingProfile() {
+        private FirefoxProfile createNonCachingProfile() {
             FirefoxProfile profile = new FirefoxProfile();
             profile.setPreference("browser.cache.disk.enable", false);
             profile.setPreference("browser.cache.memory.enable", false);
