@@ -21,24 +21,42 @@
 
 package com.soulgalore.web.browsertime.guice;
 
+import java.util.HashMap;
+import java.util.Map;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.name.Names;
 import com.soulgalore.web.browsertime.SeleniumTimingRunner;
 import com.soulgalore.web.browsertime.TimingRunner;
 import com.soulgalore.web.browsertime.datacollector.ChromeDataCollector;
 import com.soulgalore.web.browsertime.datacollector.TimingDataCollector;
+import com.soulgalore.web.browsertime.run.Main;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
 
 /**
  * Setup a module that uses Chrome.
  */
 public class ChromeModule extends AbstractModule {
 
+	public static final String USER_AGENT = "user-agent";
+	public static final String WINDOW_SIZE = "window-size";
+	
+	private final Map<String,String> options = new HashMap<String,String>();
+	
+	public ChromeModule(String userAgent, String windowSize) {
+			options.put(USER_AGENT, userAgent);
+			options.put(WINDOW_SIZE, windowSize);
+	}
+	
 	@Override
 	protected void configure() {
-		bind(WebDriver.class).to(ChromeDriver.class);
+		
+		Names.bindProperties(binder(), options);
+		
+		bind(WebDriver.class)
+        .toProvider(ChromeDriverProvider.class);
         bind(TimingRunner.class).to(SeleniumTimingRunner.class);
         bind(TimingDataCollector.class).to(ChromeDataCollector.class);
     }
