@@ -23,9 +23,9 @@ public class ChromeDriverProvider implements Provider<ChromeDriver> {
 	@Inject
 	public ChromeDriverProvider(@Named (ChromeModule.USER_AGENT) String userAgent, @Named (ChromeModule.WINDOW_SIZE) String windowSize) {
 		options = new ChromeOptions();
-		if (!Main.EMPTY.equals(userAgent))
+		if (!"".equals(userAgent))
 			options.addArguments(USER_AGENT_STRING + "=" + userAgent);
-		if (!Main.EMPTY.equals(windowSize))
+		if (!"".equals(windowSize))
 			options.addArguments(WINDOW_SIZE_STRING + "=" + windowSize);
 		options.addArguments(WINDOW_POSITION_STRING + "=" + "0,0");
 	}

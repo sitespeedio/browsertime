@@ -52,8 +52,6 @@ public class Main {
 	public static final int ERROR = 1;
 	public static final int OK = 0;
 	
-	public static final String EMPTY = "empty";
-	
     public static void main(String[] args) {
         Main app = new Main();
         int status = app.handleCommandLine(args);
@@ -101,8 +99,8 @@ public class Main {
 
     private void run(CommandLine line) throws IOException {
         
-    	String userAgent = line.getOptionValue("ua",EMPTY);
-        String windowSize = line.getOptionValue("w",EMPTY);
+    	String userAgent = line.getOptionValue("ua","");
+        String windowSize = line.getOptionValue("w","");
     	
     	Injector injector = Guice.createInjector(
                 createFormatModule(line.getOptionValue("f", DEFAULT_FORMAT.name())),
