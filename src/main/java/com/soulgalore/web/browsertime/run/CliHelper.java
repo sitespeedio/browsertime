@@ -74,6 +74,8 @@ class CliHelper {
         options.addOption(createOutputOption());
         options.addOption(createFormatOption());
         options.addOption(createHelpOption());
+        options.addOption(createUserAgentOption());
+        options.addOption(createWindowSizeOption());
         options.addOption(createVersionOption());
     }
 
@@ -114,6 +116,19 @@ class CliHelper {
         option.setArgs(0);
         return option;
     }
+    
+	private Option createUserAgentOption() {
+		return createOption(
+				"ua",
+				"user-agent",
+				"Set the user agent. Default is the one by the browser you use. Only works with Chrome.");
+	}
+
+	private Option createWindowSizeOption() {
+		return createOption("w", "window-size",
+				"The size of the browser window:x,y.  Only works with Chrome.");
+	}
+    
 
     /**
      * Create an optional Option with one argument.
