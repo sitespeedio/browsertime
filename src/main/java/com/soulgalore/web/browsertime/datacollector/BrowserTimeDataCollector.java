@@ -35,18 +35,14 @@ import java.util.Map;
 public class BrowserTimeDataCollector extends TimingDataCollector {
 
     private static final MarkInterval[] intervals = {
-            new MarkInterval("domainLookup", "domainLookupStart", "domainLookupEnd"),
-            new MarkInterval("redirectTime", "redirectStart", "redirectEnd"),
-            new MarkInterval("initialConnection", "connectStart", "connectEnd"),
-            new MarkInterval("ttfb", "connectEnd", "responseStart"),
-            new MarkInterval("basePage", "responseStart", "responseEnd"),
-            new MarkInterval("domProcessing", "domLoading", "domInteractive"),
-            new MarkInterval("renderTime", "domContentLoadedEventStart", "loadEventEnd"),
-            new MarkInterval("domInteractive", "navigationStart", "domInteractive"),
-            new MarkInterval("domComplete", "navigationStart", "domComplete"),
-            new MarkInterval("pageLoad", "navigationStart", "loadEventStart"),
-            new MarkInterval("frontEnd", "responseEnd", "loadEventStart"),
-            new MarkInterval("backEnd", "navigationStart", "responseStart"),
+            new MarkInterval("domainLookupTime", "domainLookupStart", "domainLookupEnd"),
+            new MarkInterval("redirectionTime", "navigationStart","fetchStart"),
+            new MarkInterval("serverConnectionTime", "connectStart", "connectEnd"),
+            new MarkInterval("serverResponseTime", "requestStart", "responseStart"),
+            new MarkInterval("pageDownloadTime", "responseStart", "responseEnd"),
+            new MarkInterval("domInteractiveTime", "navigationStart", "domInteractive"),
+            new MarkInterval("domContentLoadedTime", "navigationStart", "domContentLoadedEventStart"),
+            new MarkInterval("pageLoadTime", "navigationStart", "loadEventStart"),            
     };
 
     @Override
