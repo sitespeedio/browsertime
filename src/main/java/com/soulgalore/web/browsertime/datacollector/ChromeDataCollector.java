@@ -63,12 +63,12 @@ wasNpnNegotiated: false
 
         // Chrome timing is in s.ms, convert it to ms!!
         Double time = (Double) js.executeScript("return window.chrome.loadTimes().firstPaintTime");
-        results.addMark(new TimingMark("firstPaintTime", (long) (time * 1000)));
+        results.addMark(new TimingMark("firstPaint", (long) (time * 1000)));
     }
 
     @Override
     public void collectMeasurements(JavascriptExecutor js, TimingRun results) {
-        MarkInterval interval = new MarkInterval("firstPaintTime", "navigationStart", "firstPaintTime");
+        MarkInterval interval = new MarkInterval("firstPaintTime", "navigationStart", "firstPaint");
         interval.collectMeasurement(results);
     }
 }
