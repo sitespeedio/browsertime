@@ -68,7 +68,7 @@ wasNpnNegotiated: false
 
     @Override
     public void collectMeasurements(JavascriptExecutor js, TimingRun results) {
-        MarkInterval interval = new MarkInterval("firstPaint", "navigationStart", "firstPaintTime");
+        MarkInterval interval = new MarkInterval("firstPaintTime", "navigationStart", "firstPaintTime");
         interval.collectMeasurement(results);
     }
 }
