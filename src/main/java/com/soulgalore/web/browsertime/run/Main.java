@@ -98,9 +98,13 @@ public class Main {
     }
 
     private void run(CommandLine line) throws IOException {
-        Injector injector = Guice.createInjector(
+        
+    	String userAgent = line.getOptionValue("ua","");
+        String windowSize = line.getOptionValue("w","");
+    	
+    	Injector injector = Guice.createInjector(
                 createFormatModule(line.getOptionValue("f", DEFAULT_FORMAT.name())),
-                createBrowserModule(line.getOptionValue("b", DEFAULT_BROWSER.name())));
+                createBrowserModule(line.getOptionValue("b", DEFAULT_BROWSER.name()),userAgent, windowSize));
 
         int numIterations = Integer.parseInt(line.getOptionValue("n", "3"));
 
@@ -134,10 +138,10 @@ public class Main {
         }
     }
 
-    private Module createBrowserModule(String name) {
+    private Module createBrowserModule(String name, String userAgent, String windowSize) {
         switch (Browser.valueOf(name)) {
             case chrome:
-                return new ChromeModule();
+                return new ChromeModule(userAgent, windowSize);
             case firefox:
                 return new FireFoxModule();
             case ie:
