@@ -42,10 +42,6 @@ public class TimingDataCollector {
     public void collectMeasurements(JavascriptExecutor js, TimingRun results) {
     }
 
-    public boolean isRestartRequiredBetweenRuns() {
-        return true;
-    }
-
     final static protected class MarkInterval {
         private final String measurementName;
         private final String startMarkName;
