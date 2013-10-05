@@ -22,24 +22,56 @@
 package com.soulgalore.web.browsertime.guice;
 
 
-import com.google.inject.AbstractModule;
-import com.soulgalore.web.browsertime.SeleniumTimingRunner;
-import com.soulgalore.web.browsertime.TimingRunner;
+import com.google.inject.Provider;
+import com.soulgalore.web.browsertime.BrowserConfig;
 import com.soulgalore.web.browsertime.datacollector.ChromeDataCollector;
 import com.soulgalore.web.browsertime.datacollector.TimingDataCollector;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
-/**
+import java.util.Map;
+
+ /**
  * Setup a module that uses Chrome.
  */
-public class ChromeModule extends AbstractModule {
+public class ChromeModule extends AbstractBrowserModule {
 
-	@Override
+     public ChromeModule(Map<BrowserConfig, String> browserConfiguration) {
+         super(browserConfiguration);
+     }
+
+     @Override
 	protected void configure() {
-		bind(WebDriver.class).to(ChromeDriver.class);
-        bind(TimingRunner.class).to(SeleniumTimingRunner.class);
+        super.configure();
+        bind(WebDriver.class).toProvider(DRIVER_PROVIDER);
         bind(TimingDataCollector.class).to(ChromeDataCollector.class);
     }
-}
+
+     private final Provider<WebDriver> DRIVER_PROVIDER = new Provider<WebDriver>() {
+         @Override
+         public WebDriver get() {
+             return new ChromeDriver(createChromeOptions());
+         }
+
+         private ChromeOptions createChromeOptions() {
+             ChromeOptions options = new ChromeOptions();
+
+             // see http://peter.sh/experiments/chromium-command-line-switches/
+             String config = browserConfiguration.get(BrowserConfig.userAgent);
+             if (config != null) {
+                 options.addArguments("--user-agent" + "=" + config);
+             }
+
+             config = browserConfiguration.get(BrowserConfig.windowSize);
+             if (config != null) {
+                 config = config.replace("x", ",");
+                 options.addArguments("--window-size" + "=" + config);
+             }
+
+             options.addArguments("--window-position=0,0");
+
+             return options;
+         }
+     };
+ }

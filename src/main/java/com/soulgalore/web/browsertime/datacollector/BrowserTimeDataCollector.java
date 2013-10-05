@@ -1,6 +1,6 @@
- /*******************************************************************************************************************************
+/*******************************************************************************************************************************
  * It's Browser Time!
- * 
+ *
  *
  * Copyright (C) 2013 by Tobias Lidskog (https://twitter.com/tobiaslidskog) &  Peter Hedenskog (http://peterhedenskog.com)
  *
@@ -8,7 +8,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in 
  * compliance with the License. You may obtain a copy of the License at
- * 
+ *
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -21,12 +21,12 @@
 package com.soulgalore.web.browsertime.datacollector;
 
 import com.soulgalore.web.browsertime.timings.TimingRun;
-
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,25 +35,21 @@ import java.util.Map;
 public class BrowserTimeDataCollector extends TimingDataCollector {
 
     private static final MarkInterval[] intervals = {
-            new MarkInterval("domainLookup", "domainLookupStart", "domainLookupEnd"),
-            new MarkInterval("redirectTime", "redirectStart", "redirectEnd"),
-            new MarkInterval("initialConnection", "connectStart", "connectEnd"),
-            new MarkInterval("ttfb", "connectEnd", "responseStart"),
-            new MarkInterval("basePage", "responseStart", "responseEnd"),
-            new MarkInterval("domProcessing", "domLoading", "domInteractive"),
-            new MarkInterval("renderTime", "domContentLoadedEventStart", "loadEventEnd"),
-            new MarkInterval("domInteractive", "navigationStart", "domInteractive"),
-            new MarkInterval("domComplete", "navigationStart", "domComplete"),
-            new MarkInterval("pageLoad", "navigationStart", "loadEventStart"),
-            new MarkInterval("frontEnd", "responseEnd", "loadEventStart"),
-            new MarkInterval("backEnd", "navigationStart", "responseStart"),
+            new MarkInterval("domainLookupTime", "domainLookupStart", "domainLookupEnd"),
+            new MarkInterval("redirectionTime", "navigationStart", "fetchStart"),
+            new MarkInterval("serverConnectionTime", "connectStart", "connectEnd"),
+            new MarkInterval("serverResponseTime", "requestStart", "responseStart"),
+            new MarkInterval("pageDownloadTime", "responseStart", "responseEnd"),
+            new MarkInterval("domInteractiveTime", "navigationStart", "domInteractive"),
+            new MarkInterval("domContentLoadedTime", "navigationStart", "domContentLoadedEventStart"),
+            new MarkInterval("pageLoadTime", "navigationStart", "loadEventStart"),
     };
 
     @Override
     public void collectPageData(JavascriptExecutor js, Map<String, String> pageInfo) {
         // This won't give proper url in case in connections error
         if (js instanceof WebDriver) {
-            pageInfo.put("actualUrl", ((WebDriver)js).getCurrentUrl());
+            pageInfo.put("actualUrl", ((WebDriver) js).getCurrentUrl());
         }
 
         if (js instanceof HasCapabilities) {
@@ -61,8 +57,13 @@ public class BrowserTimeDataCollector extends TimingDataCollector {
             pageInfo.put("browserName", caps.getBrowserName());
             pageInfo.put("browserVersion", caps.getVersion());
             pageInfo.put("platform", caps.getPlatform().name());
-            // caps.asMap()
         }
+
+        pageInfo.put("userAgent", js.executeScript("return window.navigator.userAgent").toString());
+        List size = (List) js.executeScript("var w=window,d=document,e=d.documentElement,g=d.getElementsByTagName('body')[0]," +
+                "x=w.innerWidth||e.clientWidth||g.clientWidth,y=w.innerHeight||e.clientHeight||g.clientHeight;" +
+                "return [x,y];");
+        pageInfo.put("windowSize", String.valueOf(size.get(0)) + "x" + String.valueOf(size.get(1)));
     }
 
     @Override

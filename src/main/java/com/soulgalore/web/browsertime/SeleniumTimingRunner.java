@@ -20,33 +20,37 @@
  */
 package com.soulgalore.web.browsertime;
 
-import com.google.inject.Inject;
-import com.soulgalore.web.browsertime.datacollector.BrowserTimeDataCollector;
-import com.soulgalore.web.browsertime.datacollector.TimingDataCollector;
-import com.soulgalore.web.browsertime.datacollector.UserTimingDataCollector;
-import com.soulgalore.web.browsertime.datacollector.W3CTimingDataCollector;
-import com.soulgalore.web.browsertime.timings.TimingRun;
-import com.soulgalore.web.browsertime.timings.TimingSession;
+ import com.google.inject.Inject;
+ import com.google.inject.Provider;
+ import com.soulgalore.web.browsertime.datacollector.BrowserTimeDataCollector;
+ import com.soulgalore.web.browsertime.datacollector.TimingDataCollector;
+ import com.soulgalore.web.browsertime.datacollector.UserTimingDataCollector;
+ import com.soulgalore.web.browsertime.datacollector.W3CTimingDataCollector;
+ import com.soulgalore.web.browsertime.timings.TimingRun;
+ import com.soulgalore.web.browsertime.timings.TimingSession;
+ import org.openqa.selenium.JavascriptExecutor;
+ import org.openqa.selenium.WebDriver;
+ import org.openqa.selenium.support.ui.ExpectedCondition;
+ import org.openqa.selenium.support.ui.WebDriverWait;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-
-import java.net.URL;
-import java.util.*;
+ import java.net.URL;
+ import java.util.Arrays;
+ import java.util.HashMap;
+ import java.util.List;
+ import java.util.Map;
 
 /**
  *
  */
 public class SeleniumTimingRunner implements TimingRunner {
-    private final WebDriver driver;
+    public static final int MAX_WAIT_SECONDS = 30;
 
+    private final Provider<WebDriver> driverProvider;
     private final List<TimingDataCollector> dataCollectors;
-    
-    private static final String URL = "url";
 
     @Inject
-    public SeleniumTimingRunner(WebDriver driver, TimingDataCollector browserDataCollector) {
-        this.driver = driver;
+    public SeleniumTimingRunner(TimingDataCollector browserDataCollector, Provider<WebDriver> driverProvider) {
+        this.driverProvider = driverProvider;
         TimingDataCollector w3cDataCollector = new W3CTimingDataCollector();
         TimingDataCollector userTimingDataCollector = new UserTimingDataCollector();
         TimingDataCollector browserTimeDataCollector = new BrowserTimeDataCollector();
@@ -66,45 +70,66 @@ public class SeleniumTimingRunner implements TimingRunner {
             return session;
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private Map<String, String> collectPageData(URL url) {
+        WebDriver driver = driverProvider.get();
+        try {
+            JavascriptExecutor js = fetchUrl(driver, url);
+
+            Map<String, String> pageInfo = new HashMap<String, String>();
+            pageInfo.put("url", url.toString());
+
+            for (TimingDataCollector collector : dataCollectors) {
+                collector.collectPageData(js, pageInfo);
+            }
+
+            // possibly collect user specified page info (e.g. "page version" js property)
+
+            return pageInfo;
         } finally {
             driver.quit();
         }
     }
 
-    private Map<String, String> collectPageData(URL url) {
-        JavascriptExecutor js = fetchUrl(url);
-
-        Map<String, String> pageInfo = new HashMap<String, String>();
-        pageInfo.put(URL, url.toString());
-
-        for (TimingDataCollector collector : dataCollectors) {
-            collector.collectPageData(js, pageInfo);
-        }
-
-        // possibly collect user specified page info (e.g. "page version" js property)
-
-        return pageInfo;
-    }
-
     private TimingRun collectTimingData(URL url) {
-        JavascriptExecutor js = fetchUrl(url);
+        WebDriver driver = driverProvider.get();
+        try {
+            JavascriptExecutor js = fetchUrl(driver, url);
 
-        TimingRun results = new TimingRun();
+            TimingRun results = new TimingRun();
 
-        for (TimingDataCollector collector : dataCollectors) {
-            collector.collectMarks(js, results);
+            for (TimingDataCollector collector : dataCollectors) {
+                collector.collectMarks(js, results);
+            }
+
+            for (TimingDataCollector collector : dataCollectors) {
+                collector.collectMeasurements(js, results);
+            }
+
+            return results;
+        } finally {
+            driver.quit();
         }
-
-        for (TimingDataCollector collector : dataCollectors) {
-            collector.collectMeasurements(js, results);
-        }
-
-        return results;
     }
 
-    private JavascriptExecutor fetchUrl(URL url) {
+    private JavascriptExecutor fetchUrl(WebDriver driver, URL url) {
         String urlString = url.toString();
         driver.get(urlString);
+        waitForLoad(driver);
         return (JavascriptExecutor) driver;
     }
+
+    private void waitForLoad(WebDriver driver) {
+        ExpectedCondition<Boolean> pageLoadCondition = new
+                ExpectedCondition<Boolean>() {
+                    public Boolean apply(WebDriver driver) {
+                        return ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
+                    }
+                };
+        WebDriverWait wait = new WebDriverWait(driver, MAX_WAIT_SECONDS);
+        wait.until(pageLoadCondition);
+    }
+
 }

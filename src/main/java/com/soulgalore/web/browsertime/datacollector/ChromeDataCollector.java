@@ -31,22 +31,6 @@ import java.util.Map;
  *
  */
 public class ChromeDataCollector extends TimingDataCollector {
-    /*
-    window.chrome.loadTimes():
-    commitLoadTime: 1379543366.221452
-connectionInfo: "http/1"
-finishDocumentLoadTime: 1379543366.608697
-finishLoadTime: 1379543368.68224
-firstPaintAfterLoadTime: 1379543369.41713
-firstPaintTime: 1379543366.346558
-navigationType: "Other"
-npnNegotiatedProtocol: "unknown"
-requestTime: 1379543366.031938
-startLoadTime: 1379543366.178765
-wasAlternateProtocolAvailable: false
-wasFetchedViaSpdy: false
-wasNpnNegotiated: false
-     */
 
     @Override
     public void collectPageData(JavascriptExecutor js, Map<String, String> pageInfo) {
@@ -63,12 +47,12 @@ wasNpnNegotiated: false
 
         // Chrome timing is in s.ms, convert it to ms!!
         Double time = (Double) js.executeScript("return window.chrome.loadTimes().firstPaintTime");
-        results.addMark(new TimingMark("firstPaintTime", (long) (time * 1000)));
+        results.addMark(new TimingMark("firstPaint", (long) (time * 1000)));
     }
 
     @Override
     public void collectMeasurements(JavascriptExecutor js, TimingRun results) {
-        MarkInterval interval = new MarkInterval("firstPaint", "navigationStart", "firstPaintTime");
+        MarkInterval interval = new MarkInterval("firstPaintTime", "navigationStart", "firstPaint");
         interval.collectMeasurement(results);
     }
 }
