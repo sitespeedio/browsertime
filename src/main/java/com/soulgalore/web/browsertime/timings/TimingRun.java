@@ -49,7 +49,7 @@ public class TimingRun {
     @XmlElementWrapper(name = "measurements")
     @XmlElement(name = "measurement")
     public List<TimingMeasurement> getMeasurements() {
-        Collections.sort(measurements);
+        Collections.sort(measurements); // sort in time order
         return Collections.unmodifiableList(measurements);
     }
 }
