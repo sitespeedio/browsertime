@@ -20,41 +20,61 @@
  */
 package com.soulgalore.web.browsertime.guice;
 
-import com.google.inject.AbstractModule;
 import com.google.inject.Provider;
-import com.soulgalore.web.browsertime.SeleniumTimingRunner;
-import com.soulgalore.web.browsertime.TimingRunner;
-
-import com.soulgalore.web.browsertime.datacollector.FirefoxDataCollector;
-import com.soulgalore.web.browsertime.datacollector.TimingDataCollector;
+import com.soulgalore.web.browsertime.BrowserConfig;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+
+import java.util.Map;
 
 /**
  * Setup a module that uses Firefox.
  */
-public class FireFoxModule extends AbstractModule {
+public class FireFoxModule extends AbstractBrowserModule {
+
+    public FireFoxModule(Map<BrowserConfig, String> browserConfiguration) {
+        super(browserConfiguration);
+    }
 
     @Override
     protected void configure() {
+        super.configure();
         bind(WebDriver.class).toProvider(DRIVER_PROVIDER);
-        bind(TimingRunner.class).to(SeleniumTimingRunner.class);
-        bind(TimingDataCollector.class).to(FirefoxDataCollector.class);
     }
 
-    private static final Provider<WebDriver> DRIVER_PROVIDER = new Provider<WebDriver>() {
+    private final Provider<WebDriver> DRIVER_PROVIDER = new Provider<WebDriver>() {
+
         @Override
         public WebDriver get() {
-            return new FirefoxDriver(createNonCachingProfile());
+            return new FirefoxDriver(createBinary(), createProfile());
         }
 
-        private FirefoxProfile createNonCachingProfile() {
+        private FirefoxBinary createBinary() {
+            FirefoxBinary binary = new FirefoxBinary();
+            String windowSize = browserConfiguration.get(BrowserConfig.windowSize);
+            if (windowSize != null) {
+                String[] parts = windowSize.split("x");
+                binary.addCommandLineOptions("-width", parts[0], "-height", parts[1]);
+            }
+
+            return binary;
+        }
+
+        private FirefoxProfile createProfile() {
             FirefoxProfile profile = new FirefoxProfile();
+
+            // http://kb.mozillazine.org/Firefox_:_FAQs_:_About:config_Entries
             profile.setPreference("browser.cache.disk.enable", false);
             profile.setPreference("browser.cache.memory.enable", false);
             profile.setPreference("browser.cache.offline.enable", false);
             profile.setPreference("network.http.use-cache", false);
+
+            String userAgent = browserConfiguration.get(BrowserConfig.userAgent);
+            if (userAgent != null) {
+                profile.setPreference("general.useragent.override", userAgent);
+            }
 
             return profile;
         }

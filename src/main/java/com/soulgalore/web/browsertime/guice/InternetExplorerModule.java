@@ -20,22 +20,46 @@
  */
 package com.soulgalore.web.browsertime.guice;
 
-import com.google.inject.AbstractModule;
+import com.google.inject.Provider;
+import com.soulgalore.web.browsertime.BrowserConfig;
 import com.soulgalore.web.browsertime.datacollector.InternetExplorerDataCollector;
 import com.soulgalore.web.browsertime.datacollector.TimingDataCollector;
-
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
-/**
+import java.util.Map;
+
+ /**
  * Setup a module that uses IE.
  */
-public class InternetExplorerModule extends AbstractModule {
+public class InternetExplorerModule extends AbstractBrowserModule {
 
-	@Override
+     public InternetExplorerModule(Map<BrowserConfig, String> browserConfiguration) {
+         super(browserConfiguration);
+     }
+
+     @Override
 	protected void configure()
 	{
-		bind(WebDriver.class).to(InternetExplorerDriver.class);
+        super.configure();
+		bind(WebDriver.class).toProvider(DRIVER_PROVIDER);
         bind(TimingDataCollector.class).to(InternetExplorerDataCollector.class);
 	}
-}
+
+     private final Provider<WebDriver> DRIVER_PROVIDER = new Provider<WebDriver>() {
+         @Override
+         public WebDriver get() {
+             return new InternetExplorerDriver(getCapabilities());
+         }
+
+         public Capabilities getCapabilities() {
+             DesiredCapabilities capabilities = new DesiredCapabilities();
+
+             capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+
+             return capabilities;
+         }
+     };
+ }

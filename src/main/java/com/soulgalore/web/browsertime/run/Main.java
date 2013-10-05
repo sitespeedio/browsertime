@@ -20,29 +20,21 @@
  */
 package com.soulgalore.web.browsertime.run;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Module;
-import com.soulgalore.web.browsertime.guice.ChromeModule;
-import com.soulgalore.web.browsertime.guice.FireFoxModule;
-import com.soulgalore.web.browsertime.guice.InternetExplorerModule;
-import com.soulgalore.web.browsertime.guice.JSONResultModule;
-import com.soulgalore.web.browsertime.guice.XMLResultModule;
-import com.soulgalore.web.browsertime.serializer.Serializer;
-import com.soulgalore.web.browsertime.serializer.SerializerFactory;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.ParseException;
+ import com.google.inject.Guice;
+ import com.google.inject.Injector;
+ import com.google.inject.Module;
+ import com.soulgalore.web.browsertime.BrowserConfig;
+ import com.soulgalore.web.browsertime.guice.*;
+ import com.soulgalore.web.browsertime.serializer.Serializer;
+ import com.soulgalore.web.browsertime.serializer.SerializerFactory;
+ import org.apache.commons.cli.CommandLine;
+ import org.apache.commons.cli.ParseException;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+ import java.io.*;
+ import java.util.HashMap;
+ import java.util.Map;
 
-import static com.soulgalore.web.browsertime.run.CliHelper.Browser;
-import static com.soulgalore.web.browsertime.run.CliHelper.DEFAULT_BROWSER;
-import static com.soulgalore.web.browsertime.run.CliHelper.DEFAULT_FORMAT;
-import static com.soulgalore.web.browsertime.run.CliHelper.Format;
+ import static com.soulgalore.web.browsertime.run.CliHelper.*;
 
  /**
  *
@@ -98,13 +90,18 @@ public class Main {
     }
 
     private void run(CommandLine line) throws IOException {
-        Injector injector = Guice.createInjector(
-                createFormatModule(line.getOptionValue("f", DEFAULT_FORMAT.name())),
-                createBrowserModule(line.getOptionValue("b", DEFAULT_BROWSER.name())));
-
         int numIterations = Integer.parseInt(line.getOptionValue("n", "3"));
 
         Writer writer = parseSerializationWriter(line.getOptionValue("o"));
+
+        Map<BrowserConfig, String> config = new HashMap<BrowserConfig, String>();
+
+        addConfigIfPresent(line, "ua", config, BrowserConfig.userAgent);
+        addConfigIfPresent(line, "w", config, BrowserConfig.windowSize);
+
+        Injector injector = Guice.createInjector(
+                createFormatModule(line.getOptionValue("f", DEFAULT_FORMAT.name())),
+                createBrowserModule(line.getOptionValue("b", DEFAULT_BROWSER.name()), config));
 
         SerializerFactory factory = injector.getInstance(SerializerFactory.class);
         Serializer serializer = factory.create(writer);
@@ -114,7 +111,15 @@ public class Main {
         timer.performTiming(line.getArgs()[0], numIterations, serializer);
     }
 
-    private Writer parseSerializationWriter(String filename) throws IOException {
+     private void addConfigIfPresent(CommandLine line, String option,
+                                     Map<BrowserConfig, String> configs, BrowserConfig config) {
+         String value = line.getOptionValue(option);
+         if (value != null) {
+             configs.put(config, value);
+         }
+     }
+
+     private Writer parseSerializationWriter(String filename) throws IOException {
         if (filename == null) {
             return new OutputStreamWriter(System.out);
         } else {
@@ -123,27 +128,27 @@ public class Main {
         }
     }
 
-    private Module createFormatModule(String name) {
-        switch (Format.valueOf(name)) {
+    private Module createFormatModule(String formatName) {
+        switch (Format.valueOf(formatName)) {
             case xml:
                 return new XMLResultModule();
             case json:
                 return new JSONResultModule();
             default:
-                throw new RuntimeException();
+                throw new RuntimeException("Unsupported format: " + formatName);
         }
     }
 
-    private Module createBrowserModule(String name) {
-        switch (Browser.valueOf(name)) {
+    private Module createBrowserModule(String browserName, Map<BrowserConfig, String> browserConfiguration) {
+        switch (Browser.valueOf(browserName)) {
             case chrome:
-                return new ChromeModule();
+                return new ChromeModule(browserConfiguration);
             case firefox:
-                return new FireFoxModule();
+                return new FireFoxModule(browserConfiguration);
             case ie:
-                return new InternetExplorerModule();
+                return new InternetExplorerModule(browserConfiguration);
             default:
-                throw new RuntimeException();
+                throw new RuntimeException("Unsupported browser: " + browserName);
         }
     }
 }

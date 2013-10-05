@@ -61,11 +61,12 @@ class CliHelper {
         String[] urlArgs = line.getArgs();
         if (urlArgs.length != 1) {
             throw new ParseException("One url must be passed as the last argument.");
-        } else {
-            validateBrowserOption(line);
-            validateFormatOption(line);
-            validateIterationsOption(line);
         }
+
+        validateBrowserOption(line);
+        validateFormatOption(line);
+        validateIterationsOption(line);
+        validateWindowSizeOption(line);
     }
 
     private void setupOptions(Options options) {
@@ -73,6 +74,8 @@ class CliHelper {
         options.addOption(createBrowserOption());
         options.addOption(createOutputOption());
         options.addOption(createFormatOption());
+        options.addOption(createUserAgentOption());
+        options.addOption(createWindowSizeOption());
         options.addOption(createHelpOption());
         options.addOption(createVersionOption());
     }
@@ -99,6 +102,19 @@ class CliHelper {
         return createOption("f", "format",
                 "The desired output format. Supported values are: " + asList(Format.values()) +
                         ", default being " + DEFAULT_FORMAT + ".");
+    }
+
+    private Option createUserAgentOption() {
+        return createOption(
+                "ua",
+                "user-agent",
+                "Set the user agent. Default is the one by the browser you use. Only works with Chrome.");
+    }
+
+    private Option createWindowSizeOption() {
+        return createOption("w", "window-size",
+                "The size of the browser window: <width>x<height>, e.g. 400x600. " +
+                        "Only works with Chrome and Firefox.");
     }
 
     private Option createHelpOption() {
@@ -159,6 +175,15 @@ class CliHelper {
                 }
             } catch (NumberFormatException e) {
                 throw new ParseException("Invalid number: " + times);
+            }
+        }
+    }
+
+    private void validateWindowSizeOption(CommandLine line) throws ParseException {
+        String size = line.getOptionValue("w");
+        if (size != null) {
+            if (!size.matches("\\d+x\\d+")) {
+                throw new ParseException("Window size is <width>x<height>");
             }
         }
     }
