@@ -39,7 +39,7 @@ public class InternetExplorerDataCollector extends TimingDataCollector {
 
     @Override
     public void collectMeasurements(JavascriptExecutor js, TimingRun results) {
-        MarkInterval interval = new MarkInterval("firstPaint", "navigationStart", "msFirstPaint");
+        MarkInterval interval = new MarkInterval("firstPaintTime", "navigationStart", "msFirstPaint");
         interval.collectMeasurement(results);
     }
 
