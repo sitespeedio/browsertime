@@ -58,15 +58,15 @@ public class Statistics {
     }
 
     public static class Statistic {
-        @XmlElement String name;
-        @XmlElement double min;
-        @XmlElement double avg;
-        @XmlElement double median;
-        @XmlElement double p60;
-        @XmlElement double p70;
-        @XmlElement double p80;
-        @XmlElement double p90;
-        @XmlElement double max;
+        @XmlElement public String name;
+        @XmlElement public double min;
+        @XmlElement public double avg;
+        @XmlElement public double median;
+        @XmlElement public double p60;
+        @XmlElement public double p70;
+        @XmlElement public double p80;
+        @XmlElement public double p90;
+        @XmlElement public double max;
 
         public static Statistic create(String name, DescriptiveStatistics statistics) {
             Statistic statistic = new Statistic();

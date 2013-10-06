@@ -20,15 +20,22 @@
  */
 package com.soulgalore.web.browsertime.serializer;
 
-import com.google.gson.Gson;
-import com.google.inject.Inject;
-import com.google.inject.assistedinject.Assisted;
-import com.soulgalore.web.browsertime.timings.TimingSession;
+ import com.google.gson.Gson;
+ import com.google.gson.GsonBuilder;
+ import com.google.gson.TypeAdapter;
+ import com.google.gson.stream.JsonReader;
+ import com.google.gson.stream.JsonWriter;
+ import com.google.inject.Inject;
+ import com.google.inject.assistedinject.Assisted;
+ import com.soulgalore.web.browsertime.timings.*;
 
-import java.io.IOException;
-import java.io.Writer;
+ import java.io.IOException;
+ import java.io.Writer;
+ import java.text.DecimalFormat;
+ import java.text.DecimalFormatSymbols;
+ import java.util.List;
 
-/**
+ /**
  *
  */
 public class JsonSerializer implements Serializer {
@@ -41,8 +48,101 @@ public class JsonSerializer implements Serializer {
 
     @Override
     public void serialize(TimingSession session) throws IOException {
-        Gson gson = new Gson();
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Statistics.class, new StatisticsAdapter());
+        builder.registerTypeAdapter(TimingRun.class, new TimingRunAdapter());
+        Gson gson = builder.create();
         gson.toJson(session, writer);
         writer.close();
     }
-}
+
+    private static class StatisticsAdapter extends TypeAdapter<Statistics> {
+        private final DecimalFormat doubleFormat = new DecimalFormat("#.######", new DecimalFormatSymbols() {{
+            setDecimalSeparator('.');
+        }});
+
+        @Override
+        public void write(JsonWriter out, Statistics value) throws IOException {
+            List<Statistics.Statistic> statistics = value.getStatistics();
+            out.beginArray();
+            for (Statistics.Statistic statistic : statistics) {
+                out.beginObject();
+                out.name("name");
+                out.value(statistic.name);
+                out.name("min");
+                out.value(doubleFormat.format(statistic.min));
+                out.name("avg");
+                out.value(doubleFormat.format(statistic.avg));
+                out.name("median");
+                out.value(doubleFormat.format(statistic.median));
+                out.name("p60");
+                out.value(doubleFormat.format(statistic.p60));
+                out.name("p70");
+                out.value(doubleFormat.format(statistic.p70));
+                out.name("p80");
+                out.value(doubleFormat.format(statistic.p80));
+                out.name("p90");
+                out.value(doubleFormat.format(statistic.p90));
+                out.name("max");
+                out.value(doubleFormat.format(statistic.max));
+                out.endObject();
+            }
+            out.endArray();
+        }
+
+        @Override
+        public Statistics read(JsonReader in) throws IOException {
+            // Reading json is not used in Browsertime.
+            return null;
+        }
+    }
+
+    private static class TimingRunAdapter extends TypeAdapter<TimingRun> {
+
+        @Override
+        public void write(JsonWriter out, TimingRun run) throws IOException {
+            out.beginObject();
+            writeMarks(out, run);
+            writeMeasurements(out, run);
+            out.endObject();
+        }
+
+        private void writeMarks(JsonWriter out, TimingRun run) throws IOException {
+            out.name("marks");
+            out.beginArray();
+            for (TimingMark mark : run.getMarks()) {
+                out.beginObject();
+                out.name("name");
+                out.value(mark.getName());
+                out.name("time");
+                out.value(mark.getTime());
+                out.endObject();
+            }
+            out.endArray();
+        }
+
+        private void writeMeasurements(JsonWriter out, TimingRun run) throws IOException {
+            out.name("measurements");
+            out.beginArray();
+            for (TimingMeasurement measurement : run.getMeasurements()) {
+                out.beginObject();
+                out.name("name");
+                out.value(measurement.getName());
+                out.name("time");
+                out.value(measurement.getTime());
+                out.name("duration");
+                out.value(measurement.getDuration());
+                out.endObject();
+            }
+            out.endArray();
+        }
+
+
+        @Override
+         public TimingRun read(JsonReader in) throws IOException {
+             // Reading json is not used in Browsertime.
+             return null;
+         }
+     }
+
+ }
