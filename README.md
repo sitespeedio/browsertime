@@ -7,18 +7,25 @@ Guess what? It's browser time! Fetch timings (like the Navigation Timing API dat
 
 ```bash
 usage: browsertime [options] URL
- -b,--browser <BROWSER>           The browser to use. Supported values are: [chrome, firefox, ie], default
+ -b,--browser <BROWSER>           The browser to use. Supported values
+                                  are: [chrome, firefox, ie], default
                                   being firefox.
- -f,--format <FORMAT>             The desired output format. Supported values are: [xml, json], default being
+ -f,--format <FORMAT>             The desired output format. Supported
+                                  values are: [xml, json], default being
                                   xml.
  -h,--help                        Show this help message
- -n,--times <TIMES>               The number of times to run the test, default being 3.
- -o,--output <OUTPUT>             Output the result as a file, give the name of the file. If no filename is
-                                  given, the result is put on standard out.
- -ua,--user-agent <USER-AGENT>    Set the user agent. Default is the one by the browser you use. Only works with 
+ -n,--times <TIMES>               The number of times to run the test,
+                                  default being 3.
+ -o,--output <OUTPUT>             Output the result as a file, give the
+                                  name of the file. If no filename is
+                                  given, the result is put on standard
+                                  out.
+ -ua,--user-agent <USER-AGENT>    Set the user agent. Default is the one
+                                  by the browser you use. Only works with
                                   Chrome.
  -V,--version                     Show version information
- -w,--window-size <WINDOW-SIZE>   The size of the browser window: <width>x<height>, e.g. 400x600. Only
+ -w,--window-size <WINDOW-SIZE>   The size of the browser window:
+                                  <width>x<height>, e.g. 400x600. Only
                                   works with Chrome and Firefox.
 ```
 
