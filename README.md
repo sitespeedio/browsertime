@@ -1,6 +1,7 @@
 # Browser Time [![Build Status](https://travis-ci.org/tobli/browsertime.png?branch=master)](https://travis-ci.org/tobli/browsertime)
 
-Guess what? It's browser time! Fetch timings (like the Navigation Timing API data) and other data from your browser (inspired by [wbench](https://github.com/desktoppr/wbench))
+Guess what? It's browser time! Fetch timings (like the Navigation Timing API data) and other data from your browser (inspired by [wbench](https://github.com/desktoppr/wbench)).
+
 
 ## Usage
 
@@ -40,3 +41,11 @@ mvn package
 java -jar browsertime-X.Y-SNAPSHOT-full.jar https://github.com
 ```
 
+## Authors
+Tobias Lidskog - https://github.com/tobli - https://twitter.com/tobiaslidskog
+
+Peter Hedenskog - https://github.com/soulgalore - https://twitter.com/soulislove
+
+## Copyright and license
+
+Copyright 2013 Tobias Lidskog & Peter Hedenskog under [the Apache 2.0 license](LICENSE).
