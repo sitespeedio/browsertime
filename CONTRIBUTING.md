@@ -9,7 +9,7 @@ If you want help out, that's great! Check the issue list and see if there's some
  - Run all the tests to make sure you haven't broken anything else (it happens to the best!)
 
 ## Add a defect
-First, check the defect/bug list https://github.com/soulgalore/browsertime/issues?labels=bug&page=1&state=open to make sure that it hasn't been filed yet.
+First, check the defect/bug list https://github.com/tobli/browsertime/issues?labels=bug&page=1&state=open to make sure that it hasn't been filed yet.
 
 If you find a defect, please file a bug report. Include the following:
  - Explain the bug/defect and what you where doing
