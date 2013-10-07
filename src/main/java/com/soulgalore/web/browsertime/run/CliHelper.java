@@ -198,7 +198,10 @@ class CliHelper {
     }
 
     void printVersion() {
-        System.out.println(getClass().getPackage().getImplementationVersion());
+    	
+    	if (getClass().getPackage().getImplementationVersion()==null)
+    		System.out.println("unknown");
+    	else System.out.println(getClass().getPackage().getImplementationVersion());
     }
 
 }
