@@ -114,8 +114,8 @@ public class JsonSerializer implements Serializer {
                 out.beginObject();
                 out.name("name");
                 out.value(mark.getName());
-                out.name("time");
-                out.value(mark.getTime());
+                out.name("startTime");
+                out.value(mark.getStartTime());
                 out.endObject();
             }
             out.endArray();
@@ -128,8 +128,8 @@ public class JsonSerializer implements Serializer {
                 out.beginObject();
                 out.name("name");
                 out.value(measurement.getName());
-                out.name("time");
-                out.value(measurement.getTime());
+                out.name("startTime");
+                out.value(measurement.getStartTime());
                 out.name("duration");
                 out.value(measurement.getDuration());
                 out.endObject();
