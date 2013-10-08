@@ -39,7 +39,11 @@ package com.soulgalore.web.browsertime.serializer;
  *
  */
 public class JsonSerializer implements Serializer {
-    private final Writer writer;
+     private static final DecimalFormat doubleFormat = new DecimalFormat("#.######", new DecimalFormatSymbols() {{
+         setDecimalSeparator('.');
+     }});
+
+     private final Writer writer;
 
     @Inject
     public JsonSerializer(@Assisted Writer writer) {
@@ -57,10 +61,6 @@ public class JsonSerializer implements Serializer {
     }
 
     private static class StatisticsAdapter extends TypeAdapter<Statistics> {
-        private final DecimalFormat doubleFormat = new DecimalFormat("#.######", new DecimalFormatSymbols() {{
-            setDecimalSeparator('.');
-        }});
-
         @Override
         public void write(JsonWriter out, Statistics value) throws IOException {
             List<Statistics.Statistic> statistics = value.getStatistics();
@@ -115,7 +115,7 @@ public class JsonSerializer implements Serializer {
                 out.name("name");
                 out.value(mark.getName());
                 out.name("startTime");
-                out.value(mark.getStartTime());
+                out.value(doubleFormat.format(mark.getStartTime()));
                 out.endObject();
             }
             out.endArray();
@@ -129,9 +129,9 @@ public class JsonSerializer implements Serializer {
                 out.name("name");
                 out.value(measurement.getName());
                 out.name("startTime");
-                out.value(measurement.getStartTime());
+                out.value(doubleFormat.format(measurement.getStartTime()));
                 out.name("duration");
-                out.value(measurement.getDuration());
+                out.value(doubleFormat.format(measurement.getDuration()));
                 out.endObject();
             }
             out.endArray();
