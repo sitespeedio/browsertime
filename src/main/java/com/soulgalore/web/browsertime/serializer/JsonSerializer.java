@@ -40,10 +40,12 @@ package com.soulgalore.web.browsertime.serializer;
  */
 public class JsonSerializer implements Serializer {
     private final Writer writer;
+    private final boolean prettyPrint;
 
     @Inject
-    public JsonSerializer(@Assisted Writer writer) {
+    public JsonSerializer(@Assisted Writer writer, @Assisted boolean prettyPrint) {
         this.writer = writer;
+        this.prettyPrint = prettyPrint;
     }
 
     @Override
@@ -51,6 +53,9 @@ public class JsonSerializer implements Serializer {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(Statistics.class, new StatisticsAdapter());
         builder.registerTypeAdapter(TimingRun.class, new TimingRunAdapter());
+        if (prettyPrint) {
+            builder.setPrettyPrinting();
+        }
         Gson gson = builder.create();
         gson.toJson(session, writer);
         writer.close();

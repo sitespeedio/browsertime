@@ -74,6 +74,7 @@ class CliHelper {
         options.addOption(createBrowserOption());
         options.addOption(createOutputOption());
         options.addOption(createFormatOption());
+        options.addOption(createCompactOption());
         options.addOption(createUserAgentOption());
         options.addOption(createWindowSizeOption());
         options.addOption(createHelpOption());
@@ -102,6 +103,12 @@ class CliHelper {
         return createOption("f", "format",
                 "The desired output format. Supported values are: " + asList(Format.values()) +
                         ", default being " + DEFAULT_FORMAT + ".");
+    }
+
+    private Option createCompactOption() {
+        Option option = createOption(null, "compact", "Generate compact output (default is pretty-printed).");
+        option.setArgs(0);
+        return option;
     }
 
     private Option createUserAgentOption() {

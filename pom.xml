@@ -41,14 +41,14 @@
 	</parent>
 
 	<scm>
-		<connection>scm:git:git://github.com/soulgalore/browsertime.git</connection>
-		<developerConnection>scm:git:git@github.com:soulgalore/browsertime.git</developerConnection>
-		<url>git@github.com:soulgalore/browsertime.git</url>
+		<connection>scm:git:git://github.com/tobli/browsertime.git</connection>
+		<developerConnection>scm:git:git@github.com:tobli/browsertime.git</developerConnection>
+		<url>git@github.com:tobli/browsertime.git</url>
 	</scm>
 
 	<issueManagement>
 		<system>github</system>
-		<url>https://github.com/soulgalore/browsertime/issues#issue/</url>
+		<url>https://github.com/tobli/browsertime/issues</url>
 	</issueManagement>
 
 	<dependencies>

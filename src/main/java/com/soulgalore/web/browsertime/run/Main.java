@@ -99,12 +99,14 @@ public class Main {
         addConfigIfPresent(line, "ua", config, BrowserConfig.userAgent);
         addConfigIfPresent(line, "w", config, BrowserConfig.windowSize);
 
+        boolean shouldPrettyPrint = !line.hasOption("compact");
+
         Injector injector = Guice.createInjector(
                 createFormatModule(line.getOptionValue("f", DEFAULT_FORMAT.name())),
                 createBrowserModule(line.getOptionValue("b", DEFAULT_BROWSER.name()), config));
 
         SerializerFactory factory = injector.getInstance(SerializerFactory.class);
-        Serializer serializer = factory.create(writer);
+        Serializer serializer = factory.create(writer, shouldPrettyPrint);
 
         TimingController timer = injector.getInstance(TimingController.class);
 
