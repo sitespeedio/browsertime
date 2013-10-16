@@ -335,3 +335,7 @@ Peter Hedenskog - https://github.com/soulgalore - https://twitter.com/soulislove
 ## Copyright and license
 
 Copyright 2013 Tobias Lidskog & Peter Hedenskog under [the Apache 2.0 license](LICENSE).
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/tobli/browsertime/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+

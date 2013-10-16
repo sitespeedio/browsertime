@@ -168,11 +168,6 @@
 						<excludes>
 							<exclude>junit:junit</exclude>
 							<exclude>jmock:*</exclude>
-							<exclude>org.seleniumhq.selenium:selenium-android-driver</exclude>
-							<exclude>org.seleniumhq.selenium:selenium-htmlunit-driver</exclude>
-							<exclude>org.seleniumhq.selenium:selenium-iphone-driver</exclude>
-							<exclude>org.seleniumhq.selenium:selenium-safari-driver</exclude>
-							
 						</excludes>
 					</artifactSet>
 					<!--<minimizeJar>true</minimizeJar> -->
