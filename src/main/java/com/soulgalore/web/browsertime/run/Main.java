@@ -21,20 +21,17 @@
 package com.soulgalore.web.browsertime.run;
 
  import com.google.inject.Guice;
- import com.google.inject.Injector;
- import com.google.inject.Module;
- import com.soulgalore.web.browsertime.BrowserConfig;
- import com.soulgalore.web.browsertime.guice.*;
- import com.soulgalore.web.browsertime.serializer.Serializer;
- import com.soulgalore.web.browsertime.serializer.SerializerFactory;
- import org.apache.commons.cli.CommandLine;
- import org.apache.commons.cli.ParseException;
+import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.soulgalore.web.browsertime.TimingRunner;
+import com.soulgalore.web.browsertime.guice.*;
+import com.soulgalore.web.browsertime.serializer.Serializer;
+import com.soulgalore.web.browsertime.serializer.SerializerFactory;
+import com.soulgalore.web.browsertime.timings.TimingSession;
+import org.apache.commons.cli.ParseException;
 
- import java.io.*;
- import java.util.HashMap;
- import java.util.Map;
-
- import static com.soulgalore.web.browsertime.run.CliHelper.*;
+import java.io.IOException;
+import java.net.URL;
 
  /**
  *
@@ -58,99 +55,73 @@ public class Main {
         CliHelper cliHelper = new CliHelper();
 
         try {
-            CommandLine line = cliHelper.parse(args);
+            CliParser parser = CliParser.parseArgs(args);
 
-            if (line.hasOption("h")) {
+            if (parser.shouldShowHelp()) {
                 shouldShowUsage = true;
-            } else if (line.hasOption("version")) {
+            } else if (parser.shouldShowVersion()) {
                 cliHelper.printVersion();
             } else {
-                cliHelper.validateArgValues(line);
-
-                run(line);
+                TimingConfig config = parser.parseTimingConfig();
+                URL url = parser.parseUrl();
+                run(config, url);
             }
-        } catch (NumberFormatException e) {
-            commandStatus = ERROR;
-            shouldShowUsage = true;
-            cliHelper.printSyntaxError("Error parsing command line options: " + e.getMessage());
         } catch (ParseException e) {
             commandStatus = ERROR;
             shouldShowUsage = true;
-            cliHelper.printSyntaxError("Error parsing command line options: " + e.getMessage());
+            printSyntaxError("Error parsing command line options: " + e.getMessage());
         } catch (IOException e) {
             commandStatus = ERROR;
-            cliHelper.printSyntaxError("Error creating output file. " + e.getMessage());
+            printSyntaxError("Error creating output file. " + e.getMessage());
         }
 
         if (shouldShowUsage) {
-            cliHelper.printUsage(cliHelper.getOptions());
+            cliHelper.printUsage();
         }
 
         return commandStatus;
     }
 
-    private void run(CommandLine line) throws IOException {
-        int numIterations = Integer.parseInt(line.getOptionValue("n", "3"));
+     private void run(TimingConfig config, URL url) throws IOException {
+         Injector injector = createInjector(config);
 
-        Writer writer = parseSerializationWriter(line.getOptionValue("o"));
+         TimingRunner timingRunner = injector.getInstance(TimingRunner.class);
+         SerializerFactory factory = injector.getInstance(SerializerFactory.class);
+         Serializer serializer = factory.create(config.outputWriter, config.shouldPrettyPrint);
 
-        Map<BrowserConfig, String> config = new HashMap<BrowserConfig, String>();
+         TimingSession session = timingRunner.run(url, config.numIterations);
+         serializer.serialize(session);
+     }
 
-        addConfigIfPresent(line, "ua", config, BrowserConfig.userAgent);
-        addConfigIfPresent(line, "w", config, BrowserConfig.windowSize);
+     void printSyntaxError(String s) {
+         System.err.println(s);
+     }
 
-        boolean shouldPrettyPrint = !line.hasOption("compact");
+     private Injector createInjector(TimingConfig config) {
+         return Guice.createInjector(createFormatModule(config), createBrowserModule(config));
+     }
 
-        Injector injector = Guice.createInjector(
-                createFormatModule(line.getOptionValue("f", DEFAULT_FORMAT.name())),
-                createBrowserModule(line.getOptionValue("b", DEFAULT_BROWSER.name()), config));
-
-        SerializerFactory factory = injector.getInstance(SerializerFactory.class);
-        Serializer serializer = factory.create(writer, shouldPrettyPrint);
-
-        TimingController timer = injector.getInstance(TimingController.class);
-
-        timer.performTiming(line.getArgs()[0], numIterations, serializer);
-    }
-
-     private void addConfigIfPresent(CommandLine line, String option,
-                                     Map<BrowserConfig, String> configs, BrowserConfig config) {
-         String value = line.getOptionValue(option);
-         if (value != null) {
-             configs.put(config, value);
+     private Module createFormatModule(TimingConfig config) {
+         switch (config.format) {
+             case xml:
+                 return new XMLResultModule();
+             case json:
+                 return new JSONResultModule();
+             default:
+                 throw new RuntimeException("Unsupported format: " + config.format);
          }
      }
 
-     private Writer parseSerializationWriter(String filename) throws IOException {
-        if (filename == null) {
-            return new OutputStreamWriter(System.out);
-        } else {
-            File file = new File(filename);
-            return new FileWriter(file);
-        }
-    }
-
-    private Module createFormatModule(String formatName) {
-        switch (Format.valueOf(formatName)) {
-            case xml:
-                return new XMLResultModule();
-            case json:
-                return new JSONResultModule();
-            default:
-                throw new RuntimeException("Unsupported format: " + formatName);
-        }
-    }
-
-    private Module createBrowserModule(String browserName, Map<BrowserConfig, String> browserConfiguration) {
-        switch (Browser.valueOf(browserName)) {
+     private Module createBrowserModule(TimingConfig config) {
+        switch (config.browser) {
             case chrome:
-                return new ChromeModule(browserConfiguration);
+                return new ChromeModule(config.browserOptions);
             case firefox:
-                return new FireFoxModule(browserConfiguration);
+                return new FireFoxModule(config.browserOptions);
             case ie:
-                return new InternetExplorerModule(browserConfiguration);
+                return new InternetExplorerModule(config.browserOptions);
             default:
-                throw new RuntimeException("Unsupported browser: " + browserName);
+                throw new RuntimeException("Unsupported browser: " + config.browser);
         }
     }
 }

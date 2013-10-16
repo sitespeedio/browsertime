@@ -35,26 +35,18 @@ import static java.util.Arrays.asList;
  */
 class CliHelper {
 
-    enum Browser { chrome, firefox, ie }
-    enum Format { xml, json }
-
     public static final Browser DEFAULT_BROWSER = Browser.firefox;
     public static final Format DEFAULT_FORMAT = Format.xml;
 
-    private final Options options;
+    private final Options options = new Options();
 
     public CliHelper() {
-        options = new Options();
+        setupOptions(options);
     }
 
     public CommandLine parse(String[] args) throws ParseException {
-        setupOptions(options);
         Parser parser = new BasicParser();
         return parser.parse(options, args);
-    }
-
-    public Options getOptions() {
-        return options;
     }
 
     public void validateArgValues(CommandLine line) throws ParseException {
@@ -195,20 +187,16 @@ class CliHelper {
         }
     }
 
-    void printSyntaxError(String s) {
-        System.err.println(s);
-    }
-
-    void printUsage(Options options) {
+    void printUsage() {
         HelpFormatter helpFormatter = new HelpFormatter();
         helpFormatter.printHelp("browsertime [options] URL", options);
     }
 
     void printVersion() {
-    	
-    	if (getClass().getPackage().getImplementationVersion()==null)
-    		System.out.println("unknown");
-    	else System.out.println(getClass().getPackage().getImplementationVersion());
+        String implementationVersion = getClass().getPackage().getImplementationVersion();
+        implementationVersion = implementationVersion != null ? implementationVersion : "unknown";
+
+        System.out.println(implementationVersion);
     }
 
 }

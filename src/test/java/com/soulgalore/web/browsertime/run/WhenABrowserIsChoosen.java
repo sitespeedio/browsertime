@@ -5,10 +5,9 @@ import org.apache.commons.cli.ParseException;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.soulgalore.web.browsertime.run.CliHelper.Browser;
-import static com.soulgalore.web.browsertime.run.CliHelper.Browser.chrome;
-import static com.soulgalore.web.browsertime.run.CliHelper.Browser.firefox;
-import static com.soulgalore.web.browsertime.run.CliHelper.Browser.ie;
+import static com.soulgalore.web.browsertime.run.Browser.chrome;
+import static com.soulgalore.web.browsertime.run.Browser.firefox;
+import static com.soulgalore.web.browsertime.run.Browser.ie;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
