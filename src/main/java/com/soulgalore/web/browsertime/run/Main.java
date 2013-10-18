@@ -20,7 +20,7 @@
  */
 package com.soulgalore.web.browsertime.run;
 
- import com.google.inject.Guice;
+import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.soulgalore.web.browsertime.TimingRunner;
@@ -52,15 +52,15 @@ public class Main {
         int commandStatus = OK;
         boolean shouldShowUsage = false;
 
-        CliHelper cliHelper = new CliHelper();
+        CliParser parser = new CliParser();
 
         try {
-            CliParser parser = CliParser.parseArgs(args);
+            parser.parseArgs(args);
 
             if (parser.shouldShowHelp()) {
                 shouldShowUsage = true;
             } else if (parser.shouldShowVersion()) {
-                cliHelper.printVersion();
+                parser.printVersion();
             } else {
                 TimingConfig config = parser.parseTimingConfig();
                 URL url = parser.parseUrl();
@@ -76,7 +76,7 @@ public class Main {
         }
 
         if (shouldShowUsage) {
-            cliHelper.printUsage();
+            parser.printUsage();
         }
 
         return commandStatus;
