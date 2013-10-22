@@ -1,53 +1,53 @@
 package com.soulgalore.web.browsertime.run;
 
-import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.ParseException;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.soulgalore.web.browsertime.run.CliHelper.Browser;
-import static com.soulgalore.web.browsertime.run.CliHelper.Browser.chrome;
-import static com.soulgalore.web.browsertime.run.CliHelper.Browser.firefox;
-import static com.soulgalore.web.browsertime.run.CliHelper.Browser.ie;
+import java.io.IOException;
+
+import static com.soulgalore.web.browsertime.run.Browser.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 public class WhenABrowserIsChoosen {
-    private CliHelper helper;
+    private CliParser parser;
 
     @Before
     public void setUp() throws Exception {
-        helper = new CliHelper();
+        parser = new CliParser();
     }
 
     @Test(expected = ParseException.class)
-    public void invalidBrowserShouldFail() throws ParseException {
+    public void invalidBrowserShouldFail() throws ParseException, IOException {
         String[] args = {"-b", "invalidBrowser", "http://www.google.com"};
-        CommandLine cl = helper.parse(args);
-        helper.validateArgValues(cl);
+        parser.parseArgs(args);
+        parser.parseTimingConfig();
     }
 
     @Test
-    public void firefoxShouldBeFirefox() {
+    public void firefoxShouldBeFirefox() throws IOException {
         testBrowserChoice(firefox);
     }
 
     @Test
-    public void chromeShouldBeChrome() {
+    public void chromeShouldBeChrome() throws IOException {
         testBrowserChoice(chrome);
     }
 
     @Test
-    public void ieShouldBeIe() {
+    public void ieShouldBeIe() throws IOException {
         testBrowserChoice(ie);
     }
 
-    private void testBrowserChoice(Browser browser) {
+    private void testBrowserChoice(Browser browser) throws IOException {
         String[] args = {"-b", browser.name(), "http://www.google.com"};
         try {
-            CommandLine cl = helper.parse(args);
-            assertThat(browser.name(), is(cl.getOptionValue("b")));
+            parser.parseArgs(args);
+            TimingConfig config = parser.parseTimingConfig();
+
+            assertThat(browser, is(config.browser));
 
         } catch (ParseException e) {
             fail(browser + " should signal a " + browser + " browser");

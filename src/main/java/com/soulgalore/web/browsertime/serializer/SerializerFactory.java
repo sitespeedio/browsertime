@@ -26,5 +26,5 @@ import java.io.Writer;
  *
  */
 public interface SerializerFactory {
-    public Serializer create(Writer writer);
+    public Serializer create(Writer writer, boolean prettyPrint);
 }
