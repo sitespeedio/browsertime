@@ -43,7 +43,7 @@ package com.soulgalore.web.browsertime;
  *
  */
 public class SeleniumTimingRunner implements TimingRunner {
-    public static final int MAX_WAIT_SECONDS = 30;
+    public static final int MAX_WAIT_SECONDS = 60;
 
     private final Provider<WebDriver> driverProvider;
     private final List<TimingDataCollector> dataCollectors;
