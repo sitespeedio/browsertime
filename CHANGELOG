@@ -1,5 +1,16 @@
-Changlelog BrowserTime
+BrowserTime changelog
 
-version 0.1
+version 0.2 (NOT YET RELEASED)
+------------------------
+* Add optional --compact flag to disable pretty printing of xml and json.
+* Update format of xml/json (NOTE - incompatible changes from 0.1)
+ - all metrics and statistics are now floating point numbers
+ - numbers in json output are now represented as strings (surrounded by quotes). This is an
+    unfortunate side-effect of avoiding printing numbers in scientific notation.
+ - time property of marks and measurements have been renamed startTime
+ - measurements and statistics are now sorted according to start time.
+
+
+version 0.1 (2013-10-07)
 ------------------------
 * First release
