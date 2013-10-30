@@ -27,10 +27,13 @@ import com.soulgalore.web.browsertime.timings.TimingSession;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.io.IOException;
 import java.io.Writer;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
-/**
+ /**
  *
  */
 public class XmlSerializer implements Serializer {
@@ -55,4 +58,23 @@ public class XmlSerializer implements Serializer {
             throw new RuntimeException(e);
         }
     }
-}
+
+     /**
+      *
+      */
+     public static class NonScientificDoubleAdapter extends XmlAdapter<String, Double> {
+         private final DecimalFormat format = new DecimalFormat("#.######", new DecimalFormatSymbols() {{
+             setDecimalSeparator('.');
+         }});
+
+         @Override
+         public Double unmarshal(String v) throws Exception {
+             return Double.valueOf(v);
+         }
+
+         @Override
+         public String marshal(Double v) throws Exception {
+             return format.format(v);
+         }
+     }
+ }

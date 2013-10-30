@@ -20,7 +20,7 @@
  */
 package com.soulgalore.web.browsertime.timings;
 
-import com.soulgalore.web.browsertime.serializer.NonScientificDoubleAdapter;
+import com.soulgalore.web.browsertime.serializer.XmlSerializer;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -37,7 +37,7 @@ public class TimingMeasurement extends TimingMark implements Comparable<TimingMe
     }
 
     @XmlAttribute
-    @XmlJavaTypeAdapter(NonScientificDoubleAdapter.class)
+    @XmlJavaTypeAdapter(XmlSerializer.NonScientificDoubleAdapter.class)
     public Double getDuration() {
         return duration;
     }
