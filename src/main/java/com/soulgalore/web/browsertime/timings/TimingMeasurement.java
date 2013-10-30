@@ -20,26 +20,39 @@
  */
 package com.soulgalore.web.browsertime.timings;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import com.soulgalore.web.browsertime.serializer.NonScientificDoubleAdapter;
 
-/**
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+ /**
  *
  */
-public class TimingMeasurement extends TimingMark {
-    private final long duration;
+public class TimingMeasurement extends TimingMark implements Comparable<TimingMeasurement> {
+    private final double duration;
 
-    public TimingMeasurement(String name, long startTime, long duration) {
+    public TimingMeasurement(String name, double startTime, double duration) {
         super(name, startTime);
         this.duration = duration;
     }
 
     @XmlAttribute
-    public long getDuration() {
+    @XmlJavaTypeAdapter(NonScientificDoubleAdapter.class)
+    public Double getDuration() {
         return duration;
+    }
+
+    private Double getEndTime() {
+        return getStartTime() + getDuration();
     }
 
     private TimingMeasurement() {
         super(null, 0);
         duration = 0;
+    }
+
+    @Override
+    public int compareTo(TimingMeasurement o) {
+        return (int) (getEndTime() - o.getEndTime());
     }
 }

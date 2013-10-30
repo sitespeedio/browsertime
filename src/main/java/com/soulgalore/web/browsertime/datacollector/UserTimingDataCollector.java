@@ -32,6 +32,8 @@ import java.util.Map;
 /**
  * Marks and measurements defined in the w3c user timing recommendation.
  * http://www.w3.org/TR/user-timing/
+ *
+ * NOTE: The user timing spec uses a different resolution for time stamps (milliseconds with
  */
 public class UserTimingDataCollector extends TimingDataCollector {
     private static final String LIST_PAGE_DEFINED_MARKS =
@@ -49,11 +51,12 @@ public class UserTimingDataCollector extends TimingDataCollector {
 
         List marks = (List) js.executeScript(LIST_PAGE_DEFINED_MARKS);
 
+        double referenceTime = getNavigationStart(results);
+
         for (Object m : marks) {
             Map mark = (Map) m;
             String name = (String) mark.get("name");
-            double doubleTime = (Double) mark.get("startTime");
-            long startTime = Double.valueOf(doubleTime).longValue();
+            double startTime = (Double) mark.get("startTime") + referenceTime;
             results.addMark(new TimingMark(name, startTime));
         }
     }
@@ -66,13 +69,13 @@ public class UserTimingDataCollector extends TimingDataCollector {
 
         List measurements = (List) js.executeScript(LIST_PAGE_DEFINED_MEASUREMENTS);
 
+        double referenceTime = getNavigationStart(results);
+
         for (Object m : measurements) {
             Map measurement = (Map) m;
             String name = (String) measurement.get("name");
-            double doubleTime = (Double) measurement.get("startTime");
-            long startTime = Double.valueOf(doubleTime).longValue();
-            doubleTime = (Double) measurement.get("duration");
-            long duration = Double.valueOf(doubleTime).longValue();
+            double startTime = (Double) measurement.get("startTime") + referenceTime;
+            double duration = (Double) measurement.get("duration");
             results.addMeasurement(new TimingMeasurement(name, startTime, duration));
         }
     }
@@ -80,5 +83,11 @@ public class UserTimingDataCollector extends TimingDataCollector {
     private boolean isPageDefinedTimingsSupported(JavascriptExecutor js) {
         return (Boolean) js
                 .executeScript("return !!(window.performance && window.performance.getEntriesByType);");
+    }
+
+    private double getNavigationStart(TimingRun results) {
+        TimingMark start = results.getMark("navigationStart");
+
+        return start != null ? start.getStartTime() : 0;
     }
 }

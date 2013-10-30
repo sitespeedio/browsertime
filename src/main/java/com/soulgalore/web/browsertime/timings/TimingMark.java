@@ -20,18 +20,21 @@
  */
 package com.soulgalore.web.browsertime.timings;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import com.soulgalore.web.browsertime.serializer.NonScientificDoubleAdapter;
 
-/**
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+ /**
  *
  */
 public class TimingMark {
     private final String name;
-    private final long time;
+    private final double startTime;
 
-    public TimingMark(String name, long time) {
+    public TimingMark(String name, double startTime) {
         this.name = name;
-        this.time = time;
+        this.startTime = startTime;
     }
 
     @XmlAttribute
@@ -40,12 +43,13 @@ public class TimingMark {
     }
 
     @XmlAttribute
-    public long getTime() {
-        return time;
+    @XmlJavaTypeAdapter(NonScientificDoubleAdapter.class)
+    public Double getStartTime() {
+        return startTime;
     }
 
     private TimingMark() {
         name = null;
-        time = 0;
+        startTime = 0;
     }
 }
