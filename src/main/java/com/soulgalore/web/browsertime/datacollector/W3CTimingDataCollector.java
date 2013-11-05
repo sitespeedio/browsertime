@@ -23,6 +23,7 @@ package com.soulgalore.web.browsertime.datacollector;
 import com.soulgalore.web.browsertime.timings.TimingMark;
 import com.soulgalore.web.browsertime.timings.TimingRun;
 
+import org.apache.bcel.generic.INSTANCEOF;
 import org.openqa.selenium.JavascriptExecutor;
 
 import java.util.List;
@@ -57,10 +58,20 @@ public class W3CTimingDataCollector extends TimingDataCollector {
         List<String> markNames = (List) js.executeScript(LIST_STANDARD_MARKS);
 
         for (String markName : markNames) {
-            double startTime = (Long) js.executeScript("return " + STANDARD_MARK_PREFIX + markName);
-            if (startTime > 0) {
-                results.addMark(new TimingMark(markName, startTime));
-            }
+
+			Object unknownType = js.executeScript("return "
+					+ STANDARD_MARK_PREFIX + markName);
+			if (unknownType instanceof Long) {
+				double startTime = (Long) js.executeScript("return "
+						+ STANDARD_MARK_PREFIX + markName);
+				if (startTime > 0) {
+					results.addMark(new TimingMark(markName, startTime));
+				}
+			} else {
+				// Firefox 25 added function toJSON() as the type String ... skip that 
+				// from the marks
+			}
+        		
         }
     }
 
