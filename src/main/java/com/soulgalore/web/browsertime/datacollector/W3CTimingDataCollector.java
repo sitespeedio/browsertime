@@ -22,8 +22,6 @@ package com.soulgalore.web.browsertime.datacollector;
 
 import com.soulgalore.web.browsertime.timings.TimingMark;
 import com.soulgalore.web.browsertime.timings.TimingRun;
-
-import org.apache.bcel.generic.INSTANCEOF;
 import org.openqa.selenium.JavascriptExecutor;
 
 import java.util.List;
@@ -62,8 +60,7 @@ public class W3CTimingDataCollector extends TimingDataCollector {
 			Object unknownType = js.executeScript("return "
 					+ STANDARD_MARK_PREFIX + markName);
 			if (unknownType instanceof Long) {
-				double startTime = (Long) js.executeScript("return "
-						+ STANDARD_MARK_PREFIX + markName);
+				double startTime = (Long) unknownType;
 				if (startTime > 0) {
 					results.addMark(new TimingMark(markName, startTime));
 				}
