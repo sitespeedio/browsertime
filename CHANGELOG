@@ -11,6 +11,7 @@ version 0.2 (NOT YET RELEASED)
  - measurements and statistics are now sorted according to start time.
 * Changed max wait time for the Selenium driver from 30 s to 60 s 
 * Updated org.seleniumhq.selenium:selenium-java from 2.35.0 to 2.37.1
+* Fix for Firefox 25 that added toJson in window.performance.timings
 
 version 0.1 (2013-10-07)
 ------------------------
