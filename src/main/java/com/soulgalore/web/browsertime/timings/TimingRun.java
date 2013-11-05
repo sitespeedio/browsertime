@@ -20,10 +20,14 @@
  */
 package com.soulgalore.web.browsertime.timings;
 
+import com.soulgalore.web.browsertime.serializer.XmlSerializer;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.*;
 
+@XmlJavaTypeAdapter(XmlSerializer.TimingRunXmlAdapter.class)
 public class TimingRun {
     private final Map<String, TimingMark> marks = new HashMap<String, TimingMark>();
     private final List<TimingMeasurement> measurements = new ArrayList<TimingMeasurement>();

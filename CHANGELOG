@@ -1,5 +1,11 @@
 BrowserTime changelog
 
+version 0.3 (NOT YET RELEASED)
+------------------------
+* Add --raw flag to control if data for individual runs is included in output.
+  The default is to not include run data. NOTE - this is a change in the default
+  output from 0.2 and earlier.
+
 version 0.2 (2013-11-05)
 ------------------------
 * Add optional --compact flag to disable pretty printing of xml and json.

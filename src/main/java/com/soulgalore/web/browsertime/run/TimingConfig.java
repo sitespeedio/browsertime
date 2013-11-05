@@ -17,4 +17,5 @@ public class TimingConfig {
     public Format format;
     public Writer outputWriter;
     public boolean shouldPrettyPrint;
+    public boolean shouldIncludeRuns;
 }

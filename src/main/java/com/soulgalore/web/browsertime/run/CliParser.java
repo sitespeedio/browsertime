@@ -52,6 +52,7 @@ public class CliParser {
 
         config.numIterations = parseIterations();
         config.shouldPrettyPrint = !commandLine.hasOption("compact");
+        config.shouldIncludeRuns = commandLine.hasOption("raw");
         config.browser = parseBrowser();
         config.format = parseFormat();
 
@@ -132,6 +133,7 @@ public class CliParser {
                 .addOption(createOutputOption())
                 .addOption(createFormatOption())
                 .addOption(createCompactOption())
+                .addOption(createRawOption())
                 .addOption(createUserAgentOption())
                 .addOption(createWindowSizeOption())
                 .addOption(createHelpOption())
@@ -164,6 +166,12 @@ public class CliParser {
 
     private Option createCompactOption() {
         Option option = createOption(null, "compact", "Generate compact output (default is pretty-printed).");
+        option.setArgs(0);
+        return option;
+    }
+
+    private Option createRawOption() {
+        Option option = createOption(null, "raw", "Include raw metrics data from each test run (excluded by default).");
         option.setArgs(0);
         return option;
     }

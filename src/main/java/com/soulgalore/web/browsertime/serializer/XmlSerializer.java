@@ -22,6 +22,7 @@ package com.soulgalore.web.browsertime.serializer;
 
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
+import com.soulgalore.web.browsertime.timings.TimingRun;
 import com.soulgalore.web.browsertime.timings.TimingSession;
 
 import javax.xml.bind.JAXBContext;
@@ -39,11 +40,15 @@ import java.text.DecimalFormatSymbols;
 public class XmlSerializer implements Serializer {
     private final Writer writer;
     private final boolean prettyPrint;
+    private final boolean includeRuns;
 
     @Inject
-    public XmlSerializer(@Assisted Writer writer, @Assisted boolean prettyPrint) {
+    public XmlSerializer(@Assisted Writer writer,
+                         @Assisted("prettyPrint") boolean prettyPrint,
+                         @Assisted("includeRuns") boolean includeRuns) {
         this.writer = writer;
         this.prettyPrint = prettyPrint;
+        this.includeRuns = includeRuns;
     }
 
     @Override
@@ -51,6 +56,7 @@ public class XmlSerializer implements Serializer {
         try {
             JAXBContext context = JAXBContext.newInstance(TimingSession.class);
             Marshaller marshaller = context.createMarshaller();
+            marshaller.setAdapter(TimingRunXmlAdapter.class, new TimingRunXmlAdapter(includeRuns));
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, prettyPrint);
             marshaller.marshal(session, writer);
             writer.close();
@@ -59,22 +65,46 @@ public class XmlSerializer implements Serializer {
         }
     }
 
-     /**
-      *
-      */
-     public static class NonScientificDoubleAdapter extends XmlAdapter<String, Double> {
-         private final DecimalFormat format = new DecimalFormat("#.######", new DecimalFormatSymbols() {{
-             setDecimalSeparator('.');
-         }});
+    public static class TimingRunXmlAdapter extends XmlAdapter<TimingRun, TimingRun> {
+        private boolean include;
 
-         @Override
-         public Double unmarshal(String v) throws Exception {
-             return Double.valueOf(v);
-         }
+        public TimingRunXmlAdapter(boolean include) {
+            this.include = include;
+        }
 
-         @Override
-         public String marshal(Double v) throws Exception {
-             return format.format(v);
-         }
-     }
- }
+        @Override
+        public TimingRun unmarshal(TimingRun v) throws Exception {
+            if (include) {
+                return v;
+            }
+            return null;
+        }
+
+        @Override
+        public TimingRun marshal(TimingRun v) throws Exception {
+            if (include) {
+                return v;
+            }
+            return null;
+        }
+    }
+
+    /**
+     *
+     */
+    public static class NonScientificDoubleAdapter extends XmlAdapter<String, Double> {
+        private final DecimalFormat format = new DecimalFormat("#.######", new DecimalFormatSymbols() {{
+            setDecimalSeparator('.');
+        }});
+
+        @Override
+        public Double unmarshal(String v) throws Exception {
+            return Double.valueOf(v);
+        }
+
+        @Override
+        public String marshal(Double v) throws Exception {
+            return format.format(v);
+        }
+    }
+}

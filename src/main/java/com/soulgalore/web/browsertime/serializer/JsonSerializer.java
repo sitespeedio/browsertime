@@ -21,19 +21,19 @@
 package com.soulgalore.web.browsertime.serializer;
 
  import com.google.gson.Gson;
- import com.google.gson.GsonBuilder;
- import com.google.gson.TypeAdapter;
- import com.google.gson.stream.JsonReader;
- import com.google.gson.stream.JsonWriter;
- import com.google.inject.Inject;
- import com.google.inject.assistedinject.Assisted;
- import com.soulgalore.web.browsertime.timings.*;
+import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
+import com.soulgalore.web.browsertime.timings.*;
 
- import java.io.IOException;
- import java.io.Writer;
- import java.text.DecimalFormat;
- import java.text.DecimalFormatSymbols;
- import java.util.List;
+import java.io.IOException;
+import java.io.Writer;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.List;
 
  /**
  *
@@ -45,18 +45,22 @@ public class JsonSerializer implements Serializer {
 
     private final Writer writer;
     private final boolean prettyPrint;
+    private final boolean includeRuns;
 
     @Inject
-    public JsonSerializer(@Assisted Writer writer, @Assisted boolean prettyPrint) {
+    public JsonSerializer(@Assisted Writer writer,
+                          @Assisted("prettyPrint") boolean prettyPrint,
+                          @Assisted("includeRuns") boolean includeRuns) {
         this.writer = writer;
         this.prettyPrint = prettyPrint;
+        this.includeRuns = includeRuns;
     }
 
     @Override
     public void serialize(TimingSession session) throws IOException {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(Statistics.class, new StatisticsAdapter());
-        builder.registerTypeAdapter(TimingRun.class, new TimingRunAdapter());
+        builder.registerTypeAdapter(TimingRun.class, new TimingRunAdapter(includeRuns));
         if (prettyPrint) {
             builder.setPrettyPrinting();
         }
@@ -104,8 +108,17 @@ public class JsonSerializer implements Serializer {
 
     private static class TimingRunAdapter extends TypeAdapter<TimingRun> {
 
+        private final boolean shouldSerialize;
+
+        public TimingRunAdapter(boolean shouldSerialize) {
+            this.shouldSerialize = shouldSerialize;
+        }
+
         @Override
         public void write(JsonWriter out, TimingRun run) throws IOException {
+            if (!shouldSerialize) {
+                return;
+            }
             out.beginObject();
             writeMarks(out, run);
             writeMeasurements(out, run);

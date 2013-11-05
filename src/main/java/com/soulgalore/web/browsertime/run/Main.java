@@ -87,7 +87,8 @@ public class Main {
 
          TimingRunner timingRunner = injector.getInstance(TimingRunner.class);
          SerializerFactory factory = injector.getInstance(SerializerFactory.class);
-         Serializer serializer = factory.create(config.outputWriter, config.shouldPrettyPrint);
+         Serializer serializer = factory.create(config.outputWriter,
+                 config.shouldPrettyPrint, config.shouldIncludeRuns);
 
          TimingSession session = timingRunner.run(url, config.numIterations);
          serializer.serialize(session);
