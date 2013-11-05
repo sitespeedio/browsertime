@@ -10,7 +10,7 @@ version 0.2 (NOT YET RELEASED)
  - time property of marks and measurements have been renamed startTime
  - measurements and statistics are now sorted according to start time.
 * Changed max wait time for the Selenium driver from 30 s to 60 s 
-
+* Updated org.seleniumhq.selenium:selenium-java from 2.35.0 to 2.37.1
 
 version 0.1 (2013-10-07)
 ------------------------
