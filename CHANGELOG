@@ -2,6 +2,7 @@ BrowserTime changelog
 
 version 0.3 (NOT YET RELEASED)
 ------------------------
+* Added frontEnd (responseEnd & loadEventStart) & backEnd (navigationStart, responseStart) measurements to make it cleaner when comparing.
 
 version 0.2 (2013-11-05)
 ------------------------
