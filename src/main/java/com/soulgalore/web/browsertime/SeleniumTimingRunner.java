@@ -63,9 +63,21 @@ public class SeleniumTimingRunner implements TimingRunner {
     public TimingSession run(URL url, int numIterations) {
         try {
             TimingSession session = new TimingSession();
-            session.addPageData(collectPageData(url));
+            boolean hasCollectedPageData = false;
             for (int i = 0; i < numIterations; i++) {
-                session.addTimingRun(collectTimingData(url));
+                WebDriver driver = driverProvider.get();
+                try {
+                    JavascriptExecutor js = fetchUrl(driver, url);
+
+                    session.addTimingRun(collectTimingData(js));
+
+                    if (!hasCollectedPageData) {
+                        session.addPageData(collectPageData(url, js));
+                        hasCollectedPageData = true;
+                    }
+                } finally {
+                    driver.quit();
+                }
             }
             return session;
         } catch (Exception e) {
@@ -73,45 +85,31 @@ public class SeleniumTimingRunner implements TimingRunner {
         }
     }
 
-    private Map<String, String> collectPageData(URL url) {
-        WebDriver driver = driverProvider.get();
-        try {
-            JavascriptExecutor js = fetchUrl(driver, url);
+    private Map<String, String> collectPageData(URL url, JavascriptExecutor js) {
+        Map<String, String> pageInfo = new HashMap<String, String>();
+        pageInfo.put("url", url.toString());
 
-            Map<String, String> pageInfo = new HashMap<String, String>();
-            pageInfo.put("url", url.toString());
-
-            for (TimingDataCollector collector : dataCollectors) {
-                collector.collectPageData(js, pageInfo);
-            }
-
-            // possibly collect user specified page info (e.g. "page version" js property)
-
-            return pageInfo;
-        } finally {
-            driver.quit();
+        for (TimingDataCollector collector : dataCollectors) {
+            collector.collectPageData(js, pageInfo);
         }
+
+        // possibly collect user specified page info (e.g. "page version" js property)
+
+        return pageInfo;
     }
 
-    private TimingRun collectTimingData(URL url) {
-        WebDriver driver = driverProvider.get();
-        try {
-            JavascriptExecutor js = fetchUrl(driver, url);
+    private TimingRun collectTimingData(JavascriptExecutor js) {
+        TimingRun results = new TimingRun();
 
-            TimingRun results = new TimingRun();
-
-            for (TimingDataCollector collector : dataCollectors) {
-                collector.collectMarks(js, results);
-            }
-
-            for (TimingDataCollector collector : dataCollectors) {
-                collector.collectMeasurements(js, results);
-            }
-
-            return results;
-        } finally {
-            driver.quit();
+        for (TimingDataCollector collector : dataCollectors) {
+            collector.collectMarks(js, results);
         }
+
+        for (TimingDataCollector collector : dataCollectors) {
+            collector.collectMeasurements(js, results);
+        }
+
+        return results;
     }
 
     private JavascriptExecutor fetchUrl(WebDriver driver, URL url) {
