@@ -45,8 +45,8 @@ public class BrowserTimeDataCollector extends TimingDataCollector {
             new MarkInterval("domContentLoadedTime", "navigationStart", "domContentLoadedEventStart"),
             new MarkInterval("pageLoadTime", "navigationStart", "loadEventStart"),
             // these two are extras to make it easy to compare
-            new MarkInterval("frontEnd", "responseEnd", "loadEventStart"),
-            new MarkInterval("backEnd", "navigationStart", "responseStart"),
+            new MarkInterval("frontEndTime", "responseEnd", "loadEventStart"),
+            new MarkInterval("backEndTime", "navigationStart", "responseStart"),
     };
 
     @Override
