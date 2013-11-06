@@ -43,7 +43,14 @@ public class TimingRun {
     @XmlElementWrapper(name = "marks")
     @XmlElement(name = "mark")
     public Collection<TimingMark> getMarks() {
-        return Collections.unmodifiableCollection(marks.values());
+        List<TimingMark> markList = new ArrayList<TimingMark>(marks.values());
+        Collections.sort(markList, new Comparator<TimingMark>() {
+            @Override
+            public int compare(TimingMark o1, TimingMark o2) {
+                return o1.getStartTime().compareTo(o2.getStartTime());
+            }
+        });
+        return Collections.unmodifiableCollection(markList);
     }
 
     public void addMeasurement(TimingMeasurement measurement) {
