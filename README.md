@@ -20,6 +20,9 @@ usage: browsertime [options] URL
                                   name of the file. If no filename is
                                   given, the result is put on standard
                                   out.
+ -t,--timeout <TIMEOUT>           Number of seconds to wait for url to
+                                  complete loading before giving up,
+                                  default being 60.
  -ua,--user-agent <USER-AGENT>    Set the user agent. Default is the one
                                   by the browser you use. Only works with
                                   Chrome.

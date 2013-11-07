@@ -12,6 +12,7 @@ public class TimingConfig {
     public int numIterations = 1;
     public Browser browser;
     public Map<BrowserConfig, String> browserOptions;
+    public int timeoutSeconds;
 
     // output config
     public Format format;

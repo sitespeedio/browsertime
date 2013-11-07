@@ -17,6 +17,7 @@ import static java.util.Arrays.asList;
 public class CliParser {
     public static final Browser DEFAULT_BROWSER = Browser.firefox;
     public static final Format DEFAULT_FORMAT = Format.xml;
+    public static final int DEFAULT_TIMEOUT_SECONDS = 60;
 
     private CommandLine commandLine;
     private final Options options;
@@ -54,6 +55,7 @@ public class CliParser {
         config.shouldPrettyPrint = !commandLine.hasOption("compact");
         config.shouldIncludeRuns = commandLine.hasOption("raw");
         config.browser = parseBrowser();
+        config.timeoutSeconds = parseTimeout();
         config.format = parseFormat();
 
         config.outputWriter = parseSerializationWriter(commandLine.getOptionValue("o"));
@@ -88,6 +90,22 @@ public class CliParser {
             return Browser.valueOf(browser);
         } catch (IllegalArgumentException e) {
             throw new ParseException("Invalid browser: " + browser);
+        }
+    }
+
+    private int parseTimeout() throws ParseException {
+        if (!commandLine.hasOption("t")) {
+            return DEFAULT_TIMEOUT_SECONDS;
+        }
+        String timeout = commandLine.getOptionValue("t");
+        try {
+            int i = Integer.parseInt(timeout);
+            if (i <= 0) {
+                throw new ParseException("Must specify timeout >= 0 seconds.");
+            }
+            return i;
+        } catch (NumberFormatException e) {
+            throw new ParseException("Invalid number: " + timeout);
         }
     }
 
@@ -131,6 +149,7 @@ public class CliParser {
                 .addOption(createIterationsOption())
                 .addOption(createBrowserOption())
                 .addOption(createOutputOption())
+                .addOption(createTimeoutOption())
                 .addOption(createFormatOption())
                 .addOption(createCompactOption())
                 .addOption(createRawOption())
@@ -162,6 +181,12 @@ public class CliParser {
         return createOption("f", "format",
                 "The desired output format. Supported values are: " + asList(Format.values()) +
                         ", default being " + DEFAULT_FORMAT + ".");
+    }
+
+    private Option createTimeoutOption() {
+        return createOption("t", "timeout",
+                "Number of seconds to wait for url to complete loading before giving up" +
+                        ", default being " + DEFAULT_TIMEOUT_SECONDS + ".");
     }
 
     private Option createCompactOption() {

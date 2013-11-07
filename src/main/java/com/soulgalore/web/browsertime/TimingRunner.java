@@ -29,6 +29,6 @@ import java.net.URL;
  */
 public interface TimingRunner {
 
-    TimingSession run(URL url, int numIterations);
+    TimingSession run(URL url, int numIterations, int timeoutSeconds);
 
 }

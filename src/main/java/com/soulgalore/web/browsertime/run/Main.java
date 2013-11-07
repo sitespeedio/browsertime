@@ -90,7 +90,7 @@ public class Main {
          Serializer serializer = factory.create(config.outputWriter,
                  config.shouldPrettyPrint, config.shouldIncludeRuns);
 
-         TimingSession session = timingRunner.run(url, config.numIterations);
+         TimingSession session = timingRunner.run(url, config.numIterations, config.timeoutSeconds);
          serializer.serialize(session);
      }
 

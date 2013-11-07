@@ -43,8 +43,6 @@ package com.soulgalore.web.browsertime;
  *
  */
 public class SeleniumTimingRunner implements TimingRunner {
-    public static final int MAX_WAIT_SECONDS = 60;
-
     private final Provider<WebDriver> driverProvider;
     private final List<TimingDataCollector> dataCollectors;
 
@@ -60,14 +58,14 @@ public class SeleniumTimingRunner implements TimingRunner {
     }
 
     @Override
-    public TimingSession run(URL url, int numIterations) {
+    public TimingSession run(URL url, int numIterations, int timeoutSeconds) {
         try {
             TimingSession session = new TimingSession();
             boolean hasCollectedPageData = false;
             for (int i = 0; i < numIterations; i++) {
                 WebDriver driver = driverProvider.get();
                 try {
-                    JavascriptExecutor js = fetchUrl(driver, url);
+                    JavascriptExecutor js = fetchUrl(driver, url, timeoutSeconds);
 
                     session.addTimingRun(collectTimingData(js));
 
@@ -112,21 +110,21 @@ public class SeleniumTimingRunner implements TimingRunner {
         return results;
     }
 
-    private JavascriptExecutor fetchUrl(WebDriver driver, URL url) {
+    private JavascriptExecutor fetchUrl(WebDriver driver, URL url, int timeoutSeconds) {
         String urlString = url.toString();
         driver.get(urlString);
-        waitForLoad(driver);
+        waitForLoad(driver, timeoutSeconds);
         return (JavascriptExecutor) driver;
     }
 
-    private void waitForLoad(WebDriver driver) {
+    private void waitForLoad(WebDriver driver, int timeoutSeconds) {
         ExpectedCondition<Boolean> pageLoadCondition = new
                 ExpectedCondition<Boolean>() {
                     public Boolean apply(WebDriver driver) {
                         return ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
                     }
                 };
-        WebDriverWait wait = new WebDriverWait(driver, MAX_WAIT_SECONDS);
+        WebDriverWait wait = new WebDriverWait(driver, timeoutSeconds);
         wait.until(pageLoadCondition);
     }
 
