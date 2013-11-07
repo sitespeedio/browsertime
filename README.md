@@ -10,6 +10,8 @@ usage: browsertime [options] URL
  -b,--browser <BROWSER>           The browser to use. Supported values
                                   are: [chrome, firefox, ie], default
                                   being firefox.
+    --compact                     Generate compact output (default is
+                                  pretty-printed).
  -f,--format <FORMAT>             The desired output format. Supported
                                   values are: [xml, json], default being
                                   xml.
@@ -20,6 +22,8 @@ usage: browsertime [options] URL
                                   name of the file. If no filename is
                                   given, the result is put on standard
                                   out.
+    --raw                         Include raw metrics data from each test
+                                  run (excluded by default).
  -ua,--user-agent <USER-AGENT>    Set the user agent. Default is the one
                                   by the browser you use. Only works with
                                   Chrome.
