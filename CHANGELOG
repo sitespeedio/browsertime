@@ -1,6 +1,6 @@
 Browsertime changelog
 
-version 0.3 (NOT YET RELEASED)
+version 0.3 (2013-11-09)
 ------------------------
 * Added frontEndTime (responseEnd & loadEventStart) & backEndTime (navigationStart, responseStart) measurements to make it cleaner when comparing.
 * Collect page data (browser version etc.) on first timing run. This reduces the number of times the browser is
