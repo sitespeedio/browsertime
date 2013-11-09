@@ -18,6 +18,7 @@ public class CliParser {
     public static final Browser DEFAULT_BROWSER = Browser.firefox;
     public static final Format DEFAULT_FORMAT = Format.xml;
     public static final int DEFAULT_TIMEOUT_SECONDS = 60;
+    public static final int DEFAULT_NUMBER_OF_ITERATIONS = 3;
 
     private CommandLine commandLine;
     private final Options options;
@@ -120,7 +121,7 @@ public class CliParser {
 
     private int parseIterations() throws ParseException {
         if (!commandLine.hasOption("n")) {
-            return 3;
+            return DEFAULT_NUMBER_OF_ITERATIONS;
         }
         String iterations = commandLine.getOptionValue("n");
         try {
