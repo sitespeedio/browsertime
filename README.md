@@ -38,14 +38,21 @@ usage: browsertime [options] URL
 
 ## How to run 
 
+### Build from source
+
 1. Build the project
 ```
 mvn package
 ```
 
-2. Run the full jar like this
+1. Unpack distribution zip file
 ```
-java -jar browsertime-X.Y-SNAPSHOT-full.jar https://github.com
+unzip target/browsertime-0.3-SNAPSHOT.zip -d ~
+```
+
+1. Run the browsertime command (optionally adding it to your PATH)
+```
+~/browsertime-0.3-SNAPSHOT/bin/browsertime https://google.com
 ```
 
 ## Output XML example
