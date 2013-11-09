@@ -3,9 +3,7 @@ package com.soulgalore.web.browsertime.run;
 import org.apache.commons.cli.ParseException;
 import org.junit.Test;
 
-import com.soulgalore.web.browsertime.run.Main;
-
-public class FullTest {
+public class FetchAndTimeIT {
 
 	// Dummy test just to get travis up and running
 		@Test
