@@ -38,6 +38,30 @@ usage: browsertime [options] URL
 
 ## How to run 
 
+### Install via homebrew on mac
+
+1. Add the browsertime tap to Homebrew
+```
+brew tap tobli/browsertime
+```
+
+1. Install browsertime
+```
+brew install browsertime
+```
+
+1. Run browsertime
+```
+browsertime -h
+```
+
+### Download a release
+
+1. Download the latest zip or tar.gz release from https://github.com/tobli/browsertime/releases
+
+1. Uncompress and run the browsertime script from the bin folder in the distribution (or add the bin folder to your PATH)
+
+
 ### Build from source
 
 1. Build the project
@@ -47,12 +71,12 @@ mvn package
 
 1. Unpack distribution zip file
 ```
-unzip target/browsertime-0.3-SNAPSHOT.zip -d ~
+unzip target/browsertime-0.3.zip -d ~
 ```
 
 1. Run the browsertime command (optionally adding it to your PATH)
 ```
-~/browsertime-0.3-SNAPSHOT/bin/browsertime https://google.com
+~/browsertime-0.3/bin/browsertime https://google.com
 ```
 
 ## Output XML example
