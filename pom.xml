@@ -6,7 +6,7 @@
 	<name>Browsertime</name>
 
 	<packaging>jar</packaging>
-	<description>It's Browser Time! Fetch timings and other data from the browser</description>
+	<description>It's browser time! Fetch timings and other data from the browser</description>
 
 	<licenses>
 		<license>
