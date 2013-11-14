@@ -156,6 +156,7 @@ public class CliParser {
                 .addOption(createUserAgentOption())
                 .addOption(createWindowSizeOption())
                 .addOption(createHelpOption())
+                .addOption(createVerboseOption())
                 .addOption(createVersionOption());
     }
 
@@ -217,6 +218,13 @@ public class CliParser {
     private Option createHelpOption() {
         Option option = createOption("h", "help",
                 "Show this help message");
+        option.setArgs(0);
+        return option;
+    }
+
+    private Option createVerboseOption() {
+        Option option = createOption("v", "verbose",
+                "Turn on verbose output, reporting progress as browsertime runs.");
         option.setArgs(0);
         return option;
     }
