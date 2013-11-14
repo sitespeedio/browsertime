@@ -57,13 +57,15 @@ public class UserTimingDataCollector extends TimingDataCollector {
 
         List marks = (List) js.executeScript(LIST_PAGE_DEFINED_MARKS);
 
-        double referenceTime = getNavigationStart(results);
+        if (marks != null) {
+            double referenceTime = getNavigationStart(results);
 
-        for (Object m : marks) {
-            Map mark = (Map) m;
-            String name = (String) mark.get("name");
-            double startTime = (Double) mark.get("startTime") + referenceTime;
-            results.addMark(new TimingMark(name, startTime));
+            for (Object m : marks) {
+                Map mark = (Map) m;
+                String name = (String) mark.get("name");
+                double startTime = (Double) mark.get("startTime") + referenceTime;
+                results.addMark(new TimingMark(name, startTime));
+            }
         }
     }
 
@@ -79,22 +81,26 @@ public class UserTimingDataCollector extends TimingDataCollector {
             // create synthetic measurements for each mark, in order to easily get both start time and duration.
             List marks = (List) js.executeScript(LIST_PAGE_DEFINED_MARKS);
 
-            for (Object m : marks) {
-                Map mark = (Map) m;
-                String name = (String) mark.get("name");
-                double duration = (Double) mark.get("startTime");
-                results.addMeasurement(new TimingMeasurement(name, referenceTime, duration));
+            if (marks != null) {
+                for (Object m : marks) {
+                    Map mark = (Map) m;
+                    String name = (String) mark.get("name");
+                    double duration = (Double) mark.get("startTime");
+                    results.addMeasurement(new TimingMeasurement(name, referenceTime, duration));
+                }
             }
         }
 
         List measurements = (List) js.executeScript(LIST_PAGE_DEFINED_MEASUREMENTS);
 
-        for (Object m : measurements) {
-            Map measurement = (Map) m;
-            String name = (String) measurement.get("name");
-            double startTime = (Double) measurement.get("startTime") + referenceTime;
-            double duration = (Double) measurement.get("duration");
-            results.addMeasurement(new TimingMeasurement(name, startTime, duration));
+        if (measurements != null) {
+            for (Object m : measurements) {
+                Map measurement = (Map) m;
+                String name = (String) measurement.get("name");
+                double startTime = (Double) measurement.get("startTime") + referenceTime;
+                double duration = (Double) measurement.get("duration");
+                results.addMeasurement(new TimingMeasurement(name, startTime, duration));
+            }
         }
 
     }
