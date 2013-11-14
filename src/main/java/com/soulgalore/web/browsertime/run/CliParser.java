@@ -147,7 +147,6 @@ public class CliParser {
     private Options createCliOptions() {
         return new Options()
                 .addOption(createIterationsOption())
-                .addOption(createIterationsOption())
                 .addOption(createBrowserOption())
                 .addOption(createOutputOption())
                 .addOption(createTimeoutOption())
