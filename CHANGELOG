@@ -1,6 +1,6 @@
 Browsertime changelog
 
-version 0.4 (NOT YET RELEASED)
+version 0.4 (2013-11-15)
 ------------------------
 * User Timing marks and measures should now be compatible with Firefox 25. Custom user marks are also converted to
   "synthetic" measures, with duration as time from the navigationStart event. This way user marks are also
