@@ -50,7 +50,7 @@ public class SeleniumTimingRunner implements TimingRunner {
     public SeleniumTimingRunner(TimingDataCollector browserDataCollector, Provider<WebDriver> driverProvider) {
         this.driverProvider = driverProvider;
         TimingDataCollector w3cDataCollector = new W3CTimingDataCollector();
-        TimingDataCollector userTimingDataCollector = new UserTimingDataCollector();
+        TimingDataCollector userTimingDataCollector = new UserTimingDataCollector(true);
         TimingDataCollector browserTimeDataCollector = new BrowserTimeDataCollector();
 
         this.dataCollectors = Arrays.asList(w3cDataCollector, browserDataCollector,
