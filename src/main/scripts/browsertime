@@ -21,6 +21,6 @@ BT_HOME=`dirname "$PRG"`/..
 BT_HOME=$(cd "$BT_HOME" > /dev/null && pwd)
 
 
-MAINCLASS="net.browsertime.browsertime.run.Main"
+MAINCLASS="net.browsertime.tool.run.Main"
 
 java -classpath "${BT_HOME}/lib/*" $MAINCLASS "$@"
