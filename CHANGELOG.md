@@ -1,4 +1,8 @@
-Browsertime changelog
+# Browsertime changelog
+
+version 0.5 (NOT YET RELEASED)
+------------------------
+* Updated package
 
 version 0.4 (2013-11-15)
 ------------------------
