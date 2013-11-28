@@ -20,14 +20,11 @@
  */
 package net.browsertime.tool.guice;
 
-import com.google.inject.Provider;
 import net.browsertime.tool.BrowserConfig;
 import net.browsertime.tool.datacollector.InternetExplorerDataCollector;
 import net.browsertime.tool.datacollector.TimingDataCollector;
-import org.openqa.selenium.Capabilities;
+import net.browsertime.tool.webdriver.InternetExplorerDriverProvider;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
 
@@ -44,22 +41,7 @@ public class InternetExplorerModule extends AbstractBrowserModule {
 	protected void configure()
 	{
         super.configure();
-		bind(WebDriver.class).toProvider(DRIVER_PROVIDER);
+		bind(WebDriver.class).toProvider(new InternetExplorerDriverProvider());
         bind(TimingDataCollector.class).to(InternetExplorerDataCollector.class);
 	}
-
-     private final Provider<WebDriver> DRIVER_PROVIDER = new Provider<WebDriver>() {
-         @Override
-         public WebDriver get() {
-             return new InternetExplorerDriver(getCapabilities());
-         }
-
-         public Capabilities getCapabilities() {
-             DesiredCapabilities capabilities = new DesiredCapabilities();
-
-             capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
-
-             return capabilities;
-         }
-     };
  }
