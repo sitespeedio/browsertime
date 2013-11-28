@@ -18,7 +18,7 @@
  *
  ********************************************************************************************************************************
  */
-package net.browsertime.tool;
+package net.browsertime.tool.timingrunner;
 
  import com.google.inject.Inject;
  import com.google.inject.Provider;
@@ -29,7 +29,9 @@ package net.browsertime.tool;
  import net.browsertime.tool.timings.TimingRun;
  import net.browsertime.tool.timings.TimingSession;
  import org.openqa.selenium.JavascriptExecutor;
+ import org.openqa.selenium.TimeoutException;
  import org.openqa.selenium.WebDriver;
+ import org.openqa.selenium.WebDriverException;
  import org.openqa.selenium.support.ui.ExpectedCondition;
  import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -58,7 +60,7 @@ public class SeleniumTimingRunner implements TimingRunner {
     }
 
     @Override
-    public TimingSession run(URL url, int numIterations, int timeoutSeconds) {
+    public TimingSession run(URL url, int numIterations, int timeoutSeconds) throws TimingRunnerException {
         try {
             TimingSession session = new TimingSession();
             boolean hasCollectedPageData = false;
@@ -78,8 +80,10 @@ public class SeleniumTimingRunner implements TimingRunner {
                 }
             }
             return session;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (TimeoutException e) {
+            throw new TimingRunnerException("Timeout, page was still loading after " + timeoutSeconds + " seconds.", e);
+        } catch (WebDriverException e) {
+            throw new TimingRunnerException("Error while running Selenium.", e);
         }
     }
 

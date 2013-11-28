@@ -23,10 +23,11 @@ package net.browsertime.tool.run;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import net.browsertime.tool.TimingRunner;
+import net.browsertime.tool.timingrunner.TimingRunner;
 import net.browsertime.tool.guice.*;
 import net.browsertime.tool.serializer.Serializer;
 import net.browsertime.tool.serializer.SerializerFactory;
+import net.browsertime.tool.timingrunner.TimingRunnerException;
 import net.browsertime.tool.timings.TimingSession;
 import org.apache.commons.cli.ParseException;
 
@@ -64,7 +65,7 @@ public class Main {
             } else {
                 TimingConfig config = parser.parseTimingConfig();
                 URL url = parser.parseUrl();
-                run(config, url);
+                run(url, config);
             }
         } catch (ParseException e) {
             commandStatus = ERROR;
@@ -72,7 +73,10 @@ public class Main {
             printSyntaxError("Error parsing command line options: " + e.getMessage());
         } catch (IOException e) {
             commandStatus = ERROR;
-            printSyntaxError("Error creating output file. " + e.getMessage());
+            printSyntaxError("Error creating output file: " + e.getMessage());
+        } catch (TimingRunnerException e) {
+            commandStatus = ERROR;
+            printSyntaxError("Error occurred while performing timing: " + e.getMessage());
         }
 
         if (shouldShowUsage) {
@@ -82,7 +86,7 @@ public class Main {
         return commandStatus;
     }
 
-     private void run(TimingConfig config, URL url) throws IOException {
+     private void run(URL url, TimingConfig config) throws IOException {
          Injector injector = createInjector(config);
 
          TimingRunner timingRunner = injector.getInstance(TimingRunner.class);
