@@ -16,5 +16,5 @@ do echo "Test $url"
     then
 	url=http://$url
     fi
-    java -Xmx"$JAVA_HEAP"m -Xms"$JAVA_HEAP"m  -jar ../../../../target/browsertime-0.2-SNAPSHOT-full.jar -n 1 $url
+    java -Xmx"$JAVA_HEAP"m -Xms"$JAVA_HEAP"m  -jar ../../../../target/browsertime-0.5-SNAPSHOT-full.jar -n 1 $url
 done

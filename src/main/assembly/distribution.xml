@@ -17,7 +17,7 @@
             <source>README.md</source>
         </file>
         <file>
-            <source>CHANGELOG</source>
+            <source>CHANGELOG.md</source>
         </file>
     </files>
     <dependencySets>
