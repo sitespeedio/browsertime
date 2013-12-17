@@ -20,6 +20,7 @@
  */
 package net.browsertime.tool.run;
 
+import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
@@ -33,6 +34,8 @@ import org.apache.commons.cli.ParseException;
 
 import java.io.IOException;
 import java.net.URL;
+
+import static com.google.inject.name.Names.named;
 
  /**
  *
@@ -91,8 +94,8 @@ public class Main {
 
          TimingRunner timingRunner = injector.getInstance(TimingRunner.class);
          SerializerFactory factory = injector.getInstance(SerializerFactory.class);
-         Serializer serializer = factory.create(config.outputWriter,
-                 config.shouldPrettyPrint, config.shouldIncludeRuns);
+         Serializer serializer = factory.create(config.outputWriter, config.shouldPrettyPrint,
+                                                config.shouldIncludeRuns);
 
          TimingSession session = timingRunner.run(url, config.numIterations, config.timeoutSeconds);
          serializer.serialize(session);
@@ -103,7 +106,16 @@ public class Main {
      }
 
      private Injector createInjector(TimingConfig config) {
-         return Guice.createInjector(createFormatModule(config), createBrowserModule(config));
+         return Guice.createInjector(createToolModule(config), createFormatModule(config), createBrowserModule(config));
+     }
+
+     private Module createToolModule(final TimingConfig config) {
+         return new AbstractModule() {
+             @Override
+             protected void configure() {
+                 bindConstant().annotatedWith(named("verbose")).to(config.verbose);
+             }
+         };
      }
 
      private Module createFormatModule(TimingConfig config) {

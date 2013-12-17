@@ -22,6 +22,7 @@ package net.browsertime.tool.timingrunner;
 
  import com.google.inject.Inject;
  import com.google.inject.Provider;
+ import com.google.inject.name.Named;
  import net.browsertime.tool.datacollector.BrowserTimeDataCollector;
  import net.browsertime.tool.datacollector.TimingDataCollector;
  import net.browsertime.tool.datacollector.UserTimingDataCollector;
@@ -47,16 +48,19 @@ package net.browsertime.tool.timingrunner;
 public class SeleniumTimingRunner implements TimingRunner {
     private final Provider<WebDriver> driverProvider;
     private final List<TimingDataCollector> dataCollectors;
+    private final boolean verbose;
 
     @Inject
-    public SeleniumTimingRunner(TimingDataCollector browserDataCollector, Provider<WebDriver> driverProvider) {
-        this.driverProvider = driverProvider;
+    public SeleniumTimingRunner(TimingDataCollector browserDataCollector, Provider<WebDriver> driverProvider,
+                                @Named("verbose") boolean verbose) {
         TimingDataCollector w3cDataCollector = new W3CTimingDataCollector();
         TimingDataCollector userTimingDataCollector = new UserTimingDataCollector(true);
         TimingDataCollector browserTimeDataCollector = new BrowserTimeDataCollector();
 
         this.dataCollectors = Arrays.asList(w3cDataCollector, browserDataCollector,
                 userTimingDataCollector, browserTimeDataCollector);
+        this.driverProvider = driverProvider;
+        this.verbose = verbose;
     }
 
     @Override
@@ -103,10 +107,12 @@ public class SeleniumTimingRunner implements TimingRunner {
     private TimingRun collectTimingData(JavascriptExecutor js) {
         TimingRun results = new TimingRun();
 
+        printStatus("Collecting timing marks");
         for (TimingDataCollector collector : dataCollectors) {
             collector.collectMarks(js, results);
         }
 
+        printStatus("Collecting timing measurements");
         for (TimingDataCollector collector : dataCollectors) {
             collector.collectMeasurements(js, results);
         }
@@ -116,9 +122,16 @@ public class SeleniumTimingRunner implements TimingRunner {
 
     private JavascriptExecutor fetchUrl(WebDriver driver, URL url, int timeoutSeconds) {
         String urlString = url.toString();
+        printStatus("Fetching url: " + urlString);
         driver.get(urlString);
         waitForLoad(driver, timeoutSeconds);
         return (JavascriptExecutor) driver;
+    }
+
+    private void printStatus(String s) {
+        if (verbose) {
+            System.err.println(s);
+        }
     }
 
     private void waitForLoad(WebDriver driver, int timeoutSeconds) {

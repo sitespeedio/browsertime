@@ -9,6 +9,10 @@ import java.util.Map;
  *
  */
 public class TimingConfig {
+    // tool options
+    public boolean verbose;
+
+    // measurement options
     public int numIterations = 1;
     public Browser browser;
     public Map<BrowserConfig, String> browserOptions;

@@ -53,6 +53,7 @@ public class CliParser {
     public TimingConfig parseTimingConfig() throws IOException, ParseException {
         TimingConfig config = new TimingConfig();
 
+        config.verbose = commandLine.hasOption("v");
         config.numIterations = parseIterations();
         config.shouldPrettyPrint = !commandLine.hasOption(compactOption.longForm);
         config.shouldIncludeRuns = commandLine.hasOption(rawOption.longForm);
