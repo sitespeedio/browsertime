@@ -22,12 +22,15 @@ package net.browsertime.tool.timings;
 
 import net.browsertime.tool.serializer.XmlSerializer;
 
+import javax.xml.bind.annotation.XmlAccessOrder;
+import javax.xml.bind.annotation.XmlAccessorOrder;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
  /**
  *
  */
+@XmlAccessorOrder(XmlAccessOrder.ALPHABETICAL)
 public class TimingMeasurement extends TimingMark implements Comparable<TimingMeasurement> {
     private final double duration;
 
