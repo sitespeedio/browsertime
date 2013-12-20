@@ -130,10 +130,8 @@ public class JsonSerializer implements Serializer {
             out.beginArray();
             for (TimingMark mark : run.getMarks()) {
                 out.beginObject();
-                out.name("name");
-                out.value(mark.getName());
-                out.name("startTime");
-                out.value(doubleFormat.format(mark.getStartTime()));
+                print(out, "name", mark.getName());
+                print(out, "startTime", mark.getStartTime());
                 out.endObject();
             }
             out.endArray();
@@ -144,17 +142,23 @@ public class JsonSerializer implements Serializer {
             out.beginArray();
             for (TimingMeasurement measurement : run.getMeasurements()) {
                 out.beginObject();
-                out.name("name");
-                out.value(measurement.getName());
-                out.name("startTime");
-                out.value(doubleFormat.format(measurement.getStartTime()));
-                out.name("duration");
-                out.value(doubleFormat.format(measurement.getDuration()));
+                print(out, "name", measurement.getName());
+                print(out, "startTime", measurement.getStartTime());
+                print(out, "duration", measurement.getDuration());
                 out.endObject();
             }
             out.endArray();
         }
 
+        private void print(JsonWriter out, String name, String value) throws IOException {
+            out.name(name);
+            out.value(value);
+        }
+
+        private void print(JsonWriter out, String name, double value) throws IOException {
+            out.name(name);
+            out.value(doubleFormat.format(value));
+        }
 
         @Override
          public TimingRun read(JsonReader in) throws IOException {
