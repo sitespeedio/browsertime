@@ -49,8 +49,13 @@ public class UserTimingDataCollector extends TimingDataCollector {
     }
 
     @Override
+    public void collectTimingData(JavascriptExecutor js, TimingRun results) {
+        collectMarks(js, results);
+        collectMeasurements(js, results);
+    }
+
     @SuppressWarnings("unchecked")
-    public void collectMarks(JavascriptExecutor js, TimingRun results) {
+    private void collectMarks(JavascriptExecutor js, TimingRun results) {
         if (!isPageDefinedTimingsSupported(js)) {
             return;
         }
@@ -69,8 +74,7 @@ public class UserTimingDataCollector extends TimingDataCollector {
         }
     }
 
-    @Override
-    public void collectMeasurements(JavascriptExecutor js, TimingRun results) {
+    private void collectMeasurements(JavascriptExecutor js, TimingRun results) {
         if (!isPageDefinedTimingsSupported(js)) {
             return;
         }

@@ -31,15 +31,12 @@ import java.util.Map;
 /**
  * Superclass for browser specific data collection, subclass as needed.
  */
-public class TimingDataCollector {
+public abstract class TimingDataCollector {
 
     public void collectPageData(JavascriptExecutor js, Map<String, String> pageInfo) {
     }
 
-    public void collectMarks(JavascriptExecutor js, TimingRun results) {
-    }
-
-    public void collectMeasurements(JavascriptExecutor js, TimingRun results) {
+    public void collectTimingData(JavascriptExecutor js, TimingRun results) {
     }
 
     final static protected class MarkInterval {

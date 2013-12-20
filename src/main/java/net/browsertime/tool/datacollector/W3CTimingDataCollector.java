@@ -48,7 +48,7 @@ public class W3CTimingDataCollector extends TimingDataCollector {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void collectMarks(JavascriptExecutor js, TimingRun results) {
+    public void collectTimingData(JavascriptExecutor js, TimingRun results) {
         if (!isNavigationTimingSupported(js)) {
             return;
         }

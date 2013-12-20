@@ -104,11 +104,7 @@ public class SeleniumTimingRunner implements TimingRunner {
         TimingRun results = new TimingRun();
 
         for (TimingDataCollector collector : dataCollectors) {
-            collector.collectMarks(js, results);
-        }
-
-        for (TimingDataCollector collector : dataCollectors) {
-            collector.collectMeasurements(js, results);
+            collector.collectTimingData(js, results);
         }
 
         return results;

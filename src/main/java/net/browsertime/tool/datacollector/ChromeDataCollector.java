@@ -42,16 +42,18 @@ public class ChromeDataCollector extends TimingDataCollector {
     }
 
     @Override
-    public void collectMarks(JavascriptExecutor js, TimingRun results) {
-        super.collectMarks(js, results);
+    public void collectTimingData(JavascriptExecutor js, TimingRun results) {
+        collectMarks(js, results);
+        collectMeasurements(results);
+    }
 
+    private void collectMarks(JavascriptExecutor js, TimingRun results) {
         // Chrome timing is in s.ms, convert it to ms!!
         Double time = (Double) js.executeScript("return window.chrome.loadTimes().firstPaintTime");
         results.addMark(new TimingMark("firstPaint", (long) (time * 1000)));
     }
 
-    @Override
-    public void collectMeasurements(JavascriptExecutor js, TimingRun results) {
+    private void collectMeasurements(TimingRun results) {
         MarkInterval interval = new MarkInterval("firstPaintTime", "navigationStart", "firstPaint");
         interval.collectMeasurement(results);
     }

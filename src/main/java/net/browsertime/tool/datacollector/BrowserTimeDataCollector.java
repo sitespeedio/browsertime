@@ -71,7 +71,7 @@ public class BrowserTimeDataCollector extends TimingDataCollector {
     }
 
     @Override
-    public void collectMeasurements(JavascriptExecutor js, TimingRun results) {
+    public void collectTimingData(JavascriptExecutor js, TimingRun results) {
         for (MarkInterval interval : intervals) {
             interval.collectMeasurement(results);
         }

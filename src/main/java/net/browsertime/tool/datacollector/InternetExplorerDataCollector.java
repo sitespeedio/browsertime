@@ -30,17 +30,18 @@ import org.openqa.selenium.JavascriptExecutor;
 public class InternetExplorerDataCollector extends TimingDataCollector {
 
     @Override
-    public void collectMarks(JavascriptExecutor js, TimingRun results) {
-        super.collectMarks(js, results);
+    public void collectTimingData(JavascriptExecutor js, TimingRun results) {
+        collectMarks(js, results);
+        collectMeasurements(results);
+    }
 
+    private void collectMarks(JavascriptExecutor js, TimingRun results) {
         Long time = (Long) js.executeScript("return window.performance.timing.msFirstPaint");
         results.addMark(new TimingMark("msFirstPaint", time));
     }
 
-    @Override
-    public void collectMeasurements(JavascriptExecutor js, TimingRun results) {
+    private void collectMeasurements(TimingRun results) {
         MarkInterval interval = new MarkInterval("firstPaintTime", "navigationStart", "msFirstPaint");
         interval.collectMeasurement(results);
     }
-
 }
