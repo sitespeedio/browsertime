@@ -123,6 +123,7 @@ public class JsonSerializer implements Serializer {
             out.beginObject();
             writeMarks(out, run);
             writeMeasurements(out, run);
+            writeResourceMeasurements(out, run);
             out.endObject();
         }
 
@@ -151,6 +152,30 @@ public class JsonSerializer implements Serializer {
             out.endArray();
         }
 
+        private void writeResourceMeasurements(JsonWriter out, TimingRun run) throws IOException {
+            out.name("resourceMeasurements");
+            out.beginArray();
+            for (TimingResourceMeasurement measurement : run.getResourceMeasurements()) {
+                out.beginObject();
+                print(out, "name", measurement.getName());
+                print(out, "startTime", measurement.getStartTime());
+                print(out, "duration", measurement.getDuration());
+                print(out, "initiatorType", measurement.getInitiatorType());
+                print(out, "redirectStart", measurement.getRedirectStart());
+                print(out, "redirectEnd", measurement.getRedirectEnd());
+                print(out, "fetchStart", measurement.getFetchStart());
+                print(out, "domainLookupStart", measurement.getDomainLookupStart());
+                print(out, "domainLookupEnd", measurement.getDomainLookupEnd());
+                print(out, "connectStart", measurement.getConnectStart());
+                print(out, "connectEnd", measurement.getConnectEnd());
+                print(out, "secureConnectionStart", measurement.getSecureConnectionStart());
+                print(out, "requestStart", measurement.getRequestStart());
+                print(out, "responseStart", measurement.getResponseStart());
+                print(out, "responseEnd", measurement.getResponseEnd());
+                out.endObject();
+            }
+            out.endArray();
+        }
 
         @Override
          public TimingRun read(JsonReader in) throws IOException {
