@@ -1,6 +1,6 @@
- /*******************************************************************************************************************************
+/*******************************************************************************************************************************
  * It's Browser Time!
- * 
+ *
  *
  * Copyright (C) 2013 by Tobias Lidskog (https://twitter.com/tobiaslidskog) &  Peter Hedenskog (http://peterhedenskog.com)
  *
@@ -8,7 +8,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in 
  * compliance with the License. You may obtain a copy of the License at
- * 
+ *
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -32,7 +32,7 @@ import java.util.Map;
 /**
  * Marks and measurements defined in the w3c user timing recommendation.
  * http://www.w3.org/TR/user-timing/
- *
+ * <p/>
  * NOTE: The user timing spec uses a different resolution for time stamps (milliseconds with a decimal part)
  */
 public class UserTimingDataCollector extends TimingDataCollector {

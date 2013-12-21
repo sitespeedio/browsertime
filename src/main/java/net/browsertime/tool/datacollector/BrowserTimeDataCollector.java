@@ -35,7 +35,7 @@ import java.util.Map;
 public class BrowserTimeDataCollector extends TimingDataCollector {
 
     private static final MarkInterval[] intervals = {
-    		// The following is the standard from GA
+            // The following is the standard from GA
             new MarkInterval("domainLookupTime", "domainLookupStart", "domainLookupEnd"),
             new MarkInterval("redirectionTime", "navigationStart", "fetchStart"),
             new MarkInterval("serverConnectionTime", "connectStart", "connectEnd"),

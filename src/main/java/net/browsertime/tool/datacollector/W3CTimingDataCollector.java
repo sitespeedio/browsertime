@@ -1,6 +1,6 @@
- /*******************************************************************************************************************************
+/*******************************************************************************************************************************
  * It's Browser Time!
- * 
+ *
  *
  * Copyright (C) 2013 by Tobias Lidskog (https://twitter.com/tobiaslidskog) &  Peter Hedenskog (http://peterhedenskog.com)
  *
@@ -8,7 +8,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in 
  * compliance with the License. You may obtain a copy of the License at
- * 
+ *
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -61,19 +61,19 @@ public class W3CTimingDataCollector extends TimingDataCollector {
 
         for (String markName : markNames) {
 
-			Object unknownType = js.executeScript("return "
-					+ STANDARD_MARK_PREFIX + markName);
-			
-			// When Firefox 25 was released, the function toJSON was added to 
-			// window.performance.timing. so a String is returned, that's why 
-			// we now checks the type.
-			if (unknownType instanceof Long) {
-				double startTime = (Long) unknownType;
-				if (startTime > 0) {
-					results.addMark(new TimingMark(markName, startTime));
-				}
-			} 
-     
+            Object unknownType = js.executeScript("return "
+                    + STANDARD_MARK_PREFIX + markName);
+
+            // When Firefox 25 was released, the function toJSON was added to
+            // window.performance.timing. so a String is returned, that's why
+            // we now checks the type.
+            if (unknownType instanceof Long) {
+                double startTime = (Long) unknownType;
+                if (startTime > 0) {
+                    results.addMark(new TimingMark(markName, startTime));
+                }
+            }
+
         }
     }
 
