@@ -50,7 +50,7 @@ public class ChromeDataCollector extends TimingDataCollector {
     private void collectMarks(JavascriptExecutor js, TimingRun results) {
         // Chrome timing is in s.ms, convert it to ms!!
         Double time = (Double) js.executeScript("return window.chrome.loadTimes().firstPaintTime");
-        results.addMark(new TimingMark("firstPaint", (long) (time * 1000)));
+        results.addMark(new TimingMark("firstPaint", time * 1000));
     }
 
     private void collectMeasurements(TimingRun results) {
