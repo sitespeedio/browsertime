@@ -68,6 +68,11 @@ public class BrowserTimeDataCollector extends TimingDataCollector {
                 "x=w.innerWidth||e.clientWidth||g.clientWidth,y=w.innerHeight||e.clientHeight||g.clientHeight;" +
                 "return [x,y];");
         pageInfo.put("windowSize", String.valueOf(size.get(0)) + "x" + String.valueOf(size.get(1)));
+
+        String implementationVersion = getClass().getPackage().getImplementationVersion();
+        implementationVersion = implementationVersion != null ? implementationVersion : "unknown";
+        pageInfo.put("browserTimeVersion", implementationVersion);
+
     }
 
     @Override

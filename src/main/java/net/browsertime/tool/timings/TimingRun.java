@@ -31,6 +31,7 @@ import java.util.*;
 public class TimingRun {
     private final Map<String, TimingMark> marks = new HashMap<String, TimingMark>();
     private final List<TimingMeasurement> measurements = new ArrayList<TimingMeasurement>();
+    private final List<TimingResourceMeasurement> resourceMeasurements = new ArrayList<TimingResourceMeasurement>();
 
     public void addMark(TimingMark mark) {
         marks.put(mark.getName(), mark);
@@ -62,5 +63,16 @@ public class TimingRun {
     public List<TimingMeasurement> getMeasurements() {
         Collections.sort(measurements); // sort in time order
         return Collections.unmodifiableList(measurements);
+    }
+
+    public void addResourceMeasurement(TimingResourceMeasurement measurement) {
+        resourceMeasurements.add(measurement);
+    }
+
+    @XmlElementWrapper(name = "resourceMeasurements")
+    @XmlElement(name = "measurement")
+    public List<TimingResourceMeasurement> getResourceMeasurements() {
+        Collections.sort(resourceMeasurements); // sort in time order
+        return Collections.unmodifiableList(resourceMeasurements);
     }
 }
