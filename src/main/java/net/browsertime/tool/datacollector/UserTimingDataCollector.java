@@ -56,7 +56,7 @@ public class UserTimingDataCollector extends TimingDataCollector {
 
     @SuppressWarnings("unchecked")
     private void collectMarks(JavascriptExecutor js, TimingRun results) {
-        if (!isPageDefinedTimingsSupported(js)) {
+        if (!isUserTimingApiSupported(js)) {
             return;
         }
 
@@ -75,7 +75,7 @@ public class UserTimingDataCollector extends TimingDataCollector {
     }
 
     private void collectMeasurements(JavascriptExecutor js, TimingRun results) {
-        if (!isPageDefinedTimingsSupported(js)) {
+        if (!isUserTimingApiSupported(js)) {
             return;
         }
 
@@ -106,10 +106,9 @@ public class UserTimingDataCollector extends TimingDataCollector {
                 results.addMeasurement(new TimingMeasurement(name, startTime, duration));
             }
         }
-
     }
 
-    private boolean isPageDefinedTimingsSupported(JavascriptExecutor js) {
+    private boolean isUserTimingApiSupported(JavascriptExecutor js) {
         return (Boolean) js
                 .executeScript("return !!(window.performance && window.performance.getEntriesByType);");
     }

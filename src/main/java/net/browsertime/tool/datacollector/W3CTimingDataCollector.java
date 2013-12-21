@@ -42,6 +42,10 @@ public class W3CTimingDataCollector extends TimingDataCollector {
 
     @Override
     public void collectPageData(JavascriptExecutor js, Map<String, String> pageInfo) {
+        if (!isNavigationApiSupported(js)) {
+            return;
+        }
+
         long redirectCount = (Long) js.executeScript("return window.performance.navigation.redirectCount;");
         pageInfo.put("redirectCount", Long.toString(redirectCount));
     }
@@ -49,7 +53,7 @@ public class W3CTimingDataCollector extends TimingDataCollector {
     @Override
     @SuppressWarnings("unchecked")
     public void collectTimingData(JavascriptExecutor js, TimingRun results) {
-        if (!isNavigationTimingSupported(js)) {
+        if (!isTimingApiSupported(js)) {
             return;
         }
 
@@ -73,7 +77,12 @@ public class W3CTimingDataCollector extends TimingDataCollector {
         }
     }
 
-    private boolean isNavigationTimingSupported(JavascriptExecutor js) {
+    private boolean isNavigationApiSupported(JavascriptExecutor js) {
+        return (Boolean) js
+                .executeScript("return !!(window.performance && window.performance.navigation);");
+    }
+
+    private boolean isTimingApiSupported(JavascriptExecutor js) {
         return (Boolean) js
                 .executeScript("return !!(window.performance && window.performance.timing);");
     }
