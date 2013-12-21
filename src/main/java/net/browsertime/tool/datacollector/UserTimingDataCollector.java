@@ -63,12 +63,10 @@ public class UserTimingDataCollector extends TimingDataCollector {
         List marks = (List) js.executeScript(LIST_PAGE_DEFINED_MARKS);
 
         if (marks != null) {
-            double referenceTime = getNavigationStart(results);
-
             for (Object m : marks) {
                 Map mark = (Map) m;
                 String name = (String) mark.get("name");
-                double startTime = (Double) mark.get("startTime") + referenceTime;
+                double startTime = (Double) mark.get("startTime");
                 results.addMark(new TimingMark(name, startTime));
             }
         }
@@ -79,8 +77,6 @@ public class UserTimingDataCollector extends TimingDataCollector {
             return;
         }
 
-        double referenceTime = getNavigationStart(results);
-
         if (shouldAddMeasurementsForUserMarks) {
             // create synthetic measurements for each mark, in order to easily get both start time and duration.
             List marks = (List) js.executeScript(LIST_PAGE_DEFINED_MARKS);
@@ -89,8 +85,8 @@ public class UserTimingDataCollector extends TimingDataCollector {
                 for (Object m : marks) {
                     Map mark = (Map) m;
                     String name = (String) mark.get("name");
-                    double duration = (Double) mark.get("startTime");
-                    results.addMeasurement(new TimingMeasurement(name, referenceTime, duration));
+                    double startTime = (Double) mark.get("startTime");
+                    results.addMeasurement(new TimingMeasurement(name, 0, startTime));
                 }
             }
         }
@@ -101,7 +97,7 @@ public class UserTimingDataCollector extends TimingDataCollector {
             for (Object m : measurements) {
                 Map measurement = (Map) m;
                 String name = (String) measurement.get("name");
-                double startTime = (Double) measurement.get("startTime") + referenceTime;
+                double startTime = (Double) measurement.get("startTime");
                 double duration = (Double) measurement.get("duration");
                 results.addMeasurement(new TimingMeasurement(name, startTime, duration));
             }
@@ -111,11 +107,5 @@ public class UserTimingDataCollector extends TimingDataCollector {
     private boolean isUserTimingApiSupported(JavascriptExecutor js) {
         return (Boolean) js
                 .executeScript("return !!(window.performance && window.performance.getEntriesByType);");
-    }
-
-    private double getNavigationStart(TimingRun results) {
-        TimingMark start = results.getMark("navigationStart");
-
-        return start != null ? start.getStartTime() : 0;
     }
 }
