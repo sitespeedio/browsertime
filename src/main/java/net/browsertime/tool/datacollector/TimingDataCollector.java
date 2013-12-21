@@ -31,7 +31,7 @@ import java.util.Map;
 /**
  * Superclass for browser specific data collection, subclass as needed.
  */
-public abstract class TimingDataCollector {
+public class TimingDataCollector {
 
     public void collectPageData(JavascriptExecutor js, Map<String, String> pageInfo) {
     }
