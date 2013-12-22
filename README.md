@@ -40,14 +40,9 @@ usage: browsertime [options] URL
 
 ### Install via homebrew on mac
 
-1. Add the browsertime tap to Homebrew
-```
-brew tap tobli/browsertime
-```
-
 1. Install browsertime
 ```
-brew install browsertime
+brew install tobli/browsertime/browsertime
 ```
 
 1. Run browsertime
