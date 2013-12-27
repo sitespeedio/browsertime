@@ -36,8 +36,7 @@ public class ChromeDataCollector extends TimingDataCollector {
     public void collectPageData(JavascriptExecutor js, Map<String, String> pageInfo) {
         super.collectPageData(js, pageInfo);
 
-        Boolean wasFetchedViaSpdy = (Boolean) js
-                .executeScript("return window.chrome.loadTimes().wasFetchedViaSpdy");
+        boolean wasFetchedViaSpdy = tryScript(js, "return window.chrome.loadTimes().wasFetchedViaSpdy");
         pageInfo.put("wasFetchedViaSpdy", Boolean.toString(wasFetchedViaSpdy));
     }
 
