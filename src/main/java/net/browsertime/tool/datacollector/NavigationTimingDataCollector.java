@@ -28,10 +28,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Marks defined in the w3c timing recommendation.
+ * Marks defined in the w3c navigation timing recommendation.
  * http://www.w3.org/TR/navigation-timing/
  */
-public class W3CTimingDataCollector extends TimingDataCollector {
+public class NavigationTimingDataCollector extends TimingDataCollector {
     private static final String STANDARD_MARK_PREFIX = "window.performance.timing.";
 
     private static final String LIST_STANDARD_MARKS = "var properties = [];\n" +

@@ -45,12 +45,12 @@ public class SeleniumTimingRunner implements TimingRunner {
     @Inject
     public SeleniumTimingRunner(TimingDataCollector browserDataCollector, Provider<WebDriver> driverProvider) {
         this.driverProvider = driverProvider;
-        TimingDataCollector w3cDataCollector = new W3CTimingDataCollector();
+        TimingDataCollector navigationTimingDataCollector = new NavigationTimingDataCollector();
         TimingDataCollector userTimingDataCollector = new UserTimingDataCollector(true);
         TimingDataCollector browserTimeDataCollector = new BrowserTimeDataCollector();
         TimingDataCollector resourceTimingDataCollector = new ResourceTimingDataCollector();
 
-        this.dataCollectors = Arrays.asList(w3cDataCollector, browserDataCollector,
+        this.dataCollectors = Arrays.asList(navigationTimingDataCollector, browserDataCollector,
                 userTimingDataCollector, browserTimeDataCollector, resourceTimingDataCollector);
     }
 
