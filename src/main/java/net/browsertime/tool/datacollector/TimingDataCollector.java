@@ -28,6 +28,8 @@ import org.openqa.selenium.JavascriptExecutor;
 
 import java.util.Map;
 
+import static java.lang.Boolean.TRUE;
+
 /**
  * Superclass for browser specific data collection, subclass as needed.
  */
@@ -37,6 +39,18 @@ public class TimingDataCollector {
     }
 
     public void collectTimingData(JavascriptExecutor js, TimingRun results) {
+    }
+
+    /**
+     * Execute a given javascript and check if the returned value is boolean true.
+     *
+     * @param js     the executor that should run the script.
+     * @param script the javascript that should be run, should include a return statement
+     *               that returns a boolean value.
+     * @return <code>true</code> if the script evaluates to true, <code>false</code> if not.
+     */
+    protected boolean tryScript(JavascriptExecutor js, String script) {
+        return TRUE.equals(js.executeScript(script));
     }
 
     final static protected class MarkInterval {

@@ -78,12 +78,10 @@ public class W3CTimingDataCollector extends TimingDataCollector {
     }
 
     private boolean isNavigationApiSupported(JavascriptExecutor js) {
-        return (Boolean) js
-                .executeScript("return !!(window.performance && window.performance.navigation);");
+        return tryScript(js, "return !!(window.performance && window.performance.navigation);");
     }
 
     private boolean isTimingApiSupported(JavascriptExecutor js) {
-        return (Boolean) js
-                .executeScript("return !!(window.performance && window.performance.timing);");
+        return tryScript(js, "return !!(window.performance && window.performance.timing);");
     }
 }

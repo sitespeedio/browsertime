@@ -75,8 +75,7 @@ public class ResourceTimingDataCollector extends TimingDataCollector {
     }
 
     private boolean isPageDefinedTimingsSupported(JavascriptExecutor js) {
-        return (Boolean) js
-                .executeScript("return !!(window.performance && window.performance.getEntriesByType);");
+        return tryScript(js, "return !!(window.performance && window.performance.getEntriesByType);");
     }
 
     /**

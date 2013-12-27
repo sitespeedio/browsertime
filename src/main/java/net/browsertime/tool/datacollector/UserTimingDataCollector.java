@@ -105,7 +105,6 @@ public class UserTimingDataCollector extends TimingDataCollector {
     }
 
     private boolean isUserTimingApiSupported(JavascriptExecutor js) {
-        return (Boolean) js
-                .executeScript("return !!(window.performance && window.performance.getEntriesByType);");
+        return tryScript(js, "return !!(window.performance && window.performance.getEntriesByType);");
     }
 }
