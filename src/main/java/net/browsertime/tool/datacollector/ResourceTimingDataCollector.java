@@ -80,7 +80,7 @@ public class ResourceTimingDataCollector extends TimingDataCollector {
 
     /**
      * Helper class to simplify reading time stamps from browsers. Since 0 is interpreted by Selenium as an integer,
-     * it's represented as a Long. This class avoids ClasCastExceptions when reading all data as doubles.
+     * it's represented as a Long. This class avoids ClassCastExceptions when reading all data as doubles.
      */
     private static class DoubleAdapter {
         private final Map map;
