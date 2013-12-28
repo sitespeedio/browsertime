@@ -60,11 +60,10 @@ public class UserTimingDataCollector extends TimingDataCollector {
             return;
         }
 
-        List marks = (List) js.executeScript(LIST_PAGE_DEFINED_MARKS);
+        List<Map> marks = listFromJs(js, LIST_PAGE_DEFINED_MARKS);
 
         if (marks != null) {
-            for (Object m : marks) {
-                Map mark = (Map) m;
+            for (Map mark : marks) {
                 String name = (String) mark.get("name");
                 double startTime = (Double) mark.get("startTime");
                 results.addMark(new TimingMark(name, startTime));
@@ -72,6 +71,7 @@ public class UserTimingDataCollector extends TimingDataCollector {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private void collectMeasurements(JavascriptExecutor js, TimingRun results) {
         if (!isUserTimingApiSupported(js)) {
             return;
@@ -79,11 +79,10 @@ public class UserTimingDataCollector extends TimingDataCollector {
 
         if (shouldAddMeasurementsForUserMarks) {
             // create synthetic measurements for each mark, in order to easily get both start time and duration.
-            List marks = (List) js.executeScript(LIST_PAGE_DEFINED_MARKS);
+            List<Map> marks = listFromJs(js, LIST_PAGE_DEFINED_MARKS);
 
             if (marks != null) {
-                for (Object m : marks) {
-                    Map mark = (Map) m;
+                for (Map mark : marks) {
                     String name = (String) mark.get("name");
                     double startTime = (Double) mark.get("startTime");
                     results.addMeasurement(new TimingMeasurement(name, 0, startTime));
@@ -91,11 +90,10 @@ public class UserTimingDataCollector extends TimingDataCollector {
             }
         }
 
-        List measurements = (List) js.executeScript(LIST_PAGE_DEFINED_MEASUREMENTS);
+        List<Map> measurements = listFromJs(js, LIST_PAGE_DEFINED_MEASUREMENTS);
 
         if (measurements != null) {
-            for (Object m : measurements) {
-                Map measurement = (Map) m;
+            for (Map measurement : measurements) {
                 String name = (String) measurement.get("name");
                 double startTime = (Double) measurement.get("startTime");
                 double duration = (Double) measurement.get("duration");
@@ -105,6 +103,6 @@ public class UserTimingDataCollector extends TimingDataCollector {
     }
 
     private boolean isUserTimingApiSupported(JavascriptExecutor js) {
-        return tryScript(js, "return !!(window.performance && window.performance.getEntriesByType);");
+        return booleanFromJs(js, "return !!(window.performance && window.performance.getEntriesByType);");
     }
 }

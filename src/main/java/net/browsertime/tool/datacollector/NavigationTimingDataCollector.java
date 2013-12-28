@@ -46,7 +46,7 @@ public class NavigationTimingDataCollector extends TimingDataCollector {
             return;
         }
 
-        long redirectCount = (Long) js.executeScript("return window.performance.navigation.redirectCount;");
+        long redirectCount = longFromJs(js, "return window.performance.navigation.redirectCount;");
         pageInfo.put("redirectCount", Long.toString(redirectCount));
     }
 
@@ -57,7 +57,7 @@ public class NavigationTimingDataCollector extends TimingDataCollector {
             return;
         }
 
-        List<String> markNames = (List) js.executeScript(LIST_STANDARD_MARKS);
+        List<String> markNames = listFromJs(js, LIST_STANDARD_MARKS);
 
         for (String markName : markNames) {
 
@@ -78,10 +78,10 @@ public class NavigationTimingDataCollector extends TimingDataCollector {
     }
 
     private boolean isNavigationApiSupported(JavascriptExecutor js) {
-        return tryScript(js, "return !!(window.performance && window.performance.navigation);");
+        return booleanFromJs(js, "return !!(window.performance && window.performance.navigation);");
     }
 
     private boolean isTimingApiSupported(JavascriptExecutor js) {
-        return tryScript(js, "return !!(window.performance && window.performance.timing);");
+        return booleanFromJs(js, "return !!(window.performance && window.performance.timing);");
     }
 }

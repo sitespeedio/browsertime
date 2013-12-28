@@ -44,11 +44,10 @@ public class ResourceTimingDataCollector extends TimingDataCollector {
             return;
         }
 
-        List resources = (List) js.executeScript(LIST_RESOURCES);
+        List<Map> resources = listFromJs(js, LIST_RESOURCES);
 
         if (resources != null && !resources.isEmpty()) {
-            for (Object r : resources) {
-                Map resource = (Map) r;
+            for (Map resource : resources) {
                 DoubleAdapter da = new DoubleAdapter(resource);
                 String name = (String) resource.get("name");
                 String initiatorType = (String) resource.get("initiatorType");
@@ -75,7 +74,7 @@ public class ResourceTimingDataCollector extends TimingDataCollector {
     }
 
     private boolean isPageDefinedTimingsSupported(JavascriptExecutor js) {
-        return tryScript(js, "return !!(window.performance && window.performance.getEntriesByType);");
+        return booleanFromJs(js, "return !!(window.performance && window.performance.getEntriesByType);");
     }
 
     /**

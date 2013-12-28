@@ -79,6 +79,13 @@ public class JsonSerializer implements Serializer {
          out.value(doubleFormat.format(value));
      }
 
+     private static void printIfPositive(JsonWriter out, String name, double value) throws IOException {
+         if (value > 0) {
+             print(out, name, value);
+         }
+     }
+
+
      private static class StatisticsAdapter extends TypeAdapter<Statistics> {
         @Override
         public void write(JsonWriter out, Statistics value) throws IOException {
@@ -161,16 +168,16 @@ public class JsonSerializer implements Serializer {
                 print(out, "startTime", measurement.getStartTime());
                 print(out, "duration", measurement.getDuration());
                 print(out, "initiatorType", measurement.getInitiatorType());
-                print(out, "redirectStart", measurement.getRedirectStart());
-                print(out, "redirectEnd", measurement.getRedirectEnd());
+                printIfPositive(out, "redirectStart", measurement.getRedirectStart());
+                printIfPositive(out, "redirectEnd", measurement.getRedirectEnd());
                 print(out, "fetchStart", measurement.getFetchStart());
-                print(out, "domainLookupStart", measurement.getDomainLookupStart());
-                print(out, "domainLookupEnd", measurement.getDomainLookupEnd());
-                print(out, "connectStart", measurement.getConnectStart());
-                print(out, "connectEnd", measurement.getConnectEnd());
-                print(out, "secureConnectionStart", measurement.getSecureConnectionStart());
-                print(out, "requestStart", measurement.getRequestStart());
-                print(out, "responseStart", measurement.getResponseStart());
+                printIfPositive(out, "domainLookupStart", measurement.getDomainLookupStart());
+                printIfPositive(out, "domainLookupEnd", measurement.getDomainLookupEnd());
+                printIfPositive(out, "connectStart", measurement.getConnectStart());
+                printIfPositive(out, "connectEnd", measurement.getConnectEnd());
+                printIfPositive(out, "secureConnectionStart", measurement.getSecureConnectionStart());
+                printIfPositive(out, "requestStart", measurement.getRequestStart());
+                printIfPositive(out, "responseStart", measurement.getResponseStart());
                 print(out, "responseEnd", measurement.getResponseEnd());
                 out.endObject();
             }

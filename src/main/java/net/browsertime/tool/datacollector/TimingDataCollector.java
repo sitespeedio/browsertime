@@ -26,6 +26,7 @@ import net.browsertime.tool.timings.TimingRun;
 
 import org.openqa.selenium.JavascriptExecutor;
 
+import java.util.List;
 import java.util.Map;
 
 import static java.lang.Boolean.TRUE;
@@ -44,13 +45,25 @@ public class TimingDataCollector {
     /**
      * Execute a given javascript and check if the returned value is boolean true.
      *
-     * @param js     the executor that should run the script.
-     * @param script the javascript that should be run, should include a return statement
-     *               that returns a boolean value.
+     * @param executor the executor that should run the script.
+     * @param script   the javascript that should be run, should include a return statement
+     *                 that returns a boolean value.
      * @return <code>true</code> if the script evaluates to true, <code>false</code> if not.
      */
-    protected boolean tryScript(JavascriptExecutor js, String script) {
-        return TRUE.equals(js.executeScript(script));
+    protected boolean booleanFromJs(JavascriptExecutor executor, String script) {
+        return TRUE.equals(executor.executeScript(script));
+    }
+
+    protected List listFromJs(JavascriptExecutor executor, String script) {
+        return (List) executor.executeScript(script);
+    }
+
+    protected Long longFromJs(JavascriptExecutor executor, String script) {
+        return (Long) executor.executeScript(script);
+    }
+
+    protected Double doubleFromJs(JavascriptExecutor executor, String script) {
+        return (Double) executor.executeScript(script);
     }
 
     final static protected class MarkInterval {

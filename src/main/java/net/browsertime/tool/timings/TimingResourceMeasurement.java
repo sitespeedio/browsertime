@@ -81,13 +81,13 @@ public class TimingResourceMeasurement extends TimingMark implements Comparable<
     }
 
     @XmlAttribute
-    @XmlJavaTypeAdapter(XmlSerializer.NonScientificDoubleAdapter.class)
+    @XmlJavaTypeAdapter(XmlSerializer.OptionalNonScientificDoubleAdapter.class)
     public Double getRedirectStart() {
         return redirectStart;
     }
 
     @XmlAttribute
-    @XmlJavaTypeAdapter(XmlSerializer.NonScientificDoubleAdapter.class)
+    @XmlJavaTypeAdapter(XmlSerializer.OptionalNonScientificDoubleAdapter.class)
     public Double getRedirectEnd() {
         return redirectEnd;
     }
@@ -99,43 +99,43 @@ public class TimingResourceMeasurement extends TimingMark implements Comparable<
     }
 
     @XmlAttribute
-    @XmlJavaTypeAdapter(XmlSerializer.NonScientificDoubleAdapter.class)
+    @XmlJavaTypeAdapter(XmlSerializer.OptionalNonScientificDoubleAdapter.class)
     public Double getDomainLookupStart() {
         return domainLookupStart;
     }
 
     @XmlAttribute
-    @XmlJavaTypeAdapter(XmlSerializer.NonScientificDoubleAdapter.class)
+    @XmlJavaTypeAdapter(XmlSerializer.OptionalNonScientificDoubleAdapter.class)
     public Double getDomainLookupEnd() {
         return domainLookupEnd;
     }
 
     @XmlAttribute
-    @XmlJavaTypeAdapter(XmlSerializer.NonScientificDoubleAdapter.class)
+    @XmlJavaTypeAdapter(XmlSerializer.OptionalNonScientificDoubleAdapter.class)
     public Double getConnectStart() {
         return connectStart;
     }
 
     @XmlAttribute
-    @XmlJavaTypeAdapter(XmlSerializer.NonScientificDoubleAdapter.class)
+    @XmlJavaTypeAdapter(XmlSerializer.OptionalNonScientificDoubleAdapter.class)
     public Double getConnectEnd() {
         return connectEnd;
     }
 
     @XmlAttribute
-    @XmlJavaTypeAdapter(XmlSerializer.NonScientificDoubleAdapter.class)
+    @XmlJavaTypeAdapter(XmlSerializer.OptionalNonScientificDoubleAdapter.class)
     public Double getSecureConnectionStart() {
         return secureConnectionStart;
     }
 
     @XmlAttribute
-    @XmlJavaTypeAdapter(XmlSerializer.NonScientificDoubleAdapter.class)
+    @XmlJavaTypeAdapter(XmlSerializer.OptionalNonScientificDoubleAdapter.class)
     public Double getRequestStart() {
         return requestStart;
     }
 
     @XmlAttribute
-    @XmlJavaTypeAdapter(XmlSerializer.NonScientificDoubleAdapter.class)
+    @XmlJavaTypeAdapter(XmlSerializer.OptionalNonScientificDoubleAdapter.class)
     public Double getResponseStart() {
         return responseStart;
     }

@@ -36,7 +36,7 @@ public class ChromeDataCollector extends TimingDataCollector {
     public void collectPageData(JavascriptExecutor js, Map<String, String> pageInfo) {
         super.collectPageData(js, pageInfo);
 
-        boolean wasFetchedViaSpdy = tryScript(js, "return window.chrome.loadTimes().wasFetchedViaSpdy");
+        boolean wasFetchedViaSpdy = booleanFromJs(js, "return window.chrome.loadTimes().wasFetchedViaSpdy");
         pageInfo.put("wasFetchedViaSpdy", Boolean.toString(wasFetchedViaSpdy));
     }
 
@@ -48,7 +48,7 @@ public class ChromeDataCollector extends TimingDataCollector {
 
     private void collectMarks(JavascriptExecutor js, TimingRun results) {
         // Chrome timing is in s.ms, convert it to ms!!
-        Double time = (Double) js.executeScript("return window.chrome.loadTimes().firstPaintTime");
+        Double time = doubleFromJs(js, "return window.chrome.loadTimes().firstPaintTime");
         results.addMark(new TimingMark("firstPaint", time * 1000));
     }
 
