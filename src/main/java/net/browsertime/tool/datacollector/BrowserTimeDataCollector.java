@@ -72,7 +72,6 @@ public class BrowserTimeDataCollector extends TimingDataCollector {
         String implementationVersion = getClass().getPackage().getImplementationVersion();
         implementationVersion = implementationVersion != null ? implementationVersion : "unknown";
         pageInfo.put("browserTimeVersion", implementationVersion);
-
     }
 
     @Override
