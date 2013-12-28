@@ -1,6 +1,6 @@
- /*******************************************************************************************************************************
+/*******************************************************************************************************************************
  * It's Browser Time!
- * 
+ *
  *
  * Copyright (C) 2013 by Tobias Lidskog (https://twitter.com/tobiaslidskog) &  Peter Hedenskog (http://peterhedenskog.com)
  *
@@ -8,7 +8,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in 
  * compliance with the License. You may obtain a copy of the License at
- * 
+ *
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -32,7 +32,7 @@ import java.util.Map;
 /**
  * Marks and measurements defined in the w3c user timing recommendation.
  * http://www.w3.org/TR/user-timing/
- *
+ * <p/>
  * NOTE: The user timing spec uses a different resolution for time stamps (milliseconds with a decimal part)
  */
 public class UserTimingDataCollector extends TimingDataCollector {
@@ -49,70 +49,60 @@ public class UserTimingDataCollector extends TimingDataCollector {
     }
 
     @Override
+    public void collectTimingData(JavascriptExecutor js, TimingRun results) {
+        collectMarks(js, results);
+        collectMeasurements(js, results);
+    }
+
     @SuppressWarnings("unchecked")
-    public void collectMarks(JavascriptExecutor js, TimingRun results) {
-        if (!isPageDefinedTimingsSupported(js)) {
+    private void collectMarks(JavascriptExecutor js, TimingRun results) {
+        if (!isUserTimingApiSupported(js)) {
             return;
         }
 
-        List marks = (List) js.executeScript(LIST_PAGE_DEFINED_MARKS);
+        List<Map> marks = listFromJs(js, LIST_PAGE_DEFINED_MARKS);
 
         if (marks != null) {
-            double referenceTime = getNavigationStart(results);
-
-            for (Object m : marks) {
-                Map mark = (Map) m;
+            for (Map mark : marks) {
                 String name = (String) mark.get("name");
-                double startTime = (Double) mark.get("startTime") + referenceTime;
+                double startTime = (Double) mark.get("startTime");
                 results.addMark(new TimingMark(name, startTime));
             }
         }
     }
 
-    @Override
-    public void collectMeasurements(JavascriptExecutor js, TimingRun results) {
-        if (!isPageDefinedTimingsSupported(js)) {
+    @SuppressWarnings("unchecked")
+    private void collectMeasurements(JavascriptExecutor js, TimingRun results) {
+        if (!isUserTimingApiSupported(js)) {
             return;
         }
 
-        double referenceTime = getNavigationStart(results);
-
         if (shouldAddMeasurementsForUserMarks) {
             // create synthetic measurements for each mark, in order to easily get both start time and duration.
-            List marks = (List) js.executeScript(LIST_PAGE_DEFINED_MARKS);
+            List<Map> marks = listFromJs(js, LIST_PAGE_DEFINED_MARKS);
 
             if (marks != null) {
-                for (Object m : marks) {
-                    Map mark = (Map) m;
+                for (Map mark : marks) {
                     String name = (String) mark.get("name");
-                    double duration = (Double) mark.get("startTime");
-                    results.addMeasurement(new TimingMeasurement(name, referenceTime, duration));
+                    double startTime = (Double) mark.get("startTime");
+                    results.addMeasurement(new TimingMeasurement(name, 0, startTime));
                 }
             }
         }
 
-        List measurements = (List) js.executeScript(LIST_PAGE_DEFINED_MEASUREMENTS);
+        List<Map> measurements = listFromJs(js, LIST_PAGE_DEFINED_MEASUREMENTS);
 
         if (measurements != null) {
-            for (Object m : measurements) {
-                Map measurement = (Map) m;
+            for (Map measurement : measurements) {
                 String name = (String) measurement.get("name");
-                double startTime = (Double) measurement.get("startTime") + referenceTime;
+                double startTime = (Double) measurement.get("startTime");
                 double duration = (Double) measurement.get("duration");
                 results.addMeasurement(new TimingMeasurement(name, startTime, duration));
             }
         }
-
     }
 
-    private boolean isPageDefinedTimingsSupported(JavascriptExecutor js) {
-        return (Boolean) js
-                .executeScript("return !!(window.performance && window.performance.getEntriesByType);");
-    }
-
-    private double getNavigationStart(TimingRun results) {
-        TimingMark start = results.getMark("navigationStart");
-
-        return start != null ? start.getStartTime() : 0;
+    private boolean isUserTimingApiSupported(JavascriptExecutor js) {
+        return booleanFromJs(js, "return !!(window.performance && window.performance.getEntriesByType);");
     }
 }

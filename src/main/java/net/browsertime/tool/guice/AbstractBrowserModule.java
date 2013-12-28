@@ -18,7 +18,7 @@ public abstract class AbstractBrowserModule extends AbstractModule {
 
     protected void configure() {
         bind(TimingRunner.class).to(SeleniumTimingRunner.class);
-   }
+    }
 
     /**
      * Prohibit use of no-args constructor.

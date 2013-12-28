@@ -1,6 +1,6 @@
- /*******************************************************************************************************************************
+/*******************************************************************************************************************************
  * It's Browser Time!
- * 
+ *
  *
  * Copyright (C) 2013 by Tobias Lidskog (https://twitter.com/tobiaslidskog) &  Peter Hedenskog (http://peterhedenskog.com)
  *
@@ -8,7 +8,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in 
  * compliance with the License. You may obtain a copy of the License at
- * 
+ *
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -32,46 +32,46 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.Map;
 
- /**
+/**
  * Setup a module that uses Chrome.
  */
 public class ChromeModule extends AbstractBrowserModule {
 
-     public ChromeModule(Map<BrowserConfig, String> browserConfiguration) {
-         super(browserConfiguration);
-     }
+    public ChromeModule(Map<BrowserConfig, String> browserConfiguration) {
+        super(browserConfiguration);
+    }
 
-     @Override
-	protected void configure() {
+    @Override
+    protected void configure() {
         super.configure();
         bind(WebDriver.class).toProvider(DRIVER_PROVIDER);
         bind(TimingDataCollector.class).to(ChromeDataCollector.class);
     }
 
-     private final Provider<WebDriver> DRIVER_PROVIDER = new Provider<WebDriver>() {
-         @Override
-         public WebDriver get() {
-             return new ChromeDriver(createChromeOptions());
-         }
+    private final Provider<WebDriver> DRIVER_PROVIDER = new Provider<WebDriver>() {
+        @Override
+        public WebDriver get() {
+            return new ChromeDriver(createChromeOptions());
+        }
 
-         private ChromeOptions createChromeOptions() {
-             ChromeOptions options = new ChromeOptions();
+        private ChromeOptions createChromeOptions() {
+            ChromeOptions options = new ChromeOptions();
 
-             // see http://peter.sh/experiments/chromium-command-line-switches/
-             String config = browserConfiguration.get(BrowserConfig.userAgent);
-             if (config != null) {
-                 options.addArguments("--user-agent" + "=" + config);
-             }
+            // see http://peter.sh/experiments/chromium-command-line-switches/
+            String config = browserConfiguration.get(BrowserConfig.userAgent);
+            if (config != null) {
+                options.addArguments("--user-agent" + "=" + config);
+            }
 
-             config = browserConfiguration.get(BrowserConfig.windowSize);
-             if (config != null) {
-                 config = config.replace("x", ",");
-                 options.addArguments("--window-size" + "=" + config);
-             }
+            config = browserConfiguration.get(BrowserConfig.windowSize);
+            if (config != null) {
+                config = config.replace("x", ",");
+                options.addArguments("--window-size" + "=" + config);
+            }
 
-             options.addArguments("--window-position=0,0");
+            options.addArguments("--window-position=0,0");
 
-             return options;
-         }
-     };
- }
+            return options;
+        }
+    };
+}

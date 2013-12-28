@@ -69,31 +69,39 @@ public class JsonSerializer implements Serializer {
         writer.close();
     }
 
-    private static class StatisticsAdapter extends TypeAdapter<Statistics> {
+     private static void print(JsonWriter out, String name, String value) throws IOException {
+         out.name(name);
+         out.value(value);
+     }
+
+     private static void print(JsonWriter out, String name, double value) throws IOException {
+         out.name(name);
+         out.value(doubleFormat.format(value));
+     }
+
+     private static void printIfPositive(JsonWriter out, String name, double value) throws IOException {
+         if (value > 0) {
+             print(out, name, value);
+         }
+     }
+
+
+     private static class StatisticsAdapter extends TypeAdapter<Statistics> {
         @Override
         public void write(JsonWriter out, Statistics value) throws IOException {
             List<Statistics.Statistic> statistics = value.getStatistics();
             out.beginArray();
             for (Statistics.Statistic statistic : statistics) {
                 out.beginObject();
-                out.name("name");
-                out.value(statistic.name);
-                out.name("min");
-                out.value(doubleFormat.format(statistic.min));
-                out.name("avg");
-                out.value(doubleFormat.format(statistic.avg));
-                out.name("median");
-                out.value(doubleFormat.format(statistic.median));
-                out.name("p60");
-                out.value(doubleFormat.format(statistic.p60));
-                out.name("p70");
-                out.value(doubleFormat.format(statistic.p70));
-                out.name("p80");
-                out.value(doubleFormat.format(statistic.p80));
-                out.name("p90");
-                out.value(doubleFormat.format(statistic.p90));
-                out.name("max");
-                out.value(doubleFormat.format(statistic.max));
+                print(out, "name", statistic.name);
+                print(out, "min", statistic.min);
+                print(out, "avg", statistic.avg);
+                print(out, "median", statistic.median);
+                print(out, "p60", statistic.p60);
+                print(out, "p70", statistic.p70);
+                print(out, "p80", statistic.p80);
+                print(out, "p90", statistic.p90);
+                print(out, "max", statistic.max);
                 out.endObject();
             }
             out.endArray();
@@ -122,6 +130,7 @@ public class JsonSerializer implements Serializer {
             out.beginObject();
             writeMarks(out, run);
             writeMeasurements(out, run);
+            writeResourceMeasurements(out, run);
             out.endObject();
         }
 
@@ -130,10 +139,8 @@ public class JsonSerializer implements Serializer {
             out.beginArray();
             for (TimingMark mark : run.getMarks()) {
                 out.beginObject();
-                out.name("name");
-                out.value(mark.getName());
-                out.name("startTime");
-                out.value(doubleFormat.format(mark.getStartTime()));
+                print(out, "name", mark.getName());
+                print(out, "startTime", mark.getStartTime());
                 out.endObject();
             }
             out.endArray();
@@ -144,17 +151,38 @@ public class JsonSerializer implements Serializer {
             out.beginArray();
             for (TimingMeasurement measurement : run.getMeasurements()) {
                 out.beginObject();
-                out.name("name");
-                out.value(measurement.getName());
-                out.name("startTime");
-                out.value(doubleFormat.format(measurement.getStartTime()));
-                out.name("duration");
-                out.value(doubleFormat.format(measurement.getDuration()));
+                print(out, "name", measurement.getName());
+                print(out, "startTime", measurement.getStartTime());
+                print(out, "duration", measurement.getDuration());
                 out.endObject();
             }
             out.endArray();
         }
 
+        private void writeResourceMeasurements(JsonWriter out, TimingRun run) throws IOException {
+            out.name("resourceMeasurements");
+            out.beginArray();
+            for (TimingResourceMeasurement measurement : run.getResourceMeasurements()) {
+                out.beginObject();
+                print(out, "name", measurement.getName());
+                print(out, "startTime", measurement.getStartTime());
+                print(out, "duration", measurement.getDuration());
+                print(out, "initiatorType", measurement.getInitiatorType());
+                printIfPositive(out, "redirectStart", measurement.getRedirectStart());
+                printIfPositive(out, "redirectEnd", measurement.getRedirectEnd());
+                print(out, "fetchStart", measurement.getFetchStart());
+                printIfPositive(out, "domainLookupStart", measurement.getDomainLookupStart());
+                printIfPositive(out, "domainLookupEnd", measurement.getDomainLookupEnd());
+                printIfPositive(out, "connectStart", measurement.getConnectStart());
+                printIfPositive(out, "connectEnd", measurement.getConnectEnd());
+                printIfPositive(out, "secureConnectionStart", measurement.getSecureConnectionStart());
+                printIfPositive(out, "requestStart", measurement.getRequestStart());
+                printIfPositive(out, "responseStart", measurement.getResponseStart());
+                print(out, "responseEnd", measurement.getResponseEnd());
+                out.endObject();
+            }
+            out.endArray();
+        }
 
         @Override
          public TimingRun read(JsonReader in) throws IOException {
