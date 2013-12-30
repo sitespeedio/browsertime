@@ -57,7 +57,7 @@ public class InternetExplorerModule extends AbstractBrowserModule {
             DesiredCapabilities capabilities = new DesiredCapabilities();
 
             capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
-
+            capabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
             return capabilities;
         }
     };
