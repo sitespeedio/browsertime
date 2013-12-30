@@ -22,6 +22,9 @@ usage: browsertime [options] URL
                                   name of the file. If no filename is
                                   given, the result is put on standard
                                   out.
+ -p,--proxyHost <PROXYHOST>       Proxy server host (including optional
+                                  port) to use for http requests in
+                                  browser, e.g. proxy.myserver.com:1234.
     --raw                         Include raw metrics data from each test
                                   run (excluded by default).
  -t,--timeout <TIMEOUT>           Number of seconds to wait for url to
