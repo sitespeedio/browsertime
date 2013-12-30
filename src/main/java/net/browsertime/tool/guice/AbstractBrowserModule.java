@@ -8,11 +8,11 @@ import net.browsertime.tool.timingrunner.TimingRunner;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class AbstractBrowserModule extends AbstractModule {
+abstract class AbstractBrowserModule extends AbstractModule {
 
-    protected Map<BrowserConfig, String> browserConfiguration;
+    Map<BrowserConfig, String> browserConfiguration;
 
-    protected AbstractBrowserModule(Map<BrowserConfig, String> browserConfiguration) {
+    AbstractBrowserModule(Map<BrowserConfig, String> browserConfiguration) {
         this.browserConfiguration = new HashMap<BrowserConfig, String>(browserConfiguration);
     }
 

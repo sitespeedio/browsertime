@@ -150,6 +150,7 @@ public class TimingResourceMeasurement extends TimingMark implements Comparable<
         return getStartTime() + getDuration();
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     private TimingResourceMeasurement() {
         super(null, 0);
         initiatorType = null;

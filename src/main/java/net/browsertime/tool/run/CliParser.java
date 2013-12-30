@@ -28,10 +28,10 @@ import static net.browsertime.tool.run.CliParser.OptionString.*;
  *
  */
 public class CliParser {
-    public static final Browser DEFAULT_BROWSER = Browser.firefox;
-    public static final Format DEFAULT_FORMAT = Format.xml;
-    public static final int DEFAULT_TIMEOUT_SECONDS = 60;
-    public static final int DEFAULT_NUMBER_OF_ITERATIONS = 3;
+    private static final Browser DEFAULT_BROWSER = Browser.firefox;
+    private static final Format DEFAULT_FORMAT = Format.xml;
+    private static final int DEFAULT_TIMEOUT_SECONDS = 60;
+    private static final int DEFAULT_NUMBER_OF_ITERATIONS = 3;
 
     private CommandLine commandLine;
     private final Options options;

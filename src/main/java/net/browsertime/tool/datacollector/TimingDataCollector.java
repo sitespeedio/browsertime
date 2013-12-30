@@ -50,23 +50,23 @@ public class TimingDataCollector {
      *                 that returns a boolean value.
      * @return <code>true</code> if the script evaluates to true, <code>false</code> if not.
      */
-    protected boolean booleanFromJs(JavascriptExecutor executor, String script) {
+    boolean booleanFromJs(JavascriptExecutor executor, String script) {
         return TRUE.equals(executor.executeScript(script));
     }
 
-    protected List listFromJs(JavascriptExecutor executor, String script) {
+    List listFromJs(JavascriptExecutor executor, String script) {
         return (List) executor.executeScript(script);
     }
 
-    protected Long longFromJs(JavascriptExecutor executor, String script) {
+    Long longFromJs(JavascriptExecutor executor, String script) {
         return (Long) executor.executeScript(script);
     }
 
-    protected Double doubleFromJs(JavascriptExecutor executor, String script) {
+    Double doubleFromJs(JavascriptExecutor executor, String script) {
         return (Double) executor.executeScript(script);
     }
 
-    final static protected class MarkInterval {
+    final static class MarkInterval {
         private final String measurementName;
         private final String startMarkName;
         private final String endMarkName;

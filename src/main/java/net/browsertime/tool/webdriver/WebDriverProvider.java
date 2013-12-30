@@ -9,14 +9,14 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
 
-public abstract class WebDriverProvider implements Provider<WebDriver> {
-    protected Map<BrowserConfig, String> browserConfiguration;
+abstract class WebDriverProvider implements Provider<WebDriver> {
+    final Map<BrowserConfig, String> browserConfiguration;
 
-    public WebDriverProvider(Map<BrowserConfig, String> browserConfiguration) {
+    WebDriverProvider(Map<BrowserConfig, String> browserConfiguration) {
         this.browserConfiguration = browserConfiguration;
     }
 
-    protected DesiredCapabilities createCapabilities() {
+    DesiredCapabilities createCapabilities() {
         DesiredCapabilities c = getBrowserCapabilities();
 
         setProxyCapability(c);

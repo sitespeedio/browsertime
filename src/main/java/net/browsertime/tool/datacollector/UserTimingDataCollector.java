@@ -42,7 +42,7 @@ public class UserTimingDataCollector extends TimingDataCollector {
     private static final String LIST_PAGE_DEFINED_MEASUREMENTS =
             "return window.performance.getEntriesByType('measure');";
 
-    private boolean shouldAddMeasurementsForUserMarks;
+    private final boolean shouldAddMeasurementsForUserMarks;
 
     public UserTimingDataCollector(boolean shouldAddMeasurementsForUserMarks) {
         this.shouldAddMeasurementsForUserMarks = shouldAddMeasurementsForUserMarks;
