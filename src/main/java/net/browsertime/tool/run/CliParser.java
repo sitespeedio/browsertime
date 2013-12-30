@@ -185,72 +185,72 @@ public class CliParser {
     }
 
     private Option createIterationsOption() {
-        return createOption(iterationsOption.shortForm, iterationsOption.longForm,
+        return createOption(iterationsOption,
                 "The number of times to run the test, default being 3.");
     }
 
     private Option createBrowserOption() {
-        return createOption(browserOption.shortForm, browserOption.longForm,
+        return createOption(browserOption,
                 "The browser to use. Supported values are: " + asList(Browser.values()) +
                         ", default being " + DEFAULT_BROWSER + ".");
     }
 
     private Option createOutputOption() {
-        return createOption(outputOption.shortForm, outputOption.longForm,
+        return createOption(outputOption,
                 "Output the result as a file, give the name of the file. " +
                         "If no filename is given, the result is put on standard out.");
     }
 
 
     private Option createFormatOption() {
-        return createOption(formatOption.shortForm, formatOption.longForm,
+        return createOption(formatOption,
                 "The desired output format. Supported values are: " + asList(Format.values()) +
                         ", default being " + DEFAULT_FORMAT + ".");
     }
 
     private Option createProxyOption() {
-        return createOption(proxyHostOption.shortForm, proxyHostOption.longForm,
+        return createOption(proxyHostOption,
                 "Proxy server host (including optional port) to use for http requests in browser, " +
                         "e.g. proxy.myserver.com:1234.");
     }
 
     private Option createTimeoutOption() {
-        return createOption(timeoutOption.shortForm, timeoutOption.longForm,
+        return createOption(timeoutOption,
                 "Number of seconds to wait for url to complete loading before giving up" +
                         ", default being " + DEFAULT_TIMEOUT_SECONDS + ".");
     }
 
     private Option createCompactOption() {
-        Option option = createOption(compactOption.shortForm, compactOption.longForm, "Generate compact output (default is pretty-printed).");
+        Option option = createOption(compactOption, "Generate compact output (default is pretty-printed).");
         option.setArgs(0);
         return option;
     }
 
     private Option createRawOption() {
-        Option option = createOption(rawOption.shortForm, rawOption.longForm, "Include raw metrics data from each test run (excluded by default).");
+        Option option = createOption(rawOption, "Include raw metrics data from each test run (excluded by default).");
         option.setArgs(0);
         return option;
     }
 
     private Option createUserAgentOption() {
-        return createOption(userAgentOption.shortForm, userAgentOption.longForm,
+        return createOption(userAgentOption,
                 "Set the user agent. Default is the one by the browser you use. Only works with Chrome.");
     }
 
     private Option createWindowSizeOption() {
-        return createOption(windowSizeOption.shortForm, windowSizeOption.longForm,
+        return createOption(windowSizeOption,
                 "The size of the browser window: <width>x<height>, e.g. 400x600. " +
                         "Only works with Chrome and Firefox.");
     }
 
     private Option createHelpOption() {
-        Option option = createOption(helpOption.shortForm, helpOption.longForm,"Show this help message");
+        Option option = createOption(helpOption, "Show this help message");
         option.setArgs(0);
         return option;
     }
 
     private Option createVersionOption() {
-        Option option = createOption(versionOption.shortForm, versionOption.longForm,"Show version information");
+        Option option = createOption(versionOption, "Show version information");
         option.setArgs(0);
         return option;
     }
@@ -258,10 +258,10 @@ public class CliParser {
     /**
      * Create an optional Option with one argument.
      */
-    private Option createOption(String opt, String longName, String description) {
-        final Option option = new Option(opt, description);
-        option.setLongOpt(longName);
-        option.setArgName(longName.toUpperCase());
+    private Option createOption(OptionString optionString, String description) {
+        final Option option = new Option(optionString.shortForm, description);
+        option.setLongOpt(optionString.longForm);
+        option.setArgName(optionString.longForm.toUpperCase());
         option.setRequired(false);
         option.setArgs(1);
         return option;
