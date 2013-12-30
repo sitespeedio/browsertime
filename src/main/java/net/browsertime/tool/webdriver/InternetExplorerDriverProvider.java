@@ -1,22 +1,26 @@
 package net.browsertime.tool.webdriver;
 
-import com.google.inject.Provider;
-import org.openqa.selenium.Capabilities;
+import net.browsertime.tool.BrowserConfig;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-public class InternetExplorerDriverProvider implements Provider<WebDriver> {
-    @Override
-    public WebDriver get() {
-        return new InternetExplorerDriver(getCapabilities());
+import java.util.Map;
+
+public class InternetExplorerDriverProvider extends WebDriverProvider {
+    public InternetExplorerDriverProvider(Map<BrowserConfig, String> browserConfiguration) {
+        super(browserConfiguration);
     }
 
-    public Capabilities getCapabilities() {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-
+    @Override
+    public WebDriver get() {
+        DesiredCapabilities capabilities = createCapabilities();
         capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+        return new InternetExplorerDriver(capabilities);
+    }
 
-        return capabilities;
+    @Override
+    protected DesiredCapabilities getBrowserCapabilities() {
+        return DesiredCapabilities.internetExplorer();
     }
 }

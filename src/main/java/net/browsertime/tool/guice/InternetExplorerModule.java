@@ -41,7 +41,7 @@ public class InternetExplorerModule extends AbstractBrowserModule {
 	protected void configure()
 	{
         super.configure();
-		bind(WebDriver.class).toProvider(new InternetExplorerDriverProvider());
+		bind(WebDriver.class).toProvider(new InternetExplorerDriverProvider(browserConfiguration));
         bind(TimingDataCollector.class).to(InternetExplorerDataCollector.class);
 	}
  }
