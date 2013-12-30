@@ -16,6 +16,7 @@ public class InternetExplorerDriverProvider extends WebDriverProvider {
     public WebDriver get() {
         DesiredCapabilities capabilities = createCapabilities();
         capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+        capabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
         return new InternetExplorerDriver(capabilities);
     }
 
