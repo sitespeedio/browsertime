@@ -1,6 +1,6 @@
- /*******************************************************************************************************************************
+/*******************************************************************************************************************************
  * It's Browser Time!
- * 
+ *
  *
  * Copyright (C) 2013 by Tobias Lidskog (https://twitter.com/tobiaslidskog) &  Peter Hedenskog (http://peterhedenskog.com)
  *
@@ -8,7 +8,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in 
  * compliance with the License. You may obtain a copy of the License at
- * 
+ *
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -20,26 +20,20 @@
  */
 package net.browsertime.tool.timingrunner;
 
- import com.google.inject.Inject;
- import com.google.inject.Provider;
- import net.browsertime.tool.datacollector.BrowserTimeDataCollector;
- import net.browsertime.tool.datacollector.TimingDataCollector;
- import net.browsertime.tool.datacollector.UserTimingDataCollector;
- import net.browsertime.tool.datacollector.W3CTimingDataCollector;
- import net.browsertime.tool.timings.TimingRun;
- import net.browsertime.tool.timings.TimingSession;
- import org.openqa.selenium.JavascriptExecutor;
- import org.openqa.selenium.TimeoutException;
- import org.openqa.selenium.WebDriver;
- import org.openqa.selenium.WebDriverException;
- import org.openqa.selenium.support.ui.ExpectedCondition;
- import org.openqa.selenium.support.ui.WebDriverWait;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import net.browsertime.tool.datacollector.*;
+import net.browsertime.tool.timings.TimingRun;
+import net.browsertime.tool.timings.TimingSession;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
- import java.net.URL;
- import java.util.Arrays;
- import java.util.HashMap;
- import java.util.List;
- import java.util.Map;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -51,12 +45,13 @@ public class SeleniumTimingRunner implements TimingRunner {
     @Inject
     public SeleniumTimingRunner(TimingDataCollector browserDataCollector, Provider<WebDriver> driverProvider) {
         this.driverProvider = driverProvider;
-        TimingDataCollector w3cDataCollector = new W3CTimingDataCollector();
+        TimingDataCollector navigationTimingDataCollector = new NavigationTimingDataCollector();
         TimingDataCollector userTimingDataCollector = new UserTimingDataCollector(true);
         TimingDataCollector browserTimeDataCollector = new BrowserTimeDataCollector();
+        TimingDataCollector resourceTimingDataCollector = new ResourceTimingDataCollector();
 
-        this.dataCollectors = Arrays.asList(w3cDataCollector, browserDataCollector,
-                userTimingDataCollector, browserTimeDataCollector);
+        this.dataCollectors = Arrays.asList(navigationTimingDataCollector, browserDataCollector,
+                userTimingDataCollector, browserTimeDataCollector, resourceTimingDataCollector);
     }
 
     @Override
@@ -104,11 +99,7 @@ public class SeleniumTimingRunner implements TimingRunner {
         TimingRun results = new TimingRun();
 
         for (TimingDataCollector collector : dataCollectors) {
-            collector.collectMarks(js, results);
-        }
-
-        for (TimingDataCollector collector : dataCollectors) {
-            collector.collectMeasurements(js, results);
+            collector.collectTimingData(js, results);
         }
 
         return results;
@@ -125,7 +116,7 @@ public class SeleniumTimingRunner implements TimingRunner {
         ExpectedCondition<Boolean> pageLoadCondition = new
                 ExpectedCondition<Boolean>() {
                     public Boolean apply(WebDriver driver) {
-                        return ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
+                        return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
                     }
                 };
         WebDriverWait wait = new WebDriverWait(driver, timeoutSeconds);

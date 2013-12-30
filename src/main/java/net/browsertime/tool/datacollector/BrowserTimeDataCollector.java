@@ -35,7 +35,7 @@ import java.util.Map;
 public class BrowserTimeDataCollector extends TimingDataCollector {
 
     private static final MarkInterval[] intervals = {
-    		// The following is the standard from GA
+            // The following is the standard from GA
             new MarkInterval("domainLookupTime", "domainLookupStart", "domainLookupEnd"),
             new MarkInterval("redirectionTime", "navigationStart", "fetchStart"),
             new MarkInterval("serverConnectionTime", "connectStart", "connectEnd"),
@@ -64,14 +64,18 @@ public class BrowserTimeDataCollector extends TimingDataCollector {
         }
 
         pageInfo.put("userAgent", js.executeScript("return window.navigator.userAgent").toString());
-        List size = (List) js.executeScript("var w=window,d=document,e=d.documentElement,g=d.getElementsByTagName('body')[0]," +
+        List size = listFromJs(js, "var w=window,d=document,e=d.documentElement,g=d.getElementsByTagName('body')[0]," +
                 "x=w.innerWidth||e.clientWidth||g.clientWidth,y=w.innerHeight||e.clientHeight||g.clientHeight;" +
                 "return [x,y];");
         pageInfo.put("windowSize", String.valueOf(size.get(0)) + "x" + String.valueOf(size.get(1)));
+
+        String implementationVersion = getClass().getPackage().getImplementationVersion();
+        implementationVersion = implementationVersion != null ? implementationVersion : "unknown";
+        pageInfo.put("browserTimeVersion", implementationVersion);
     }
 
     @Override
-    public void collectMeasurements(JavascriptExecutor js, TimingRun results) {
+    public void collectTimingData(JavascriptExecutor js, TimingRun results) {
         for (MarkInterval interval : intervals) {
             interval.collectMeasurement(results);
         }
