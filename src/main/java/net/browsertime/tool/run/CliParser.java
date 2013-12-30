@@ -95,7 +95,7 @@ public class CliParser {
             map.put(BrowserConfig.userAgent, ua);
         }
 
-        String proxyHost = commandLine.getOptionValue(proxyHostOption.shortForm);
+        String proxyHost = commandLine.getOptionValue(proxyHostOption.longForm);
         if (proxyHost != null) {
             try {
                 new URI(proxyHost);
