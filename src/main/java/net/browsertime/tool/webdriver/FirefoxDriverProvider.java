@@ -1,39 +1,23 @@
 package net.browsertime.tool.webdriver;
 
-import com.google.inject.Provider;
 import net.browsertime.tool.BrowserConfig;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
 
-public class FirefoxDriverProvider implements Provider<WebDriver> {
-
-    private Map<BrowserConfig, String> browserConfiguration;
+public class FirefoxDriverProvider extends WebDriverProvider {
 
     public FirefoxDriverProvider(Map<BrowserConfig, String> browserConfiguration) {
-        this.browserConfiguration = browserConfiguration;
+        super(browserConfiguration);
     }
 
     @Override
     public WebDriver get() {
         return new FirefoxDriver(createBinary(), createProfile(), createCapabilities());
-    }
-
-    private Capabilities createCapabilities() {
-        DesiredCapabilities c = DesiredCapabilities.firefox();
-
-        Proxy proxy = new Proxy();
-        proxy.setHttpProxy("localhost:4321");
-        c.setCapability(CapabilityType.PROXY, proxy);
-
-        return c;
     }
 
     private FirefoxBinary createBinary() {
@@ -62,5 +46,10 @@ public class FirefoxDriverProvider implements Provider<WebDriver> {
         }
 
         return profile;
+    }
+
+    @Override
+    protected DesiredCapabilities getBrowserCapabilities() {
+        return DesiredCapabilities.firefox();
     }
 }

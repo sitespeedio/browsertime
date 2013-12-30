@@ -1,23 +1,23 @@
 package net.browsertime.tool.webdriver;
 
-import com.google.inject.Provider;
 import net.browsertime.tool.BrowserConfig;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
 
-public class ChromeDriverProvider implements Provider<WebDriver> {
-    private Map<BrowserConfig, String> browserConfiguration;
-
+public class ChromeDriverProvider extends WebDriverProvider {
     public ChromeDriverProvider(Map<BrowserConfig, String> browserConfiguration) {
-        this.browserConfiguration = browserConfiguration;
+        super(browserConfiguration);
     }
 
     @Override
     public WebDriver get() {
-        return new ChromeDriver(createChromeOptions());
+        DesiredCapabilities capabilities = createCapabilities();
+        capabilities.setCapability(ChromeOptions.CAPABILITY, createChromeOptions());
+        return new ChromeDriver(capabilities) ;
     }
 
     private ChromeOptions createChromeOptions() {
@@ -38,5 +38,10 @@ public class ChromeDriverProvider implements Provider<WebDriver> {
         options.addArguments("--window-position=0,0");
 
         return options;
+    }
+
+    @Override
+    protected DesiredCapabilities getBrowserCapabilities() {
+        return DesiredCapabilities.chrome();
     }
 }
