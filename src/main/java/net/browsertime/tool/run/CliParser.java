@@ -1,10 +1,22 @@
 package net.browsertime.tool.run;
 
 import net.browsertime.tool.BrowserConfig;
-import org.apache.commons.cli.*;
+import org.apache.commons.cli.BasicParser;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.Parser;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -83,6 +95,17 @@ public class CliParser {
             map.put(BrowserConfig.userAgent, ua);
         }
 
+        String proxyHost = commandLine.getOptionValue(proxyHostOption.shortForm);
+        if (proxyHost != null) {
+            try {
+                new URI(proxyHost);
+            } catch (URISyntaxException e) {
+                throw new ParseException("Invalid proxy url: " + proxyHost);
+            }
+
+            map.put(BrowserConfig.proxyHost, proxyHost);
+        }
+
         return map;
     }
 
@@ -152,6 +175,7 @@ public class CliParser {
                 .addOption(createOutputOption())
                 .addOption(createTimeoutOption())
                 .addOption(createFormatOption())
+                .addOption(createProxyOption())
                 .addOption(createCompactOption())
                 .addOption(createRawOption())
                 .addOption(createUserAgentOption())
@@ -182,6 +206,12 @@ public class CliParser {
         return createOption(formatOption.shortForm, formatOption.longForm,
                 "The desired output format. Supported values are: " + asList(Format.values()) +
                         ", default being " + DEFAULT_FORMAT + ".");
+    }
+
+    private Option createProxyOption() {
+        return createOption(proxyHostOption.shortForm, proxyHostOption.longForm,
+                "Proxy server host (including optional port) to use for http requests in browser, " +
+                        "e.g. proxy.myserver.com:1234.");
     }
 
     private Option createTimeoutOption() {
@@ -255,6 +285,7 @@ public class CliParser {
         outputOption("o", "output"),
         timeoutOption("t", "timeout"),
         formatOption("f", "format"),
+        proxyHostOption("p", "proxyHost"),
         compactOption(null, "compact"),
         rawOption(null, "raw"),
         userAgentOption("ua", "user-agent"),

@@ -27,10 +27,10 @@ public abstract class WebDriverProvider implements Provider<WebDriver> {
     protected abstract DesiredCapabilities getBrowserCapabilities();
 
     private void setProxyCapability(DesiredCapabilities c) {
-        String proxyUrl = browserConfiguration.get(BrowserConfig.proxyUrl);
-        if (proxyUrl != null) {
+        String proxyHost = browserConfiguration.get(BrowserConfig.proxyHost);
+        if (proxyHost != null) {
             Proxy proxy = new Proxy();
-            proxy.setHttpProxy(proxyUrl);
+            proxy.setHttpProxy(proxyHost);
             c.setCapability(CapabilityType.PROXY, proxy);
         }
     }
