@@ -2,6 +2,8 @@
 
 version 0.5 (NOT YET RELEASED)
 ------------------------
+* Collect resource timing metrics (http://www.w3.org/TR/resource-timing/), included when outputting all metrics using
+  the --raw option.
 * Add support for specifying http proxy, using a new --proxyHost option.
 * Updated maven groupId and Java package name to use net.browsertime instead of com.soulgalore. This does not affect
   users of the command line tool, only programmers embedding the browsertime jar in other tools.
