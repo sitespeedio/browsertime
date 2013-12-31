@@ -234,7 +234,7 @@ public class CliParser {
 
     private Option createUserAgentOption() {
         return createOption(userAgentOption,
-                "Set the user agent. Default is the one by the browser you use. Only works with Chrome.");
+                "Set the user agent. Default is the one by the browser you use. Only works with Chrome and Firefox.");
     }
 
     private Option createWindowSizeOption() {

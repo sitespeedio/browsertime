@@ -32,7 +32,7 @@ usage: browsertime [options] URL
                                   default being 60.
  -ua,--user-agent <USER-AGENT>    Set the user agent. Default is the one
                                   by the browser you use. Only works with
-                                  Chrome.
+                                  Chrome and Firefox.
  -V,--version                     Show version information
  -w,--window-size <WINDOW-SIZE>   The size of the browser window:
                                   <width>x<height>, e.g. 400x600. Only
