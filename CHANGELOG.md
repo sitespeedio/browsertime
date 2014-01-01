@@ -7,7 +7,7 @@ version 0.5 (NOT YET RELEASED)
 * Add support for specifying http proxy, using a new --proxyHost option.
 * Updated maven groupId and Java package name to use net.browsertime instead of com.soulgalore. This does not affect
   users of the command line tool, only programmers embedding the browsertime jar in other tools.
-* Added ignore zoom settings for Internet Explorer
+* Added ignore zoom settings for Internet Explorer and type for msFirstPaint
 * Include browserTimeVersion entry in static page data.
 
 version 0.4 (2013-11-15)
