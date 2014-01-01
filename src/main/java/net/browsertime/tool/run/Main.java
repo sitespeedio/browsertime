@@ -76,7 +76,8 @@ public class Main {
             printSyntaxError("Error creating output file: " + e.getMessage());
         } catch (TimingRunnerException e) {
             commandStatus = ERROR;
-            printSyntaxError("Error occurred while performing timing: " + e.getMessage());
+            // This is something serious, print the stacktrace so we know what is happening
+            e.printStackTrace();
         }
 
         if (shouldShowUsage) {
