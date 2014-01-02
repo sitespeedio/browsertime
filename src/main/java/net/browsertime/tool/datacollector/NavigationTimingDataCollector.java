@@ -64,11 +64,19 @@ public class NavigationTimingDataCollector extends TimingDataCollector {
             Object unknownType = js.executeScript("return "
                     + STANDARD_MARK_PREFIX + markName);
 
+            // TODO make this cleaner
             // When Firefox 25 was released, the function toJSON was added to
             // window.performance.timing. so a String is returned, that's why
             // we now checks the type.
             if (unknownType instanceof Long) {
                 double startTime = (Long) unknownType;
+                if (startTime > 0) {
+                    results.addMark(new TimingMark(markName, startTime));
+                }
+            }
+            // When using IE, the values are doubles
+            else if (unknownType instanceof Double) {
+                double startTime = (Double) unknownType;
                 if (startTime > 0) {
                     results.addMark(new TimingMark(markName, startTime));
                 }
