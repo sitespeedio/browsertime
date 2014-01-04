@@ -23,13 +23,10 @@ package net.browsertime.tool.datacollector;
 import net.browsertime.tool.timings.TimingMark;
 import net.browsertime.tool.timings.TimingMeasurement;
 import net.browsertime.tool.timings.TimingRun;
-
 import org.openqa.selenium.JavascriptExecutor;
 
 import java.util.List;
 import java.util.Map;
-
-import static java.lang.Boolean.TRUE;
 
 /**
  * Superclass for browser specific data collection, subclass as needed.
@@ -51,7 +48,7 @@ public class TimingDataCollector {
      * @return <code>true</code> if the script evaluates to true, <code>false</code> if not.
      */
     boolean booleanFromJs(JavascriptExecutor executor, String script) {
-        return TRUE.equals(executor.executeScript(script));
+        return (Boolean) executor.executeScript(script);
     }
 
     List listFromJs(JavascriptExecutor executor, String script) {
