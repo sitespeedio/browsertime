@@ -32,13 +32,33 @@ import java.util.Map;
  * http://www.w3.org/TR/navigation-timing/
  */
 public class NavigationTimingDataCollector extends TimingDataCollector {
+    private enum NavigationAttributes {
+        navigationStart,
+        unloadEventStart,
+        unloadEventEnd,
+        redirectStart,
+        redirectEnd,
+        fetchStart,
+        domainLookupStart,
+        domainLookupEnd,
+        connectStart,
+        connectEnd,
+        secureConnectionStart,
+        requestStart,
+        responseStart,
+        responseEnd,
+        domLoading,
+        domInteractive,
+        domContentLoadedEventStart,
+        domContentLoadedEventEnd,
+        domComplete,
+        loadEventStart,
+        loadEventEnd
+    }
+
     private static final String STANDARD_MARK_PREFIX = "window.performance.timing.";
 
-    private static final String LIST_STANDARD_MARKS = "var properties = [];\n" +
-            "for (var x in window.performance.timing) {\n" +
-            "  properties.push(x);\n" +
-            "}\n" +
-            "return properties.sort();";
+    private static final String LIST_STANDARD_MARKS = buildMarksListingJavascript();
 
     @Override
     public void collectPageData(JavascriptExecutor js, Map<String, String> pageInfo) {
@@ -57,31 +77,15 @@ public class NavigationTimingDataCollector extends TimingDataCollector {
             return;
         }
 
-        List<String> markNames = listFromJs(js, LIST_STANDARD_MARKS);
+        List<Map> marks = listFromJs(js, LIST_STANDARD_MARKS);
 
-        for (String markName : markNames) {
-
-            Object unknownType = js.executeScript("return "
-                    + STANDARD_MARK_PREFIX + markName);
-
-            // TODO make this cleaner
-            // When Firefox 25 was released, the function toJSON was added to
-            // window.performance.timing. so a String is returned, that's why
-            // we now checks the type.
-            if (unknownType instanceof Long) {
-                double startTime = (Long) unknownType;
-                if (startTime > 0) {
-                    results.addMark(new TimingMark(markName, startTime));
-                }
+        if (marks != null) {
+            for (Map mark : marks) {
+                MapAdapter ma = new MapAdapter(mark);
+                String name = ma.asString("name");
+                double time = ma.asDouble ("time");
+                results.addMark(new TimingMark(name, time));
             }
-            // When using IE, the values are doubles
-            else if (unknownType instanceof Double) {
-                double startTime = (Double) unknownType;
-                if (startTime > 0) {
-                    results.addMark(new TimingMark(markName, startTime));
-                }
-            }
-
         }
     }
 
@@ -91,5 +95,24 @@ public class NavigationTimingDataCollector extends TimingDataCollector {
 
     private boolean isTimingApiSupported(JavascriptExecutor js) {
         return booleanFromJs(js, "return !!(window.performance && window.performance.timing);");
+    }
+
+    /**
+     * A listing that explicitly selects attributes is needed since Firefox 25 adds toJSON as a
+     * property of window.performance.timing, instead of on the __proto__.
+     * @return A javascript that selects a list of objects, one object per navigation mark.
+     */
+    private static String buildMarksListingJavascript() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("var marks = [];").append('\n');
+        for (NavigationAttributes na : NavigationAttributes.values()) {
+            builder.append("var m = {};").append('\n');
+            builder.append("m.name='").append(na.name()).append("';").append('\n');
+            builder.append("m.time=").append(STANDARD_MARK_PREFIX).append(na.name()).append(';').append('\n');
+            builder.append("if (typeof m.time !== 'undefined')").append('\n');
+            builder.append("   ").append("marks.push(m);").append('\n');
+        }
+        builder.append("return marks;");
+        return builder.toString();
     }
 }

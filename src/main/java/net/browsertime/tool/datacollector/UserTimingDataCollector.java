@@ -64,8 +64,9 @@ public class UserTimingDataCollector extends TimingDataCollector {
 
         if (marks != null) {
             for (Map mark : marks) {
-                String name = (String) mark.get("name");
-                double startTime = (Double) mark.get("startTime");
+                MapAdapter ma = new MapAdapter(mark);
+                String name = ma.asString("name");
+                double startTime = ma.asDouble("startTime");
                 results.addMark(new TimingMark(name, startTime));
             }
         }
@@ -83,8 +84,9 @@ public class UserTimingDataCollector extends TimingDataCollector {
 
             if (marks != null) {
                 for (Map mark : marks) {
-                    String name = (String) mark.get("name");
-                    double startTime = (Double) mark.get("startTime");
+                    MapAdapter ma = new MapAdapter(mark);
+                    String name = ma.asString("name");
+                    double startTime = ma.asDouble("startTime");
                     results.addMeasurement(new TimingMeasurement(name, 0, startTime));
                 }
             }
@@ -94,9 +96,10 @@ public class UserTimingDataCollector extends TimingDataCollector {
 
         if (measurements != null) {
             for (Map measurement : measurements) {
-                String name = (String) measurement.get("name");
-                double startTime = (Double) measurement.get("startTime");
-                double duration = (Double) measurement.get("duration");
+                MapAdapter ma = new MapAdapter(measurement);
+                String name = ma.asString("name");
+                double startTime = ma.asDouble("startTime");
+                double duration = ma.asDouble("duration");
                 results.addMeasurement(new TimingMeasurement(name, startTime, duration));
             }
         }
