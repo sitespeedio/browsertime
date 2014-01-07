@@ -2,6 +2,7 @@
 
 version 0.5 (NOT YET RELEASED)
 ------------------------
+* Windows support - Browsertime now ships with a bat file, and Internet Explorer has been confirmed to work.
 * Collect resource timing metrics (http://www.w3.org/TR/resource-timing/), included when outputting all metrics using
   the --raw option.
 * Add support for specifying http proxy, using a new --proxyHost option.

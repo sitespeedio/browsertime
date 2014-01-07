@@ -57,7 +57,7 @@ browsertime -h
 
 1. Download the latest zip or tar.gz release from https://github.com/tobli/browsertime/releases
 
-1. Uncompress and run the browsertime script from the bin folder in the distribution (or add the bin folder to your PATH)
+1. Uncompress and run the browsertime script from the bin folder in the distribution (or add the bin folder to your PATH). For Windows, run the supplied bat file.
 
 
 ### Build from source
@@ -489,7 +489,7 @@ Peter Hedenskog - https://github.com/soulgalore - https://twitter.com/soulislove
 
 ## Copyright and license
 
-Copyright 2013 Tobias Lidskog & Peter Hedenskog under [the Apache 2.0 license](LICENSE).
+Copyright 2014 Tobias Lidskog & Peter Hedenskog under [the Apache 2.0 license](LICENSE).
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/tobli/browsertime/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
