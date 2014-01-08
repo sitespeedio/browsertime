@@ -1,5 +1,8 @@
 # Browsertime changelog
 
+version 0.6 (NOT YET RELEASED)
+------------------------
+
 version 0.5 (2014-01-09)
 ------------------------
 * Windows support - Browsertime now ships with a bat file, and Internet Explorer has been confirmed to work.
