@@ -60,7 +60,9 @@ public class TimingDataCollector {
     }
 
     Double doubleFromJs(JavascriptExecutor executor, String script) {
-        return (Double) executor.executeScript(script);
+        // Extract object since Selenium returns a Long whenever 0 is returned by a script.
+        Object o = executor.executeScript(script);
+        return Double.parseDouble(o.toString());
     }
 
     final static class MarkInterval {
