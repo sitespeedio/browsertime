@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-version 0.5 (NOT YET RELEASED)
+version 0.5 (2014-01-09)
 ------------------------
 * Windows support - Browsertime now ships with a bat file, and Internet Explorer has been confirmed to work.
 * Collect resource timing metrics (http://www.w3.org/TR/resource-timing/), included when outputting all metrics using
