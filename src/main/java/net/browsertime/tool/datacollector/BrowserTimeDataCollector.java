@@ -63,7 +63,7 @@ public class BrowserTimeDataCollector extends TimingDataCollector {
             pageInfo.put("platform", caps.getPlatform().name());
         }
 
-        pageInfo.put("userAgent", js.executeScript("return window.navigator.userAgent").toString());
+        pageInfo.put("userAgent", stringFromJs(js, "return window.navigator.userAgent"));
         List size = listFromJs(js, "var w=window,d=document,e=d.documentElement,g=d.getElementsByTagName('body')[0]," +
                 "x=w.innerWidth||e.clientWidth||g.clientWidth,y=w.innerHeight||e.clientHeight||g.clientHeight;" +
                 "return [x,y];");

@@ -51,6 +51,10 @@ public class TimingDataCollector {
         return (Boolean) executor.executeScript(script);
     }
 
+    String stringFromJs(JavascriptExecutor executor, String script) {
+        return (String) executor.executeScript(script);
+    }
+
     List listFromJs(JavascriptExecutor executor, String script) {
         return (List) executor.executeScript(script);
     }
