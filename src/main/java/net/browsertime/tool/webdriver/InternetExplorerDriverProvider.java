@@ -8,20 +8,20 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.util.Map;
 
 public class InternetExplorerDriverProvider extends WebDriverProvider {
-    public InternetExplorerDriverProvider(Map<BrowserConfig, String> browserConfiguration) {
-        super(browserConfiguration);
-    }
+  public InternetExplorerDriverProvider(Map<BrowserConfig, String> browserConfiguration) {
+    super(browserConfiguration);
+  }
 
-    @Override
-    public WebDriver get() {
-        DesiredCapabilities capabilities = createCapabilities();
-        capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
-        capabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
-        return new InternetExplorerDriver(capabilities);
-    }
+  @Override
+  public WebDriver get() {
+    DesiredCapabilities capabilities = createCapabilities();
+    capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+    capabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
+    return new InternetExplorerDriver(capabilities);
+  }
 
-    @Override
-    protected DesiredCapabilities getBrowserCapabilities() {
-        return DesiredCapabilities.internetExplorer();
-    }
+  @Override
+  protected DesiredCapabilities getBrowserCapabilities() {
+    return DesiredCapabilities.internetExplorer();
+  }
 }

@@ -10,28 +10,28 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.util.Map;
 
 abstract class WebDriverProvider implements Provider<WebDriver> {
-    final Map<BrowserConfig, String> browserConfiguration;
+  final Map<BrowserConfig, String> browserConfiguration;
 
-    WebDriverProvider(Map<BrowserConfig, String> browserConfiguration) {
-        this.browserConfiguration = browserConfiguration;
+  WebDriverProvider(Map<BrowserConfig, String> browserConfiguration) {
+    this.browserConfiguration = browserConfiguration;
+  }
+
+  DesiredCapabilities createCapabilities() {
+    DesiredCapabilities c = getBrowserCapabilities();
+
+    setProxyCapability(c);
+
+    return c;
+  }
+
+  protected abstract DesiredCapabilities getBrowserCapabilities();
+
+  private void setProxyCapability(DesiredCapabilities c) {
+    String proxyHost = browserConfiguration.get(BrowserConfig.proxyHost);
+    if (proxyHost != null) {
+      Proxy proxy = new Proxy();
+      proxy.setHttpProxy(proxyHost);
+      c.setCapability(CapabilityType.PROXY, proxy);
     }
-
-    DesiredCapabilities createCapabilities() {
-        DesiredCapabilities c = getBrowserCapabilities();
-
-        setProxyCapability(c);
-
-        return c;
-    }
-
-    protected abstract DesiredCapabilities getBrowserCapabilities();
-
-    private void setProxyCapability(DesiredCapabilities c) {
-        String proxyHost = browserConfiguration.get(BrowserConfig.proxyHost);
-        if (proxyHost != null) {
-            Proxy proxy = new Proxy();
-            proxy.setHttpProxy(proxyHost);
-            c.setCapability(CapabilityType.PROXY, proxy);
-        }
-    }
+  }
 }
