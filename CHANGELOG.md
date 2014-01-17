@@ -2,6 +2,7 @@
 
 version 0.6 (NOT YET RELEASED)
 ------------------------
+* Fix crash while trying to run resource timing measurements in Firefox.
 
 version 0.5 (2014-01-09)
 ------------------------
