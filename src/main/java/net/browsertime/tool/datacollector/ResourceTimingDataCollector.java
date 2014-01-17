@@ -45,7 +45,7 @@ public class ResourceTimingDataCollector extends TimingDataCollector {
   @Override
   @SuppressWarnings("unchecked")
   public void collectTimingData(JavascriptExecutor js, TimingRun results) {
-    if (!isPageDefinedTimingsSupported(js)) {
+    if (!isResourceTimingsSupported(js)) {
       return;
     }
 
@@ -78,7 +78,7 @@ public class ResourceTimingDataCollector extends TimingDataCollector {
     }
   }
 
-  private boolean isPageDefinedTimingsSupported(JavascriptExecutor js) {
+  private boolean isResourceTimingsSupported(JavascriptExecutor js) {
     return booleanFromJs(js,
         "return !!(window.performance && window.performance.getEntriesByType);");
   }
@@ -94,6 +94,7 @@ public class ResourceTimingDataCollector extends TimingDataCollector {
     builder.append("var resources = [];").append('\n');
     builder.append("var entries = window.performance.getEntriesByType('resource');").append('\n');
 
+    builder.append("if (!! entries) {").append('\n');
     builder.append("for (var i = 0; i < entries.length; i++) {").append('\n');
     builder.append("var r = {};").append('\n');
 
@@ -104,6 +105,7 @@ public class ResourceTimingDataCollector extends TimingDataCollector {
 
     builder.append("resources.push(r);").append('\n');
 
+    builder.append("}").append('\n');
     builder.append("}").append('\n');
 
     builder.append("return resources;");
