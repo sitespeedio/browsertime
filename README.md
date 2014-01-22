@@ -1,6 +1,6 @@
 # Browsertime [![Build Status](https://travis-ci.org/tobli/browsertime.png?branch=master)](https://travis-ci.org/tobli/browsertime)
 
-Guess what? It's browser time! Fetch timings (like the Navigation Timing API data) and other data from your browser (inspired by [wbench](https://github.com/desktoppr/wbench)).
+Guess what? It's browser time! Fetch timings ([Navigation Timing API](http://kaaes.github.io/timing/info.html) and [User Timing](http://www.html5rocks.com/en/tutorials/webperformance/usertiming/)) and other data from your browser (inspired by [wbench](https://github.com/desktoppr/wbench)).
 
 
 ## Usage
