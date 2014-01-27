@@ -18,8 +18,9 @@ public class ChromeDriverProvider extends WebDriverProvider {
   public void validateProvider() throws WebDriverValidationException {
     String path = CommandLine.find("chromedriver");
     if (path == null) {
-      throw new WebDriverValidationException("Can't find chromedriver. "
-          + "Download it from http://chromedriver.storage.googleapis.com/index.html and place it in your PATH.");
+      throw new WebDriverValidationException(
+          "Can't find chromedriver. "
+              + "Download it from http://chromedriver.storage.googleapis.com/index.html and place it in your PATH.");
     }
   }
 

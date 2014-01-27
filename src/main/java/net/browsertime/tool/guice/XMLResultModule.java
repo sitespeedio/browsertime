@@ -35,6 +35,6 @@ public class XMLResultModule extends AbstractModule {
   @Override
   protected void configure() {
     install(new FactoryModuleBuilder().implement(Serializer.class, XmlSerializer.class).build(
-            SerializerFactory.class));
+        SerializerFactory.class));
   }
 }

@@ -17,8 +17,9 @@ public class InternetExplorerDriverProvider extends WebDriverProvider {
   public void validateProvider() throws WebDriverValidationException {
     String path = CommandLine.find("IEDriverServer");
     if (path == null) {
-      throw new WebDriverValidationException("Can't find IEDriverServer. "
-          + "Download it from http://code.google.com/p/selenium/downloads/list and place it in your PATH.");
+      throw new WebDriverValidationException(
+          "Can't find IEDriverServer. "
+              + "Download it from http://code.google.com/p/selenium/downloads/list and place it in your PATH.");
     }
   }
 

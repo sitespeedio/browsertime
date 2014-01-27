@@ -22,7 +22,7 @@ public class FirefoxDriverProvider extends WebDriverProvider {
       new FirefoxBinary();
     } catch (WebDriverException e) {
       throw new WebDriverValidationException("Can't find Firefox. "
-              + "Download it from http://getfirefox.com");
+          + "Download it from http://getfirefox.com");
     }
   }
 
