@@ -1,5 +1,7 @@
 .classpath
 .project
+*.iml
+.idea
 .settings/
 target
 chromedriver.log
