@@ -9,18 +9,18 @@ import java.util.Map;
  *
  */
 public class TimingConfig {
-    // tool options
-    public boolean verbose;
+  // tool options
+  public boolean verbose;
 
-    // measurement options
-    public int numIterations = 1;
-    public Browser browser;
-    public Map<BrowserConfig, String> browserOptions;
-    public int timeoutSeconds;
+  // measurement options
+  public int numIterations = 1;
+  public Browser browser;
+  public Map<BrowserConfig, String> browserOptions;
+  public int timeoutSeconds;
 
-    // output config
-    public Format format;
-    public Writer outputWriter;
-    public boolean shouldPrettyPrint;
-    public boolean shouldIncludeRuns;
+  // output config
+  public Format format;
+  public Writer outputWriter;
+  public boolean shouldPrettyPrint;
+  public boolean shouldIncludeRuns;
 }
