@@ -26,7 +26,7 @@ import net.browsertime.tool.BrowserConfig;
 import net.browsertime.tool.datacollector.InternetExplorerDataCollector;
 import net.browsertime.tool.datacollector.TimingDataCollector;
 import net.browsertime.tool.webdriver.InternetExplorerDriverProvider;
-import org.openqa.selenium.WebDriver;
+import net.browsertime.tool.webdriver.WebDriverProvider;
 
 import java.util.Map;
 
@@ -42,7 +42,8 @@ public class InternetExplorerModule extends AbstractBrowserModule {
   @Override
   protected void configure() {
     super.configure();
-    bind(WebDriver.class).toProvider(new InternetExplorerDriverProvider(browserConfiguration));
+    bind(WebDriverProvider.class).toInstance(
+        new InternetExplorerDriverProvider(browserConfiguration));
     bind(TimingDataCollector.class).to(InternetExplorerDataCollector.class);
   }
 }

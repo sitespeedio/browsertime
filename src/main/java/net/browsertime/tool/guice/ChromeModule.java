@@ -28,7 +28,7 @@ import net.browsertime.tool.BrowserConfig;
 import net.browsertime.tool.datacollector.ChromeDataCollector;
 import net.browsertime.tool.datacollector.TimingDataCollector;
 import net.browsertime.tool.webdriver.ChromeDriverProvider;
-import org.openqa.selenium.WebDriver;
+import net.browsertime.tool.webdriver.WebDriverProvider;
 
 import java.util.Map;
 
@@ -43,7 +43,7 @@ public class ChromeModule extends AbstractBrowserModule {
   @Override
   protected void configure() {
     super.configure();
-    bind(WebDriver.class).toProvider(new ChromeDriverProvider(browserConfiguration));
+    bind(WebDriverProvider.class).toInstance(new ChromeDriverProvider(browserConfiguration));
     bind(TimingDataCollector.class).to(ChromeDataCollector.class);
   }
 }

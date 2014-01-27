@@ -9,14 +9,14 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
 
-abstract class WebDriverProvider implements Provider<WebDriver> {
+abstract public class WebDriverProvider implements Provider<WebDriver> {
   final Map<BrowserConfig, String> browserConfiguration;
 
   WebDriverProvider(Map<BrowserConfig, String> browserConfiguration) {
     this.browserConfiguration = browserConfiguration;
   }
 
-  DesiredCapabilities createCapabilities() {
+  protected DesiredCapabilities createCapabilities() {
     DesiredCapabilities c = getBrowserCapabilities();
 
     setProxyCapability(c);
@@ -25,6 +25,13 @@ abstract class WebDriverProvider implements Provider<WebDriver> {
   }
 
   protected abstract DesiredCapabilities getBrowserCapabilities();
+
+  /**
+   * Validate that the provider can run, e.g. that external dependencies as fulfilled.
+   * 
+   * @throws WebDriverValidationException if provider isn't able to run.
+   */
+  public abstract void validateProvider() throws WebDriverValidationException;
 
   private void setProxyCapability(DesiredCapabilities c) {
     String proxyHost = browserConfiguration.get(BrowserConfig.proxyHost);

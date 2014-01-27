@@ -23,7 +23,7 @@
 package net.browsertime.tool.timingrunner;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import net.browsertime.tool.BrowserTimeException;
 import net.browsertime.tool.datacollector.BrowserTimeDataCollector;
 import net.browsertime.tool.datacollector.NavigationTimingDataCollector;
 import net.browsertime.tool.datacollector.ResourceTimingDataCollector;
@@ -31,6 +31,7 @@ import net.browsertime.tool.datacollector.TimingDataCollector;
 import net.browsertime.tool.datacollector.UserTimingDataCollector;
 import net.browsertime.tool.timings.TimingRun;
 import net.browsertime.tool.timings.TimingSession;
+import net.browsertime.tool.webdriver.WebDriverProvider;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -48,12 +49,12 @@ import java.util.Map;
  *
  */
 public class SeleniumTimingRunner implements TimingRunner {
-  private final Provider<WebDriver> driverProvider;
+  private final WebDriverProvider driverProvider;
   private final List<TimingDataCollector> dataCollectors;
 
   @Inject
   public SeleniumTimingRunner(TimingDataCollector browserDataCollector,
-      Provider<WebDriver> driverProvider) {
+      WebDriverProvider driverProvider) {
     this.driverProvider = driverProvider;
     TimingDataCollector navigationTimingDataCollector = new NavigationTimingDataCollector();
     TimingDataCollector userTimingDataCollector = new UserTimingDataCollector(true);
@@ -67,8 +68,10 @@ public class SeleniumTimingRunner implements TimingRunner {
 
   @Override
   public TimingSession run(URL url, int numIterations, int timeoutSeconds)
-      throws TimingRunnerException {
+      throws BrowserTimeException {
     try {
+      driverProvider.validateProvider();
+
       TimingSession session = new TimingSession();
       boolean hasCollectedPageData = false;
       for (int i = 0; i < numIterations; i++) {

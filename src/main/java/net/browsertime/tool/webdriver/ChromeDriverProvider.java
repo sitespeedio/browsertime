@@ -4,6 +4,7 @@ import net.browsertime.tool.BrowserConfig;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.os.CommandLine;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
@@ -11,6 +12,15 @@ import java.util.Map;
 public class ChromeDriverProvider extends WebDriverProvider {
   public ChromeDriverProvider(Map<BrowserConfig, String> browserConfiguration) {
     super(browserConfiguration);
+  }
+
+  @Override
+  public void validateProvider() throws WebDriverValidationException {
+    String path = CommandLine.find("chromedriver");
+    if (path == null) {
+      throw new WebDriverValidationException("Can't find chromedriver. "
+          + "Download it from http://chromedriver.storage.googleapis.com/index.html and place it in your PATH.");
+    }
   }
 
   @Override

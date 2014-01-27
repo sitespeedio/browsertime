@@ -24,7 +24,7 @@ package net.browsertime.tool.guice;
 
 import net.browsertime.tool.BrowserConfig;
 import net.browsertime.tool.webdriver.FirefoxDriverProvider;
-import org.openqa.selenium.WebDriver;
+import net.browsertime.tool.webdriver.WebDriverProvider;
 
 import java.util.Map;
 
@@ -40,7 +40,6 @@ public class FireFoxModule extends AbstractBrowserModule {
   @Override
   protected void configure() {
     super.configure();
-
-    bind(WebDriver.class).toProvider(new FirefoxDriverProvider(browserConfiguration));
+    bind(WebDriverProvider.class).toInstance(new FirefoxDriverProvider(browserConfiguration));
   }
 }

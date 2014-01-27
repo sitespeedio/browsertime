@@ -22,6 +22,7 @@
  */
 package net.browsertime.tool.timingrunner;
 
+import net.browsertime.tool.BrowserTimeException;
 import net.browsertime.tool.timings.TimingSession;
 
 import java.net.URL;
@@ -31,6 +32,6 @@ import java.net.URL;
  */
 public interface TimingRunner {
 
-  TimingSession run(URL url, int numIterations, int timeoutSeconds) throws TimingRunnerException;
+  TimingSession run(URL url, int numIterations, int timeoutSeconds) throws BrowserTimeException;
 
 }

@@ -25,6 +25,7 @@ package net.browsertime.tool.run;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import net.browsertime.tool.BrowserTimeException;
 import net.browsertime.tool.guice.ChromeModule;
 import net.browsertime.tool.guice.FireFoxModule;
 import net.browsertime.tool.guice.InternetExplorerModule;
@@ -33,8 +34,8 @@ import net.browsertime.tool.guice.XMLResultModule;
 import net.browsertime.tool.serializer.Serializer;
 import net.browsertime.tool.serializer.SerializerFactory;
 import net.browsertime.tool.timingrunner.TimingRunner;
-import net.browsertime.tool.timingrunner.TimingRunnerException;
 import net.browsertime.tool.timings.TimingSession;
+import net.browsertime.tool.webdriver.WebDriverValidationException;
 import org.apache.commons.cli.ParseException;
 
 import java.io.IOException;
@@ -80,7 +81,10 @@ public class Main {
     } catch (IOException e) {
       commandStatus = ERROR;
       printSyntaxError("Error creating output file: " + e.getMessage());
-    } catch (TimingRunnerException e) {
+    } catch (WebDriverValidationException e) {
+      commandStatus = ERROR;
+      printSyntaxError(e.getMessage());
+    } catch (BrowserTimeException e) {
       commandStatus = ERROR;
       // This is something serious, print the stacktrace so we know what is happening
       e.printStackTrace();
@@ -93,7 +97,7 @@ public class Main {
     return commandStatus;
   }
 
-  private void run(URL url, TimingConfig config) throws IOException {
+  private void run(URL url, TimingConfig config) throws IOException, BrowserTimeException {
     Injector injector = createInjector(config);
 
     TimingRunner timingRunner = injector.getInstance(TimingRunner.class);

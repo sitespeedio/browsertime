@@ -2,6 +2,7 @@ package net.browsertime.tool.webdriver;
 
 import net.browsertime.tool.BrowserConfig;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -13,6 +14,16 @@ public class FirefoxDriverProvider extends WebDriverProvider {
 
   public FirefoxDriverProvider(Map<BrowserConfig, String> browserConfiguration) {
     super(browserConfiguration);
+  }
+
+  @Override
+  public void validateProvider() throws WebDriverValidationException {
+    try {
+      new FirefoxBinary();
+    } catch (WebDriverException e) {
+      throw new WebDriverValidationException("Can't find Firefox. "
+              + "Download it from http://getfirefox.com");
+    }
   }
 
   @Override
