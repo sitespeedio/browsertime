@@ -11,6 +11,7 @@ import static net.browsertime.tool.run.CliParser.OptionString.proxyHostOption;
 import static net.browsertime.tool.run.CliParser.OptionString.rawOption;
 import static net.browsertime.tool.run.CliParser.OptionString.timeoutOption;
 import static net.browsertime.tool.run.CliParser.OptionString.userAgentOption;
+import static net.browsertime.tool.run.CliParser.OptionString.verboseOption;
 import static net.browsertime.tool.run.CliParser.OptionString.versionOption;
 import static net.browsertime.tool.run.CliParser.OptionString.windowSizeOption;
 
@@ -43,9 +44,8 @@ public class CliParser {
   private static final Format DEFAULT_FORMAT = Format.xml;
   private static final int DEFAULT_TIMEOUT_SECONDS = 60;
   private static final int DEFAULT_NUMBER_OF_ITERATIONS = 3;
-
-  private CommandLine commandLine;
   private final Options options;
+  private CommandLine commandLine;
 
   public CliParser() {
     options = createCliOptions();
@@ -187,7 +187,7 @@ public class CliParser {
         .addOption(createFormatOption()).addOption(createProxyOption())
         .addOption(createCompactOption()).addOption(createRawOption())
         .addOption(createUserAgentOption()).addOption(createWindowSizeOption())
-        .addOption(createVerboseOption()).addOption(createVersionOption());
+        .addOption(createVerboseOption()).addOption(createVersionOption())
         .addOption(createHelpOption()).addOption(createVersionOption());
   }
 
@@ -258,7 +258,7 @@ public class CliParser {
 
   private Option createVerboseOption() {
     Option option =
-        createOption("v", "verbose",
+        createOption(verboseOption,
             "Turn on verbose output, reporting progress as browsertime runs.");
     option.setArgs(0);
     return option;
@@ -298,7 +298,8 @@ public class CliParser {
     iterationsOption("n", "times"), browserOption("b", "browser"), outputOption("o", "output"), timeoutOption(
         "t", "timeout"), formatOption("f", "format"), proxyHostOption("p", "proxyHost"), compactOption(
         null, "compact"), rawOption(null, "raw"), userAgentOption("ua", "user-agent"), windowSizeOption(
-        "w", "window-size"), helpOption("h", "help"), versionOption("V", "version");
+        "w", "window-size"), verboseOption("v", "verbose"), helpOption("h", "help"), versionOption(
+        "V", "version");
 
 
     public final String shortForm;
