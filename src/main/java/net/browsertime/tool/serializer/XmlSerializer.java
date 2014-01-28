@@ -68,7 +68,7 @@ public class XmlSerializer implements Serializer {
   }
 
   public static class TimingRunXmlAdapter extends XmlAdapter<TimingRun, TimingRun> {
-    private boolean include;
+    private final boolean include;
 
     public TimingRunXmlAdapter(boolean include) {
       this.include = include;

@@ -23,8 +23,7 @@
 package net.browsertime.tool.timingrunner;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.name.Named;
+import net.browsertime.tool.BrowserTimeException;
 import net.browsertime.tool.datacollector.BrowserTimeDataCollector;
 import net.browsertime.tool.datacollector.NavigationTimingDataCollector;
 import net.browsertime.tool.datacollector.ResourceTimingDataCollector;
@@ -32,6 +31,7 @@ import net.browsertime.tool.datacollector.TimingDataCollector;
 import net.browsertime.tool.datacollector.UserTimingDataCollector;
 import net.browsertime.tool.timings.TimingRun;
 import net.browsertime.tool.timings.TimingSession;
+import net.browsertime.tool.webdriver.WebDriverProvider;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -49,13 +49,13 @@ import java.util.Map;
  *
  */
 public class SeleniumTimingRunner implements TimingRunner {
-  private final Provider<WebDriver> driverProvider;
+  private final WebDriverProvider driverProvider;
   private final List<TimingDataCollector> dataCollectors;
-  private final boolean verbose;
 
   @Inject
   public SeleniumTimingRunner(TimingDataCollector browserDataCollector,
-      Provider<WebDriver> driverProvider, @Named("verbose") boolean verbose) {
+      WebDriverProvider driverProvider) {
+    this.driverProvider = driverProvider;
     TimingDataCollector navigationTimingDataCollector = new NavigationTimingDataCollector();
     TimingDataCollector userTimingDataCollector = new UserTimingDataCollector(true);
     TimingDataCollector browserTimeDataCollector = new BrowserTimeDataCollector();
@@ -64,14 +64,14 @@ public class SeleniumTimingRunner implements TimingRunner {
     this.dataCollectors =
         Arrays.asList(navigationTimingDataCollector, browserDataCollector, userTimingDataCollector,
             browserTimeDataCollector, resourceTimingDataCollector);
-    this.driverProvider = driverProvider;
-    this.verbose = verbose;
   }
 
   @Override
   public TimingSession run(URL url, int numIterations, int timeoutSeconds)
-      throws TimingRunnerException {
+      throws BrowserTimeException {
     try {
+      driverProvider.validateProvider();
+
       TimingSession session = new TimingSession();
       boolean hasCollectedPageData = false;
       for (int i = 0; i < numIterations; i++) {
@@ -114,7 +114,6 @@ public class SeleniumTimingRunner implements TimingRunner {
   private TimingRun collectTimingData(JavascriptExecutor js) {
     TimingRun results = new TimingRun();
 
-    printStatus("Collecting timing data");
     for (TimingDataCollector collector : dataCollectors) {
       collector.collectTimingData(js, results);
     }
@@ -124,16 +123,9 @@ public class SeleniumTimingRunner implements TimingRunner {
 
   private JavascriptExecutor fetchUrl(WebDriver driver, URL url, int timeoutSeconds) {
     String urlString = url.toString();
-    printStatus("Fetching url: " + urlString);
     driver.get(urlString);
     waitForLoad(driver, timeoutSeconds);
     return (JavascriptExecutor) driver;
-  }
-
-  private void printStatus(String s) {
-    if (verbose) {
-      System.err.println(s);
-    }
   }
 
   private void waitForLoad(WebDriver driver, int timeoutSeconds) {

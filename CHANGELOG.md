@@ -1,9 +1,21 @@
 # Browsertime changelog
 
-version 0.5 (NOT YET RELEASED)
+version 0.6 (NOT YET RELEASED)
 ------------------------
+* Fix crash while trying to run resource timing measurements in Firefox.
+* Provide better error messages if chromedriver, IEDriverServer or Firefox is missing.
+* Upgraded to latest version of Selenium, for (hopefully) increased stability in the interaction with browsers.
+
+version 0.5 (2014-01-09)
+------------------------
+* Windows support - Browsertime now ships with a bat file, and Internet Explorer has been confirmed to work.
+* Collect resource timing metrics (http://www.w3.org/TR/resource-timing/), included when outputting all metrics using
+  the --raw option.
+* Add support for specifying http proxy, using a new --proxyHost option.
 * Updated maven groupId and Java package name to use net.browsertime instead of com.soulgalore. This does not affect
   users of the command line tool, only programmers embedding the browsertime jar in other tools.
+* Added ignore zoom settings for Internet Explorer and type for msFirstPaint
+* Include browserTimeVersion entry in static page data.
 
 version 0.4 (2013-11-15)
 ------------------------

@@ -79,8 +79,8 @@ public class TimingRun {
     resourceMeasurements.add(measurement);
   }
 
-  @XmlElementWrapper(name = "resourceMeasurements")
-  @XmlElement(name = "measurement")
+  @XmlElementWrapper(name = "resources")
+  @XmlElement(name = "resource")
   public List<TimingResourceMeasurement> getResourceMeasurements() {
     Collections.sort(resourceMeasurements); // sort in time order
     return Collections.unmodifiableList(resourceMeasurements);

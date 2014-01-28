@@ -151,6 +151,7 @@ public class TimingResourceMeasurement extends TimingMark
     return getStartTime() + getDuration();
   }
 
+  @SuppressWarnings("UnusedDeclaration")
   private TimingResourceMeasurement() {
     super(null, 0);
     initiatorType = null;

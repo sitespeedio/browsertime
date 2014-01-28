@@ -36,13 +36,16 @@ import java.util.Map;
  * decimal part)
  */
 public class ResourceTimingDataCollector extends TimingDataCollector {
-  private static final String LIST_RESOURCES =
-      "return window.performance.getEntriesByType('resource');";
+  private enum ResourceTimingAttributes {
+    name, entryType, startTime, duration, initiatorType, redirectStart, redirectEnd, fetchStart, domainLookupStart, domainLookupEnd, connectStart, connectEnd, secureConnectionStart, requestStart, responseStart, responseEnd
+  }
+
+  private static final String LIST_RESOURCES = buildResourceListingJavascript();
 
   @Override
   @SuppressWarnings("unchecked")
   public void collectTimingData(JavascriptExecutor js, TimingRun results) {
-    if (!isPageDefinedTimingsSupported(js)) {
+    if (!isResourceTimingsSupported(js)) {
       return;
     }
 
@@ -50,22 +53,23 @@ public class ResourceTimingDataCollector extends TimingDataCollector {
 
     if (resources != null && !resources.isEmpty()) {
       for (Map resource : resources) {
-        DoubleAdapter da = new DoubleAdapter(resource);
-        String name = (String) resource.get("name");
-        String initiatorType = (String) resource.get("initiatorType");
-        double startTime = da.asDouble("startTime");
-        double duration = da.asDouble("duration");
-        double redirectStart = da.asDouble("redirectStart");
-        double redirectEnd = da.asDouble("redirectEnd");
-        double fetchStart = da.asDouble("fetchStart");
-        double domainLookupStart = da.asDouble("domainLookupStart");
-        double domainLookupEnd = da.asDouble("domainLookupEnd");
-        double connectStart = da.asDouble("connectStart");
-        double connectEnd = da.asDouble("connectEnd");
-        double secureConnectionStart = da.asDouble("secureConnectionStart");
-        double requestStart = da.asDouble("requestStart");
-        double responseStart = da.asDouble("responseStart");
-        double responseEnd = da.asDouble("responseEnd");
+        MapAdapter ma = new MapAdapter(resource);
+        String name = ma.asString(ResourceTimingAttributes.name.name());
+        String initiatorType = ma.asString(ResourceTimingAttributes.initiatorType.name());
+        double startTime = ma.asDouble(ResourceTimingAttributes.startTime.name());
+        double duration = ma.asDouble(ResourceTimingAttributes.duration.name());
+        double redirectStart = ma.asDouble(ResourceTimingAttributes.redirectStart.name());
+        double redirectEnd = ma.asDouble(ResourceTimingAttributes.redirectEnd.name());
+        double fetchStart = ma.asDouble(ResourceTimingAttributes.fetchStart.name());
+        double domainLookupStart = ma.asDouble(ResourceTimingAttributes.domainLookupStart.name());
+        double domainLookupEnd = ma.asDouble(ResourceTimingAttributes.domainLookupEnd.name());
+        double connectStart = ma.asDouble(ResourceTimingAttributes.connectStart.name());
+        double connectEnd = ma.asDouble(ResourceTimingAttributes.connectEnd.name());
+        double secureConnectionStart =
+            ma.asDouble(ResourceTimingAttributes.secureConnectionStart.name());
+        double requestStart = ma.asDouble(ResourceTimingAttributes.requestStart.name());
+        double responseStart = ma.asDouble(ResourceTimingAttributes.responseStart.name());
+        double responseEnd = ma.asDouble(ResourceTimingAttributes.responseEnd.name());
         results.addResourceMeasurement(new TimingResourceMeasurement(name, startTime,
             initiatorType, duration, redirectStart, redirectEnd, fetchStart, domainLookupStart,
             domainLookupEnd, connectStart, connectEnd, secureConnectionStart, requestStart,
@@ -74,25 +78,38 @@ public class ResourceTimingDataCollector extends TimingDataCollector {
     }
   }
 
-  private boolean isPageDefinedTimingsSupported(JavascriptExecutor js) {
+  private boolean isResourceTimingsSupported(JavascriptExecutor js) {
     return booleanFromJs(js,
         "return !!(window.performance && window.performance.getEntriesByType);");
   }
 
   /**
-   * Helper class to simplify reading time stamps from browsers. Since 0 is interpreted by Selenium
-   * as an integer, it's represented as a Long. This class avoids ClassCastExceptions when reading
-   * all data as doubles.
+   * A listing that explicitly selects attributes is needed since IE adds constructor as a property
+   * of a PerformanceResourceTiming object.
+   * 
+   * @return A javascript that selects a list of objects, one object per resource.
    */
-  private static class DoubleAdapter {
-    private final Map map;
+  private static String buildResourceListingJavascript() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("var resources = [];").append('\n');
+    builder.append("var entries = window.performance.getEntriesByType('resource');").append('\n');
 
-    DoubleAdapter(Map map) {
-      this.map = map;
+    builder.append("if (!! entries) {").append('\n');
+    builder.append("for (var i = 0; i < entries.length; i++) {").append('\n');
+    builder.append("var r = {};").append('\n');
+
+    for (ResourceTimingAttributes ra : ResourceTimingAttributes.values()) {
+      builder.append("r.").append(ra.name()).append(" = entries[i].").append(ra.name()).append(";")
+          .append('\n');
     }
 
-    double asDouble(String key) {
-      return Double.parseDouble(map.get(key).toString());
-    }
+    builder.append("resources.push(r);").append('\n');
+
+    builder.append("}").append('\n');
+    builder.append("}").append('\n');
+
+    builder.append("return resources;");
+    return builder.toString();
   }
+
 }

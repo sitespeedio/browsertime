@@ -51,6 +51,7 @@ public class TimingMeasurement extends TimingMark implements Comparable<TimingMe
     return getStartTime() + getDuration();
   }
 
+  @SuppressWarnings("UnusedDeclaration")
   private TimingMeasurement() {
     super(null, 0);
     duration = 0;

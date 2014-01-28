@@ -38,7 +38,7 @@ public class InternetExplorerDataCollector extends TimingDataCollector {
   }
 
   private void collectMarks(JavascriptExecutor js, TimingRun results) {
-    Long time = longFromJs(js, "return window.performance.timing.msFirstPaint");
+    Double time = doubleFromJs(js, "return window.performance.timing.msFirstPaint");
     results.addMark(new TimingMark("msFirstPaint", time));
   }
 

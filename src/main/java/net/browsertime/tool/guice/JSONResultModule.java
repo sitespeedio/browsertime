@@ -35,6 +35,6 @@ public class JSONResultModule extends AbstractModule {
   @Override
   protected void configure() {
     install(new FactoryModuleBuilder().implement(Serializer.class, JsonSerializer.class).build(
-            SerializerFactory.class));
+        SerializerFactory.class));
   }
 }

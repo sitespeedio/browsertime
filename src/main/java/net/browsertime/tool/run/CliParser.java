@@ -7,6 +7,7 @@ import static net.browsertime.tool.run.CliParser.OptionString.formatOption;
 import static net.browsertime.tool.run.CliParser.OptionString.helpOption;
 import static net.browsertime.tool.run.CliParser.OptionString.iterationsOption;
 import static net.browsertime.tool.run.CliParser.OptionString.outputOption;
+import static net.browsertime.tool.run.CliParser.OptionString.proxyHostOption;
 import static net.browsertime.tool.run.CliParser.OptionString.rawOption;
 import static net.browsertime.tool.run.CliParser.OptionString.timeoutOption;
 import static net.browsertime.tool.run.CliParser.OptionString.userAgentOption;
@@ -28,6 +29,8 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,10 +39,10 @@ import java.util.Map;
  *
  */
 public class CliParser {
-  public static final Browser DEFAULT_BROWSER = Browser.firefox;
-  public static final Format DEFAULT_FORMAT = Format.xml;
-  public static final int DEFAULT_TIMEOUT_SECONDS = 60;
-  public static final int DEFAULT_NUMBER_OF_ITERATIONS = 3;
+  private static final Browser DEFAULT_BROWSER = Browser.firefox;
+  private static final Format DEFAULT_FORMAT = Format.xml;
+  private static final int DEFAULT_TIMEOUT_SECONDS = 60;
+  private static final int DEFAULT_NUMBER_OF_ITERATIONS = 3;
 
   private CommandLine commandLine;
   private final Options options;
@@ -103,6 +106,17 @@ public class CliParser {
     String ua = commandLine.getOptionValue(userAgentOption.longForm);
     if (ua != null) {
       map.put(BrowserConfig.userAgent, ua);
+    }
+
+    String proxyHost = commandLine.getOptionValue(proxyHostOption.longForm);
+    if (proxyHost != null) {
+      try {
+        new URI(proxyHost);
+      } catch (URISyntaxException e) {
+        throw new ParseException("Invalid proxy url: " + proxyHost);
+      }
+
+      map.put(BrowserConfig.proxyHost, proxyHost);
     }
 
     return map;
@@ -170,72 +184,74 @@ public class CliParser {
   private Options createCliOptions() {
     return new Options().addOption(createIterationsOption()).addOption(createBrowserOption())
         .addOption(createOutputOption()).addOption(createTimeoutOption())
-        .addOption(createFormatOption()).addOption(createCompactOption())
-        .addOption(createRawOption()).addOption(createUserAgentOption())
-        .addOption(createWindowSizeOption()).addOption(createHelpOption())
+        .addOption(createFormatOption()).addOption(createProxyOption())
+        .addOption(createCompactOption()).addOption(createRawOption())
+        .addOption(createUserAgentOption()).addOption(createWindowSizeOption())
         .addOption(createVerboseOption()).addOption(createVersionOption());
+        .addOption(createHelpOption()).addOption(createVersionOption());
   }
 
   private Option createIterationsOption() {
-    return createOption(iterationsOption.shortForm, iterationsOption.longForm,
-            "The number of times to run the test, default being 3.");
+    return createOption(iterationsOption, "The number of times to run the test, default being 3.");
   }
 
   private Option createBrowserOption() {
-    return createOption(browserOption.shortForm, browserOption.longForm,
-        "The browser to use. Supported values are: " + asList(Browser.values())
-            + ", default being " + DEFAULT_BROWSER + ".");
+    return createOption(browserOption, "The browser to use. Supported values are: "
+        + asList(Browser.values()) + ", default being " + DEFAULT_BROWSER + ".");
   }
 
   private Option createOutputOption() {
-    return createOption(outputOption.shortForm, outputOption.longForm,
-        "Output the result as a file, give the name of the file. "
-            + "If no filename is given, the result is put on standard out.");
+    return createOption(outputOption, "Output the result as a file, give the name of the file. "
+        + "If no filename is given, the result is put on standard out.");
   }
 
 
   private Option createFormatOption() {
-    return createOption(formatOption.shortForm, formatOption.longForm,
-        "The desired output format. Supported values are: " + asList(Format.values())
-            + ", default being " + DEFAULT_FORMAT + ".");
+    return createOption(formatOption, "The desired output format. Supported values are: "
+        + asList(Format.values()) + ", default being " + DEFAULT_FORMAT + ".");
+  }
+
+  private Option createProxyOption() {
+    return createOption(proxyHostOption,
+        "Proxy server host (including optional port) to use for http requests in browser, "
+            + "e.g. proxy.myserver.com:1234.");
   }
 
   private Option createTimeoutOption() {
-    return createOption(timeoutOption.shortForm, timeoutOption.longForm,
+    return createOption(timeoutOption,
         "Number of seconds to wait for url to complete loading before giving up"
             + ", default being " + DEFAULT_TIMEOUT_SECONDS + ".");
   }
 
   private Option createCompactOption() {
     Option option =
-        createOption(compactOption.shortForm, compactOption.longForm,
-            "Generate compact output (default is pretty-printed).");
+        createOption(compactOption, "Generate compact output (default is pretty-printed).");
     option.setArgs(0);
     return option;
   }
 
   private Option createRawOption() {
     Option option =
-        createOption(rawOption.shortForm, rawOption.longForm,
+        createOption(rawOption,
             "Include raw metrics data from each test run (excluded by default).");
     option.setArgs(0);
     return option;
   }
 
   private Option createUserAgentOption() {
-    return createOption(userAgentOption.shortForm, userAgentOption.longForm,
-        "Set the user agent. Default is the one by the browser you use. Only works with Chrome.");
+    return createOption(
+        userAgentOption,
+        "Set the user agent. Default is the one by the browser you use. Only works with Chrome and Firefox.");
   }
 
   private Option createWindowSizeOption() {
-    return createOption(windowSizeOption.shortForm, windowSizeOption.longForm,
+    return createOption(windowSizeOption,
         "The size of the browser window: <width>x<height>, e.g. 400x600. "
             + "Only works with Chrome and Firefox.");
   }
 
   private Option createHelpOption() {
-    Option option =
-        createOption(helpOption.shortForm, helpOption.longForm, "Show this help message");
+    Option option = createOption(helpOption, "Show this help message");
     option.setArgs(0);
     return option;
   }
@@ -249,8 +265,7 @@ public class CliParser {
   }
 
   private Option createVersionOption() {
-    Option option =
-        createOption(versionOption.shortForm, versionOption.longForm, "Show version information");
+    Option option = createOption(versionOption, "Show version information");
     option.setArgs(0);
     return option;
   }
@@ -258,10 +273,10 @@ public class CliParser {
   /**
    * Create an optional Option with one argument.
    */
-  private Option createOption(String opt, String longName, String description) {
-    final Option option = new Option(opt, description);
-    option.setLongOpt(longName);
-    option.setArgName(longName.toUpperCase());
+  private Option createOption(OptionString optionString, String description) {
+    final Option option = new Option(optionString.shortForm, description);
+    option.setLongOpt(optionString.longForm);
+    option.setArgName(optionString.longForm.toUpperCase());
     option.setRequired(false);
     option.setArgs(1);
     return option;
@@ -281,9 +296,9 @@ public class CliParser {
 
   protected enum OptionString {
     iterationsOption("n", "times"), browserOption("b", "browser"), outputOption("o", "output"), timeoutOption(
-        "t", "timeout"), formatOption("f", "format"), compactOption(null, "compact"), rawOption(
-        null, "raw"), userAgentOption("ua", "user-agent"), windowSizeOption("w", "window-size"), helpOption(
-        "h", "help"), versionOption("V", "version");
+        "t", "timeout"), formatOption("f", "format"), proxyHostOption("p", "proxyHost"), compactOption(
+        null, "compact"), rawOption(null, "raw"), userAgentOption("ua", "user-agent"), windowSizeOption(
+        "w", "window-size"), helpOption("h", "help"), versionOption("V", "version");
 
 
     public final String shortForm;

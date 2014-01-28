@@ -22,8 +22,6 @@
  */
 package net.browsertime.tool.datacollector;
 
-import static java.lang.Boolean.TRUE;
-
 import net.browsertime.tool.timings.TimingMark;
 import net.browsertime.tool.timings.TimingMeasurement;
 import net.browsertime.tool.timings.TimingRun;
@@ -49,23 +47,29 @@ public class TimingDataCollector {
    *        a boolean value.
    * @return <code>true</code> if the script evaluates to true, <code>false</code> if not.
    */
-  protected boolean booleanFromJs(JavascriptExecutor executor, String script) {
-    return TRUE.equals(executor.executeScript(script));
+  boolean booleanFromJs(JavascriptExecutor executor, String script) {
+    return (Boolean) executor.executeScript(script);
   }
 
-  protected List listFromJs(JavascriptExecutor executor, String script) {
+  String stringFromJs(JavascriptExecutor executor, String script) {
+    return (String) executor.executeScript(script);
+  }
+
+  List listFromJs(JavascriptExecutor executor, String script) {
     return (List) executor.executeScript(script);
   }
 
-  protected Long longFromJs(JavascriptExecutor executor, String script) {
+  Long longFromJs(JavascriptExecutor executor, String script) {
     return (Long) executor.executeScript(script);
   }
 
-  protected Double doubleFromJs(JavascriptExecutor executor, String script) {
-    return (Double) executor.executeScript(script);
+  Double doubleFromJs(JavascriptExecutor executor, String script) {
+    // Extract object since Selenium returns a Long whenever 0 is returned by a script.
+    Object o = executor.executeScript(script);
+    return Double.parseDouble(o.toString());
   }
 
-  final static protected class MarkInterval {
+  final static class MarkInterval {
     private final String measurementName;
     private final String startMarkName;
     private final String endMarkName;

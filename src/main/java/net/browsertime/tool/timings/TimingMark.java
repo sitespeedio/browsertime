@@ -53,6 +53,7 @@ public class TimingMark {
     return startTime;
   }
 
+  @SuppressWarnings("UnusedDeclaration")
   private TimingMark() {
     name = null;
     startTime = 0;
