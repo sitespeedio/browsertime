@@ -37,13 +37,13 @@ public class ChromeDriverProvider extends WebDriverProvider {
     // see http://peter.sh/experiments/chromium-command-line-switches/
     String config = browserConfiguration.get(BrowserConfig.userAgent);
     if (config != null) {
-      options.addArguments("--user-agent" + "=" + config);
+      options.addArguments("--user-agent=" + config);
     }
 
     config = browserConfiguration.get(BrowserConfig.windowSize);
     if (config != null) {
       config = config.replace("x", ",");
-      options.addArguments("--window-size" + "=" + config);
+      options.addArguments("--window-size=" + config);
     }
 
     options.addArguments("--window-position=0,0");
