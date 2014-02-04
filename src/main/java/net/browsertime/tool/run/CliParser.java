@@ -3,6 +3,7 @@ package net.browsertime.tool.run;
 import static java.util.Arrays.asList;
 import static net.browsertime.tool.run.CliParser.OptionString.browserOption;
 import static net.browsertime.tool.run.CliParser.OptionString.compactOption;
+import static net.browsertime.tool.run.CliParser.OptionString.debugOption;
 import static net.browsertime.tool.run.CliParser.OptionString.formatOption;
 import static net.browsertime.tool.run.CliParser.OptionString.helpOption;
 import static net.browsertime.tool.run.CliParser.OptionString.iterationsOption;
@@ -77,6 +78,7 @@ public class CliParser {
     TimingConfig config = new TimingConfig();
 
     config.verbose = commandLine.hasOption("v");
+    config.debug = commandLine.hasOption("debug");
     config.numIterations = parseIterations();
     config.shouldPrettyPrint = !commandLine.hasOption(compactOption.longForm);
     config.shouldIncludeRuns = commandLine.hasOption(rawOption.longForm);
@@ -187,8 +189,8 @@ public class CliParser {
         .addOption(createFormatOption()).addOption(createProxyOption())
         .addOption(createCompactOption()).addOption(createRawOption())
         .addOption(createUserAgentOption()).addOption(createWindowSizeOption())
-        .addOption(createVerboseOption()).addOption(createVersionOption())
-        .addOption(createHelpOption()).addOption(createVersionOption());
+        .addOption(createVerboseOption()).addOption(createDebugOption())
+        .addOption(createVersionOption()).addOption(createHelpOption());
   }
 
   private Option createIterationsOption() {
@@ -264,6 +266,15 @@ public class CliParser {
     return option;
   }
 
+  private Option createDebugOption() {
+    Option option =
+        createOption(
+            debugOption,
+            "Turn on debug output, very verbose output as browsertime runs, only for debugging browsertime itself.");
+    option.setArgs(0);
+    return option;
+  }
+
   private Option createVersionOption() {
     Option option = createOption(versionOption, "Show version information");
     option.setArgs(0);
@@ -291,8 +302,8 @@ public class CliParser {
     iterationsOption("n", "times"), browserOption("b", "browser"), outputOption("o", "output"), timeoutOption(
         "t", "timeout"), formatOption("f", "format"), proxyHostOption("p", "proxyHost"), compactOption(
         null, "compact"), rawOption(null, "raw"), userAgentOption("ua", "user-agent"), windowSizeOption(
-        "w", "window-size"), verboseOption("v", "verbose"), helpOption("h", "help"), versionOption(
-        "V", "version");
+        "w", "window-size"), verboseOption("v", "verbose"), debugOption(null, "debug"), helpOption(
+        "h", "help"), versionOption("V", "version");
 
 
     public final String shortForm;

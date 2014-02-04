@@ -11,6 +11,7 @@ import java.util.Map;
 public class TimingConfig {
   // tool options
   public boolean verbose;
+  public boolean debug;
 
   // measurement options
   public int numIterations = 1;
