@@ -287,13 +287,6 @@ public class CliParser {
     helpFormatter.printHelp("browsertime [options] URL", options);
   }
 
-  void printVersion() {
-    String implementationVersion = getClass().getPackage().getImplementationVersion();
-    implementationVersion = implementationVersion != null ? implementationVersion : "unknown";
-
-    System.out.println(implementationVersion);
-  }
-
   protected enum OptionString {
     iterationsOption("n", "times"), browserOption("b", "browser"), outputOption("o", "output"), timeoutOption(
         "t", "timeout"), formatOption("f", "format"), proxyHostOption("p", "proxyHost"), compactOption(

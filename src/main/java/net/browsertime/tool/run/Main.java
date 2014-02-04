@@ -71,7 +71,7 @@ public class Main {
       if (parser.shouldShowHelp()) {
         shouldShowUsage = true;
       } else if (parser.shouldShowVersion()) {
-        parser.printVersion();
+        System.out.println(Version.getVersion());
       } else {
         TimingConfig config = parser.parseTimingConfig();
         URL url = parser.parseUrl();
