@@ -5,7 +5,8 @@ version 0.6 (NOT YET RELEASED)
 * Fix crash while trying to run resource timing measurements in Firefox.
 * Provide better error messages if chromedriver, IEDriverServer or Firefox is missing.
 * Upgraded to latest version of Selenium, for (hopefully) increased stability in the interaction with browsers.
-* Suppress debug output (Starting ChromeDriver...) when running Chrome
+* Suppress chromedriver diagnostics output (Starting ChromeDriver...) when running Chrome
+* Add --verbose and --debug option for getting additional information printed as Browsertime runs.
 
 version 0.5 (2014-01-09)
 ------------------------
