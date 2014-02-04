@@ -42,6 +42,8 @@ import net.browsertime.tool.webdriver.WebDriverValidationException;
 import org.apache.commons.cli.ParseException;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URL;
 
 /**
@@ -57,6 +59,13 @@ public class Main {
     int status = app.handleCommandLine(args);
 
     System.exit(status);
+  }
+
+  private static String getStacktrace(Exception e) {
+    StringWriter stringWriter = new StringWriter();
+    PrintWriter printWriter = new PrintWriter(stringWriter);
+    e.printStackTrace(printWriter);
+    return stringWriter.toString();
   }
 
   int handleCommandLine(String[] args) {
@@ -89,8 +98,10 @@ public class Main {
       printSyntaxError(e.getMessage());
     } catch (BrowserTimeException e) {
       commandStatus = ERROR;
-      // This is something serious, print the stacktrace so we know what is happening
-      e.printStackTrace();
+
+      printSyntaxError("An unknown error occurred!\nPlease attach the following information to a bug report at "
+          + "https://github.com/tobli/browsertime/issues");
+      printSyntaxError(getStacktrace(e));
     }
 
     if (shouldShowUsage) {
