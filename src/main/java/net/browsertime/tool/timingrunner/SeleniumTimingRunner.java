@@ -98,7 +98,7 @@ public class SeleniumTimingRunner implements TimingRunner {
       throw new TimingRunnerException("Timeout, page was still loading after " + timeoutSeconds
           + " seconds.", e);
     } catch (WebDriverException e) {
-      throw new TimingRunnerException("Error while running Selenium.", e);
+      throw new BrowserTimeException("Error while running Selenium.", e);
     }
   }
 
