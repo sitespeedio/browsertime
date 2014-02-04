@@ -22,8 +22,6 @@
  */
 package net.browsertime.tool.run;
 
-import static com.google.inject.name.Names.named;
-
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -34,6 +32,8 @@ import net.browsertime.tool.guice.FireFoxModule;
 import net.browsertime.tool.guice.InternetExplorerModule;
 import net.browsertime.tool.guice.JSONResultModule;
 import net.browsertime.tool.guice.XMLResultModule;
+import net.browsertime.tool.logger.ConsoleLogger;
+import net.browsertime.tool.logger.Logger;
 import net.browsertime.tool.serializer.Serializer;
 import net.browsertime.tool.serializer.SerializerFactory;
 import net.browsertime.tool.timingrunner.TimingRunner;
@@ -136,7 +136,7 @@ public class Main {
     return new AbstractModule() {
       @Override
       protected void configure() {
-        bindConstant().annotatedWith(named("verbose")).to(config.verbose);
+        bind(Logger.class).toInstance(new ConsoleLogger(config.verbose, config.debug));
       }
     };
   }

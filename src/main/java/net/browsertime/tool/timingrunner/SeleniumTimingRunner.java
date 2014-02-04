@@ -29,6 +29,7 @@ import net.browsertime.tool.datacollector.NavigationTimingDataCollector;
 import net.browsertime.tool.datacollector.ResourceTimingDataCollector;
 import net.browsertime.tool.datacollector.TimingDataCollector;
 import net.browsertime.tool.datacollector.UserTimingDataCollector;
+import net.browsertime.tool.logger.Logger;
 import net.browsertime.tool.timings.TimingRun;
 import net.browsertime.tool.timings.TimingSession;
 import net.browsertime.tool.webdriver.WebDriverProvider;
@@ -51,11 +52,13 @@ import java.util.Map;
 public class SeleniumTimingRunner implements TimingRunner {
   private final WebDriverProvider driverProvider;
   private final List<TimingDataCollector> dataCollectors;
+  private final Logger logger;
 
   @Inject
   public SeleniumTimingRunner(TimingDataCollector browserDataCollector,
-      WebDriverProvider driverProvider) {
+                              WebDriverProvider driverProvider, Logger logger) {
     this.driverProvider = driverProvider;
+    this.logger = logger;
     TimingDataCollector navigationTimingDataCollector = new NavigationTimingDataCollector();
     TimingDataCollector userTimingDataCollector = new UserTimingDataCollector(true);
     TimingDataCollector browserTimeDataCollector = new BrowserTimeDataCollector();
@@ -70,20 +73,21 @@ public class SeleniumTimingRunner implements TimingRunner {
   public TimingSession run(URL url, int numIterations, int timeoutSeconds)
       throws BrowserTimeException {
     try {
+      logger.printDebug("Validating driver provider.");
       driverProvider.validateProvider();
 
       TimingSession session = new TimingSession();
-      boolean hasCollectedPageData = false;
-      for (int i = 0; i < numIterations; i++) {
+      for (int i = 1; i <= numIterations; i++) {
         WebDriver driver = driverProvider.get();
         try {
           JavascriptExecutor js = fetchUrl(driver, url, timeoutSeconds);
 
+          logger.printStatus("Collecting timing data for " + url + " (run " + i + " of " + numIterations + ")");
           session.addTimingRun(collectTimingData(js));
 
-          if (!hasCollectedPageData) {
+          if (i == numIterations) {
+            logger.printStatus("Collecting page data for " + url);
             session.addPageData(collectPageData(url, js));
-            hasCollectedPageData = true;
           }
         } finally {
           driver.quit();
