@@ -2,11 +2,11 @@ package net.browsertime.tool.webdriver;
 
 import net.browsertime.tool.BrowserConfig;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.os.CommandLine;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import java.io.File;
 import java.util.Map;
 
 public class ChromeDriverProvider extends WebDriverProvider {
@@ -14,6 +14,7 @@ public class ChromeDriverProvider extends WebDriverProvider {
     super(browserConfiguration);
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public void validateProvider() throws WebDriverValidationException {
     String path = CommandLine.find("chromedriver");
@@ -29,15 +30,7 @@ public class ChromeDriverProvider extends WebDriverProvider {
     DesiredCapabilities capabilities = createCapabilities();
     capabilities.setCapability(ChromeOptions.CAPABILITY, createChromeOptions());
 
-    SilentChromeDriverService driverService = createChromeDriverService();
-
-    return new ChromeDriver(driverService, capabilities);
-  }
-
-  public SilentChromeDriverService createChromeDriverService() {
-    File exe = SilentChromeDriverService.findExecutable();
-    return new SilentChromeDriverService.Builder().usingDriverExecutable(exe).usingAnyFreePort()
-        .withSilent(true).build();
+    return new ChromeDriver(SilentChromeDriverService.createSilentService(), capabilities);
   }
 
   private ChromeOptions createChromeOptions() {
