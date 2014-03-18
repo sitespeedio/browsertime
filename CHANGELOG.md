@@ -1,5 +1,8 @@
 # Browsertime changelog
 
+version 0.7 (NOT YET RELEASED)
+------------------------
+
 version 0.6 (2014-02-05)
 ------------------------
 * Fix crash while trying to run resource timing measurements in Firefox.
