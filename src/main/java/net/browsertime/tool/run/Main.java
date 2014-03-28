@@ -61,7 +61,7 @@ public class Main {
     System.exit(status);
   }
 
-  private static String getStacktrace(Exception e) {
+  private static String getStackTrace(Exception e) {
     StringWriter stringWriter = new StringWriter();
     PrintWriter printWriter = new PrintWriter(stringWriter);
     e.printStackTrace(printWriter);
@@ -101,7 +101,7 @@ public class Main {
 
       printSyntaxError("An unknown error occurred!\nPlease attach the following information to a bug report at "
           + "https://github.com/tobli/browsertime/issues");
-      printSyntaxError(getStacktrace(e));
+      printSyntaxError(getStackTrace(e));
     }
 
     if (shouldShowUsage) {
