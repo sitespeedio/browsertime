@@ -22,13 +22,12 @@
  */
 package net.browsertime.tool.serializer;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import com.google.inject.Inject;
-import com.google.inject.assistedinject.Assisted;
+import java.io.IOException;
+import java.io.Writer;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.List;
+
 import net.browsertime.tool.timings.Statistics;
 import net.browsertime.tool.timings.TimingMark;
 import net.browsertime.tool.timings.TimingMeasurement;
@@ -36,11 +35,13 @@ import net.browsertime.tool.timings.TimingResourceMeasurement;
 import net.browsertime.tool.timings.TimingRun;
 import net.browsertime.tool.timings.TimingSession;
 
-import java.io.IOException;
-import java.io.Writer;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.List;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
 
 /**
  *
@@ -53,20 +54,18 @@ public class JsonSerializer implements Serializer {
         }
       });
 
-  private final Writer writer;
   private final boolean prettyPrint;
   private final boolean includeRuns;
 
   @Inject
-  public JsonSerializer(@Assisted Writer writer, @Assisted("prettyPrint") boolean prettyPrint,
+  public JsonSerializer(@Assisted("prettyPrint") boolean prettyPrint,
       @Assisted("includeRuns") boolean includeRuns) {
-    this.writer = writer;
     this.prettyPrint = prettyPrint;
     this.includeRuns = includeRuns;
   }
 
   @Override
-  public void serialize(TimingSession session) throws IOException {
+  public void serialize(TimingSession session, Writer writer) throws IOException {
     GsonBuilder builder = new GsonBuilder();
     builder.registerTypeAdapter(Statistics.class, new StatisticsAdapter());
     builder.registerTypeAdapter(TimingRun.class, new TimingRunAdapter(includeRuns));

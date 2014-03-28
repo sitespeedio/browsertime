@@ -22,13 +22,14 @@
  */
 package net.browsertime.tool.serializer;
 
-import net.browsertime.tool.timings.TimingSession;
-
 import java.io.IOException;
+import java.io.Writer;
+
+import net.browsertime.tool.timings.TimingSession;
 
 /**
  *
  */
 public interface Serializer {
-  void serialize(TimingSession session) throws IOException;
+  void serialize(TimingSession session, Writer writer) throws IOException;
 }

@@ -22,39 +22,37 @@
  */
 package net.browsertime.tool.serializer;
 
-import com.google.inject.Inject;
-import com.google.inject.assistedinject.Assisted;
-import net.browsertime.tool.timings.TimingRun;
-import net.browsertime.tool.timings.TimingSession;
-
 import java.io.IOException;
 import java.io.Writer;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
+import net.browsertime.tool.timings.TimingRun;
+import net.browsertime.tool.timings.TimingSession;
+
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
+
 /**
  *
  */
 public class XmlSerializer implements Serializer {
-  private final Writer writer;
   private final boolean prettyPrint;
   private final boolean includeRuns;
 
   @Inject
-  public XmlSerializer(@Assisted Writer writer, @Assisted("prettyPrint") boolean prettyPrint,
+  public XmlSerializer(@Assisted("prettyPrint") boolean prettyPrint,
       @Assisted("includeRuns") boolean includeRuns) {
-    this.writer = writer;
     this.prettyPrint = prettyPrint;
     this.includeRuns = includeRuns;
   }
 
   @Override
-  public void serialize(TimingSession session) throws IOException {
+  public void serialize(TimingSession session, Writer writer) throws IOException {
     try {
       JAXBContext context = JAXBContext.newInstance(TimingSession.class);
       Marshaller marshaller = context.createMarshaller();

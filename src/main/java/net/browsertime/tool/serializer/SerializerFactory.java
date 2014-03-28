@@ -24,12 +24,10 @@ package net.browsertime.tool.serializer;
 
 import com.google.inject.assistedinject.Assisted;
 
-import java.io.Writer;
-
 /**
  *
  */
 public interface SerializerFactory {
-  public Serializer create(Writer writer, @Assisted("prettyPrint") boolean prettyPrint,
-      @Assisted("includeRuns") boolean includeRuns);
+  public Serializer create(@Assisted("prettyPrint") boolean prettyPrint,
+                           @Assisted("includeRuns") boolean includeRuns);
 }
