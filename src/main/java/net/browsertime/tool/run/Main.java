@@ -53,13 +53,6 @@ public class Main {
     System.exit(status);
   }
 
-  private static String getStackTrace(Exception e) {
-    StringWriter stringWriter = new StringWriter();
-    PrintWriter printWriter = new PrintWriter(stringWriter);
-    e.printStackTrace(printWriter);
-    return stringWriter.toString();
-  }
-
   int handleCommandLine(String[] args) {
     int commandStatus = OK;
     boolean shouldShowUsage = false;
@@ -117,5 +110,12 @@ public class Main {
 
   void printSyntaxError(String s) {
     System.err.println(s);
+  }
+
+  private static String getStackTrace(Exception e) {
+    StringWriter stringWriter = new StringWriter();
+    PrintWriter printWriter = new PrintWriter(stringWriter);
+    e.printStackTrace(printWriter);
+    return stringWriter.toString();
   }
 }
