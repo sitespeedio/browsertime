@@ -22,18 +22,12 @@
  */
 package net.browsertime.tool.run;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Module;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.URL;
+
 import net.browsertime.tool.BrowserTimeException;
-import net.browsertime.tool.guice.ChromeModule;
-import net.browsertime.tool.guice.FireFoxModule;
-import net.browsertime.tool.guice.InternetExplorerModule;
-import net.browsertime.tool.guice.JSONResultModule;
-import net.browsertime.tool.guice.XMLResultModule;
-import net.browsertime.tool.logger.ConsoleLogger;
-import net.browsertime.tool.logger.Logger;
 import net.browsertime.tool.serializer.Serializer;
 import net.browsertime.tool.serializer.SerializerFactory;
 import net.browsertime.tool.timingrunner.TimingRunner;
@@ -41,10 +35,8 @@ import net.browsertime.tool.timings.TimingSession;
 import net.browsertime.tool.webdriver.WebDriverValidationException;
 import org.apache.commons.cli.ParseException;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.net.URL;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  *
@@ -112,7 +104,7 @@ public class Main {
   }
 
   private void run(URL url, TimingConfig config) throws IOException, BrowserTimeException {
-    Injector injector = createInjector(config);
+    Injector injector = Guice.createInjector(GuiceSetup.setupModules(config));
 
     TimingRunner timingRunner = injector.getInstance(TimingRunner.class);
     SerializerFactory factory = injector.getInstance(SerializerFactory.class);
@@ -125,43 +117,5 @@ public class Main {
 
   void printSyntaxError(String s) {
     System.err.println(s);
-  }
-
-  private Injector createInjector(TimingConfig config) {
-    return Guice.createInjector(createToolModule(config), createFormatModule(config),
-        createBrowserModule(config));
-  }
-
-  private Module createToolModule(final TimingConfig config) {
-    return new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(Logger.class).toInstance(new ConsoleLogger(config.verbose, config.debug));
-      }
-    };
-  }
-
-  private Module createFormatModule(TimingConfig config) {
-    switch (config.format) {
-      case xml:
-        return new XMLResultModule();
-      case json:
-        return new JSONResultModule();
-      default:
-        throw new RuntimeException("Unsupported format: " + config.format);
-    }
-  }
-
-  private Module createBrowserModule(TimingConfig config) {
-    switch (config.browser) {
-      case chrome:
-        return new ChromeModule(config.browserOptions);
-      case firefox:
-        return new FireFoxModule(config.browserOptions);
-      case ie:
-        return new InternetExplorerModule(config.browserOptions);
-      default:
-        throw new RuntimeException("Unsupported browser: " + config.browser);
-    }
   }
 }
