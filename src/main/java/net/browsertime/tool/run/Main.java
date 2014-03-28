@@ -84,8 +84,9 @@ public class Main {
     } catch (BrowserTimeException e) {
       commandStatus = ERROR;
 
-      printSyntaxError("An unknown error occurred!\nPlease attach the following information to a bug report at "
-          + "https://github.com/tobli/browsertime/issues");
+      printSyntaxError("An unknown error occurred!\n" +
+          "Please attach the following information to a bug report at " +
+          "https://github.com/tobli/browsertime/issues");
       printSyntaxError(getStackTrace(e));
     }
 
