@@ -28,6 +28,7 @@ import java.io.StringWriter;
 import java.net.URL;
 
 import net.browsertime.tool.BrowserTimeException;
+import net.browsertime.tool.guice.BrowserTimeModule;
 import net.browsertime.tool.serializer.Serializer;
 import net.browsertime.tool.serializer.SerializerFactory;
 import net.browsertime.tool.timingrunner.TimingRunner;
@@ -98,7 +99,7 @@ public class Main {
   }
 
   private void run(URL url, TimingConfig config) throws IOException, BrowserTimeException {
-    Injector injector = Guice.createInjector(GuiceSetup.setupModules(config));
+    Injector injector = Guice.createInjector(new BrowserTimeModule(config));
 
     TimingRunner timingRunner = injector.getInstance(TimingRunner.class);
     SerializerFactory factory = injector.getInstance(SerializerFactory.class);
