@@ -21,14 +21,12 @@
  ******************************************************************************************************************************** 
  */
 
-package net.browsertime.tool.guice;
+package net.browsertime.tool.webdriver;
 
 
 import net.browsertime.tool.BrowserConfig;
 import net.browsertime.tool.datacollector.ChromeDataCollector;
 import net.browsertime.tool.datacollector.TimingDataCollector;
-import net.browsertime.tool.webdriver.ChromeDriverProvider;
-import net.browsertime.tool.webdriver.WebDriverProvider;
 
 import java.util.Map;
 

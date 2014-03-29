@@ -1,8 +1,8 @@
 package net.browsertime.tool;
 
-import net.browsertime.tool.guice.ChromeModule;
-import net.browsertime.tool.guice.FireFoxModule;
-import net.browsertime.tool.guice.InternetExplorerModule;
+import net.browsertime.tool.webdriver.ChromeModule;
+import net.browsertime.tool.webdriver.FireFoxModule;
+import net.browsertime.tool.webdriver.InternetExplorerModule;
 import net.browsertime.tool.logger.ConsoleLogger;
 import net.browsertime.tool.logger.Logger;
 import net.browsertime.tool.run.ConfigModule;

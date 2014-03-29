@@ -1,4 +1,4 @@
-package net.browsertime.tool.guice;
+package net.browsertime.tool.webdriver;
 
 import com.google.inject.AbstractModule;
 import net.browsertime.tool.BrowserConfig;
