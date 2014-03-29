@@ -41,12 +41,12 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.google.inject.Inject;
-import com.google.inject.assistedinject.Assisted;
+import com.google.inject.name.Named;
 
 /**
  *
  */
-public class JsonSerializer implements Serializer {
+class JsonSerializer implements Serializer {
   private static final DecimalFormat doubleFormat = new DecimalFormat("#.######",
       new DecimalFormatSymbols() {
         {
@@ -58,8 +58,8 @@ public class JsonSerializer implements Serializer {
   private final boolean includeRuns;
 
   @Inject
-  public JsonSerializer(@Assisted("prettyPrint") boolean prettyPrint,
-      @Assisted("includeRuns") boolean includeRuns) {
+  JsonSerializer(@Named("prettyPrint") boolean prettyPrint,
+      @Named("includeRuns") boolean includeRuns) {
     this.prettyPrint = prettyPrint;
     this.includeRuns = includeRuns;
   }

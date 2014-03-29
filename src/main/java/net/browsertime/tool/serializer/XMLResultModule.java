@@ -20,21 +20,16 @@
  * 
  ******************************************************************************************************************************** 
  */
-package net.browsertime.tool.guice;
+package net.browsertime.tool.serializer;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.assistedinject.FactoryModuleBuilder;
-import net.browsertime.tool.serializer.JsonSerializer;
-import net.browsertime.tool.serializer.Serializer;
-import net.browsertime.tool.serializer.SerializerFactory;
 
 /**
  *
  */
-public class JSONResultModule extends AbstractModule {
+public class XMLResultModule extends AbstractModule {
   @Override
   protected void configure() {
-    install(new FactoryModuleBuilder().implement(Serializer.class, JsonSerializer.class).build(
-        SerializerFactory.class));
+    bind(Serializer.class).to(XmlSerializer.class);
   }
 }

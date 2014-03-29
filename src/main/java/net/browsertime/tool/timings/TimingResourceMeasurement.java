@@ -22,8 +22,6 @@
  */
 package net.browsertime.tool.timings;
 
-import net.browsertime.tool.serializer.XmlSerializer;
-
 import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessorOrder;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -71,7 +69,7 @@ public class TimingResourceMeasurement extends TimingMark
   }
 
   @XmlAttribute
-  @XmlJavaTypeAdapter(XmlSerializer.NonScientificDoubleAdapter.class)
+  @XmlJavaTypeAdapter(NonScientificDoubleAdapter.class)
   public Double getDuration() {
     return duration;
   }
@@ -82,67 +80,67 @@ public class TimingResourceMeasurement extends TimingMark
   }
 
   @XmlAttribute
-  @XmlJavaTypeAdapter(XmlSerializer.OptionalNonScientificDoubleAdapter.class)
+  @XmlJavaTypeAdapter(OptionalNonScientificDoubleAdapter.class)
   public Double getRedirectStart() {
     return redirectStart;
   }
 
   @XmlAttribute
-  @XmlJavaTypeAdapter(XmlSerializer.OptionalNonScientificDoubleAdapter.class)
+  @XmlJavaTypeAdapter(OptionalNonScientificDoubleAdapter.class)
   public Double getRedirectEnd() {
     return redirectEnd;
   }
 
   @XmlAttribute
-  @XmlJavaTypeAdapter(XmlSerializer.NonScientificDoubleAdapter.class)
+  @XmlJavaTypeAdapter(NonScientificDoubleAdapter.class)
   public Double getFetchStart() {
     return fetchStart;
   }
 
   @XmlAttribute
-  @XmlJavaTypeAdapter(XmlSerializer.OptionalNonScientificDoubleAdapter.class)
+  @XmlJavaTypeAdapter(OptionalNonScientificDoubleAdapter.class)
   public Double getDomainLookupStart() {
     return domainLookupStart;
   }
 
   @XmlAttribute
-  @XmlJavaTypeAdapter(XmlSerializer.OptionalNonScientificDoubleAdapter.class)
+  @XmlJavaTypeAdapter(OptionalNonScientificDoubleAdapter.class)
   public Double getDomainLookupEnd() {
     return domainLookupEnd;
   }
 
   @XmlAttribute
-  @XmlJavaTypeAdapter(XmlSerializer.OptionalNonScientificDoubleAdapter.class)
+  @XmlJavaTypeAdapter(OptionalNonScientificDoubleAdapter.class)
   public Double getConnectStart() {
     return connectStart;
   }
 
   @XmlAttribute
-  @XmlJavaTypeAdapter(XmlSerializer.OptionalNonScientificDoubleAdapter.class)
+  @XmlJavaTypeAdapter(OptionalNonScientificDoubleAdapter.class)
   public Double getConnectEnd() {
     return connectEnd;
   }
 
   @XmlAttribute
-  @XmlJavaTypeAdapter(XmlSerializer.OptionalNonScientificDoubleAdapter.class)
+  @XmlJavaTypeAdapter(OptionalNonScientificDoubleAdapter.class)
   public Double getSecureConnectionStart() {
     return secureConnectionStart;
   }
 
   @XmlAttribute
-  @XmlJavaTypeAdapter(XmlSerializer.OptionalNonScientificDoubleAdapter.class)
+  @XmlJavaTypeAdapter(OptionalNonScientificDoubleAdapter.class)
   public Double getRequestStart() {
     return requestStart;
   }
 
   @XmlAttribute
-  @XmlJavaTypeAdapter(XmlSerializer.OptionalNonScientificDoubleAdapter.class)
+  @XmlJavaTypeAdapter(OptionalNonScientificDoubleAdapter.class)
   public Double getResponseStart() {
     return responseStart;
   }
 
   @XmlAttribute
-  @XmlJavaTypeAdapter(XmlSerializer.NonScientificDoubleAdapter.class)
+  @XmlJavaTypeAdapter(NonScientificDoubleAdapter.class)
   public Double getResponseEnd() {
     return responseEnd;
   }

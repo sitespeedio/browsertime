@@ -22,8 +22,6 @@
  */
 package net.browsertime.tool.timings;
 
-import net.browsertime.tool.serializer.XmlSerializer;
-
 import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessorOrder;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -48,7 +46,7 @@ public class TimingMark {
   }
 
   @XmlAttribute
-  @XmlJavaTypeAdapter(XmlSerializer.NonScientificDoubleAdapter.class)
+  @XmlJavaTypeAdapter(NonScientificDoubleAdapter.class)
   public Double getStartTime() {
     return startTime;
   }

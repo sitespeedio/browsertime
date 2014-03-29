@@ -2,7 +2,10 @@ package net.browsertime.tool.guice;
 
 import net.browsertime.tool.logger.ConsoleLogger;
 import net.browsertime.tool.logger.Logger;
+import net.browsertime.tool.run.ConfigModule;
 import net.browsertime.tool.run.TimingConfig;
+import net.browsertime.tool.serializer.JSONResultModule;
+import net.browsertime.tool.serializer.XMLResultModule;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;
@@ -19,6 +22,7 @@ public class BrowserTimeModule extends AbstractModule {
     install(createBrowserModule(config));
     install(createFormatModule(config));
     install(createToolModule(config));
+    install(new ConfigModule(config));
   }
 
   private Module createToolModule(final TimingConfig config) {

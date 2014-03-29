@@ -24,29 +24,26 @@ package net.browsertime.tool.serializer;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-import net.browsertime.tool.timings.TimingRun;
+import net.browsertime.tool.timings.TimingRunXmlAdapter;
 import net.browsertime.tool.timings.TimingSession;
 
 import com.google.inject.Inject;
-import com.google.inject.assistedinject.Assisted;
+import com.google.inject.name.Named;
 
 /**
  *
  */
-public class XmlSerializer implements Serializer {
+class XmlSerializer implements Serializer {
   private final boolean prettyPrint;
   private final boolean includeRuns;
 
   @Inject
-  public XmlSerializer(@Assisted("prettyPrint") boolean prettyPrint,
-      @Assisted("includeRuns") boolean includeRuns) {
+  XmlSerializer(@Named("prettyPrint") boolean prettyPrint,
+      @Named("includeRuns") boolean includeRuns) {
     this.prettyPrint = prettyPrint;
     this.includeRuns = includeRuns;
   }
@@ -65,55 +62,5 @@ public class XmlSerializer implements Serializer {
     }
   }
 
-  public static class TimingRunXmlAdapter extends XmlAdapter<TimingRun, TimingRun> {
-    private final boolean include;
 
-    public TimingRunXmlAdapter(boolean include) {
-      this.include = include;
-    }
-
-    @Override
-    public TimingRun unmarshal(TimingRun v) throws Exception {
-      if (include) {
-        return v;
-      }
-      return null;
-    }
-
-    @Override
-    public TimingRun marshal(TimingRun v) throws Exception {
-      if (include) {
-        return v;
-      }
-      return null;
-    }
-  }
-
-  /**
-     *
-     */
-  public static class NonScientificDoubleAdapter extends XmlAdapter<String, Double> {
-    private final DecimalFormat format = new DecimalFormat("#.######", new DecimalFormatSymbols() {
-      {
-        setDecimalSeparator('.');
-      }
-    });
-
-    @Override
-    public Double unmarshal(String v) throws Exception {
-      return Double.valueOf(v);
-    }
-
-    @Override
-    public String marshal(Double v) throws Exception {
-      return format.format(v);
-    }
-  }
-
-  public static class OptionalNonScientificDoubleAdapter extends NonScientificDoubleAdapter {
-    @Override
-    public String marshal(Double v) throws Exception {
-      return (v != null && v > 0) ? super.marshal(v) : null;
-    }
-  }
 }

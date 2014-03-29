@@ -30,7 +30,6 @@ import java.net.URL;
 import net.browsertime.tool.BrowserTimeException;
 import net.browsertime.tool.guice.BrowserTimeModule;
 import net.browsertime.tool.serializer.Serializer;
-import net.browsertime.tool.serializer.SerializerFactory;
 import net.browsertime.tool.timingrunner.TimingRunner;
 import net.browsertime.tool.timings.TimingSession;
 import net.browsertime.tool.webdriver.WebDriverValidationException;
@@ -102,9 +101,7 @@ public class Main {
     Injector injector = Guice.createInjector(new BrowserTimeModule(config));
 
     TimingRunner timingRunner = injector.getInstance(TimingRunner.class);
-    SerializerFactory factory = injector.getInstance(SerializerFactory.class);
-    Serializer serializer =
-        factory.create(config.shouldPrettyPrint, config.shouldIncludeRuns);
+    Serializer serializer = injector.getInstance(Serializer.class);
 
     TimingSession session = timingRunner.run(url, config.numIterations, config.timeoutSeconds);
     serializer.serialize(session, config.outputWriter);
