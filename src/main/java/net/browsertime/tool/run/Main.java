@@ -28,7 +28,7 @@ import java.io.StringWriter;
 import java.net.URL;
 
 import net.browsertime.tool.BrowserTimeException;
-import net.browsertime.tool.guice.BrowserTimeModule;
+import net.browsertime.tool.BrowserTimeModule;
 import net.browsertime.tool.serializer.Serializer;
 import net.browsertime.tool.timingrunner.TimingRunner;
 import net.browsertime.tool.timings.TimingSession;
