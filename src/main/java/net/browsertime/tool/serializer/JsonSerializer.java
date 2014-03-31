@@ -22,13 +22,13 @@
  */
 package net.browsertime.tool.serializer;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import com.google.inject.Inject;
-import com.google.inject.assistedinject.Assisted;
+import java.io.IOException;
+import java.io.Writer;
+import java.lang.reflect.Type;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.List;
+
 import net.browsertime.tool.timings.Statistics;
 import net.browsertime.tool.timings.TimingMark;
 import net.browsertime.tool.timings.TimingMeasurement;
@@ -36,11 +36,16 @@ import net.browsertime.tool.timings.TimingResourceMeasurement;
 import net.browsertime.tool.timings.TimingRun;
 import net.browsertime.tool.timings.TimingSession;
 
-import java.io.IOException;
-import java.io.Writer;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.List;
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapter;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
 
 /**
  *
@@ -68,8 +73,11 @@ public class JsonSerializer implements Serializer {
   @Override
   public void serialize(TimingSession session) throws IOException {
     GsonBuilder builder = new GsonBuilder();
+    if (!includeRuns) {
+      builder.addSerializationExclusionStrategy(new ExcludeTimingRunsStrategy());
+    }
     builder.registerTypeAdapter(Statistics.class, new StatisticsAdapter());
-    builder.registerTypeAdapter(TimingRun.class, new TimingRunAdapter(includeRuns));
+    builder.registerTypeAdapter(TimingRun.class, new TimingRunAdapter());
     if (prettyPrint) {
       builder.setPrettyPrinting();
     }
@@ -125,17 +133,8 @@ public class JsonSerializer implements Serializer {
 
   private static class TimingRunAdapter extends TypeAdapter<TimingRun> {
 
-    private final boolean shouldSerialize;
-
-    public TimingRunAdapter(boolean shouldSerialize) {
-      this.shouldSerialize = shouldSerialize;
-    }
-
     @Override
     public void write(JsonWriter out, TimingRun run) throws IOException {
-      if (!shouldSerialize) {
-        return;
-      }
       out.beginObject();
       writeMarks(out, run);
       writeMeasurements(out, run);
@@ -200,4 +199,17 @@ public class JsonSerializer implements Serializer {
     }
   }
 
+  private static class ExcludeTimingRunsStrategy implements ExclusionStrategy {
+    private static final Type TIMING_RUN_LIST_TYPE = new TypeToken<List<TimingRun>>() {}.getType();
+
+    @Override
+    public boolean shouldSkipField(FieldAttributes f) {
+      return f.getDeclaredType().equals(TIMING_RUN_LIST_TYPE);
+    }
+
+    @Override
+    public boolean shouldSkipClass(Class<?> clazz) {
+      return false;
+    }
+  }
 }
