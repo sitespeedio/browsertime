@@ -16,5 +16,7 @@ public class ConfigModule extends AbstractModule {
         .toInstance(config.shouldPrettyPrint);
     bind(Boolean.class).annotatedWith(Names.named("includeRuns"))
         .toInstance(config.shouldIncludeRuns);
+    bind(Integer.class).annotatedWith(Names.named("timeoutSeconds"))
+        .toInstance(config.timeoutSeconds);
   }
 }

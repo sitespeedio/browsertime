@@ -27,12 +27,10 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
 
+import net.browsertime.tool.BrowserTime;
 import net.browsertime.tool.BrowserTimeException;
 import net.browsertime.tool.BrowserTimeModule;
 import net.browsertime.tool.Version;
-import net.browsertime.tool.serializer.Serializer;
-import net.browsertime.tool.timingrunner.TimingRunner;
-import net.browsertime.tool.timings.TimingSession;
 import net.browsertime.tool.webdriver.WebDriverValidationException;
 import org.apache.commons.cli.ParseException;
 
@@ -70,7 +68,9 @@ public class Main {
       } else {
         TimingConfig config = parser.parseTimingConfig();
         URL url = parser.parseUrl();
-        run(url, config);
+
+        Injector injector = Guice.createInjector(new BrowserTimeModule(config));
+        injector.getInstance(BrowserTime.class).run(url, config.numIterations, config.outputWriter);
       }
     } catch (ParseException e) {
       commandStatus = ERROR;
@@ -96,16 +96,6 @@ public class Main {
     }
 
     return commandStatus;
-  }
-
-  private void run(URL url, TimingConfig config) throws IOException, BrowserTimeException {
-    Injector injector = Guice.createInjector(new BrowserTimeModule(config));
-
-    TimingRunner timingRunner = injector.getInstance(TimingRunner.class);
-    Serializer serializer = injector.getInstance(Serializer.class);
-
-    TimingSession session = timingRunner.run(url, config.numIterations, config.timeoutSeconds);
-    serializer.serialize(session, config.outputWriter);
   }
 
   void printSyntaxError(String s) {

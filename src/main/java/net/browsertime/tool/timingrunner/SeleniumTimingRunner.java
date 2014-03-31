@@ -22,7 +22,12 @@
  */
 package net.browsertime.tool.timingrunner;
 
-import com.google.inject.Inject;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import net.browsertime.tool.BrowserTimeException;
 import net.browsertime.tool.datacollector.BrowserTimeDataCollector;
 import net.browsertime.tool.datacollector.NavigationTimingDataCollector;
@@ -40,11 +45,8 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.net.URL;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  *
@@ -52,12 +54,15 @@ import java.util.Map;
 public class SeleniumTimingRunner implements TimingRunner {
   private final WebDriverProvider driverProvider;
   private final List<TimingDataCollector> dataCollectors;
+  private final int timeoutSeconds;
   private final Logger logger;
 
   @Inject
   public SeleniumTimingRunner(TimingDataCollector browserDataCollector,
-                              WebDriverProvider driverProvider, Logger logger) {
+                              WebDriverProvider driverProvider,
+                              @Named("timeoutSeconds") int timeoutSeconds, Logger logger) {
     this.driverProvider = driverProvider;
+    this.timeoutSeconds = timeoutSeconds;
     this.logger = logger;
     TimingDataCollector navigationTimingDataCollector = new NavigationTimingDataCollector();
     TimingDataCollector userTimingDataCollector = new UserTimingDataCollector(true);
@@ -70,7 +75,7 @@ public class SeleniumTimingRunner implements TimingRunner {
   }
 
   @Override
-  public TimingSession run(URL url, int numIterations, int timeoutSeconds)
+  public TimingSession run(URL url, int numIterations)
       throws BrowserTimeException {
     try {
       logger.printDebug("Validating driver provider.");

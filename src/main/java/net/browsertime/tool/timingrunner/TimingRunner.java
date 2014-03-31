@@ -22,16 +22,16 @@
  */
 package net.browsertime.tool.timingrunner;
 
+import java.net.URL;
+
 import net.browsertime.tool.BrowserTimeException;
 import net.browsertime.tool.timings.TimingSession;
-
-import java.net.URL;
 
 /**
  *
  */
 public interface TimingRunner {
 
-  TimingSession run(URL url, int numIterations, int timeoutSeconds) throws BrowserTimeException;
+  TimingSession run(URL url, int numIterations) throws BrowserTimeException;
 
 }
