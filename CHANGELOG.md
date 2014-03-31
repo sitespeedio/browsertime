@@ -2,6 +2,7 @@
 
 version 0.7 (NOT YET RELEASED)
 ------------------------
+* Upgrade Selenium to version 2.41.
 
 version 0.6 (2014-02-05)
 ------------------------
