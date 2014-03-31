@@ -27,6 +27,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import net.browsertime.tool.BrowserTimeException;
+import net.browsertime.tool.Version;
 import net.browsertime.tool.guice.ChromeModule;
 import net.browsertime.tool.guice.FireFoxModule;
 import net.browsertime.tool.guice.InternetExplorerModule;
