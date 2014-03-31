@@ -22,14 +22,15 @@
  */
 package net.browsertime.tool.datacollector;
 
+import java.util.List;
+import java.util.Map;
+
+import net.browsertime.tool.Version;
 import net.browsertime.tool.timings.TimingRun;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Custom data defined by browser time.
@@ -73,9 +74,7 @@ public class BrowserTimeDataCollector extends TimingDataCollector {
                 + "return [x,y];");
     pageInfo.put("windowSize", String.valueOf(size.get(0)) + "x" + String.valueOf(size.get(1)));
 
-    String implementationVersion = getClass().getPackage().getImplementationVersion();
-    implementationVersion = implementationVersion != null ? implementationVersion : "unknown";
-    pageInfo.put("browserTimeVersion", implementationVersion);
+    pageInfo.put("browserTimeVersion", Version.getVersion());
   }
 
   @Override

@@ -1,7 +1,7 @@
-package net.browsertime.tool.run;
+package net.browsertime.tool;
 
 public class Version {
-  static String getVersion() {
+  public static String getVersion() {
     String version = Version.class.getPackage().getImplementationVersion();
     return version != null ? version : "unknown";
   }
