@@ -1,13 +1,16 @@
 package net.browsertime.tool.webdriver;
 
+import static org.openqa.selenium.chrome.ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY;
+import static org.openqa.selenium.chrome.ChromeDriverService.CHROME_DRIVER_VERBOSE_LOG_PROPERTY;
+
+import java.util.Map;
+
 import net.browsertime.tool.BrowserConfig;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.os.CommandLine;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
-import java.util.Map;
 
 public class ChromeDriverProvider extends WebDriverProvider {
   public ChromeDriverProvider(Map<BrowserConfig, String> browserConfiguration) {
@@ -29,8 +32,10 @@ public class ChromeDriverProvider extends WebDriverProvider {
   public WebDriver get() {
     DesiredCapabilities capabilities = createCapabilities();
     capabilities.setCapability(ChromeOptions.CAPABILITY, createChromeOptions());
-
-    return new ChromeDriver(SilentChromeDriverService.createSilentService(), capabilities);
+    boolean debugOutput = false;
+    System.setProperty(CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, Boolean.toString(!debugOutput));
+    System.setProperty(CHROME_DRIVER_VERBOSE_LOG_PROPERTY, Boolean.toString(debugOutput));
+    return new ChromeDriver(capabilities);
   }
 
   private ChromeOptions createChromeOptions() {
