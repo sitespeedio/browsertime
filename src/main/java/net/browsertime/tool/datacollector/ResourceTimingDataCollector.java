@@ -22,12 +22,12 @@
  */
 package net.browsertime.tool.datacollector;
 
+import java.util.List;
+import java.util.Map;
+
 import net.browsertime.tool.timings.TimingResourceMeasurement;
 import net.browsertime.tool.timings.TimingRun;
 import org.openqa.selenium.JavascriptExecutor;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Marks defined in the w3c resource timing recommendation. http://www.w3.org/TR/resource-timing/
@@ -37,7 +37,9 @@ import java.util.Map;
  */
 public class ResourceTimingDataCollector extends TimingDataCollector {
   private enum ResourceTimingAttributes {
-    name, entryType, startTime, duration, initiatorType, redirectStart, redirectEnd, fetchStart, domainLookupStart, domainLookupEnd, connectStart, connectEnd, secureConnectionStart, requestStart, responseStart, responseEnd
+    name, entryType, startTime, duration, initiatorType, redirectStart, redirectEnd, fetchStart,
+    domainLookupStart, domainLookupEnd, connectStart, connectEnd, secureConnectionStart,
+    requestStart, responseStart, responseEnd
   }
 
   private static final String LIST_RESOURCES = buildResourceListingJavascript();
@@ -51,7 +53,7 @@ public class ResourceTimingDataCollector extends TimingDataCollector {
 
     List<Map> resources = listFromJs(js, LIST_RESOURCES);
 
-    if (resources != null && !resources.isEmpty()) {
+    if (resources != null) {
       for (Map resource : resources) {
         MapAdapter ma = new MapAdapter(resource);
         String name = ma.asString(ResourceTimingAttributes.name.name());
@@ -99,7 +101,7 @@ public class ResourceTimingDataCollector extends TimingDataCollector {
     builder.append("var r = {};").append('\n');
 
     for (ResourceTimingAttributes ra : ResourceTimingAttributes.values()) {
-      builder.append("r.").append(ra.name()).append(" = entries[i].").append(ra.name()).append(";")
+      builder.append("r.").append(ra).append(" = entries[i].").append(ra).append(";")
           .append('\n');
     }
 
