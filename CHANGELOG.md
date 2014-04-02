@@ -2,6 +2,7 @@
 
 version 0.7 (NOT YET RELEASED)
 ------------------------
+* Add support for sending BASIC AUTH credentials, by specifying the --basic-auth option.
 * Add support for generating har files, by specifying the --har-file option.
 * Upgrade Selenium to version 2.41.
 

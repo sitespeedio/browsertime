@@ -1,5 +1,7 @@
 package net.browsertime.tool.run;
 
+import net.browsertime.tool.BasicAuth;
+
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
 
@@ -18,5 +20,8 @@ public class ConfigModule extends AbstractModule {
         .toInstance(config.shouldIncludeRuns);
     bind(Integer.class).annotatedWith(Names.named("timeoutSeconds"))
         .toInstance(config.timeoutSeconds);
+    if (config.basicAuth != null) {
+      bind(BasicAuth.class).toInstance(config.basicAuth);
+    }
   }
 }

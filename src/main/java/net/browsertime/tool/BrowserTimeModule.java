@@ -48,14 +48,24 @@ public class BrowserTimeModule extends AbstractModule {
       protected void configure() {
         String proxyHost = config.browserOptions.get(BrowserConfig.proxyHost);
 
-        if (config.harWriter != null) {
+        if (config.harWriter != null || config.basicAuth != null) {
           bind(ProxyServer.class).toInstance(new ProxyServer(0));
-          bind(HarGenerator.class).to(BrowserMobHarGenerator.class);
           bind(BrowserProxy.class).to(BrowserMobBrowserProxy.class);
 
-          if (proxyHost != null) {
-            throw new IllegalArgumentException("Using an upstream proxy is currently not " +
-                "supported when generating a har file.");
+          if (config.basicAuth != null && proxyHost != null) {
+              throw new IllegalArgumentException("Using an upstream proxy is currently not " +
+                  "supported when using basic authentication.");
+          }
+
+          if (config.harWriter != null) {
+            bind(HarGenerator.class).to(BrowserMobHarGenerator.class);
+
+            if (proxyHost != null) {
+              throw new IllegalArgumentException("Using an upstream proxy is currently not " +
+                  "supported when generating a har file.");
+            }
+          } else {
+            bind(HarGenerator.class).toProvider(Providers.<HarGenerator>of(null));
           }
         } else {
           bind(HarGenerator.class).toProvider(Providers.<HarGenerator>of(null));

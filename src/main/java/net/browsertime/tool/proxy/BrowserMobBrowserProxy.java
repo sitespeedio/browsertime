@@ -2,6 +2,9 @@ package net.browsertime.tool.proxy;
 
 import java.net.UnknownHostException;
 
+import javax.annotation.Nullable;
+
+import net.browsertime.tool.BasicAuth;
 import net.lightbody.bmp.proxy.ProxyServer;
 import org.openqa.selenium.Proxy;
 
@@ -9,10 +12,12 @@ import com.google.inject.Inject;
 
 public class BrowserMobBrowserProxy implements BrowserProxy {
   private final ProxyServer proxyServer;
+  private final BasicAuth basicAuth;
 
   @Inject
-  public BrowserMobBrowserProxy(ProxyServer proxyServer) {
+  public BrowserMobBrowserProxy(ProxyServer proxyServer, @Nullable BasicAuth basicAuth) {
     this.proxyServer = proxyServer;
+    this.basicAuth = basicAuth;
   }
 
   @Override
@@ -28,6 +33,9 @@ public class BrowserMobBrowserProxy implements BrowserProxy {
   public void start() {
     try {
       proxyServer.start();
+      if (basicAuth != null) {
+        proxyServer.autoBasicAuthorization(basicAuth.domain, basicAuth.username, basicAuth.password);
+      }
     } catch (Exception e) {
       throw new RuntimeException(e);
     }

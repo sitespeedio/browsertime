@@ -3,6 +3,7 @@ package net.browsertime.tool.run;
 import java.io.Writer;
 import java.util.Map;
 
+import net.browsertime.tool.BasicAuth;
 import net.browsertime.tool.BrowserConfig;
 
 /**
@@ -26,4 +27,6 @@ public class TimingConfig {
   public boolean shouldIncludeRuns;
 
   public Writer harWriter;
+  
+  public BasicAuth basicAuth;
 }

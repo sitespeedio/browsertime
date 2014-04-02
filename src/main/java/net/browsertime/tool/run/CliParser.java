@@ -1,6 +1,7 @@
 package net.browsertime.tool.run;
 
 import static java.util.Arrays.asList;
+import static net.browsertime.tool.run.CliParser.OptionString.basicAuthOption;
 import static net.browsertime.tool.run.CliParser.OptionString.browserOption;
 import static net.browsertime.tool.run.CliParser.OptionString.compactOption;
 import static net.browsertime.tool.run.CliParser.OptionString.debugOption;
@@ -29,6 +30,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.browsertime.tool.BasicAuth;
 import net.browsertime.tool.BrowserConfig;
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
@@ -94,7 +96,36 @@ public class CliParser {
 
     config.browserOptions = parseBrowserOptions();
 
+    config.basicAuth = parseBasicAuth();
+
     return config;
+  }
+
+  private BasicAuth parseBasicAuth() throws ParseException, MalformedURLException {
+    if (!commandLine.hasOption(basicAuthOption.longForm)) {
+      return null;
+    }
+    String optionValue = commandLine.getOptionValue(basicAuthOption.longForm);
+    BasicAuth auth = new BasicAuth();
+    String[] strings = optionValue.split(":", 3);
+    if (strings.length != 2 && strings.length != 3) {
+      throw new ParseException(basicAuthOption.longForm + " argument must be of the form [domain:]username:password");
+    }
+
+    int index = 0;
+    if (strings.length == 3) {
+      auth.domain = strings[index++];
+    } else {
+      auth.domain = parseDomainFromUrl();
+    }
+    auth.username = strings[index++];
+    auth.password = strings[index];
+
+    return auth;
+  }
+
+  private String parseDomainFromUrl() throws MalformedURLException, ParseException {
+    return parseUrl().getHost();
   }
 
   private Map<BrowserConfig, String> parseBrowserOptions() throws ParseException {
@@ -204,7 +235,7 @@ public class CliParser {
         .addOption(createRawOption()).addOption(createUserAgentOption())
         .addOption(createWindowSizeOption()).addOption(createVerboseOption())
         .addOption(createDebugOption()).addOption(createVersionOption())
-        .addOption(createHelpOption());
+        .addOption(createHelpOption()).addOption(createBasicAuthOption());
   }
 
   private Option createIterationsOption() {
@@ -270,6 +301,13 @@ public class CliParser {
             + "Only works with Chrome and Firefox.");
   }
 
+  private Option createBasicAuthOption() {
+    return createOption(basicAuthOption,
+        "User name and password to authenticate using basic authentication, " +
+            "in the form username:password. Optionally a domain can be specified, by specifying " +
+            "domain:username:password, else the domain will be set from the current url.");
+  }
+
   private Option createHelpOption() {
     Option option = createOption(helpOption, "Show this help message");
     option.setArgs(0);
@@ -321,7 +359,8 @@ public class CliParser {
         "t", "timeout"), formatOption("f", "format"), proxyHostOption("p", "proxyHost"), compactOption(
         null, "compact"), rawOption(null, "raw"), userAgentOption("ua", "user-agent"), windowSizeOption(
         "w", "window-size"), verboseOption("v", "verbose"), harFileOption(null, "har-file"),
-        debugOption(null, "debug"), helpOption("h", "help"), versionOption("V", "version");
+        debugOption(null, "debug"), helpOption("h", "help"), versionOption("V", "version"),
+        basicAuthOption(null, "basic-auth");
 
     public final String shortForm;
     public final String longForm;
