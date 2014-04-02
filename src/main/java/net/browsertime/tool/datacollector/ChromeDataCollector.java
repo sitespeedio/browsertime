@@ -22,11 +22,12 @@
  */
 package net.browsertime.tool.datacollector;
 
+import java.util.Map;
+
 import net.browsertime.tool.timings.TimingMark;
+import net.browsertime.tool.timings.TimingMeasurement;
 import net.browsertime.tool.timings.TimingRun;
 import org.openqa.selenium.JavascriptExecutor;
-
-import java.util.Map;
 
 /**
  *
@@ -45,19 +46,24 @@ public class ChromeDataCollector extends TimingDataCollector {
   @Override
   public void collectTimingData(JavascriptExecutor js, TimingRun results) {
     collectMarks(js, results);
-    collectMeasurements(results);
+    collectMeasurements(js, results);
   }
 
   private void collectMarks(JavascriptExecutor js, TimingRun results) {
-    // Chrome timing is in s.ms, convert it to ms!!
-    double time = doubleFromJs(js, "return window.chrome.loadTimes().firstPaintTime");
+    // Chrome timing is in seconds, convert it to milliseconds
+    double time = doubleFromJs(js, "return window.chrome.loadTimes().firstPaintTime * 1000");
     if (time > 0) { // ignore 0 times, see https://github.com/tobli/browsertime/issues/36
-      results.addMark(new TimingMark("firstPaint", time * 1000));
+      results.addMark(new TimingMark("firstPaint", time));
     }
   }
 
-  private void collectMeasurements(TimingRun results) {
-    MarkInterval interval = new MarkInterval("firstPaintTime", "navigationStart", "firstPaint");
-    interval.collectMeasurement(results);
+  private void collectMeasurements(JavascriptExecutor js, TimingRun results) {
+    double start = doubleFromJs(js, "return window.performance.timing.navigationStart");
+    double end = doubleFromJs(js, "return window.chrome.loadTimes().firstPaintTime * 1000");
+
+    if (start > 0 && end > 0) {
+      TimingMeasurement m = new TimingMeasurement("firstPaintTime", start, end - start);
+      results.addMeasurement(m);
+    }
   }
 }

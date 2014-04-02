@@ -22,21 +22,18 @@
  */
 package net.browsertime.tool.datacollector;
 
+import java.util.List;
+import java.util.Map;
+
 import net.browsertime.tool.timings.TimingMark;
 import net.browsertime.tool.timings.TimingRun;
 import org.openqa.selenium.JavascriptExecutor;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Marks defined in the w3c navigation timing recommendation.
  * http://www.w3.org/TR/navigation-timing/
  */
 public class NavigationTimingDataCollector extends TimingDataCollector {
-  private enum NavigationAttributes {
-    navigationStart, unloadEventStart, unloadEventEnd, redirectStart, redirectEnd, fetchStart, domainLookupStart, domainLookupEnd, connectStart, connectEnd, secureConnectionStart, requestStart, responseStart, responseEnd, domLoading, domInteractive, domContentLoadedEventStart, domContentLoadedEventEnd, domComplete, loadEventStart, loadEventEnd
-  }
 
   private static final String STANDARD_MARK_PREFIX = "window.performance.timing.";
 
@@ -88,7 +85,7 @@ public class NavigationTimingDataCollector extends TimingDataCollector {
   private static String buildMarksListingJavascript() {
     StringBuilder builder = new StringBuilder();
     builder.append("var marks = [];").append('\n');
-    for (NavigationAttributes na : NavigationAttributes.values()) {
+    for (NavigationTimingAttribute na : NavigationTimingAttribute.values()) {
       builder.append("var m = {};").append('\n');
       builder.append("m.name='").append(na.name()).append("';").append('\n');
       builder.append("m.time=").append(STANDARD_MARK_PREFIX).append(na.name()).append(';')
