@@ -22,11 +22,13 @@
  */
 package net.browsertime.tool.webdriver;
 
+import java.util.Map;
+
 import net.browsertime.tool.BrowserConfig;
 import net.browsertime.tool.datacollector.InternetExplorerDataCollector;
 import net.browsertime.tool.datacollector.TimingDataCollector;
 
-import java.util.Map;
+import com.google.inject.multibindings.Multibinder;
 
 /**
  * Setup a module that uses IE.
@@ -39,9 +41,11 @@ public class InternetExplorerModule extends AbstractBrowserModule {
 
   @Override
   protected void configure() {
-    super.configure();
     bind(WebDriverProvider.class).toInstance(
         new InternetExplorerDriverProvider(browserConfiguration));
-    bind(TimingDataCollector.class).to(InternetExplorerDataCollector.class);
+
+    Multibinder<TimingDataCollector> dataCollectorMultibinder = Multibinder.newSetBinder(binder(),
+        TimingDataCollector.class);
+    dataCollectorMultibinder.addBinding().to(InternetExplorerDataCollector.class);
   }
 }

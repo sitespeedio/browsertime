@@ -37,7 +37,6 @@ public class FireFoxModule extends AbstractBrowserModule {
 
   @Override
   protected void configure() {
-    super.configure();
     bind(WebDriverProvider.class).toInstance(new FirefoxDriverProvider(browserConfiguration));
   }
 }

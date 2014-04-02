@@ -23,17 +23,12 @@
 package net.browsertime.tool.timingrunner;
 
 import java.net.URL;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import net.browsertime.tool.BrowserTimeException;
-import net.browsertime.tool.datacollector.BrowserTimeDataCollector;
-import net.browsertime.tool.datacollector.NavigationTimingDataCollector;
-import net.browsertime.tool.datacollector.ResourceTimingDataCollector;
 import net.browsertime.tool.datacollector.TimingDataCollector;
-import net.browsertime.tool.datacollector.UserTimingDataCollector;
 import net.browsertime.tool.logger.Logger;
 import net.browsertime.tool.timings.TimingRun;
 import net.browsertime.tool.timings.TimingSession;
@@ -53,25 +48,18 @@ import com.google.inject.name.Named;
  */
 public class SeleniumTimingRunner implements TimingRunner {
   private final WebDriverProvider driverProvider;
-  private final List<TimingDataCollector> dataCollectors;
+  private final Set<TimingDataCollector> dataCollectors;
   private final int timeoutSeconds;
   private final Logger logger;
 
   @Inject
-  public SeleniumTimingRunner(TimingDataCollector browserDataCollector,
+  public SeleniumTimingRunner(Set<TimingDataCollector> dataCollectors,
                               WebDriverProvider driverProvider,
                               @Named("timeoutSeconds") int timeoutSeconds, Logger logger) {
+    this.dataCollectors = dataCollectors;
     this.driverProvider = driverProvider;
     this.timeoutSeconds = timeoutSeconds;
     this.logger = logger;
-    TimingDataCollector navigationTimingDataCollector = new NavigationTimingDataCollector();
-    TimingDataCollector userTimingDataCollector = new UserTimingDataCollector(true);
-    TimingDataCollector browserTimeDataCollector = new BrowserTimeDataCollector();
-    TimingDataCollector resourceTimingDataCollector = new ResourceTimingDataCollector();
-
-    this.dataCollectors =
-        Arrays.asList(navigationTimingDataCollector, browserDataCollector, userTimingDataCollector,
-            browserTimeDataCollector, resourceTimingDataCollector);
   }
 
   @Override

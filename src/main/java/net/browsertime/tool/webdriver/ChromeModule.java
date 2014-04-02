@@ -24,11 +24,13 @@
 package net.browsertime.tool.webdriver;
 
 
+import java.util.Map;
+
 import net.browsertime.tool.BrowserConfig;
 import net.browsertime.tool.datacollector.ChromeDataCollector;
 import net.browsertime.tool.datacollector.TimingDataCollector;
 
-import java.util.Map;
+import com.google.inject.multibindings.Multibinder;
 
 /**
  * Setup a module that uses Chrome.
@@ -40,8 +42,10 @@ public class ChromeModule extends AbstractBrowserModule {
 
   @Override
   protected void configure() {
-    super.configure();
     bind(WebDriverProvider.class).toInstance(new ChromeDriverProvider(browserConfiguration));
-    bind(TimingDataCollector.class).to(ChromeDataCollector.class);
+
+    Multibinder<TimingDataCollector> dataCollectorMultibinder = Multibinder.newSetBinder(binder(),
+        TimingDataCollector.class);
+    dataCollectorMultibinder.addBinding().to(ChromeDataCollector.class);
   }
 }

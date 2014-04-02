@@ -1,5 +1,8 @@
 package net.browsertime.tool;
 
+import net.browsertime.tool.datacollector.DataCollectorModule;
+import net.browsertime.tool.timingrunner.SeleniumTimingRunner;
+import net.browsertime.tool.timingrunner.TimingRunner;
 import net.browsertime.tool.webdriver.ChromeModule;
 import net.browsertime.tool.webdriver.FireFoxModule;
 import net.browsertime.tool.webdriver.InternetExplorerModule;
@@ -26,6 +29,9 @@ public class BrowserTimeModule extends AbstractModule {
     install(createFormatModule(config));
     install(createToolModule(config));
     install(new ConfigModule(config));
+    install(new DataCollectorModule());
+
+    bind(TimingRunner.class).to(SeleniumTimingRunner.class);
   }
 
   private Module createToolModule(final TimingConfig config) {
