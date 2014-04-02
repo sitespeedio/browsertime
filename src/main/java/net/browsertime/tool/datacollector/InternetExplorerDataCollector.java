@@ -23,6 +23,7 @@
 package net.browsertime.tool.datacollector;
 
 import net.browsertime.tool.timings.TimingMark;
+import net.browsertime.tool.timings.TimingMeasurement;
 import net.browsertime.tool.timings.TimingRun;
 import org.openqa.selenium.JavascriptExecutor;
 
@@ -34,7 +35,7 @@ public class InternetExplorerDataCollector extends TimingDataCollector {
   @Override
   public void collectTimingData(JavascriptExecutor js, TimingRun results) {
     collectMarks(js, results);
-    collectMeasurements(results);
+    collectMeasurements(js, results);
   }
 
   private void collectMarks(JavascriptExecutor js, TimingRun results) {
@@ -42,8 +43,13 @@ public class InternetExplorerDataCollector extends TimingDataCollector {
     results.addMark(new TimingMark("msFirstPaint", time));
   }
 
-  private void collectMeasurements(TimingRun results) {
-    MarkInterval interval = new MarkInterval("firstPaintTime", "navigationStart", "msFirstPaint");
-    interval.collectMeasurement(results);
+  private void collectMeasurements(JavascriptExecutor js, TimingRun results) {
+    double start = doubleFromJs(js, "return window.performance.timing.navigationStart");
+    double end = doubleFromJs(js, "return window.performance.timing.msFirstPaint");
+
+    if (start > 0 && end > 0) {
+      TimingMeasurement m = new TimingMeasurement("firstPaintTime", start, end - start);
+      results.addMeasurement(m);
+    }
   }
 }

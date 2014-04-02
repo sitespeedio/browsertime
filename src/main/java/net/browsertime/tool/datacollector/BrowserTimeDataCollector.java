@@ -22,10 +22,24 @@
  */
 package net.browsertime.tool.datacollector;
 
+import static net.browsertime.tool.datacollector.NavigationTimingAttribute.connectEnd;
+import static net.browsertime.tool.datacollector.NavigationTimingAttribute.connectStart;
+import static net.browsertime.tool.datacollector.NavigationTimingAttribute.domContentLoadedEventStart;
+import static net.browsertime.tool.datacollector.NavigationTimingAttribute.domInteractive;
+import static net.browsertime.tool.datacollector.NavigationTimingAttribute.domainLookupEnd;
+import static net.browsertime.tool.datacollector.NavigationTimingAttribute.domainLookupStart;
+import static net.browsertime.tool.datacollector.NavigationTimingAttribute.fetchStart;
+import static net.browsertime.tool.datacollector.NavigationTimingAttribute.loadEventStart;
+import static net.browsertime.tool.datacollector.NavigationTimingAttribute.navigationStart;
+import static net.browsertime.tool.datacollector.NavigationTimingAttribute.requestStart;
+import static net.browsertime.tool.datacollector.NavigationTimingAttribute.responseEnd;
+import static net.browsertime.tool.datacollector.NavigationTimingAttribute.responseStart;
+
 import java.util.List;
 import java.util.Map;
 
 import net.browsertime.tool.Version;
+import net.browsertime.tool.timings.TimingMeasurement;
 import net.browsertime.tool.timings.TimingRun;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.HasCapabilities;
@@ -39,17 +53,17 @@ public class BrowserTimeDataCollector extends TimingDataCollector {
 
   private static final MarkInterval[] intervals = {
       // The following is the standard from GA
-      new MarkInterval("domainLookupTime", "domainLookupStart", "domainLookupEnd"),
-      new MarkInterval("redirectionTime", "navigationStart", "fetchStart"),
-      new MarkInterval("serverConnectionTime", "connectStart", "connectEnd"),
-      new MarkInterval("serverResponseTime", "requestStart", "responseStart"),
-      new MarkInterval("pageDownloadTime", "responseStart", "responseEnd"),
-      new MarkInterval("domInteractiveTime", "navigationStart", "domInteractive"),
-      new MarkInterval("domContentLoadedTime", "navigationStart", "domContentLoadedEventStart"),
-      new MarkInterval("pageLoadTime", "navigationStart", "loadEventStart"),
+      new MarkInterval("domainLookupTime", domainLookupStart, domainLookupEnd),
+      new MarkInterval("redirectionTime", navigationStart, fetchStart),
+      new MarkInterval("serverConnectionTime", connectStart, connectEnd),
+      new MarkInterval("serverResponseTime", requestStart, responseStart),
+      new MarkInterval("pageDownloadTime", responseStart, responseEnd),
+      new MarkInterval("domInteractiveTime", navigationStart, domInteractive),
+      new MarkInterval("domContentLoadedTime", navigationStart, domContentLoadedEventStart),
+      new MarkInterval("pageLoadTime", navigationStart, loadEventStart),
       // these two are extras to make it easy to compare
-      new MarkInterval("frontEndTime", "responseEnd", "loadEventStart"),
-      new MarkInterval("backEndTime", "navigationStart", "responseStart"),};
+      new MarkInterval("frontEndTime", responseEnd, loadEventStart),
+      new MarkInterval("backEndTime", navigationStart, responseStart),};
 
   @Override
   public void collectPageData(JavascriptExecutor js, Map<String, String> pageInfo) {
@@ -80,8 +94,26 @@ public class BrowserTimeDataCollector extends TimingDataCollector {
   @Override
   public void collectTimingData(JavascriptExecutor js, TimingRun results) {
     for (MarkInterval interval : intervals) {
-      interval.collectMeasurement(results);
+      double start = doubleFromJs(js, "return window.performance.timing." + interval.start);
+      double end = doubleFromJs(js, "return window.performance.timing." + interval.end);
+
+      if (start > 0 && end > 0) {
+        TimingMeasurement m = new TimingMeasurement(interval.measurementName, start, end - start);
+        results.addMeasurement(m);
+      }
     }
   }
 
+  final static private class MarkInterval {
+    private final String measurementName;
+    private final NavigationTimingAttribute start;
+    private final NavigationTimingAttribute end;
+
+    MarkInterval(String measurementName, NavigationTimingAttribute start, 
+                 NavigationTimingAttribute end) {
+      this.measurementName = measurementName;
+      this.start = start;
+      this.end = end;
+    }
+  }
 }

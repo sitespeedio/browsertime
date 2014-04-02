@@ -22,13 +22,11 @@
  */
 package net.browsertime.tool.datacollector;
 
-import net.browsertime.tool.timings.TimingMark;
-import net.browsertime.tool.timings.TimingMeasurement;
-import net.browsertime.tool.timings.TimingRun;
-import org.openqa.selenium.JavascriptExecutor;
-
 import java.util.List;
 import java.util.Map;
+
+import net.browsertime.tool.timings.TimingRun;
+import org.openqa.selenium.JavascriptExecutor;
 
 /**
  * Superclass for browser specific data collection, subclass as needed.
@@ -67,29 +65,5 @@ public class TimingDataCollector {
     // Extract object since Selenium returns a Long whenever 0 is returned by a script.
     Object o = executor.executeScript(script);
     return Double.parseDouble(o.toString());
-  }
-
-  final static class MarkInterval {
-    private final String measurementName;
-    private final String startMarkName;
-    private final String endMarkName;
-
-    MarkInterval(String measurementName, String startMarkName, String endMarkName) {
-      this.measurementName = measurementName;
-      this.startMarkName = startMarkName;
-      this.endMarkName = endMarkName;
-    }
-
-    void collectMeasurement(TimingRun timingRun) {
-      TimingMark start = timingRun.getMark(startMarkName);
-      TimingMark end = timingRun.getMark(endMarkName);
-
-      if (start != null && end != null) {
-        double duration = end.getStartTime() - start.getStartTime();
-        TimingMeasurement m =
-            new TimingMeasurement(measurementName, start.getStartTime(), duration);
-        timingRun.addMeasurement(m);
-      }
-    }
   }
 }
