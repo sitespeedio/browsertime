@@ -1,9 +1,10 @@
 package net.browsertime.tool.run;
 
-import net.browsertime.tool.BrowserConfig;
-
+import java.io.File;
 import java.io.Writer;
 import java.util.Map;
+
+import net.browsertime.tool.BrowserConfig;
 
 /**
  *
@@ -24,4 +25,6 @@ public class TimingConfig {
   public Writer outputWriter;
   public boolean shouldPrettyPrint;
   public boolean shouldIncludeRuns;
+
+  public File harFile;
 }

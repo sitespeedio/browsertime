@@ -5,6 +5,7 @@ import static net.browsertime.tool.run.CliParser.OptionString.browserOption;
 import static net.browsertime.tool.run.CliParser.OptionString.compactOption;
 import static net.browsertime.tool.run.CliParser.OptionString.debugOption;
 import static net.browsertime.tool.run.CliParser.OptionString.formatOption;
+import static net.browsertime.tool.run.CliParser.OptionString.harFileOption;
 import static net.browsertime.tool.run.CliParser.OptionString.helpOption;
 import static net.browsertime.tool.run.CliParser.OptionString.iterationsOption;
 import static net.browsertime.tool.run.CliParser.OptionString.outputOption;
@@ -15,15 +16,6 @@ import static net.browsertime.tool.run.CliParser.OptionString.userAgentOption;
 import static net.browsertime.tool.run.CliParser.OptionString.verboseOption;
 import static net.browsertime.tool.run.CliParser.OptionString.versionOption;
 import static net.browsertime.tool.run.CliParser.OptionString.windowSizeOption;
-
-import net.browsertime.tool.BrowserConfig;
-import org.apache.commons.cli.BasicParser;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-import org.apache.commons.cli.Parser;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -36,6 +28,15 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+
+import net.browsertime.tool.BrowserConfig;
+import org.apache.commons.cli.BasicParser;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.Parser;
 
 /**
  *
@@ -85,6 +86,8 @@ public class CliParser {
     config.browser = parseBrowser();
     config.timeoutSeconds = parseTimeout();
     config.format = parseFormat();
+
+    config.harFile = parseHarFile();
 
     config.outputWriter =
         parseSerializationWriter(commandLine.getOptionValue(outputOption.longForm));
@@ -174,6 +177,15 @@ public class CliParser {
     }
   }
 
+  private File parseHarFile() {
+    String filename = commandLine.getOptionValue(harFileOption.longForm);
+    if (filename == null) {
+      return null;
+    } else {
+      return new File(filename);
+    }
+  }
+
   private Writer parseSerializationWriter(String filename) throws IOException {
     if (filename == null) {
       return new OutputStreamWriter(System.out);
@@ -185,12 +197,13 @@ public class CliParser {
 
   private Options createCliOptions() {
     return new Options().addOption(createIterationsOption()).addOption(createBrowserOption())
-        .addOption(createOutputOption()).addOption(createTimeoutOption())
-        .addOption(createFormatOption()).addOption(createProxyOption())
-        .addOption(createCompactOption()).addOption(createRawOption())
-        .addOption(createUserAgentOption()).addOption(createWindowSizeOption())
-        .addOption(createVerboseOption()).addOption(createDebugOption())
-        .addOption(createVersionOption()).addOption(createHelpOption());
+        .addOption(createOutputOption()).addOption(createHarFileOption())
+        .addOption(createTimeoutOption()).addOption(createFormatOption())
+        .addOption(createProxyOption()).addOption(createCompactOption())
+        .addOption(createRawOption()).addOption(createUserAgentOption())
+        .addOption(createWindowSizeOption()).addOption(createVerboseOption())
+        .addOption(createDebugOption()).addOption(createVersionOption())
+        .addOption(createHelpOption());
   }
 
   private Option createIterationsOption() {
@@ -207,6 +220,10 @@ public class CliParser {
         + "If no filename is given, the result is put on standard out.");
   }
 
+  private Option createHarFileOption() {
+    return createOption(harFileOption,
+        "Create a HAR file and write it to the specified path.");
+  }
 
   private Option createFormatOption() {
     return createOption(formatOption, "The desired output format. Supported values are: "
@@ -302,9 +319,8 @@ public class CliParser {
     iterationsOption("n", "times"), browserOption("b", "browser"), outputOption("o", "output"), timeoutOption(
         "t", "timeout"), formatOption("f", "format"), proxyHostOption("p", "proxyHost"), compactOption(
         null, "compact"), rawOption(null, "raw"), userAgentOption("ua", "user-agent"), windowSizeOption(
-        "w", "window-size"), verboseOption("v", "verbose"), debugOption(null, "debug"), helpOption(
-        "h", "help"), versionOption("V", "version");
-
+        "w", "window-size"), verboseOption("v", "verbose"), harFileOption(null, "har-file"),
+        debugOption(null, "debug"), helpOption("h", "help"), versionOption("V", "version");
 
     public final String shortForm;
     public final String longForm;
