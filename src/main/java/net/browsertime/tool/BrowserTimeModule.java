@@ -46,7 +46,7 @@ public class BrowserTimeModule extends AbstractModule {
     return new AbstractModule() {
       @Override
       protected void configure() {
-        bind(ProxyServer.class).toInstance(new ProxyServer(9090));
+        bind(ProxyServer.class).toInstance(new ProxyServer(0));
 
         String proxyHost = config.browserOptions.get(BrowserConfig.proxyHost);
 
