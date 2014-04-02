@@ -27,8 +27,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Nullable;
+
 import net.browsertime.tool.BrowserTimeException;
 import net.browsertime.tool.datacollector.TimingDataCollector;
+import net.browsertime.tool.har.HarGenerator;
 import net.browsertime.tool.logger.Logger;
 import net.browsertime.tool.timings.TimingRun;
 import net.browsertime.tool.timings.TimingSession;
@@ -49,15 +52,18 @@ import com.google.inject.name.Named;
 public class SeleniumTimingRunner implements TimingRunner {
   private final WebDriverProvider driverProvider;
   private final Set<TimingDataCollector> dataCollectors;
+  private final HarGenerator harGenerator;
   private final int timeoutSeconds;
   private final Logger logger;
 
   @Inject
   public SeleniumTimingRunner(Set<TimingDataCollector> dataCollectors,
                               WebDriverProvider driverProvider,
+                              @Nullable HarGenerator harGenerator,
                               @Named("timeoutSeconds") int timeoutSeconds, Logger logger) {
     this.dataCollectors = dataCollectors;
     this.driverProvider = driverProvider;
+    this.harGenerator = harGenerator;
     this.timeoutSeconds = timeoutSeconds;
     this.logger = logger;
   }
@@ -70,8 +76,18 @@ public class SeleniumTimingRunner implements TimingRunner {
       driverProvider.validateProvider();
 
       TimingSession session = new TimingSession();
+
+      if (harGenerator != null) {
+        harGenerator.startSession();
+      }
+
       for (int i = 1; i <= numIterations; i++) {
         WebDriver driver = driverProvider.get();
+
+        if (harGenerator != null) {
+          harGenerator.startRun();
+        }
+
         try {
           JavascriptExecutor js = fetchUrl(driver, url, timeoutSeconds);
 
@@ -84,6 +100,10 @@ public class SeleniumTimingRunner implements TimingRunner {
           }
         } finally {
           driver.quit();
+
+          if (harGenerator != null) {
+            harGenerator.endRun();
+          }
         }
       }
       return session;
@@ -92,6 +112,10 @@ public class SeleniumTimingRunner implements TimingRunner {
           + " seconds.", e);
     } catch (WebDriverException e) {
       throw new BrowserTimeException("Error while running Selenium.", e);
+    } finally {
+      if (harGenerator != null) {
+        harGenerator.endSession();
+      }
     }
   }
 

@@ -87,7 +87,7 @@ public class CliParser {
     config.timeoutSeconds = parseTimeout();
     config.format = parseFormat();
 
-    config.harFile = parseHarFile();
+    config.harWriter = parseHarWriter();
 
     config.outputWriter =
         parseSerializationWriter(commandLine.getOptionValue(outputOption.longForm));
@@ -177,12 +177,13 @@ public class CliParser {
     }
   }
 
-  private File parseHarFile() {
+  private Writer parseHarWriter() throws IOException {
     String filename = commandLine.getOptionValue(harFileOption.longForm);
     if (filename == null) {
       return null;
     } else {
-      return new File(filename);
+      File file = new File(filename);
+      return new FileWriter(file);
     }
   }
 

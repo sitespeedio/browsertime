@@ -70,7 +70,8 @@ public class Main {
         URL url = parser.parseUrl();
 
         Injector injector = Guice.createInjector(new BrowserTimeModule(config));
-        injector.getInstance(BrowserTime.class).run(url, config.numIterations, config.outputWriter);
+        injector.getInstance(BrowserTime.class).run(url, config.numIterations,
+            config.outputWriter, config.harWriter);
       }
     } catch (ParseException e) {
       commandStatus = ERROR;
