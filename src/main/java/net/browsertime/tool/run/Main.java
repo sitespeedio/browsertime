@@ -25,6 +25,7 @@ package net.browsertime.tool.run;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import net.browsertime.tool.BrowserTime;
@@ -77,6 +78,9 @@ public class Main {
       commandStatus = ERROR;
       shouldShowUsage = true;
       printSyntaxError("Error parsing command line options: " + e.getMessage());
+    } catch (MalformedURLException e) {
+      commandStatus = ERROR;
+      printSyntaxError("Url cannot be parsed: " + e.getMessage());
     } catch (IOException e) {
       commandStatus = ERROR;
       printSyntaxError("Error creating output file: " + e.getMessage());
