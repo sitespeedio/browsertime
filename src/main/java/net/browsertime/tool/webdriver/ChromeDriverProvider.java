@@ -12,7 +12,12 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.os.CommandLine;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+
 public class ChromeDriverProvider extends WebDriverProvider {
+  @Inject @Named("debugMode") private boolean debugMode;
+
   public ChromeDriverProvider(Map<BrowserConfig, String> browserConfiguration) {
     super(browserConfiguration);
   }
@@ -32,9 +37,8 @@ public class ChromeDriverProvider extends WebDriverProvider {
   public WebDriver get() {
     DesiredCapabilities capabilities = createCapabilities();
     capabilities.setCapability(ChromeOptions.CAPABILITY, createChromeOptions());
-    boolean debugOutput = false;
-    System.setProperty(CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, Boolean.toString(!debugOutput));
-    System.setProperty(CHROME_DRIVER_VERBOSE_LOG_PROPERTY, Boolean.toString(debugOutput));
+    System.setProperty(CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, Boolean.toString(!debugMode));
+    System.setProperty(CHROME_DRIVER_VERBOSE_LOG_PROPERTY, Boolean.toString(debugMode));
     return new ChromeDriver(capabilities);
   }
 
