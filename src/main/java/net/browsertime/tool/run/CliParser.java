@@ -81,7 +81,7 @@ public class CliParser {
     TimingConfig config = new TimingConfig();
 
     config.verbose = commandLine.hasOption(verboseOption.longForm);
-    config.debug = commandLine.hasOption(debugOption.longForm);
+    config.debugMode = commandLine.hasOption(debugOption.longForm);
     config.numIterations = parseIterations();
     config.shouldPrettyPrint = !commandLine.hasOption(compactOption.longForm);
     config.shouldIncludeRuns = commandLine.hasOption(rawOption.longForm);

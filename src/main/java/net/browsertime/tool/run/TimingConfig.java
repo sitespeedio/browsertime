@@ -12,7 +12,7 @@ import net.browsertime.tool.BrowserConfig;
 public class TimingConfig {
   // tool options
   public boolean verbose;
-  public boolean debug;
+  public boolean debugMode;
 
   // measurement options
   public int numIterations = 1;

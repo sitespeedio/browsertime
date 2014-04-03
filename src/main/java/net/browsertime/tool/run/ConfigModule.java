@@ -15,6 +15,8 @@ public class ConfigModule extends AbstractModule {
 
   @Override
   protected void configure() {
+    bind(Boolean.class).annotatedWith(Names.named("debugMode"))
+        .toInstance(config.debugMode);
     bind(Boolean.class).annotatedWith(Names.named("prettyPrint"))
         .toInstance(config.shouldPrettyPrint);
     bind(Boolean.class).annotatedWith(Names.named("includeRuns"))

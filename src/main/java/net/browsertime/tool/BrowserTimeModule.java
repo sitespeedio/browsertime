@@ -84,7 +84,7 @@ public class BrowserTimeModule extends AbstractModule {
     return new AbstractModule() {
       @Override
       protected void configure() {
-        bind(Logger.class).toInstance(new ConsoleLogger(config.verbose, config.debug));
+        bind(Logger.class).toInstance(new ConsoleLogger(config.verbose, config.debugMode));
       }
     };
   }
