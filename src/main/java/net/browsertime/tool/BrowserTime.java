@@ -38,6 +38,7 @@ public class BrowserTime {
     serializer.serialize(session, outputWriter);
 
     if (harGenerator != null) {
+      harGenerator.addTimingDataToHar(session);
       harGenerator.writeHar(harWriter);
     }
 

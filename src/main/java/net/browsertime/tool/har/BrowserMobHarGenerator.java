@@ -2,8 +2,13 @@ package net.browsertime.tool.har;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Map;
 
+import net.browsertime.tool.timings.TimingSession;
 import net.lightbody.bmp.core.har.Har;
+import net.lightbody.bmp.core.har.HarLog;
+import net.lightbody.bmp.core.har.HarNameVersion;
+import net.lightbody.bmp.core.har.HarPage;
 import net.lightbody.bmp.proxy.ProxyServer;
 
 import com.google.inject.Inject;
@@ -38,6 +43,27 @@ public class BrowserMobHarGenerator implements HarGenerator {
   @Override
   public void endRun() {
     proxyServer.endPage();
+  }
+
+
+  @Override
+  public void addTimingDataToHar(TimingSession session) {
+    HarLog log = proxyServer.getHar().getLog();
+
+    Map<String, String> pageData = session.getPageData();
+
+    HarNameVersion creator = log.getCreator();
+    creator.setName("Browsertime");
+    creator.setVersion(pageData.get("browserTimeVersion"));
+    creator.setComment("Created using BrowserMob Proxy");
+
+    HarNameVersion browser = log.getBrowser();
+    browser.setName(pageData.get("browserName"));
+    browser.setVersion(pageData.get("browserVersion"));
+
+    for (HarPage harPage : log.getPages()) {
+      harPage.setComment(pageData.get("url"));
+    }
   }
 
   @Override

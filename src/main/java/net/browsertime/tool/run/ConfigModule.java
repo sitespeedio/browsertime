@@ -4,6 +4,7 @@ import net.browsertime.tool.BasicAuth;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
+import com.google.inject.util.Providers;
 
 public class ConfigModule extends AbstractModule {
   private TimingConfig config;
@@ -22,6 +23,8 @@ public class ConfigModule extends AbstractModule {
         .toInstance(config.timeoutSeconds);
     if (config.basicAuth != null) {
       bind(BasicAuth.class).toInstance(config.basicAuth);
+    } else {
+      bind(BasicAuth.class).toProvider(Providers.<BasicAuth>of(null));
     }
   }
 }
