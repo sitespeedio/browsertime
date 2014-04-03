@@ -31,7 +31,6 @@ import org.openqa.selenium.JavascriptExecutor;
 
 /**
  * Marks defined in the w3c resource timing recommendation. http://www.w3.org/TR/resource-timing/
- * <p/>
  * NOTE: The user timing spec uses a different resolution for time stamps (milliseconds with a
  * decimal part)
  */

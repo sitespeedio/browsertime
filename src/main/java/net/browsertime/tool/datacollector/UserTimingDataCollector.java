@@ -22,18 +22,17 @@
  */
 package net.browsertime.tool.datacollector;
 
+import java.util.List;
+import java.util.Map;
+
 import net.browsertime.tool.timings.TimingMark;
 import net.browsertime.tool.timings.TimingMeasurement;
 import net.browsertime.tool.timings.TimingRun;
 import org.openqa.selenium.JavascriptExecutor;
 
-import java.util.List;
-import java.util.Map;
-
 /**
  * Marks and measurements defined in the w3c user timing recommendation.
  * http://www.w3.org/TR/user-timing/
- * <p/>
  * NOTE: The user timing spec uses a different resolution for time stamps (milliseconds with a
  * decimal part)
  */
