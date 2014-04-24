@@ -33,6 +33,7 @@ public class BrowserMobBrowserProxy implements BrowserProxy {
   public void start() {
     try {
       proxyServer.start();
+      proxyServer.setCaptureHeaders(true);
       if (basicAuth != null) {
         proxyServer.autoBasicAuthorization(basicAuth.domain, basicAuth.username, basicAuth.password);
       }
