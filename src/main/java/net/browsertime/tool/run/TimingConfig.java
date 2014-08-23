@@ -5,6 +5,7 @@ import java.util.Map;
 
 import net.browsertime.tool.BasicAuth;
 import net.browsertime.tool.BrowserConfig;
+import net.browsertime.tool.Headers;
 
 /**
  *
@@ -29,4 +30,6 @@ public class TimingConfig {
   public Writer harWriter;
   
   public BasicAuth basicAuth;
+  
+  public Headers headers;
 }

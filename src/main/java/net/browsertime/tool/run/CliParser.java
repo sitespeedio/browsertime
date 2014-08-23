@@ -17,6 +17,7 @@ import static net.browsertime.tool.run.CliParser.OptionString.userAgentOption;
 import static net.browsertime.tool.run.CliParser.OptionString.verboseOption;
 import static net.browsertime.tool.run.CliParser.OptionString.versionOption;
 import static net.browsertime.tool.run.CliParser.OptionString.windowSizeOption;
+import static net.browsertime.tool.run.CliParser.OptionString.headersOption;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -32,6 +33,8 @@ import java.util.Map;
 
 import net.browsertime.tool.BasicAuth;
 import net.browsertime.tool.BrowserConfig;
+import net.browsertime.tool.Headers;
+
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
@@ -91,6 +94,8 @@ public class CliParser {
 
     config.harWriter = parseHarWriter();
 
+    config.headers = parseHeaders();
+    
     config.outputWriter =
         parseSerializationWriter(commandLine.getOptionValue(outputOption.longForm));
 
@@ -126,6 +131,24 @@ public class CliParser {
 
   private String parseDomainFromUrl() throws MalformedURLException, ParseException {
     return parseUrl().getHost();
+  }
+  
+  private Headers parseHeaders() throws MalformedURLException, ParseException {
+    Map<String, String> headers = new HashMap<String, String>();
+
+    String headersAsString = commandLine.getOptionValue(headersOption.longForm);
+
+    if (headersAsString != null) {
+      String[] a = headersAsString.split(",");
+      for (int i = 0; i < a.length; i++) {
+        String[] keyAndValue = a[i].split(":");
+        headers.put(keyAndValue[0], keyAndValue[1]);
+      }
+    }
+    
+    Headers h = new Headers();
+    h.keyAndValues = headers;
+    return h;
   }
 
   private Map<BrowserConfig, String> parseBrowserOptions() throws ParseException {
@@ -235,7 +258,7 @@ public class CliParser {
         .addOption(createRawOption()).addOption(createUserAgentOption())
         .addOption(createWindowSizeOption()).addOption(createVerboseOption())
         .addOption(createDebugOption()).addOption(createVersionOption())
-        .addOption(createHelpOption()).addOption(createBasicAuthOption());
+        .addOption(createHelpOption()).addOption(createBasicAuthOption()).addOption(createHeaderOption());
   }
 
   private Option createIterationsOption() {
@@ -255,6 +278,11 @@ public class CliParser {
   private Option createHarFileOption() {
     return createOption(harFileOption,
         "Create a HAR file and write it to the specified path.");
+  }
+  
+  private Option createHeaderOption() {
+    return createOption(headersOption,
+        "Add request headers by the format of key:value,key:value");
   }
 
   private Option createFormatOption() {
@@ -360,7 +388,7 @@ public class CliParser {
         null, "compact"), rawOption(null, "raw"), userAgentOption("ua", "user-agent"), windowSizeOption(
         "w", "window-size"), verboseOption("v", "verbose"), harFileOption(null, "har-file"),
         debugOption(null, "debug"), helpOption("h", "help"), versionOption("V", "version"),
-        basicAuthOption(null, "basic-auth");
+        basicAuthOption(null, "basic-auth"), headersOption(null,"headers");
 
     public final String shortForm;
     public final String longForm;
