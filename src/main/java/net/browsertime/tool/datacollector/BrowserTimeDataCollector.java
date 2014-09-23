@@ -56,7 +56,7 @@ public class BrowserTimeDataCollector extends TimingDataCollector {
       new MarkInterval("domainLookupTime", domainLookupStart, domainLookupEnd),
       new MarkInterval("redirectionTime", navigationStart, fetchStart),
       new MarkInterval("serverConnectionTime", connectStart, connectEnd),
-      new MarkInterval("serverResponseTime", requestStart, responseStart),
+      new MarkInterval("serverResponseTime", requestStart, responseEnd),
       new MarkInterval("pageDownloadTime", responseStart, responseEnd),
       new MarkInterval("domInteractiveTime", navigationStart, domInteractive),
       new MarkInterval("domContentLoadedTime", navigationStart, domContentLoadedEventStart),
