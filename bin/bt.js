@@ -2,12 +2,12 @@
 
 var BT = require('../lib/bt'),
   bt = new BT(),
-  argv = require('minimist')(process.argv.slice(2), opts = {
+  argv = require('minimist')(process.argv.slice(2), {
     alias: {
       'u': 'url',
       'b': 'browser',
       'n': 'runs',
-      's': 'size'
+      'w': 'size'
     }
   });
 
