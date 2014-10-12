@@ -1,0 +1,45 @@
+{
+  "name": "bt",
+  "version": "0.1.0",
+  "bin": "./bin/bt.js",
+  "description": "Analyze the speed of your web page",
+  "keywords": [
+    "performance",
+    "web",
+    "speed",
+    "navigation-timing",
+    "browser"
+  ],
+  "homepage": "http://www.sitespeed.io",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Peter Hedenskog",
+    "url": "http://www.peterhedenskog.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/soulgalore/bt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/soulgalore/bt/issues"
+  },
+  "files": ["bin", "lib"],
+  "engines": {
+    "node": ">=0.8.1"
+  },
+  "main": "./lib/bt.js",
+  "devDependencies": {
+    "jshint": "2.5.3"
+  },
+  "dependencies": {
+    "selenium-webdriver": "2.43.x",
+    "async": "0.9.x",
+    "minimist": "1.1.x",
+    "fast-stats": "0.0.2"
+  },
+  "scripts": {
+    "lint": "jshint .",
+    "test": "npm run lint",
+    "travis": "npm run lint"
+  }
+}
