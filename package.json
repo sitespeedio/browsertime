@@ -8,20 +8,23 @@
     "web",
     "speed",
     "navigation-timing",
+    "har",
     "browser"
   ],
-  "homepage": "http://www.sitespeed.io",
+  "homepage": "http://www.browsertime.net",
   "license": "Apache-2.0",
   "author": {
-    "name": "Peter Hedenskog",
-    "url": "http://www.peterhedenskog.com"
+    "name": "Tobias Lidskog"
+  },
+  "contributors": {
+    "name": "Peter Hedenskog"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/soulgalore/bt.git"
+    "url": "git://github.com/tobli/browsertime.git"
   },
   "bugs": {
-    "url": "https://github.com/soulgalore/bt/issues"
+    "url": "https://github.com/tobli/browsertime/issues"
   },
   "files": ["bin", "lib"],
   "engines": {
@@ -35,7 +38,7 @@
     "selenium-webdriver": "2.43.x",
     "async": "0.9.x",
     "minimist": "1.1.x",
-    "fast-stats": "0.0.2"
+    "fast-stats": "0.0.x"
   },
   "scripts": {
     "lint": "jshint .",
