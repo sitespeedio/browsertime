@@ -9,5 +9,5 @@ before_install:
  
 script: 
 - "npm run-script travis"
-- "node ./bin/bt.js -u http://www.sitespeed.io -b firefox -n 2"
+- "node ./bin/browsertime.js -u http://www.sitespeed.io -b firefox -n 2"
 
