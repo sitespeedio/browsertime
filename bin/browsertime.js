@@ -7,7 +7,8 @@ var BT = require('../lib/browsertime'),
       'u': 'url',
       'b': 'browser',
       'n': 'runs',
-      'w': 'size'
+      'w': 'size',
+      'f': 'filename'
     }
   });
 
