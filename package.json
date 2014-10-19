@@ -40,7 +40,8 @@
     "minimist": "1.1.x",
     "fast-stats": "0.0.x",
     "cross-spawn": "0.1.x",
-    "browsermob-proxy-api": "0.1.x"
+    "browsermob-proxy-api": "0.1.x",
+    "winston": "0.7.x"
   },
   "scripts": {
     "lint": "jshint .",
