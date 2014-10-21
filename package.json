@@ -1,5 +1,5 @@
 {
-  "name": "bt",
+  "name": "browsertime",
   "version": "0.1.0",
   "bin": "./bin/browsertime.js",
   "description": "Analyze the speed of your web page",
