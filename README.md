@@ -1,7 +1,7 @@
 # Browsertime [![Build Status](https://travis-ci.org/tobli/browsertime.png?branch=master)](https://travis-ci.org/tobli/browsertime)
 
-Guess what? It's browser time! Fetch timings ([Navigation Timing API](http://kaaes.github.io/timing/info.html) and [User Timing](http://www.html5rocks.com/en/tutorials/webperformance/usertiming/)), [HAR file](http://www.softwareishard.com/blog/har-12-spec/),
-[Resource Timing](http://www.w3.org/TR/resource-timing/), first paint & [RUM Speed Index](https://github.com/WPO-Foundation/RUM-SpeedIndex) and other data from your browser.
+Guess what? It's browser time! Fetch timings: [Navigation Timing API](http://kaaes.github.io/timing/info.html), [User Timing](http://www.html5rocks.com/en/tutorials/webperformance/usertiming/), [HAR file](http://www.softwareishard.com/blog/har-12-spec/),
+[Resource Timing](http://www.w3.org/TR/resource-timing/), first paint & [RUM Speed Index](https://github.com/WPO-Foundation/RUM-SpeedIndex). And other data from your browser.
 
 ## Install
 ```bash
