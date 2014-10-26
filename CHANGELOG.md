@@ -1,6 +1,14 @@
 # Browsertime changelog
 
-version 0.7 (NOT YET RELEASED)
+version 0.8
+------------------------
+* Ooops, what happend? the new version is written in NodeJS, instead of Java.
+* Check out the README or --help to see new input format.
+* You can now run your own javascript in the browser and get the data back in the JSON.
+* Support for getting timings using PhantomJS 2.
+* Limit the connection speed.
+
+version 0.7 (NOT RELEASED)
 ------------------------
 * Add support for sending BASIC AUTH credentials, by specifying the --basic-auth option.
 * Add support for generating har files, by specifying the --har-file option.
@@ -53,7 +61,7 @@ version 0.2 (2013-11-05)
     unfortunate side-effect of avoiding printing numbers in scientific notation.
  - time property of marks and measurements have been renamed startTime
  - measurements and statistics are now sorted according to start time.
-* Changed max wait time for the Selenium driver from 30 s to 60 s 
+* Changed max wait time for the Selenium driver from 30 s to 60 s
 * Updated org.seleniumhq.selenium:selenium-java from 2.35.0 to 2.37.1
 * Fix for Firefox 25 that added toJson in window.performance.timings
 
