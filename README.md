@@ -24,6 +24,7 @@ usage: browsertime [options]
  --basicAuth {username:$NAME, password:$password}
  --useProxy use MobProxy or not. Use it to get a HAR file.
  --limit the speed by simulating connection types by setting a JSON like {downstreamKbps: $X, upstreamKbps: $Y, latency: $Z}
+ --silent will not write anything on stdout
 ```
 
 ## How to run
