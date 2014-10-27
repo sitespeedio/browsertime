@@ -23,7 +23,8 @@ usage: browsertime [options]
  --headers set request headers by setting a JSON of the format {name:value,name2:value2}
  --basicAuth {username:$NAME, password:$password}
  --useProxy use MobProxy or not. Use it to get a HAR file.
- --limit the speed by simulating connection types by setting a JSON like {downstreamKbps: $X, upstreamKbps: $Y, latency: $Z}
+ --connection the speed by simulating connection types, one of [mobile3g,mobile3gfast,cable,native], default is native
+ --connectionRaw the speed by simulating connection types by setting a JSON like {downstreamKbps: $X, upstreamKbps: $Y, latency: $Z}
  --silent will not write anything on stdout
 ```
 
