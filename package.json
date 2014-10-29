@@ -32,7 +32,7 @@
   },
   "main": "./lib/browsertime.js",
   "devDependencies": {
-    "jshint": "2.5.3"
+    "jshint": "2.5.x"
   },
   "dependencies": {
     "selenium-webdriver": "2.43.x",
