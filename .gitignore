@@ -1,3 +1,5 @@
 .DS_Store
 node_modules
 phantomjsdriver.log
+browsermobproxy.log
+browsertime.log
