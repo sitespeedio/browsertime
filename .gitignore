@@ -3,3 +3,4 @@ node_modules
 phantomjsdriver.log
 browsermobproxy.log
 browsertime.log
+npm-debug.log
