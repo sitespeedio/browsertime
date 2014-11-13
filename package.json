@@ -1,6 +1,6 @@
 {
   "name": "browsertime",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "bin": "./bin/browsertime.js",
   "description": "Analyze the speed of your web page",
   "keywords": [
@@ -26,7 +26,10 @@
   "bugs": {
     "url": "https://github.com/tobli/browsertime/issues"
   },
-  "files": ["bin", "lib"],
+  "files": [
+    "bin",
+    "lib"
+  ],
   "engines": {
     "node": ">=0.8.1"
   },
