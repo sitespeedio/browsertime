@@ -15,7 +15,8 @@ require('whereis')('java', function searched(err) {
           'b': 'browser',
           'n': 'runs',
           'w': 'size',
-          'f': 'filename'
+          'f': 'filename',
+          'V': 'version'
         }
       });
 
