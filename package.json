@@ -45,7 +45,8 @@
     "fast-stats": "0.0.x",
     "cross-spawn": "0.1.x",
     "browsermob-proxy-api": "0.1.x",
-    "winston": "0.7.x"
+    "winston": "0.7.x",
+    "async-node-events": "joshuafcole/async-node-events#d32411f1f4"
   },
   "scripts": {
     "lint": "jshint .",

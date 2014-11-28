@@ -1,5 +1,11 @@
 #!/usr/bin/env node
 
+var async = require('async');
+
+var proxy = require('../lib/proxy');
+var browsers = require('../lib/browsers');
+var browserListenerProxy = require('../lib/proxy/browserListenerProxy');
+
 require('whereis')('java', function searched(err) {
   // yep, we need Java for Selenium & the proxy
   if (err) {
@@ -8,7 +14,6 @@ require('whereis')('java', function searched(err) {
   } else {
     var Browsertime = require('../lib/browsertime'),
       cli = require('../lib/cli'),
-      bt = new Browsertime(),
       argv = require('minimist')(process.argv.slice(2), {
         alias: {
           'u': 'url',
@@ -22,8 +27,31 @@ require('whereis')('java', function searched(err) {
 
     cli.verifyInput(argv);
 
-    bt.fetch(
-      argv
-    );
+    //argv.proxySleepBeforeStart = argv.proxySleepBeforeStart || 3000;
+
+    var p = proxy.createProxy(argv);
+
+    async.series([
+          function (cb) {
+            p.launchProcess(cb);
+          },
+          function (cb) {
+            browsers.setProxy(p);
+
+            var bt = new Browsertime(browsers);
+
+            browserListenerProxy.setup(bt, p, argv);
+
+            bt.fetch(argv, cb);
+          }
+        ],
+        function (error) {
+          if (error) {
+            p.stopProcess();
+            process.exit(1);
+            throw error;
+          }
+          p.stopProcess();
+        });
   }
 });
