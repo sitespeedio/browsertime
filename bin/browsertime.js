@@ -46,12 +46,9 @@ require('whereis')('java', function searched(err) {
           }
         ],
         function (error) {
-          if (error) {
-            p.stopProcess();
-            process.exit(1);
-            throw error;
-          }
-          p.stopProcess();
+          p.stopProcess(function() {});
+
+          process.exit(err ? 1 : 0);
         });
   }
 });
