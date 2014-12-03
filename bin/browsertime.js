@@ -45,7 +45,7 @@ require('whereis')('java', function searched(err) {
             bt.fetch(argv, cb);
           }
         ],
-        function (error) {
+        function (err) {
           p.stopProcess(function() {});
 
           process.exit(err ? 1 : 0);
