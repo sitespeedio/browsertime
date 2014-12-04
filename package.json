@@ -1,6 +1,6 @@
 {
   "name": "browsertime",
-  "version": "0.8.13",
+  "version": "0.8.14",
   "bin": "./bin/browsertime.js",
   "description": "Analyze the speed of your web page",
   "keywords": [
@@ -47,9 +47,7 @@
     "browsermob-proxy-api": "0.1.x",
     "winston": "0.7.x",
     "async-node-events": "git://github.com/joshuafcole/async-node-events.git#d32411f1f4"
-
   },
-
   "scripts": {
     "lint": "jshint .",
     "test": "npm run lint",
