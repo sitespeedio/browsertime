@@ -38,14 +38,14 @@
     "jshint": "2.5.x"
   },
   "dependencies": {
-    "selenium-webdriver": "2.43.x",
+    "selenium-webdriver": "2.44.x",
     "async": "0.9.x",
-    "whereis": "0.2.x",
+    "whereis": "0.4.x",
     "minimist": "1.1.x",
     "fast-stats": "0.0.x",
-    "cross-spawn": "0.1.x",
+    "cross-spawn": "0.2.x",
     "browsermob-proxy-api": "0.1.x",
-    "winston": "0.7.x",
+    "winston": "0.8.x",
     "async-node-events": "git://github.com/joshuafcole/async-node-events.git#d32411f1f4"
   },
   "scripts": {
