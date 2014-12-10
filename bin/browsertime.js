@@ -3,6 +3,7 @@
 var async = require('async');
 
 var proxy = require('../lib/proxy');
+var logger = require('../lib/logger');
 var browsers = require('../lib/browsers');
 var browserListenerProxy = require('../lib/proxy/browserListenerProxy');
 
@@ -28,6 +29,8 @@ require('whereis')('java', function searched(err) {
     cli.verifyInput(argv);
 
     //argv.proxySleepBeforeStart = argv.proxySleepBeforeStart || 3000;
+
+    logger.addLog(null, argv);
 
     var p = proxy.createProxy(argv);
 
