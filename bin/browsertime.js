@@ -28,8 +28,6 @@ require('whereis')('java', function searched(err) {
 
     cli.verifyInput(argv);
 
-    //argv.proxySleepBeforeStart = argv.proxySleepBeforeStart || 3000;
-
     logger.addLog(null, argv);
 
     var p = proxy.createProxy(argv);
