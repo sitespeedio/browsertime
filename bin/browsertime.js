@@ -47,6 +47,9 @@ require('whereis')('java', function searched(err) {
           }
         ],
         function (err) {
+          if (err) {
+            logger.getLog().error(err.message);
+          }
           p.stopProcess(function() {});
 
           process.exit(err ? 1 : 0);
