@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+version 0.8.21
+------------------------
+* Upgraded to the new BrowserMobProxy 2.0.0
+
 version 0.8
 ------------------------
 * Ooops, what happend? the new version is written in NodeJS, instead of Java.
@@ -8,7 +12,7 @@ version 0.8
 * Support for getting timings using PhantomJS 2.
 * Limit the connection speed.
 
-version 0.7 (NOT RELEASED)
+version 0.7 
 ------------------------
 * Add support for sending BASIC AUTH credentials, by specifying the --basic-auth option.
 * Add support for generating har files, by specifying the --har-file option.
