@@ -1,6 +1,6 @@
 {
   "name": "browsertime",
-  "version": "0.8.20",
+  "version": "0.8.21",
   "bin": "./bin/browsertime.js",
   "description": "Analyze the speed of your web page",
   "keywords": [
