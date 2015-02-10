@@ -48,13 +48,13 @@ require('whereis')('java', function searched(err) {
             bt.fetch(argv, cb);
           }
         ],
-        function (err) {
-          if (err) {
-            logger.getLog().error(err.message);
+        function (e) {
+          if (e) {
+            logger.getLog().error(e.message);
           }
           p.stopProcess(function() {});
 
-          process.exit(err ? 1 : 0);
+          process.exit(e ? 1 : 0);
         });
   }
 });
