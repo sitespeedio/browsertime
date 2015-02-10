@@ -18,10 +18,12 @@ require('whereis')('java', function searched(err) {
       argv = require('minimist')(process.argv.slice(2), {
         alias: {
           'u': 'url',
+          'h': 'help',
           'b': 'browser',
           'n': 'runs',
           'w': 'size',
           'f': 'filename',
+          'v': 'verbose',
           'V': 'version'
         }
       });
