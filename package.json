@@ -45,7 +45,7 @@
     "fast-stats": "0.0.x",
     "cross-spawn": "0.2.x",
     "browsermob-proxy-api": "0.1.x",
-    "winston": "0.8.x",
+    "winston": "0.9.x",
     "async-node-events": "git://github.com/joshuafcole/async-node-events.git#d32411f1f4"
   },
   "scripts": {
