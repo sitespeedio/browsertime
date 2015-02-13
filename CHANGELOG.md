@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-version 0.8.22 (NOT RELEASED YET)
+version 0.8.22
 ------------------------
 * You can now choose to supply a Javascript that will decide when a run is finished. The default 
 script is 'return window.performance.timing.loadEventEnd>0'. Use the parameter --waitScript
