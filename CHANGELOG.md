@@ -5,6 +5,8 @@ version 0.8.22 (NOT RELEASED YET)
 * You can now choose to supply a Javascript that will decide when a run is finished. The default 
 script is 'return window.performance.timing.loadEventEnd>0'. Use the parameter --waitScript
 
+* The browsermob prixy will now test a port and use it if it's free. Before the port was hardcoded.
+
 version 0.8.21
 ------------------------
 * Upgraded to the new BrowserMobProxy 2.0.0
