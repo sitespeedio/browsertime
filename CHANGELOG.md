@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+version 0.8.22 (NOT_RELEASED_YET)
+------------------------
+* Log to standard log when uncaught exception happens, so that it will be propagated to sitespeed.io
+
 version 0.8.22
 ------------------------
 * You can now choose to supply a Javascript that will decide when a run is finished. The default 
