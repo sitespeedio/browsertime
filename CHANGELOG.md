@@ -1,6 +1,9 @@
 # Browsertime changelog
 
-version 0.8.22 
+version 0.8.24 (NOT YET RELEASED)
+------------------------
+
+version 0.8.23 
 ------------------------
 * Log to standard log when uncaught exception happens, so that it will be propagated to sitespeed.io
 * So we have a real proble with processes that just hangs, it happens on when we get an uncaught exception,
