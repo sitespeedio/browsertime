@@ -3,6 +3,9 @@
 version 0.8.22 (NOT_RELEASED_YET)
 ------------------------
 * Log to standard log when uncaught exception happens, so that it will be propagated to sitespeed.io
+* So we have a real proble with processes that just hangs, it happens on when we get an uncaught exception,
+  one of the problems is Selenium/Chromedriver, we will try to fix the main issue but for now we will exit 
+  the process #74
 
 version 0.8.22
 ------------------------
