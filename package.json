@@ -48,8 +48,7 @@
     "selenium-webdriver": "2.44.x",
     "valid-url": "1.0.9",
     "whereis": "0.4.x",
-    "winston": "0.9.x",
-    "treekill": "1.0.0"
+    "winston": "0.9.x"
   },
   "scripts": {
     "lint": "jshint .",
