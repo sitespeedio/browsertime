@@ -2,7 +2,7 @@
 
 version 0.8.24 (NOT YET RELEASED)
 ------------------------
-* Fix that hopefully kills the BMP on Windows
+* Fix that hopefully kills the BMP on Windows (using taskkill)
 
 version 0.8.23 
 ------------------------
