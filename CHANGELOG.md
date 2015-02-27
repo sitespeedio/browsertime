@@ -1,5 +1,8 @@
 # Browsertime changelog
 
+version 0.8.25 (NOT YET RELEASED)
+------------------------
+
 version 0.8.24
 ------------------------
 * Fix that kills the BMP on Windows (using taskkill)
