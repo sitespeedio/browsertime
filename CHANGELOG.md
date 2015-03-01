@@ -1,5 +1,8 @@
 # Browsertime changelog
 
+version 0.8.26 (UNRELEASED)
+------------------------
+
 version 0.8.25 
 ------------------------
 * New Selenium version (2.4.5) to support Firefox 36
