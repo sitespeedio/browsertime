@@ -2,6 +2,7 @@
 
 version 0.8.25 (NOT YET RELEASED)
 ------------------------
+* New Selenium version (2.4.5) to support Firefox 36
 
 version 0.8.24
 ------------------------
