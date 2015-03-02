@@ -2,10 +2,12 @@
 
 version 0.8.26 (UNRELEASED)
 ------------------------
+## Changed
+* Update to Selenium 2.45.1 to get latest bug fixes.
 
 version 0.8.25 
 ------------------------
-* New Selenium version (2.4.5) to support Firefox 36
+* New Selenium version (2.45) to support Firefox 36
 
 version 0.8.24
 ------------------------
