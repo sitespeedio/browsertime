@@ -1,9 +1,10 @@
 # Browsertime changelog
 
-version 0.8.26 (UNRELEASED)
+version 0.8.26
 ------------------------
 ## Changed
 * Update to Selenium 2.45.1 to get latest bug fixes.
+* Avoid hangs when fetching urls by explicitly set timeout values in Selenium drivers.
 
 version 0.8.25 
 ------------------------
