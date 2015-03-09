@@ -1,5 +1,7 @@
 # It's browser time!
-[![Build Status](https://travis-ci.org/tobli/browsertime.png?branch=master)](https://travis-ci.org/tobli/browsertime)
+[![Build status][travis-image]][travis-url]
+[![Downloads][downloads-image]][downloads-url]
+[![Stars][stars-image]][stars-url]
 
 Access the Web Performance Timeline, from your browser, in your terminal!
 
@@ -51,3 +53,10 @@ Follow Browsertime on Twitter: [@browsertime](https://twitter.com/browsertime)
 ## Copyright and license
 
 Copyright 2014 Tobias Lidskog & Peter Hedenskog under [the Apache 2.0 license](LICENSE).
+
+[travis-image]: https://img.shields.io/travis/tobli/browsertime.svg?style=flat-square
+[travis-url]: https://travis-ci.org/tobli/browsertime
+[stars-url]: https://github.com/tobli/browsertime/stargazers
+[stars-image]: https://img.shields.io/github/stars/tobli/browsertime.svg?style=flat-square
+[downloads-image]: http://img.shields.io/npm/dm/browsertime.svg?style=flat-square
+[downloads-url]: https://npmjs.org/package/browsertime
