@@ -1,12 +1,16 @@
 # Browsertime changelog
 
+unreleased
+------------------------
+* Safari doesn't support pageLoadTimeout, disable for Safari
+
 version 0.8.26
 ------------------------
 ## Changed
 * Update to Selenium 2.45.1 to get latest bug fixes.
 * Avoid hangs when fetching urls by explicitly set timeout values in Selenium drivers.
 
-version 0.8.25 
+version 0.8.25
 ------------------------
 * New Selenium version (2.45) to support Firefox 36
 
@@ -14,16 +18,16 @@ version 0.8.24
 ------------------------
 * Fix that kills the BMP on Windows (using taskkill)
 
-version 0.8.23 
+version 0.8.23
 ------------------------
 * Log to standard log when uncaught exception happens, so that it will be propagated to sitespeed.io
 * So we have a real proble with processes that just hangs, it happens on when we get an uncaught exception,
-  one of the problems is Selenium/Chromedriver, we will try to fix the main issue but for now we will exit 
+  one of the problems is Selenium/Chromedriver, we will try to fix the main issue but for now we will exit
   the process #74
 
 version 0.8.22
 ------------------------
-* You can now choose to supply a Javascript that will decide when a run is finished. The default 
+* You can now choose to supply a Javascript that will decide when a run is finished. The default
 script is 'return window.performance.timing.loadEventEnd>0'. Use the parameter --waitScript
 
 * The browsermob prixy will now test a port and use it if it's free. Before the port was hardcoded.
@@ -40,7 +44,7 @@ version 0.8
 * Support for getting timings using PhantomJS 2.
 * Limit the connection speed.
 
-version 0.7 
+version 0.7
 ------------------------
 * Add support for sending BASIC AUTH credentials, by specifying the --basic-auth option.
 * Add support for generating har files, by specifying the --har-file option.
