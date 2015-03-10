@@ -2,6 +2,7 @@
 
 unreleased
 ------------------------
+* Latest Selenium supports IE and Safari without the Selenium jar, use it! Safari users, install SafariDriver.safariextz from http://selenium-release.storage.googleapis.com/index.html?path=2.45/
 * Safari doesn't support pageLoadTimeout, disable for Safari
 
 version 0.8.26
