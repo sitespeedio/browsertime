@@ -38,6 +38,32 @@ All available options for controlling Browsertime are documented when running
 > browsertime -h
 ```
 
+## Browsers
+Browsertime supports Chrome, Firefox, IE (Windows only), Safari (8.x and will not generate a complete HAR) and phantomjs (2.0 or later).
+
+## Choose when to end your test
+By default the browser will collect data until the *window.performance.timing.loadEventEnd* happens. That is perfectly fine for most sites, but if you do ajax loading and you mark them with user timings, you probably want to include them in your test. Do that by changing the script that will end the test (*--waitScript*). When the scripts returns true the browser will close or if the timeout time (default 60 seconds) will be reached:
+```bash
+> browsertime -u http://www.github.com --waitScript 'return window.performance.timing.loadEventEnd>0'
+```
+
+## Fetch your own metrics from the browser
+You can collect your own metrics in the browser by supplying a directory with jacascript files. Each file need to return a metric/value and it will be picked up and returned in the JSON. If you return a number, statistics will automatically be generated for the vallue (like median/percentils etc). Check out the [scripts](https://github.com/tobli/browsertime/tree/master/lib/scripts) we use.
+
+Say we have a folder called *scripts* and in there we have one file called *scripts.js* that checks how many javascript that is loaded. The script looks like this:
+
+```javascript
+return document.getElementsByTagName("script").length;
+```
+
+Then to pick up the script, run like this:
+
+```bash
+> browsertime -u http://www.github.com --scriptPath scripts
+```
+
+The basename of the file *script* will be used as the metric name in the json.
+
 ## Installation
 Browsertime is built using [Node.js](http://nodejs.org), and installed via npm.
 ```bash
