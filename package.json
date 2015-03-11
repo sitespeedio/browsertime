@@ -31,7 +31,7 @@
     "lib"
   ],
   "engines": {
-    "node": ">=0.8.1"
+    "node": ">=0.10"
   },
   "main": "./lib/browsertime.js",
   "devDependencies": {

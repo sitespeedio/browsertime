@@ -5,6 +5,7 @@ unreleased
 * Latest Selenium supports IE and Safari without the Selenium jar, use it! Safari users, install SafariDriver.safariextz from http://selenium-release.storage.googleapis.com/index.html?path=2.45/
 * Safari doesn't support pageLoadTimeout, disable for Safari
 * Cleaned up the use of javascript that runs in the browser: get name from the filename and keep scripts simple. #77
+* Running Browsertime on node.js version 0.8 is no longer supported (or tested).
 
 version 0.8.26
 ------------------------
