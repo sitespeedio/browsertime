@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+'use strict';
 
 var async = require('async');
 
