@@ -6,6 +6,7 @@ unreleased
 * Safari doesn't support pageLoadTimeout, disable for Safari
 * Cleaned up the use of javascript that runs in the browser: get name from the filename and keep scripts simple. #77
 * Running Browsertime on node.js version 0.8 is no longer supported (or tested).
+* Removed toJSON method from Reource Timing data from Firefox
 
 version 0.8.26
 ------------------------
