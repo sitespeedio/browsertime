@@ -7,7 +7,8 @@ unreleased
 * Cleaned up the use of javascript that runs in the browser: get name from the filename and keep scripts simple. #77
 * Running Browsertime on node.js version 0.8 is no longer supported (or tested).
 * Fix incorrect calculation of serverConnectionTime in json output.
-* Removed toJSON method from Reource Timing data from Firefox
+* Removed toJSON method from Resource Timing data from Firefox
+* Getting window size from the actual window.
 * Internally: Get metrics and static values from the browser using JS.
 
 version 0.8.26
