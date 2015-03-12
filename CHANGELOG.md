@@ -8,6 +8,7 @@ unreleased
 * Running Browsertime on node.js version 0.8 is no longer supported (or tested).
 * Fix incorrect calculation of serverConnectionTime in json output.
 * Removed toJSON method from Reource Timing data from Firefox
+* Internally: Get metrics and static values from the browser using JS.
 
 version 0.8.26
 ------------------------
