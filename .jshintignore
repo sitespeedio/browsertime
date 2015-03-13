@@ -1,4 +1,4 @@
 node_modules
-scripts/metrics/speedIndex.js
-scripts/metrics/firstPaint.js
+scripts/dynamic/speedIndex.js
+scripts/dynamic/firstPaint.js
 test/scripts
