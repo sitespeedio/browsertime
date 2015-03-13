@@ -10,5 +10,5 @@ before_install:
 script: 
 - "npm run-script travis"
 - "node ./bin/browsertime.js -u http://www.sitespeed.io -b firefox -n 2 --useProxy false"
-- "node ./bin/browsertime.js -u http://www.sitespeed.io -b firefox -n 2 --scriptPath scripts"
+- "node ./bin/browsertime.js -u http://www.sitespeed.io -b firefox -n 2 --scriptPath test/scripts"
 
