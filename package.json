@@ -28,7 +28,8 @@
   },
   "files": [
     "bin",
-    "lib"
+    "lib",
+    "scripts"
   ],
   "engines": {
     "node": ">=0.10"
