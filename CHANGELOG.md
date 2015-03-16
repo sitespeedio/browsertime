@@ -12,6 +12,7 @@ unreleased
 * Internally: Get metrics and static values from the browser using JS.
 * Set the page title in the HAR
 * Added more timings per page, follow WPT style in the HAR
+* Changed name of parameter scriptPath to customScripts to better match what it does
 
 version 0.8.26
 ------------------------

@@ -6,9 +6,8 @@ node_js:
 before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
- 
-script: 
+
+script:
 - "npm run-script travis"
 - "node ./bin/browsertime.js -u http://www.sitespeed.io -b firefox -n 2 --useProxy false"
-- "node ./bin/browsertime.js -u http://www.sitespeed.io -b firefox -n 2 --scriptPath test/scripts"
-
+- "node ./bin/browsertime.js -u http://www.sitespeed.io -b firefox -n 2 --customScripts test/scripts"
