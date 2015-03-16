@@ -11,6 +11,7 @@ unreleased
 * Getting window size from the actual window.
 * Internally: Get metrics and static values from the browser using JS.
 * Set the page title in the HAR
+* Added more timings per page, follow WPT style in the HAR
 
 version 0.8.26
 ------------------------
