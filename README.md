@@ -75,7 +75,7 @@ return document.getElementsByTagName("script").length;
 Then to pick up the script, run like this:
 
 ```bash
-> browsertime -u http://www.github.com --scriptPath scripts
+> browsertime -u http://www.github.com --customScripts scripts
 ```
 
 The basename of the file *script* will be used as the metric name in the json.
