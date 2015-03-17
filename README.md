@@ -50,7 +50,7 @@ Using the excellent tool [jq](http://stedolan.github.io/jq/), query the timing d
 
 ```bash
 > jq '.default.statistics[] | select(.name == "pageLoadTime").p99 ' -r  www.sitespeed.io.json
-> 4061
+> 694
 ```
 
 All available options for controlling Browsertime are documented when running 
