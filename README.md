@@ -43,12 +43,12 @@ Load www.browsertime.net in Chrome three times. Results are stored in a json fil
 > browsertime -u http://www.sitespeed.io -n 9 -b firefox -w 600x800 --filename sitespeed.json --harFile sitespeed.har
 ```
 
-Start firefox and load www.sitespeed.io nine times, to get a better statistical sample. Statistical median, percentiles and more are outputted to *sitespeed.json*, including all individual measurement values. The window size is fixed at 600 times 800 pixels.
+Start firefox and load www.sitespeed.io nine times, to get a better statistical sample. Statistical median, percentiles and more are outputted to *www.sitespeed.io.json*, including all individual measurement values. The window size is fixed at 600 times 800 pixels.
 
 Using the excellent tool [jq](http://stedolan.github.io/jq/), query the timing data to find the 99th percentile of the pageLoadTime metric; 4061 milliseconds.
 
 ```bash
-> jq '.statistics[] | select(.name == "pageLoadTime").p99 ' -r  sitespeed.json
+> jq '.default.statistics[] | select(.name == "pageLoadTime").p99 ' -r  www.sitespeed.io.json
 > 4061
 ```
 
