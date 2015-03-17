@@ -1,7 +1,8 @@
 # Browsertime changelog
 
-unreleased
+version 0.9.0 UNRELEASED
 ------------------------
+* New data structure in the output JSON, better support for custom Metrics. Note if you fetch values from the JSON, you will need to change how you do it.
 * Latest Selenium supports IE and Safari without the Selenium jar, use it! Safari users, install SafariDriver.safariextz from http://selenium-release.storage.googleapis.com/index.html?path=2.45/
 * Safari doesn't support pageLoadTimeout, disable for Safari
 * Cleaned up the use of javascript that runs in the browser: get name from the filename and keep scripts simple. #77
@@ -13,6 +14,7 @@ unreleased
 * Set the page title in the HAR
 * Added more timings per page, follow WPT style in the HAR
 * Changed name of parameter scriptPath to customScripts to better match what it does
+* Locking versions in package.json to be SAFE
 
 version 0.8.26
 ------------------------
