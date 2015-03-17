@@ -39,17 +39,17 @@
     "jshint": "2.6.x"
   },
   "dependencies": {
-    "async": "0.9.x",
+    "async": "0.9.0",
     "async-node-events": "git://github.com/joshuafcole/async-node-events.git#d32411f1f4",
-    "browsermob-proxy-api": "0.1.x",
-    "cross-spawn": "0.2.x",
-    "fast-stats": "0.0.x",
-    "getport": "^0.1.0",
-    "minimist": "1.1.x",
+    "browsermob-proxy-api": "0.1.4",
+    "cross-spawn": "0.2.6",
+    "fast-stats": "0.0.2",
+    "getport": "0.1.0",
+    "minimist": "1.1.1",
     "selenium-webdriver": "2.45.1",
     "valid-url": "1.0.9",
-    "whereis": "0.4.x",
-    "winston": "0.9.x"
+    "whereis": "0.4.0",
+    "winston": "0.9.0"
   },
   "scripts": {
     "lint": "jshint .",
