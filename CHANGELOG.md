@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-version 0.9.0 UNRELEASED
+version 0.9.0 
 ------------------------
 * New data structure in the output JSON, better support for custom Metrics. Note if you fetch values from the JSON, you will need to change how you do it.
 * Latest Selenium supports IE and Safari without the Selenium jar, use it! Safari users, install SafariDriver.safariextz from http://selenium-release.storage.googleapis.com/index.html?path=2.45/
