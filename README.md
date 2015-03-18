@@ -49,7 +49,7 @@ Start firefox and load www.sitespeed.io nine times, to get a better statistical 
 Using the excellent tool [jq](http://stedolan.github.io/jq/), query the timing data to find the 99th percentile of the pageLoadTime metric; 4061 milliseconds.
 
 ```bash
-> jq '.default.statistics[] | select(.name == "pageLoadTime").p99 ' -r  www.sitespeed.io.json
+> jq '.default.statistics.pageLoadTime.p99 ' -r  www.sitespeed.io.json
 > 694
 ```
 
