@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "async": "0.9.0",
-    "async-node-events": "git://github.com/joshuafcole/async-node-events.git#d32411f1f4",
+    "async-node-events": "git+https://github.com/joshuafcole/async-node-events.git#d32411f1f4",
     "browsermob-proxy-api": "0.1.4",
     "cross-spawn": "0.2.6",
     "fast-stats": "0.0.2",
