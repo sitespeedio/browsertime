@@ -3,6 +3,7 @@
 UNRELEASED
 ------------------------
 * Killing Chromedriver on Linux if it is up and running after a finished round. Need to be run after each URL when we have a timeout.
+* Fixed installation issue on npm v0.12.0, Windows 7 (thanks Patrick Wieczorek)
 
 version 0.9.1 
 ------------------------
