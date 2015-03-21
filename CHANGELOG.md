@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+unreleased
+------------------------
+
+
 version 0.9.2
 ------------------------
 * Fixed installation issue on npm v0.12.0, Windows 7 (thanks Patrick Wieczorek)
