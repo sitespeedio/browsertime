@@ -2,7 +2,7 @@
 
 unreleased
 ------------------------
-
+* User timing marks was missing from statistics since 0.9. This puts then back!
 
 version 0.9.2
 ------------------------
