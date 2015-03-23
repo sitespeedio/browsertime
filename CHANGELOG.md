@@ -3,6 +3,7 @@
 unreleased
 ------------------------
 * User timing marks was missing from statistics since 0.9. This puts then back!
+* Timeout a run if it takes too long. On Linux Chrome/Chromedriver can hang, making Browsertime hang. This fix kill the chromedriver and signal an error if it happens.
 
 version 0.9.2
 ------------------------
