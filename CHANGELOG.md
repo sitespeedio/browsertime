@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-unreleased
+version 0.9.4
 ------------------------
 * Possible to configure a selenium server (hopefully make IE run smoother on Windows and
   Chrome on Linux).
