@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+version 0.9.5
+------------------------
+* Added more default connection types: mobile2g and mobile3gslow
+
 version 0.9.4
 ------------------------
 * Possible to configure a selenium server (hopefully make IE run smoother on Windows and
