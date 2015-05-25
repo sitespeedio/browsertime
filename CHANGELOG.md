@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-version 0.9.5
+version 0.9.5 (UNRELEASED)
 ------------------------
 * Added more default connection types: mobile2g and mobile3gslow
 
