@@ -1,8 +1,9 @@
 # Browsertime changelog
 
-version 0.9.5 (UNRELEASED)
+version 0.9.5
 ------------------------
 * Added more default connection types: mobile2g and mobile3gslow
+* Ability to avoid sandbox mode when runnig Chrome (use with care) 
 
 version 0.9.4
 ------------------------
