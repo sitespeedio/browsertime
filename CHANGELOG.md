@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+version 0.9.6
+------------------------
+* Increased timeouts to be 2 minutes instead of 1 minute. Running using mobile2g times out a lot.
+
 version 0.9.5
 ------------------------
 * Added more default connection types: mobile2g and mobile3gslow
