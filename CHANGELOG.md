@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+version 0.9.7
+------------------------
+* Upgrading selenium version to 2.46.0 that will make Firefox (38) useable again.
+
 version 0.9.6
 ------------------------
 * Increased timeouts to be 2 minutes instead of 1 minute. Running using mobile2g times out a lot.
