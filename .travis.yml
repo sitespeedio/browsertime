@@ -1,16 +1,20 @@
 language: node_js
 node_js:
-  - "0.10"
-  - "0.12"
-
+- '0.10'
+- '0.12'
 before_install:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - "java -jar test/selenium-server-standalone-2.45.0.jar &"
-  - "sleep 10"
-
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- java -jar test/selenium-server-standalone-2.45.0.jar &
+- sleep 10
 script:
-- "npm run-script travis"
-- "node ./bin/browsertime.js -u http://www.sitespeed.io -b firefox -n 2 --useProxy false"
-- "node ./bin/browsertime.js -u http://www.sitespeed.io -b firefox -n 2 --customScripts test/scripts"
-- "node ./bin/browsertime.js -u http://www.sitespeed.io -b firefox -n 1 --seleniumServer http://localhost:4444/wd/hub"
+- npm run-script travis
+- node ./bin/browsertime.js -u http://www.sitespeed.io -b firefox -n 2 --useProxy
+  false
+- node ./bin/browsertime.js -u http://www.sitespeed.io -b firefox -n 2 --customScripts
+  test/scripts
+- node ./bin/browsertime.js -u http://www.sitespeed.io -b firefox -n 1 --seleniumServer
+  http://localhost:4444/wd/hub
+notifications:
+  slack:
+    secure: Bo/bgmtFVGj6I2XnkvERfGnoM+t73WQSsP5eMlGM0jhUSKPqIc7Hf2zjYil3amMY3awFnoA6prILcMBzyUURj3jc5VRsWBCf6aQZ3bM+xzAcuTMcoiAKS7Ru1HQj1WY8G7VycDWuNeF8dCT0kt2QhcSneAUQ0qqyclWjcOK22kw=
