@@ -36,12 +36,12 @@
   },
   "main": "./lib/browsertime.js",
   "devDependencies": {
-    "jshint": "2.6.x"
+    "jshint": "2.8.x"
   },
   "dependencies": {
-    "async": "0.9.0",
+    "async": "1.2.1",
     "async-node-events": "git+https://github.com/joshuafcole/async-node-events.git#d32411f1f4",
-    "browsermob-proxy-api": "0.1.4",
+    "browsermob-proxy-api": "0.2.0",
     "cross-spawn": "0.2.6",
     "fast-stats": "0.0.2",
     "getport": "0.1.0",
