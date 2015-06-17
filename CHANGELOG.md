@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+version 0.9.8
+------------------------
+* Upgrading Selenium version to 2.46.1 that makes it work on Windows (again).
+
 version 0.9.7
 ------------------------
 * Upgrading selenium version to 2.46.0 that will make Firefox (38) useable again.
