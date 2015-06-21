@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+unreleased
+------------------------
+* Remove level prefix (e.g. info: ) from console log lines. Log files aren't affected.
+
 version 0.9.8
 ------------------------
 * Upgrading Selenium version to 2.46.1 that makes it work on Windows (again).
