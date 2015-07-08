@@ -2,8 +2,14 @@
 environment:
   nodejs_version: "0.10"
 
+cache:
+- C:\ProgramData\chocolatey\bin -> appveyor.yml
+- C:\ProgramData\chocolatey\lib -> appveyor.yml
+
 # Install scripts. (runs after repo cloning)
 install:
+  - cinst firefox
+  - cinst googlechrome
   # Get the latest stable version of Node.js or io.js
   - ps: Install-Product node $env:nodejs_version
   # install modules
