@@ -24,6 +24,7 @@ test_script:
   - npm test
   - cmd: node bin\browsertime.js -b chrome -u http://browsertime.net
   - cmd: node bin\browsertime.js -b firefox -u http://browsertime.net
+  - cmd: node bin\browsertime.js -b ie -u http://browsertime.net
 
 # Don't actually build.
 build: off
