@@ -12,7 +12,7 @@ script:
 - node ./bin/browsertime.js -u http://www.sitespeed.io -b firefox -n 2 --useProxy
   false
 - node ./bin/browsertime.js -u http://www.sitespeed.io -b firefox -n 2 --customScripts
-  test/scripts
+  test/scripts --connection cable
 - node ./bin/browsertime.js -u http://www.sitespeed.io -b firefox -n 1 --seleniumServer
   http://localhost:4444/wd/hub
 notifications:
