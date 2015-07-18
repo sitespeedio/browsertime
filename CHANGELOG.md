@@ -4,7 +4,7 @@ version 0.10.0 (unreleased)
 ------------------------
 * Remove level prefix (e.g. info: ) from console log lines. Log files aren't affected.
 * Normalized Navigation Timing Data: All navigation timing metrics are now relative from Navigation start instead of using timestamps
-* Navigation Timings are now included in the statistics so you can get median times for all Nav Timining metrics.
+* Navigation Timings are now included in the statistics so you can get median times for all Navigation Timing metrics.
 
 version 0.9.8
 ------------------------
