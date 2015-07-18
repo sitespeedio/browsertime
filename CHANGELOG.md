@@ -1,9 +1,9 @@
 # Browsertime changelog
 
-version 0.10.0 (unreleased)
+version 0.10.0 
 ------------------------
 * Remove level prefix (e.g. info: ) from console log lines. Log files aren't affected.
-* Normalized Navigation Timing Data: All navigation timing metrics are now relative from Navigation start instead of using timestamps
+* Normalized Navigation Timing Data: All navigation timing metrics are now relative from Navigation start instead of using timestamps #88
 * Navigation Timings are now included in the statistics so you can get median times for all Navigation Timing metrics.
 
 version 0.9.8
