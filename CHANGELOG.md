@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-version 0.10.1 (UNRELEASED)
+version 0.10.1
 ------------------------
 * Show correct browser and version in the HAR file #90
 
