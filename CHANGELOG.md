@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+version 0.10.1 (UNRELEASED)
+------------------------
+* Show correct browser and version in the HAR file #90
+
 version 0.10.0 
 ------------------------
 * Remove level prefix (e.g. info: ) from console log lines. Log files aren't affected.
