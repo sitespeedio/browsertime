@@ -1,8 +1,12 @@
 # Browsertime changelog
 
+version 0.10.2
+------------------------
+* Bug fix: Running multiple tests, included same requests many many times in one HAR #91
+
 version 0.10.1
 ------------------------
-* Show correct browser and version in the HAR file #90
+* Bug fix: Show correct browser and version in the HAR file #90
 
 version 0.10.0 
 ------------------------
