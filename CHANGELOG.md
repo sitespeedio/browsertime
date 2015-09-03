@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+NOT YET RELEASED
+------------------------
+* Handle cases where HAR file from MobProxy is lacking log.browser without crashing.
+
 version 0.10.2
 ------------------------
 * Bug fix: Running multiple tests, included same requests many many times in one HAR #91
