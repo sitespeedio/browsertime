@@ -3,6 +3,7 @@
 NOT YET RELEASED
 ------------------------
 * Handle cases where HAR file from MobProxy is lacking log.browser without crashing.
+* Set correct Browsertime version in HAR file (previously was always 1.0)
 
 version 0.10.2
 ------------------------
