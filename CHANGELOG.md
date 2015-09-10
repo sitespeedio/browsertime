@@ -1,4 +1,7 @@
 # Browsertime changelog
+Note that Browsertime doesn't follow semantic versioning just yet. Breaking changes may be introduced even in patch 
+releases, even though we try to avoid that. Once we're happy with the design and api we'll declare 1.0 and follow 
+semantic versioning after that.
 
 NOT YET RELEASED
 ------------------------
