@@ -36,7 +36,7 @@
   },
   "main": "./lib/browsertime.js",
   "devDependencies": {
-    "jshint": "2.9.x"
+    "jshint": "2.8.x"
   },
   "dependencies": {
     "async": "1.4.2",
