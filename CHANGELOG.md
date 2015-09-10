@@ -2,6 +2,7 @@
 
 NOT YET RELEASED
 ------------------------
+* Don't log 'Storing ...har' when har generation is turned off.
 * Handle cases where HAR file from MobProxy is lacking log.browser without crashing.
 * Set correct Browsertime version in HAR file (previously was always 1.0)
 
