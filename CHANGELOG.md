@@ -3,7 +3,7 @@ Note that Browsertime doesn't follow semantic versioning just yet. Breaking chan
 releases, even though we try to avoid that. Once we're happy with the design and api we'll declare 1.0 and follow 
 semantic versioning after that.
 
-NOT YET RELEASED
+version 0.11.0
 ------------------------
 * Don't log 'Storing ...har' when har generation is turned off.
 * Handle cases where HAR file from MobProxy is lacking log.browser without crashing.
