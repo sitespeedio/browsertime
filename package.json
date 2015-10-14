@@ -1,0 +1,44 @@
+{
+  "description": "Browsertime, the next generation",
+  "version": "1.0.0",
+  "bin": "./bin/bt.js",
+  "dependencies": {
+    "alto-saxophone": "^2.20.0",
+    "baryton-saxophone": "^2.48.2",
+    "bluebird": "^2.10.2",
+    "browsermob-proxy-api": "^0.3.0",
+    "cross-spawn-async": "^2.0.0",
+    "fast-stats": "0.0.3",
+    "getport": "^0.1.0",
+    "intel": "^1.0.2",
+    "lodash.merge": "^3.3.2",
+    "selenium-webdriver": "^2.47.0",
+    "tenor-saxophone": "^2.48.0",
+    "valid-url": "^1.0.9",
+    "yargs": "^3.27.0"
+  },
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "chai-as-promised": "^5.1.0",
+    "eslint": "^1.6.0",
+    "eslint-plugin-require-jsdoc": "^1.0.4",
+    "jsdoc": "^3.3.3",
+    "mocha": "^2.3.3"
+  },
+  "scripts": {
+    "test": "mocha",
+    "lint": "eslint .",
+    "generateDocs": "node node_modules/sequencediagrams doc/sequence-diagrams"
+  },
+  "name": "browsertime",
+  "author": "Tobias Lidskog",
+  "contributors": {
+    "name": "Peter Hedenskog"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tobli/browsertime.git"
+  },
+  "homepage": "http://browsertime.net",
+  "license": "MIT"
+}
