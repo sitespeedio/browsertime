@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- '4.0'
+sudo: false
+before_install:
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+script:
+- npm run lint
+- node ./bin/bt.js http://www.browsertime.net -b firefox -n 2
+notifications:
+  slack:
+    secure: Bo/bgmtFVGj6I2XnkvERfGnoM+t73WQSsP5eMlGM0jhUSKPqIc7Hf2zjYil3amMY3awFnoA6prILcMBzyUURj3jc5VRsWBCf6aQZ3bM+xzAcuTMcoiAKS7Ru1HQj1WY8G7VycDWuNeF8dCT0kt2QhcSneAUQ0qqyclWjcOK22kw=
