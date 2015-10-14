@@ -31,11 +31,11 @@ describe('traffic_shape_parser', function() {
       });
     });
 
-    it('should return undefined for "native" traffic shape config', function() {
+    it('should return null for "native" traffic shape config', function() {
       let shapeConfig = parser.parseTrafficShapeConfig({
         connection: 'native'
       });
-      expect(shapeConfig).to.equal(undefined);
+      expect(shapeConfig).to.equal(null);
     });
 
     it('should return undefined if traffic shape config is missing', function() {
