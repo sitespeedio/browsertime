@@ -27,9 +27,9 @@
     "sequencediagrams": "0.0.8"
   },
   "scripts": {
-    "test": "mocha",
-    "lint": "eslint .",
-    "generateDocs": "node node_modules/sequencediagrams doc/sequence-diagrams"
+    "test": "node_modules/mocha/bin/mocha",
+    "lint": "node_modules/eslint/bin/eslint.js .",
+    "generateDocs": "node_modules/sequencediagrams/lib/index.js doc/sequence-diagrams"
   },
   "name": "browsertime",
   "author": "Tobias Lidskog",
