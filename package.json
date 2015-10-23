@@ -36,7 +36,7 @@
   },
   "main": "./lib/browsertime.js",
   "devDependencies": {
-    "jshint": "2.8.x"
+    "jshint": "^2.8.0"
   },
   "dependencies": {
     "async": "1.4.2",
@@ -45,11 +45,11 @@
     "cross-spawn-async": "2.0.0",
     "fast-stats": "0.0.3",
     "getport": "0.1.0",
-    "minimist": "1.2.0",
-    "selenium-webdriver": "^2.47.0",
+    "minimist": "^1.2.0",
+    "selenium-webdriver": "^2.48.0",
     "valid-url": "1.0.9",
-    "whereis": "0.4.0",
-    "winston": "^1.0.2"
+    "whereis": "^0.4.0",
+    "winston": "^1.1.1"
   },
   "scripts": {
     "lint": "jshint .",
