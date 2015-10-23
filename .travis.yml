@@ -7,6 +7,7 @@ before_install:
 - sh -e /etc/init.d/xvfb start
 script:
 - npm run lint
+- npm test
 - node ./bin/bt.js http://www.browsertime.net -b firefox -n 2
 notifications:
   slack:
