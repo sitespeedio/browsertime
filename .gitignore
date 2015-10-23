@@ -4,3 +4,5 @@ phantomjsdriver.log
 browsermobproxy.log
 browsertime.log
 npm-debug.log
+chromedriver.log
+doc/sequence-diagrams/*.png
