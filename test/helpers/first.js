@@ -14,4 +14,7 @@ chai.use(chaiAsPromised);
 
 chai.should();
 
-Bluebird.longStackTraces();
+Bluebird.config({
+  warnings: true,
+  longStackTraces: true
+});
