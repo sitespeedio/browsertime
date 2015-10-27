@@ -1,8 +1,17 @@
 language: node_js
 node_js:
-- '4.0'
+- '4.1'
 sudo: false
+addons:
+  apt:
+    sources:
+    - google-chrome
+    packages:
+    - google-chrome-stable
+  firefox: latest
 before_install:
+- firefox --version 2>/dev/null
+- google-chrome --product-version
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 script:
