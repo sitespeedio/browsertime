@@ -28,7 +28,7 @@ describe('JarLauncher', function() {
   it('should launch bmp with args', function() {
     return launcher.start(['-port', 8080])
       .finally(function() {
-        launcher.stop();
+        return launcher.stop();
       });
   });
 
