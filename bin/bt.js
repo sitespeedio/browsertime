@@ -29,21 +29,24 @@ function run(url, options) {
     })
     .then(function(result) {
       const namer = fileNamer();
+      let saveOperations = [];
 
-      let jsonName = options.output || namer.getNameFromUrl(url, 'json'),
-        harName = options.har || namer.getNameFromUrl(url, 'har');
+      if (result.browsertimeData) {
+        let browsertimeData = JSON.stringify(result.browsertimeData, null, 2);
+        let jsonName = options.output || namer.getNameFromUrl(url, 'json');
+        saveOperations.push(fs.writeFileAsync(jsonName, browsertimeData).tap(() => {
+          log.info('Wrote browsertime data to %s', jsonName);
+        }));
+      }
+      if (result.har) {
+        let har = JSON.stringify(result.har, null, 2);
+        let harName = options.har || namer.getNameFromUrl(url, 'har');
+        saveOperations.push(fs.writeFileAsync(harName, har).tap(() => {
+          log.info('Wrote har data to %s', options.har);
+        }));
+      }
 
-      let browsertimeData = JSON.stringify(result.browsertimeData, null, 2);
-      let har = JSON.stringify(result.har, null, 2);
-
-      return Promise.all([
-        fs.writeFileAsync(jsonName, browsertimeData).tap(() => {
-            log.info('Wrote browsertime data to %s', jsonName);
-          }),
-        fs.writeFileAsync(harName, har).tap(() => {
-          log.info('Wrote har data to %s', harName);
-        })
-      ]);
+      return Promise.all(saveOperations);
     })
     .catch(function(e) {
       log.error('Error running browsertime', e);
