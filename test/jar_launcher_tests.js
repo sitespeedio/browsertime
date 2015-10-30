@@ -5,27 +5,39 @@ let Launcher = require('../lib/support/jar_launcher'),
   log = require('intel');
 
 describe('JarLauncher', function() {
-  it('should launch bmp with args', function() {
+  var launcher;
+
+  beforeEach(() => {
     let jarPath = path.resolve(__dirname, '..', 'vendor', 'bmpwrapper-2.0.0-full.jar');
-    let launcher = new Launcher({
+    launcher = new Launcher({
       'jarPath': jarPath,
       'stderrLogLevel': log.INFO,
       'startupCriteria': {
         'success': {
           'stdout': null,
-          'stderr': null
+          'stderr': 'Started SelectChannelConnector'
         },
         'failure': {
           'stdout': null,
-          'stderr': null
+          'stderr': 'Failed to start Jetty server'
         }
       }
     });
+  });
 
+  it('should launch bmp with args', function() {
     return launcher.start(['-port', 8080])
-      .delay(5000)
       .finally(function() {
         launcher.stop();
       });
   });
+
+  it('should fail if bmp is launched with invalid args', function() {
+    return launcher.start(['-port', 'foo'])
+      .finally(function() {
+        launcher.stop();
+      })
+      .should.be.rejected;
+  });
+
 });
