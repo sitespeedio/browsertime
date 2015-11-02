@@ -1,14 +1,17 @@
 module.exports = {
   run(context) {
     console.log('In pretask!!!');
-    return context.runWithDriver((driver) => {
-      return driver.get('https://www.sitespeed.io')
-        .then(() => {
-          return driver.getTitle();
+    if (!context.taskData.loadedSitespeed) {
+      return context.runWithDriver((driver) => {
+          return driver.get('https://www.sitespeed.io')
+            .then(() => driver.getTitle())
+            .then((title) => {
+              console.log('Loaded page with title: ' + title);
+            });
         })
-        .then((title) => {
-          console.log('Loaded page with title: ' + title);
+        .then(() => {
+          context.taskData.loadedSitespeed = true;
         });
-    });
+    }
   }
 };
