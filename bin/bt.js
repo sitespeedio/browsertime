@@ -2,9 +2,9 @@
 
 'use strict';
 
-let Engine = require('../lib/core/engine'),
+let Engine = require('../').Engine,
   scriptParser = require('../lib/support/browser_script'),
-  logging = require('../lib/support/logging'),
+  logging = require('../').logging,
   cli = require('../lib/support/cli'),
   path = require('path'),
   Promise = require('bluebird'),
