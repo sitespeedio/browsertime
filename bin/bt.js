@@ -25,6 +25,14 @@ function run(url, options) {
   } else {
     options.scripts = browserScripts.defaultScripts;
   }
+
+  if (options.preTask) {
+    options.preTask = require(path.resolve(options.preTask));
+  }
+  if (options.postTask) {
+    options.postTask = require(path.resolve(options.postTask));
+  }
+
   let engine = new Engine(options);
 
   log.info('Running %s for url: %s', options.browser, url);
