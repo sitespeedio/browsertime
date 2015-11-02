@@ -2,12 +2,12 @@ module.exports = {
   run(context) {
     console.log('In pretask!!!');
     return context.runWithDriver((driver) => {
-      driver.get('https://www.sitespeed.io')
+      return driver.get('https://www.sitespeed.io')
         .then(() => {
-          return driver.getCurrentUrl();
+          return driver.getTitle();
         })
-        .then((url) => {
-          console.log('Loaded url: ' + url);
+        .then((title) => {
+          console.log('Loaded page with title: ' + title);
         });
     });
   }
