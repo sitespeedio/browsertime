@@ -12,7 +12,7 @@
     "getport": "^0.1.0",
     "intel": "^1.0.2",
     "lodash.merge": "^3.3.2",
-    "selenium-webdriver": "^2.48.0",
+    "selenium-webdriver": "^2.48.2",
     "tenor-saxophone": "^2.48.0",
     "valid-url": "^1.0.9",
     "yargs": "^3.29.0"
