@@ -16,6 +16,7 @@
     "moment": "^2.10.6",
     "selenium-webdriver": "^2.48.2",
     "tenor-saxophone": "^2.48.0",
+    "tough-cookie": "^2.2.1",
     "valid-url": "^1.0.9",
     "yargs": "^3.31.0"
   },

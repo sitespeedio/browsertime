@@ -1,0 +1,2300 @@
+[
+  {
+    "timestamp": 1447622551669,
+    "method": "Network.responseReceived",
+    "data": {
+      "frameId": "96213.2",
+      "loaderId": "96213.3",
+      "requestId": "96213.1",
+      "response": {
+        "connectionId": 0,
+        "connectionReused": false,
+        "encodedDataLength": -1,
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "headers": {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "text/plain;charset=US-ASCII"
+        },
+        "mimeType": "text/plain",
+        "protocol": "data",
+        "securityState": "unknown",
+        "status": 200,
+        "statusText": "OK",
+        "url": "data:,"
+      },
+      "timestamp": 316315.411292,
+      "type": "Document"
+    }
+  },
+  {
+    "timestamp": 1447622551669,
+    "method": "Network.loadingFinished",
+    "data": {
+      "encodedDataLength": 0,
+      "requestId": "96213.1",
+      "timestamp": 316315.411299
+    }
+  },
+  {
+    "timestamp": 1447622551669,
+    "method": "Page.frameNavigated",
+    "data": {
+      "frame": {
+        "id": "96213.2",
+        "loaderId": "96213.3",
+        "mimeType": "text/plain",
+        "securityOrigin": "://",
+        "url": "data:,"
+      }
+    }
+  },
+  {
+    "timestamp": 1447622551685,
+    "method": "Page.loadEventFired",
+    "data": {
+      "timestamp": 316315.425354
+    }
+  },
+  {
+    "timestamp": 1447622551685,
+    "method": "Page.frameStoppedLoading",
+    "data": {
+      "frameId": "96213.2"
+    }
+  },
+  {
+    "timestamp": 1447622551685,
+    "method": "Page.domContentEventFired",
+    "data": {
+      "timestamp": 316315.425568
+    }
+  },
+  {
+    "timestamp": 1447622551727,
+    "method": "Page.frameStartedLoading",
+    "data": {
+      "frameId": "96213.2"
+    }
+  },
+  {
+    "timestamp": 1447622551727,
+    "method": "Network.requestWillBeSent",
+    "data": {
+      "documentURL": "http://www.sitespeed.io/",
+      "frameId": "96213.2",
+      "initiator": {
+        "type": "other"
+      },
+      "loaderId": "96213.5",
+      "request": {
+        "headers": {
+          "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+          "Upgrade-Insecure-Requests": "1",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "method": "GET",
+        "mixedContentType": "none",
+        "url": "http://www.sitespeed.io/"
+      },
+      "requestId": "96213.2",
+      "timestamp": 316315.479551,
+      "type": "Document",
+      "wallTime": 1447622551.72634
+    }
+  },
+  {
+    "timestamp": 1447622551995,
+    "method": "Network.requestWillBeSent",
+    "data": {
+      "documentURL": "https://www.sitespeed.io/",
+      "frameId": "96213.2",
+      "initiator": {
+        "type": "other"
+      },
+      "loaderId": "96213.5",
+      "redirectResponse": {
+        "connectionId": 11,
+        "connectionReused": false,
+        "encodedDataLength": 414,
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Length": "0",
+          "Date": "Sun, 15 Nov 2015 21:22:31 GMT\nSun, 15 Nov 2015 21:22:29 GMT",
+          "Location": "https://www.sitespeed.io/",
+          "Retry-After": "0",
+          "Server": "Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\nVarnish",
+          "Strict-Transport-Security": "max-age=31536000; preload",
+          "Via": "1.1 varnish",
+          "X-Cache": "HIT",
+          "X-Cache-Hits": "0",
+          "X-Served-By": "cache-fra1238-FRA"
+        },
+        "headersText": "HTTP/1.1 301 Moved Permanently\r\nDate: Sun, 15 Nov 2015 21:22:31 GMT\r\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\r\nServer: Varnish\r\nRetry-After: 0\r\nLocation: https://www.sitespeed.io/\r\nContent-Length: 0\r\nAccept-Ranges: bytes\r\nDate: Sun, 15 Nov 2015 21:22:29 GMT\r\nVia: 1.1 varnish\r\nX-Served-By: cache-fra1238-FRA\r\nX-Cache: HIT\r\nX-Cache-Hits: 0\r\nStrict-Transport-Security: max-age=31536000; preload\r\n\r\n",
+        "mimeType": "",
+        "protocol": "http/1.1",
+        "remoteIPAddress": "127.0.0.1",
+        "remotePort": 2003,
+        "requestHeaders": {
+          "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+          "Accept-Encoding": "gzip, deflate, sdch",
+          "Accept-Language": "sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4",
+          "Host": "www.sitespeed.io",
+          "Proxy-Connection": "keep-alive",
+          "Upgrade-Insecure-Requests": "1",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "requestHeadersText": "GET http://www.sitespeed.io/ HTTP/1.1\r\nHost: www.sitespeed.io\r\nProxy-Connection: keep-alive\r\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\r\nUpgrade-Insecure-Requests: 1\r\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\r\nAccept-Encoding: gzip, deflate, sdch\r\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\r\n\r\n",
+        "securityState": "neutral",
+        "status": 301,
+        "statusText": "Moved Permanently",
+        "timing": {
+          "connectEnd": 11.796000006143,
+          "connectStart": 11.2049999879673,
+          "dnsEnd": -1,
+          "dnsStart": -1,
+          "proxyEnd": -1,
+          "proxyStart": -1,
+          "receiveHeadersEnd": 267.752000014298,
+          "requestTime": 316315.479917,
+          "sendEnd": 11.9870000053197,
+          "sendStart": 11.9260000064969,
+          "sslEnd": -1,
+          "sslStart": -1,
+          "workerReady": -1,
+          "workerStart": -1
+        },
+        "url": "http://www.sitespeed.io/"
+      },
+      "request": {
+        "headers": {
+          "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "method": "GET",
+        "mixedContentType": "none",
+        "url": "https://www.sitespeed.io/"
+      },
+      "requestId": "96213.2",
+      "timestamp": 316315.74825,
+      "type": "Document",
+      "wallTime": 1447622551.99503
+    }
+  },
+  {
+    "timestamp": 1447622553485,
+    "method": "Network.responseReceived",
+    "data": {
+      "frameId": "96213.2",
+      "loaderId": "96213.5",
+      "requestId": "96213.2",
+      "response": {
+        "connectionId": 17,
+        "connectionReused": false,
+        "encodedDataLength": -1,
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Age": "351306",
+          "Cache-Control": "max-age=600",
+          "Content-Encoding": "gzip",
+          "Content-Length": "7271",
+          "Content-Type": "text/html",
+          "Date": "Sun, 15 Nov 2015 21:22:33 GMT\nSun, 15 Nov 2015 21:22:30 GMT",
+          "Expires": "Wed, 11 Nov 2015 19:57:23 GMT",
+          "Last-Modified": "Mon, 19 Oct 2015 12:44:28 GMT",
+          "Server": "Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\nnginx/1.8.0",
+          "Strict-Transport-Security": "max-age=31536000; preload",
+          "Vary": "Accept-Encoding,User-Agent",
+          "Via": "1.1 varnish",
+          "X-Cache": "HIT",
+          "X-Cache-Hits": "1",
+          "X-Served-By": "cache-fra1220-FRA"
+        },
+        "headersText": "HTTP/1.1 200 OK\r\nDate: Sun, 15 Nov 2015 21:22:33 GMT\r\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\r\nServer: nginx/1.8.0\r\nContent-Type: text/html\r\nLast-Modified: Mon, 19 Oct 2015 12:44:28 GMT\r\nCache-Control: max-age=600\r\nExpires: Wed, 11 Nov 2015 19:57:23 GMT\r\nContent-Encoding: gzip\r\nContent-Length: 7271\r\nAccept-Ranges: bytes\r\nDate: Sun, 15 Nov 2015 21:22:30 GMT\r\nVia: 1.1 varnish\r\nAge: 351306\r\nX-Served-By: cache-fra1220-FRA\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nVary: Accept-Encoding,User-Agent\r\nStrict-Transport-Security: max-age=31536000; preload\r\n\r\n",
+        "mimeType": "text/html",
+        "protocol": "http/1.1",
+        "remoteIPAddress": "127.0.0.1",
+        "remotePort": 2003,
+        "requestHeaders": {
+          "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+          "Accept-Encoding": "gzip, deflate, sdch",
+          "Accept-Language": "sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4",
+          "Connection": "keep-alive",
+          "Host": "www.sitespeed.io",
+          "Upgrade-Insecure-Requests": "1",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "requestHeadersText": "GET / HTTP/1.1\r\nHost: www.sitespeed.io\r\nConnection: keep-alive\r\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\r\nUpgrade-Insecure-Requests: 1\r\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\r\nAccept-Encoding: gzip, deflate, sdch\r\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\r\n\r\n",
+        "securityDetails": {
+          "certificateId": 1,
+          "cipher": "ECDHE_RSA",
+          "keyExchange": "AES_128_GCM",
+          "protocol": "TLS 1.2"
+        },
+        "securityState": "insecure",
+        "status": 200,
+        "statusText": "OK",
+        "timing": {
+          "connectEnd": 1316.07000000076,
+          "connectStart": 0.302000029478222,
+          "dnsEnd": -1,
+          "dnsStart": -1,
+          "proxyEnd": -1,
+          "proxyStart": -1,
+          "receiveHeadersEnd": 1488.6220000335,
+          "requestTime": 316315.748552,
+          "sendEnd": 1316.21700001415,
+          "sendStart": 1316.14400004037,
+          "sslEnd": 1316.043000028,
+          "sslStart": 1215.50800005207,
+          "workerReady": -1,
+          "workerStart": -1
+        },
+        "url": "https://www.sitespeed.io/"
+      },
+      "timestamp": 316317.237773,
+      "type": "Document"
+    }
+  },
+  {
+    "timestamp": 1447622553497,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 12117,
+      "encodedDataLength": 4096,
+      "requestId": "96213.2",
+      "timestamp": 316317.238295
+    }
+  },
+  {
+    "timestamp": 1447622553497,
+    "method": "Page.frameNavigated",
+    "data": {
+      "frame": {
+        "id": "96213.2",
+        "loaderId": "96213.5",
+        "mimeType": "text/html",
+        "securityOrigin": "https://www.sitespeed.io",
+        "url": "https://www.sitespeed.io/"
+      }
+    }
+  },
+  {
+    "timestamp": 1447622553498,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 2232,
+      "encodedDataLength": 564,
+      "requestId": "96213.2",
+      "timestamp": 316317.243412
+    }
+  },
+  {
+    "timestamp": 1447622553498,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 10676,
+      "encodedDataLength": 3174,
+      "requestId": "96213.2",
+      "timestamp": 316317.24731
+    }
+  },
+  {
+    "timestamp": 1447622553498,
+    "method": "Network.loadingFinished",
+    "data": {
+      "encodedDataLength": 7834,
+      "requestId": "96213.2",
+      "timestamp": 316317.240019
+    }
+  },
+  {
+    "timestamp": 1447622553501,
+    "method": "Network.requestWillBeSent",
+    "data": {
+      "documentURL": "https://www.sitespeed.io/",
+      "frameId": "96213.2",
+      "initiator": {
+        "lineNumber": 1,
+        "type": "parser",
+        "url": "https://www.sitespeed.io/"
+      },
+      "loaderId": "96213.5",
+      "request": {
+        "headers": {
+          "Accept": "image/webp,image/*,*/*;q=0.8",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "method": "GET",
+        "mixedContentType": "none",
+        "url": "https://www.sitespeed.io/img/sitespeed-logo-2c.png"
+      },
+      "requestId": "96213.3",
+      "timestamp": 316317.248292,
+      "type": "Other",
+      "wallTime": 1447622553.49497
+    }
+  },
+  {
+    "timestamp": 1447622553501,
+    "method": "Network.requestWillBeSent",
+    "data": {
+      "documentURL": "https://www.sitespeed.io/",
+      "frameId": "96213.2",
+      "initiator": {
+        "lineNumber": 1,
+        "type": "parser",
+        "url": "https://www.sitespeed.io/"
+      },
+      "loaderId": "96213.5",
+      "request": {
+        "headers": {
+          "Accept": "image/webp,image/*,*/*;q=0.8",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "method": "GET",
+        "mixedContentType": "none",
+        "url": "https://www.sitespeed.io/img/sitespeed.io-logo-large2.png"
+      },
+      "requestId": "96213.4",
+      "timestamp": 316317.248422,
+      "type": "Other",
+      "wallTime": 1447622553.4951
+    }
+  },
+  {
+    "timestamp": 1447622553501,
+    "method": "Network.requestWillBeSent",
+    "data": {
+      "documentURL": "https://www.sitespeed.io/",
+      "frameId": "96213.2",
+      "initiator": {
+        "stackTrace": [
+          {
+            "columnNumber": 16723,
+            "functionName": "",
+            "lineNumber": 1,
+            "scriptId": "51",
+            "url": "https://www.sitespeed.io/"
+          },
+          {
+            "columnNumber": 16746,
+            "functionName": "",
+            "lineNumber": 1,
+            "scriptId": "51",
+            "url": "https://www.sitespeed.io/"
+          }
+        ],
+        "type": "script"
+      },
+      "loaderId": "96213.5",
+      "request": {
+        "headers": {
+          "Accept": "*/*",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "method": "GET",
+        "mixedContentType": "none",
+        "url": "https://ssl.google-analytics.com/ga.js"
+      },
+      "requestId": "96213.5",
+      "timestamp": 316317.254318,
+      "type": "Other",
+      "wallTime": 1447622553.50099
+    }
+  },
+  {
+    "timestamp": 1447622553503,
+    "method": "Network.requestWillBeSent",
+    "data": {
+      "documentURL": "https://www.sitespeed.io/",
+      "frameId": "96213.2",
+      "initiator": {
+        "lineNumber": 3,
+        "type": "parser",
+        "url": "https://www.sitespeed.io/"
+      },
+      "loaderId": "96213.5",
+      "request": {
+        "headers": {
+          "Accept": "image/webp,image/*,*/*;q=0.8",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "method": "GET",
+        "mixedContentType": "none",
+        "url": "https://www.sitespeed.io/img/GitHub-Mark-64px.png"
+      },
+      "requestId": "96213.6",
+      "timestamp": 316317.254859,
+      "type": "Other",
+      "wallTime": 1447622553.50153
+    }
+  },
+  {
+    "timestamp": 1447622553503,
+    "method": "Network.requestWillBeSent",
+    "data": {
+      "documentURL": "https://www.sitespeed.io/",
+      "frameId": "96213.2",
+      "initiator": {
+        "lineNumber": 3,
+        "type": "parser",
+        "url": "https://www.sitespeed.io/"
+      },
+      "loaderId": "96213.5",
+      "request": {
+        "headers": {
+          "Accept": "image/webp,image/*,*/*;q=0.8",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "method": "GET",
+        "mixedContentType": "none",
+        "url": "https://www.sitespeed.io/img/star3.png"
+      },
+      "requestId": "96213.7",
+      "timestamp": 316317.254997,
+      "type": "Other",
+      "wallTime": 1447622553.50167
+    }
+  },
+  {
+    "timestamp": 1447622553503,
+    "method": "Network.requestWillBeSent",
+    "data": {
+      "documentURL": "https://www.sitespeed.io/",
+      "frameId": "96213.2",
+      "initiator": {
+        "lineNumber": 3,
+        "type": "parser",
+        "url": "https://www.sitespeed.io/"
+      },
+      "loaderId": "96213.5",
+      "request": {
+        "headers": {
+          "Accept": "image/webp,image/*,*/*;q=0.8",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "method": "GET",
+        "mixedContentType": "none",
+        "url": "https://www.sitespeed.io/img/dashboard.png"
+      },
+      "requestId": "96213.8",
+      "timestamp": 316317.255138,
+      "type": "Other",
+      "wallTime": 1447622553.50181
+    }
+  },
+  {
+    "timestamp": 1447622553503,
+    "method": "Network.requestWillBeSent",
+    "data": {
+      "documentURL": "https://www.sitespeed.io/",
+      "frameId": "96213.2",
+      "initiator": {
+        "lineNumber": 3,
+        "type": "parser",
+        "url": "https://www.sitespeed.io/"
+      },
+      "loaderId": "96213.5",
+      "request": {
+        "headers": {
+          "Accept": "image/webp,image/*,*/*;q=0.8",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "method": "GET",
+        "mixedContentType": "none",
+        "url": "https://www.sitespeed.io/img/perfbudget.png"
+      },
+      "requestId": "96213.9",
+      "timestamp": 316317.255258,
+      "type": "Other",
+      "wallTime": 1447622553.50193
+    }
+  },
+  {
+    "timestamp": 1447622553503,
+    "method": "Network.requestWillBeSent",
+    "data": {
+      "documentURL": "https://www.sitespeed.io/",
+      "frameId": "96213.2",
+      "initiator": {
+        "lineNumber": 3,
+        "type": "parser",
+        "url": "https://www.sitespeed.io/"
+      },
+      "loaderId": "96213.5",
+      "request": {
+        "headers": {
+          "Accept": "image/webp,image/*,*/*;q=0.8",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "method": "GET",
+        "mixedContentType": "none",
+        "url": "https://www.sitespeed.io/img/twitter64.png"
+      },
+      "requestId": "96213.10",
+      "timestamp": 316317.255379,
+      "type": "Other",
+      "wallTime": 1447622553.50205
+    }
+  },
+  {
+    "timestamp": 1447622553503,
+    "method": "Network.requestWillBeSent",
+    "data": {
+      "documentURL": "https://www.sitespeed.io/",
+      "frameId": "96213.2",
+      "initiator": {
+        "lineNumber": 3,
+        "type": "parser",
+        "url": "https://www.sitespeed.io/"
+      },
+      "loaderId": "96213.5",
+      "request": {
+        "headers": {
+          "Accept": "image/webp,image/*,*/*;q=0.8",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "method": "GET",
+        "mixedContentType": "none",
+        "url": "https://www.sitespeed.io/img/black-logo-120.png"
+      },
+      "requestId": "96213.11",
+      "timestamp": 316317.255472,
+      "type": "Other",
+      "wallTime": 1447622553.50215
+    }
+  },
+  {
+    "timestamp": 1447622553504,
+    "method": "Network.requestWillBeSent",
+    "data": {
+      "documentURL": "https://www.sitespeed.io/",
+      "frameId": "96213.2",
+      "initiator": {
+        "lineNumber": 3,
+        "type": "parser",
+        "url": "https://www.sitespeed.io/"
+      },
+      "loaderId": "96213.5",
+      "request": {
+        "headers": {
+          "Accept": "image/webp,image/*,*/*;q=0.8",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "method": "GET",
+        "mixedContentType": "none",
+        "url": "https://www.sitespeed.io/img/fastly2.png"
+      },
+      "requestId": "96213.12",
+      "timestamp": 316317.255559,
+      "type": "Other",
+      "wallTime": 1447622553.50223
+    }
+  },
+  {
+    "timestamp": 1447622553543,
+    "method": "Page.domContentEventFired",
+    "data": {
+      "timestamp": 316317.295206
+    }
+  },
+  {
+    "timestamp": 1447622553565,
+    "method": "Network.responseReceived",
+    "data": {
+      "frameId": "96213.2",
+      "loaderId": "96213.5",
+      "requestId": "96213.3",
+      "response": {
+        "connectionId": 17,
+        "connectionReused": true,
+        "encodedDataLength": -1,
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Age": "351305",
+          "Cache-Control": "max-age=31536000, public, public, must-revalidate, proxy-revalidate",
+          "Content-Length": "3717",
+          "Content-Type": "image/png",
+          "Date": "Sun, 15 Nov 2015 21:22:33 GMT\nSun, 15 Nov 2015 21:22:30 GMT",
+          "Expires": "Thu, 10 Nov 2016 19:47:24 GMT",
+          "Last-Modified": "Mon, 19 Oct 2015 12:44:12 GMT",
+          "Pragma": "public",
+          "Server": "Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\nnginx/1.8.0",
+          "Strict-Transport-Security": "max-age=31536000; preload",
+          "Vary": "User-Agent",
+          "Via": "1.1 varnish",
+          "X-Cache": "HIT",
+          "X-Cache-Hits": "1",
+          "X-Served-By": "cache-fra1220-FRA"
+        },
+        "headersText": "HTTP/1.1 200 OK\r\nDate: Sun, 15 Nov 2015 21:22:33 GMT\r\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\r\nServer: nginx/1.8.0\r\nContent-Type: image/png\r\nLast-Modified: Mon, 19 Oct 2015 12:44:12 GMT\r\nCache-Control: max-age=31536000, public, public, must-revalidate, proxy-revalidate\r\nExpires: Thu, 10 Nov 2016 19:47:24 GMT\r\nContent-Length: 3717\r\nAccept-Ranges: bytes\r\nDate: Sun, 15 Nov 2015 21:22:30 GMT\r\nVia: 1.1 varnish\r\nAge: 351305\r\nX-Served-By: cache-fra1220-FRA\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nVary: User-Agent\r\nStrict-Transport-Security: max-age=31536000; preload\r\nPragma: public\r\n\r\n",
+        "mimeType": "image/png",
+        "protocol": "http/1.1",
+        "remoteIPAddress": "127.0.0.1",
+        "remotePort": 2003,
+        "requestHeaders": {
+          "Accept": "image/webp,image/*,*/*;q=0.8",
+          "Accept-Encoding": "gzip, deflate, sdch",
+          "Accept-Language": "sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4",
+          "Connection": "keep-alive",
+          "Host": "www.sitespeed.io",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "requestHeadersText": "GET /img/sitespeed-logo-2c.png HTTP/1.1\r\nHost: www.sitespeed.io\r\nConnection: keep-alive\r\nAccept: image/webp,image/*,*/*;q=0.8\r\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\r\nReferer: https://www.sitespeed.io/\r\nAccept-Encoding: gzip, deflate, sdch\r\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\r\n\r\n",
+        "securityDetails": {
+          "certificateId": 1,
+          "cipher": "ECDHE_RSA",
+          "keyExchange": "AES_128_GCM",
+          "protocol": "TLS 1.2"
+        },
+        "securityState": "insecure",
+        "status": 200,
+        "statusText": "OK",
+        "timing": {
+          "connectEnd": -1,
+          "connectStart": -1,
+          "dnsEnd": -1,
+          "dnsStart": -1,
+          "proxyEnd": -1,
+          "proxyStart": -1,
+          "receiveHeadersEnd": 65.879000001587,
+          "requestTime": 316317.248508,
+          "sendEnd": 0.959000026341528,
+          "sendStart": 0.887000001966953,
+          "sslEnd": -1,
+          "sslStart": -1,
+          "workerReady": -1,
+          "workerStart": -1
+        },
+        "url": "https://www.sitespeed.io/img/sitespeed-logo-2c.png"
+      },
+      "timestamp": 316317.317345,
+      "type": "Image"
+    }
+  },
+  {
+    "timestamp": 1447622553565,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 3501,
+      "encodedDataLength": 4096,
+      "requestId": "96213.3",
+      "timestamp": 316317.31756
+    }
+  },
+  {
+    "timestamp": 1447622553565,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 216,
+      "encodedDataLength": 216,
+      "requestId": "96213.3",
+      "timestamp": 316317.317694
+    }
+  },
+  {
+    "timestamp": 1447622553565,
+    "method": "Network.loadingFinished",
+    "data": {
+      "encodedDataLength": 4312,
+      "requestId": "96213.3",
+      "timestamp": 316317.314983
+    }
+  },
+  {
+    "timestamp": 1447622553604,
+    "method": "Network.responseReceived",
+    "data": {
+      "frameId": "96213.2",
+      "loaderId": "96213.5",
+      "requestId": "96213.10",
+      "response": {
+        "connectionId": 17,
+        "connectionReused": true,
+        "encodedDataLength": -1,
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Age": "306283",
+          "Cache-Control": "max-age=31536000, public, public, must-revalidate, proxy-revalidate",
+          "Content-Length": "517",
+          "Content-Type": "image/png",
+          "Date": "Sun, 15 Nov 2015 21:22:33 GMT\nSun, 15 Nov 2015 21:22:30 GMT",
+          "Expires": "Fri, 11 Nov 2016 08:17:46 GMT",
+          "Last-Modified": "Mon, 19 Oct 2015 12:44:27 GMT",
+          "Pragma": "public",
+          "Server": "Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\nnginx/1.8.0",
+          "Strict-Transport-Security": "max-age=31536000; preload",
+          "Vary": "User-Agent",
+          "Via": "1.1 varnish",
+          "X-Cache": "HIT",
+          "X-Cache-Hits": "1",
+          "X-Served-By": "cache-fra1220-FRA"
+        },
+        "headersText": "HTTP/1.1 200 OK\r\nDate: Sun, 15 Nov 2015 21:22:33 GMT\r\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\r\nServer: nginx/1.8.0\r\nContent-Type: image/png\r\nLast-Modified: Mon, 19 Oct 2015 12:44:27 GMT\r\nCache-Control: max-age=31536000, public, public, must-revalidate, proxy-revalidate\r\nExpires: Fri, 11 Nov 2016 08:17:46 GMT\r\nContent-Length: 517\r\nAccept-Ranges: bytes\r\nDate: Sun, 15 Nov 2015 21:22:30 GMT\r\nVia: 1.1 varnish\r\nAge: 306283\r\nX-Served-By: cache-fra1220-FRA\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nVary: User-Agent\r\nStrict-Transport-Security: max-age=31536000; preload\r\nPragma: public\r\n\r\n",
+        "mimeType": "image/png",
+        "protocol": "http/1.1",
+        "remoteIPAddress": "127.0.0.1",
+        "remotePort": 2003,
+        "requestHeaders": {
+          "Accept": "image/webp,image/*,*/*;q=0.8",
+          "Accept-Encoding": "gzip, deflate, sdch",
+          "Accept-Language": "sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4",
+          "Connection": "keep-alive",
+          "Host": "www.sitespeed.io",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "requestHeadersText": "GET /img/twitter64.png HTTP/1.1\r\nHost: www.sitespeed.io\r\nConnection: keep-alive\r\nAccept: image/webp,image/*,*/*;q=0.8\r\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\r\nReferer: https://www.sitespeed.io/\r\nAccept-Encoding: gzip, deflate, sdch\r\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\r\n\r\n",
+        "securityDetails": {
+          "certificateId": 1,
+          "cipher": "ECDHE_RSA",
+          "keyExchange": "AES_128_GCM",
+          "protocol": "TLS 1.2"
+        },
+        "securityState": "insecure",
+        "status": 200,
+        "statusText": "OK",
+        "timing": {
+          "connectEnd": -1,
+          "connectStart": -1,
+          "dnsEnd": -1,
+          "dnsStart": -1,
+          "proxyEnd": -1,
+          "proxyStart": -1,
+          "receiveHeadersEnd": 41.4200000232086,
+          "requestTime": 316317.314648,
+          "sendEnd": 0.614000018686056,
+          "sendStart": 0.543000001925975,
+          "sslEnd": -1,
+          "sslStart": -1,
+          "workerReady": -1,
+          "workerStart": -1
+        },
+        "url": "https://www.sitespeed.io/img/twitter64.png"
+      },
+      "timestamp": 316317.35687,
+      "type": "Image"
+    }
+  },
+  {
+    "timestamp": 1447622553604,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 517,
+      "encodedDataLength": 1111,
+      "requestId": "96213.10",
+      "timestamp": 316317.357055
+    }
+  },
+  {
+    "timestamp": 1447622553604,
+    "method": "Network.loadingFinished",
+    "data": {
+      "encodedDataLength": 1111,
+      "requestId": "96213.10",
+      "timestamp": 316317.357038
+    }
+  },
+  {
+    "timestamp": 1447622553652,
+    "method": "Network.responseReceived",
+    "data": {
+      "frameId": "96213.2",
+      "loaderId": "96213.5",
+      "requestId": "96213.11",
+      "response": {
+        "connectionId": 17,
+        "connectionReused": true,
+        "encodedDataLength": -1,
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Age": "218932",
+          "Cache-Control": "max-age=31536000, public, public, must-revalidate, proxy-revalidate",
+          "Content-Length": "1678",
+          "Content-Type": "image/png",
+          "Date": "Sun, 15 Nov 2015 21:22:33 GMT\nSun, 15 Nov 2015 21:22:30 GMT",
+          "Expires": "Sat, 12 Nov 2016 08:33:36 GMT",
+          "Last-Modified": "Mon, 19 Oct 2015 12:43:46 GMT",
+          "Pragma": "public",
+          "Server": "Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\nnginx/1.8.0",
+          "Strict-Transport-Security": "max-age=31536000; preload",
+          "Vary": "User-Agent",
+          "Via": "1.1 varnish",
+          "X-Cache": "HIT",
+          "X-Cache-Hits": "1",
+          "X-Served-By": "cache-fra1220-FRA"
+        },
+        "headersText": "HTTP/1.1 200 OK\r\nDate: Sun, 15 Nov 2015 21:22:33 GMT\r\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\r\nServer: nginx/1.8.0\r\nContent-Type: image/png\r\nLast-Modified: Mon, 19 Oct 2015 12:43:46 GMT\r\nCache-Control: max-age=31536000, public, public, must-revalidate, proxy-revalidate\r\nExpires: Sat, 12 Nov 2016 08:33:36 GMT\r\nContent-Length: 1678\r\nAccept-Ranges: bytes\r\nDate: Sun, 15 Nov 2015 21:22:30 GMT\r\nVia: 1.1 varnish\r\nAge: 218932\r\nX-Served-By: cache-fra1220-FRA\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nVary: User-Agent\r\nStrict-Transport-Security: max-age=31536000; preload\r\nPragma: public\r\n\r\n",
+        "mimeType": "image/png",
+        "protocol": "http/1.1",
+        "remoteIPAddress": "127.0.0.1",
+        "remotePort": 2003,
+        "requestHeaders": {
+          "Accept": "image/webp,image/*,*/*;q=0.8",
+          "Accept-Encoding": "gzip, deflate, sdch",
+          "Accept-Language": "sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4",
+          "Connection": "keep-alive",
+          "Host": "www.sitespeed.io",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "requestHeadersText": "GET /img/black-logo-120.png HTTP/1.1\r\nHost: www.sitespeed.io\r\nConnection: keep-alive\r\nAccept: image/webp,image/*,*/*;q=0.8\r\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\r\nReferer: https://www.sitespeed.io/\r\nAccept-Encoding: gzip, deflate, sdch\r\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\r\n\r\n",
+        "securityDetails": {
+          "certificateId": 1,
+          "cipher": "ECDHE_RSA",
+          "keyExchange": "AES_128_GCM",
+          "protocol": "TLS 1.2"
+        },
+        "securityState": "insecure",
+        "status": 200,
+        "statusText": "OK",
+        "timing": {
+          "connectEnd": -1,
+          "connectStart": -1,
+          "dnsEnd": -1,
+          "dnsStart": -1,
+          "proxyEnd": -1,
+          "proxyStart": -1,
+          "receiveHeadersEnd": 47.3740000161342,
+          "requestTime": 316317.356716,
+          "sendEnd": 0.671999994665384,
+          "sendStart": 0.608999980613589,
+          "sslEnd": -1,
+          "sslStart": -1,
+          "workerReady": -1,
+          "workerStart": -1
+        },
+        "url": "https://www.sitespeed.io/img/black-logo-120.png"
+      },
+      "timestamp": 316317.404928,
+      "type": "Image"
+    }
+  },
+  {
+    "timestamp": 1447622553653,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 1678,
+      "encodedDataLength": 2273,
+      "requestId": "96213.11",
+      "timestamp": 316317.405434
+    }
+  },
+  {
+    "timestamp": 1447622553653,
+    "method": "Network.loadingFinished",
+    "data": {
+      "encodedDataLength": 2273,
+      "requestId": "96213.11",
+      "timestamp": 316317.405088
+    }
+  },
+  {
+    "timestamp": 1447622553657,
+    "method": "Network.responseReceived",
+    "data": {
+      "frameId": "96213.2",
+      "loaderId": "96213.5",
+      "requestId": "96213.7",
+      "response": {
+        "connectionId": 57,
+        "connectionReused": false,
+        "encodedDataLength": -1,
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Age": "351305",
+          "Cache-Control": "max-age=31536000, public, public, must-revalidate, proxy-revalidate",
+          "Content-Length": "492",
+          "Content-Type": "image/png",
+          "Date": "Sun, 15 Nov 2015 21:22:33 GMT\nSun, 15 Nov 2015 21:22:30 GMT",
+          "Expires": "Thu, 10 Nov 2016 19:47:24 GMT",
+          "Last-Modified": "Mon, 19 Oct 2015 12:44:19 GMT",
+          "Pragma": "public",
+          "Server": "Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\nnginx/1.8.0",
+          "Strict-Transport-Security": "max-age=31536000; preload",
+          "Vary": "User-Agent",
+          "Via": "1.1 varnish",
+          "X-Cache": "HIT",
+          "X-Cache-Hits": "1",
+          "X-Served-By": "cache-fra1240-FRA"
+        },
+        "headersText": "HTTP/1.1 200 OK\r\nDate: Sun, 15 Nov 2015 21:22:33 GMT\r\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\r\nServer: nginx/1.8.0\r\nContent-Type: image/png\r\nLast-Modified: Mon, 19 Oct 2015 12:44:19 GMT\r\nCache-Control: max-age=31536000, public, public, must-revalidate, proxy-revalidate\r\nExpires: Thu, 10 Nov 2016 19:47:24 GMT\r\nPragma: public\r\nContent-Length: 492\r\nAccept-Ranges: bytes\r\nDate: Sun, 15 Nov 2015 21:22:30 GMT\r\nVia: 1.1 varnish\r\nAge: 351305\r\nX-Served-By: cache-fra1240-FRA\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nVary: User-Agent\r\nStrict-Transport-Security: max-age=31536000; preload\r\n\r\n",
+        "mimeType": "image/png",
+        "protocol": "http/1.1",
+        "remoteIPAddress": "127.0.0.1",
+        "remotePort": 2003,
+        "requestHeaders": {
+          "Accept": "image/webp,image/*,*/*;q=0.8",
+          "Accept-Encoding": "gzip, deflate, sdch",
+          "Accept-Language": "sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4",
+          "Connection": "keep-alive",
+          "Host": "www.sitespeed.io",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "requestHeadersText": "GET /img/star3.png HTTP/1.1\r\nHost: www.sitespeed.io\r\nConnection: keep-alive\r\nAccept: image/webp,image/*,*/*;q=0.8\r\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\r\nReferer: https://www.sitespeed.io/\r\nAccept-Encoding: gzip, deflate, sdch\r\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\r\n\r\n",
+        "securityDetails": {
+          "certificateId": 1,
+          "cipher": "ECDHE_RSA",
+          "keyExchange": "AES_128_GCM",
+          "protocol": "TLS 1.2"
+        },
+        "securityState": "insecure",
+        "status": 200,
+        "statusText": "OK",
+        "timing": {
+          "connectEnd": 40.1929999934509,
+          "connectStart": 1.48400000762194,
+          "dnsEnd": -1,
+          "dnsStart": -1,
+          "proxyEnd": -1,
+          "proxyStart": -1,
+          "receiveHeadersEnd": 154.026000003796,
+          "requestTime": 316317.255329,
+          "sendEnd": 41.1520000197925,
+          "sendStart": 41.0590000101365,
+          "sslEnd": 40.1839999831282,
+          "sslStart": 3.28800000716001,
+          "workerReady": -1,
+          "workerStart": -1
+        },
+        "url": "https://www.sitespeed.io/img/star3.png"
+      },
+      "timestamp": 316317.409947,
+      "type": "Image"
+    }
+  },
+  {
+    "timestamp": 1447622553657,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 492,
+      "encodedDataLength": 1086,
+      "requestId": "96213.7",
+      "timestamp": 316317.410268
+    }
+  },
+  {
+    "timestamp": 1447622553658,
+    "method": "Network.loadingFinished",
+    "data": {
+      "encodedDataLength": 1086,
+      "requestId": "96213.7",
+      "timestamp": 316317.410268
+    }
+  },
+  {
+    "timestamp": 1447622553658,
+    "method": "Network.responseReceived",
+    "data": {
+      "frameId": "96213.2",
+      "loaderId": "96213.5",
+      "requestId": "96213.6",
+      "response": {
+        "connectionId": 52,
+        "connectionReused": false,
+        "encodedDataLength": -1,
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Age": "306285",
+          "Cache-Control": "max-age=31536000, public, public, must-revalidate, proxy-revalidate",
+          "Content-Length": "514",
+          "Content-Type": "image/png",
+          "Date": "Sun, 15 Nov 2015 21:22:33 GMT\nSun, 15 Nov 2015 21:22:30 GMT",
+          "Expires": "Fri, 11 Nov 2016 08:17:44 GMT",
+          "Last-Modified": "Mon, 19 Oct 2015 12:43:50 GMT",
+          "Pragma": "public",
+          "Server": "Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\nnginx/1.8.0",
+          "Strict-Transport-Security": "max-age=31536000; preload",
+          "Vary": "User-Agent",
+          "Via": "1.1 varnish",
+          "X-Cache": "HIT",
+          "X-Cache-Hits": "1",
+          "X-Served-By": "cache-fra1224-FRA"
+        },
+        "headersText": "HTTP/1.1 200 OK\r\nDate: Sun, 15 Nov 2015 21:22:33 GMT\r\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\r\nServer: nginx/1.8.0\r\nContent-Type: image/png\r\nLast-Modified: Mon, 19 Oct 2015 12:43:50 GMT\r\nCache-Control: max-age=31536000, public, public, must-revalidate, proxy-revalidate\r\nExpires: Fri, 11 Nov 2016 08:17:44 GMT\r\nPragma: public\r\nContent-Length: 514\r\nAccept-Ranges: bytes\r\nDate: Sun, 15 Nov 2015 21:22:30 GMT\r\nVia: 1.1 varnish\r\nAge: 306285\r\nX-Served-By: cache-fra1224-FRA\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nVary: User-Agent\r\nStrict-Transport-Security: max-age=31536000; preload\r\n\r\n",
+        "mimeType": "image/png",
+        "protocol": "http/1.1",
+        "remoteIPAddress": "127.0.0.1",
+        "remotePort": 2003,
+        "requestHeaders": {
+          "Accept": "image/webp,image/*,*/*;q=0.8",
+          "Accept-Encoding": "gzip, deflate, sdch",
+          "Accept-Language": "sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4",
+          "Connection": "keep-alive",
+          "Host": "www.sitespeed.io",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "requestHeadersText": "GET /img/GitHub-Mark-64px.png HTTP/1.1\r\nHost: www.sitespeed.io\r\nConnection: keep-alive\r\nAccept: image/webp,image/*,*/*;q=0.8\r\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\r\nReferer: https://www.sitespeed.io/\r\nAccept-Encoding: gzip, deflate, sdch\r\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\r\n\r\n",
+        "securityDetails": {
+          "certificateId": 1,
+          "cipher": "ECDHE_RSA",
+          "keyExchange": "AES_128_GCM",
+          "protocol": "TLS 1.2"
+        },
+        "securityState": "insecure",
+        "status": 200,
+        "statusText": "OK",
+        "timing": {
+          "connectEnd": 37.5590000185184,
+          "connectStart": 1.61400000797585,
+          "dnsEnd": -1,
+          "dnsStart": -1,
+          "proxyEnd": -1,
+          "proxyStart": -1,
+          "receiveHeadersEnd": 155.377999995835,
+          "requestTime": 316317.255146,
+          "sendEnd": 37.7519999747165,
+          "sendStart": 37.6849999884144,
+          "sslEnd": 37.5510000158101,
+          "sslStart": 3.49199998890981,
+          "workerReady": -1,
+          "workerStart": -1
+        },
+        "url": "https://www.sitespeed.io/img/GitHub-Mark-64px.png"
+      },
+      "timestamp": 316317.411009,
+      "type": "Image"
+    }
+  },
+  {
+    "timestamp": 1447622553658,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 514,
+      "encodedDataLength": 1108,
+      "requestId": "96213.6",
+      "timestamp": 316317.411127
+    }
+  },
+  {
+    "timestamp": 1447622553658,
+    "method": "Network.loadingFinished",
+    "data": {
+      "encodedDataLength": 1108,
+      "requestId": "96213.6",
+      "timestamp": 316317.411149
+    }
+  },
+  {
+    "timestamp": 1447622553674,
+    "method": "Network.responseReceived",
+    "data": {
+      "frameId": "96213.2",
+      "loaderId": "96213.5",
+      "requestId": "96213.4",
+      "response": {
+        "connectionId": 29,
+        "connectionReused": false,
+        "encodedDataLength": -1,
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Age": "351305",
+          "Cache-Control": "max-age=31536000, public, public, must-revalidate, proxy-revalidate",
+          "Content-Length": "14113",
+          "Content-Type": "image/png",
+          "Date": "Sun, 15 Nov 2015 21:22:33 GMT\nSun, 15 Nov 2015 21:22:30 GMT",
+          "Expires": "Thu, 10 Nov 2016 19:47:24 GMT",
+          "Last-Modified": "Mon, 19 Oct 2015 12:44:18 GMT",
+          "Pragma": "public",
+          "Server": "Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\nnginx/1.8.0",
+          "Strict-Transport-Security": "max-age=31536000; preload",
+          "Vary": "User-Agent",
+          "Via": "1.1 varnish",
+          "X-Cache": "HIT",
+          "X-Cache-Hits": "1",
+          "X-Served-By": "cache-fra1240-FRA"
+        },
+        "headersText": "HTTP/1.1 200 OK\r\nDate: Sun, 15 Nov 2015 21:22:33 GMT\r\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\r\nServer: nginx/1.8.0\r\nContent-Type: image/png\r\nLast-Modified: Mon, 19 Oct 2015 12:44:18 GMT\r\nCache-Control: max-age=31536000, public, public, must-revalidate, proxy-revalidate\r\nExpires: Thu, 10 Nov 2016 19:47:24 GMT\r\nPragma: public\r\nContent-Length: 14113\r\nAccept-Ranges: bytes\r\nDate: Sun, 15 Nov 2015 21:22:30 GMT\r\nVia: 1.1 varnish\r\nAge: 351305\r\nX-Served-By: cache-fra1240-FRA\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nVary: User-Agent\r\nStrict-Transport-Security: max-age=31536000; preload\r\n\r\n",
+        "mimeType": "image/png",
+        "protocol": "http/1.1",
+        "remoteIPAddress": "127.0.0.1",
+        "remotePort": 2003,
+        "requestHeaders": {
+          "Accept": "image/webp,image/*,*/*;q=0.8",
+          "Accept-Encoding": "gzip, deflate, sdch",
+          "Accept-Language": "sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4",
+          "Connection": "keep-alive",
+          "Host": "www.sitespeed.io",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "requestHeadersText": "GET /img/sitespeed.io-logo-large2.png HTTP/1.1\r\nHost: www.sitespeed.io\r\nConnection: keep-alive\r\nAccept: image/webp,image/*,*/*;q=0.8\r\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\r\nReferer: https://www.sitespeed.io/\r\nAccept-Encoding: gzip, deflate, sdch\r\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\r\n\r\n",
+        "securityDetails": {
+          "certificateId": 1,
+          "cipher": "ECDHE_RSA",
+          "keyExchange": "AES_128_GCM",
+          "protocol": "TLS 1.2"
+        },
+        "securityState": "insecure",
+        "status": 200,
+        "statusText": "OK",
+        "timing": {
+          "connectEnd": 30.6149999960326,
+          "connectStart": 0.476000015623868,
+          "dnsEnd": -1,
+          "dnsStart": -1,
+          "proxyEnd": -1,
+          "proxyStart": -1,
+          "receiveHeadersEnd": 178.184000018518,
+          "requestTime": 316317.248646,
+          "sendEnd": 30.7669999892823,
+          "sendStart": 30.6979999877512,
+          "sslEnd": 30.6059999857098,
+          "sslStart": 2.07300001056865,
+          "workerReady": -1,
+          "workerStart": -1
+        },
+        "url": "https://www.sitespeed.io/img/sitespeed.io-logo-large2.png"
+      },
+      "timestamp": 316317.427287,
+      "type": "Image"
+    }
+  },
+  {
+    "timestamp": 1447622553675,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 3500,
+      "encodedDataLength": 4096,
+      "requestId": "96213.4",
+      "timestamp": 316317.427784
+    }
+  },
+  {
+    "timestamp": 1447622553675,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 597,
+      "encodedDataLength": 597,
+      "requestId": "96213.4",
+      "timestamp": 316317.427856
+    }
+  },
+  {
+    "timestamp": 1447622553675,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 3572,
+      "encodedDataLength": 3572,
+      "requestId": "96213.4",
+      "timestamp": 316317.428047
+    }
+  },
+  {
+    "timestamp": 1447622553676,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.4",
+      "timestamp": 316317.429389
+    }
+  },
+  {
+    "timestamp": 1447622553677,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 2348,
+      "encodedDataLength": 2348,
+      "requestId": "96213.4",
+      "timestamp": 316317.430296
+    }
+  },
+  {
+    "timestamp": 1447622553677,
+    "method": "Network.loadingFinished",
+    "data": {
+      "encodedDataLength": 14709,
+      "requestId": "96213.4",
+      "timestamp": 316317.430325
+    }
+  },
+  {
+    "timestamp": 1447622553698,
+    "method": "Network.responseReceived",
+    "data": {
+      "frameId": "96213.2",
+      "loaderId": "96213.5",
+      "requestId": "96213.12",
+      "response": {
+        "connectionId": 17,
+        "connectionReused": true,
+        "encodedDataLength": -1,
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Age": "94037",
+          "Cache-Control": "max-age=31536000, public, public, must-revalidate, proxy-revalidate",
+          "Content-Length": "2227",
+          "Content-Type": "image/png",
+          "Date": "Sun, 15 Nov 2015 21:22:33 GMT\nSun, 15 Nov 2015 21:22:30 GMT",
+          "Expires": "Sun, 13 Nov 2016 19:15:12 GMT",
+          "Last-Modified": "Mon, 19 Oct 2015 12:43:49 GMT",
+          "Pragma": "public",
+          "Server": "Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\nnginx/1.8.0",
+          "Strict-Transport-Security": "max-age=31536000; preload",
+          "Vary": "User-Agent",
+          "Via": "1.1 varnish",
+          "X-Cache": "HIT",
+          "X-Cache-Hits": "1",
+          "X-Served-By": "cache-fra1220-FRA"
+        },
+        "headersText": "HTTP/1.1 200 OK\r\nDate: Sun, 15 Nov 2015 21:22:33 GMT\r\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\r\nServer: nginx/1.8.0\r\nContent-Type: image/png\r\nLast-Modified: Mon, 19 Oct 2015 12:43:49 GMT\r\nCache-Control: max-age=31536000, public, public, must-revalidate, proxy-revalidate\r\nExpires: Sun, 13 Nov 2016 19:15:12 GMT\r\nContent-Length: 2227\r\nAccept-Ranges: bytes\r\nDate: Sun, 15 Nov 2015 21:22:30 GMT\r\nVia: 1.1 varnish\r\nAge: 94037\r\nX-Served-By: cache-fra1220-FRA\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nVary: User-Agent\r\nStrict-Transport-Security: max-age=31536000; preload\r\nPragma: public\r\n\r\n",
+        "mimeType": "image/png",
+        "protocol": "http/1.1",
+        "remoteIPAddress": "127.0.0.1",
+        "remotePort": 2003,
+        "requestHeaders": {
+          "Accept": "image/webp,image/*,*/*;q=0.8",
+          "Accept-Encoding": "gzip, deflate, sdch",
+          "Accept-Language": "sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4",
+          "Connection": "keep-alive",
+          "Host": "www.sitespeed.io",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "requestHeadersText": "GET /img/fastly2.png HTTP/1.1\r\nHost: www.sitespeed.io\r\nConnection: keep-alive\r\nAccept: image/webp,image/*,*/*;q=0.8\r\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\r\nReferer: https://www.sitespeed.io/\r\nAccept-Encoding: gzip, deflate, sdch\r\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\r\n\r\n",
+        "securityDetails": {
+          "certificateId": 1,
+          "cipher": "ECDHE_RSA",
+          "keyExchange": "AES_128_GCM",
+          "protocol": "TLS 1.2"
+        },
+        "securityState": "insecure",
+        "status": 200,
+        "statusText": "OK",
+        "timing": {
+          "connectEnd": -1,
+          "connectStart": -1,
+          "dnsEnd": -1,
+          "dnsStart": -1,
+          "proxyEnd": -1,
+          "proxyStart": -1,
+          "receiveHeadersEnd": 43.7030000030063,
+          "requestTime": 316317.404804,
+          "sendEnd": 0.56600000243634,
+          "sendStart": 0.499000016134232,
+          "sslEnd": -1,
+          "sslStart": -1,
+          "workerReady": -1,
+          "workerStart": -1
+        },
+        "url": "https://www.sitespeed.io/img/fastly2.png"
+      },
+      "timestamp": 316317.449344,
+      "type": "Image"
+    }
+  },
+  {
+    "timestamp": 1447622553698,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 2227,
+      "encodedDataLength": 2821,
+      "requestId": "96213.12",
+      "timestamp": 316317.450211
+    }
+  },
+  {
+    "timestamp": 1447622553698,
+    "method": "Network.loadingFinished",
+    "data": {
+      "encodedDataLength": 2821,
+      "requestId": "96213.12",
+      "timestamp": 316317.449346
+    }
+  },
+  {
+    "timestamp": 1447622553699,
+    "method": "Network.responseReceived",
+    "data": {
+      "frameId": "96213.2",
+      "loaderId": "96213.5",
+      "requestId": "96213.9",
+      "response": {
+        "connectionId": 67,
+        "connectionReused": false,
+        "encodedDataLength": -1,
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Age": "161",
+          "Cache-Control": "max-age=31536000, public, public, must-revalidate, proxy-revalidate",
+          "Content-Length": "71179",
+          "Content-Type": "image/png",
+          "Date": "Sun, 15 Nov 2015 21:22:33 GMT\nSun, 15 Nov 2015 21:22:30 GMT",
+          "Expires": "Mon, 14 Nov 2016 21:19:48 GMT",
+          "Last-Modified": "Mon, 19 Oct 2015 12:44:08 GMT",
+          "Pragma": "public",
+          "Server": "Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\nnginx/1.8.0",
+          "Strict-Transport-Security": "max-age=31536000; preload",
+          "Vary": "User-Agent",
+          "Via": "1.1 varnish",
+          "X-Cache": "HIT",
+          "X-Cache-Hits": "1",
+          "X-Served-By": "cache-fra1220-FRA"
+        },
+        "headersText": "HTTP/1.1 200 OK\r\nDate: Sun, 15 Nov 2015 21:22:33 GMT\r\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\r\nServer: nginx/1.8.0\r\nContent-Type: image/png\r\nLast-Modified: Mon, 19 Oct 2015 12:44:08 GMT\r\nCache-Control: max-age=31536000, public, public, must-revalidate, proxy-revalidate\r\nExpires: Mon, 14 Nov 2016 21:19:48 GMT\r\nPragma: public\r\nContent-Length: 71179\r\nAccept-Ranges: bytes\r\nDate: Sun, 15 Nov 2015 21:22:30 GMT\r\nVia: 1.1 varnish\r\nAge: 161\r\nX-Served-By: cache-fra1220-FRA\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nVary: User-Agent\r\nStrict-Transport-Security: max-age=31536000; preload\r\n\r\n",
+        "mimeType": "image/png",
+        "protocol": "http/1.1",
+        "remoteIPAddress": "127.0.0.1",
+        "remotePort": 2003,
+        "requestHeaders": {
+          "Accept": "image/webp,image/*,*/*;q=0.8",
+          "Accept-Encoding": "gzip, deflate, sdch",
+          "Accept-Language": "sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4",
+          "Connection": "keep-alive",
+          "Host": "www.sitespeed.io",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "requestHeadersText": "GET /img/perfbudget.png HTTP/1.1\r\nHost: www.sitespeed.io\r\nConnection: keep-alive\r\nAccept: image/webp,image/*,*/*;q=0.8\r\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\r\nReferer: https://www.sitespeed.io/\r\nAccept-Encoding: gzip, deflate, sdch\r\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\r\n\r\n",
+        "securityDetails": {
+          "certificateId": 1,
+          "cipher": "ECDHE_RSA",
+          "keyExchange": "AES_128_GCM",
+          "protocol": "TLS 1.2"
+        },
+        "securityState": "insecure",
+        "status": 200,
+        "statusText": "OK",
+        "timing": {
+          "connectEnd": 46.533000015188,
+          "connectStart": 1.44400005228817,
+          "dnsEnd": -1,
+          "dnsStart": -1,
+          "proxyEnd": -1,
+          "proxyStart": -1,
+          "receiveHeadersEnd": 193.591999995988,
+          "requestTime": 316317.255906,
+          "sendEnd": 46.6700000106357,
+          "sendStart": 46.6010000091046,
+          "sslEnd": 46.5250000124797,
+          "sslStart": 6.62600004579872,
+          "workerReady": -1,
+          "workerStart": -1
+        },
+        "url": "https://www.sitespeed.io/img/perfbudget.png"
+      },
+      "timestamp": 316317.450616,
+      "type": "Image"
+    }
+  },
+  {
+    "timestamp": 1447622553699,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 3503,
+      "encodedDataLength": 4096,
+      "requestId": "96213.9",
+      "timestamp": 316317.450717
+    }
+  },
+  {
+    "timestamp": 1447622553699,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 594,
+      "encodedDataLength": 594,
+      "requestId": "96213.9",
+      "timestamp": 316317.4508
+    }
+  },
+  {
+    "timestamp": 1447622553700,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 3575,
+      "encodedDataLength": 3575,
+      "requestId": "96213.9",
+      "timestamp": 316317.452766
+    }
+  },
+  {
+    "timestamp": 1447622553701,
+    "method": "Network.responseReceived",
+    "data": {
+      "frameId": "96213.2",
+      "loaderId": "96213.5",
+      "requestId": "96213.8",
+      "response": {
+        "connectionId": 62,
+        "connectionReused": false,
+        "encodedDataLength": -1,
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Age": "218966",
+          "Cache-Control": "max-age=31536000, public, public, must-revalidate, proxy-revalidate",
+          "Content-Length": "59183",
+          "Content-Type": "image/png",
+          "Date": "Sun, 15 Nov 2015 21:22:33 GMT\nSun, 15 Nov 2015 21:22:30 GMT",
+          "Expires": "Sat, 12 Nov 2016 08:33:03 GMT",
+          "Last-Modified": "Mon, 19 Oct 2015 12:43:48 GMT",
+          "Pragma": "public",
+          "Server": "Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\nnginx/1.8.0",
+          "Strict-Transport-Security": "max-age=31536000; preload",
+          "Vary": "User-Agent",
+          "Via": "1.1 varnish",
+          "X-Cache": "HIT",
+          "X-Cache-Hits": "1",
+          "X-Served-By": "cache-fra1233-FRA"
+        },
+        "headersText": "HTTP/1.1 200 OK\r\nDate: Sun, 15 Nov 2015 21:22:33 GMT\r\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\r\nServer: nginx/1.8.0\r\nContent-Type: image/png\r\nLast-Modified: Mon, 19 Oct 2015 12:43:48 GMT\r\nCache-Control: max-age=31536000, public, public, must-revalidate, proxy-revalidate\r\nExpires: Sat, 12 Nov 2016 08:33:03 GMT\r\nPragma: public\r\nContent-Length: 59183\r\nAccept-Ranges: bytes\r\nDate: Sun, 15 Nov 2015 21:22:30 GMT\r\nVia: 1.1 varnish\r\nAge: 218966\r\nX-Served-By: cache-fra1233-FRA\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nVary: User-Agent\r\nStrict-Transport-Security: max-age=31536000; preload\r\n\r\n",
+        "mimeType": "image/png",
+        "protocol": "http/1.1",
+        "remoteIPAddress": "127.0.0.1",
+        "remotePort": 2003,
+        "requestHeaders": {
+          "Accept": "image/webp,image/*,*/*;q=0.8",
+          "Accept-Encoding": "gzip, deflate, sdch",
+          "Accept-Language": "sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4",
+          "Connection": "keep-alive",
+          "Host": "www.sitespeed.io",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "requestHeadersText": "GET /img/dashboard.png HTTP/1.1\r\nHost: www.sitespeed.io\r\nConnection: keep-alive\r\nAccept: image/webp,image/*,*/*;q=0.8\r\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\r\nReferer: https://www.sitespeed.io/\r\nAccept-Encoding: gzip, deflate, sdch\r\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\r\n\r\n",
+        "securityDetails": {
+          "certificateId": 1,
+          "cipher": "ECDHE_RSA",
+          "keyExchange": "AES_128_GCM",
+          "protocol": "TLS 1.2"
+        },
+        "securityState": "insecure",
+        "status": 200,
+        "statusText": "OK",
+        "timing": {
+          "connectEnd": 44.2199999815784,
+          "connectStart": 1.42999994568527,
+          "dnsEnd": -1,
+          "dnsStart": -1,
+          "proxyEnd": -1,
+          "proxyStart": -1,
+          "receiveHeadersEnd": 196.99899997795,
+          "requestTime": 316317.255599,
+          "sendEnd": 44.3489999743179,
+          "sendStart": 44.2859999602661,
+          "sslEnd": 44.2119999788702,
+          "sslStart": 5.01699995948002,
+          "workerReady": -1,
+          "workerStart": -1
+        },
+        "url": "https://www.sitespeed.io/img/dashboard.png"
+      },
+      "timestamp": 316317.453352,
+      "type": "Image"
+    }
+  },
+  {
+    "timestamp": 1447622553701,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 3500,
+      "encodedDataLength": 4096,
+      "requestId": "96213.8",
+      "timestamp": 316317.453817
+    }
+  },
+  {
+    "timestamp": 1447622553701,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4169,
+      "encodedDataLength": 4169,
+      "requestId": "96213.8",
+      "timestamp": 316317.453917
+    }
+  },
+  {
+    "timestamp": 1447622553704,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 8192,
+      "encodedDataLength": 8192,
+      "requestId": "96213.9",
+      "timestamp": 316317.456981
+    }
+  },
+  {
+    "timestamp": 1447622553704,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.8",
+      "timestamp": 316317.457041
+    }
+  },
+  {
+    "timestamp": 1447622553704,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.8",
+      "timestamp": 316317.457593
+    }
+  },
+  {
+    "timestamp": 1447622553712,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.9",
+      "timestamp": 316317.465091
+    }
+  },
+  {
+    "timestamp": 1447622553713,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.8",
+      "timestamp": 316317.4661
+    }
+  },
+  {
+    "timestamp": 1447622553713,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.9",
+      "timestamp": 316317.466796
+    }
+  },
+  {
+    "timestamp": 1447622553715,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.8",
+      "timestamp": 316317.468122
+    }
+  },
+  {
+    "timestamp": 1447622553715,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.9",
+      "timestamp": 316317.468178
+    }
+  },
+  {
+    "timestamp": 1447622553716,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.8",
+      "timestamp": 316317.469366
+    }
+  },
+  {
+    "timestamp": 1447622553717,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.9",
+      "timestamp": 316317.470366
+    }
+  },
+  {
+    "timestamp": 1447622553718,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.8",
+      "timestamp": 316317.471144
+    }
+  },
+  {
+    "timestamp": 1447622553727,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.9",
+      "timestamp": 316317.480468
+    }
+  },
+  {
+    "timestamp": 1447622553728,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.9",
+      "timestamp": 316317.481826
+    }
+  },
+  {
+    "timestamp": 1447622553729,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.8",
+      "timestamp": 316317.482869
+    }
+  },
+  {
+    "timestamp": 1447622553730,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.9",
+      "timestamp": 316317.48365
+    }
+  },
+  {
+    "timestamp": 1447622553731,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.8",
+      "timestamp": 316317.484707
+    }
+  },
+  {
+    "timestamp": 1447622553733,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.9",
+      "timestamp": 316317.486106
+    }
+  },
+  {
+    "timestamp": 1447622553735,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.8",
+      "timestamp": 316317.486787
+    }
+  },
+  {
+    "timestamp": 1447622553737,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.8",
+      "timestamp": 316317.489897
+    }
+  },
+  {
+    "timestamp": 1447622553741,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.9",
+      "timestamp": 316317.494099
+    }
+  },
+  {
+    "timestamp": 1447622553741,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.8",
+      "timestamp": 316317.494157
+    }
+  },
+  {
+    "timestamp": 1447622553742,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.9",
+      "timestamp": 316317.495884
+    }
+  },
+  {
+    "timestamp": 1447622553742,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.8",
+      "timestamp": 316317.495944
+    }
+  },
+  {
+    "timestamp": 1447622553743,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 2362,
+      "encodedDataLength": 2362,
+      "requestId": "96213.8",
+      "timestamp": 316317.496553
+    }
+  },
+  {
+    "timestamp": 1447622553744,
+    "method": "Network.loadingFinished",
+    "data": {
+      "encodedDataLength": 59779,
+      "requestId": "96213.8",
+      "timestamp": 316317.496541
+    }
+  },
+  {
+    "timestamp": 1447622553744,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.9",
+      "timestamp": 316317.497314
+    }
+  },
+  {
+    "timestamp": 1447622553747,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.9",
+      "timestamp": 316317.500192
+    }
+  },
+  {
+    "timestamp": 1447622553750,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4096,
+      "encodedDataLength": 4096,
+      "requestId": "96213.9",
+      "timestamp": 316317.502956
+    }
+  },
+  {
+    "timestamp": 1447622553751,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 2067,
+      "encodedDataLength": 2067,
+      "requestId": "96213.9",
+      "timestamp": 316317.504268
+    }
+  },
+  {
+    "timestamp": 1447622553751,
+    "method": "Network.loadingFinished",
+    "data": {
+      "encodedDataLength": 71772,
+      "requestId": "96213.9",
+      "timestamp": 316317.504143
+    }
+  },
+  {
+    "timestamp": 1447622553755,
+    "method": "Network.responseReceived",
+    "data": {
+      "frameId": "96213.2",
+      "loaderId": "96213.5",
+      "requestId": "96213.5",
+      "response": {
+        "connectionId": 36,
+        "connectionReused": false,
+        "encodedDataLength": -1,
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "headers": {
+          "Age": "2855",
+          "Alt-Svc": "quic=\":443\"; p=\"1\"; ma=604800",
+          "Alternate-Protocol": "443:quic,p=1",
+          "Cache-Control": "public, max-age=7200",
+          "Content-Encoding": "gzip",
+          "Content-Length": "16022",
+          "Content-Type": "text/javascript",
+          "Date": "Sun, 15 Nov 2015 21:22:33 GMT\nSun, 15 Nov 2015 20:34:55 GMT",
+          "Expires": "Sun, 15 Nov 2015 22:34:55 GMT",
+          "Last-Modified": "Thu, 05 Nov 2015 22:24:16 GMT",
+          "Server": "Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\nGolfe2",
+          "Vary": "Accept-Encoding",
+          "X-Content-Type-Options": "nosniff"
+        },
+        "headersText": "HTTP/1.1 200 OK\r\nDate: Sun, 15 Nov 2015 21:22:33 GMT\r\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\r\nDate: Sun, 15 Nov 2015 20:34:55 GMT\r\nExpires: Sun, 15 Nov 2015 22:34:55 GMT\r\nLast-Modified: Thu, 05 Nov 2015 22:24:16 GMT\r\nX-Content-Type-Options: nosniff\r\nContent-Type: text/javascript\r\nVary: Accept-Encoding\r\nContent-Encoding: gzip\r\nServer: Golfe2\r\nContent-Length: 16022\r\nCache-Control: public, max-age=7200\r\nAge: 2855\r\nAlternate-Protocol: 443:quic,p=1\r\nAlt-Svc: quic=\":443\"; p=\"1\"; ma=604800\r\n\r\n",
+        "mimeType": "text/javascript",
+        "protocol": "http/1.1",
+        "remoteIPAddress": "127.0.0.1",
+        "remotePort": 2003,
+        "requestHeaders": {
+          "Accept": "*/*",
+          "Accept-Encoding": "gzip, deflate, sdch",
+          "Accept-Language": "sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4",
+          "Connection": "keep-alive",
+          "Host": "ssl.google-analytics.com",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "requestHeadersText": "GET /ga.js HTTP/1.1\r\nHost: ssl.google-analytics.com\r\nConnection: keep-alive\r\nAccept: */*\r\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\r\nReferer: https://www.sitespeed.io/\r\nAccept-Encoding: gzip, deflate, sdch\r\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\r\n\r\n",
+        "securityDetails": {
+          "certificateId": 2,
+          "cipher": "ECDHE_RSA",
+          "keyExchange": "AES_128_GCM",
+          "protocol": "TLS 1.2"
+        },
+        "securityState": "insecure",
+        "status": 200,
+        "statusText": "OK",
+        "timing": {
+          "connectEnd": 165.21800000919,
+          "connectStart": 0.44600002001971,
+          "dnsEnd": -1,
+          "dnsStart": -1,
+          "proxyEnd": -1,
+          "proxyStart": -1,
+          "receiveHeadersEnd": 253.570000000764,
+          "requestTime": 316317.254571,
+          "sendEnd": 165.356000012252,
+          "sendStart": 165.282000030857,
+          "sslEnd": 165.207999991253,
+          "sslStart": 136.51199999731,
+          "workerReady": -1,
+          "workerStart": -1
+        },
+        "url": "https://ssl.google-analytics.com/ga.js"
+      },
+      "timestamp": 316317.50864,
+      "type": "Script"
+    }
+  },
+  {
+    "timestamp": 1447622553756,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 2092,
+      "encodedDataLength": 1486,
+      "requestId": "96213.5",
+      "timestamp": 316317.508889
+    }
+  },
+  {
+    "timestamp": 1447622553756,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 3452,
+      "encodedDataLength": 1389,
+      "requestId": "96213.5",
+      "timestamp": 316317.509312
+    }
+  },
+  {
+    "timestamp": 1447622553757,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4076,
+      "encodedDataLength": 1389,
+      "requestId": "96213.5",
+      "timestamp": 316317.510726
+    }
+  },
+  {
+    "timestamp": 1447622553759,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 3725,
+      "encodedDataLength": 1389,
+      "requestId": "96213.5",
+      "timestamp": 316317.511994
+    }
+  },
+  {
+    "timestamp": 1447622553763,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 3416,
+      "encodedDataLength": 1389,
+      "requestId": "96213.5",
+      "timestamp": 316317.516219
+    }
+  },
+  {
+    "timestamp": 1447622553763,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 3684,
+      "encodedDataLength": 1389,
+      "requestId": "96213.5",
+      "timestamp": 316317.516324
+    }
+  },
+  {
+    "timestamp": 1447622553768,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 3507,
+      "encodedDataLength": 1389,
+      "requestId": "96213.5",
+      "timestamp": 316317.521738
+    }
+  },
+  {
+    "timestamp": 1447622553770,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 3501,
+      "encodedDataLength": 1389,
+      "requestId": "96213.5",
+      "timestamp": 316317.523358
+    }
+  },
+  {
+    "timestamp": 1447622553771,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 3786,
+      "encodedDataLength": 1389,
+      "requestId": "96213.5",
+      "timestamp": 316317.524544
+    }
+  },
+  {
+    "timestamp": 1447622553772,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4376,
+      "encodedDataLength": 1389,
+      "requestId": "96213.5",
+      "timestamp": 316317.525567
+    }
+  },
+  {
+    "timestamp": 1447622553773,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 4551,
+      "encodedDataLength": 1389,
+      "requestId": "96213.5",
+      "timestamp": 316317.526499
+    }
+  },
+  {
+    "timestamp": 1447622553774,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 2916,
+      "encodedDataLength": 1157,
+      "requestId": "96213.5",
+      "timestamp": 316317.527758
+    }
+  },
+  {
+    "timestamp": 1447622553775,
+    "method": "Network.loadingFinished",
+    "data": {
+      "encodedDataLength": 16533,
+      "requestId": "96213.5",
+      "timestamp": 316317.527803
+    }
+  },
+  {
+    "timestamp": 1447622553805,
+    "method": "Network.requestWillBeSent",
+    "data": {
+      "documentURL": "https://www.sitespeed.io/",
+      "frameId": "96213.2",
+      "initiator": {
+        "lineNumber": 1,
+        "type": "parser",
+        "url": "https://www.sitespeed.io/"
+      },
+      "loaderId": "96213.5",
+      "request": {
+        "headers": {
+          "Accept": "image/webp,image/*,*/*;q=0.8",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "method": "GET",
+        "mixedContentType": "none",
+        "url": "https://ssl.google-analytics.com/r/__utm.gif?utmwv=5.6.7&utms=1&utmn=1626079846&utmhn=www.sitespeed.io&utmcs=UTF-8&utmsr=1440x900&utmvp=1050x757&utmsc=24-bit&utmul=sv&utmje=1&utmfl=-&utmdt=Sitespeed.io%20-%20Analyze%20your%20website%20speed%20and%20performance&utmhid=929390294&utmr=-&utmp=%2F&utmht=1447622553802&utmac=UA-31246987-1&utmcc=__utma%3D152498875.1026109498.1447622554.1447622554.1447622554.1%3B%2B__utmz%3D152498875.1447622554.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmjid=2024065191&utmredir=1&utmu=qAAAAAAAAAAAAAAAAAAAAAAE~"
+      },
+      "requestId": "96213.13",
+      "timestamp": 316317.558102,
+      "type": "Other",
+      "wallTime": 1447622553.80478
+    }
+  },
+  {
+    "timestamp": 1447622553835,
+    "method": "Network.responseReceived",
+    "data": {
+      "frameId": "96213.2",
+      "loaderId": "96213.5",
+      "requestId": "96213.13",
+      "response": {
+        "connectionId": 36,
+        "connectionReused": true,
+        "encodedDataLength": -1,
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "headers": {
+          "Access-Control-Allow-Origin": "*",
+          "Alt-Svc": "quic=\":443\"; p=\"1\"; ma=604800",
+          "Alternate-Protocol": "443:quic,p=1",
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          "Content-Length": "35",
+          "Content-Type": "image/gif",
+          "Date": "Sun, 15 Nov 2015 21:22:33 GMT\nSun, 15 Nov 2015 21:22:30 GMT",
+          "Expires": "Fri, 01 Jan 1990 00:00:00 GMT",
+          "Last-Modified": "Sun, 17 May 1998 03:00:00 GMT",
+          "Pragma": "no-cache",
+          "Server": "Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\nGolfe2",
+          "X-Content-Type-Options": "nosniff"
+        },
+        "headersText": "HTTP/1.1 200 OK\r\nDate: Sun, 15 Nov 2015 21:22:33 GMT\r\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\r\nDate: Sun, 15 Nov 2015 21:22:30 GMT\r\nExpires: Fri, 01 Jan 1990 00:00:00 GMT\r\nLast-Modified: Sun, 17 May 1998 03:00:00 GMT\r\nX-Content-Type-Options: nosniff\r\nContent-Type: image/gif\r\nServer: Golfe2\r\nContent-Length: 35\r\nCache-Control: no-cache, no-store, must-revalidate\r\nAlternate-Protocol: 443:quic,p=1\r\nAlt-Svc: quic=\":443\"; p=\"1\"; ma=604800\r\nAccess-Control-Allow-Origin: *\r\nPragma: no-cache\r\n\r\n",
+        "mimeType": "image/gif",
+        "protocol": "http/1.1",
+        "remoteIPAddress": "127.0.0.1",
+        "remotePort": 2003,
+        "requestHeaders": {
+          "Accept": "image/webp,image/*,*/*;q=0.8",
+          "Accept-Encoding": "gzip, deflate, sdch",
+          "Accept-Language": "sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4",
+          "Connection": "keep-alive",
+          "Host": "ssl.google-analytics.com",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "requestHeadersText": "GET /r/__utm.gif?utmwv=5.6.7&utms=1&utmn=1626079846&utmhn=www.sitespeed.io&utmcs=UTF-8&utmsr=1440x900&utmvp=1050x757&utmsc=24-bit&utmul=sv&utmje=1&utmfl=-&utmdt=Sitespeed.io%20-%20Analyze%20your%20website%20speed%20and%20performance&utmhid=929390294&utmr=-&utmp=%2F&utmht=1447622553802&utmac=UA-31246987-1&utmcc=__utma%3D152498875.1026109498.1447622554.1447622554.1447622554.1%3B%2B__utmz%3D152498875.1447622554.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmjid=2024065191&utmredir=1&utmu=qAAAAAAAAAAAAAAAAAAAAAAE~ HTTP/1.1\r\nHost: ssl.google-analytics.com\r\nConnection: keep-alive\r\nAccept: image/webp,image/*,*/*;q=0.8\r\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\r\nReferer: https://www.sitespeed.io/\r\nAccept-Encoding: gzip, deflate, sdch\r\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\r\n\r\n",
+        "securityDetails": {
+          "certificateId": 2,
+          "cipher": "ECDHE_RSA",
+          "keyExchange": "AES_128_GCM",
+          "protocol": "TLS 1.2"
+        },
+        "securityState": "insecure",
+        "status": 200,
+        "statusText": "OK",
+        "timing": {
+          "connectEnd": -1,
+          "connectStart": -1,
+          "dnsEnd": -1,
+          "dnsStart": -1,
+          "proxyEnd": -1,
+          "proxyStart": -1,
+          "receiveHeadersEnd": 30.2060000249185,
+          "requestTime": 316317.558242,
+          "sendEnd": 0.431000022217631,
+          "sendStart": 0.357999990228564,
+          "sslEnd": -1,
+          "sslStart": -1,
+          "workerReady": -1,
+          "workerStart": -1
+        },
+        "url": "https://ssl.google-analytics.com/r/__utm.gif?utmwv=5.6.7&utms=1&utmn=1626079846&utmhn=www.sitespeed.io&utmcs=UTF-8&utmsr=1440x900&utmvp=1050x757&utmsc=24-bit&utmul=sv&utmje=1&utmfl=-&utmdt=Sitespeed.io%20-%20Analyze%20your%20website%20speed%20and%20performance&utmhid=929390294&utmr=-&utmp=%2F&utmht=1447622553802&utmac=UA-31246987-1&utmcc=__utma%3D152498875.1026109498.1447622554.1447622554.1447622554.1%3B%2B__utmz%3D152498875.1447622554.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmjid=2024065191&utmredir=1&utmu=qAAAAAAAAAAAAAAAAAAAAAAE~"
+      },
+      "timestamp": 316317.588768,
+      "type": "Image"
+    }
+  },
+  {
+    "timestamp": 1447622553835,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 35,
+      "encodedDataLength": 544,
+      "requestId": "96213.13",
+      "timestamp": 316317.588932
+    }
+  },
+  {
+    "timestamp": 1447622553838,
+    "method": "Network.loadingFinished",
+    "data": {
+      "encodedDataLength": 544,
+      "requestId": "96213.13",
+      "timestamp": 316317.588891
+    }
+  },
+  {
+    "timestamp": 1447622553838,
+    "method": "Page.loadEventFired",
+    "data": {
+      "timestamp": 316317.589238
+    }
+  },
+  {
+    "timestamp": 1447622553838,
+    "method": "Page.frameStoppedLoading",
+    "data": {
+      "frameId": "96213.2"
+    }
+  },
+  {
+    "timestamp": 1447622553844,
+    "method": "Network.requestWillBeSent",
+    "data": {
+      "documentURL": "https://www.sitespeed.io/",
+      "frameId": "96213.2",
+      "initiator": {
+        "type": "other"
+      },
+      "loaderId": "96213.5",
+      "request": {
+        "headers": {
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "method": "GET",
+        "mixedContentType": "none",
+        "url": "https://www.sitespeed.io/img/ico/sitespeed.io.ico"
+      },
+      "requestId": "96213.14",
+      "timestamp": 316317.592103,
+      "type": "Other",
+      "wallTime": 1447622553.83878
+    }
+  },
+  {
+    "timestamp": 1447622553881,
+    "method": "Network.responseReceived",
+    "data": {
+      "frameId": "96213.2",
+      "loaderId": "96213.5",
+      "requestId": "96213.14",
+      "response": {
+        "connectionId": 67,
+        "connectionReused": true,
+        "encodedDataLength": -1,
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Age": "256499",
+          "Cache-Control": "max-age=31536000, public, public, must-revalidate, proxy-revalidate",
+          "Content-Encoding": "gzip",
+          "Content-Length": "2875",
+          "Content-Type": "image/x-icon",
+          "Date": "Sun, 15 Nov 2015 21:22:33 GMT\nSun, 15 Nov 2015 21:22:30 GMT",
+          "Expires": "Fri, 11 Nov 2016 22:07:30 GMT",
+          "Last-Modified": "Mon, 19 Oct 2015 12:43:53 GMT",
+          "Pragma": "public",
+          "Server": "Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\nnginx/1.8.0",
+          "Strict-Transport-Security": "max-age=31536000; preload",
+          "Vary": "Accept-Encoding,User-Agent",
+          "Via": "1.1 varnish",
+          "X-Cache": "HIT",
+          "X-Cache-Hits": "1",
+          "X-Served-By": "cache-fra1220-FRA"
+        },
+        "headersText": "HTTP/1.1 200 OK\r\nDate: Sun, 15 Nov 2015 21:22:33 GMT\r\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\r\nServer: nginx/1.8.0\r\nContent-Type: image/x-icon\r\nLast-Modified: Mon, 19 Oct 2015 12:43:53 GMT\r\nCache-Control: max-age=31536000, public, public, must-revalidate, proxy-revalidate\r\nExpires: Fri, 11 Nov 2016 22:07:30 GMT\r\nPragma: public\r\nContent-Length: 2875\r\nAccept-Ranges: bytes\r\nDate: Sun, 15 Nov 2015 21:22:30 GMT\r\nVia: 1.1 varnish\r\nAge: 256499\r\nX-Served-By: cache-fra1220-FRA\r\nX-Cache: HIT\r\nX-Cache-Hits: 1\r\nVary: Accept-Encoding,User-Agent\r\nStrict-Transport-Security: max-age=31536000; preload\r\nContent-Encoding: gzip\r\n\r\n",
+        "mimeType": "image/x-icon",
+        "protocol": "http/1.1",
+        "remoteIPAddress": "127.0.0.1",
+        "remotePort": 2003,
+        "requestHeaders": {
+          "Accept": "*/*",
+          "Accept-Encoding": "gzip, deflate, sdch",
+          "Accept-Language": "sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4",
+          "Connection": "keep-alive",
+          "Cookie": "__utmt=1; __utma=152498875.1026109498.1447622554.1447622554.1447622554.1; __utmb=152498875.1.10.1447622554; __utmc=152498875; __utmz=152498875.1447622554.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)",
+          "Host": "www.sitespeed.io",
+          "Referer": "https://www.sitespeed.io/",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+        },
+        "requestHeadersText": "GET /img/ico/sitespeed.io.ico HTTP/1.1\r\nHost: www.sitespeed.io\r\nConnection: keep-alive\r\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\r\nAccept: */*\r\nReferer: https://www.sitespeed.io/\r\nAccept-Encoding: gzip, deflate, sdch\r\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\r\nCookie: __utmt=1; __utma=152498875.1026109498.1447622554.1447622554.1447622554.1; __utmb=152498875.1.10.1447622554; __utmc=152498875; __utmz=152498875.1447622554.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)\r\n\r\n",
+        "securityDetails": {
+          "certificateId": 1,
+          "cipher": "ECDHE_RSA",
+          "keyExchange": "AES_128_GCM",
+          "protocol": "TLS 1.2"
+        },
+        "securityState": "insecure",
+        "status": 200,
+        "statusText": "OK",
+        "timing": {
+          "connectEnd": -1,
+          "connectStart": -1,
+          "dnsEnd": -1,
+          "dnsStart": -1,
+          "proxyEnd": -1,
+          "proxyStart": -1,
+          "receiveHeadersEnd": 39.2920000012964,
+          "requestTime": 316317.592304,
+          "sendEnd": 0.625999993644655,
+          "sendStart": 0.555000035092235,
+          "sslEnd": -1,
+          "sslStart": -1,
+          "workerReady": -1,
+          "workerStart": -1
+        },
+        "url": "https://www.sitespeed.io/img/ico/sitespeed.io.ico"
+      },
+      "timestamp": 316317.634144,
+      "type": "Other"
+    }
+  },
+  {
+    "timestamp": 1447622553881,
+    "method": "Network.dataReceived",
+    "data": {
+      "dataLength": 6518,
+      "encodedDataLength": 3513,
+      "requestId": "96213.14",
+      "timestamp": 316317.634214
+    }
+  },
+  {
+    "timestamp": 1447622553881,
+    "method": "Network.loadingFinished",
+    "data": {
+      "encodedDataLength": 3513,
+      "requestId": "96213.14",
+      "timestamp": 316317.632307
+    }
+  }
+]

@@ -1,0 +1,692 @@
+[
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"96141.2\",\"loaderId\":\"96141.3\",\"requestId\":\"96141.1\",\"response\":{\"connectionId\":0,\"connectionReused\":false,\"encodedDataLength\":-1,\"fromDiskCache\":false,\"fromServiceWorker\":false,\"headers\":{\"Access-Control-Allow-Origin\":\"*\",\"Content-Type\":\"text/plain;charset=US-ASCII\"},\"mimeType\":\"text/plain\",\"protocol\":\"data\",\"securityState\":\"unknown\",\"status\":200,\"statusText\":\"OK\",\"url\":\"data:,\"},\"timestamp\":316153.884647,\"type\":\"Document\"}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622390189,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":0,\"requestId\":\"96141.1\",\"timestamp\":316153.885063}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622390189,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Page.frameNavigated\",\"params\":{\"frame\":{\"id\":\"96141.2\",\"loaderId\":\"96141.3\",\"mimeType\":\"text/plain\",\"securityOrigin\":\"://\",\"url\":\"data:,\"}}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622390189,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Page.loadEventFired\",\"params\":{\"timestamp\":316153.945333}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622390224,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Page.frameStoppedLoading\",\"params\":{\"frameId\":\"96141.2\"}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622390224,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Page.domContentEventFired\",\"params\":{\"timestamp\":316153.945384}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622390224,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Page.frameStartedLoading\",\"params\":{\"frameId\":\"96141.2\"}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622390243,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"http://www.sitespeed.io/\",\"frameId\":\"96141.2\",\"initiator\":{\"type\":\"other\"},\"loaderId\":\"96141.5\",\"request\":{\"headers\":{\"Accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\",\"Upgrade-Insecure-Requests\":\"1\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"http://www.sitespeed.io/\"},\"requestId\":\"96141.2\",\"timestamp\":316153.98698,\"type\":\"Document\",\"wallTime\":1447622390.24225}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622390243,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"96141.2\",\"initiator\":{\"type\":\"other\"},\"loaderId\":\"96141.5\",\"redirectResponse\":{\"connectionId\":11,\"connectionReused\":false,\"encodedDataLength\":414,\"fromDiskCache\":false,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Content-Length\":\"0\",\"Date\":\"Sun, 15 Nov 2015 21:19:50 GMT\\nSun, 15 Nov 2015 21:19:47 GMT\",\"Location\":\"https://www.sitespeed.io/\",\"Retry-After\":\"0\",\"Server\":\"Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\nVarnish\",\"Strict-Transport-Security\":\"max-age=31536000; preload\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"HIT\",\"X-Cache-Hits\":\"0\",\"X-Served-By\":\"cache-fra1220-FRA\"},\"headersText\":\"HTTP/1.1 301 Moved Permanently\\r\\nDate: Sun, 15 Nov 2015 21:19:50 GMT\\r\\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\r\\nServer: Varnish\\r\\nRetry-After: 0\\r\\nLocation: https://www.sitespeed.io/\\r\\nContent-Length: 0\\r\\nAccept-Ranges: bytes\\r\\nDate: Sun, 15 Nov 2015 21:19:47 GMT\\r\\nVia: 1.1 varnish\\r\\nX-Served-By: cache-fra1220-FRA\\r\\nX-Cache: HIT\\r\\nX-Cache-Hits: 0\\r\\nStrict-Transport-Security: max-age=31536000; preload\\r\\n\\r\\n\",\"mimeType\":\"\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"127.0.0.1\",\"remotePort\":2003,\"requestHeaders\":{\"Accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\",\"Accept-Encoding\":\"gzip, deflate, sdch\",\"Accept-Language\":\"sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\",\"Host\":\"www.sitespeed.io\",\"Proxy-Connection\":\"keep-alive\",\"Upgrade-Insecure-Requests\":\"1\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"requestHeadersText\":\"GET http://www.sitespeed.io/ HTTP/1.1\\r\\nHost: www.sitespeed.io\\r\\nProxy-Connection: keep-alive\\r\\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\\r\\nUpgrade-Insecure-Requests: 1\\r\\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\\r\\nAccept-Encoding: gzip, deflate, sdch\\r\\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\\r\\n\\r\\n\",\"securityState\":\"neutral\",\"status\":301,\"statusText\":\"Moved Permanently\",\"timing\":{\"connectEnd\":11.363000026904,\"connectStart\":10.459000011906,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":326.286000024993,\"requestTime\":316153.988549,\"sendEnd\":12.243999983184,\"sendStart\":12.140000006184,\"sslEnd\":-1,\"sslStart\":-1,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"http://www.sitespeed.io/\"},\"request\":{\"headers\":{\"Accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/\"},\"requestId\":\"96141.2\",\"timestamp\":316154.315403,\"type\":\"Document\",\"wallTime\":1447622390.57067}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622390571,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"96141.2\",\"loaderId\":\"96141.5\",\"requestId\":\"96141.2\",\"response\":{\"connectionId\":17,\"connectionReused\":false,\"encodedDataLength\":-1,\"fromDiskCache\":false,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"351145\",\"Cache-Control\":\"max-age=600\",\"Content-Encoding\":\"gzip\",\"Content-Length\":\"7271\",\"Content-Type\":\"text/html\",\"Date\":\"Sun, 15 Nov 2015 21:19:52 GMT\\nSun, 15 Nov 2015 21:19:49 GMT\",\"Expires\":\"Wed, 11 Nov 2015 19:57:23 GMT\",\"Last-Modified\":\"Mon, 19 Oct 2015 12:44:28 GMT\",\"Server\":\"Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\nnginx/1.8.0\",\"Strict-Transport-Security\":\"max-age=31536000; preload\",\"Vary\":\"Accept-Encoding,User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"HIT\",\"X-Cache-Hits\":\"19\",\"X-Served-By\":\"cache-fra1246-FRA\"},\"headersText\":\"HTTP/1.1 200 OK\\r\\nDate: Sun, 15 Nov 2015 21:19:52 GMT\\r\\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\r\\nServer: nginx/1.8.0\\r\\nContent-Type: text/html\\r\\nLast-Modified: Mon, 19 Oct 2015 12:44:28 GMT\\r\\nCache-Control: max-age=600\\r\\nExpires: Wed, 11 Nov 2015 19:57:23 GMT\\r\\nContent-Encoding: gzip\\r\\nContent-Length: 7271\\r\\nAccept-Ranges: bytes\\r\\nDate: Sun, 15 Nov 2015 21:19:49 GMT\\r\\nVia: 1.1 varnish\\r\\nAge: 351145\\r\\nX-Served-By: cache-fra1246-FRA\\r\\nX-Cache: HIT\\r\\nX-Cache-Hits: 19\\r\\nVary: Accept-Encoding,User-Agent\\r\\nStrict-Transport-Security: max-age=31536000; preload\\r\\n\\r\\n\",\"mimeType\":\"text/html\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"127.0.0.1\",\"remotePort\":2003,\"requestHeaders\":{\"Accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\",\"Accept-Encoding\":\"gzip, deflate, sdch\",\"Accept-Language\":\"sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\",\"Connection\":\"keep-alive\",\"Host\":\"www.sitespeed.io\",\"Upgrade-Insecure-Requests\":\"1\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"requestHeadersText\":\"GET / HTTP/1.1\\r\\nHost: www.sitespeed.io\\r\\nConnection: keep-alive\\r\\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\\r\\nUpgrade-Insecure-Requests: 1\\r\\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\\r\\nAccept-Encoding: gzip, deflate, sdch\\r\\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\\r\\n\\r\\n\",\"securityDetails\":{\"certificateId\":1,\"cipher\":\"ECDHE_RSA\",\"keyExchange\":\"AES_128_GCM\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"insecure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":1813.79300000845,\"connectStart\":0.371000031009316,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":1988.5849999846,\"requestTime\":316154.315717,\"sendEnd\":1813.92500002403,\"sendStart\":1813.85700003011,\"sslEnd\":1813.76600003568,\"sslStart\":1710.79199999804,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/\"},\"timestamp\":316156.305568,\"type\":\"Document\"}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392561,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":12117,\"encodedDataLength\":4096,\"requestId\":\"96141.2\",\"timestamp\":316156.30569}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392578,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Page.frameNavigated\",\"params\":{\"frame\":{\"id\":\"96141.2\",\"loaderId\":\"96141.5\",\"mimeType\":\"text/html\",\"securityOrigin\":\"https://www.sitespeed.io\",\"url\":\"https://www.sitespeed.io/\"}}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392578,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":1707,\"encodedDataLength\":459,\"requestId\":\"96141.2\",\"timestamp\":316156.311333}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392578,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":11201,\"encodedDataLength\":3280,\"requestId\":\"96141.2\",\"timestamp\":316156.314444}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392578,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":7835,\"requestId\":\"96141.2\",\"timestamp\":316156.309692}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392578,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"96141.2\",\"initiator\":{\"lineNumber\":1,\"type\":\"parser\",\"url\":\"https://www.sitespeed.io/\"},\"loaderId\":\"96141.5\",\"request\":{\"headers\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/img/sitespeed-logo-2c.png\"},\"requestId\":\"96141.3\",\"timestamp\":316156.315069,\"type\":\"Other\",\"wallTime\":1447622392.57023}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392580,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"96141.2\",\"initiator\":{\"lineNumber\":1,\"type\":\"parser\",\"url\":\"https://www.sitespeed.io/\"},\"loaderId\":\"96141.5\",\"request\":{\"headers\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/img/sitespeed.io-logo-large2.png\"},\"requestId\":\"96141.4\",\"timestamp\":316156.315238,\"type\":\"Other\",\"wallTime\":1447622392.5704}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392580,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"96141.2\",\"initiator\":{\"stackTrace\":[{\"columnNumber\":16723,\"functionName\":\"\",\"lineNumber\":1,\"scriptId\":\"51\",\"url\":\"https://www.sitespeed.io/\"},{\"columnNumber\":16746,\"functionName\":\"\",\"lineNumber\":1,\"scriptId\":\"51\",\"url\":\"https://www.sitespeed.io/\"}],\"type\":\"script\"},\"loaderId\":\"96141.5\",\"request\":{\"headers\":{\"Accept\":\"*/*\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://ssl.google-analytics.com/ga.js\"},\"requestId\":\"96141.5\",\"timestamp\":316156.322588,\"type\":\"Other\",\"wallTime\":1447622392.57775}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392580,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"96141.2\",\"initiator\":{\"lineNumber\":3,\"type\":\"parser\",\"url\":\"https://www.sitespeed.io/\"},\"loaderId\":\"96141.5\",\"request\":{\"headers\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/img/GitHub-Mark-64px.png\"},\"requestId\":\"96141.6\",\"timestamp\":316156.323284,\"type\":\"Other\",\"wallTime\":1447622392.57844}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392581,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"96141.2\",\"initiator\":{\"lineNumber\":3,\"type\":\"parser\",\"url\":\"https://www.sitespeed.io/\"},\"loaderId\":\"96141.5\",\"request\":{\"headers\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/img/star3.png\"},\"requestId\":\"96141.7\",\"timestamp\":316156.323473,\"type\":\"Other\",\"wallTime\":1447622392.57863}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392581,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"96141.2\",\"initiator\":{\"lineNumber\":3,\"type\":\"parser\",\"url\":\"https://www.sitespeed.io/\"},\"loaderId\":\"96141.5\",\"request\":{\"headers\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/img/dashboard.png\"},\"requestId\":\"96141.8\",\"timestamp\":316156.323592,\"type\":\"Other\",\"wallTime\":1447622392.57875}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392581,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"96141.2\",\"initiator\":{\"lineNumber\":3,\"type\":\"parser\",\"url\":\"https://www.sitespeed.io/\"},\"loaderId\":\"96141.5\",\"request\":{\"headers\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/img/perfbudget.png\"},\"requestId\":\"96141.9\",\"timestamp\":316156.323712,\"type\":\"Other\",\"wallTime\":1447622392.57887}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392581,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"96141.2\",\"initiator\":{\"lineNumber\":3,\"type\":\"parser\",\"url\":\"https://www.sitespeed.io/\"},\"loaderId\":\"96141.5\",\"request\":{\"headers\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/img/twitter64.png\"},\"requestId\":\"96141.10\",\"timestamp\":316156.32384,\"type\":\"Other\",\"wallTime\":1447622392.579}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392581,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"96141.2\",\"initiator\":{\"lineNumber\":3,\"type\":\"parser\",\"url\":\"https://www.sitespeed.io/\"},\"loaderId\":\"96141.5\",\"request\":{\"headers\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/img/black-logo-120.png\"},\"requestId\":\"96141.11\",\"timestamp\":316156.323956,\"type\":\"Other\",\"wallTime\":1447622392.57912}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392581,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"96141.2\",\"initiator\":{\"lineNumber\":3,\"type\":\"parser\",\"url\":\"https://www.sitespeed.io/\"},\"loaderId\":\"96141.5\",\"request\":{\"headers\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/img/fastly2.png\"},\"requestId\":\"96141.12\",\"timestamp\":316156.324059,\"type\":\"Other\",\"wallTime\":1447622392.57922}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392581,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Page.domContentEventFired\",\"params\":{\"timestamp\":316156.381926}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392637,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"96141.2\",\"loaderId\":\"96141.5\",\"requestId\":\"96141.3\",\"response\":{\"connectionId\":17,\"connectionReused\":true,\"encodedDataLength\":-1,\"fromDiskCache\":false,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"351145\",\"Cache-Control\":\"max-age=31536000, public, public, must-revalidate, proxy-revalidate\",\"Content-Length\":\"3717\",\"Content-Type\":\"image/png\",\"Date\":\"Sun, 15 Nov 2015 21:19:52 GMT\\nSun, 15 Nov 2015 21:19:49 GMT\",\"Expires\":\"Thu, 10 Nov 2016 19:47:24 GMT\",\"Last-Modified\":\"Mon, 19 Oct 2015 12:44:12 GMT\",\"Pragma\":\"public\",\"Server\":\"Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\nnginx/1.8.0\",\"Strict-Transport-Security\":\"max-age=31536000; preload\",\"Vary\":\"User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"HIT\",\"X-Cache-Hits\":\"1\",\"X-Served-By\":\"cache-fra1246-FRA\"},\"headersText\":\"HTTP/1.1 200 OK\\r\\nDate: Sun, 15 Nov 2015 21:19:52 GMT\\r\\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\r\\nServer: nginx/1.8.0\\r\\nContent-Type: image/png\\r\\nLast-Modified: Mon, 19 Oct 2015 12:44:12 GMT\\r\\nCache-Control: max-age=31536000, public, public, must-revalidate, proxy-revalidate\\r\\nExpires: Thu, 10 Nov 2016 19:47:24 GMT\\r\\nContent-Length: 3717\\r\\nAccept-Ranges: bytes\\r\\nDate: Sun, 15 Nov 2015 21:19:49 GMT\\r\\nVia: 1.1 varnish\\r\\nAge: 351145\\r\\nX-Served-By: cache-fra1246-FRA\\r\\nX-Cache: HIT\\r\\nX-Cache-Hits: 1\\r\\nVary: User-Agent\\r\\nStrict-Transport-Security: max-age=31536000; preload\\r\\nPragma: public\\r\\n\\r\\n\",\"mimeType\":\"image/png\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"127.0.0.1\",\"remotePort\":2003,\"requestHeaders\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Accept-Encoding\":\"gzip, deflate, sdch\",\"Accept-Language\":\"sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\",\"Connection\":\"keep-alive\",\"Host\":\"www.sitespeed.io\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"requestHeadersText\":\"GET /img/sitespeed-logo-2c.png HTTP/1.1\\r\\nHost: www.sitespeed.io\\r\\nConnection: keep-alive\\r\\nAccept: image/webp,image/*,*/*;q=0.8\\r\\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\\r\\nReferer: https://www.sitespeed.io/\\r\\nAccept-Encoding: gzip, deflate, sdch\\r\\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\\r\\n\\r\\n\",\"securityDetails\":{\"certificateId\":1,\"cipher\":\"ECDHE_RSA\",\"keyExchange\":\"AES_128_GCM\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"insecure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":-1,\"connectStart\":-1,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":42.301999987103,\"requestTime\":316156.315227,\"sendEnd\":0.774000014644116,\"sendStart\":0.721000018529594,\"sslEnd\":-1,\"sslStart\":-1,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/img/sitespeed-logo-2c.png\"},\"timestamp\":316156.382716,\"type\":\"Image\"}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392638,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":3501,\"encodedDataLength\":4096,\"requestId\":\"96141.3\",\"timestamp\":316156.382927}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392638,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":216,\"encodedDataLength\":216,\"requestId\":\"96141.3\",\"timestamp\":316156.383456}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392638,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":4312,\"requestId\":\"96141.3\",\"timestamp\":316156.358255}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392639,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"96141.2\",\"loaderId\":\"96141.5\",\"requestId\":\"96141.4\",\"response\":{\"connectionId\":17,\"connectionReused\":true,\"encodedDataLength\":-1,\"fromDiskCache\":false,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"351144\",\"Cache-Control\":\"max-age=31536000, public, public, must-revalidate, proxy-revalidate\",\"Content-Length\":\"14113\",\"Content-Type\":\"image/png\",\"Date\":\"Sun, 15 Nov 2015 21:19:52 GMT\\nSun, 15 Nov 2015 21:19:49 GMT\",\"Expires\":\"Thu, 10 Nov 2016 19:47:24 GMT\",\"Last-Modified\":\"Mon, 19 Oct 2015 12:44:18 GMT\",\"Pragma\":\"public\",\"Server\":\"Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\nnginx/1.8.0\",\"Strict-Transport-Security\":\"max-age=31536000; preload\",\"Vary\":\"User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"HIT\",\"X-Cache-Hits\":\"1\",\"X-Served-By\":\"cache-fra1246-FRA\"},\"headersText\":\"HTTP/1.1 200 OK\\r\\nDate: Sun, 15 Nov 2015 21:19:52 GMT\\r\\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\r\\nServer: nginx/1.8.0\\r\\nContent-Type: image/png\\r\\nLast-Modified: Mon, 19 Oct 2015 12:44:18 GMT\\r\\nCache-Control: max-age=31536000, public, public, must-revalidate, proxy-revalidate\\r\\nExpires: Thu, 10 Nov 2016 19:47:24 GMT\\r\\nContent-Length: 14113\\r\\nAccept-Ranges: bytes\\r\\nDate: Sun, 15 Nov 2015 21:19:49 GMT\\r\\nVia: 1.1 varnish\\r\\nAge: 351144\\r\\nX-Served-By: cache-fra1246-FRA\\r\\nX-Cache: HIT\\r\\nX-Cache-Hits: 1\\r\\nVary: User-Agent\\r\\nStrict-Transport-Security: max-age=31536000; preload\\r\\nPragma: public\\r\\n\\r\\n\",\"mimeType\":\"image/png\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"127.0.0.1\",\"remotePort\":2003,\"requestHeaders\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Accept-Encoding\":\"gzip, deflate, sdch\",\"Accept-Language\":\"sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\",\"Connection\":\"keep-alive\",\"Host\":\"www.sitespeed.io\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"requestHeadersText\":\"GET /img/sitespeed.io-logo-large2.png HTTP/1.1\\r\\nHost: www.sitespeed.io\\r\\nConnection: keep-alive\\r\\nAccept: image/webp,image/*,*/*;q=0.8\\r\\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\\r\\nReferer: https://www.sitespeed.io/\\r\\nAccept-Encoding: gzip, deflate, sdch\\r\\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\\r\\n\\r\\n\",\"securityDetails\":{\"certificateId\":1,\"cipher\":\"ECDHE_RSA\",\"keyExchange\":\"AES_128_GCM\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"insecure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":-1,\"connectStart\":-1,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":89.5289999898523,\"requestTime\":316156.31541,\"sendEnd\":43.2370000053197,\"sendStart\":43.1669999961741,\"sslEnd\":-1,\"sslStart\":-1,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/img/sitespeed.io-logo-large2.png\"},\"timestamp\":316156.417852,\"type\":\"Image\"}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392673,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":3500,\"encodedDataLength\":4096,\"requestId\":\"96141.4\",\"timestamp\":316156.417975}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392673,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":597,\"encodedDataLength\":597,\"requestId\":\"96141.4\",\"timestamp\":316156.418093}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392673,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":3572,\"encodedDataLength\":3572,\"requestId\":\"96141.4\",\"timestamp\":316156.418365}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392673,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.4\",\"timestamp\":316156.418442}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392674,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":2348,\"encodedDataLength\":2348,\"requestId\":\"96141.4\",\"timestamp\":316156.418737}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392674,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":14709,\"requestId\":\"96141.4\",\"timestamp\":316156.409368}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392675,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"96141.2\",\"loaderId\":\"96141.5\",\"requestId\":\"96141.11\",\"response\":{\"connectionId\":17,\"connectionReused\":true,\"encodedDataLength\":-1,\"fromDiskCache\":false,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"218772\",\"Cache-Control\":\"max-age=31536000, public, public, must-revalidate, proxy-revalidate\",\"Content-Length\":\"1678\",\"Content-Type\":\"image/png\",\"Date\":\"Sun, 15 Nov 2015 21:19:52 GMT\\nSun, 15 Nov 2015 21:19:49 GMT\",\"Expires\":\"Sat, 12 Nov 2016 08:33:36 GMT\",\"Last-Modified\":\"Mon, 19 Oct 2015 12:43:46 GMT\",\"Pragma\":\"public\",\"Server\":\"Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\nnginx/1.8.0\",\"Strict-Transport-Security\":\"max-age=31536000; preload\",\"Vary\":\"User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"HIT\",\"X-Cache-Hits\":\"1\",\"X-Served-By\":\"cache-fra1246-FRA\"},\"headersText\":\"HTTP/1.1 200 OK\\r\\nDate: Sun, 15 Nov 2015 21:19:52 GMT\\r\\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\r\\nServer: nginx/1.8.0\\r\\nContent-Type: image/png\\r\\nLast-Modified: Mon, 19 Oct 2015 12:43:46 GMT\\r\\nCache-Control: max-age=31536000, public, public, must-revalidate, proxy-revalidate\\r\\nExpires: Sat, 12 Nov 2016 08:33:36 GMT\\r\\nContent-Length: 1678\\r\\nAccept-Ranges: bytes\\r\\nDate: Sun, 15 Nov 2015 21:19:49 GMT\\r\\nVia: 1.1 varnish\\r\\nAge: 218772\\r\\nX-Served-By: cache-fra1246-FRA\\r\\nX-Cache: HIT\\r\\nX-Cache-Hits: 1\\r\\nVary: User-Agent\\r\\nStrict-Transport-Security: max-age=31536000; preload\\r\\nPragma: public\\r\\n\\r\\n\",\"mimeType\":\"image/png\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"127.0.0.1\",\"remotePort\":2003,\"requestHeaders\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Accept-Encoding\":\"gzip, deflate, sdch\",\"Accept-Language\":\"sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\",\"Connection\":\"keep-alive\",\"Host\":\"www.sitespeed.io\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"requestHeadersText\":\"GET /img/black-logo-120.png HTTP/1.1\\r\\nHost: www.sitespeed.io\\r\\nConnection: keep-alive\\r\\nAccept: image/webp,image/*,*/*;q=0.8\\r\\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\\r\\nReferer: https://www.sitespeed.io/\\r\\nAccept-Encoding: gzip, deflate, sdch\\r\\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\\r\\n\\r\\n\",\"securityDetails\":{\"certificateId\":1,\"cipher\":\"ECDHE_RSA\",\"keyExchange\":\"AES_128_GCM\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"insecure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":-1,\"connectStart\":-1,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":40.7300000078976,\"requestTime\":316156.40932,\"sendEnd\":0.52000000141561,\"sendStart\":0.456000037956983,\"sslEnd\":-1,\"sslStart\":-1,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/img/black-logo-120.png\"},\"timestamp\":316156.450477,\"type\":\"Image\"}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392713,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":1678,\"encodedDataLength\":2273,\"requestId\":\"96141.11\",\"timestamp\":316156.451238}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392714,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":2273,\"requestId\":\"96141.11\",\"timestamp\":316156.451183}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392714,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"96141.2\",\"loaderId\":\"96141.5\",\"requestId\":\"96141.6\",\"response\":{\"connectionId\":52,\"connectionReused\":false,\"encodedDataLength\":-1,\"fromDiskCache\":false,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"306124\",\"Cache-Control\":\"max-age=31536000, public, public, must-revalidate, proxy-revalidate\",\"Content-Length\":\"514\",\"Content-Type\":\"image/png\",\"Date\":\"Sun, 15 Nov 2015 21:19:52 GMT\\nSun, 15 Nov 2015 21:19:49 GMT\",\"Expires\":\"Fri, 11 Nov 2016 08:17:44 GMT\",\"Last-Modified\":\"Mon, 19 Oct 2015 12:43:50 GMT\",\"Pragma\":\"public\",\"Server\":\"Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\nnginx/1.8.0\",\"Strict-Transport-Security\":\"max-age=31536000; preload\",\"Vary\":\"User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"HIT\",\"X-Cache-Hits\":\"1\",\"X-Served-By\":\"cache-fra1234-FRA\"},\"headersText\":\"HTTP/1.1 200 OK\\r\\nDate: Sun, 15 Nov 2015 21:19:52 GMT\\r\\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\r\\nServer: nginx/1.8.0\\r\\nContent-Type: image/png\\r\\nLast-Modified: Mon, 19 Oct 2015 12:43:50 GMT\\r\\nCache-Control: max-age=31536000, public, public, must-revalidate, proxy-revalidate\\r\\nExpires: Fri, 11 Nov 2016 08:17:44 GMT\\r\\nPragma: public\\r\\nContent-Length: 514\\r\\nAccept-Ranges: bytes\\r\\nDate: Sun, 15 Nov 2015 21:19:49 GMT\\r\\nVia: 1.1 varnish\\r\\nAge: 306124\\r\\nX-Served-By: cache-fra1234-FRA\\r\\nX-Cache: HIT\\r\\nX-Cache-Hits: 1\\r\\nVary: User-Agent\\r\\nStrict-Transport-Security: max-age=31536000; preload\\r\\n\\r\\n\",\"mimeType\":\"image/png\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"127.0.0.1\",\"remotePort\":2003,\"requestHeaders\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Accept-Encoding\":\"gzip, deflate, sdch\",\"Accept-Language\":\"sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\",\"Connection\":\"keep-alive\",\"Host\":\"www.sitespeed.io\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"requestHeadersText\":\"GET /img/GitHub-Mark-64px.png HTTP/1.1\\r\\nHost: www.sitespeed.io\\r\\nConnection: keep-alive\\r\\nAccept: image/webp,image/*,*/*;q=0.8\\r\\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\\r\\nReferer: https://www.sitespeed.io/\\r\\nAccept-Encoding: gzip, deflate, sdch\\r\\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\\r\\n\\r\\n\",\"securityDetails\":{\"certificateId\":1,\"cipher\":\"ECDHE_RSA\",\"keyExchange\":\"AES_128_GCM\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"insecure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":36.9730000384152,\"connectStart\":1.16200000047684,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":141.004000033718,\"requestTime\":316156.323453,\"sendEnd\":37.320000003092,\"sendStart\":37.2569999890402,\"sslEnd\":36.9640000280924,\"sslStart\":4.13499999558553,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/img/GitHub-Mark-64px.png\"},\"timestamp\":316156.464868,\"type\":\"Image\"}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392720,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":514,\"encodedDataLength\":1108,\"requestId\":\"96141.6\",\"timestamp\":316156.465021}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392720,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":1108,\"requestId\":\"96141.6\",\"timestamp\":316156.465022}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392720,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"96141.2\",\"loaderId\":\"96141.5\",\"requestId\":\"96141.7\",\"response\":{\"connectionId\":29,\"connectionReused\":false,\"encodedDataLength\":-1,\"fromDiskCache\":false,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"351144\",\"Cache-Control\":\"max-age=31536000, public, public, must-revalidate, proxy-revalidate\",\"Content-Length\":\"492\",\"Content-Type\":\"image/png\",\"Date\":\"Sun, 15 Nov 2015 21:19:52 GMT\\nSun, 15 Nov 2015 21:19:49 GMT\",\"Expires\":\"Thu, 10 Nov 2016 19:47:24 GMT\",\"Last-Modified\":\"Mon, 19 Oct 2015 12:44:19 GMT\",\"Pragma\":\"public\",\"Server\":\"Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\nnginx/1.8.0\",\"Strict-Transport-Security\":\"max-age=31536000; preload\",\"Vary\":\"User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"HIT\",\"X-Cache-Hits\":\"1\",\"X-Served-By\":\"cache-fra1220-FRA\"},\"headersText\":\"HTTP/1.1 200 OK\\r\\nDate: Sun, 15 Nov 2015 21:19:52 GMT\\r\\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\r\\nServer: nginx/1.8.0\\r\\nContent-Type: image/png\\r\\nLast-Modified: Mon, 19 Oct 2015 12:44:19 GMT\\r\\nCache-Control: max-age=31536000, public, public, must-revalidate, proxy-revalidate\\r\\nExpires: Thu, 10 Nov 2016 19:47:24 GMT\\r\\nPragma: public\\r\\nContent-Length: 492\\r\\nAccept-Ranges: bytes\\r\\nDate: Sun, 15 Nov 2015 21:19:49 GMT\\r\\nVia: 1.1 varnish\\r\\nAge: 351144\\r\\nX-Served-By: cache-fra1220-FRA\\r\\nX-Cache: HIT\\r\\nX-Cache-Hits: 1\\r\\nVary: User-Agent\\r\\nStrict-Transport-Security: max-age=31536000; preload\\r\\n\\r\\n\",\"mimeType\":\"image/png\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"127.0.0.1\",\"remotePort\":2003,\"requestHeaders\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Accept-Encoding\":\"gzip, deflate, sdch\",\"Accept-Language\":\"sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\",\"Connection\":\"keep-alive\",\"Host\":\"www.sitespeed.io\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"requestHeadersText\":\"GET /img/star3.png HTTP/1.1\\r\\nHost: www.sitespeed.io\\r\\nConnection: keep-alive\\r\\nAccept: image/webp,image/*,*/*;q=0.8\\r\\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\\r\\nReferer: https://www.sitespeed.io/\\r\\nAccept-Encoding: gzip, deflate, sdch\\r\\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\\r\\n\\r\\n\",\"securityDetails\":{\"certificateId\":1,\"cipher\":\"ECDHE_RSA\",\"keyExchange\":\"AES_128_GCM\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"insecure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":36.9949999731034,\"connectStart\":0,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":142.950000008568,\"requestTime\":316156.323646,\"sendEnd\":37.2189999907278,\"sendStart\":37.155999976676,\"sslEnd\":36.9889999856241,\"sslStart\":0,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/img/star3.png\"},\"timestamp\":316156.467017,\"type\":\"Image\"}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392722,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":492,\"encodedDataLength\":1086,\"requestId\":\"96141.7\",\"timestamp\":316156.467223}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392722,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":1086,\"requestId\":\"96141.7\",\"timestamp\":316156.467173}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392722,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"96141.2\",\"loaderId\":\"96141.5\",\"requestId\":\"96141.10\",\"response\":{\"connectionId\":57,\"connectionReused\":false,\"encodedDataLength\":-1,\"fromDiskCache\":false,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"306122\",\"Cache-Control\":\"max-age=31536000, public, public, must-revalidate, proxy-revalidate\",\"Content-Length\":\"517\",\"Content-Type\":\"image/png\",\"Date\":\"Sun, 15 Nov 2015 21:19:52 GMT\\nSun, 15 Nov 2015 21:19:49 GMT\",\"Expires\":\"Fri, 11 Nov 2016 08:17:46 GMT\",\"Last-Modified\":\"Mon, 19 Oct 2015 12:44:27 GMT\",\"Pragma\":\"public\",\"Server\":\"Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\nnginx/1.8.0\",\"Strict-Transport-Security\":\"max-age=31536000; preload\",\"Vary\":\"User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"HIT\",\"X-Cache-Hits\":\"1\",\"X-Served-By\":\"cache-fra1244-FRA\"},\"headersText\":\"HTTP/1.1 200 OK\\r\\nDate: Sun, 15 Nov 2015 21:19:52 GMT\\r\\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\r\\nServer: nginx/1.8.0\\r\\nContent-Type: image/png\\r\\nLast-Modified: Mon, 19 Oct 2015 12:44:27 GMT\\r\\nCache-Control: max-age=31536000, public, public, must-revalidate, proxy-revalidate\\r\\nExpires: Fri, 11 Nov 2016 08:17:46 GMT\\r\\nPragma: public\\r\\nContent-Length: 517\\r\\nAccept-Ranges: bytes\\r\\nDate: Sun, 15 Nov 2015 21:19:49 GMT\\r\\nVia: 1.1 varnish\\r\\nAge: 306122\\r\\nX-Served-By: cache-fra1244-FRA\\r\\nX-Cache: HIT\\r\\nX-Cache-Hits: 1\\r\\nVary: User-Agent\\r\\nStrict-Transport-Security: max-age=31536000; preload\\r\\n\\r\\n\",\"mimeType\":\"image/png\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"127.0.0.1\",\"remotePort\":2003,\"requestHeaders\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Accept-Encoding\":\"gzip, deflate, sdch\",\"Accept-Language\":\"sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\",\"Connection\":\"keep-alive\",\"Host\":\"www.sitespeed.io\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"requestHeadersText\":\"GET /img/twitter64.png HTTP/1.1\\r\\nHost: www.sitespeed.io\\r\\nConnection: keep-alive\\r\\nAccept: image/webp,image/*,*/*;q=0.8\\r\\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\\r\\nReferer: https://www.sitespeed.io/\\r\\nAccept-Encoding: gzip, deflate, sdch\\r\\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\\r\\n\\r\\n\",\"securityDetails\":{\"certificateId\":1,\"cipher\":\"ECDHE_RSA\",\"keyExchange\":\"AES_128_GCM\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"insecure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":18.2009999989532,\"connectStart\":0,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":127.119000011589,\"requestTime\":316156.358188,\"sendEnd\":18.3420000248589,\"sendStart\":18.2780000031926,\"sslEnd\":18.1929999962449,\"sslStart\":0,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/img/twitter64.png\"},\"timestamp\":316156.486556,\"type\":\"Image\"}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392742,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":517,\"encodedDataLength\":1111,\"requestId\":\"96141.10\",\"timestamp\":316156.487059}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392742,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":1111,\"requestId\":\"96141.10\",\"timestamp\":316156.486015}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392742,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"96141.2\",\"loaderId\":\"96141.5\",\"requestId\":\"96141.12\",\"response\":{\"connectionId\":17,\"connectionReused\":true,\"encodedDataLength\":-1,\"fromDiskCache\":false,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"93876\",\"Cache-Control\":\"max-age=31536000, public, public, must-revalidate, proxy-revalidate\",\"Content-Length\":\"2227\",\"Content-Type\":\"image/png\",\"Date\":\"Sun, 15 Nov 2015 21:19:52 GMT\\nSun, 15 Nov 2015 21:19:49 GMT\",\"Expires\":\"Sun, 13 Nov 2016 19:15:12 GMT\",\"Last-Modified\":\"Mon, 19 Oct 2015 12:43:49 GMT\",\"Pragma\":\"public\",\"Server\":\"Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\nnginx/1.8.0\",\"Strict-Transport-Security\":\"max-age=31536000; preload\",\"Vary\":\"User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"HIT\",\"X-Cache-Hits\":\"1\",\"X-Served-By\":\"cache-fra1246-FRA\"},\"headersText\":\"HTTP/1.1 200 OK\\r\\nDate: Sun, 15 Nov 2015 21:19:52 GMT\\r\\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\r\\nServer: nginx/1.8.0\\r\\nContent-Type: image/png\\r\\nLast-Modified: Mon, 19 Oct 2015 12:43:49 GMT\\r\\nCache-Control: max-age=31536000, public, public, must-revalidate, proxy-revalidate\\r\\nExpires: Sun, 13 Nov 2016 19:15:12 GMT\\r\\nContent-Length: 2227\\r\\nAccept-Ranges: bytes\\r\\nDate: Sun, 15 Nov 2015 21:19:49 GMT\\r\\nVia: 1.1 varnish\\r\\nAge: 93876\\r\\nX-Served-By: cache-fra1246-FRA\\r\\nX-Cache: HIT\\r\\nX-Cache-Hits: 1\\r\\nVary: User-Agent\\r\\nStrict-Transport-Security: max-age=31536000; preload\\r\\nPragma: public\\r\\n\\r\\n\",\"mimeType\":\"image/png\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"127.0.0.1\",\"remotePort\":2003,\"requestHeaders\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Accept-Encoding\":\"gzip, deflate, sdch\",\"Accept-Language\":\"sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\",\"Connection\":\"keep-alive\",\"Host\":\"www.sitespeed.io\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"requestHeadersText\":\"GET /img/fastly2.png HTTP/1.1\\r\\nHost: www.sitespeed.io\\r\\nConnection: keep-alive\\r\\nAccept: image/webp,image/*,*/*;q=0.8\\r\\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\\r\\nReferer: https://www.sitespeed.io/\\r\\nAccept-Encoding: gzip, deflate, sdch\\r\\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\\r\\n\\r\\n\",\"securityDetails\":{\"certificateId\":1,\"cipher\":\"ECDHE_RSA\",\"keyExchange\":\"AES_128_GCM\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"insecure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":-1,\"connectStart\":-1,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":36.6640000138432,\"requestTime\":316156.451159,\"sendEnd\":0.659000012092292,\"sendStart\":0.575000012759119,\"sslEnd\":-1,\"sslStart\":-1,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/img/fastly2.png\"},\"timestamp\":316156.488236,\"type\":\"Image\"}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392744,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":2227,\"encodedDataLength\":2821,\"requestId\":\"96141.12\",\"timestamp\":316156.488452}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392744,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":2821,\"requestId\":\"96141.12\",\"timestamp\":316156.488465}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392744,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"96141.2\",\"loaderId\":\"96141.5\",\"requestId\":\"96141.8\",\"response\":{\"connectionId\":67,\"connectionReused\":false,\"encodedDataLength\":-1,\"fromDiskCache\":false,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"218805\",\"Cache-Control\":\"max-age=31536000, public, public, must-revalidate, proxy-revalidate\",\"Content-Length\":\"59183\",\"Content-Type\":\"image/png\",\"Date\":\"Sun, 15 Nov 2015 21:19:52 GMT\\nSun, 15 Nov 2015 21:19:49 GMT\",\"Expires\":\"Sat, 12 Nov 2016 08:33:03 GMT\",\"Last-Modified\":\"Mon, 19 Oct 2015 12:43:48 GMT\",\"Pragma\":\"public\",\"Server\":\"Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\nnginx/1.8.0\",\"Strict-Transport-Security\":\"max-age=31536000; preload\",\"Vary\":\"User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"HIT\",\"X-Cache-Hits\":\"1\",\"X-Served-By\":\"cache-fra1235-FRA\"},\"headersText\":\"HTTP/1.1 200 OK\\r\\nDate: Sun, 15 Nov 2015 21:19:52 GMT\\r\\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\r\\nServer: nginx/1.8.0\\r\\nContent-Type: image/png\\r\\nLast-Modified: Mon, 19 Oct 2015 12:43:48 GMT\\r\\nCache-Control: max-age=31536000, public, public, must-revalidate, proxy-revalidate\\r\\nExpires: Sat, 12 Nov 2016 08:33:03 GMT\\r\\nPragma: public\\r\\nContent-Length: 59183\\r\\nAccept-Ranges: bytes\\r\\nDate: Sun, 15 Nov 2015 21:19:49 GMT\\r\\nVia: 1.1 varnish\\r\\nAge: 218805\\r\\nX-Served-By: cache-fra1235-FRA\\r\\nX-Cache: HIT\\r\\nX-Cache-Hits: 1\\r\\nVary: User-Agent\\r\\nStrict-Transport-Security: max-age=31536000; preload\\r\\n\\r\\n\",\"mimeType\":\"image/png\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"127.0.0.1\",\"remotePort\":2003,\"requestHeaders\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Accept-Encoding\":\"gzip, deflate, sdch\",\"Accept-Language\":\"sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\",\"Connection\":\"keep-alive\",\"Host\":\"www.sitespeed.io\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"requestHeadersText\":\"GET /img/dashboard.png HTTP/1.1\\r\\nHost: www.sitespeed.io\\r\\nConnection: keep-alive\\r\\nAccept: image/webp,image/*,*/*;q=0.8\\r\\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\\r\\nReferer: https://www.sitespeed.io/\\r\\nAccept-Encoding: gzip, deflate, sdch\\r\\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\\r\\n\\r\\n\",\"securityDetails\":{\"certificateId\":1,\"cipher\":\"ECDHE_RSA\",\"keyExchange\":\"AES_128_GCM\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"insecure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":45.8670000080019,\"connectStart\":1.85299996519461,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":206.139999965671,\"requestTime\":316156.323793,\"sendEnd\":46.0009999806061,\"sendStart\":45.936000009533,\"sslEnd\":45.8579999976791,\"sslStart\":4.73300000885502,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/img/dashboard.png\"},\"timestamp\":316156.530473,\"type\":\"Image\"}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392786,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":3500,\"encodedDataLength\":4096,\"requestId\":\"96141.8\",\"timestamp\":316156.530613}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392786,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":597,\"encodedDataLength\":597,\"requestId\":\"96141.8\",\"timestamp\":316156.530694}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392786,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":3572,\"encodedDataLength\":3572,\"requestId\":\"96141.8\",\"timestamp\":316156.531139}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392786,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.8\",\"timestamp\":316156.532443}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392787,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.8\",\"timestamp\":316156.533916}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392789,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.8\",\"timestamp\":316156.540939}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392796,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.8\",\"timestamp\":316156.542333}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392797,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.8\",\"timestamp\":316156.543597}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392798,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.8\",\"timestamp\":316156.544927}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392800,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.8\",\"timestamp\":316156.568891}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392824,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.8\",\"timestamp\":316156.570343}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392825,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.8\",\"timestamp\":316156.571736}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392827,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.8\",\"timestamp\":316156.57336}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392828,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.8\",\"timestamp\":316156.578108}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392833,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.8\",\"timestamp\":316156.579794}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392835,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":2362,\"encodedDataLength\":2362,\"requestId\":\"96141.8\",\"timestamp\":316156.580842}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392836,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":59779,\"requestId\":\"96141.8\",\"timestamp\":316156.580879}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392836,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"96141.2\",\"loaderId\":\"96141.5\",\"requestId\":\"96141.5\",\"response\":{\"connectionId\":36,\"connectionReused\":false,\"encodedDataLength\":-1,\"fromDiskCache\":false,\"fromServiceWorker\":false,\"headers\":{\"Age\":\"6798\",\"Alt-Svc\":\"quic=\\\":443\\\"; p=\\\"1\\\"; ma=604800\",\"Alternate-Protocol\":\"443:quic,p=1\",\"Cache-Control\":\"public, max-age=7200\",\"Content-Encoding\":\"gzip\",\"Content-Length\":\"16022\",\"Content-Type\":\"text/javascript\",\"Date\":\"Sun, 15 Nov 2015 21:19:52 GMT\\nSun, 15 Nov 2015 19:26:31 GMT\",\"Expires\":\"Sun, 15 Nov 2015 21:26:31 GMT\",\"Last-Modified\":\"Thu, 05 Nov 2015 22:24:16 GMT\",\"Server\":\"Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\nGolfe2\",\"Vary\":\"Accept-Encoding\",\"X-Content-Type-Options\":\"nosniff\"},\"headersText\":\"HTTP/1.1 200 OK\\r\\nDate: Sun, 15 Nov 2015 21:19:52 GMT\\r\\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\r\\nDate: Sun, 15 Nov 2015 19:26:31 GMT\\r\\nExpires: Sun, 15 Nov 2015 21:26:31 GMT\\r\\nLast-Modified: Thu, 05 Nov 2015 22:24:16 GMT\\r\\nX-Content-Type-Options: nosniff\\r\\nContent-Type: text/javascript\\r\\nVary: Accept-Encoding\\r\\nContent-Encoding: gzip\\r\\nServer: Golfe2\\r\\nContent-Length: 16022\\r\\nCache-Control: public, max-age=7200\\r\\nAge: 6798\\r\\nAlternate-Protocol: 443:quic,p=1\\r\\nAlt-Svc: quic=\\\":443\\\"; p=\\\"1\\\"; ma=604800\\r\\n\\r\\n\",\"mimeType\":\"text/javascript\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"127.0.0.1\",\"remotePort\":2003,\"requestHeaders\":{\"Accept\":\"*/*\",\"Accept-Encoding\":\"gzip, deflate, sdch\",\"Accept-Language\":\"sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\",\"Connection\":\"keep-alive\",\"Host\":\"ssl.google-analytics.com\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"requestHeadersText\":\"GET /ga.js HTTP/1.1\\r\\nHost: ssl.google-analytics.com\\r\\nConnection: keep-alive\\r\\nAccept: */*\\r\\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\\r\\nReferer: https://www.sitespeed.io/\\r\\nAccept-Encoding: gzip, deflate, sdch\\r\\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\\r\\n\\r\\n\",\"securityDetails\":{\"certificateId\":2,\"cipher\":\"ECDHE_RSA\",\"keyExchange\":\"AES_128_GCM\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"insecure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":197.984000027645,\"connectStart\":0.526000047102571,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":278.213000041433,\"requestTime\":316156.322732,\"sendEnd\":198.086000047624,\"sendStart\":198.035000008531,\"sslEnd\":197.976000024937,\"sslStart\":176.478000008501,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://ssl.google-analytics.com/ga.js\"},\"timestamp\":316156.601261,\"type\":\"Script\"}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392856,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":2092,\"encodedDataLength\":1486,\"requestId\":\"96141.5\",\"timestamp\":316156.601504}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392857,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":3452,\"encodedDataLength\":1389,\"requestId\":\"96141.5\",\"timestamp\":316156.601721}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392857,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4076,\"encodedDataLength\":1389,\"requestId\":\"96141.5\",\"timestamp\":316156.602651}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392858,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":3725,\"encodedDataLength\":1389,\"requestId\":\"96141.5\",\"timestamp\":316156.603361}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392858,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":3416,\"encodedDataLength\":1389,\"requestId\":\"96141.5\",\"timestamp\":316156.604211}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392859,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":3684,\"encodedDataLength\":1389,\"requestId\":\"96141.5\",\"timestamp\":316156.605049}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392860,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":3507,\"encodedDataLength\":1389,\"requestId\":\"96141.5\",\"timestamp\":316156.605741}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392861,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":3501,\"encodedDataLength\":1389,\"requestId\":\"96141.5\",\"timestamp\":316156.606565}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392861,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":3786,\"encodedDataLength\":1389,\"requestId\":\"96141.5\",\"timestamp\":316156.607413}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392862,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4376,\"encodedDataLength\":1389,\"requestId\":\"96141.5\",\"timestamp\":316156.608452}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392863,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4551,\"encodedDataLength\":1389,\"requestId\":\"96141.5\",\"timestamp\":316156.609411}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392864,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":2916,\"encodedDataLength\":1157,\"requestId\":\"96141.5\",\"timestamp\":316156.610104}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392865,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":16533,\"requestId\":\"96141.5\",\"timestamp\":316156.610147}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392865,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"96141.2\",\"initiator\":{\"lineNumber\":1,\"type\":\"parser\",\"url\":\"https://www.sitespeed.io/\"},\"loaderId\":\"96141.5\",\"request\":{\"headers\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://ssl.google-analytics.com/r/__utm.gif?utmwv=5.6.7&utms=1&utmn=1136686001&utmhn=www.sitespeed.io&utmcs=UTF-8&utmsr=1440x900&utmvp=1050x757&utmsc=24-bit&utmul=sv&utmje=1&utmfl=-&utmdt=Sitespeed.io%20-%20Analyze%20your%20website%20speed%20and%20performance&utmhid=419132353&utmr=-&utmp=%2F&utmht=1447622392890&utmac=UA-31246987-1&utmcc=__utma%3D152498875.921679114.1447622393.1447622393.1447622393.1%3B%2B__utmz%3D152498875.1447622393.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmjid=1850987125&utmredir=1&utmu=qAAAAAAAAAAAAAAAAAAAAAAE~\"},\"requestId\":\"96141.13\",\"timestamp\":316156.640317,\"type\":\"Other\",\"wallTime\":1447622392.89548}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392895,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"96141.2\",\"loaderId\":\"96141.5\",\"requestId\":\"96141.13\",\"response\":{\"connectionId\":36,\"connectionReused\":true,\"encodedDataLength\":-1,\"fromDiskCache\":false,\"fromServiceWorker\":false,\"headers\":{\"Access-Control-Allow-Origin\":\"*\",\"Alt-Svc\":\"quic=\\\":443\\\"; p=\\\"1\\\"; ma=604800\",\"Alternate-Protocol\":\"443:quic,p=1\",\"Cache-Control\":\"no-cache, no-store, must-revalidate\",\"Content-Length\":\"35\",\"Content-Type\":\"image/gif\",\"Date\":\"Sun, 15 Nov 2015 21:19:52 GMT\\nSun, 15 Nov 2015 21:19:50 GMT\",\"Expires\":\"Fri, 01 Jan 1990 00:00:00 GMT\",\"Last-Modified\":\"Sun, 17 May 1998 03:00:00 GMT\",\"Pragma\":\"no-cache\",\"Server\":\"Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\nGolfe2\",\"X-Content-Type-Options\":\"nosniff\"},\"headersText\":\"HTTP/1.1 200 OK\\r\\nDate: Sun, 15 Nov 2015 21:19:52 GMT\\r\\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\r\\nDate: Sun, 15 Nov 2015 21:19:50 GMT\\r\\nExpires: Fri, 01 Jan 1990 00:00:00 GMT\\r\\nLast-Modified: Sun, 17 May 1998 03:00:00 GMT\\r\\nX-Content-Type-Options: nosniff\\r\\nContent-Type: image/gif\\r\\nServer: Golfe2\\r\\nContent-Length: 35\\r\\nCache-Control: no-cache, no-store, must-revalidate\\r\\nAlternate-Protocol: 443:quic,p=1\\r\\nAlt-Svc: quic=\\\":443\\\"; p=\\\"1\\\"; ma=604800\\r\\nAccess-Control-Allow-Origin: *\\r\\nPragma: no-cache\\r\\n\\r\\n\",\"mimeType\":\"image/gif\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"127.0.0.1\",\"remotePort\":2003,\"requestHeaders\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Accept-Encoding\":\"gzip, deflate, sdch\",\"Accept-Language\":\"sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\",\"Connection\":\"keep-alive\",\"Host\":\"ssl.google-analytics.com\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"requestHeadersText\":\"GET /r/__utm.gif?utmwv=5.6.7&utms=1&utmn=1136686001&utmhn=www.sitespeed.io&utmcs=UTF-8&utmsr=1440x900&utmvp=1050x757&utmsc=24-bit&utmul=sv&utmje=1&utmfl=-&utmdt=Sitespeed.io%20-%20Analyze%20your%20website%20speed%20and%20performance&utmhid=419132353&utmr=-&utmp=%2F&utmht=1447622392890&utmac=UA-31246987-1&utmcc=__utma%3D152498875.921679114.1447622393.1447622393.1447622393.1%3B%2B__utmz%3D152498875.1447622393.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmjid=1850987125&utmredir=1&utmu=qAAAAAAAAAAAAAAAAAAAAAAE~ HTTP/1.1\\r\\nHost: ssl.google-analytics.com\\r\\nConnection: keep-alive\\r\\nAccept: image/webp,image/*,*/*;q=0.8\\r\\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\\r\\nReferer: https://www.sitespeed.io/\\r\\nAccept-Encoding: gzip, deflate, sdch\\r\\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\\r\\n\\r\\n\",\"securityDetails\":{\"certificateId\":2,\"cipher\":\"ECDHE_RSA\",\"keyExchange\":\"AES_128_GCM\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"insecure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":-1,\"connectStart\":-1,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":33.8340000016615,\"requestTime\":316156.640455,\"sendEnd\":0.357999990228564,\"sendStart\":0.316000019665808,\"sslEnd\":-1,\"sslStart\":-1,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://ssl.google-analytics.com/r/__utm.gif?utmwv=5.6.7&utms=1&utmn=1136686001&utmhn=www.sitespeed.io&utmcs=UTF-8&utmsr=1440x900&utmvp=1050x757&utmsc=24-bit&utmul=sv&utmje=1&utmfl=-&utmdt=Sitespeed.io%20-%20Analyze%20your%20website%20speed%20and%20performance&utmhid=419132353&utmr=-&utmp=%2F&utmht=1447622392890&utmac=UA-31246987-1&utmcc=__utma%3D152498875.921679114.1447622393.1447622393.1447622393.1%3B%2B__utmz%3D152498875.1447622393.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmjid=1850987125&utmredir=1&utmu=qAAAAAAAAAAAAAAAAAAAAAAE~\"},\"timestamp\":316156.6746,\"type\":\"Image\"}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392930,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":35,\"encodedDataLength\":544,\"requestId\":\"96141.13\",\"timestamp\":316156.674814}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392930,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":544,\"requestId\":\"96141.13\",\"timestamp\":316156.674784}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622392930,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"96141.2\",\"loaderId\":\"96141.5\",\"requestId\":\"96141.9\",\"response\":{\"connectionId\":62,\"connectionReused\":false,\"encodedDataLength\":-1,\"fromDiskCache\":false,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"0\",\"Cache-Control\":\"max-age=31536000, public, public, must-revalidate, proxy-revalidate\",\"Content-Length\":\"71179\",\"Content-Type\":\"image/png\",\"Date\":\"Sun, 15 Nov 2015 21:19:52 GMT\\nSun, 15 Nov 2015 21:19:50 GMT\",\"Expires\":\"Mon, 14 Nov 2016 21:19:48 GMT\",\"Last-Modified\":\"Mon, 19 Oct 2015 12:44:08 GMT\",\"Pragma\":\"public\",\"Server\":\"Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\nnginx/1.8.0\",\"Strict-Transport-Security\":\"max-age=31536000; preload\",\"Vary\":\"User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"MISS\",\"X-Cache-Hits\":\"0\",\"X-Served-By\":\"cache-fra1235-FRA\"},\"headersText\":\"HTTP/1.1 200 OK\\r\\nDate: Sun, 15 Nov 2015 21:19:52 GMT\\r\\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\r\\nServer: nginx/1.8.0\\r\\nContent-Type: image/png\\r\\nLast-Modified: Mon, 19 Oct 2015 12:44:08 GMT\\r\\nCache-Control: max-age=31536000, public, public, must-revalidate, proxy-revalidate\\r\\nExpires: Mon, 14 Nov 2016 21:19:48 GMT\\r\\nPragma: public\\r\\nContent-Length: 71179\\r\\nAccept-Ranges: bytes\\r\\nDate: Sun, 15 Nov 2015 21:19:50 GMT\\r\\nVia: 1.1 varnish\\r\\nAge: 0\\r\\nX-Served-By: cache-fra1235-FRA\\r\\nX-Cache: MISS\\r\\nX-Cache-Hits: 0\\r\\nVary: User-Agent\\r\\nStrict-Transport-Security: max-age=31536000; preload\\r\\n\\r\\n\",\"mimeType\":\"image/png\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"127.0.0.1\",\"remotePort\":2003,\"requestHeaders\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Accept-Encoding\":\"gzip, deflate, sdch\",\"Accept-Language\":\"sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\",\"Connection\":\"keep-alive\",\"Host\":\"www.sitespeed.io\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"requestHeadersText\":\"GET /img/perfbudget.png HTTP/1.1\\r\\nHost: www.sitespeed.io\\r\\nConnection: keep-alive\\r\\nAccept: image/webp,image/*,*/*;q=0.8\\r\\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\\r\\nReferer: https://www.sitespeed.io/\\r\\nAccept-Encoding: gzip, deflate, sdch\\r\\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\\r\\n\\r\\n\",\"securityDetails\":{\"certificateId\":1,\"cipher\":\"ECDHE_RSA\",\"keyExchange\":\"AES_128_GCM\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"insecure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":50.6549999699928,\"connectStart\":1.47800002014264,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":674.20199996559,\"requestTime\":316156.323929,\"sendEnd\":50.8109999937005,\"sendStart\":50.7419999921694,\"sslEnd\":50.6469999672845,\"sslStart\":4.91499999770895,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/img/perfbudget.png\"},\"timestamp\":316156.99864,\"type\":\"Image\"}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393254,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":3504,\"encodedDataLength\":4096,\"requestId\":\"96141.9\",\"timestamp\":316156.99883}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393254,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":593,\"encodedDataLength\":593,\"requestId\":\"96141.9\",\"timestamp\":316156.998949}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393254,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":3576,\"encodedDataLength\":3576,\"requestId\":\"96141.9\",\"timestamp\":316156.999053}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393254,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.9\",\"timestamp\":316157.000211}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393255,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.9\",\"timestamp\":316157.002048}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393257,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.9\",\"timestamp\":316157.007947}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393263,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.9\",\"timestamp\":316157.009596}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393265,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.9\",\"timestamp\":316157.011046}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393266,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.9\",\"timestamp\":316157.012104}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393267,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.9\",\"timestamp\":316157.03111}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393286,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.9\",\"timestamp\":316157.032292}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393287,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.9\",\"timestamp\":316157.033385}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393288,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.9\",\"timestamp\":316157.034653}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393290,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.9\",\"timestamp\":316157.041485}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393296,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.9\",\"timestamp\":316157.042866}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393298,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.9\",\"timestamp\":316157.044132}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393299,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.9\",\"timestamp\":316157.045265}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393300,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":4096,\"encodedDataLength\":4096,\"requestId\":\"96141.9\",\"timestamp\":316157.047927}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393303,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":2066,\"encodedDataLength\":2066,\"requestId\":\"96141.9\",\"timestamp\":316157.048537}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393304,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":71771,\"requestId\":\"96141.9\",\"timestamp\":316157.048572}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393307,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Page.loadEventFired\",\"params\":{\"timestamp\":316157.048686}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393307,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Page.frameStoppedLoading\",\"params\":{\"frameId\":\"96141.2\"}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393307,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"96141.2\",\"initiator\":{\"type\":\"other\"},\"loaderId\":\"96141.5\",\"request\":{\"headers\":{\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/img/ico/sitespeed.io.ico\"},\"requestId\":\"96141.14\",\"timestamp\":316157.052952,\"type\":\"Other\",\"wallTime\":1447622393.30806}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393313,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"96141.2\",\"loaderId\":\"96141.5\",\"requestId\":\"96141.14\",\"response\":{\"connectionId\":62,\"connectionReused\":true,\"encodedDataLength\":-1,\"fromDiskCache\":false,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"256339\",\"Cache-Control\":\"max-age=31536000, public, public, must-revalidate, proxy-revalidate\",\"Content-Encoding\":\"gzip\",\"Content-Length\":\"2875\",\"Content-Type\":\"image/x-icon\",\"Date\":\"Sun, 15 Nov 2015 21:19:53 GMT\\nSun, 15 Nov 2015 21:19:50 GMT\",\"Expires\":\"Fri, 11 Nov 2016 22:07:30 GMT\",\"Last-Modified\":\"Mon, 19 Oct 2015 12:43:53 GMT\",\"Pragma\":\"public\",\"Server\":\"Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\nnginx/1.8.0\",\"Strict-Transport-Security\":\"max-age=31536000; preload\",\"Vary\":\"Accept-Encoding,User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"HIT\",\"X-Cache-Hits\":\"1\",\"X-Served-By\":\"cache-fra1235-FRA\"},\"headersText\":\"HTTP/1.1 200 OK\\r\\nDate: Sun, 15 Nov 2015 21:19:53 GMT\\r\\nServer: Jetty/2.0.0 (Mac OS X/10.11.1 x86_64 java/1.8.0_40\\r\\nServer: nginx/1.8.0\\r\\nContent-Type: image/x-icon\\r\\nLast-Modified: Mon, 19 Oct 2015 12:43:53 GMT\\r\\nCache-Control: max-age=31536000, public, public, must-revalidate, proxy-revalidate\\r\\nExpires: Fri, 11 Nov 2016 22:07:30 GMT\\r\\nPragma: public\\r\\nContent-Length: 2875\\r\\nAccept-Ranges: bytes\\r\\nDate: Sun, 15 Nov 2015 21:19:50 GMT\\r\\nVia: 1.1 varnish\\r\\nAge: 256339\\r\\nX-Served-By: cache-fra1235-FRA\\r\\nX-Cache: HIT\\r\\nX-Cache-Hits: 1\\r\\nVary: Accept-Encoding,User-Agent\\r\\nStrict-Transport-Security: max-age=31536000; preload\\r\\nContent-Encoding: gzip\\r\\n\\r\\n\",\"mimeType\":\"image/x-icon\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"127.0.0.1\",\"remotePort\":2003,\"requestHeaders\":{\"Accept\":\"*/*\",\"Accept-Encoding\":\"gzip, deflate, sdch\",\"Accept-Language\":\"sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\",\"Connection\":\"keep-alive\",\"Cookie\":\"__utmt=1; __utma=152498875.921679114.1447622393.1447622393.1447622393.1; __utmb=152498875.1.10.1447622393; __utmc=152498875; __utmz=152498875.1447622393.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)\",\"Host\":\"www.sitespeed.io\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\"},\"requestHeadersText\":\"GET /img/ico/sitespeed.io.ico HTTP/1.1\\r\\nHost: www.sitespeed.io\\r\\nConnection: keep-alive\\r\\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36\\r\\nAccept: */*\\r\\nReferer: https://www.sitespeed.io/\\r\\nAccept-Encoding: gzip, deflate, sdch\\r\\nAccept-Language: sv-SE,sv;q=0.8,en-US;q=0.6,en;q=0.4\\r\\nCookie: __utmt=1; __utma=152498875.921679114.1447622393.1447622393.1447622393.1; __utmb=152498875.1.10.1447622393; __utmc=152498875; __utmz=152498875.1447622393.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)\\r\\n\\r\\n\",\"securityDetails\":{\"certificateId\":1,\"cipher\":\"ECDHE_RSA\",\"keyExchange\":\"AES_128_GCM\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"insecure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":-1,\"connectStart\":-1,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":41.2890000152402,\"requestTime\":316157.053075,\"sendEnd\":0.576999969780445,\"sendStart\":0.505000003613532,\"sslEnd\":-1,\"sslStart\":-1,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/img/ico/sitespeed.io.ico\"},\"timestamp\":316157.100554,\"type\":\"Other\"}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393356,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":6518,\"encodedDataLength\":3513,\"requestId\":\"96141.14\",\"timestamp\":316157.100625}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393356,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":3513,\"requestId\":\"96141.14\",\"timestamp\":316157.094965}},\"webview\":\"1C0BD524-D2CF-4C3B-8F8D-A32D8F117298\"}",
+    "timestamp": 1447622393356,
+    "type": ""
+  }
+]
