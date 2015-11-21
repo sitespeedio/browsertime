@@ -1,5 +1,5 @@
 module.exports = {
-    run(results) {
-      console.log('In posttask!!! (with results: ' + results.toString() + ')');
+    run(context) {
+      context.log.info('In posttask!!! (with results: ' + JSON.stringify(context.results) + ')');
     }
   };

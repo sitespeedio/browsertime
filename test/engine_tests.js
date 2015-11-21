@@ -1,6 +1,7 @@
 'use strict';
 
-let Engine = require('../lib/core/engine');
+let path = require('path'),
+  Engine = require('../lib/core/engine');
 
 let BROWSERS = ['chrome', 'firefox'];
 
@@ -59,5 +60,29 @@ describe('Engine', function() {
           .timeout(10000, 'Waited for ' + browser + ' to quit for too long');
       });
     });
+
+    describe('#pre/post tasks - ' + browser, function() {
+      beforeEach(function() {
+        engine = new Engine({
+          'browser': browser,
+          'iterations': 1,
+          'preTask': require(path.resolve(__dirname, 'preposttasks', 'pre-sample.js')),
+          'postTask': require(path.resolve(__dirname, 'preposttasks', 'post-sample.js'))
+
+        });
+        return engine.start();
+      });
+
+      it('should run pre and post tasks', function() {
+        return engine.run('http://httpbin.org/html');
+      });
+
+
+      afterEach(function() {
+        return engine
+          .stop()
+          .timeout(10000, 'Waited for ' + browser + ' to quit for too long');
+      });
+    })
   });
 });
