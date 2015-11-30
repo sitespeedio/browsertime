@@ -13,19 +13,19 @@ let Engine = require('../').Engine,
 
 Promise.promisifyAll(fs);
 
-function run(u, options) {
+function run(url, options) {
   options.scripts = scriptParser.parseBrowserScripts(path.resolve(__dirname, '..', 'browserscripts'));
 
   let engine = new Engine(options);
 
-  log.info('Running for url: %s', u);
+  log.info('Running for url: %s', url);
   if (log.isEnabledFor(log.VERBOSE)) {
     log.verbose('Running with options: %:2j', options);
   }
 
   engine.start()
     .then(function() {
-      return engine.run(u);
+      return engine.run(url);
     })
     .then(function(result) {
       let browsertimeData = JSON.stringify(result.browsertimeData, null, 2);
