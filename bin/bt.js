@@ -6,6 +6,7 @@ let Engine = require('../').Engine,
   scriptParser = require('../lib/support/browser_script'),
   logging = require('../').logging,
   cli = require('../lib/support/cli'),
+  fileNamer = require('../lib/support/file-namer').fileNamer,
   path = require('path'),
   Promise = require('bluebird'),
   fs = require('fs'),
@@ -28,15 +29,20 @@ function run(url, options) {
       return engine.run(url);
     })
     .then(function(result) {
+      const namer = fileNamer();
+
+      let jsonName = options.output || namer.getNameFromUrl(url, 'json'),
+        harName = options.har || namer.getNameFromUrl(url, 'har');
+
       let browsertimeData = JSON.stringify(result.browsertimeData, null, 2);
       let har = JSON.stringify(result.har, null, 2);
 
       return Promise.all([
-        fs.writeFileAsync(options.output, browsertimeData).tap(() => {
-            log.info('Wrote browsertime data to %s', options.output);
+        fs.writeFileAsync(jsonName, browsertimeData).tap(() => {
+            log.info('Wrote browsertime data to %s', jsonName);
           }),
-        fs.writeFileAsync(options.har, har).tap(() => {
-          log.info('Wrote har data to %s', options.har);
+        fs.writeFileAsync(harName, har).tap(() => {
+          log.info('Wrote har data to %s', harName);
         })
       ]);
     })
