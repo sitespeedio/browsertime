@@ -25,12 +25,12 @@ describe('chrome-perflog-parser', function() {
       let perflogFile = path.resolve(datadir, 'perflog.json');
 
       let perflog = JSON.parse(fs.readFileSync(perflogFile, 'utf-8'));
-      let events = perflog.map(function(logentry) {
-        return parser.eventFromLogEntry(logentry);
-      });
+      let events = perflog.map((logentry) => parser.eventFromLogEntry(logentry));
+      //fs.writeFileSync(path.resolve(datadir, 'events.json'), JSON.stringify(events, null, 2), 'utf8');
 
       let har = parser.harFromEvents(events);
       assert.notEqual(har, null);
+      fs.writeFileSync(path.resolve(datadir, 'har.har'), JSON.stringify(har, null, 2), 'utf8');
     });
   })
 });
