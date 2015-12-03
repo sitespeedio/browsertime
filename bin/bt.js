@@ -51,13 +51,13 @@ function run(url, options) {
       throw e;
     })
     .finally(function() {
-      log.info('Stopping engine');
+      log.verbose('Stopping Browsertime');
       return engine.stop()
         .tap(() => {
-          log.debug('Stopped engine');
+          log.debug('Stopped Browsertime');
         })
         .catch((e) => {
-          log.error('Error stopping browsertime!', e);
+          log.error('Error stopping Browsertime!', e);
 
           process.exitCode = 1;
         });
