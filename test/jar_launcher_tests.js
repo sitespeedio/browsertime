@@ -19,7 +19,7 @@ describe('JarLauncher', function() {
         },
         'failure': {
           'stdout': null,
-          'stderr': 'Failed to start Jetty server'
+          'stderr': 'Exception in thread'
         }
       }
     });
