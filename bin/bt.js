@@ -47,14 +47,19 @@ function run(url, options) {
       ]);
     })
     .catch(function(e) {
-      log.error('Error running browsertime ', e);
+      log.error('Error running browsertime', e);
       throw e;
     })
     .finally(function() {
       log.info('Stopping engine');
       return engine.stop()
-        .tap(function() {
+        .tap(() => {
           log.debug('Stopped engine');
+        })
+        .catch((e) => {
+          log.error('Error stopping browsertime!', e);
+
+          process.exitCode = 1;
         });
     })
     .catch(function() {
