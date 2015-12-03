@@ -19,7 +19,7 @@ function run(url, options) {
 
   let engine = new Engine(options);
 
-  log.info('Running for url: %s', url);
+  log.info('Running %s for url: %s', options.browser, url);
   if (log.isEnabledFor(log.VERBOSE)) {
     log.verbose('Running with options: %:2j', options);
   }
