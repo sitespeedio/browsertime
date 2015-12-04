@@ -3,6 +3,11 @@ Note that Browsertime doesn't follow semantic versioning just yet. Breaking chan
 releases, even though we try to avoid that. Once we're happy with the design and api we'll declare 1.0 and follow 
 semantic versioning after that.
 
+NOT YET RELEASED
+------------------------
+* Fix parsing of --headers and --connectionRaw options. Note that JSON strings needs to be properly quoted when 
+passed on the command line, e.g. --headers '{"name":"value"}'
+
 version 0.12.0
 ------------------------
 * Upgrade selenium-webdriver to 2.47. This means dropping node 0.10 support, but allowing installation on node 4.x.
