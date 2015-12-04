@@ -3,7 +3,7 @@ Note that Browsertime doesn't follow semantic versioning just yet. Breaking chan
 releases, even though we try to avoid that. Once we're happy with the design and api we'll declare 1.0 and follow 
 semantic versioning after that.
 
-NOT YET RELEASED
+version 0.12.1
 ------------------------
 * Fix parsing of --headers and --connectionRaw options. Note that JSON strings needs to be properly quoted when 
 passed on the command line, e.g. --headers '{"name":"value"}'
