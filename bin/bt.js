@@ -3,11 +3,10 @@
 'use strict';
 
 let Engine = require('../').Engine,
-  scriptParser = require('../lib/support/browser_script'),
+  browserScripts = require('../lib/support/browser_script'),
   logging = require('../').logging,
   cli = require('../lib/support/cli'),
   fileNamer = require('../lib/support/file-namer').fileNamer,
-  path = require('path'),
   Promise = require('bluebird'),
   fs = require('fs'),
   log = require('intel');
@@ -15,7 +14,7 @@ let Engine = require('../').Engine,
 Promise.promisifyAll(fs);
 
 function run(url, options) {
-  options.scripts = scriptParser.parseBrowserScripts(path.resolve(__dirname, '..', 'browserscripts'));
+  options.scripts = browserScripts.defaultScripts;
 
   let engine = new Engine(options);
 
