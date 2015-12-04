@@ -42,14 +42,14 @@
     "async": "^1.5.0",
     "async-node-events": "git+https://github.com/joshuafcole/async-node-events.git#d32411f1f4",
     "browsermob-proxy-api": "0.3.0",
-    "cross-spawn-async": "2.0.0",
+    "cross-spawn-async": "^2.0.1",
     "fast-stats": "0.0.3",
     "getport": "0.1.0",
     "minimist": "^1.2.0",
     "selenium-webdriver": "~2.47.0",
     "valid-url": "1.0.9",
     "whereis": "^0.4.0",
-    "winston": "^1.1.1"
+    "winston": "^2.1.1"
   },
   "scripts": {
     "lint": "jshint .",
