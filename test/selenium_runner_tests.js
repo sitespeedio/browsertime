@@ -31,7 +31,9 @@ describe('SeleniumRunner', function() {
     it.skip('should handle if Chrome crashes', function() {
       runner = new SeleniumRunner({
         'browser': 'chrome',
-        'chromeArgs': '--crash-test',
+        'chrome': {
+          'args': '--crash-test'
+        },
         'verbose': true
       });
 
