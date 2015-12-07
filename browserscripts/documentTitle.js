@@ -1,1 +1,3 @@
-return document.title;
+(function() {
+  return document.title;
+})();

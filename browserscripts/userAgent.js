@@ -1,1 +1,3 @@
-return navigator.userAgent;
+(function() {
+  return navigator.userAgent;
+})();

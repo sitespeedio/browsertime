@@ -1,6 +1,3 @@
-if(document.documentElement.scrollWidth>window.innerWidth){
- return false;
-}
-else {
-  return true;
-}
+(function() {
+  return document.documentElement.scrollWidth <= window.innerWidth;
+})();
