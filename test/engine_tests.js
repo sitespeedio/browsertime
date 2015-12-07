@@ -16,10 +16,10 @@ describe('Engine', function() {
     describe('#run - ' + browser, function() {
       let scripts = [{
         path: 'foo.js',
-        source: 'return "foo";'
+        source: '(function () {return "foo";})()'
       }, {
         path: 'fourtytwo.js',
-        source: 'return 42;'
+        source: '(function () {return 42;})()'
       }];
 
       beforeEach(function() {
