@@ -25,6 +25,7 @@ Note: Your browser need to support the Navigation Timing API, the User Timing AP
 	- [Simulate connection types](#simulate-connection-types)
 	- [Basic Auth](#basic-auth)
 	- [Request headers](#request-headers)
+	- [Blacklist urls](#blacklist-urls)
 	- [Fake the user agent](#fake-the-user-agent)
 - [Installation](#installation)
 - [Authors](#authors)
@@ -103,6 +104,12 @@ You can set basic auth user & password like this:
 Set request headers by supplying a JSON:
 ```bash
 > browsertime -u http://stage.example.com --headers '{ "name": "value", "name2": "value2"}'
+``` 
+
+## Blacklist urls
+Match urls that should return 404, e.g. block Facebook and Google Analytics
+```bash
+> browsertime -u http://stage.example.com  --blacklist ".*(facebook|google-analytics)\.com.*"'
 ``` 
 
 ## Fake the user agent
