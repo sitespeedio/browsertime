@@ -1,1 +1,3 @@
-return document.getElementsByTagName("script").length;
+(function() {
+  return document.getElementsByTagName("script").length;
+})();
