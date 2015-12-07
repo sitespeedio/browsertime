@@ -102,7 +102,7 @@ You can set basic auth user & password like this:
 ## Request headers
 Set request headers by supplying a JSON:
 ```bash
-> browsertime -u http://stage.example.com --headers {name:value,name2:value2}
+> browsertime -u http://stage.example.com --headers '{ "name": "value", "name2": "value2"}'
 ``` 
 
 ## Fake the user agent
