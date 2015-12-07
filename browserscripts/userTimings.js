@@ -14,6 +14,7 @@
       marks: []
     };
   } else {
+    // FIXME marks exported from Firefox include "toJSON": "function toJSON() {\n    [native code]\n}"
     return {
       measures: (window.performance && window.performance.getEntriesByType) ? window.performance.getEntriesByType(
         'measure') : [],
