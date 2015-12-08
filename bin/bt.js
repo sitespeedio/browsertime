@@ -42,7 +42,7 @@ function run(url, options) {
         let har = JSON.stringify(result.har, null, 2);
         let harName = options.har || namer.getNameFromUrl(url, 'har');
         saveOperations.push(fs.writeFileAsync(harName, har).tap(() => {
-          log.info('Wrote har data to %s', options.har);
+          log.info('Wrote har data to %s', harName);
         }));
       }
 
