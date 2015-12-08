@@ -27,6 +27,9 @@
     "moment": "^2.10.6",
     "sequencediagrams": "0.0.8"
   },
+  "engines": {
+    "node": ">=5.1.0"
+  },
   "main": "index.js",
   "scripts": {
     "test": "node_modules/mocha/bin/mocha",
