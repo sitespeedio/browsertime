@@ -64,15 +64,9 @@ describe('SeleniumRunner', function() {
         return runner.loadAndWait('http://httpbin.org/html').should.be.fulfilled;
       });
 
-      if (browser !== 'chrome') {
-        // Chrome doesn't report a failure after load has been aborted by page load timeout.
-        // Putting if (chrome) {this.skip()} inside the test doesn't work, the afterEach teardown
-        // isn't run. Seems like a mocha bug.
-
-        it('should fail if url takes too long to load', function() {
-          return runner.loadAndWait('http://httpbin.org/delay/20', 'return true').should.be.rejected;
-        });
-      }
+      it('should fail if url takes too long to load', function() {
+        return runner.loadAndWait('http://httpbin.org/delay/20', 'return true').should.be.rejected;
+      });
 
       it('should fail if wait script never returns true', function() {
         return runner.loadAndWait('http://httpbin.org/html', 'return false').should.be.rejected;
