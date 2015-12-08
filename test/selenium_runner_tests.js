@@ -53,7 +53,8 @@ describe('SeleniumRunner', function() {
           'browser': browser,
           'timeouts': {
             'scripts': 5000,
-            'pageCompleteCheck': 20000
+            'pageLoad': 10000,
+            'pageCompleteCheck': 10000
           }
         });
         return runner.start();
