@@ -14,11 +14,18 @@
       marks: []
     };
   } else {
-    // FIXME marks exported from Firefox include "toJSON": "function toJSON() {\n    [native code]\n}"
+    var marks = [],
+      measures = [];
+
+    if (window.performance && window.performance.getEntriesByType) {
+      // workaround for issue with Firefox where each user timing entry contains a toJSON entry.
+      marks = JSON.parse(JSON.stringify(window.performance.getEntriesByType('mark')));
+      measures = JSON.parse(JSON.stringify(window.performance.getEntriesByType('measure')));
+    }
+
     return {
-      measures: (window.performance && window.performance.getEntriesByType) ? window.performance.getEntriesByType(
-        'measure') : [],
-      marks: (window.performance && window.performance.getEntriesByType) ? window.performance.getEntriesByType('mark') : []
+      marks : marks,
+      measures: measures
     };
   }
 })();
