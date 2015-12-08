@@ -1,12 +1,16 @@
 language: node_js
 node_js:
 - '5.1'
+env:
+  - CXX=g++-4.8
 sudo: false
 addons:
   apt:
     sources:
+    - ubuntu-toolchain-r-test
     - google-chrome
     packages:
+    - g++-4.8
     - google-chrome-stable
   firefox: latest
 before_install:
