@@ -23,6 +23,7 @@
     "eslint": "^1.7.3",
     "eslint-plugin-require-jsdoc": "^1.0.4",
     "jsdoc": "^3.3.3",
+    "longjohn": "^0.2.11",
     "mocha": "^2.3.3",
     "moment": "^2.10.6",
     "sequencediagrams": "0.0.8"

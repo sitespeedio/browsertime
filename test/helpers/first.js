@@ -14,6 +14,8 @@ chai.use(chaiAsPromised);
 
 chai.should();
 
+require('longjohn');
+
 Bluebird.config({
   warnings: true,
   longStackTraces: true
