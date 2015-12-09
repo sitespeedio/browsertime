@@ -6,7 +6,7 @@
     "alto-saxophone": "^2.20.0",
     "baryton-saxophone": "^2.48.2",
     "bluebird": "^2.10.2",
-    "browsermob-proxy-api": "^0.3.0",
+    "browsermob-proxy-api": "^0.3.1",
     "cross-spawn-async": "^2.0.0",
     "fast-stats": "0.0.3",
     "getport": "^0.1.0",
