@@ -10,7 +10,7 @@
     "cross-spawn-async": "^2.0.0",
     "fast-stats": "0.0.3",
     "getport": "^0.1.0",
-    "intel": "^1.0.2",
+    "intel": "^1.1.0",
     "lodash.merge": "^3.3.2",
     "selenium-webdriver": "^2.48.2",
     "tenor-saxophone": "^2.48.0",
