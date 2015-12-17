@@ -3,9 +3,9 @@ Note that Browsertime doesn't follow semantic versioning just yet. Breaking chan
 releases, even though we try to avoid that. Once we're happy with the design and api we'll declare 1.0 and follow 
 semantic versioning after that.
 
-NOT YET RELEASED
+version 0.12.2
 ------------------------
-* Add ability to block urls (i.e. return 404) based on regex.
+* Add ability to block urls (e.g. return 404) based on regex.
 
 version 0.12.1
 ------------------------
