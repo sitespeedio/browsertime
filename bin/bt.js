@@ -71,4 +71,8 @@ let cliResult = cli.parseCommandLine();
 
 logging.configure(cliResult.options);
 
+if (log.isEnabledFor(log.CRITICAL)) { // TODO change the threshold to VERBOSE before releasing 1.0
+  Promise.longStackTraces();
+}
+
 run(cliResult.url, cliResult.options);
