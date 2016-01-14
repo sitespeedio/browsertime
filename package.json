@@ -11,7 +11,7 @@
     "fast-stats": "0.0.3",
     "getport": "^0.1.0",
     "intel": "^1.1.0",
-    "lodash.merge": "^3.3.2",
+    "lodash.merge": "^4.0.1",
     "selenium-webdriver": "^2.48.2",
     "tenor-saxophone": "^2.48.0",
     "valid-url": "^1.0.9",
