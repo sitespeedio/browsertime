@@ -22,6 +22,7 @@ script:
 - npm run lint
 - npm test
 - node ./bin/bt.js -b firefox -n 2 http://www.browsertime.net
+- node ./bin/bt.js -b chrome --skipHar -n 2 https://www.sitespeed.io
 notifications:
   slack:
     secure: Bo/bgmtFVGj6I2XnkvERfGnoM+t73WQSsP5eMlGM0jhUSKPqIc7Hf2zjYil3amMY3awFnoA6prILcMBzyUURj3jc5VRsWBCf6aQZ3bM+xzAcuTMcoiAKS7Ru1HQj1WY8G7VycDWuNeF8dCT0kt2QhcSneAUQ0qqyclWjcOK22kw=
