@@ -9,6 +9,7 @@ let Engine = require('../').Engine,
   fileNamer = require('../lib/support/file-namer').fileNamer,
   Promise = require('bluebird'),
   fs = require('fs'),
+  path = require('path'),
   log = require('intel');
 
 Promise.promisifyAll(fs);
