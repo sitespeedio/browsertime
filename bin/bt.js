@@ -45,14 +45,6 @@ function run(url, options) {
           log.info('Wrote har data to %s', harName);
         }));
       }
-      if (result.ffHar) {
-        let har = JSON.stringify(result.ffHar, null, 2);
-        let harName = namer.getNameFromUrl(url, 'har');
-        harName = harName.slice(0, -4) + '-firefox.har';
-        saveOperations.push(fs.writeFileAsync(harName, har).tap(() => {
-          log.info('Wrote Firefox har data to %s', harName);
-        }));
-      }
 
       return Promise.all(saveOperations);
     })
