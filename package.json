@@ -12,6 +12,7 @@
     "getport": "^0.1.0",
     "intel": "^1.1.0",
     "lodash.merge": "^4.0.1",
+    "moment": "^2.10.6",
     "selenium-webdriver": "^2.48.2",
     "tenor-saxophone": "^2.48.0",
     "valid-url": "^1.0.9",
@@ -25,7 +26,6 @@
     "jsdoc": "^3.3.3",
     "longjohn": "^0.2.11",
     "mocha": "^2.3.3",
-    "moment": "^2.10.6",
     "sequencediagrams": "0.0.8"
   },
   "engines": {
