@@ -12,6 +12,7 @@
     "getport": "^0.1.0",
     "intel": "^1.1.0",
     "lodash.merge": "^4.0.1",
+    "lodash.pick": "^4.0.0",
     "moment": "^2.10.6",
     "selenium-webdriver": "^2.48.2",
     "tenor-saxophone": "^2.48.0",
