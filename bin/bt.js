@@ -32,14 +32,14 @@ function run(url, options) {
       let saveOperations = [];
 
       if (result.browsertimeData) {
-        let browsertimeData = JSON.stringify(result.browsertimeData, null, 2);
+        let browsertimeData = JSON.stringify(result.browsertimeData);
         let jsonName = options.output || namer.getNameFromUrl(url, 'json');
         saveOperations.push(fs.writeFileAsync(jsonName, browsertimeData).tap(() => {
           log.info('Wrote browsertime data to %s', jsonName);
         }));
       }
       if (result.har) {
-        let har = JSON.stringify(result.har, null, 2);
+        let har = JSON.stringify(result.har);
         let harName = options.har || namer.getNameFromUrl(url, 'har');
         saveOperations.push(fs.writeFileAsync(harName, har).tap(() => {
           log.info('Wrote har data to %s', harName);
