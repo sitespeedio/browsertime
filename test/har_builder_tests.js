@@ -62,10 +62,16 @@ describe('har_builder', function() {
           },
           'pages': [{
             'id': 'page_0'
-          }],
+          },
+            {
+              'id': 'page_1'
+            }],
           'entries': [{
             'pageref': 'page_0'
-          }]
+          },
+            {
+              'pageref': 'page_1'
+            }]
         }
       };
 
@@ -77,6 +83,9 @@ describe('har_builder', function() {
         },
         {
           'id': 'page_0-1'
+        },
+        {
+          'id': 'page_1'
         }]);
       expect(combinedHar.log.entries).to.eql([
         {
@@ -84,6 +93,9 @@ describe('har_builder', function() {
         },
         {
           'pageref': 'page_0-1'
+        },
+        {
+          'pageref': 'page_1'
         }]);
       expect(combinedHar).to.have.deep.property('log.version', '1.2');
       expect(combinedHar).to.have.deep.property('log.creator.name', 'Browsertime');
