@@ -13,7 +13,7 @@
     "intel": "^1.1.0",
     "lodash.merge": "^4.0.2",
     "lodash.pick": "^4.0.1",
-    "moment": "^2.10.6",
+    "moment": "^2.11.2",
     "selenium-webdriver": "^2.48.2",
     "tenor-saxophone": "^2.48.0",
     "tough-cookie": "^2.2.1",
