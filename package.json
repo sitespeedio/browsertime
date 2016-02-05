@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "bin": "./bin/bt.js",
   "dependencies": {
-    "alto-saxophone": "^2.20.0",
-    "baryton-saxophone": "^2.48.2",
+    "alto-saxophone": "^2.21.0",
+    "baryton-saxophone": "^2.50.1",
     "bluebird": "^3.1.5",
     "browsermob-proxy-api": "^0.3.1",
     "cross-spawn-async": "^2.1.8",
@@ -15,7 +15,7 @@
     "lodash.pick": "^4.0.1",
     "moment": "^2.11.2",
     "selenium-webdriver": "^2.48.2",
-    "tenor-saxophone": "^2.48.0",
+    "tenor-saxophone": "^2.50.0",
     "tough-cookie": "^2.2.1",
     "valid-url": "^1.0.9",
     "yargs": "^3.31.0"
