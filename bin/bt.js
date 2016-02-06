@@ -14,8 +14,13 @@ let Engine = require('../').Engine,
 Promise.promisifyAll(fs);
 
 function run(url, options) {
-  options.scripts = browserScripts.defaultScripts;
 
+  // TODO we shouldn't ovewrite input options, lets rename it
+  if (options.scripts) {
+    options.scripts = browserScripts.parseBrowserScripts(options.scripts, false);
+  } else {
+    options.scripts = browserScripts.defaultScripts;
+  }
   let engine = new Engine(options);
 
   log.info('Running %s for url: %s', options.browser, url);
