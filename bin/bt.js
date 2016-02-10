@@ -9,23 +9,27 @@ let Engine = require('../').Engine,
   cli = require('../lib/support/cli'),
   fileNamer = require('../lib/support/file-namer').fileNamer,
   Promise = require('bluebird'),
+  merge = require('lodash.merge'),
   fs = require('fs'),
   path = require('path'),
   log = require('intel');
 
 Promise.promisifyAll(fs);
 
+function parseUserScripts(scripts) {
+  if (!Array.isArray(scripts))
+    scripts = [scripts];
+
+  return Promise.reduce(scripts, (results, script) =>
+      browserScripts.parseScriptDirectory(path.resolve(script), 'custom')
+        .then((scripts) => merge(results, scripts)),
+    {});
+}
+
 function run(url, options) {
   let dir = 'browsertime-results';
   if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
-  }
-
-  // TODO we shouldn't ovewrite input options, lets rename it
-  if (options.scripts) {
-    options.scripts = browserScripts.parseBrowserScripts(options.scripts, false);
-  } else {
-    options.scripts = browserScripts.defaultScripts;
   }
 
   if (options.preTask) {
@@ -42,11 +46,20 @@ function run(url, options) {
     log.verbose('Running with options: %:2j', options);
   }
 
+  const scriptCategories = browserScripts.allScriptCategories;
+  let scriptsByCategory = browserScripts.getScriptsForCategories(scriptCategories);
+
+  if (options.script) {
+    const userScripts = parseUserScripts(options.script);
+    scriptsByCategory = Promise.join(scriptsByCategory, userScripts,
+      (scriptsByCategory, userScripts) => merge(scriptsByCategory, userScripts));
+  }
+
   const indentation = options.prettyPrint ? 2 : 0;
 
   engine.start()
     .then(function() {
-      return engine.run(url);
+      return engine.run(url, scriptsByCategory);
     })
     .then(function(result) {
       const namer = fileNamer();

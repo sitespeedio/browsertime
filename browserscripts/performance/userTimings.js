@@ -13,19 +13,17 @@
       measures: [],
       marks: []
     };
-  } else {
-    var marks = [],
-      measures = [];
-
-    if (window.performance && window.performance.getEntriesByType) {
-      // workaround for issue with Firefox where each user timing entry contains a toJSON entry.
-      marks = JSON.parse(JSON.stringify(window.performance.getEntriesByType('mark')));
-      measures = JSON.parse(JSON.stringify(window.performance.getEntriesByType('measure')));
-    }
-
-    return {
-      marks : marks,
-      measures: measures
-    };
   }
+  var marks = [],
+    measures = [];
+
+  if (window.performance && window.performance.getEntriesByType) {
+    marks = window.performance.getEntriesByType('mark');
+    measures = window.performance.getEntriesByType('measure');
+  }
+
+  return {
+    marks: marks,
+    measures: measures
+  };
 })();

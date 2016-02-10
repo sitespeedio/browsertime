@@ -30,7 +30,7 @@ describe('chrome-perflog-parser', function() {
 
       let har = parser.harFromEvents(events);
       assert.notEqual(har, null);
-      fs.writeFileSync(path.resolve(datadir, 'har.har'), JSON.stringify(har, null, 2), 'utf8');
+      //fs.writeFileSync(path.resolve(datadir, 'har.har'), JSON.stringify(har, null, 2), 'utf8');
     });
   })
 });

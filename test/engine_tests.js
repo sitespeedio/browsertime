@@ -15,18 +15,15 @@ describe('Engine', function() {
   BROWSERS.forEach(function(browser) {
 
     describe('#run - ' + browser, function() {
-      let scripts = [{
-        path: 'foo.js',
-        source: '(function () {return "foo";})()'
-      }, {
-        path: 'fourtytwo.js',
-        source: '(function () {return 42;})()'
-      }];
+      const scripts = {
+        foo: '(function () {return "fff";})()',
+        uri: 'document.documentURI',
+        fourtytwo: '(function () {return 42;})()'
+      };
 
       beforeEach(function() {
         engine = new Engine({
           'browser': browser,
-          'scripts': scripts,
           'iterations': 2,
           'delay': 17
         });
@@ -35,28 +32,37 @@ describe('Engine', function() {
 
       it('should be able to load a url', function() {
         // somewhat clunky way to ignore generated har data in test.
-        let browsertimeData = engine.run('http://httpbin.org/html').then(function(r) {
-          return r.browsertimeData;
-        });
-        return browsertimeData.should.become([{
-          'foo': 'foo',
-          'fourtytwo': 42
-        }, {
-          'foo': 'foo',
-          'fourtytwo': 42
-        }]);
+        let browsertimeData = engine.run('http://httpbin.org/html', {scripts})
+          .then(function(r) {
+            return r.browsertimeData;
+          });
+        return browsertimeData.should.become([
+          {
+            scripts: {
+              'foo': 'fff',
+              'uri': 'http://httpbin.org/html',
+              'fourtytwo': 42
+            }
+          },
+          {
+            scripts: {
+              'foo': 'fff',
+              'uri': 'http://httpbin.org/html',
+              'fourtytwo': 42
+            }
+          }]);
       });
 
       it('should be able to load multiple urls', function() {
-        return engine.run('http://httpbin.org/html')
+        return engine.run('http://httpbin.org/html', {scripts})
           .then(function() {
-            return engine.run('http://httpbin.org/html');
+            return engine.run('http://httpbin.org/html', {scripts});
           }).should.be.fulfilled;
       });
 
       it('should be able to generate a har', function() {
         // somewhat clunky way to ignore generated har data in test.
-        return engine.run('http://httpbin.org/html')
+        return engine.run('http://httpbin.org/html', {scripts})
           .then(function(r) {
             return r.har.should.have.deep.property('log.entries[0].request.url');
           });
@@ -74,15 +80,15 @@ describe('Engine', function() {
         return require(path.resolve(__dirname, 'preposttasks', file))
       }
 
-      let scripts = [{
-        path: 'foo.js',
-        source: '(function () {return document.URL;})()'
-      }];
+      const scripts = {
+        foo: '(function () {return "fff";})()',
+        uri: 'document.documentURI',
+        fourtytwo: '(function () {return 42;})()'
+      };
 
       beforeEach(function() {
         engine = new Engine({
           'browser': browser,
-          'scripts': scripts,
           'iterations': 1,
           'preTask': loadTaskFile('pre-sample.js'),
           'postTask': [loadTaskFile('post-sample.js'), loadTaskFile('post-sample2.js')]
@@ -91,7 +97,7 @@ describe('Engine', function() {
       });
 
       it('should run pre and post tasks', function() {
-        return engine.run('http://httpbin.org/html');
+        return engine.run('http://httpbin.org/html', {scripts});
       });
 
 
