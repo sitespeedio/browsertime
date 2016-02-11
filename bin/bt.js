@@ -14,6 +14,10 @@ let Engine = require('../').Engine,
 Promise.promisifyAll(fs);
 
 function run(url, options) {
+  let dir = 'browsertime-results';
+  if (!fs.existsSync(dir)){
+    fs.mkdirSync(dir);
+  }
 
   // TODO we shouldn't ovewrite input options, lets rename it
   if (options.scripts) {
@@ -39,14 +43,14 @@ function run(url, options) {
       if (result.browsertimeData) {
         let browsertimeData = JSON.stringify(result.browsertimeData);
         let jsonName = options.output || namer.getNameFromUrl(url, 'json');
-        saveOperations.push(fs.writeFileAsync('results/' + jsonName, browsertimeData).tap(() => {
+        saveOperations.push(fs.writeFileAsync('browsertime-results/' + jsonName, browsertimeData).tap(() => {
           log.info('Wrote browsertime data to results/%s', jsonName);
         }));
       }
       if (result.har) {
         let har = JSON.stringify(result.har);
         let harName = options.har || namer.getNameFromUrl(url, 'har');
-        saveOperations.push(fs.writeFileAsync('results/' + harName, har).tap(() => {
+        saveOperations.push(fs.writeFileAsync('browsertime-results/' + harName, har).tap(() => {
           log.info('Wrote har data to results/%s', harName);
         }));
       }
