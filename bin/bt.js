@@ -5,6 +5,7 @@
 let Engine = require('../').Engine,
   browserScripts = require('../lib/support/browser_script'),
   logging = require('../').logging,
+  toArray = require('../lib/support/toArray'),
   cli = require('../lib/support/cli'),
   fileNamer = require('../lib/support/file-namer').fileNamer,
   Promise = require('bluebird'),
@@ -28,10 +29,10 @@ function run(url, options) {
   }
 
   if (options.preTask) {
-    options.preTask = require(path.resolve(options.preTask));
+    options.preTask = toArray(options.preTask).map((task) => require(path.resolve(task)));
   }
   if (options.postTask) {
-    options.postTask = require(path.resolve(options.postTask));
+    options.postTask = toArray(options.postTask).map((task) => require(path.resolve(task)));
   }
 
   let engine = new Engine(options);

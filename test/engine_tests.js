@@ -62,6 +62,10 @@ describe('Engine', function() {
     });
 
     describe('#pre/post tasks - ' + browser, function() {
+      function loadTaskFile(file) {
+        return require(path.resolve(__dirname, 'preposttasks', file))
+      }
+
       let scripts = [{
         path: 'foo.js',
         source: '(function () {return document.URL;})()'
@@ -72,9 +76,8 @@ describe('Engine', function() {
           'browser': browser,
           'scripts': scripts,
           'iterations': 1,
-          'preTask': require(path.resolve(__dirname, 'preposttasks', 'pre-sample.js')),
-          'postTask': require(path.resolve(__dirname, 'preposttasks', 'post-sample.js'))
-
+          'preTask': loadTaskFile('pre-sample.js'),
+          'postTask': [loadTaskFile('post-sample.js'), loadTaskFile('post-sample2.js')]
         });
         return engine.start();
       });
