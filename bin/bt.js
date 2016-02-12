@@ -50,22 +50,20 @@ function run(url, options) {
       const namer = fileNamer();
       let saveOperations = [];
 
+      const resultsFolder = 'browsertime-results';
       if (result.browsertimeData) {
         let browsertimeData = JSON.stringify(result.browsertimeData);
         let jsonName = options.output || namer.getNameFromUrl(url, 'json');
-        saveOperations.push(fs.writeFileAsync('browsertime-results/' + jsonName, browsertimeData).tap(() => {
-          log.info('Wrote browsertime data to results/%s', jsonName);
-        }));
+        saveOperations.push(fs.writeFileAsync(path.join(resultsFolder, jsonName), browsertimeData));
       }
       if (result.har) {
         let har = JSON.stringify(result.har);
         let harName = options.har || namer.getNameFromUrl(url, 'har');
-        saveOperations.push(fs.writeFileAsync('browsertime-results/' + harName, har).tap(() => {
-          log.info('Wrote har data to results/%s', harName);
-        }));
+        saveOperations.push(fs.writeFileAsync(path.join(resultsFolder, harName), har));
       }
 
-      return Promise.all(saveOperations);
+      return Promise.all(saveOperations)
+        .then(() => log.info('Wrote har data to %s', resultsFolder));
     })
     .catch(function(e) {
       log.error('Error running browsertime', e);
