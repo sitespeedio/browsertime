@@ -14,7 +14,7 @@
     "lodash.merge": "^4.0.2",
     "lodash.pick": "^4.0.1",
     "moment": "^2.11.2",
-    "selenium-webdriver": "2.48.2",
+    "selenium-webdriver": "2.52.0",
     "tenor-saxophone": "^2.50.0",
     "tough-cookie": "^2.2.1",
     "valid-url": "^1.0.9",
