@@ -5,6 +5,10 @@ node_js:
 env:
   - CXX=g++-4.8
 sudo: false
+cache:
+  apt: true
+  directories:
+    - node_modules
 addons:
   apt:
     sources:
