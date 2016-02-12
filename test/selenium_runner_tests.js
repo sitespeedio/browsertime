@@ -20,14 +20,6 @@ describe('SeleniumRunner', function() {
       return runner.start().should.be.rejected;
     });
 
-    it('should return browser capabilities', function() {
-      runner = new SeleniumRunner();
-      return runner.start().
-      then(function(caps) {
-        return caps.serialize();
-      }).should.eventually.contain.all.keys('browserName', 'version');
-    });
-
     it.skip('should handle if Chrome crashes', function() {
       runner = new SeleniumRunner({
         'browser': 'chrome',
