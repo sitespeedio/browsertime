@@ -54,6 +54,14 @@ describe('Engine', function() {
           }).should.be.fulfilled;
       });
 
+      it('should be able to generate a har', function() {
+        // somewhat clunky way to ignore generated har data in test.
+        return engine.run('http://httpbin.org/html')
+          .then(function(r) {
+            return r.har.should.have.deep.property('log.entries[0].request.url', 'http://httpbin.org/html');
+          });
+      });
+      
       afterEach(function() {
         return engine
           .stop()
