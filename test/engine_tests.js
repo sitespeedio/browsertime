@@ -58,10 +58,10 @@ describe('Engine', function() {
         // somewhat clunky way to ignore generated har data in test.
         return engine.run('http://httpbin.org/html')
           .then(function(r) {
-            return r.har.should.have.deep.property('log.entries[0].request.url', 'http://httpbin.org/html');
+            return r.har.should.have.deep.property('log.entries[0].request.url');
           });
       });
-      
+
       afterEach(function() {
         return engine
           .stop()
