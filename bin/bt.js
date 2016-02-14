@@ -42,6 +42,8 @@ function run(url, options) {
     log.verbose('Running with options: %:2j', options);
   }
 
+  const indentation = options.prettyPrint ? 2 : 0;
+
   engine.start()
     .then(function() {
       return engine.run(url);
@@ -52,12 +54,12 @@ function run(url, options) {
 
       const resultsFolder = 'browsertime-results';
       if (result.browsertimeData) {
-        let browsertimeData = JSON.stringify(result.browsertimeData);
+        let browsertimeData = JSON.stringify(result.browsertimeData, null, indentation);
         let jsonName = options.output || namer.getNameFromUrl(url, 'json');
         saveOperations.push(fs.writeFileAsync(path.join(resultsFolder, jsonName), browsertimeData));
       }
       if (result.har) {
-        let har = JSON.stringify(result.har);
+        let har = JSON.stringify(result.har, null, indentation);
         let harName = options.har || namer.getNameFromUrl(url, 'har');
         saveOperations.push(fs.writeFileAsync(path.join(resultsFolder, harName), har));
       }
