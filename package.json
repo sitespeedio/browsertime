@@ -5,14 +5,14 @@
   "dependencies": {
     "alto-saxophone": "^2.21.0",
     "baryton-saxophone": "^2.50.1",
-    "bluebird": "^3.3.0",
+    "bluebird": "^3.3.1",
     "browsermob-proxy-api": "^0.3.1",
     "cross-spawn-async": "^2.1.8",
     "fast-stats": "0.0.3",
     "getport": "^0.1.0",
     "intel": "^1.1.0",
-    "lodash.merge": "^4.0.2",
-    "lodash.pick": "^4.0.1",
+    "lodash.merge": "^4.2.0",
+    "lodash.pick": "^4.1.0",
     "moment": "^2.11.2",
     "selenium-webdriver": "2.52.0",
     "tenor-saxophone": "^2.50.0",
@@ -23,9 +23,9 @@
   "devDependencies": {
     "chai": "^3.4.0",
     "chai-as-promised": "^5.1.0",
-    "eslint": "^2.0.0",
     "eslint-plugin-require-jsdoc": "^1.0.4",
     "jsdoc": "^3.3.3",
+    "eslint": "^2.1.0",
     "longjohn": "^0.2.11",
     "mocha": "^2.4.2",
     "sequencediagrams": "0.0.8"
