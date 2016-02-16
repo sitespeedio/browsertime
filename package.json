@@ -23,8 +23,6 @@
   "devDependencies": {
     "chai": "^3.4.0",
     "chai-as-promised": "^5.1.0",
-    "eslint-plugin-require-jsdoc": "^1.0.4",
-    "jsdoc": "^3.3.3",
     "eslint": "^2.1.0",
     "longjohn": "^0.2.11",
     "mocha": "^2.4.2",
