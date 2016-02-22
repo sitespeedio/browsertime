@@ -21,7 +21,7 @@ function parseUserScripts(scripts) {
     scripts = [scripts];
 
   return Promise.reduce(scripts, (results, script) =>
-      browserScripts.parseScriptDirectory(path.resolve(script), 'custom')
+      browserScripts.findAndParseScripts(path.resolve(script), 'custom')
         .then((scripts) => merge(results, scripts)),
     {});
 }
