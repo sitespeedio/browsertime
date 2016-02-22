@@ -18,7 +18,7 @@
     "tenor-saxophone": "2.50.0",
     "tough-cookie": "2.2.1",
     "valid-url": "1.0.9",
-    "yargs": "3.31.0"
+    "yargs": "^4.1.0"
   },
   "devDependencies": {
     "chai": "^3.4.0",
