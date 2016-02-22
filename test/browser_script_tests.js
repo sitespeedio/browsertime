@@ -8,7 +8,7 @@ const TEST_SCRIPTS_FOLDER = path.resolve(__dirname, 'browserscripts', 'testscrip
 
 describe('#parseBrowserScripts', function() {
   it('should parse valid scripts', function() {
-    return parser.parseScriptDirectory(TEST_SCRIPTS_FOLDER)
+    return parser.findAndParseScripts(TEST_SCRIPTS_FOLDER)
       .then((scriptsByCategory) => {
         const categoryNames = Object.keys(scriptsByCategory);
 
