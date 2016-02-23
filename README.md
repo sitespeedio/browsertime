@@ -1,4 +1,4 @@
-#Browsertime
+# Browsertime
 
 Access the Web Performance Timeline, from your browser, in your terminal!
 
