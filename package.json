@@ -31,6 +31,9 @@
   "engines": {
     "node": ">=4.2.0"
   },
+  "publishConfig": {
+    "tag": "canary"
+  },
   "main": "index.js",
   "scripts": {
     "test": "node_modules/mocha/bin/mocha",
