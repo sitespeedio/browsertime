@@ -1,9 +1,9 @@
 'use strict';
 
 const Engine = require('./lib/core/engine'),
-  SeleniumRunner = require('./lib/core/selenium_runner'),
+  SeleniumRunner = require('./lib/core/seleniumRunner'),
   errors = require('./lib/support/errors'),
-  browserScripts = require('./lib/support/browser_script'),
+  browserScripts = require('./lib/support/browserScript'),
   logging = require('./lib/support/logging');
 
 module.exports = {

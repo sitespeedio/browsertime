@@ -1,6 +1,6 @@
 'use strict';
 
-let SeleniumRunner = require('../lib/core/selenium_runner');
+let SeleniumRunner = require('../lib/core/seleniumRunner');
 
 let isWindows = process.platform === 'win32';
 
@@ -119,7 +119,7 @@ describe('SeleniumRunner', function() {
        at null.<anonymous> (/Users/tobli/Development/btnext/node_modules/chai-as-promised/lib/chai-as-promised.js:122:55)
        at null.<anonymous> (/Users/tobli/Development/btnext/node_modules/chai-as-promised/lib/chai-as-promised.js:66:33)
        at Object.defineProperty.get (/Users/tobli/Development/btnext/node_modules/chai/lib/chai/utils/addProperty.js:35:29)
-       at Context.<anonymous> (/Users/tobli/Development/btnext/test/selenium_runner_tests.js:93:75)
+       at Context.<anonymous> (/Users/tobli/Development/btnext/test/seleniumRunnerTests.js:93:75)
        */
 
       it.skip('should fail if script hangs', function() {

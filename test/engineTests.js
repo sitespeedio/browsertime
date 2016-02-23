@@ -90,8 +90,8 @@ describe('Engine', function() {
         engine = new Engine({
           'browser': browser,
           'iterations': 1,
-          'preTask': loadTaskFile('pre-sample.js'),
-          'postTask': [loadTaskFile('post-sample.js'), loadTaskFile('post-sample2.js')]
+          'preTask': loadTaskFile('preSample.js'),
+          'postTask': [loadTaskFile('postSample.js'), loadTaskFile('postSample2.js')]
         });
         return engine.start();
       });

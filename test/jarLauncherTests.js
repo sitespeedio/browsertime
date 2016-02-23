@@ -1,6 +1,6 @@
 'use strict';
 
-let Launcher = require('../lib/support/jar_launcher'),
+let Launcher = require('../lib/support/jarLauncher'),
   path = require('path'),
   log = require('intel');
 

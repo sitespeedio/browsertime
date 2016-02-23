@@ -2,7 +2,7 @@
 
 let assert = require('assert'),
   path = require('path'),
-  parser = require('../lib/support/browser_script');
+  parser = require('../lib/support/browserScript');
 
 const TEST_SCRIPTS_FOLDER = path.resolve(__dirname, 'browserscripts', 'testscripts');
 

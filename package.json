@@ -1,7 +1,7 @@
 {
-  "description": "Browsertime, the next generation",
+  "description": "Browsertime",
   "version": "1.0.0",
-  "bin": "./bin/bt.js",
+  "bin": "./bin/browsertime.js",
   "dependencies": {
     "alto-saxophone": "2.21.0",
     "baryton-saxophone": "2.50.1",

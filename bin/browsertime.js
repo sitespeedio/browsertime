@@ -3,11 +3,11 @@
 'use strict';
 
 let Engine = require('../').Engine,
-  browserScripts = require('../lib/support/browser_script'),
+  browserScripts = require('../lib/support/browserScript'),
   logging = require('../').logging,
   toArray = require('../lib/support/toArray'),
   cli = require('../lib/support/cli'),
-  fileNamer = require('../lib/support/file-namer').fileNamer,
+  fileNamer = require('../lib/support/fileNamer').fileNamer,
   Promise = require('bluebird'),
   merge = require('lodash.merge'),
   fs = require('fs'),

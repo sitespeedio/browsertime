@@ -1,6 +1,6 @@
 'use strict';
 
-let parser = require('../lib/support/chrome-perflog-parser'),
+let parser = require('../lib/support/chromePerflogParser'),
   assert = require('assert'),
   fs = require('fs'),
   path = require('path');

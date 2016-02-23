@@ -1,6 +1,6 @@
 'use strict';
 
-let builder = require('../lib/support/har_builder'),
+let builder = require('../lib/support/harBuilder'),
   expect = require('chai').expect;
 
 describe('har_builder', function() {

@@ -1,6 +1,6 @@
 'use strict';
 
-let parser = require('../lib/support/traffic_shape_parser'),
+let parser = require('../lib/support/trafficShapeParser'),
   expect = require('chai').expect;
 
 describe('traffic_shape_parser', function() {

@@ -1,6 +1,6 @@
 'use strict';
 
-let fileNamer = require('../lib/support/file-namer').fileNamer,
+let fileNamer = require('../lib/support/fileNamer').fileNamer,
   expect = require('chai').expect;
 
 describe('file-namer', function() {
