@@ -1,10 +1,4 @@
 (function() {
-  /**
-   * Browsertime (http://www.browsertime.com)
-   * Copyright (c) 2014, Peter Hedenskog, Tobias Lidskog
-   * and other contributors
-   * Released under the Apache 2.0 License
-   */
   var t = window.performance.timing;
 
   return {

@@ -1,29 +1,28 @@
 (function() {
-  /**
-   * Browsertime (http://www.browsertime.com)
-   * Copyright (c) 2014, Peter Hedenskog, Tobias Lidskog
-   * and other contributors
-   * Released under the Apache 2.0 License
-   */
-
-// someway the get entries by type isn't working in IE using Selenium,
-// will spend time fixing this later, now just return empty
-  if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
-    return {
-      measures: [],
-      marks: []
-    };
-  }
-  var marks = [],
-    measures = [];
+  var measures = {}
+  var marks = {};
 
   if (window.performance && window.performance.getEntriesByType) {
-    marks = window.performance.getEntriesByType('mark');
-    measures = window.performance.getEntriesByType('measure');
+
+    var myMarks = Array.prototype.slice.call(window.performance.getEntriesByType('mark'));
+
+    myMarks.forEach(function(mark) {
+      marks[mark.name] = mark.startTime;
+    });
+
+    var myMeasures = Array.prototype.slice.call(window.performance.getEntriesByType('measure'));
+
+    myMeasures.forEach(function(measure) {
+      measures[measure.name] = {
+        duration: measure.duration,
+        startTime: measure.startTime
+      };
+    });
   }
 
   return {
     marks: marks,
     measures: measures
   };
+
 })();

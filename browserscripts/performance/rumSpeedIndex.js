@@ -2,10 +2,8 @@
   /******************************************************************************
    Copyright (c) 2014, Google Inc.
    All rights reserved.
-
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are met:
-
    * Redistributions of source code must retain the above copyright notice,
    this list of conditions and the following disclaimer.
    * Redistributions in binary form must reproduce the above copyright notice,
@@ -14,7 +12,6 @@
    * Neither the name of the <ORGANIZATION> nor the names of its contributors
    may be used to endorse or promote products derived from this software
    without specific prior written permission.
-
    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -37,7 +34,6 @@
    - Calculates the likely time that the background painted
    - Runs the various paint rectangles through the SpeedIndex calculation:
    https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/metrics/speed-index
-
    TODO:
    - Improve the start render estimate
    - Handle overlapping rects (though maybe counting the area as multiple paints
@@ -124,7 +120,7 @@
                 });
               }
             }
-          } catch (e) {
+          } catch (e) { // hepp
           }
         }
       }
@@ -263,7 +259,7 @@
       GetFirstPaint();
       CalculateVisualProgress();
       CalculateSpeedIndex();
-    } catch (e) {
+    } catch (e) { // hepp
     }
     /* Debug output for testing
      var dbg = '';
@@ -280,5 +276,5 @@
     return SpeedIndex;
   };
 
-  return RUMSpeedIndex() || -1;
+  return RUMSpeedIndex()|| -1;
 })();
