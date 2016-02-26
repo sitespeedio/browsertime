@@ -1,0 +1,31 @@
+'use strict';
+let webdriver = require('selenium-webdriver');
+
+/*
+  Here's an example of how you can use a preTask to login the user
+  and then measure/get metrics from pages as an authenticated user
+  */
+
+module.exports = {
+  run(context) {
+    return context.runWithDriver((driver) => {
+      // Go to Wikipedias login URL
+      return driver.get('https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page')
+        .then(() => {
+          // You need to find the form, the login input fiels and the
+          // password field. Just add you name and password and submit the form
+          // For more docs, checkout the NodeJS Selenium version
+          // http://selenium.googlecode.com/git/docs/api/javascript/index.html
+          // before you start, make your username and password
+          var userName = 'YOUR_USERNAME_HERE';
+          var password = 'YOUR_PASSWORD_HERE';
+          var loginForm = driver.findElement(webdriver.By.tagName('form'));
+          var loginInput = driver.findElement(webdriver.By.id(userName));
+          loginInput.sendKeys('wptuser');
+          var passwordInput = driver.findElement(webdriver.By.id('wpPassword1'));
+          passwordInput.sendKeys(password);
+          loginForm.submit();
+        });
+    })
+  }
+};
