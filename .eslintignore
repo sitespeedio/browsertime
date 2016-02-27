@@ -1,3 +1,4 @@
 browserscripts/*
+tools/*
 test/browserscripts/*
 test/preposttasks/*
