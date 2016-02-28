@@ -6,14 +6,14 @@ let parser = require('../lib/support/chromePerflogParser'),
   path = require('path');
 
 describe('chrome-perflog-parser', function() {
-  describe('#eventFromLogEntry', function() {
+  describe('#eventFromSeleniumLogEntry', function() {
     it('should parse valid log entries', function() {
       let datadir = path.resolve(__dirname, 'testdata', 'chromehar');
       let perflogFile = path.resolve(datadir, 'perflog.json');
 
       let perflog = JSON.parse(fs.readFileSync(perflogFile, 'utf-8'));
       for (let logentry of perflog) {
-        let event = parser.eventFromLogEntry(logentry);
+        let event = parser.eventFromSeleniumLogEntry(logentry);
         assert.notEqual(event, null);
       }
     });
@@ -25,7 +25,7 @@ describe('chrome-perflog-parser', function() {
       let perflogFile = path.resolve(datadir, 'perflog.json');
 
       let perflog = JSON.parse(fs.readFileSync(perflogFile, 'utf-8'));
-      let events = perflog.map((logentry) => parser.eventFromLogEntry(logentry));
+      let events = perflog.map((logentry) => parser.eventFromSeleniumLogEntry(logentry));
       //fs.writeFileSync(path.resolve(datadir, 'events.json'), JSON.stringify(events, null, 2), 'utf8');
 
       let har = parser.harFromEvents(events);
