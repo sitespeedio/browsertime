@@ -42,12 +42,7 @@ describe('SeleniumRunner', function() {
     describe('#loadAndWait - ' + browser, function() {
       beforeEach(function() {
         runner = new SeleniumRunner({
-          'browser': browser,
-          'timeouts': {
-            'scripts': 5000,
-            'pageLoad': 10000,
-            'pageCompleteCheck': 10000
-          }
+          'browser': browser
         });
         return runner.start();
       });
