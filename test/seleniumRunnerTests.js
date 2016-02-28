@@ -42,7 +42,13 @@ describe('SeleniumRunner', function() {
     describe('#loadAndWait - ' + browser, function() {
       beforeEach(function() {
         runner = new SeleniumRunner({
-          'browser': browser
+          'browser': browser,
+          'timeouts': {
+            'browserStart': 60000,
+            'scripts': 5000,
+            'pageLoad': 10000,
+            'pageCompleteCheck': 10000
+          }
         });
         return runner.start();
       });
@@ -77,7 +83,13 @@ describe('SeleniumRunner', function() {
     describe('#runScript - ' + browser, function() {
       beforeEach(function() {
         runner = new SeleniumRunner({
-          'browser': browser
+          'browser': browser,
+          'timeouts': {
+            'browserStart': 60000,
+            'scripts': 5000,
+            'pageLoad': 10000,
+            'pageCompleteCheck': 10000
+          }
         });
         return runner.start()
           .then(function() {
