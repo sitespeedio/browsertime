@@ -14,7 +14,7 @@ describe('chrome-perflog-parser', function() {
       let perflog = JSON.parse(fs.readFileSync(perflogFile, 'utf-8'));
       for (let logentry of perflog) {
         let event = parser.eventFromSeleniumLogEntry(logentry);
-        assert.notEqual(event, null);
+        assert.notEqual(event.message.params, null);
       }
     });
   });
@@ -26,11 +26,10 @@ describe('chrome-perflog-parser', function() {
 
       let perflog = JSON.parse(fs.readFileSync(perflogFile, 'utf-8'));
       let events = perflog.map((logentry) => parser.eventFromSeleniumLogEntry(logentry));
-      //fs.writeFileSync(path.resolve(datadir, 'events.json'), JSON.stringify(events, null, 2), 'utf8');
 
       let har = parser.harFromEvents(events);
-      assert.notEqual(har, null);
-      //fs.writeFileSync(path.resolve(datadir, 'har.har'), JSON.stringify(har, null, 2), 'utf8');
+      assert.equal(har.log.pages.length, 1);
+      assert.equal(har.log.entries.length, 48);
     });
   })
 });
