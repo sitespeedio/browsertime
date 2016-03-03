@@ -36,9 +36,9 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha",
-    "lint": "node_modules/eslint/bin/eslint.js .",
-    "generateDocs": "node_modules/sequencediagrams/lib/index.js doc/sequence-diagrams"
+    "test": "mocha",
+    "lint": "eslint .",
+    "generateDocs": "sequencediagrams docs/sequence-diagrams"
   },
   "name": "browsertime",
   "author": "Tobias Lidskog",
