@@ -26,17 +26,32 @@ function parseUserScripts(scripts) {
     {});
 }
 
+function loadPrePostTasks(tasks) {
+  return toArray(tasks).map((task) => {
+    try {
+      require(path.resolve(task));
+    } catch (e) {
+      throw new Error('Couldn\'t load task file: ' + task);
+    }
+  });
+}
+
 function run(url, options) {
   let dir = 'browsertime-results';
   if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
   }
 
-  if (options.preTask) {
-    options.preTask = toArray(options.preTask).map((task) => require(path.resolve(task)));
-  }
-  if (options.postTask) {
-    options.postTask = toArray(options.postTask).map((task) => require(path.resolve(task)));
+  try {
+    if (options.preTask) {
+      options.preTask = loadPrePostTasks(options.preTask);
+    }
+    if (options.postTask) {
+      options.postTask = loadPrePostTasks(options.postTask);
+    }
+  } catch (e) {
+    log.error(e.message);
+    process.exit(1);
   }
 
   let engine = new Engine(options);
