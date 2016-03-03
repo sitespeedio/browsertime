@@ -28,7 +28,7 @@ describe('#parseBrowserScripts', function() {
       .then((scriptsByCategory) => {
         const categoryNames = Object.keys(scriptsByCategory);
 
-        assert.deepEqual(categoryNames, ['browser', 'pageinfo', 'performance']);
+        assert.deepEqual(categoryNames, ['browser', 'pageinfo', 'timings']);
       });
   });
 });
