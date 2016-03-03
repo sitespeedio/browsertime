@@ -29,7 +29,7 @@ function parseUserScripts(scripts) {
 function loadPrePostTasks(tasks) {
   return toArray(tasks).map((task) => {
     try {
-      require(path.resolve(task));
+      return require(path.resolve(task));
     } catch (e) {
       throw new Error('Couldn\'t load task file: ' + task);
     }
