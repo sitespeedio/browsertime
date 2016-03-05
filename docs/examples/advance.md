@@ -7,11 +7,11 @@ browsertime https://www.sitespeed.io --script ~/browserscripts/scripts.js
 
 - The script option allows for a single file or a directory to be passed to gather custom values that will be available in the JSON output. An additional page will be created to cover this option in the future.
 
-browsertime https://www.sitespeed.io --preTask ~/browserscripts/preTask.js
+browsertime https://www.sitespeed.io --preTask test/preposttasks/preSample.js
 
 - You can pass in a file path to preTask you would like to executed arbitrary code before the tests begin. (Example: Login)
 
-browsertime https://www.sitespeed.io --postTask  ~/browserscripts/postTask.js
+browsertime https://www.sitespeed.io --preTask test/preposttasks/postSample.js
 
 - You can pass in a file path to postTask you would like to executed arbitrary code before the tests begin. (Example: Logout)
 
