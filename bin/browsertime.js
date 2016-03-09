@@ -93,7 +93,7 @@ function run(url, options) {
       }
 
       return Promise.all(saveOperations)
-        .then(() => log.info('Wrote har data to %s', resultsFolder));
+        .then(() => log.info('Wrote data to %s', resultsFolder));
     })
     .catch(function(e) {
       log.error('Error running browsertime', e);
