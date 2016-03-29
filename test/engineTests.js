@@ -203,6 +203,7 @@ describe('Engine', function() {
         engine = new Engine({
           'browser': browser,
           'iterations': 1,
+          'skipHar': true,
           'preTask': loadTaskFile('preSample.js'),
           'postTask': [loadTaskFile('postSample.js'), loadTaskFile('postSample2.js')]
         });
