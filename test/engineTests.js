@@ -23,10 +23,12 @@ describe('Engine', function() {
 
       beforeEach(function() {
         engine = new Engine({
-          'browser': browser,
-          'iterations': 2,
-          'delay': 17,
-          'experimental.nativeHar': true
+          browser: browser,
+          iterations: 2,
+          delay: 17,
+          experimental: {
+            nativeHar: true
+          }
         });
         return engine.start();
       });
@@ -88,9 +90,9 @@ describe('Engine', function() {
 
       beforeEach(function() {
         engine = new Engine({
-          'browser': browser,
-          'iterations': 1,
-          'skipHar': true
+          browser: browser,
+          iterations: 1,
+          skipHar: true
         });
         return engine.start();
       });
@@ -202,11 +204,11 @@ describe('Engine', function() {
 
       beforeEach(function() {
         engine = new Engine({
-          'browser': browser,
-          'iterations': 1,
-          'skipHar': true,
-          'preTask': loadTaskFile('preSample.js'),
-          'postTask': [loadTaskFile('postSample.js'), loadTaskFile('postSample2.js')]
+          browser: browser,
+          iterations: 1,
+          skipHar: true,
+          preTask: loadTaskFile('preSample.js'),
+          postTask: [loadTaskFile('postSample.js'), loadTaskFile('postSample2.js')]
         });
         return engine.start();
       });
