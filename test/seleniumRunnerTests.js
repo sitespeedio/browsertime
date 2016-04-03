@@ -139,5 +139,28 @@ describe('SeleniumRunner', function() {
           .timeout(10000, 'Waited for ' + browser + ' to quit for too long');
       });
     });
+
+    describe('#takeScreenshot - ' + browser, function() {
+      beforeEach(function() {
+        runner = new SeleniumRunner({
+          'browser': browser,
+          'timeouts': {
+            'browserStart': 60000,
+            'scripts': 5000,
+            'pageLoad': 10000,
+            'pageCompleteCheck': 10000
+          }
+        });
+        return runner.start()
+          .then(function() {
+            return runner.loadAndWait('http://httpbin.org/html');
+          });
+      });
+
+      it('should take a screen shot', function() {
+        return runner.takeScreenshot().should.eventually.be.an.instanceof(Buffer);
+      });
+    });
+
   });
 });
