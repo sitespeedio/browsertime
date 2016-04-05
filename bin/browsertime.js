@@ -7,9 +7,10 @@ let Engine = require('../').Engine,
   logging = require('../').logging,
   toArray = require('../lib/support/toArray'),
   cli = require('../lib/support/cli'),
-  fileNamer = require('../lib/support/fileNamer').fileNamer,
+  StorageManager = require('../lib/support/storageManager'),
   Promise = require('bluebird'),
   merge = require('lodash.merge'),
+  forEach = require('lodash.foreach'),
   fs = require('fs'),
   path = require('path'),
   log = require('intel');
@@ -38,7 +39,7 @@ function loadPrePostTasks(tasks) {
 
 function run(url, options) {
   let dir = 'browsertime-results';
-  if (!fs.existsSync(dir)){
+  if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir);
   }
 
@@ -70,30 +71,26 @@ function run(url, options) {
       (scriptsByCategory, userScripts) => merge(scriptsByCategory, userScripts));
   }
 
-  const indentation = options.prettyPrint ? 2 : 0;
-
   engine.start()
     .then(function() {
       return engine.run(url, scriptsByCategory);
     })
     .then(function(result) {
-      const namer = fileNamer();
       let saveOperations = [];
 
-      const resultsFolder = 'browsertime-results';
+      const storageManager = new StorageManager(url, options);
       if (result.browsertimeData) {
-        let browsertimeData = JSON.stringify(result.browsertimeData, null, indentation);
-        let jsonName = options.output || namer.getNameFromUrl(url, 'json');
-        saveOperations.push(fs.writeFileAsync(path.join(resultsFolder, jsonName), browsertimeData));
+        saveOperations.push(storageManager.writeJson('browsertime.json', result.browsertimeData));
       }
       if (result.har) {
-        let har = JSON.stringify(result.har, null, indentation);
-        let harName = options.har || namer.getNameFromUrl(url, 'har');
-        saveOperations.push(fs.writeFileAsync(path.join(resultsFolder, harName), har));
+        saveOperations.push(storageManager.writeJson('browsertime.har', result.har));
       }
+      forEach(result.extras, (value, key) =>
+        saveOperations.push(storageManager.writeData(key, value)));
 
       return Promise.all(saveOperations)
-        .then(() => log.info('Wrote data to %s', resultsFolder));
+        .then(() => log.info('Wrote data to %s',
+          path.relative(process.cwd(), storageManager.directory)));
     })
     .catch(function(e) {
       log.error('Error running browsertime', e);
