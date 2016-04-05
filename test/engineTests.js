@@ -35,11 +35,11 @@ describe('Engine', function() {
 
       it('should be able to load a url', function() {
         // somewhat clunky way to ignore generated har data in test.
-        let browsertimeData = engine.run('http://httpbin.org/html', {scripts})
+        let browserScripts = engine.run('http://httpbin.org/html', {scripts})
           .then(function(r) {
-            return r.browsertimeData;
+            return r.browserScripts;
           });
-        return browsertimeData.should.become([
+        return browserScripts.should.become([
           {
             scripts: {
               'foo': 'fff',
@@ -98,11 +98,11 @@ describe('Engine', function() {
       });
 
       it('should be able to run async script', function() {
-        let browsertimeData = engine.run('http://httpbin.org/html', {scripts: syncScripts}, {scripts: asyncScripts})
+        let browserScripts = engine.run('http://httpbin.org/html', {scripts: syncScripts}, {scripts: asyncScripts})
           .then(function(r) {
-            return r.browsertimeData;
+            return r.browserScripts;
           });
-        return browsertimeData.should.become([
+        return browserScripts.should.become([
           {
             scripts: {
               'foo': 'fff',
@@ -114,7 +114,7 @@ describe('Engine', function() {
       });
 
       it('should be able to run async fetch script', function() {
-        let browsertimeData = engine.run('http://examples.sitespeed.io/3.0/2014-12-15-22-16-30/', null, {
+        let browserScripts = engine.run('http://examples.sitespeed.io/3.0/2014-12-15-22-16-30/', null, {
             scripts: {
               stylesheets: `(function() {
             'use strict';
@@ -163,9 +163,9 @@ describe('Engine', function() {
             }
           })
           .then(function(r) {
-            return r.browsertimeData;
+            return r.browserScripts;
           });
-        return browsertimeData.should.become([
+        return browserScripts.should.become([
           {
             scripts: {
               stylesheets: [
