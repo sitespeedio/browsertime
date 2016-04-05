@@ -79,14 +79,16 @@ function run(url, options) {
       let saveOperations = [];
 
       const storageManager = new StorageManager(url, options);
-      if (result.browsertimeData) {
-        saveOperations.push(storageManager.writeJson('browsertime.json', result.browsertimeData));
+      if (result.browserScripts) {
+        saveOperations.push(storageManager.writeJson('browsertime.json', result.browserScripts));
       }
       if (result.har) {
         saveOperations.push(storageManager.writeJson('browsertime.har', result.har));
       }
       forEach(result.extras, (value, key) =>
         saveOperations.push(storageManager.writeData(key, value)));
+      forEach(result.screenshots, (value, index) =>
+        saveOperations.push(storageManager.writeData(`screenshot-${index}.png`, value)));
 
       return Promise.all(saveOperations)
         .then(() => log.info('Wrote data to %s',
