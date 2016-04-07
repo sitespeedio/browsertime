@@ -15,6 +15,10 @@ browsertime https://www.sitespeed.io -n 5
 
 - If you would like to override the default number of runs. It defaults to 3.
 
+browsertime https://www.sitespeed.io --screenshot
+
+- If you would like to capture screenshots during your run(s). It will capture a screenshot for each run.
+
 browsertime https://www.sitespeed.io -b chrome
 
 - If you would like to override the default browser used. Defaults to Firefox.
