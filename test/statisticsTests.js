@@ -88,6 +88,65 @@ describe('statistics', function() {
     });
   });
 
+  describe('#addDeep', function() {
+    it('should be possible to add a deep structure', function() {
+      stats.addDeep({
+        a: 1,
+        b: {
+          c: 2,
+          d: 3
+        }
+      });
+      stats.addDeep({
+        "userTimings": {
+          "marks": [
+            {
+              "name": "headerTime",
+              "startTime": 2457.125
+            },
+            {
+              "name": "logoTime",
+              "startTime": 2654.805
+            }
+          ],
+          "measures": []
+        }
+      }, (keyPath, value) => {
+        if (keyPath === 'userTimings.marks') {
+          return value.reduce((result, mark) => {
+            result[mark.name] = mark.startTime;
+            return result;
+          }, {});
+        } else if (keyPath === 'userTimings.measure') {
+          return value.reduce((result, mark) => {
+            result[mark.name] = mark.duration;
+            return result;
+          }, {});
+        }
+
+        return value;
+      });
+      stats.addDeep({
+        a: 3,
+        b: {
+          c: 2,
+          d: 1
+        }
+      });
+      stats.addDeep({
+        a: 2,
+        b: {
+          c: 2,
+          d: 2
+        }
+      });
+
+      let result = stats.summarizeDeep();
+      assert.deepEqual(result.a, result.b.d);
+      assert.equal(result.b.c.mean, result.b.d.mean);
+    });
+  });
+
   describe('#summarize', function() {
     it('should summarize correctly', function() {
       stats.addAll({

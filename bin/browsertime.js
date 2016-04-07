@@ -5,12 +5,13 @@
 let Engine = require('../').Engine,
   browserScripts = require('../lib/support/browserScript'),
   logging = require('../').logging,
-  toArray = require('../lib/support/toArray'),
+  util = require('../lib/support/util'),
   cli = require('../lib/support/cli'),
   StorageManager = require('../lib/support/storageManager'),
   Promise = require('bluebird'),
   merge = require('lodash.merge'),
   forEach = require('lodash.foreach'),
+  pick = require('lodash.pick'),
   fs = require('fs'),
   path = require('path'),
   log = require('intel');
@@ -28,7 +29,7 @@ function parseUserScripts(scripts) {
 }
 
 function loadPrePostTasks(tasks) {
-  return toArray(tasks).map((task) => {
+  return util.toArray(tasks).map((task) => {
     try {
       return require(path.resolve(task));
     } catch (e) {
@@ -79,8 +80,10 @@ function run(url, options) {
       let saveOperations = [];
 
       const storageManager = new StorageManager(url, options);
-      if (result.browserScripts) {
-        saveOperations.push(storageManager.writeJson('browsertime.json', result.browserScripts));
+
+      const btData = pick(result, ['info', 'browserScripts', 'statistics']);
+      if (!util.isEmpty(btData)) {
+        saveOperations.push(storageManager.writeJson('browsertime.json', btData));
       }
       if (result.har) {
         saveOperations.push(storageManager.writeJson('browsertime.har', result.har));
