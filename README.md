@@ -12,3 +12,5 @@ The 1.0 branch is to a large degree a re-write of the internal implementation, t
 based on learnings from the previous releases of Browsertime, and their use in Sitespeed.io. It's still lacking features
 from the 0.x releases, and the API is not final. However it should be a better foundation for future development, using
 more modern Javascript features and a much more extensive test suite.
+
+If you run into any issues getting started using Browsertime visit our [Issues Page](docs/issues.md) for some common issues and solutions.
