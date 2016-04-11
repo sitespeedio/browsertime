@@ -22,7 +22,7 @@ addons:
 before_install:
 - wget http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz
 - tar xvJf ffmpeg-release-64bit-static.tar.xz
-- export FFMPEG=$PWD/ffmpeg-3.0-64bit-static/ffmpeg
+- export PATH=$PWD/ffmpeg-3.0-64bit-static/ffmpeg:$PATH
 - git clone https://github.com/WPO-Foundation/visualmetrics.git
 - export VISUALMETRICS=$PWD/visualmetrics/visualmetrics.py
 - ffmpeg -version
