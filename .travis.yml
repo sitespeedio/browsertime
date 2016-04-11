@@ -20,9 +20,10 @@ addons:
     - google-chrome-stable
   firefox: latest
 before_install:
-- wget http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz
-- tar xvJf ffmpeg-release-64bit-static.tar.xz
-- export PATH=$PWD/ffmpeg-3.0.1-64bit-static/ffmpeg:$PATH
+- mkdir /tmp/ffmpeg
+- wget http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz -O /tmp/ffmpeg/download-ffmpeg.tar.xz
+- tar -xf /tmp/ffmpeg/download-ffmpeg.tar.xz -C /tmp/ffmpeg/ --strip=1
+- export PATH=/tmp/ffmpeg:$PATH
 - git clone https://github.com/WPO-Foundation/visualmetrics.git
 - export VISUALMETRICS=$PWD/visualmetrics/visualmetrics.py
 - ffmpeg -version
@@ -30,6 +31,7 @@ before_install:
 - google-chrome --product-version
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
+
 script:
 - npm run lint
 - npm test
