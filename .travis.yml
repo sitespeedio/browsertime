@@ -24,7 +24,7 @@ before_install:
 - mkdir /tmp/ffmpeg
 - wget http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz -O /tmp/ffmpeg/download-ffmpeg.tar.xz
 - tar -xf /tmp/ffmpeg/download-ffmpeg.tar.xz -C /tmp/ffmpeg/ --strip=1
-- export PATH=/tmp/ffmpeg:$PATH
+- export PATH=$PATH:/tmp/ffmpeg
 - git clone https://github.com/WPO-Foundation/visualmetrics.git
 - export VISUALMETRICS=$PWD/visualmetrics/visualmetrics.py
 - ffmpeg -version
