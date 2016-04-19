@@ -25,8 +25,6 @@ before_install:
 - wget http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz -O /tmp/ffmpeg/download-ffmpeg.tar.xz
 - tar -xf /tmp/ffmpeg/download-ffmpeg.tar.xz -C /tmp/ffmpeg/ --strip=1
 - export PATH=$PATH:/tmp/ffmpeg
-- git clone https://github.com/WPO-Foundation/visualmetrics.git
-- export VISUALMETRICS=$PWD/visualmetrics/visualmetrics.py
 - ffmpeg -version
 - firefox --version 2>/dev/null
 - google-chrome --product-version
