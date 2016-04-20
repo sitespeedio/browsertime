@@ -25,7 +25,9 @@ addons:
     - liblapack-dev
   firefox: latest
 before_install:
+- export PATH=$HOME/.local/bin:$PATH
 - sudo pip install --upgrade pip
+- pip --version
 - pip install --user pillow
 - pip install --user pyssim
 - mkdir /tmp/ffmpeg
