@@ -19,11 +19,22 @@ addons:
     packages:
     - g++-4.8
     - google-chrome-stable
-    - python-pip
-    # libblas-dev liblapack-dev needed for pyssim
-    - libblas-dev 
-    - liblapack-dev
-  firefox: latest
+    # packages for visual metrics
+    - ipython
+    - ipython-notebook 
+    - libjpeg-dev 
+    - python
+    - python-dev
+    - python-imaging
+    - python-numpy 
+    - python-scipy
+    - python-matplotlib
+    - python-pandas 
+    - python-pip 
+    - python-sympy 
+    - python-nose 
+    - xz-utils
+    firefox: latest
 before_install:
 - export PATH=$HOME/.local/bin:$PATH
 - pip install --user --upgrade pip
