@@ -36,7 +36,6 @@ addons:
     - xz-utils
     firefox: latest
 before_install:
-- export PATH=$HOME/.local/bin:$PATH
 - pip install --user --upgrade pip
 - pip --version
 - pip install --user Pillow
@@ -46,6 +45,8 @@ before_install:
 - tar -xf /tmp/ffmpeg/download-ffmpeg.tar.xz -C /tmp/ffmpeg/ --strip=1
 - export PATH=$PATH:/tmp/ffmpeg
 - ffmpeg -version
+- /usr/bin/python --version
+- python --version
 - firefox --version 2>/dev/null
 - google-chrome --product-version
 - export DISPLAY=:99.0
