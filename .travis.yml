@@ -47,6 +47,7 @@ before_install:
 - ffmpeg -version
 - /usr/bin/python --version
 - python --version
+- which python
 - firefox --version 2>/dev/null
 - google-chrome --product-version
 - export DISPLAY=:99.0
