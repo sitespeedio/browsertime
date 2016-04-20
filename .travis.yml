@@ -37,10 +37,12 @@ before_install:
 - ffmpeg -version
 - firefox --version 2>/dev/null
 - google-chrome --product-version
+./vendor/visualmetrics.py --check
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 
 script:
+- ./vendor/visualmetrics.py --check
 - npm run lint
 - npm test
 - node ./bin/browsertime.js -b firefox -n 2 --timeouts.browserStart=60000 http://www.browsertime.net --preTask test/preposttasks/preSample.js --postTask test/preposttasks/postSample2.js
