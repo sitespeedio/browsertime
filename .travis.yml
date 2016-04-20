@@ -26,10 +26,10 @@ addons:
   firefox: latest
 before_install:
 - export PATH=$HOME/.local/bin:$PATH
-- sudo pip install --upgrade pip
-- sudo pip --version
-- sudo pip install --user pillow
-- sudo pip install --user pyssim
+- pip install --user --upgrade pip
+- pip --version
+- pip install --user pillow
+- pip install --user pyssim
 - mkdir /tmp/ffmpeg
 - wget http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz -O /tmp/ffmpeg/download-ffmpeg.tar.xz
 - tar -xf /tmp/ffmpeg/download-ffmpeg.tar.xz -C /tmp/ffmpeg/ --strip=1
