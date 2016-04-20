@@ -20,6 +20,9 @@ addons:
     - g++-4.8
     - google-chrome-stable
     - python-pip
+    # libblas-dev liblapack-dev needed for pyssim
+    - libblas-dev 
+    - liblapack-dev
   firefox: latest
 before_install:
 - pip install --user pillow
