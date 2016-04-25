@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 """
 Copyright (c) 2014, Google Inc.
 All rights reserved.
@@ -950,6 +950,8 @@ def main():
                                                                  "sampling (to 10fps, 1fps, etc).")
     parser.add_argument('-k', '--perceptual', action='store_true', default=False,
                         help="Calculate perceptual Speed Index")
+    parser.add_argument('-j', '--json', action='store_true', default=False,
+                        help="Set output format to JSON")
 
     options = parser.parse_args()
 
@@ -1014,8 +1016,14 @@ def main():
 
                 if metrics is not None:
                     ok = True
-                    for metric in metrics:
-                        print "{0}: {1}".format(metric['name'], metric['value'])
+                    if options.json:
+                        data = dict()
+                        for metric in metrics:
+                            data[metric['name']] = metric['value']
+                        print json.dumps(data)
+                    else:
+                        for metric in metrics:
+                            print "{0}: {1}".format(metric['name'], metric['value'])
         else:
             ok = check_config()
     except Exception as e:
