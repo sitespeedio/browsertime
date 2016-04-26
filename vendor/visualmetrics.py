@@ -1019,7 +1019,7 @@ def main():
                     if options.json:
                         data = dict()
                         for metric in metrics:
-                            data[metric['name']] = metric['value']
+                            data[metric['name'].replace(' ', '')] = metric['value']
                         print json.dumps(data)
                     else:
                         for metric in metrics:
