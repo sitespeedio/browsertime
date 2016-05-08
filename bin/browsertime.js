@@ -59,8 +59,8 @@ function run(url, options) {
   let engine = new Engine(options);
 
   log.info('Running %s for url: %s', options.browser, url);
-  if (log.isEnabledFor(log.VERBOSE)) {
-    log.verbose('Running with options: %:2j', options);
+  if (log.isEnabledFor(log.DEBUG)) {
+    log.debug('Running with options: %:2j', options);
   }
 
   const scriptCategories = browserScripts.allScriptCategories;
@@ -102,7 +102,7 @@ function run(url, options) {
       throw e;
     })
     .finally(function() {
-      log.verbose('Stopping Browsertime');
+      log.debug('Stopping Browsertime');
       return engine.stop()
         .tap(() => {
           log.debug('Stopped Browsertime');
