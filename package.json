@@ -21,7 +21,7 @@
     "selenium-webdriver": "2.53.2",
     "tough-cookie": "2.2.2",
     "valid-url": "1.0.9",
-    "yargs": "4.6.0"
+    "yargs": "4.7.0"
   },
   "devDependencies": {
     "chai": "^3.4.0",
