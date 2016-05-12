@@ -25,10 +25,7 @@ describe('Engine', function() {
         engine = new Engine({
           browser: browser,
           iterations: 2,
-          delay: 17,
-          experimental: {
-            nativeHar: true
-          }
+          delay: 17
         });
         return engine.start();
       });

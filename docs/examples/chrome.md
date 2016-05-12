@@ -3,11 +3,11 @@ Chrome Examples
 
 This page shows a few of the options specific to Chrome.
 
-browsertime https://www.sitespeed.io --experimental.nativeHar -b chrome
+browsertime https://www.sitespeed.io -b chrome
 
 - Will use chrome's native performance logs to generate a HAR file.
 
-browsertime https://www.sitespeed.io --experimental.nativeHar --experimental.dumpChromePerflog -b chrome
+browsertime https://www.sitespeed.io --experimental.dumpChromePerflog -b chrome
 
 - Used for debugging  chrome's native HAR export you can have it additionally output the Chrome performance logs.
 
