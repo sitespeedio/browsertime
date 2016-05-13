@@ -21,18 +21,20 @@ addons:
     - google-chrome-stable
     # packages for visual metrics hepp
     - ipython
-    - ipython-notebook 
-    - libjpeg-dev 
+    - ipython-notebook
+    - libjpeg-dev
+    - libatlas-base-dev
+    - gfortran
     - python
     - python-dev
     - python-imaging
-    - python-numpy 
+    - python-numpy
     - python-scipy
     - python-matplotlib
-    - python-pandas 
-    - python-pip 
-    - python-sympy 
-    - python-nose 
+    - python-pandas
+    - python-pip
+    - python-sympy
+    - python-nose
     - xz-utils
   firefox: latest
 before_install:
