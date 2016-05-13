@@ -59,7 +59,7 @@ script:
 - npm test
 - node ./bin/browsertime.js -b firefox -n 2 --timeouts.browserStart=60000 http://www.browsertime.net --preTask test/preposttasks/preSample.js --postTask test/preposttasks/postSample2.js
 - node ./bin/browsertime.js -b chrome --skipHar -n 2 --timeouts.browserStart=60000 https://www.sitespeed.io
-- node ./bin/browsertime.js -b chrome --experimental.nativeHar -vv --viewPort=640x480 --experimental.video -n 1 https://www.sitespeed.io
+- node ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --experimental.video -n 1 https://www.sitespeed.io
 notifications:
   slack:
     secure: Bo/bgmtFVGj6I2XnkvERfGnoM+t73WQSsP5eMlGM0jhUSKPqIc7Hf2zjYil3amMY3awFnoA6prILcMBzyUURj3jc5VRsWBCf6aQZ3bM+xzAcuTMcoiAKS7Ru1HQj1WY8G7VycDWuNeF8dCT0kt2QhcSneAUQ0qqyclWjcOK22kw=
