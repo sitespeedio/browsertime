@@ -23,6 +23,8 @@ addons:
     - ipython
     - ipython-notebook 
     - libjpeg-dev 
+    - libatlas-base-dev
+    - gfortran
     - python
     - python-dev
     - python-imaging
