@@ -81,7 +81,7 @@ function run(url, options) {
 
       const storageManager = new StorageManager(url, options);
 
-      const btData = pick(result, ['info', 'browserScripts', 'statistics']);
+      const btData = pick(result, ['info', 'browserScripts', 'statistics', 'visualMetrics']);
       if (!util.isEmpty(btData)) {
         saveOperations.push(storageManager.writeJson('browsertime.json', btData));
       }
