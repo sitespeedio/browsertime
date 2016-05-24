@@ -7,7 +7,7 @@
     "baryton-saxophone": "2.53.0",
     "bluebird": "3.3.5",
     "browsermob-proxy-api": "0.3.1",
-    "cross-spawn-async": "2.2.2",
+    "cross-spawn": "3.0.1",
     "fast-stats": "0.0.3",
     "getport": "0.1.0",
     "hasbin": "1.2.1",

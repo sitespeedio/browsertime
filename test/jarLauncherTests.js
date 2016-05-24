@@ -1,8 +1,12 @@
 'use strict';
 
 let Launcher = require('../lib/support/jarLauncher'),
+  Promise = require('bluebird'),
   path = require('path'),
-  log = require('intel');
+  log = require('intel'),
+  getport = require('getport');
+
+getport = Promise.promisify(getport);
 
 describe('JarLauncher', function() {
   var launcher;
@@ -26,7 +30,8 @@ describe('JarLauncher', function() {
   });
 
   it('should launch bmp with args', function() {
-    return launcher.start(['-port', 8080])
+    return getport()
+      .then((port) => launcher.start(['-port', port]))
       .finally(function() {
         return launcher.stop();
       });
