@@ -80,13 +80,14 @@ function run(url, options) {
       let saveOperations = [];
 
       const storageManager = new StorageManager(url, options);
-
+      const harName = (options.har) ? (options.har) : 'browsertime';
+      const jsonName = (options.output) ? (options.output) : 'browsertime';
       const btData = pick(result, ['info', 'browserScripts', 'statistics', 'visualMetrics']);
       if (!util.isEmpty(btData)) {
-        saveOperations.push(storageManager.writeJson('browsertime.json', btData));
+        saveOperations.push(storageManager.writeJson(jsonName + '.json', btData));
       }
       if (result.har) {
-        saveOperations.push(storageManager.writeJson('browsertime.har', result.har));
+        saveOperations.push(storageManager.writeJson(harName + '.har', result.har));
       }
       forEach(result.extras, (value, key) =>
         saveOperations.push(storageManager.writeData(key, value)));
