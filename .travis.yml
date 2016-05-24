@@ -12,7 +12,8 @@ cache:
   directories:
     - node_modules
     - ffmpeg-2.1.3-64bit-static
-    - $HOME/.local/lib/python2.7/site-package
+    - $HOME/.local/lib/python2.7/site-packages
+    - /usr/local/lib/python2.7/site-packages
 addons:
   apt:
     sources:
