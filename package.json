@@ -4,7 +4,6 @@
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "alto-saxophone": "2.21.0",
-    "baryton-saxophone": "2.53.0",
     "bluebird": "3.4.0",
     "browsermob-proxy-api": "0.3.1",
     "cross-spawn": "3.0.1",
