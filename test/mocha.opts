@@ -2,5 +2,5 @@
 --reporter spec
 --retries 1
 --bail
---timeout 60s
+--timeout 120s
 --check-leaks
