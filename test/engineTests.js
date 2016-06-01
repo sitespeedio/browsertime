@@ -188,9 +188,9 @@ describe('Engine', function() {
       });
     });
 
-    describe('#pre/post tasks - ' + browser, function() {
+    describe('#pre/post scripts - ' + browser, function() {
       function loadTaskFile(file) {
-        return require(path.resolve(__dirname, 'preposttasks', file))
+        return require(path.resolve(__dirname, 'prepostscripts', file))
       }
 
       const scripts = {

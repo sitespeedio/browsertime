@@ -28,32 +28,10 @@ function parseUserScripts(scripts) {
     {});
 }
 
-function loadPrePostTasks(tasks) {
-  return util.toArray(tasks).map((task) => {
-    try {
-      return require(path.resolve(task));
-    } catch (e) {
-      throw new Error('Couldn\'t load task file: ' + task);
-    }
-  });
-}
-
 function run(url, options) {
   let dir = 'browsertime-results';
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir);
-  }
-
-  try {
-    if (options.preTask) {
-      options.preTask = loadPrePostTasks(options.preTask);
-    }
-    if (options.postTask) {
-      options.postTask = loadPrePostTasks(options.postTask);
-    }
-  } catch (e) {
-    log.error(e.message);
-    process.exit(1);
   }
 
   let engine = new Engine(options);
