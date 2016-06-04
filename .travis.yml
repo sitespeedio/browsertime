@@ -24,20 +24,20 @@ addons:
     - google-chrome-stable
     # packages for visual metrics
     - ipython
-    - ipython-notebook 
-    - libjpeg-dev 
+    - ipython-notebook
+    - libjpeg-dev
     - libatlas-base-dev
     - gfortran
     - python
     - python-dev
     - python-imaging
-    - python-numpy 
+    - python-numpy
     - python-scipy
     - python-matplotlib
-    - python-pandas 
-    - python-pip 
-    - python-sympy 
-    - python-nose 
+    - python-pandas
+    - python-pip
+    - python-sympy
+    - python-nose
     - xz-utils
   firefox: latest
 before_install:
@@ -65,7 +65,7 @@ script:
 - ./vendor/visualmetrics.py --check
 - npm run lint
 - npm test
-- node ./bin/browsertime.js -b firefox -n 2 --timeouts.browserStart=60000 http://www.browsertime.net --preTask test/preposttasks/preSample.js --postTask test/preposttasks/postSample2.js
+- node ./bin/browsertime.js -b firefox -n 2 --timeouts.browserStart=60000 http://www.browsertime.net --preTask test/prepostscripts/preSample.js --postTask test/prepostscripts/postSample2.js
 - node ./bin/browsertime.js -b chrome --skipHar -n 2 --timeouts.browserStart=60000 https://www.sitespeed.io
 - node ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --experimental.video -n 1 https://www.sitespeed.io
 notifications:
