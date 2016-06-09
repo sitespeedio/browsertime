@@ -6,7 +6,7 @@
     firstPaint = (loadTimes.firstPaintTime - loadTimes.requestTime) * 1000;
 
     if (firstPaint > 0) {
-      return firstPaint;
+      return Number(firstPaint.toFixed(0));
     }
   } else if (typeof timing.msFirstPaint === 'number') {
     firstPaint = timing.msFirstPaint - timing.navigationStart;

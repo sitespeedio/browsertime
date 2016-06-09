@@ -269,7 +269,7 @@
     dbg += 'Speed Index: ' + SpeedIndex + "\n";
     console.log(dbg);
     */
-    return SpeedIndex;
+    return Number(SpeedIndex.toFixed(0));
   };
   return RUMSpeedIndex()|| -1;
 })();
