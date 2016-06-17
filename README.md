@@ -13,4 +13,4 @@ based on learnings from the previous releases of Browsertime, and their use in S
 from the 0.x releases, and the API is not final. However it should be a better foundation for future development, using
 more modern Javascript features and a much more extensive test suite.
 
-If you run into any issues getting started using Browsertime visit our [Issues Page](docs/issues.md) for some common issues and solutions.
+If you would would like to get started there are a few examples that can be found in the [docs folder](docs/examples/README.md). If you run into any issues getting started using Browsertime visit our [Issues Page](docs/issues.md) for some common issues/solutions. If you still cannot resolve the problem and feel the issue is within browsertime feel free to open an issue.
