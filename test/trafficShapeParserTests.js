@@ -27,7 +27,7 @@ describe('traffic_shape_parser', function() {
 
       it('should return profile for ' + name, function() {
         let shapeConfig = parser.parseTrafficShapeConfig({
-          connectivity: name
+          connectivity: {profile: name}
         });
         shapeConfig.should.deep.equal(profile);
       });
@@ -35,7 +35,7 @@ describe('traffic_shape_parser', function() {
 
     it('should return null for "native" traffic shape config', function() {
       let shapeConfig = parser.parseTrafficShapeConfig({
-        connection: 'native'
+        connection: {profile: 'native'}
       });
       expect(shapeConfig).to.equal(null);
     });
