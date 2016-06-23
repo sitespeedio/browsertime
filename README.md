@@ -1,5 +1,8 @@
 # Browsertime - Your browser, your page, your scripts!
 
+
+![Browsertime](browsertime.png)
+
 Access the Web Performance Timeline, from your browser, in your terminal!
 
 Browsertime allows you to:
