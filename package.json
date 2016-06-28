@@ -46,7 +46,7 @@
     "fast-stats": "0.0.3",
     "getport": "0.1.0",
     "minimist": "^1.2.0",
-    "selenium-webdriver": "~2.47.0",
+    "selenium-webdriver": "~2.53.3",
     "valid-url": "1.0.9",
     "whereis": "^0.4.0",
     "winston": "^2.1.1"
