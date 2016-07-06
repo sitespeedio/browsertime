@@ -5,21 +5,21 @@ let parser = require('../lib/support/trafficShapeParser'),
 
 describe('traffic_shape_parser', function() {
   describe('#parseTrafficShapeConfig', function() {
-    // DIsable raw config for a while
-    /*
-    it('should not modify a specified raw connection config', function() {
-      let rawConfig = {
-        downstreamKbps: 42,
-        upstreamKbps: 18,
-        latency: 37
-      };
+
+
+    it('should convert the raw config', function() {
+      let rawConfig = "{\"downstreamKbps\": 42, \"upstreamKbps\": 18, \"latency\": 37}";
 
       let shapeConfig = parser.parseTrafficShapeConfig({
-        connectionRaw: rawConfig
+        connectivity: {
+          raw: rawConfig
+        }
       });
-      shapeConfig.should.deep.equal(rawConfig);
+      shapeConfig.downstreamKbps.should.equal(42);
+      shapeConfig.upstreamKbps.should.equal(18);
+      shapeConfig.latency.should.equal(37);
     });
-    */
+
     let profiles = parser.getProfiles();
 
     Object.keys(profiles).forEach(function(name) {
@@ -35,7 +35,7 @@ describe('traffic_shape_parser', function() {
 
     it('should return null for "native" traffic shape config', function() {
       let shapeConfig = parser.parseTrafficShapeConfig({
-        connection: {profile: 'native'}
+        connectivity: {profile: 'native'}
       });
       expect(shapeConfig).to.equal(null);
     });
