@@ -12,7 +12,7 @@ describe('traffic_shape_parser', function() {
 
       let shapeConfig = parser.parseTrafficShapeConfig({
         connectivity: {
-          raw: rawConfig
+          config: rawConfig
         }
       });
       shapeConfig.downstreamKbps.should.equal(42);
