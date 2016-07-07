@@ -14,7 +14,7 @@ describe('chrome-perflog-parser', function() {
       let perflog = JSON.parse(fs.readFileSync(perflogFile, 'utf-8'));
       for (let logentry of perflog) {
         let event = parser.eventFromSeleniumLogEntry(logentry);
-        assert.notEqual(event.message.params, null);
+        assert.notEqual(event.params, null);
       }
     });
   });
