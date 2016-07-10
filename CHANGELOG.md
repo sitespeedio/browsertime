@@ -1,7 +1,11 @@
 # Browsertime changelog
-Note that Browsertime doesn't follow semantic versioning just yet. Breaking changes may be introduced even in patch 
-releases, even though we try to avoid that. Once we're happy with the design and api we'll declare 1.0 and follow 
+Note that Browsertime doesn't follow semantic versioning just yet. Breaking changes may be introduced even in patch
+releases, even though we try to avoid that. Once we're happy with the design and api we'll declare 1.0 and follow
 semantic versioning after that.
+
+version 0.12.3
+------------------------
+* Upgraded Selenium to work with Firefox 47.0.1
 
 version 0.12.2
 ------------------------
@@ -9,7 +13,7 @@ version 0.12.2
 
 version 0.12.1
 ------------------------
-* Fix parsing of --headers and --connectionRaw options. Note that JSON strings needs to be properly quoted when 
+* Fix parsing of --headers and --connectionRaw options. Note that JSON strings needs to be properly quoted when
 passed on the command line, e.g. --headers '{"name":"value"}'
 
 version 0.12.0
@@ -31,7 +35,7 @@ version 0.10.1
 ------------------------
 * Bug fix: Show correct browser and version in the HAR file #90
 
-version 0.10.0 
+version 0.10.0
 ------------------------
 * Remove level prefix (e.g. info: ) from console log lines. Log files aren't affected.
 * Normalized Navigation Timing Data: All navigation timing metrics are now relative from Navigation start instead of using timestamps #88
