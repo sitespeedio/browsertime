@@ -39,7 +39,7 @@
     "jshint": "^2.8.0"
   },
   "dependencies": {
-    "async": "^1.5.2",
+    "async": "^2.0.0",
     "async-node-events": "git+https://github.com/joshuafcole/async-node-events.git#d32411f1f4",
     "browsermob-proxy-api": "^0.3.1",
     "cross-spawn-async": "^2.0.1",
