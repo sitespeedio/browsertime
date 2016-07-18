@@ -5,6 +5,8 @@
 
 Access the Web Performance Timeline, from your browser, in your terminal!
 
+Soon, really soon will we merge in [1.0](https://github.com/sitespeedio/browsertime/tree/1.0) into master, have a look there.
+
 Browsertime allows you to:
  1. Query timing data directly from the browser, to access [Navigation Timing](http://kaaes.github.io/timing/info.html), [User Timing](http://www.html5rocks.com/en/tutorials/webperformance/usertiming/),
 [Resource Timing](http://www.w3.org/TR/resource-timing/), first paint and [RUM Speed Index](https://github.com/WPO-Foundation/RUM-SpeedIndex).
