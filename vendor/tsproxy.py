@@ -17,9 +17,10 @@ limitations under the License.
 import asyncore
 import gc
 import logging
+import Queue
 import signal
 import socket
-import Queue
+import sys
 import threading
 import time
 
@@ -33,6 +34,10 @@ connections = {}
 dns_cache = {}
 port_mappings = None
 map_localhost = False
+needs_flush = False
+flush_pipes = False
+REMOVE_TCP_OVERHEAD = 1460.0 / 1500.0
+
 
 ########################################################################################################################
 #   Traffic-shaping pipe (just passthrough for now)
@@ -72,6 +77,7 @@ class TSPipe():
 
   def tick(self):
     global connections
+    global flush_pipes
     processed_messages = False
     now = time.clock()
     try:
@@ -86,8 +92,8 @@ class TSPipe():
 
       # process messages as long as the next message is sendable (latency or available bytes)
       while (self.next_message is not None) and\
-          (self.next_message['time'] <= now) and\
-          (self.kbps <= .0 or self.next_message['size'] <= self.available_bytes):
+          (flush_pipes or ((self.next_message['time'] <= now) and\
+                          (self.kbps <= .0 or self.next_message['size'] <= self.available_bytes))):
         processed_messages = True
         self.queue.task_done()
         connection_id = self.next_message['connection']
@@ -141,6 +147,7 @@ class AsyncDNS(threading.Thread):
       logging.info('[{0:d}] Resolving {1}:{2:d} Failed'.format(self.client_id, self.hostname, self.port))
     message = {'message': 'resolved', 'connection': self.client_id, 'addresses': addresses}
     self.result_pipe.SendMessage(message)
+
 
 ########################################################################################################################
 #   TCP Client
@@ -304,7 +311,8 @@ class Socks5Server(asyncore.dispatcher):
     try:
       #self.set_reuse_addr()
       self.bind((host, port))
-      self.listen(5)
+      self.listen(socket.SOMAXCONN)
+      self.ipaddr, self.port = self.getsockname()
       self.current_client_id = 0
     except:
       print "Unable to listen on {0}:{1}. Is the port already in use?".format(host, port)
@@ -505,6 +513,52 @@ class Socks5Connection(asyncore.dispatcher):
 
 
 ########################################################################################################################
+#   stdin command processor
+########################################################################################################################
+class CommandProcessor():
+  def __init__(self):
+    thread = threading.Thread(target = self.run, args=())
+    thread.daemon = True
+    thread.start()
+
+  def run(self):
+    global must_exit
+    while not must_exit:
+      for line in iter(sys.stdin.readline, ''):
+        self.ProcessCommand(line.strip())
+
+  def ProcessCommand(self, input):
+    global in_pipe
+    global out_pipe
+    global needs_flush
+    global REMOVE_TCP_OVERHEAD
+    if len(input):
+      command = input.split()
+      if len(command) and len(command[0]):
+        ok = False
+        if command[0].lower() == 'flush':
+          needs_flush = True
+          ok = True
+        elif len(command) >= 3 and command[0].lower() == 'set' and command[1].lower() == 'rtt' and len(command[2]):
+          rtt = float(command[2])
+          latency = rtt / 2000.0
+          in_pipe.latency = latency
+          out_pipe.latency = latency
+          needs_flush = True
+          ok = True
+        elif len(command) >= 3 and command[0].lower() == 'set' and command[1].lower() == 'inkbps' and len(command[2]):
+          in_pipe.kbps = float(command[2]) * REMOVE_TCP_OVERHEAD
+          needs_flush = True
+          ok = True
+        elif len(command) >= 3 and command[0].lower() == 'set' and command[1].lower() == 'outkbps' and len(command[2]):
+          out_pipe.kbps = float(command[2]) * REMOVE_TCP_OVERHEAD
+          needs_flush = True
+          ok = True
+        if not ok:
+          print 'ERROR'
+
+
+########################################################################################################################
 #   Main Entry Point
 ########################################################################################################################
 def main():
@@ -516,11 +570,12 @@ def main():
   global port_mappings
   global map_localhost
   import argparse
+  global REMOVE_TCP_OVERHEAD
   parser = argparse.ArgumentParser(description='Traffic-shaping socks5 proxy.',
                                    prog='tsproxy')
   parser.add_argument('-v', '--verbose', action='count', help="Increase verbosity (specify multiple times for more). -vvvv for full debug output.")
   parser.add_argument('-b', '--bind', default='localhost', help="Server interface address (defaults to localhost).")
-  parser.add_argument('-p', '--port', type=int, default=1080, help="Server port (defaults to 1080).")
+  parser.add_argument('-p', '--port', type=int, default=1080, help="Server port (defaults to 1080, use 0 for randomly assigned).")
   parser.add_argument('-r', '--rtt', type=float, default=.0, help="Round Trip Time Latency (in ms).")
   parser.add_argument('-i', '--inkbps', type=float, default=.0, help="Download Bandwidth (in 1000 bits/s - Kbps).")
   parser.add_argument('-o', '--outkbps', type=float, default=.0, help="Upload Bandwidth (in 1000 bits/s - Kbps).")
@@ -560,13 +615,13 @@ def main():
     dest_addresses = socket.getaddrinfo(options.desthost, GetDestPort(80))
 
   # Set up the pipes.  1/2 of the latency gets applied in each direction (and /1000 to convert to seconds)
-  REMOVE_TCP_OVERHEAD = 1460.0 / 1500.0
   in_pipe = TSPipe(TSPipe.PIPE_IN, options.rtt / 2000.0, options.inkbps * REMOVE_TCP_OVERHEAD)
   out_pipe = TSPipe(TSPipe.PIPE_OUT, options.rtt / 2000.0, options.outkbps * REMOVE_TCP_OVERHEAD)
 
   signal.signal(signal.SIGINT, signal_handler)
   server = Socks5Server(options.bind, options.port)
-  print 'Started Socks5 proxy server on {0}:{1:d}. Hit Ctrl-C to exit.'.format(options.bind, options.port)
+  command_processor = CommandProcessor()
+  print 'Started Socks5 proxy server on {0}:{1:d}\nHit Ctrl-C to exit.'.format(server.ipaddr, server.port)
   run_loop()
 
 def signal_handler(signal, frame):
@@ -575,23 +630,31 @@ def signal_handler(signal, frame):
   logging.error('Exiting...')
   must_exit = True
   del server
-  #sys.exit(0)
+
 
 # Wrapper around the asyncore loop that lets us poll the in/out pipes every 1ms
 def run_loop():
   global must_exit
   global in_pipe
   global out_pipe
+  global needs_flush
+  global flush_pipes
   gc_check_count = 0
   last_activity = time.clock()
   # disable gc to avoid pauses during traffic shaping/proxying
   gc.disable()
   while not must_exit:
     asyncore.poll(0.001, asyncore.socket_map)
+    if needs_flush:
+      flush_pipes = True
+      needs_flush = False
     if in_pipe.tick():
       last_activity = time.clock()
     if out_pipe.tick():
       last_activity = time.clock()
+    if flush_pipes:
+      print 'OK'
+      flush_pipes = False
     # Every 500 loops (~0.5 second) check to see if it is a good time to do a gc
     if gc_check_count > 1000:
       gc_check_count = 0
@@ -612,6 +675,7 @@ def GetDestPort(port):
     elif 'default' in port_mappings:
       return port_mappings['default']
   return port
+
 
 if '__main__' == __name__:
   main()
