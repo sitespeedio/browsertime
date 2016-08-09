@@ -316,13 +316,14 @@ class Socks5Server(asyncore.dispatcher):
     asyncore.dispatcher.__init__(self)
     self.create_socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
-      #self.set_reuse_addr()
+      self.set_reuse_addr()
       self.bind((host, port))
       self.listen(socket.SOMAXCONN)
       self.ipaddr, self.port = self.getsockname()
       self.current_client_id = 0
-    except:
+    except Exception as e:
       PrintMessage("Unable to listen on {0}:{1}. Is the port already in use?".format(host, port))
+      PrintMessage(e)
       exit(1)
 
   def handle_accept(self):
