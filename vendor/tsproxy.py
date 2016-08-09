@@ -321,8 +321,9 @@ class Socks5Server(asyncore.dispatcher):
       self.listen(socket.SOMAXCONN)
       self.ipaddr, self.port = self.getsockname()
       self.current_client_id = 0
-    except:
+    except Exception as e:
       PrintMessage("Unable to listen on {0}:{1}. Is the port already in use?".format(host, port))
+      PrintMessage(e)
       exit(1)
 
   def handle_accept(self):
