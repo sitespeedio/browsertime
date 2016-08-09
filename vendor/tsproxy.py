@@ -316,7 +316,7 @@ class Socks5Server(asyncore.dispatcher):
     asyncore.dispatcher.__init__(self)
     self.create_socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
-      #self.set_reuse_addr()
+      self.set_reuse_addr()
       self.bind((host, port))
       self.listen(socket.SOMAXCONN)
       self.ipaddr, self.port = self.getsockname()
