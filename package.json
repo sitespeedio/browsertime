@@ -19,7 +19,7 @@
     "mkdirp": "0.5.1",
     "moment": "2.14.1",
     "selenium-webdriver": "2.53.3",
-    "sltc": "0.1.0",
+    "sltc": "0.2.0",
     "tough-cookie": "2.2.2",
     "valid-url": "1.0.9",
     "yargs": "4.8.1"
