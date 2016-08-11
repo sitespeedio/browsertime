@@ -14,7 +14,7 @@ module.exports = {
           // password field. Just add you name and password and submit the form
           // For more docs, checkout the NodeJS Selenium version
           // http://selenium.googlecode.com/git/docs/api/javascript/index.html
-
+		console.log(context.webdriver);
           // before you start, make your username and password
           var userName = 'YOUR_USERNAME_HERE';
           var password = 'YOUR_PASSWORD_HERE';
