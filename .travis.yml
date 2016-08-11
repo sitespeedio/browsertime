@@ -66,7 +66,7 @@ script:
 - npm run lint
 - npm test
 - node ./bin/browsertime.js -b firefox -n 2 --timeouts.browserStart=60000 http://www.browsertime.net --preTask test/prepostscripts/preSample.js --postTask test/prepostscripts/postSample2.js --connectivity.profile cable --connectivity.engine tc
-- node ./bin/browsertime.js -b chrome --skipHar -n 2 --connectivity.profile cable --timeouts.browserStart=60000 https://www.sitespeed.io
+- node ./bin/browsertime.js -b chrome --skipHar -n 2 --connectivity.profile cable --timeouts.browserStart=60000 http://www.sitespeed.io
 - node ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --experimental.video -n 1 https://www.sitespeed.io
 notifications:
   slack:
