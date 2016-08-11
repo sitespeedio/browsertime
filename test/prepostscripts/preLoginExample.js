@@ -1,6 +1,4 @@
 'use strict';
-let webdriver = require('selenium-webdriver');
-
 /*
   Here's an example of how you can use a preTask to login the user
   and then measure/get metrics from pages as an authenticated user
@@ -20,10 +18,10 @@ module.exports = {
           // before you start, make your username and password
           var userName = 'YOUR_USERNAME_HERE';
           var password = 'YOUR_PASSWORD_HERE';
-          var loginForm = driver.findElement(webdriver.By.tagName('form'));
-          var loginInput = driver.findElement(webdriver.By.id('wpName1'));
+          var loginForm = driver.findElement(context.webdriver.By.tagName('form'));
+          var loginInput = driver.findElement(context.webdriver.By.id('wpName1'));
           loginInput.sendKeys(userName);
-          var passwordInput = driver.findElement(webdriver.By.id('wpPassword1'));
+          var passwordInput = driver.findElement(context.webdriver.By.id('wpPassword1'));
           passwordInput.sendKeys(password);
           loginForm.submit();
         });
