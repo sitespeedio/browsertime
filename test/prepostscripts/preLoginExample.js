@@ -14,14 +14,16 @@ module.exports = {
           // password field. Just add you name and password and submit the form
           // For more docs, checkout the NodeJS Selenium version
           // http://selenium.googlecode.com/git/docs/api/javascript/index.html
-		console.log(context.webdriver);
+
+          // we fetch the selenium webdriver from context
+          var webdriver = context.webdriver;
           // before you start, make your username and password
           var userName = 'YOUR_USERNAME_HERE';
           var password = 'YOUR_PASSWORD_HERE';
-          var loginForm = driver.findElement(context.webdriver.By.tagName('form'));
-          var loginInput = driver.findElement(context.webdriver.By.id('wpName1'));
+          var loginForm = driver.findElement(webdriver.By.tagName('form'));
+          var loginInput = driver.findElement(webdriver.By.id('wpName1'));
           loginInput.sendKeys(userName);
-          var passwordInput = driver.findElement(context.webdriver.By.id('wpPassword1'));
+          var passwordInput = driver.findElement(webdriver.By.id('wpPassword1'));
           passwordInput.sendKeys(password);
           loginForm.submit();
         });
