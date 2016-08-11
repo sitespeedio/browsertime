@@ -1,6 +1,4 @@
 'use strict';
-let webdriver = require('selenium-webdriver');
-
 /*
   Here's an example of how you can use a preTask to login the user
   and then measure/get metrics from pages as an authenticated user
@@ -17,6 +15,8 @@ module.exports = {
           // For more docs, checkout the NodeJS Selenium version
           // http://selenium.googlecode.com/git/docs/api/javascript/index.html
 
+          // we fetch the selenium webdriver from context
+          var webdriver = context.webdriver;
           // before you start, make your username and password
           var userName = 'YOUR_USERNAME_HERE';
           var password = 'YOUR_PASSWORD_HERE';
