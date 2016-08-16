@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.27",
   "bin": "./bin/browsertime.js",
   "dependencies": {
-    "alto-saxophone": "2.23.0",
+    "alto-saxophone": "2.23.1",
     "bluebird": "3.4.1",
     "cross-spawn": "4.0.0",
     "execa": "0.4.0",
