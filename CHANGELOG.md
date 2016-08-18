@@ -1,13 +1,11 @@
 # Browsertime changelog
 
-UNRELEASED
-------------------------
-The master is to a large degree a re-write of the internal implementation, the cli interface, and the node API. It's
-based on learnings from the previous releases of Browsertime, and their use in Sitespeed.io. It's still lacking some features
-from the 0.x releases, and the API is not final. However it should be a better foundation for future development, using
-more modern Javascript features and a much more extensive test suite.
 
-We plan to soon release 1.0 in beta.
+version 1.0-beta.1
+------------------------
+* This is the first beta of 1.0. 1.0 is a TOTAL rewrite from 0.12.3. We don't use BrowserMobProxy anymore (so you don't need Java). To get the HAR from Firefox we use the [HAR Export Trigger](https://github.com/firebug/har-export-trigger) and Chrome we parse the timeline log and generates the HAR file.
+
+* The beta-1 has no way of blocking requests, if you need that functionality you should wait with upgrading.
 
 version 0.12.3
 ------------------------
