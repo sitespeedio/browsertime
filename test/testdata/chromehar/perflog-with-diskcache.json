@@ -1,0 +1,374 @@
+[
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Page.frameStartedLoading\",\"params\":{\"frameId\":\"39190.2\"}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275080,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"39190.2\",\"initiator\":{\"type\":\"other\"},\"loaderId\":\"39190.8\",\"request\":{\"headers\":{\"Accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\",\"Upgrade-Insecure-Requests\":\"1\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36\"},\"initialPriority\":\"VeryHigh\",\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/\"},\"requestId\":\"39190.15\",\"timestamp\":74898.343266,\"type\":\"Document\",\"wallTime\":1457551275.07973}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275080,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"39190.2\",\"loaderId\":\"39190.8\",\"requestId\":\"39190.15\",\"response\":{\"connectionId\":49,\"connectionReused\":true,\"encodedDataLength\":-1,\"fromDiskCache\":false,\"fromServiceWorker\":false,\"headers\":{\"Age\":\"1\",\"Cache-Control\":\"max-age=600\",\"Connection\":\"keep-alive\",\"Content-Security-Policy\":\"default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://ssl.google-analytics.com; script-src 'self' 'unsafe-inline' https://ssl.google-analytics.com\",\"Date\":\"Wed, 09 Mar 2016 19:21:14 GMT\",\"Expires\":\"Wed, 09 Mar 2016 19:31:13 GMT\",\"Strict-Transport-Security\":\"max-age=31536000; preload\",\"Vary\":\"Accept-Encoding,User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"HIT\",\"X-Cache-Hits\":\"1\",\"X-Content-Type-Options\":\"nosniff\",\"X-Frame-Options\":\"DENY\",\"X-Served-By\":\"cache-ams4140-AMS\",\"X-XSS-Protection\":\"1; mode=block\"},\"headersText\":\"HTTP/1.1 304 Not Modified\\r\\nDate: Wed, 09 Mar 2016 19:21:14 GMT\\r\\nVia: 1.1 varnish\\r\\nCache-Control: max-age=600\\r\\nExpires: Wed, 09 Mar 2016 19:31:13 GMT\\r\\nAge: 1\\r\\nConnection: keep-alive\\r\\nX-Served-By: cache-ams4140-AMS\\r\\nX-Cache: HIT\\r\\nX-Cache-Hits: 1\\r\\nVary: Accept-Encoding,User-Agent\\r\\nContent-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://ssl.google-analytics.com; script-src 'self' 'unsafe-inline' https://ssl.google-analytics.com\\r\\nStrict-Transport-Security: max-age=31536000; preload\\r\\nX-Content-Type-Options: nosniff\\r\\nX-Frame-Options: DENY\\r\\nX-XSS-Protection: 1; mode=block\\r\\n\\r\\n\",\"mimeType\":\"text/html\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"23.235.43.69\",\"remotePort\":443,\"requestHeaders\":{\"Accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\",\"Accept-Encoding\":\"gzip, deflate, sdch\",\"Accept-Language\":\"en-US,en;q=0.8\",\"Cache-Control\":\"max-age=0\",\"Connection\":\"keep-alive\",\"Cookie\":\"__utmt=1; __utma=152498875.1612082311.1457551274.1457551274.1457551274.1; __utmb=152498875.1.10.1457551274; __utmc=152498875; __utmz=152498875.1457551274.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)\",\"Host\":\"www.sitespeed.io\",\"If-Modified-Since\":\"Thu, 25 Feb 2016 23:23:23 GMT\",\"Upgrade-Insecure-Requests\":\"1\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36\"},\"requestHeadersText\":\"GET / HTTP/1.1\\r\\nHost: www.sitespeed.io\\r\\nConnection: keep-alive\\r\\nCache-Control: max-age=0\\r\\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\\r\\nUpgrade-Insecure-Requests: 1\\r\\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36\\r\\nAccept-Encoding: gzip, deflate, sdch\\r\\nAccept-Language: en-US,en;q=0.8\\r\\nCookie: __utmt=1; __utma=152498875.1612082311.1457551274.1457551274.1457551274.1; __utmb=152498875.1.10.1457551274; __utmc=152498875; __utmz=152498875.1457551274.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)\\r\\nIf-Modified-Since: Thu, 25 Feb 2016 23:23:23 GMT\\r\\n\\r\\n\",\"securityDetails\":{\"certificateId\":1,\"cipher\":\"AES_128_GCM\",\"keyExchange\":\"ECDHE_RSA\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"secure\",\"status\":304,\"statusText\":\"Not Modified\",\"timing\":{\"connectEnd\":-1,\"connectStart\":-1,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":142.252999998163,\"requestTime\":74898.343959,\"sendEnd\":0.937999997404404,\"sendStart\":0.875999990967102,\"sslEnd\":-1,\"sslStart\":-1,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/\"},\"timestamp\":74898.486838,\"type\":\"Document\"}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275223,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":26352,\"encodedDataLength\":620,\"requestId\":\"39190.15\",\"timestamp\":74898.487249}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275234,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFailed\",\"params\":{\"canceled\":true,\"errorText\":\"\",\"requestId\":\"39190.14\",\"timestamp\":74898.487899,\"type\":\"Other\"}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275234,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Page.frameNavigated\",\"params\":{\"frame\":{\"id\":\"39190.2\",\"loaderId\":\"39190.8\",\"mimeType\":\"text/html\",\"securityOrigin\":\"https://www.sitespeed.io\",\"url\":\"https://www.sitespeed.io/\"}}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275234,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":620,\"requestId\":\"39190.15\",\"timestamp\":74898.486864}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275234,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"39190.2\",\"initiator\":{\"lineNumber\":1,\"type\":\"parser\",\"url\":\"https://www.sitespeed.io/\"},\"loaderId\":\"39190.8\",\"request\":{\"headers\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36\"},\"initialPriority\":\"VeryLow\",\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/img/sitespeed-logo-2c.png\"},\"requestId\":\"39190.16\",\"timestamp\":74898.495252,\"type\":\"Other\",\"wallTime\":1457551275.23171}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275236,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"39190.2\",\"initiator\":{\"lineNumber\":1,\"type\":\"parser\",\"url\":\"https://www.sitespeed.io/\"},\"loaderId\":\"39190.8\",\"request\":{\"headers\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36\"},\"initialPriority\":\"VeryLow\",\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/img/sitespeed.io-logo-large2.png\"},\"requestId\":\"39190.17\",\"timestamp\":74898.495343,\"type\":\"Other\",\"wallTime\":1457551275.2318}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275236,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"39190.2\",\"initiator\":{\"lineNumber\":3,\"type\":\"parser\",\"url\":\"https://www.sitespeed.io/\"},\"loaderId\":\"39190.8\",\"request\":{\"headers\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36\"},\"initialPriority\":\"VeryLow\",\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/img/GitHub-Mark-64px.png\"},\"requestId\":\"39190.18\",\"timestamp\":74898.495432,\"type\":\"Other\",\"wallTime\":1457551275.23189}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275236,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"39190.2\",\"initiator\":{\"lineNumber\":3,\"type\":\"parser\",\"url\":\"https://www.sitespeed.io/\"},\"loaderId\":\"39190.8\",\"request\":{\"headers\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36\"},\"initialPriority\":\"VeryLow\",\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/img/star3.png\"},\"requestId\":\"39190.19\",\"timestamp\":74898.495515,\"type\":\"Other\",\"wallTime\":1457551275.23197}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275236,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"39190.2\",\"initiator\":{\"lineNumber\":3,\"type\":\"parser\",\"url\":\"https://www.sitespeed.io/\"},\"loaderId\":\"39190.8\",\"request\":{\"headers\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36\"},\"initialPriority\":\"VeryLow\",\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/img/dashboard.png\"},\"requestId\":\"39190.20\",\"timestamp\":74898.495603,\"type\":\"Other\",\"wallTime\":1457551275.23206}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275236,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"39190.2\",\"initiator\":{\"lineNumber\":3,\"type\":\"parser\",\"url\":\"https://www.sitespeed.io/\"},\"loaderId\":\"39190.8\",\"request\":{\"headers\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36\"},\"initialPriority\":\"VeryLow\",\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/img/perfbudget.png\"},\"requestId\":\"39190.21\",\"timestamp\":74898.49567,\"type\":\"Other\",\"wallTime\":1457551275.23213}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275236,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"39190.2\",\"initiator\":{\"lineNumber\":3,\"type\":\"parser\",\"url\":\"https://www.sitespeed.io/\"},\"loaderId\":\"39190.8\",\"request\":{\"headers\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36\"},\"initialPriority\":\"VeryLow\",\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/img/twitter64.png\"},\"requestId\":\"39190.22\",\"timestamp\":74898.495754,\"type\":\"Other\",\"wallTime\":1457551275.23221}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275236,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"39190.2\",\"initiator\":{\"lineNumber\":3,\"type\":\"parser\",\"url\":\"https://www.sitespeed.io/\"},\"loaderId\":\"39190.8\",\"request\":{\"headers\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36\"},\"initialPriority\":\"VeryLow\",\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/img/black-logo-120.png\"},\"requestId\":\"39190.23\",\"timestamp\":74898.495822,\"type\":\"Other\",\"wallTime\":1457551275.23228}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275236,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"39190.2\",\"initiator\":{\"lineNumber\":3,\"type\":\"parser\",\"url\":\"https://www.sitespeed.io/\"},\"loaderId\":\"39190.8\",\"request\":{\"headers\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36\"},\"initialPriority\":\"VeryLow\",\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/img/fastly2.png\"},\"requestId\":\"39190.24\",\"timestamp\":74898.495904,\"type\":\"Other\",\"wallTime\":1457551275.23236}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275236,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"39190.2\",\"initiator\":{\"stackTrace\":[{\"columnNumber\":17205,\"functionName\":\"\",\"lineNumber\":1,\"scriptId\":\"58\",\"url\":\"https://www.sitespeed.io/\"},{\"columnNumber\":17228,\"functionName\":\"\",\"lineNumber\":1,\"scriptId\":\"58\",\"url\":\"https://www.sitespeed.io/\"}],\"type\":\"script\"},\"loaderId\":\"39190.8\",\"request\":{\"headers\":{\"Accept\":\"*/*\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36\"},\"initialPriority\":\"Low\",\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://ssl.google-analytics.com/ga.js\"},\"requestId\":\"39190.25\",\"timestamp\":74898.499279,\"type\":\"Other\",\"wallTime\":1457551275.23574}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275236,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"39190.2\",\"loaderId\":\"39190.8\",\"requestId\":\"39190.16\",\"response\":{\"connectionId\":0,\"connectionReused\":false,\"encodedDataLength\":-1,\"fromDiskCache\":true,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"0\",\"Cache-Control\":\"max-age=31536000, public, public, must-revalidate, proxy-revalidate\",\"Content-Length\":\"3717\",\"Content-Security-Policy\":\"default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://ssl.google-analytics.com; script-src 'self' 'unsafe-inline' https://ssl.google-analytics.com\",\"Content-Type\":\"image/png\",\"Date\":\"Wed, 09 Mar 2016 19:21:13 GMT\",\"Expires\":\"Thu, 09 Mar 2017 19:21:13 GMT\",\"Last-Modified\":\"Thu, 25 Feb 2016 23:23:07 GMT\",\"Pragma\":\"public\",\"Server\":\"nginx/1.8.1\",\"Vary\":\"User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"MISS\",\"X-Cache-Hits\":\"0\",\"X-Content-Type-Options\":\"nosniff\",\"X-Frame-Options\":\"DENY\",\"X-Served-By\":\"cache-ams4137-AMS\",\"X-XSS-Protection\":\"1; mode=block\"},\"mimeType\":\"image/png\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"23.235.43.69\",\"remotePort\":443,\"securityDetails\":{\"certificateId\":1,\"cipher\":\"AES_128_GCM\",\"keyExchange\":\"ECDHE_RSA\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"secure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":-1,\"connectStart\":-1,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":1.63300000713207,\"requestTime\":74898.495428,\"sendEnd\":0.118000010843389,\"sendStart\":0.118000010843389,\"sslEnd\":-1,\"sslStart\":-1,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/img/sitespeed-logo-2c.png\"},\"timestamp\":74898.499726,\"type\":\"Image\"}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275236,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"39190.2\",\"loaderId\":\"39190.8\",\"requestId\":\"39190.17\",\"response\":{\"connectionId\":0,\"connectionReused\":false,\"encodedDataLength\":-1,\"fromDiskCache\":true,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"0\",\"Cache-Control\":\"max-age=31536000, public, public, must-revalidate, proxy-revalidate\",\"Content-Length\":\"14113\",\"Content-Security-Policy\":\"default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://ssl.google-analytics.com; script-src 'self' 'unsafe-inline' https://ssl.google-analytics.com\",\"Content-Type\":\"image/png\",\"Date\":\"Wed, 09 Mar 2016 19:21:14 GMT\",\"Expires\":\"Thu, 09 Mar 2017 19:21:13 GMT\",\"Last-Modified\":\"Thu, 25 Feb 2016 23:23:12 GMT\",\"Pragma\":\"public\",\"Server\":\"nginx/1.8.1\",\"Vary\":\"User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"MISS\",\"X-Cache-Hits\":\"0\",\"X-Content-Type-Options\":\"nosniff\",\"X-Frame-Options\":\"DENY\",\"X-Served-By\":\"cache-ams4122-AMS\",\"X-XSS-Protection\":\"1; mode=block\"},\"mimeType\":\"image/png\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"23.235.43.69\",\"remotePort\":443,\"securityDetails\":{\"certificateId\":1,\"cipher\":\"AES_128_GCM\",\"keyExchange\":\"ECDHE_RSA\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"secure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":-1,\"connectStart\":-1,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":1.98200000158977,\"requestTime\":74898.495517,\"sendEnd\":0.075999996624887,\"sendStart\":0.075999996624887,\"sslEnd\":-1,\"sslStart\":-1,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/img/sitespeed.io-logo-large2.png\"},\"timestamp\":74898.499907,\"type\":\"Image\"}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275237,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"39190.2\",\"loaderId\":\"39190.8\",\"requestId\":\"39190.18\",\"response\":{\"connectionId\":0,\"connectionReused\":false,\"encodedDataLength\":-1,\"fromDiskCache\":true,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"0\",\"Cache-Control\":\"max-age=31536000, public, public, must-revalidate, proxy-revalidate\",\"Content-Length\":\"514\",\"Content-Security-Policy\":\"default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://ssl.google-analytics.com; script-src 'self' 'unsafe-inline' https://ssl.google-analytics.com\",\"Content-Type\":\"image/png\",\"Date\":\"Wed, 09 Mar 2016 19:21:14 GMT\",\"Expires\":\"Thu, 09 Mar 2017 19:21:14 GMT\",\"Last-Modified\":\"Thu, 25 Feb 2016 23:22:44 GMT\",\"Pragma\":\"public\",\"Server\":\"nginx/1.8.1\",\"Vary\":\"User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"MISS\",\"X-Cache-Hits\":\"0\",\"X-Content-Type-Options\":\"nosniff\",\"X-Frame-Options\":\"DENY\",\"X-Served-By\":\"cache-ams4140-AMS\",\"X-XSS-Protection\":\"1; mode=block\"},\"mimeType\":\"image/png\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"23.235.43.69\",\"remotePort\":443,\"securityDetails\":{\"certificateId\":1,\"cipher\":\"AES_128_GCM\",\"keyExchange\":\"ECDHE_RSA\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"secure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":-1,\"connectStart\":-1,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":2.33400000433903,\"requestTime\":74898.495627,\"sendEnd\":0.0710000022081658,\"sendStart\":0.0710000022081658,\"sslEnd\":-1,\"sslStart\":-1,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/img/GitHub-Mark-64px.png\"},\"timestamp\":74898.500032,\"type\":\"Image\"}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275237,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"39190.2\",\"loaderId\":\"39190.8\",\"requestId\":\"39190.19\",\"response\":{\"connectionId\":0,\"connectionReused\":false,\"encodedDataLength\":-1,\"fromDiskCache\":true,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"0\",\"Cache-Control\":\"max-age=31536000, public, public, must-revalidate, proxy-revalidate\",\"Content-Length\":\"492\",\"Content-Security-Policy\":\"default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://ssl.google-analytics.com; script-src 'self' 'unsafe-inline' https://ssl.google-analytics.com\",\"Content-Type\":\"image/png\",\"Date\":\"Wed, 09 Mar 2016 19:21:14 GMT\",\"Expires\":\"Thu, 09 Mar 2017 19:21:14 GMT\",\"Last-Modified\":\"Thu, 25 Feb 2016 23:23:13 GMT\",\"Pragma\":\"public\",\"Server\":\"nginx/1.8.1\",\"Vary\":\"User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"MISS\",\"X-Cache-Hits\":\"0\",\"X-Content-Type-Options\":\"nosniff\",\"X-Frame-Options\":\"DENY\",\"X-Served-By\":\"cache-ams4126-AMS\",\"X-XSS-Protection\":\"1; mode=block\"},\"mimeType\":\"image/png\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"23.235.43.69\",\"remotePort\":443,\"securityDetails\":{\"certificateId\":1,\"cipher\":\"AES_128_GCM\",\"keyExchange\":\"ECDHE_RSA\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"secure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":-1,\"connectStart\":-1,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":2.63500001165085,\"requestTime\":74898.495772,\"sendEnd\":0.0980000040726736,\"sendStart\":0.0980000040726736,\"sslEnd\":-1,\"sslStart\":-1,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/img/star3.png\"},\"timestamp\":74898.500182,\"type\":\"Image\"}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275237,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"39190.2\",\"loaderId\":\"39190.8\",\"requestId\":\"39190.20\",\"response\":{\"connectionId\":0,\"connectionReused\":false,\"encodedDataLength\":-1,\"fromDiskCache\":true,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"0\",\"Cache-Control\":\"max-age=31536000, public, public, must-revalidate, proxy-revalidate\",\"Content-Length\":\"59183\",\"Content-Security-Policy\":\"default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://ssl.google-analytics.com; script-src 'self' 'unsafe-inline' https://ssl.google-analytics.com\",\"Content-Type\":\"image/png\",\"Date\":\"Wed, 09 Mar 2016 19:21:14 GMT\",\"Expires\":\"Thu, 09 Mar 2017 19:21:14 GMT\",\"Last-Modified\":\"Thu, 25 Feb 2016 23:22:42 GMT\",\"Pragma\":\"public\",\"Server\":\"nginx/1.8.1\",\"Vary\":\"User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"MISS\",\"X-Cache-Hits\":\"0\",\"X-Content-Type-Options\":\"nosniff\",\"X-Frame-Options\":\"DENY\",\"X-Served-By\":\"cache-ams4134-AMS\",\"X-XSS-Protection\":\"1; mode=block\"},\"mimeType\":\"image/png\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"23.235.43.69\",\"remotePort\":443,\"securityDetails\":{\"certificateId\":1,\"cipher\":\"AES_128_GCM\",\"keyExchange\":\"ECDHE_RSA\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"secure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":-1,\"connectStart\":-1,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":2.88499999442138,\"requestTime\":74898.495878,\"sendEnd\":0.0770000042393804,\"sendStart\":0.0770000042393804,\"sslEnd\":-1,\"sslStart\":-1,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/img/dashboard.png\"},\"timestamp\":74898.500318,\"type\":\"Image\"}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275237,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"39190.2\",\"loaderId\":\"39190.8\",\"requestId\":\"39190.21\",\"response\":{\"connectionId\":0,\"connectionReused\":false,\"encodedDataLength\":-1,\"fromDiskCache\":true,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"0\",\"Cache-Control\":\"max-age=31536000, public, public, must-revalidate, proxy-revalidate\",\"Content-Length\":\"71179\",\"Content-Security-Policy\":\"default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://ssl.google-analytics.com; script-src 'self' 'unsafe-inline' https://ssl.google-analytics.com\",\"Content-Type\":\"image/png\",\"Date\":\"Wed, 09 Mar 2016 19:21:14 GMT\",\"Expires\":\"Thu, 09 Mar 2017 19:21:13 GMT\",\"Last-Modified\":\"Thu, 25 Feb 2016 23:23:02 GMT\",\"Pragma\":\"public\",\"Server\":\"nginx/1.8.1\",\"Vary\":\"User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"MISS\",\"X-Cache-Hits\":\"0\",\"X-Content-Type-Options\":\"nosniff\",\"X-Frame-Options\":\"DENY\",\"X-Served-By\":\"cache-ams4140-AMS\",\"X-XSS-Protection\":\"1; mode=block\"},\"mimeType\":\"image/png\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"23.235.43.69\",\"remotePort\":443,\"securityDetails\":{\"certificateId\":1,\"cipher\":\"AES_128_GCM\",\"keyExchange\":\"ECDHE_RSA\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"secure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":-1,\"connectStart\":-1,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":3.15699999919161,\"requestTime\":74898.495971,\"sendEnd\":0.0770000042393804,\"sendStart\":0.0770000042393804,\"sslEnd\":-1,\"sslStart\":-1,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/img/perfbudget.png\"},\"timestamp\":74898.501645,\"type\":\"Image\"}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275238,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Page.domContentEventFired\",\"params\":{\"timestamp\":74898.503584}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275240,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":3717,\"encodedDataLength\":0,\"requestId\":\"39190.16\",\"timestamp\":74898.503666}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275240,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":0,\"requestId\":\"39190.16\",\"timestamp\":74898.499782}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275240,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":14113,\"encodedDataLength\":0,\"requestId\":\"39190.17\",\"timestamp\":74898.503888}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275240,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":0,\"requestId\":\"39190.17\",\"timestamp\":74898.500016}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275240,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":514,\"encodedDataLength\":0,\"requestId\":\"39190.18\",\"timestamp\":74898.504091}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275240,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":0,\"requestId\":\"39190.18\",\"timestamp\":74898.50022}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275240,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":492,\"encodedDataLength\":0,\"requestId\":\"39190.19\",\"timestamp\":74898.504267}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275240,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":0,\"requestId\":\"39190.19\",\"timestamp\":74898.500395}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275240,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":32768,\"encodedDataLength\":0,\"requestId\":\"39190.20\",\"timestamp\":74898.504413}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275241,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":32768,\"encodedDataLength\":0,\"requestId\":\"39190.21\",\"timestamp\":74898.50451}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275241,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":26415,\"encodedDataLength\":0,\"requestId\":\"39190.20\",\"timestamp\":74898.504577}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275241,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":0,\"requestId\":\"39190.20\",\"timestamp\":74898.501186}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275241,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":32768,\"encodedDataLength\":0,\"requestId\":\"39190.21\",\"timestamp\":74898.507119}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275243,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":5643,\"encodedDataLength\":0,\"requestId\":\"39190.21\",\"timestamp\":74898.50721}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275243,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":0,\"requestId\":\"39190.21\",\"timestamp\":74898.501653}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275243,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"39190.2\",\"loaderId\":\"39190.8\",\"requestId\":\"39190.25\",\"response\":{\"connectionId\":0,\"connectionReused\":false,\"encodedDataLength\":-1,\"fromDiskCache\":true,\"fromServiceWorker\":false,\"headers\":{\"age\":\"4265\",\"alt-svc\":\"quic=\\\":443\\\"; ma=2592000; v=\\\"31,30,29,28,27,26,25\\\"\",\"alternate-protocol\":\"443:quic,p=1\",\"cache-control\":\"public, max-age=7200\",\"content-encoding\":\"gzip\",\"content-length\":\"16022\",\"content-type\":\"text/javascript\",\"date\":\"Wed, 09 Mar 2016 18:10:08 GMT\",\"expires\":\"Wed, 09 Mar 2016 20:10:08 GMT\",\"last-modified\":\"Thu, 04 Feb 2016 00:31:28 GMT\",\"server\":\"Golfe2\",\"status\":\"200\",\"vary\":\"Accept-Encoding\",\"x-content-type-options\":\"nosniff\"},\"mimeType\":\"text/javascript\",\"protocol\":\"h2\",\"remoteIPAddress\":\"172.217.18.136\",\"remotePort\":443,\"securityDetails\":{\"certificateId\":2,\"cipher\":\"AES_128_GCM\",\"keyExchange\":\"ECDHE_RSA\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"secure\",\"status\":200,\"statusText\":\"\",\"timing\":{\"connectEnd\":-1,\"connectStart\":-1,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":2.30700000247452,\"requestTime\":74898.499432,\"sendEnd\":0.119999996968545,\"sendStart\":0.119999996968545,\"sslEnd\":-1,\"sslStart\":-1,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://ssl.google-analytics.com/ga.js\"},\"timestamp\":74898.507571,\"type\":\"Script\"}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275244,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"39190.2\",\"loaderId\":\"39190.8\",\"requestId\":\"39190.22\",\"response\":{\"connectionId\":0,\"connectionReused\":false,\"encodedDataLength\":-1,\"fromDiskCache\":true,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"0\",\"Cache-Control\":\"max-age=31536000, public, public, must-revalidate, proxy-revalidate\",\"Content-Length\":\"517\",\"Content-Security-Policy\":\"default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://ssl.google-analytics.com; script-src 'self' 'unsafe-inline' https://ssl.google-analytics.com\",\"Content-Type\":\"image/png\",\"Date\":\"Wed, 09 Mar 2016 19:21:14 GMT\",\"Expires\":\"Thu, 09 Mar 2017 19:21:14 GMT\",\"Last-Modified\":\"Thu, 25 Feb 2016 23:23:22 GMT\",\"Pragma\":\"public\",\"Server\":\"nginx/1.8.1\",\"Vary\":\"User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"MISS\",\"X-Cache-Hits\":\"0\",\"X-Content-Type-Options\":\"nosniff\",\"X-Frame-Options\":\"DENY\",\"X-Served-By\":\"cache-ams4137-AMS\",\"X-XSS-Protection\":\"1; mode=block\"},\"mimeType\":\"image/png\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"23.235.43.69\",\"remotePort\":443,\"securityDetails\":{\"certificateId\":1,\"cipher\":\"AES_128_GCM\",\"keyExchange\":\"ECDHE_RSA\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"secure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":-1,\"connectStart\":-1,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":1.66900000476744,\"requestTime\":74898.500351,\"sendEnd\":0.151000000187196,\"sendStart\":0.151000000187196,\"sslEnd\":-1,\"sslStart\":-1,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/img/twitter64.png\"},\"timestamp\":74898.507708,\"type\":\"Image\"}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275244,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"39190.2\",\"loaderId\":\"39190.8\",\"requestId\":\"39190.23\",\"response\":{\"connectionId\":0,\"connectionReused\":false,\"encodedDataLength\":-1,\"fromDiskCache\":true,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"0\",\"Cache-Control\":\"max-age=31536000, public, public, must-revalidate, proxy-revalidate\",\"Content-Length\":\"1678\",\"Content-Security-Policy\":\"default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://ssl.google-analytics.com; script-src 'self' 'unsafe-inline' https://ssl.google-analytics.com\",\"Content-Type\":\"image/png\",\"Date\":\"Wed, 09 Mar 2016 19:21:14 GMT\",\"Expires\":\"Thu, 09 Mar 2017 19:21:14 GMT\",\"Last-Modified\":\"Thu, 25 Feb 2016 23:22:40 GMT\",\"Pragma\":\"public\",\"Server\":\"nginx/1.8.1\",\"Vary\":\"User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"MISS\",\"X-Cache-Hits\":\"0\",\"X-Content-Type-Options\":\"nosniff\",\"X-Frame-Options\":\"DENY\",\"X-Served-By\":\"cache-ams4140-AMS\",\"X-XSS-Protection\":\"1; mode=block\"},\"mimeType\":\"image/png\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"23.235.43.69\",\"remotePort\":443,\"securityDetails\":{\"certificateId\":1,\"cipher\":\"AES_128_GCM\",\"keyExchange\":\"ECDHE_RSA\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"secure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":-1,\"connectStart\":-1,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":1.85900001088157,\"requestTime\":74898.500561,\"sendEnd\":0.116000010166317,\"sendStart\":0.116000010166317,\"sslEnd\":-1,\"sslStart\":-1,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/img/black-logo-120.png\"},\"timestamp\":74898.507838,\"type\":\"Image\"}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275244,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"39190.2\",\"loaderId\":\"39190.8\",\"requestId\":\"39190.24\",\"response\":{\"connectionId\":0,\"connectionReused\":false,\"encodedDataLength\":-1,\"fromDiskCache\":true,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"0\",\"Cache-Control\":\"max-age=31536000, public, public, must-revalidate, proxy-revalidate\",\"Content-Length\":\"2227\",\"Content-Security-Policy\":\"default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://ssl.google-analytics.com; script-src 'self' 'unsafe-inline' https://ssl.google-analytics.com\",\"Content-Type\":\"image/png\",\"Date\":\"Wed, 09 Mar 2016 19:21:14 GMT\",\"Expires\":\"Thu, 09 Mar 2017 19:21:14 GMT\",\"Last-Modified\":\"Thu, 25 Feb 2016 23:22:43 GMT\",\"Pragma\":\"public\",\"Server\":\"nginx/1.8.1\",\"Vary\":\"User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"MISS\",\"X-Cache-Hits\":\"0\",\"X-Content-Type-Options\":\"nosniff\",\"X-Frame-Options\":\"DENY\",\"X-Served-By\":\"cache-ams4126-AMS\",\"X-XSS-Protection\":\"1; mode=block\"},\"mimeType\":\"image/png\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"23.235.43.69\",\"remotePort\":443,\"securityDetails\":{\"certificateId\":1,\"cipher\":\"AES_128_GCM\",\"keyExchange\":\"ECDHE_RSA\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"secure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":-1,\"connectStart\":-1,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":2.14100000448525,\"requestTime\":74898.500732,\"sendEnd\":0.109000000520609,\"sendStart\":0.109000000520609,\"sslEnd\":-1,\"sslStart\":-1,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/img/fastly2.png\"},\"timestamp\":74898.508028,\"type\":\"Image\"}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275244,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":32768,\"encodedDataLength\":0,\"requestId\":\"39190.25\",\"timestamp\":74898.508121}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275244,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":517,\"encodedDataLength\":0,\"requestId\":\"39190.22\",\"timestamp\":74898.508686}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275245,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":0,\"requestId\":\"39190.22\",\"timestamp\":74898.503474}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275245,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":1678,\"encodedDataLength\":0,\"requestId\":\"39190.23\",\"timestamp\":74898.508849}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275245,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":0,\"requestId\":\"39190.23\",\"timestamp\":74898.503586}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275245,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":2227,\"encodedDataLength\":0,\"requestId\":\"39190.24\",\"timestamp\":74898.509035}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275245,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":0,\"requestId\":\"39190.24\",\"timestamp\":74898.503694}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275245,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":10314,\"encodedDataLength\":0,\"requestId\":\"39190.25\",\"timestamp\":74898.509228}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275245,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":0,\"requestId\":\"39190.25\",\"timestamp\":74898.503798}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275245,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"39190.2\",\"initiator\":{\"type\":\"script\"},\"loaderId\":\"39190.8\",\"request\":{\"headers\":{\"Accept\":\"image/webp,image/*,*/*;q=0.8\",\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36\"},\"initialPriority\":\"VeryLow\",\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://ssl.google-analytics.com/__utm.gif?utmwv=5.6.7&utms=2&utmn=1467848794&utmhn=www.sitespeed.io&utmcs=UTF-8&utmsr=1440x900&utmvp=1050x757&utmsc=24-bit&utmul=en-us&utmje=0&utmfl=-&utmdt=Sitespeed.io%20-%20Analyze%20your%20website%20speed%20and%20performance&utmhid=355280169&utmr=-&utmp=%2F&utmht=1457551275265&utmac=UA-31246987-1&utmcc=__utma%3D152498875.1612082311.1457551274.1457551274.1457551274.1%3B%2B__utmz%3D152498875.1457551274.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmjid=&utmu=qAAAAAAAAAAAAAAAAAAAAAAE~\"},\"requestId\":\"39190.26\",\"timestamp\":74898.530887,\"type\":\"Other\",\"wallTime\":1457551275.26735}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275268,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"39190.2\",\"loaderId\":\"39190.8\",\"requestId\":\"39190.26\",\"response\":{\"connectionId\":61,\"connectionReused\":true,\"encodedDataLength\":-1,\"fromDiskCache\":false,\"fromServiceWorker\":false,\"headers\":{\"access-control-allow-origin\":\"*\",\"age\":\"92493\",\"alt-svc\":\"quic=\\\":443\\\"; ma=2592000; v=\\\"31,30,29,28,27,26,25\\\"\",\"alternate-protocol\":\"443:quic,p=1\",\"cache-control\":\"no-cache, no-store, must-revalidate\",\"content-length\":\"35\",\"content-type\":\"image/gif\",\"date\":\"Tue, 08 Mar 2016 17:39:41 GMT\",\"expires\":\"Mon, 01 Jan 1990 00:00:00 GMT\",\"last-modified\":\"Sun, 17 May 1998 03:00:00 GMT\",\"pragma\":\"no-cache\",\"server\":\"Golfe2\",\"status\":\"200\",\"x-content-type-options\":\"nosniff\"},\"mimeType\":\"image/gif\",\"protocol\":\"h2\",\"remoteIPAddress\":\"172.217.18.136\",\"remotePort\":443,\"requestHeaders\":{\":authority\":\"ssl.google-analytics.com\",\":method\":\"GET\",\":path\":\"/__utm.gif?utmwv=5.6.7&utms=2&utmn=1467848794&utmhn=www.sitespeed.io&utmcs=UTF-8&utmsr=1440x900&utmvp=1050x757&utmsc=24-bit&utmul=en-us&utmje=0&utmfl=-&utmdt=Sitespeed.io%20-%20Analyze%20your%20website%20speed%20and%20performance&utmhid=355280169&utmr=-&utmp=%2F&utmht=1457551275265&utmac=UA-31246987-1&utmcc=__utma%3D152498875.1612082311.1457551274.1457551274.1457551274.1%3B%2B__utmz%3D152498875.1457551274.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmjid=&utmu=qAAAAAAAAAAAAAAAAAAAAAAE~\",\":scheme\":\"https\",\"accept\":\"image/webp,image/*,*/*;q=0.8\",\"accept-encoding\":\"gzip, deflate, sdch\",\"accept-language\":\"en-US,en;q=0.8\",\"referer\":\"https://www.sitespeed.io/\",\"user-agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36\"},\"securityDetails\":{\"certificateId\":2,\"cipher\":\"AES_128_GCM\",\"keyExchange\":\"ECDHE_RSA\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"secure\",\"status\":200,\"statusText\":\"\",\"timing\":{\"connectEnd\":-1,\"connectStart\":-1,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":129.352999996627,\"requestTime\":74898.531122,\"sendEnd\":0.539000000571832,\"sendStart\":0.40600000647828,\"sslEnd\":-1,\"sslStart\":-1,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://ssl.google-analytics.com/__utm.gif?utmwv=5.6.7&utms=2&utmn=1467848794&utmhn=www.sitespeed.io&utmcs=UTF-8&utmsr=1440x900&utmvp=1050x757&utmsc=24-bit&utmul=en-us&utmje=0&utmfl=-&utmdt=Sitespeed.io%20-%20Analyze%20your%20website%20speed%20and%20performance&utmhid=355280169&utmr=-&utmp=%2F&utmht=1457551275265&utmac=UA-31246987-1&utmcc=__utma%3D152498875.1612082311.1457551274.1457551274.1457551274.1%3B%2B__utmz%3D152498875.1457551274.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmjid=&utmu=qAAAAAAAAAAAAAAAAAAAAAAE~\"},\"timestamp\":74898.660927,\"type\":\"Image\"}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275397,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":35,\"encodedDataLength\":118,\"requestId\":\"39190.26\",\"timestamp\":74898.661123}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275397,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":118,\"requestId\":\"39190.26\",\"timestamp\":74898.660872}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275400,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Page.loadEventFired\",\"params\":{\"timestamp\":74898.661497}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275400,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Page.frameStoppedLoading\",\"params\":{\"frameId\":\"39190.2\"}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275400,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.requestWillBeSent\",\"params\":{\"documentURL\":\"https://www.sitespeed.io/\",\"frameId\":\"39190.2\",\"initiator\":{\"type\":\"other\"},\"loaderId\":\"39190.8\",\"request\":{\"headers\":{\"Referer\":\"https://www.sitespeed.io/\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36\"},\"initialPriority\":\"Medium\",\"method\":\"GET\",\"mixedContentType\":\"none\",\"url\":\"https://www.sitespeed.io/img/ico/sitespeed.io.ico\"},\"requestId\":\"39190.27\",\"timestamp\":74898.664317,\"type\":\"Other\",\"wallTime\":1457551275.40078}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275404,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.responseReceived\",\"params\":{\"frameId\":\"39190.2\",\"loaderId\":\"39190.8\",\"requestId\":\"39190.27\",\"response\":{\"connectionId\":0,\"connectionReused\":false,\"encodedDataLength\":-1,\"fromDiskCache\":true,\"fromServiceWorker\":false,\"headers\":{\"Accept-Ranges\":\"bytes\",\"Age\":\"0\",\"Cache-Control\":\"max-age=31536000, public, public, must-revalidate, proxy-revalidate\",\"Content-Encoding\":\"gzip\",\"Content-Length\":\"2875\",\"Content-Security-Policy\":\"default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://ssl.google-analytics.com; script-src 'self' 'unsafe-inline' https://ssl.google-analytics.com\",\"Content-Type\":\"image/x-icon\",\"Date\":\"Wed, 09 Mar 2016 19:21:14 GMT\",\"Expires\":\"Thu, 09 Mar 2017 19:21:14 GMT\",\"Last-Modified\":\"Thu, 25 Feb 2016 23:22:47 GMT\",\"Pragma\":\"public\",\"Server\":\"nginx/1.8.1\",\"Vary\":\"Accept-Encoding,User-Agent\",\"Via\":\"1.1 varnish\",\"X-Cache\":\"MISS\",\"X-Cache-Hits\":\"0\",\"X-Content-Type-Options\":\"nosniff\",\"X-Frame-Options\":\"DENY\",\"X-Served-By\":\"cache-ams4134-AMS\",\"X-XSS-Protection\":\"1; mode=block\"},\"mimeType\":\"image/x-icon\",\"protocol\":\"http/1.1\",\"remoteIPAddress\":\"23.235.43.69\",\"remotePort\":443,\"securityDetails\":{\"certificateId\":1,\"cipher\":\"AES_128_GCM\",\"keyExchange\":\"ECDHE_RSA\",\"protocol\":\"TLS 1.2\"},\"securityState\":\"secure\",\"status\":200,\"statusText\":\"OK\",\"timing\":{\"connectEnd\":-1,\"connectStart\":-1,\"dnsEnd\":-1,\"dnsStart\":-1,\"proxyEnd\":-1,\"proxyStart\":-1,\"receiveHeadersEnd\":0.744999997550622,\"requestTime\":74898.664468,\"sendEnd\":0.190999999176711,\"sendStart\":0.190999999176711,\"sslEnd\":-1,\"sslStart\":-1,\"workerReady\":-1,\"workerStart\":-1},\"url\":\"https://www.sitespeed.io/img/ico/sitespeed.io.ico\"},\"timestamp\":74898.665532,\"type\":\"Other\"}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275404,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.dataReceived\",\"params\":{\"dataLength\":6518,\"encodedDataLength\":0,\"requestId\":\"39190.27\",\"timestamp\":74898.665797}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275404,
+    "type": ""
+  },
+  {
+    "level": "INFO",
+    "message": "{\"message\":{\"method\":\"Network.loadingFinished\",\"params\":{\"encodedDataLength\":0,\"requestId\":\"39190.27\",\"timestamp\":74898.66563}},\"webview\":\"98931058-CC31-414A-A6FA-54AC3DD21E34\"}",
+    "timestamp": 1457551275404,
+    "type": ""
+  }
+]

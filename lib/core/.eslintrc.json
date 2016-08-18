@@ -1,0 +1,5 @@
+{
+  "rules": {
+    "no-restricted-modules": [2, "fs"]
+  }
+}

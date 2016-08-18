@@ -1,59 +1,64 @@
 {
-  "name": "browsertime",
-  "version": "0.12.3",
+  "description": "Browsertime",
+  "version": "1.0.0-alpha.32",
   "bin": "./bin/browsertime.js",
-  "description": "Analyze the speed of your web page",
-  "keywords": [
-    "performance",
-    "web",
-    "speed",
-    "navigation-timing",
-    "har",
-    "browser"
-  ],
-  "homepage": "http://www.browsertime.net",
-  "license": "Apache-2.0",
-  "author": {
-    "name": "Tobias Lidskog"
-  },
-  "contributors": {
-    "name": "Peter Hedenskog"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/tobli/browsertime.git"
-  },
-  "bugs": {
-    "url": "https://github.com/tobli/browsertime/issues"
-  },
-  "files": [
-    "bin",
-    "lib",
-    "scripts"
-  ],
-  "engines": {
-    "node": ">=0.12"
-  },
-  "main": "./lib/browsertime.js",
-  "devDependencies": {
-    "jshint": "^2.8.0"
-  },
   "dependencies": {
-    "async": "^1.5.2",
-    "async-node-events": "git+https://github.com/joshuafcole/async-node-events.git#d32411f1f4",
-    "browsermob-proxy-api": "^0.3.1",
-    "cross-spawn-async": "^2.0.1",
+    "alto-saxophone": "2.23.1",
+    "bluebird": "3.4.1",
+    "cross-spawn": "4.0.0",
+    "execa": "0.4.0",
     "fast-stats": "0.0.3",
     "getport": "0.1.0",
-    "minimist": "^1.2.0",
-    "selenium-webdriver": "2.53.3",
+    "hasbin": "1.2.3",
+    "intel": "1.1.1",
+    "lodash.foreach": "4.3.0",
+    "lodash.get": "4.3.0",
+    "lodash.merge": "4.4.0",
+    "lodash.pick": "4.2.1",
+    "lodash.set": "4.2.0",
+    "mkdirp": "0.5.1",
+    "moment": "2.14.1",
+    "selenium-webdriver": "v3.0.0-beta-2",
+    "sltc": "0.2.0",
+    "soprano-saxophone": "0.10.0",
+    "tough-cookie": "2.2.2",
     "valid-url": "1.0.9",
-    "whereis": "^0.4.0",
-    "winston": "^2.1.1"
+    "yargs": "4.8.1"
   },
+  "devDependencies": {
+    "chai": "^3.4.0",
+    "chai-as-promised": "^5.1.0",
+    "eslint": "^3.1.0",
+    "longjohn": "^0.2.11",
+    "mocha": "^2.5.2",
+    "sequencediagrams": "0.0.8"
+  },
+  "engines": {
+    "node": ">=4.3.0"
+  },
+  "publishConfig": {
+    "tag": "canary"
+  },
+  "main": "index.js",
   "scripts": {
-    "lint": "jshint .",
-    "test": "npm run lint",
-    "travis": "npm run lint"
-  }
+    "test": "mocha",
+    "lint": "eslint .",
+    "generateDocs": "sequencediagrams docs/sequence-diagrams"
+  },
+  "name": "browsertime",
+  "author": "Tobias Lidskog",
+  "contributors": [
+    {
+      "name": "Peter Hedenskog"
+    },
+    {
+      "name": "Jonathan Lee"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sitespeedio/browsertime.git"
+  },
+  "homepage": "http://browsertime.net",
+  "license": "MIT"
 }

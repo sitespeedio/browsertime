@@ -1,0 +1,24 @@
+title Run one url via Engine
+
+caller -> Engine: run
+Engine -> EngineDelegate: onStartRun (BmpRunner - start proxy)
+
+loop n times
+  Engine -> SeleniumRunner: start
+  SeleniumRunner -> Browser: launch browser
+  Engine -> EngineDelegate: onStartIteration (createHAR OR startNewPage)
+  Engine -> SeleniumRunner: loadAndWait
+  SeleniumRunner -> Browser: get url and execute pageCompleteCheck
+  loop for each script
+    Engine -> SeleniumRunner: runScript
+    SeleniumRunner -> Browser: executeScript
+  end
+  Engine -> EngineDelegate: onStopIteration
+  Engine -> SeleniumRunner: stop
+  SeleniumRunner -> Browser: quit browser
+  Engine -> Engine: optionally wait for short delay
+end
+
+Engine -> EngineDelegate: onStopRun (BmpRunner - getHAR, stop proxy)
+
+Engine -> caller : [return HAR and script results]
