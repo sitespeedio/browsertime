@@ -1,7 +1,13 @@
 # Browsertime changelog
-Note that Browsertime doesn't follow semantic versioning just yet. Breaking changes may be introduced even in patch
-releases, even though we try to avoid that. Once we're happy with the design and api we'll declare 1.0 and follow
-semantic versioning after that.
+
+UNRELEASED
+------------------------
+The master is to a large degree a re-write of the internal implementation, the cli interface, and the node API. It's
+based on learnings from the previous releases of Browsertime, and their use in Sitespeed.io. It's still lacking some features
+from the 0.x releases, and the API is not final. However it should be a better foundation for future development, using
+more modern Javascript features and a much more extensive test suite.
+
+We plan to soon release 1.0 in beta.
 
 version 0.12.3
 ------------------------
