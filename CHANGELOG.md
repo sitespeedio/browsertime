@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+UNRELEASED
+------------------------
+* Log excplicit when the HAR export trigger fails, so it is easy to report the problem.
+* Increased the default script timeout from 40 s to 80 s.
 
 version 1.0-beta.1
 ------------------------
