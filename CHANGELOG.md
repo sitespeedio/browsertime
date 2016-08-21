@@ -4,6 +4,7 @@ UNRELEASED
 ------------------------
 * Log excplicit when the HAR export trigger fails, so it is easy to report the problem.
 * Increased the default script timeout from 40 s to 80 s.
+* Log script name if a script fails to make it easier to find failing scripts.
 
 version 1.0-beta.1
 ------------------------
