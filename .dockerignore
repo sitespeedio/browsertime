@@ -1,0 +1,9 @@
+*
+!bin
+!lib
+!package.json
+!docker
+!vendor
+!browserscripts
+!browsersupport
+!index.js
