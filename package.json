@@ -26,9 +26,9 @@
   "devDependencies": {
     "chai": "^3.4.0",
     "chai-as-promised": "^5.1.0",
-    "eslint": "^3.1.0",
+    "eslint": "3.4.0",
     "longjohn": "^0.2.11",
-    "mocha": "^2.5.2",
+    "mocha": "3.0.2",
     "sequencediagrams": "0.0.8"
   },
   "engines": {
