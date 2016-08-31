@@ -5,10 +5,8 @@
   "dependencies": {
     "alto-saxophone": "2.23.1",
     "bluebird": "3.4.1",
-    "cross-spawn": "4.0.0",
     "execa": "0.4.0",
     "fast-stats": "0.0.3",
-    "getport": "0.1.0",
     "hasbin": "1.2.3",
     "intel": "1.1.1",
     "lodash.foreach": "4.3.0",
