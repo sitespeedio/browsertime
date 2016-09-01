@@ -1,5 +1,13 @@
 # Browsertime changelog
 
+## UNRELEASED
+-------------------------
+### Fixed
+* Query parameters in HAR files from Chrome are now correct
+
+### Added
+* HAR files from Chrome now include cookies and POST data (with some limitations)
+
 version 1.0-beta.2
 ------------------------
 * Log excplicit when the HAR export trigger fails, so it is easy to report the problem.
