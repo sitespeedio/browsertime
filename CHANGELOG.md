@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## UNRELEASED
+ersion 1.0-beta.3 2016-09-02
 -------------------------
 ### Fixed
 * Query parameters in HAR files from Chrome are now correct
