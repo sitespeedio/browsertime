@@ -4,7 +4,7 @@
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "alto-saxophone": "2.23.1",
-    "bluebird": "3.4.5",
+    "bluebird": "3.4.6",
     "execa": "0.4.0",
     "fast-stats": "0.0.3",
     "hasbin": "1.2.3",
