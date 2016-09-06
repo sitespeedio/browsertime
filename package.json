@@ -21,7 +21,7 @@
     "soprano-saxophone": "0.10.0",
     "tough-cookie": "2.3.1",
     "valid-url": "1.0.9",
-    "yargs": "4.8.1"
+    "yargs": "5.0.0"
   },
   "devDependencies": {
     "chai": "^3.4.0",
