@@ -1,6 +1,11 @@
 # Browsertime changelog
 
-ersion 1.0-beta.3 2016-09-02
+version 1.0-beta.4 2016-09-19
+-------------------------
+### Changed
+* Updated to chromedriver 2.24.
+
+version 1.0-beta.3 2016-09-02
 -------------------------
 ### Fixed
 * Query parameters in HAR files from Chrome are now correct
