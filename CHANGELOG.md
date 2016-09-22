@@ -1,5 +1,12 @@
 # Browsertime changelog
 
+
+version 1.0-beta.5 2016-09-22
+-------------------------
+### Changed
+* Updated to Selenium v3.0.0-beta-3 
+* Updated to HAR export trigger beta 10 to make FF 49 functional
+
 version 1.0-beta.4 2016-09-19
 -------------------------
 ### Changed
