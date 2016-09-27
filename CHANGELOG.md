@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+UNRELEASED
+-------------------------
+### Added
+* Add chrome-esque summary line to stdout #189 thank you @moos for the PR!
+
 
 version 1.0-beta.5 2016-09-22
 -------------------------
