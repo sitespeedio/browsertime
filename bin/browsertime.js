@@ -34,8 +34,8 @@ function fmt(msec, d) {
 }
 
 function formatMetric(name, metric, multiple) {
-    if (metric === null)
-        return metric;
+    if (metric === undefined)
+        return null;
 
     let formatted = `${name}: ${fmt(metric.mean)}s`;
     if (multiple) {
