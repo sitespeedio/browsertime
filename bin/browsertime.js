@@ -4,11 +4,11 @@
 let Engine = require('../').Engine,
   browserScripts = require('../lib/support/browserScript'),
   logging = require('../').logging,
-  util = require('../lib/support/util'),
   cli = require('../lib/support/cli'),
   StorageManager = require('../lib/support/storageManager'),
   Promise = require('bluebird'),
   merge = require('lodash.merge'),
+  isEmpty = require('lodash.isempty'),
   forEach = require('lodash.foreach'),
   pick = require('lodash.pick'),
   fs = require('fs'),
@@ -77,7 +77,7 @@ function run(url, options) {
       const harName = (options.har) ? (options.har) : 'browsertime';
       const jsonName = (options.output) ? (options.output) : 'browsertime';
       const btData = pick(result, ['info', 'browserScripts', 'statistics', 'visualMetrics']);
-      if (!util.isEmpty(btData)) {
+      if (!isEmpty(btData)) {
         saveOperations.push(storageManager.writeJson(jsonName + '.json', btData));
       }
       if (result.har) {
