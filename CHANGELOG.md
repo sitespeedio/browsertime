@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-UNRELEASED
+version 1.0-beta.7 2016-10-17
 -------------------------
 ### Changed
 * Moved the summary line to the logs and inside the engine so users of the API will get 
