@@ -4,12 +4,15 @@ UNRELEASED
 -------------------------
 ### Fixed
 * Also count the main request in number of requests when printing to the log.
-* And ouput the total transfer size of the tested page.
+* And output the total transfer size of the tested page.
+
+### Changed
+* Removed option to not get statistics for the runs.
 
 version 1.0-beta.7 2016-10-17
 -------------------------
 ### Changed
-* Moved the summary line to the logs and inside the engine so users of the API will get 
+* Moved the summary line to the logs and inside the engine so users of the API will get
 the same treatment.
 
 version 1.0-beta.6 2016-09-29
@@ -23,7 +26,7 @@ version 1.0-beta.6 2016-09-29
 version 1.0-beta.5 2016-09-22
 -------------------------
 ### Changed
-* Updated to Selenium v3.0.0-beta-3 
+* Updated to Selenium v3.0.0-beta-3
 * Updated to HAR export trigger beta 10 to make FF 49 functional
 
 version 1.0-beta.4 2016-09-19
