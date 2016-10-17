@@ -4,6 +4,7 @@ UNRELEASED
 -------------------------
 ### Fixed
 * Also count the main request in number of requests when printing to the log.
+* And ouput the total transfer size of the tested page.
 
 version 1.0-beta.7 2016-10-17
 -------------------------
