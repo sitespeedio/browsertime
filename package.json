@@ -11,6 +11,7 @@
     "intel": "1.1.1",
     "lodash.foreach": "4.5.0",
     "lodash.get": "4.4.2",
+    "lodash.groupBy": "4.6.0",
     "lodash.isempty": "4.4.0",
     "lodash.merge": "4.6.0",
     "lodash.pick": "4.4.0",
