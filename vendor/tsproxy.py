@@ -178,8 +178,6 @@ class TCPConnection(asyncore.dispatcher):
     self.port = None
     self.needs_config = True
     self.needs_close = False
-    self.read_available = False
-    self.window_available = options.window
     self.is_localhost = False
     self.did_resolve = False;
 
@@ -192,12 +190,6 @@ class TCPConnection(asyncore.dispatcher):
     if message['message'] == 'data' and 'data' in message and len(message['data']) and self.state == self.STATE_CONNECTED:
       if not self.needs_close:
         self.buffer += message['data']
-        self.SendMessage('ack', {})
-    elif message['message'] == 'ack':
-      # Increase the congestion window by 2 packets for every packet transmitted up to 350 packets (~512KB)
-      self.window_available = min(self.window_available + 2, 350)
-      if self.read_available:
-        self.handle_read()
     elif message['message'] == 'resolve':
       self.HandleResolve(message)
     elif message['message'] == 'connect':
@@ -247,16 +239,11 @@ class TCPConnection(asyncore.dispatcher):
       self.handle_close()
 
   def handle_read(self):
-    if self.window_available == 0:
-      self.read_available = True
-      return
-    self.read_available = False
     try:
-      while self.window_available > 0:
+      while True:
         data = self.recv(1460)
         if data:
           if self.state == self.STATE_CONNECTED:
-            self.window_available -= 1
             logging.debug('[{0:d}] TCP <= {1:d} byte(s)'.format(self.client_id, len(data)))
             self.SendMessage('data', {'data': data})
         else:
@@ -361,8 +348,6 @@ class Socks5Connection(asyncore.dispatcher):
     self.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
     self.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, 1460)
     self.needs_close = False
-    self.read_available = False
-    self.window_available = options.window
 
   def SendMessage(self, type, message):
     message['message'] = type
@@ -373,20 +358,18 @@ class Socks5Connection(asyncore.dispatcher):
     if message['message'] == 'data' and 'data' in message and len(message['data']) and self.state == self.STATE_CONNECTED:
       if not self.needs_close:
         self.buffer += message['data']
-        self.SendMessage('ack', {})
-    elif message['message'] == 'ack':
-      # Increase the congestion window by 2 packets for every packet transmitted up to 350 packets (~512KB)
-      self.window_available = min(self.window_available + 2, 350)
-      if self.read_available:
-        self.handle_read()
+      else:
+        logging.warning('[{0:d}] ERROR: data message received on closed connection'.format(self.client_id))
     elif message['message'] == 'resolved':
       self.HandleResolved(message)
     elif message['message'] == 'connected':
       self.HandleConnected(message)
     elif message['message'] == 'closed':
       if len(self.buffer) == 0:
+        logging.info('[{0:d}] Server connection close being processed, closing Browser connection'.format(self.client_id))
         self.handle_close()
       else:
+        logging.info('[{0:d}] Server connection close being processed, queuing browser connection close'.format(self.client_id))
         self.needs_close = True
 
   def writable(self):
@@ -397,25 +380,21 @@ class Socks5Connection(asyncore.dispatcher):
     logging.debug('[{0:d}] SOCKS <= {1:d} byte(s)'.format(self.client_id, sent))
     self.buffer = self.buffer[sent:]
     if self.needs_close and len(self.buffer) == 0:
+      logging.info('[{0:d}] queued browser connection close being processed, closing Browser connection'.format(self.client_id))
       self.needs_close = False
       self.handle_close()
 
   def handle_read(self):
     global connections
     global dns_cache
-    if self.window_available == 0:
-      self.read_available = True
-      return
-    self.read_available = False
     try:
-      while self.window_available > 0:
+      while True:
         # Consume in up-to packet-sized chunks (TCP packet payload as 1460 bytes from 1500 byte ethernet frames)
         data = self.recv(1460)
         if data:
           data_len = len(data)
           if self.state == self.STATE_CONNECTED:
             logging.debug('[{0:d}] SOCKS => {1:d} byte(s)'.format(self.client_id, data_len))
-            self.window_available -= 1
             self.SendMessage('data', {'data': data})
           elif self.state == self.STATE_WAITING_FOR_HANDSHAKE:
             self.state = self.STATE_ERROR #default to an error state, set correctly if things work out
@@ -476,7 +455,7 @@ class Socks5Connection(asyncore.dispatcher):
       pass
 
   def handle_close(self):
-    logging.info('[{0:d}] Browser Connection Closed'.format(self.client_id))
+    logging.info('[{0:d}] Browser Connection Closed by browser'.format(self.client_id))
     self.state = self.STATE_ERROR
     self.close()
     try:
@@ -539,33 +518,47 @@ class CommandProcessor():
     global out_pipe
     global needs_flush
     global REMOVE_TCP_OVERHEAD
+    global port_mappings
     if len(input):
       ok = False
       try:
         command = input.split()
         if len(command) and len(command[0]):
           if command[0].lower() == 'flush':
-            needs_flush = True
             ok = True
-          elif len(command) >= 3 and command[0].lower() == 'set' and command[1].lower() == 'rtt' and len(command[2]):
-            rtt = float(command[2])
-            latency = rtt / 2000.0
-            in_pipe.latency = latency
-            out_pipe.latency = latency
+          elif command[0].lower() == 'set' and len(command) >= 3:
+            if command[1].lower() == 'rtt' and len(command[2]):
+              rtt = float(command[2])
+              latency = rtt / 2000.0
+              in_pipe.latency = latency
+              out_pipe.latency = latency
+              ok = True
+            elif command[1].lower() == 'inkbps' and len(command[2]):
+              in_pipe.kbps = float(command[2]) * REMOVE_TCP_OVERHEAD
+              ok = True
+            elif command[1].lower() == 'outkbps' and len(command[2]):
+              out_pipe.kbps = float(command[2]) * REMOVE_TCP_OVERHEAD
+              ok = True
+            elif command[1].lower() == 'mapports' and len(command[2]):
+              SetPortMappings(command[2])
+              ok = True
+          elif command[0].lower() == 'reset' and len(command) >= 2:
+            if command[1].lower() == 'rtt' or command[1].lower() == 'all':
+              in_pipe.latency = 0
+              out_pipe.latency = 0
+              ok = True
+            if command[1].lower() == 'inkbps' or command[1].lower() == 'all':
+              in_pipe.kbps = 0
+              ok = True
+            if command[1].lower() == 'outkbps' or command[1].lower() == 'all':
+              out_pipe.kbps = 0
+              ok = True
+            if command[1].lower() == 'mapports' or command[1].lower() == 'all':
+              port_mappings = {}
+              ok = True
+
+          if ok:
             needs_flush = True
-            ok = True
-          elif len(command) >= 3 and command[0].lower() == 'set' and command[1].lower() == 'inkbps' and len(command[2]):
-            in_pipe.kbps = float(command[2]) * REMOVE_TCP_OVERHEAD
-            needs_flush = True
-            ok = True
-          elif len(command) >= 3 and command[0].lower() == 'set' and command[1].lower() == 'outkbps' and len(command[2]):
-            out_pipe.kbps = float(command[2]) * REMOVE_TCP_OVERHEAD
-            needs_flush = True
-            ok = True
-          elif len(command) >= 3 and command[0].lower() == 'set' and command[1].lower() == 'mapports' and len(command[2]):
-            SetPortMappings(command[2])
-            needs_flush = True
-            ok = True
       except:
         pass
       if not ok:
@@ -593,7 +586,6 @@ def main():
   parser.add_argument('-r', '--rtt', type=float, default=.0, help="Round Trip Time Latency (in ms).")
   parser.add_argument('-i', '--inkbps', type=float, default=.0, help="Download Bandwidth (in 1000 bits/s - Kbps).")
   parser.add_argument('-o', '--outkbps', type=float, default=.0, help="Upload Bandwidth (in 1000 bits/s - Kbps).")
-  parser.add_argument('-w', '--window', type=int, default=10, help="Emulated TCP initial congestion window (defaults to 10).")
   parser.add_argument('-d', '--desthost', help="Redirect all outbound connections to the specified host.")
   parser.add_argument('-m', '--mapports', help="Remap outbound ports. Comma-separated list of original:new with * as a wildcard. --mapports '443:8443,*:8080'")
   parser.add_argument('-l', '--localhost', action='store_true', default=False,

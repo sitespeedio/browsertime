@@ -5,6 +5,9 @@ UNRELEASED
 ### Fixed
 * Also count the main request in number of requests when printing to the log.
 * And output the total transfer size of the tested page.
+* New version of TSProxy hopefully fixing the connect problems for some 
+sites (wikipedia) see https://github.com/WPO-Foundation/tsproxy/issues/9 
+
 
 ### Changed
 * Removed option to not get statistics for the runs.
