@@ -15,8 +15,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 import asyncore
+from collections import deque
 import gc
 import logging
+import platform
 import Queue
 import signal
 import socket
@@ -81,6 +83,17 @@ class TSPipe():
         self.queue.put(message)
     except:
       pass
+
+  def TimeToNextMessage(self, min_time = 0.001, max_time = 1.0):
+    next_message_time = max_time
+    try:
+      if self.next_message is None:
+        self.next_message = self.queue.get_nowait()
+      if self.next_message is not None:
+        next_message_time = max(min_time, self.next_message['time'] - time.clock())
+    except:
+      pass
+    return next_message_time
 
   def tick(self):
     global connections
@@ -147,6 +160,7 @@ class AsyncDNS(threading.Thread):
 
   def run(self):
     try:
+      logging.debug('[{0:d}] AsyncDNS - calling getaddrinfo for {1}:{2:d}'.format(self.client_id, self.hostname, self.port))
       addresses = socket.getaddrinfo(self.hostname, self.port)
       logging.info('[{0:d}] Resolving {1}:{2:d} Completed'.format(self.client_id, self.hostname, self.port))
     except:
@@ -179,17 +193,30 @@ class TCPConnection(asyncore.dispatcher):
     self.needs_config = True
     self.needs_close = False
     self.is_localhost = False
-    self.did_resolve = False;
+    self.did_resolve = False
+    self.window_available = options.window
+    self.packet_message_queue = deque([])
 
   def SendMessage(self, type, message):
     message['message'] = type
     message['connection'] = self.client_id
     in_pipe.SendMessage(message)
 
+  def QueueMessage(self, type, message):
+    message['message'] = type
+    message['connection'] = self.client_id
+    self.packet_message_queue.append(message)
+
+  def ProcessPacketMessageQueue(self):
+    while self.window_available > 0 and len(self.packet_message_queue) > 0:
+      in_pipe.SendMessage(self.packet_message_queue.popleft())
+      self.window_available -= 1
+
   def handle_message(self, message):
     if message['message'] == 'data' and 'data' in message and len(message['data']) and self.state == self.STATE_CONNECTED:
       if not self.needs_close:
         self.buffer += message['data']
+        self.SendMessage('ack', {})
     elif message['message'] == 'resolve':
       self.HandleResolve(message)
     elif message['message'] == 'connect':
@@ -199,6 +226,10 @@ class TCPConnection(asyncore.dispatcher):
         self.handle_close()
       else:
         self.needs_close = True
+    elif message['message'] == 'ack':
+      # Increase the congestion window by 2 packets for every packet transmitted up to 350 packets (~512KB)
+      self.window_available = min(self.window_available + 2, 350)
+      self.ProcessPacketMessageQueue()
 
   def handle_error(self):
     logging.warning('[{0:d}] Error'.format(self.client_id))
@@ -214,11 +245,12 @@ class TCPConnection(asyncore.dispatcher):
         if 'server' in connections[self.client_id]:
           del connections[self.client_id]['server']
         if 'client' in connections[self.client_id]:
-          self.SendMessage('closed', {})
+          self.QueueMessage('closed', {})
         else:
           del connections[self.client_id]
     except:
       pass
+    self.ProcessPacketMessageQueue()
 
   def writable(self):
     if self.state == self.STATE_CONNECTING:
@@ -245,11 +277,12 @@ class TCPConnection(asyncore.dispatcher):
         if data:
           if self.state == self.STATE_CONNECTED:
             logging.debug('[{0:d}] TCP <= {1:d} byte(s)'.format(self.client_id, len(data)))
-            self.SendMessage('data', {'data': data})
+            self.QueueMessage('data', {'data': data})
         else:
           return
     except:
       pass
+    self.ProcessPacketMessageQueue()
 
   def HandleResolve(self, message):
     global in_pipe
@@ -267,6 +300,7 @@ class TCPConnection(asyncore.dispatcher):
       logging.info('[{0:d}] Connection to localhost detected'.format(self.client_id))
       self.is_localhost = True
     if (dest_addresses is not None) and (not self.is_localhost or map_localhost):
+      logging.info('[{0:d}] Resolving {1}:{2:d} to mapped address {3}'.format(self.client_id, self.hostname, self.port, dest_addresses))
       self.SendMessage('resolved', {'addresses': dest_addresses})
     else:
       self.state = self.STATE_RESOLVING
@@ -348,16 +382,29 @@ class Socks5Connection(asyncore.dispatcher):
     self.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
     self.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, 1460)
     self.needs_close = False
+    self.window_available = options.window
+    self.packet_message_queue = deque([])
 
   def SendMessage(self, type, message):
     message['message'] = type
     message['connection'] = self.client_id
     out_pipe.SendMessage(message)
 
+  def QueueMessage(self, type, message):
+    message['message'] = type
+    message['connection'] = self.client_id
+    self.packet_message_queue.append(message)
+
+  def ProcessPacketMessageQueue(self):
+    while self.window_available > 0 and len(self.packet_message_queue) > 0:
+      out_pipe.SendMessage(self.packet_message_queue.popleft())
+      self.window_available -= 1
+
   def handle_message(self, message):
     if message['message'] == 'data' and 'data' in message and len(message['data']) and self.state == self.STATE_CONNECTED:
       if not self.needs_close:
         self.buffer += message['data']
+        self.SendMessage('ack', {})
       else:
         logging.warning('[{0:d}] ERROR: data message received on closed connection'.format(self.client_id))
     elif message['message'] == 'resolved':
@@ -371,6 +418,10 @@ class Socks5Connection(asyncore.dispatcher):
       else:
         logging.info('[{0:d}] Server connection close being processed, queuing browser connection close'.format(self.client_id))
         self.needs_close = True
+    elif message['message'] == 'ack':
+      # Increase the congestion window by 2 packets for every packet transmitted up to 350 packets (~512KB)
+      self.window_available = min(self.window_available + 2, 350)
+      self.ProcessPacketMessageQueue()
 
   def writable(self):
     return (len(self.buffer) > 0)
@@ -395,7 +446,7 @@ class Socks5Connection(asyncore.dispatcher):
           data_len = len(data)
           if self.state == self.STATE_CONNECTED:
             logging.debug('[{0:d}] SOCKS => {1:d} byte(s)'.format(self.client_id, data_len))
-            self.SendMessage('data', {'data': data})
+            self.QueueMessage('data', {'data': data})
           elif self.state == self.STATE_WAITING_FOR_HANDSHAKE:
             self.state = self.STATE_ERROR #default to an error state, set correctly if things work out
             if data_len >= 2 and ord(data[0]) == 0x05:
@@ -447,12 +498,15 @@ class Socks5Connection(asyncore.dispatcher):
                       self.SendMessage('resolve', {'hostname': self.hostname, 'port': self.port})
                   elif self.ip is not None:
                     self.state = self.STATE_CONNECTING
+                    logging.debug(
+                      '[{0:d}] Socks Connect - calling getaddrinfo for {1}:{2:d}'.format(self.client_id, self.ip, self.port))
                     self.addresses = socket.getaddrinfo(self.ip, self.port)
                     self.SendMessage('connect', {'addresses': self.addresses, 'port': self.port})
         else:
           return
     except:
       pass
+    self.ProcessPacketMessageQueue()
 
   def handle_close(self):
     logging.info('[{0:d}] Browser Connection Closed by browser'.format(self.client_id))
@@ -463,11 +517,12 @@ class Socks5Connection(asyncore.dispatcher):
         if 'client' in connections[self.client_id]:
           del connections[self.client_id]['client']
         if 'server' in connections[self.client_id]:
-          self.SendMessage('closed', {})
+          self.QueueMessage('closed', {})
         else:
           del connections[self.client_id]
     except:
       pass
+    self.ProcessPacketMessageQueue()
 
   def HandleResolved(self, message):
     global dns_cache
@@ -586,6 +641,7 @@ def main():
   parser.add_argument('-r', '--rtt', type=float, default=.0, help="Round Trip Time Latency (in ms).")
   parser.add_argument('-i', '--inkbps', type=float, default=.0, help="Download Bandwidth (in 1000 bits/s - Kbps).")
   parser.add_argument('-o', '--outkbps', type=float, default=.0, help="Upload Bandwidth (in 1000 bits/s - Kbps).")
+  parser.add_argument('-w', '--window', type=int, default=10, help="Emulated TCP initial congestion window (defaults to 10).")
   parser.add_argument('-d', '--desthost', help="Redirect all outbound connections to the specified host.")
   parser.add_argument('-m', '--mapports', help="Remap outbound ports. Comma-separated list of original:new with * as a wildcard. --mapports '443:8443,*:8080'")
   parser.add_argument('-l', '--localhost', action='store_true', default=False,
@@ -612,6 +668,7 @@ def main():
 
   # Resolve the address for a rewrite destination host if one was specified
   if options.desthost:
+    logging.debug('Startup - calling getaddrinfo for {0}:{1:d}'.format(options.desthost, GetDestPort(80)))
     dest_addresses = socket.getaddrinfo(options.desthost, GetDestPort(80))
 
   # Set up the pipes.  1/2 of the latency gets applied in each direction (and /1000 to convert to seconds)
@@ -640,11 +697,23 @@ def run_loop():
   global needs_flush
   global flush_pipes
   gc_check_count = 0
+  winmm = None
+
+  # increase the windows timer resolution to 1ms
+  if platform.system() == "Windows":
+    try:
+      import ctypes
+      winmm = ctypes.WinDLL('winmm')
+      winmm.timeBeginPeriod(1)
+    except:
+      pass
+
   last_activity = time.clock()
   # disable gc to avoid pauses during traffic shaping/proxying
   gc.disable()
   while not must_exit:
-    asyncore.poll(0.001, asyncore.socket_map)
+    wait_time = min(in_pipe.TimeToNextMessage(), out_pipe.TimeToNextMessage())
+    asyncore.poll(wait_time, asyncore.socket_map)
     if needs_flush:
       flush_pipes = True
       needs_flush = False
@@ -666,6 +735,8 @@ def run_loop():
     else:
       gc_check_count += 1
 
+  if winmm is not None:
+    winmm.timeEndPeriod(1)
 
 def GetDestPort(port):
   global port_mappings
