@@ -19,7 +19,7 @@
     "mkdirp": "0.5.1",
     "moment": "2.15.0",
     "selenium-webdriver": "v3.0.0-beta-3",
-    "sltc": "0.2.0",
+    "sltc": "0.5.0",
     "soprano-saxophone": "0.10.0",
     "tough-cookie": "2.3.1",
     "valid-url": "1.0.9",
