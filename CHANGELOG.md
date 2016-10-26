@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-UNRELEASED
+version 1.0-beta.9 2016-10-16
 -------------------------
 ### Fixed
 * Set default device to eth0 when running tc (without using the CLI).
