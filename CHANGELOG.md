@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-UNRELEASED
+version 1.0-beta.8 2016-10-16
 -------------------------
 ### Fixed
 * Also count the main request in number of requests when printing to the log.
