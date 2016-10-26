@@ -11,6 +11,7 @@ sites (wikipedia) see https://github.com/WPO-Foundation/tsproxy/issues/9
 
 ### Changed
 * Removed option to not get statistics for the runs.
+* Rollbacked SLTC so we only use tc, to make it work out of the box on Ubuntu.
 
 version 1.0-beta.7 2016-10-17
 -------------------------
