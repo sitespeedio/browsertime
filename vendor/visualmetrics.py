@@ -1,602 +1,1214 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """
-Copyright 2016 Google Inc. All Rights Reserved.
+Copyright (c) 2014, Google Inc.
+All rights reserved.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
 
-    http://www.apache.org/licenses/LICENSE-2.0
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name of the company nor the names of its contributors may be
+      used to endorse or promote products derived from this software without
+      specific prior written permission.
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-"""
-import asyncore
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."""
 import gc
+import glob
+import gzip
+import json
 import logging
+import math
+import os
 import platform
-import Queue
-import signal
-import socket
-import sys
-import threading
-import time
+import re
+import shutil
+import subprocess
+import tempfile
 
-server = None
-in_pipe = None
-out_pipe = None
-must_exit = False
+# Globals
 options = None
-dest_addresses = None
-connections = {}
-dns_cache = {}
-port_mappings = None
-map_localhost = False
-needs_flush = False
-flush_pipes = False
-REMOVE_TCP_OVERHEAD = 1460.0 / 1500.0
+client_viewport = None
 
 
-def PrintMessage(msg):
-  # Print the message to stdout & flush to make sure that the message is not
-  # buffered when tsproxy is run as a subprocess.
-  print >> sys.stdout, msg
-  sys.stdout.flush()
+# #######################################################################################################################
+# Frame Extraction and de-duplication
+# #######################################################################################################################
 
-
-########################################################################################################################
-#   Traffic-shaping pipe (just passthrough for now)
-########################################################################################################################
-class TSPipe():
-  PIPE_IN = 0
-  PIPE_OUT = 1
-
-  def __init__(self, direction, latency, kbps):
-    self.direction = direction
-    self.latency = latency
-    self.kbps = kbps
-    self.queue = Queue.Queue()
-    self.last_tick = time.clock()
-    self.next_message = None
-    self.available_bytes = .0
-    self.peer = 'server'
-    if self.direction == self.PIPE_IN:
-      self.peer = 'client'
-
-  def SendMessage(self, message):
-    global connections
-    try:
-      connection_id = message['connection']
-      if connection_id in connections and self.peer in connections[connection_id]:
-        now = time.clock()
-        if message['message'] == 'closed':
-          message['time'] = now
+def video_to_frames(video, directory, force, orange_file, multiple, find_viewport, viewport_time, full_resolution,
+                    timeline_file, trim_end):
+  global options
+  first_frame = os.path.join(directory, 'ms_000000')
+  if (not os.path.isfile(first_frame + '.png') and not os.path.isfile(first_frame + '.jpg')) or force:
+    if os.path.isfile(video):
+      video = os.path.realpath(video)
+      logging.info("Processing frames from video " + video + " to " + directory)
+      if os.path.isdir(directory):
+        shutil.rmtree(directory, True)
+      if not os.path.isdir(directory):
+        os.mkdir(directory, 0755)
+      if os.path.isdir(directory):
+        directory = os.path.realpath(directory)
+        viewport = find_video_viewport(video, directory, find_viewport, viewport_time)
+        gc.collect()
+        if extract_frames(video, directory, full_resolution, viewport):
+          if multiple and orange_file is not None:
+            directories = split_videos(directory, orange_file)
+          else:
+            directories = [directory]
+          for dir in directories:
+            trim_video_end(dir, trim_end)
+            if orange_file is not None:
+              remove_orange_frames(dir, orange_file)
+            find_first_frame(dir)
+            find_render_start(dir)
+            adjust_frame_times(dir)
+            if timeline_file is not None and not multiple:
+              synchronize_to_timeline(dir, timeline_file)
+            eliminate_duplicate_frames(dir)
+            eliminate_similar_frames(dir)
+            blank_first_frame(dir)
+            # See if we are limiting the number of frames to keep (before processing them to save processing time)
+            if options.maxframes > 0:
+              cap_frame_count(dir, options.maxframes)
+            crop_viewport(dir)
+            gc.collect()
         else:
-          message['time'] = time.clock() + self.latency
-        message['size'] = .0
-        if 'data' in message:
-          message['size'] = float(len(message['data']))
-        self.queue.put(message)
-    except:
-      pass
-
-  def tick(self):
-    global connections
-    global flush_pipes
-    processed_messages = False
-    now = time.clock()
-    try:
-      if self.next_message is None:
-        self.next_message = self.queue.get_nowait()
-
-      # Accumulate bandwidth if an available packet/message was waiting since our last tick
-      if self.next_message is not None and self.kbps > .0 and self.next_message['time'] <= now:
-        elapsed = now - self.last_tick
-        accumulated_bytes = elapsed * self.kbps * 1000.0 / 8.0
-        self.available_bytes += accumulated_bytes
-
-      # process messages as long as the next message is sendable (latency or available bytes)
-      while (self.next_message is not None) and\
-          (flush_pipes or ((self.next_message['time'] <= now) and\
-                          (self.kbps <= .0 or self.next_message['size'] <= self.available_bytes))):
-        processed_messages = True
-        self.queue.task_done()
-        connection_id = self.next_message['connection']
-        if connection_id in connections:
-          if self.peer in connections[connection_id]:
-            try:
-              if self.kbps > .0:
-                self.available_bytes -= self.next_message['size']
-              connections[connection_id][self.peer].handle_message(self.next_message)
-            except:
-              # Clean up any disconnected connections
-              try:
-                connections[connection_id]['server'].close()
-              except:
-                pass
-              try:
-                connections[connection_id]['client'].close()
-              except:
-                pass
-              del connections[connection_id]
-        self.next_message = None
-        self.next_message = self.queue.get_nowait()
-    except:
-      pass
-
-    # Only accumulate bytes while we have messages that are ready to send
-    if self.next_message is None or self.next_message['time'] > now:
-      self.available_bytes = .0
-    self.last_tick = now
-
-    return processed_messages
-
-
-########################################################################################################################
-#   Threaded DNS resolver
-########################################################################################################################
-class AsyncDNS(threading.Thread):
-  def __init__(self, client_id, hostname, port, result_pipe):
-    threading.Thread.__init__(self)
-    self.hostname = hostname
-    self.port = port
-    self.client_id = client_id
-    self.result_pipe = result_pipe
-
-  def run(self):
-    try:
-      logging.debug('[{0:d}] AsyncDNS - calling getaddrinfo for {1}:{2:d}'.format(self.client_id, self.hostname, self.port))
-      addresses = socket.getaddrinfo(self.hostname, self.port)
-      logging.info('[{0:d}] Resolving {1}:{2:d} Completed'.format(self.client_id, self.hostname, self.port))
-    except:
-      addresses = ()
-      logging.info('[{0:d}] Resolving {1}:{2:d} Failed'.format(self.client_id, self.hostname, self.port))
-    message = {'message': 'resolved', 'connection': self.client_id, 'addresses': addresses}
-    self.result_pipe.SendMessage(message)
-
-
-########################################################################################################################
-#   TCP Client
-########################################################################################################################
-class TCPConnection(asyncore.dispatcher):
-  STATE_ERROR = -1
-  STATE_IDLE = 0
-  STATE_RESOLVING = 1
-  STATE_CONNECTING = 2
-  STATE_CONNECTED = 3
-
-  def __init__(self, client_id):
-    global options
-    asyncore.dispatcher.__init__(self)
-    self.client_id = client_id
-    self.state = self.STATE_IDLE
-    self.buffer = ''
-    self.addr = None
-    self.dns_thread = None
-    self.hostname = None
-    self.port = None
-    self.needs_config = True
-    self.needs_close = False
-    self.is_localhost = False
-    self.did_resolve = False
-
-  def SendMessage(self, type, message):
-    message['message'] = type
-    message['connection'] = self.client_id
-    in_pipe.SendMessage(message)
-
-  def handle_message(self, message):
-    if message['message'] == 'data' and 'data' in message and len(message['data']) and self.state == self.STATE_CONNECTED:
-      if not self.needs_close:
-        self.buffer += message['data']
-    elif message['message'] == 'resolve':
-      self.HandleResolve(message)
-    elif message['message'] == 'connect':
-      self.HandleConnect(message)
-    elif message['message'] == 'closed':
-      if len(self.buffer) == 0:
-        self.handle_close()
+          logging.critical("Error extracting the video frames from " + video)
       else:
-        self.needs_close = True
-
-  def handle_error(self):
-    logging.warning('[{0:d}] Error'.format(self.client_id))
-    if self.state == self.STATE_CONNECTING:
-      self.SendMessage('connected', {'success': False, 'address': self.addr})
-
-  def handle_close(self):
-    logging.info('[{0:d}] Server Connection Closed'.format(self.client_id))
-    self.state = self.STATE_ERROR
-    self.close()
-    try:
-      if self.client_id in connections:
-        if 'server' in connections[self.client_id]:
-          del connections[self.client_id]['server']
-        if 'client' in connections[self.client_id]:
-          self.SendMessage('closed', {})
-        else:
-          del connections[self.client_id]
-    except:
-      pass
-
-  def writable(self):
-    if self.state == self.STATE_CONNECTING:
-      self.state = self.STATE_CONNECTED
-      self.SendMessage('connected', {'success': True, 'address': self.addr})
-      logging.info('[{0:d}] Connected'.format(self.client_id))
-    return (len(self.buffer) > 0 and self.state == self.STATE_CONNECTED)
-
-  def handle_write(self):
-    if self.needs_config:
-      self.needs_config = False
-      self.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
-    sent = self.send(self.buffer)
-    logging.debug('[{0:d}] TCP => {1:d} byte(s)'.format(self.client_id, sent))
-    self.buffer = self.buffer[sent:]
-    if self.needs_close and len(self.buffer) == 0:
-      self.needs_close = False
-      self.handle_close()
-
-  def handle_read(self):
-    try:
-      while True:
-        data = self.recv(1460)
-        if data:
-          if self.state == self.STATE_CONNECTED:
-            logging.debug('[{0:d}] TCP <= {1:d} byte(s)'.format(self.client_id, len(data)))
-            self.SendMessage('data', {'data': data})
-        else:
-          return
-    except:
-      pass
-
-  def HandleResolve(self, message):
-    global in_pipe
-    global map_localhost
-    self.did_resolve = True
-    if 'hostname' in message:
-      self.hostname = message['hostname']
-    self.port = 0
-    if 'port' in message:
-      self.port = message['port']
-    logging.info('[{0:d}] Resolving {1}:{2:d}'.format(self.client_id, self.hostname, self.port))
-    if self.hostname == 'localhost':
-      self.hostname = '127.0.0.1'
-    if self.hostname == '127.0.0.1':
-      logging.info('[{0:d}] Connection to localhost detected'.format(self.client_id))
-      self.is_localhost = True
-    if (dest_addresses is not None) and (not self.is_localhost or map_localhost):
-      logging.info('[{0:d}] Resolving {1}:{2:d} to mapped address {3}'.format(self.client_id, self.hostname, self.port, dest_addresses))
-      self.SendMessage('resolved', {'addresses': dest_addresses})
+        logging.critical("Error creating output directory: " + directory)
     else:
-      self.state = self.STATE_RESOLVING
-      self.dns_thread = AsyncDNS(self.client_id, self.hostname, self.port, in_pipe)
-      self.dns_thread.start()
+      logging.critical("Input video file " + video + " does not exist")
+  else:
+    logging.info("Extracted video already exists in " + directory)
 
-  def HandleConnect(self, message):
-    global map_localhost
-    if 'addresses' in message and len(message['addresses']):
-      self.state = self.STATE_CONNECTING
-      if not self.did_resolve and message['addresses'][0] == '127.0.0.1':
-        logging.info('[{0:d}] Connection to localhost detected'.format(self.client_id))
-        self.is_localhost = True
-      if (dest_addresses is not None) and (not self.is_localhost or map_localhost):
-        self.addr = dest_addresses[0]
+
+def extract_frames(video, directory, full_resolution, viewport):
+  ok = False
+  logging.info("Extracting frames from " + video + " to " + directory)
+  decimate = get_decimate_filter()
+  if decimate is not None:
+    crop = ''
+    if viewport is not None:
+      crop = 'crop={0}:{1}:{2}:{3},'.format(viewport['width'], viewport['height'], viewport['x'], viewport['y'])
+    scale = 'scale=iw*min(400/iw\,400/ih):ih*min(400/iw\,400/ih),'
+    if full_resolution:
+      scale = ''
+    command = ['ffmpeg', '-v', 'debug', '-i', video, '-vsync', '0',
+               '-vf', crop + scale + decimate + '=0:64:640:0.001',
+               os.path.join(directory, 'img-%d.png')]
+    logging.debug(' '.join(command))
+    lines = []
+    p = subprocess.Popen(command, stderr=subprocess.PIPE)
+    while p.poll() is None:
+      lines.extend(iter(p.stderr.readline, ""))
+
+    match = re.compile('keep pts:[0-9]+ pts_time:(?P<timecode>[0-9\.]+)')
+    frame_count = 0
+    for line in lines:
+      m = re.search(match, line)
+      if m:
+        frame_count += 1
+        frame_time = int(math.ceil(float(m.groupdict().get('timecode')) * 1000))
+        src = os.path.join(directory, 'img-{0:d}.png'.format(frame_count))
+        dest = os.path.join(directory, 'video-{0:06d}.png'.format(frame_time))
+        logging.debug('Renaming ' + src + ' to ' + dest)
+        os.rename(src, dest)
+        ok = True
+
+  return ok
+
+
+def split_videos(directory, orange_file):
+  logging.debug("Splitting video on orange frames (this may take a while)...")
+  directories = []
+  current = 0
+  found_orange = False
+  video_dir = None
+  frames = sorted(glob.glob(os.path.join(directory, 'video-*.png')))
+  if len(frames):
+    for frame in frames:
+      if is_orange_frame(frame, orange_file):
+        if not found_orange:
+          found_orange = True
+          # Make a copy of the orange frame for the end of the current video
+          if video_dir is not None:
+            dest = os.path.join(video_dir, os.path.basename(frame))
+            shutil.copyfile(frame, dest)
+          current += 1
+          video_dir = os.path.join(directory, str(current))
+          logging.debug("Orange frame found: " + frame + ", starting video directory: " + video_dir)
+          if not os.path.isdir(video_dir):
+            os.mkdir(video_dir, 0755)
+          if os.path.isdir(video_dir):
+            video_dir = os.path.realpath(video_dir)
+            clean_directory(video_dir)
+            directories.append(video_dir)
+          else:
+            video_dir = None
       else:
-        self.addr = message['addresses'][0]
-      self.create_socket(self.addr[0], socket.SOCK_STREAM)
-      addr = self.addr[4][0]
-      if not self.is_localhost or map_localhost:
-        port = GetDestPort(message['port'])
+        found_orange = False
+      if video_dir is not None:
+        dest = os.path.join(video_dir, os.path.basename(frame))
+        os.rename(frame, dest)
       else:
-        port = message['port']
-      logging.info('[{0:d}] Connecting to {1}:{2:d}'.format(self.client_id, addr, port))
-      self.connect((addr, port))
+        logging.debug("Removing spurious frame " + frame + " at the beginning")
+        os.remove(frame)
+  return directories
 
 
-########################################################################################################################
-#   Socks5 Server
-########################################################################################################################
-class Socks5Server(asyncore.dispatcher):
-
-  def __init__(self, host, port):
-    asyncore.dispatcher.__init__(self)
-    self.create_socket(socket.AF_INET, socket.SOCK_STREAM)
-    try:
-      self.set_reuse_addr()
-      self.bind((host, port))
-      self.listen(socket.SOMAXCONN)
-      self.ipaddr, self.port = self.getsockname()
-      self.current_client_id = 0
-    except:
-      PrintMessage("Unable to listen on {0}:{1}. Is the port already in use?".format(host, port))
-      exit(1)
-
-  def handle_accept(self):
-    global connections
-    pair = self.accept()
-    if pair is not None:
-      sock, addr = pair
-      self.current_client_id += 1
-      logging.info('[{0:d}] Incoming connection from {1}'.format(self.current_client_id, repr(addr)))
-      connections[self.current_client_id] = {
-        'client' : Socks5Connection(sock, self.current_client_id),
-        'server' : None
-      }
-
-
-# Socks5 reference: https://en.wikipedia.org/wiki/SOCKS#SOCKS5
-class Socks5Connection(asyncore.dispatcher):
-  STATE_ERROR = -1
-  STATE_WAITING_FOR_HANDSHAKE = 0
-  STATE_WAITING_FOR_CONNECT_REQUEST = 1
-  STATE_RESOLVING = 2
-  STATE_CONNECTING = 3
-  STATE_CONNECTED = 4
-
-  def __init__(self, connected_socket, client_id):
-    global options
-    asyncore.dispatcher.__init__(self, connected_socket)
-    self.client_id = client_id
-    self.state = self.STATE_WAITING_FOR_HANDSHAKE
-    self.ip = None
-    self.addresses = None
-    self.hostname = None
-    self.port = None
-    self.requested_address = None
-    self.buffer = ''
-    self.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
-    self.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, 1460)
-    self.needs_close = False
-
-  def SendMessage(self, type, message):
-    message['message'] = type
-    message['connection'] = self.client_id
-    out_pipe.SendMessage(message)
-
-  def handle_message(self, message):
-    if message['message'] == 'data' and 'data' in message and len(message['data']) and self.state == self.STATE_CONNECTED:
-      if not self.needs_close:
-        self.buffer += message['data']
+def remove_orange_frames(directory, orange_file):
+  frames = sorted(glob.glob(os.path.join(directory, 'video-*.png')))
+  if len(frames):
+    # go through the first 20 frames and remove any orange ones. Unfortunately
+    # sometimes the video blinks from orange to white and back to orange as Chrome flips in
+    # an old render surface. Orange frames from the middle need to be dropped silently.
+    logging.debug("Scanning for orange frames...")
+    frame_count = 0
+    for frame in frames:
+      frame_count += 1
+      if is_orange_frame(frame, orange_file):
+        logging.debug("Removing Orange frame: " + frame)
+        os.remove(frame)
+      if frame_count > 20:
+        break
+    for frame in reversed(frames):
+      if is_orange_frame(frame, orange_file):
+        logging.debug("Removing orange frame " + frame + " from the end")
+        os.remove(frame)
       else:
-        logging.warning('[{0:d}] ERROR: data message received on closed connection'.format(self.client_id))
-    elif message['message'] == 'resolved':
-      self.HandleResolved(message)
-    elif message['message'] == 'connected':
-      self.HandleConnected(message)
-    elif message['message'] == 'closed':
-      if len(self.buffer) == 0:
-        logging.info('[{0:d}] Server connection close being processed, closing Browser connection'.format(self.client_id))
-        self.handle_close()
+        break
+
+
+def find_image_viewport(file):
+  try:
+    from PIL import Image
+    im = Image.open(file)
+    width, height = im.size
+    x = int(math.floor(width / 2))
+    y = int(math.floor(height / 2))
+    pixels = im.load()
+    background = pixels[x, y]
+
+    # Find the left edge
+    left = None
+    while left is None and x >= 0:
+      if not colors_are_similar(background, pixels[x, y]):
+        left = x + 1
       else:
-        logging.info('[{0:d}] Server connection close being processed, queuing browser connection close'.format(self.client_id))
-        self.needs_close = True
+        x -= 1
+    if left is None:
+      left = 0
+    logging.debug('Viewport left edge is {0:d}'.format(left))
 
-  def writable(self):
-    return (len(self.buffer) > 0)
+    # Find the right edge
+    x = int(math.floor(width / 2))
+    right = None
+    while right is None and x < width:
+      if not colors_are_similar(background, pixels[x, y]):
+        right = x - 1
+      else:
+        x += 1
+    if right is None:
+      right = width
+    logging.debug('Viewport right edge is {0:d}'.format(right))
 
-  def handle_write(self):
-    sent = self.send(self.buffer)
-    logging.debug('[{0:d}] SOCKS <= {1:d} byte(s)'.format(self.client_id, sent))
-    self.buffer = self.buffer[sent:]
-    if self.needs_close and len(self.buffer) == 0:
-      logging.info('[{0:d}] queued browser connection close being processed, closing Browser connection'.format(self.client_id))
-      self.needs_close = False
-      self.handle_close()
+    # Find the top edge
+    x = int(math.floor(width / 2))
+    top = None
+    while top is None and y >= 0:
+      if not colors_are_similar(background, pixels[x, y]):
+        top = y + 1
+      else:
+        y -= 1
+    if top is None:
+      top = 0
+    logging.debug('Viewport top edge is {0:d}'.format(top))
 
-  def handle_read(self):
-    global connections
-    global dns_cache
-    try:
-      while True:
-        # Consume in up-to packet-sized chunks (TCP packet payload as 1460 bytes from 1500 byte ethernet frames)
-        data = self.recv(1460)
-        if data:
-          data_len = len(data)
-          if self.state == self.STATE_CONNECTED:
-            logging.debug('[{0:d}] SOCKS => {1:d} byte(s)'.format(self.client_id, data_len))
-            self.SendMessage('data', {'data': data})
-          elif self.state == self.STATE_WAITING_FOR_HANDSHAKE:
-            self.state = self.STATE_ERROR #default to an error state, set correctly if things work out
-            if data_len >= 2 and ord(data[0]) == 0x05:
-              supports_no_auth = False
-              auth_count = ord(data[1])
-              if data_len == auth_count + 2:
-                for i in range(auth_count):
-                  offset = i + 2
-                  if ord(data[offset]) == 0:
-                    supports_no_auth = True
-              if supports_no_auth:
-                # Respond with a message that "No Authentication" was agreed to
-                logging.info('[{0:d}] New Socks5 client'.format(self.client_id))
-                response = chr(0x05) + chr(0x00)
-                self.state = self.STATE_WAITING_FOR_CONNECT_REQUEST
-                self.buffer += response
-          elif self.state == self.STATE_WAITING_FOR_CONNECT_REQUEST:
-            self.state = self.STATE_ERROR #default to an error state, set correctly if things work out
-            if data_len >= 10 and ord(data[0]) == 0x05 and ord(data[2]) == 0x00:
-              if ord(data[1]) == 0x01: #TCP connection (only supported method for now)
-                connections[self.client_id]['server'] = TCPConnection(self.client_id)
-              self.requested_address = data[3:]
-              port_offset = 0
-              if ord(data[3]) == 0x01:
-                port_offset = 8
-                self.ip = '{0:d}.{1:d}.{2:d}.{3:d}'.format(ord(data[4]), ord(data[5]), ord(data[6]), ord(data[7]))
-              elif ord(data[3]) == 0x03:
-                name_len = ord(data[4])
-                if data_len >= 6 + name_len:
-                  port_offset = 5 + name_len
-                  self.hostname = data[5:5 + name_len]
-              elif ord(data[3]) == 0x04 and data_len >= 22:
-                port_offset = 20
-                self.ip = ''
-                for i in range(16):
-                  self.ip += '{0:02x}'.format(ord(data[4 + i]))
-                  if i % 2 and i < 15:
-                    self.ip += ':'
-              if port_offset and connections[self.client_id]['server'] is not None:
-                self.port = 256 * ord(data[port_offset]) + ord(data[port_offset + 1])
-                if self.port:
-                  if self.ip is None and self.hostname is not None:
-                    if self.hostname in dns_cache:
-                      self.state = self.STATE_CONNECTING
-                      self.addresses = dns_cache[self.hostname]
-                      self.SendMessage('connect', {'addresses': self.addresses, 'port': self.port})
-                    else:
-                      self.state = self.STATE_RESOLVING
-                      self.SendMessage('resolve', {'hostname': self.hostname, 'port': self.port})
-                  elif self.ip is not None:
-                    self.state = self.STATE_CONNECTING
-                    logging.debug(
-                      '[{0:d}] Socks Connect - calling getaddrinfo for {1}:{2:d}'.format(self.client_id, self.ip, self.port))
-                    self.addresses = socket.getaddrinfo(self.ip, self.port)
-                    self.SendMessage('connect', {'addresses': self.addresses, 'port': self.port})
+    # Find the bottom edge
+    y = int(math.floor(height / 2))
+    bottom = None
+    while bottom is None and y < height:
+      if not colors_are_similar(background, pixels[x, y]):
+        bottom = y - 1
+      else:
+        y += 1
+    if bottom is None:
+      bottom = height
+    logging.debug('Viewport bottom edge is {0:d}'.format(bottom))
+
+    viewport = {'x': left, 'y': top, 'width': (right - left), 'height': (bottom - top)}
+
+  except Exception as e:
+    viewport = None
+
+  return viewport
+
+
+def find_video_viewport(video, directory, find_viewport, viewport_time):
+  global options
+  viewport = None
+  try:
+    from PIL import Image
+
+    frame = os.path.join(directory, 'viewport.png')
+    if os.path.isfile(frame):
+      os.remove(frame)
+    command = ['ffmpeg', '-i', video]
+    if (viewport_time):
+      command.extend(['-ss', viewport_time])
+    command.extend(['-frames:v', '1', frame])
+    subprocess.check_output(command)
+    if os.path.isfile(frame):
+      with Image.open(frame) as im:
+        width, height = im.size
+        logging.debug('{0} is {1:d}x{2:d}'.format(frame, width, height))
+      if options.notification:
+        im = Image.open(frame)
+        pixels = im.load()
+        middle = int(math.floor(height / 2))
+        # Find the top edge
+        x = 0
+        y = 0
+        background = pixels[x, y]
+        top = None
+        while top is None and y < middle:
+          if not colors_are_similar(background, pixels[x, y]):
+            top = y
+          else:
+            y += 1
+        if top is None:
+          top = 0
+        logging.debug('Window top edge is {0:d}'.format(top))
+
+        # Find the bottom edge
+        y = height - 1
+        background = pixels[x, y]
+        bottom = None
+        while bottom is None and y > middle:
+          if not colors_are_similar(background, pixels[x, y]):
+            bottom = y
+          else:
+            y -= 1
+        if bottom is None:
+          bottom = height - 1
+        logging.debug('Window bottom edge is {0:d}'.format(bottom))
+
+        viewport = {'x': 0, 'y': top, 'width': width, 'height': (bottom - top)}
+
+      elif find_viewport:
+        viewport = find_image_viewport(frame)
+      else:
+        viewport = {'x': 0, 'y': 0, 'width': width, 'height': height}
+      os.remove(frame)
+
+  except Exception as e:
+    viewport = None
+
+  return viewport
+
+
+def trim_video_end(directory, trim_time):
+  if trim_time > 0:
+    logging.debug("Trimming " + str(trim_time) + "ms from the end of the video in " + directory)
+    frames = sorted(glob.glob(os.path.join(directory, 'video-*.png')))
+    if len(frames):
+      match = re.compile('video-(?P<ms>[0-9]+)\.png')
+      m = re.search(match, frames[-1])
+      if m is not None:
+        frame_time = int(m.groupdict().get('ms'))
+        end_time = frame_time - trim_time
+        logging.debug("Trimming frames before " + str(end_time) + "ms")
+        for frame in frames:
+          m = re.search(match, frame)
+          if m is not None:
+            frame_time = int(m.groupdict().get('ms'))
+            if frame_time > end_time:
+              logging.debug("Trimming frame " + frame)
+              os.remove(frame)
+
+
+def adjust_frame_times(directory):
+  offset = None
+  frames = sorted(glob.glob(os.path.join(directory, 'video-*.png')))
+  if len(frames):
+    match = re.compile('video-(?P<ms>[0-9]+)\.png')
+    for frame in frames:
+      m = re.search(match, frame)
+      if m is not None:
+        frame_time = int(m.groupdict().get('ms'))
+        if offset is None:
+          offset = frame_time
+        new_time = frame_time - offset
+        dest = os.path.join(directory, 'ms_{0:06d}.png'.format(new_time))
+        os.rename(frame, dest)
+
+
+def find_first_frame(directory):
+  global options
+  try:
+    if options.findstart > 0 and options.findstart <= 100:
+      files = sorted(glob.glob(os.path.join(directory, 'video-*.png')))
+      count = len(files)
+      if count > 1:
+        from PIL import Image
+        blank = files[0]
+        with Image.open(blank) as im:
+          width, height = im.size
+        match_height = int(math.ceil(height * options.findstart / 100.0))
+        crop = '{0:d}x{1:d}+{2:d}+{3:d}'.format(width, match_height, 0, 0)
+        for i in xrange(count):
+          different = not frames_match(files[i], files[i + 1], 5, 100, crop, None)
+          logging.debug('Removing early frame {0} from the beginning'.format(files[i]))
+          os.remove(files[i])
+          if different:
+            break
+  except:
+    logging.exception('Error finding first frame')
+
+
+def find_render_start(directory):
+  global options
+  global client_viewport
+  try:
+    if options.renderignore > 0 and options.renderignore <= 100:
+      files = sorted(glob.glob(os.path.join(directory, 'video-*.png')))
+      count = len(files)
+      if count > 1:
+        from PIL import Image
+        first = files[0]
+        with Image.open(first) as im:
+          width, height = im.size
+        mask = {}
+        mask['width'] = int(math.floor(width * options.renderignore / 100))
+        mask['height'] = int(math.floor(height * options.renderignore / 100))
+        mask['x'] = int(math.floor(width / 2 - mask['width'] / 2))
+        mask['y'] = int(math.floor(height / 2 - mask['height'] / 2))
+        top = 10
+        right_margin = 10
+        bottom_margin = 10
+        if height > 400 or width > 400:
+          top = int(math.ceil(float(height) * 0.03))
+          right_margin = int(math.ceil(float(width) * 0.04))
+          bottom_margin = int(math.ceil(float(width) * 0.04))
+        height = max(height - top - bottom_margin, 1)
+        left = 0
+        width = max(width - right_margin, 1)
+        if client_viewport is not None:
+          height = max(client_viewport['height'] - top - bottom_margin, 1)
+          width = max(client_viewport['width'] - right_margin, 1)
+          left += client_viewport['x']
+          top += client_viewport['y']
+        crop = '{0:d}x{1:d}+{2:d}+{3:d}'.format(width, height, left, top)
+        for i in xrange(1, count):
+          if frames_match(first, files[i], 10, 100, crop, mask):
+            logging.debug('Removing pre-render frame {0}'.format(files[i]))
+            os.remove(files[i])
+          else:
+            break
+  except:
+    logging.exception('Error getting render start')
+
+
+def eliminate_duplicate_frames(directory):
+  global options
+  global client_viewport
+
+  try:
+    files = sorted(glob.glob(os.path.join(directory, 'ms_*.png')))
+    if len(files) > 1:
+      from PIL import Image
+      blank = files[0]
+      client_viewport = None
+      with Image.open(blank) as im:
+        width, height = im.size
+      if options.viewport and options.notification:
+        client_viewport = find_image_viewport(blank)
+        if client_viewport['width'] == width and client_viewport['height'] == height:
+          client_viewport = None
+
+      # Figure out the region of the image that we care about
+      top = 6
+      right_margin = 6
+      bottom_margin = 6
+      if height > 400 or width > 400:
+        top = int(math.ceil(float(height) * 0.03))
+        right_margin = int(math.ceil(float(width) * 0.03))
+        bottom_margin = int(math.ceil(float(width) * 0.03))
+      height = max(height - top - bottom_margin, 1)
+      left = 0
+      width = max(width - right_margin, 1)
+
+      if client_viewport is not None:
+        height = max(client_viewport['height'] - top - bottom_margin, 1)
+        width = max(client_viewport['width'] - right_margin, 1)
+        left += client_viewport['x']
+        top += client_viewport['y']
+
+      crop = '{0:d}x{1:d}+{2:d}+{3:d}'.format(width, height, left, top)
+      logging.debug('Viewport cropping set to ' + crop)
+
+      # Do a pass looking for the first non-blank frame with an allowance
+      # for up to a 10% per-pixel difference for noise in the white field.
+      count = len(files)
+      for i in xrange(1, count):
+        if frames_match(blank, files[i], 10, 0, crop, None):
+          logging.debug('Removing duplicate frame {0} from the beginning'.format(files[i]))
+          os.remove(files[i])
         else:
-          return
-    except:
-      pass
+          break
 
-  def handle_close(self):
-    logging.info('[{0:d}] Browser Connection Closed by browser'.format(self.client_id))
-    self.state = self.STATE_ERROR
-    self.close()
+      # Do another pass looking for the last frame but with an allowance for up
+      # to a 10% difference in individual pixels to deal with noise around text.
+      files = sorted(glob.glob(os.path.join(directory, 'ms_*.png')))
+      count = len(files)
+      duplicates = []
+      if count > 2:
+        files.reverse()
+        baseline = files[0]
+        previous_frame = baseline
+        for i in xrange(1, count):
+          if frames_match(baseline, files[i], 10, 0, crop, None):
+            if previous_frame is baseline:
+              duplicates.append(previous_frame)
+            else:
+              logging.debug('Removing duplicate frame {0} from the end'.format(previous_frame))
+              os.remove(previous_frame)
+            previous_frame = files[i]
+          else:
+            break
+      for duplicate in duplicates:
+        logging.debug('Removing duplicate frame {0} from the end'.format(duplicate))
+        os.remove(duplicate)
+
+  except:
+    logging.exception('Error processing frames for duplicates')
+
+
+def eliminate_similar_frames(directory):
+  global client_viewport
+  global options
+  try:
+    # only do this when decimate couldn't be used to eliminate similar frames
+    if options.notification:
+      files = sorted(glob.glob(os.path.join(directory, 'ms_*.png')))
+      count = len(files)
+      if count > 3:
+        crop = None
+        if client_viewport is not None:
+          crop = '{0:d}x{1:d}+{2:d}+{3:d}'.format(client_viewport['width'], client_viewport['height'],
+                                                  client_viewport['x'], client_viewport['y'])
+        baseline = files[1]
+        for i in xrange(2, count - 1):
+          if frames_match(baseline, files[i], 1, 0, crop, None):
+            logging.debug('Removing similar frame {0}'.format(files[i]))
+            os.remove(files[i])
+          else:
+            baseline = files[i]
+  except:
+    logging.exception('Error removing similar frames')
+
+
+def blank_first_frame(directory):
+  global options
+  try:
+    if options.forceblank:
+      files = sorted(glob.glob(os.path.join(directory, 'ms_*.png')))
+      count = len(files)
+      if count > 1:
+        from PIL import Image
+        with Image.open(files[0]) as im:
+          width, height = im.size
+        command = 'convert -size {0}x{1} xc:white PNG24:"{2}"'.format(width, height, files[0])
+        subprocess.call(command, shell=True)
+  except:
+    logging.exception('Error blanking first frame')
+
+
+def crop_viewport(directory):
+  global client_viewport
+  if client_viewport is not None:
     try:
-      if self.client_id in connections:
-        if 'client' in connections[self.client_id]:
-          del connections[self.client_id]['client']
-        if 'server' in connections[self.client_id]:
-          self.SendMessage('closed', {})
-        else:
-          del connections[self.client_id]
+      files = sorted(glob.glob(os.path.join(directory, 'ms_*.png')))
+      count = len(files)
+      if count > 0:
+        crop = '{0:d}x{1:d}+{2:d}+{3:d}'.format(client_viewport['width'], client_viewport['height'],
+                                                client_viewport['x'], client_viewport['y'])
+        for i in xrange(count):
+          command = 'convert "{0}" -crop {1} "{0}"'.format(files[i], crop)
+          subprocess.call(command, shell=True)
+
     except:
-      pass
+      logging.exception('Error cropping to viewport')
 
-  def HandleResolved(self, message):
-    global dns_cache
-    if self.state == self.STATE_RESOLVING:
-      if 'addresses' in message and len(message['addresses']):
-        self.state = self.STATE_CONNECTING
-        self.addresses = message['addresses']
-        dns_cache[self.hostname] = self.addresses
-        logging.debug('[{0:d}] Resolved {1}, Connecting'.format(self.client_id, self.hostname))
-        self.SendMessage('connect', {'addresses': self.addresses, 'port': self.port})
-      else:
-        # Send host unreachable error
-        self.state = self.STATE_ERROR
-        self.buffer += chr(0x05) + chr(0x04) + self.requested_address
 
-  def HandleConnected(self, message):
-    if 'success' in message and self.state == self.STATE_CONNECTING:
-      response = chr(0x05)
-      if message['success']:
-        response += chr(0x00)
-        logging.debug('[{0:d}] Connected to {1}'.format(self.client_id, self.hostname))
-        self.state = self.STATE_CONNECTED
-      else:
-        response += chr(0x04)
-        self.state = self.STATE_ERROR
-      response += chr(0x00)
-      response += self.requested_address
-      self.buffer += response
+def get_decimate_filter():
+  decimate = None
+  try:
+    filters = subprocess.check_output(['ffmpeg', '-filters'], stderr=subprocess.STDOUT)
+    lines = filters.split("\n")
+    match = re.compile('(?P<filter>[\w]*decimate).*V->V.*Remove near-duplicate frames')
+    for line in lines:
+      m = re.search(match, line)
+      if m is not None:
+        decimate = m.groupdict().get('filter')
+        break
+  except:
+    logging.critical('Error checking ffmpeg filters for decimate')
+    decimate = None
+  return decimate
+
+
+def clean_directory(directory):
+  files = glob.glob(os.path.join(directory, '*.png'))
+  for file in files:
+    os.remove(file)
+  files = glob.glob(os.path.join(directory, '*.jpg'))
+  for file in files:
+    os.remove(file)
+  files = glob.glob(os.path.join(directory, '*.json'))
+  for file in files:
+    os.remove(file)
+
+
+def is_orange_frame(file, orange_file):
+  orange = False
+  if os.path.isfile(orange_file):
+    command = ('convert "{0}" "(" "{1}" -gravity Center -crop 50x33%+0+0 -resize 200x200! ")" miff:- | '
+               'compare -metric AE - -fuzz 10% null:').format(orange_file, file)
+    compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
+    out, err = compare.communicate()
+    if re.match('^[0-9]+$', err):
+      different_pixels = int(err)
+      if different_pixels < 100:
+        orange = True
+
+  return orange
+
+
+def colors_are_similar(a, b):
+  similar = True
+  for x in xrange(3):
+    if abs(a[x] - b[x]) > 25:
+      similar = False
+
+  return similar
+
+
+def frames_match(image1, image2, fuzz_percent, max_differences, crop_region, mask_rect):
+  match = False
+  fuzz = ''
+  if fuzz_percent > 0:
+    fuzz = '-fuzz {0:d}% '.format(fuzz_percent)
+  crop = ''
+  if crop_region is not None:
+    crop = '-crop {0} '.format(crop_region)
+  if mask_rect is None:
+    img1 = '"{0}"'.format(image1)
+    img2 = '"{0}"'.format(image2)
+  else:
+    img1 = '( "{0}" -size {1}x{2} xc:white -geometry +{3}+{4} -compose over -composite )'.format(
+      image1, mask_rect['width'], mask_rect['height'], mask_rect['x'], mask_rect['y'])
+    img2 = '( "{0}" -size {1}x{2} xc:white -geometry +{3}+{4} -compose over -composite )'.format(
+      image2, mask_rect['width'], mask_rect['height'], mask_rect['x'], mask_rect['y'])
+  command = 'convert {0} {1} {2}miff:- | compare -metric AE - {3}null:'.format(img1, img2, crop, fuzz)
+  if platform.system() != 'Windows':
+    command = command.replace('(', '\\(').replace(')', '\\)')
+  compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
+  out, err = compare.communicate()
+  if re.match('^[0-9]+$', err):
+    different_pixels = int(err)
+    if different_pixels <= max_differences:
+      match = True
+  else:
+    logging.debug('Unexpected compare result: out: "{0}", err: "{1}"'.format(out, err))
+
+  return match
+
+
+def generate_orange_png(orange_file):
+  try:
+    from PIL import Image, ImageDraw
+
+    im = Image.new('RGB', (200, 200))
+    draw = ImageDraw.Draw(im)
+    draw.rectangle([0, 0, 200, 200], fill=(222, 100, 13))
+    del draw
+    im.save(orange_file, 'PNG')
+  except:
+    logging.exception('Error generating orange png ' + orange_file)
+
+
+def synchronize_to_timeline(directory, timeline_file):
+  offset = get_timeline_offset(timeline_file)
+  if offset > 0:
+    frames = sorted(glob.glob(os.path.join(directory, 'ms_*.png')))
+    match = re.compile('ms_(?P<ms>[0-9]+)\.png')
+    for frame in frames:
+      m = re.search(match, frame)
+      if m is not None:
+        frame_time = int(m.groupdict().get('ms'))
+        new_time = max(frame_time - offset, 0)
+        dest = os.path.join(directory, 'ms_{0:06d}.png'.format(new_time))
+        if frame != dest:
+          if os.path.isfile(dest):
+            os.remove(dest)
+          os.rename(frame, dest)
+
+
+def get_timeline_offset(timeline_file):
+  offset = 0
+  try:
+    file_name, ext = os.path.splitext(timeline_file)
+    if ext.lower() == '.gz':
+      f = gzip.open(timeline_file, 'rb')
+    else:
+      f = open(timeline_file, 'r')
+    timeline = json.load(f)
+    f.close()
+    last_paint = None
+    first_navigate = None
+
+    # In the case of a trace instead of a timeline we want the list of events
+    if 'traceEvents' in timeline:
+      timeline = timeline['traceEvents']
+
+    for timeline_event in timeline:
+      paint_time = get_timeline_event_paint_time(timeline_event)
+      if paint_time is not None:
+        last_paint = paint_time
+      first_navigate = get_timeline_event_navigate_time(timeline_event)
+      if first_navigate is not None:
+        break
+
+    if last_paint is not None and first_navigate is not None and first_navigate > last_paint:
+      offset = int(round(first_navigate - last_paint))
+      logging.info(
+        "Trimming {0:d}ms from the start of the video based on timeline synchronization".format(offset))
+  except:
+    logging.critical("Error processing timeline file " + timeline_file)
+
+  return offset
+
+
+def get_timeline_event_paint_time(timeline_event):
+  paint_time = None
+  if 'cat' in timeline_event:
+    if (timeline_event['cat'].find('devtools.timeline') >= 0 and
+            'ts' in timeline_event and
+            'name' in timeline_event and (timeline_event['name'].find('Paint') >= 0 or
+                                              timeline_event['name'].find('CompositeLayers') >= 0)):
+      paint_time = float(timeline_event['ts']) / 1000.0
+      if 'dur' in timeline_event:
+        paint_time += float(timeline_event['dur']) / 1000.0
+  elif 'method' in timeline_event:
+    if (timeline_event['method'] == 'Timeline.eventRecorded' and
+            'params' in timeline_event and 'record' in timeline_event['params']):
+      paint_time = get_timeline_event_paint_time(timeline_event['params']['record'])
+  else:
+    if ('type' in timeline_event and
+          (timeline_event['type'] == 'Rasterize' or
+               timeline_event['type'] == 'CompositeLayers' or
+               timeline_event['type'] == 'Paint')):
+      if 'endTime' in timeline_event:
+        paint_time = timeline_event['endTime']
+      elif 'startTime' in timeline_event:
+        paint_time = timeline_event['startTime']
+
+    # Check for any child paint events
+    if 'children' in timeline_event:
+      for child in timeline_event['children']:
+        child_paint_time = get_timeline_event_paint_time(child)
+        if child_paint_time is not None and (paint_time is None or child_paint_time > paint_time):
+          paint_time = child_paint_time
+
+  return paint_time
+
+
+def get_timeline_event_navigate_time(timeline_event):
+  navigate_time = None
+  if 'cat' in timeline_event:
+    if (timeline_event['cat'].find('devtools.timeline') >= 0 and
+            'ts' in timeline_event and
+            'name' in timeline_event and timeline_event['name'] == 'ResourceSendRequest'):
+      navigate_time = float(timeline_event['ts']) / 1000.0
+  elif 'method' in timeline_event:
+    if (timeline_event['method'] == 'Timeline.eventRecorded' and
+            'params' in timeline_event and 'record' in timeline_event['params']):
+      navigate_time = get_timeline_event_navigate_time(timeline_event['params']['record'])
+  else:
+    if ('type' in timeline_event and
+            timeline_event['type'] == 'ResourceSendRequest' and
+            'startTime' in timeline_event):
+      navigate_time = timeline_event['startTime']
+
+    # Check for any child paint events
+    if 'children' in timeline_event:
+      for child in timeline_event['children']:
+        child_navigate_time = get_timeline_event_navigate_time(child)
+        if child_navigate_time is not None and (navigate_time is None or child_navigate_time < navigate_time):
+          navigate_time = child_navigate_time
+
+  return navigate_time
 
 
 ########################################################################################################################
-#   stdin command processor
+#   Histogram calculations
 ########################################################################################################################
-class CommandProcessor():
-  def __init__(self):
-    thread = threading.Thread(target = self.run, args=())
-    thread.daemon = True
-    thread.start()
 
-  def run(self):
-    global must_exit
-    while not must_exit:
-      for line in iter(sys.stdin.readline, ''):
-        self.ProcessCommand(line.strip())
 
-  def ProcessCommand(self, input):
-    global in_pipe
-    global out_pipe
-    global needs_flush
-    global REMOVE_TCP_OVERHEAD
-    global port_mappings
-    if len(input):
-      ok = False
-      try:
-        command = input.split()
-        if len(command) and len(command[0]):
-          if command[0].lower() == 'flush':
-            ok = True
-          elif command[0].lower() == 'set' and len(command) >= 3:
-            if command[1].lower() == 'rtt' and len(command[2]):
-              rtt = float(command[2])
-              latency = rtt / 2000.0
-              in_pipe.latency = latency
-              out_pipe.latency = latency
-              ok = True
-            elif command[1].lower() == 'inkbps' and len(command[2]):
-              in_pipe.kbps = float(command[2]) * REMOVE_TCP_OVERHEAD
-              ok = True
-            elif command[1].lower() == 'outkbps' and len(command[2]):
-              out_pipe.kbps = float(command[2]) * REMOVE_TCP_OVERHEAD
-              ok = True
-            elif command[1].lower() == 'mapports' and len(command[2]):
-              SetPortMappings(command[2])
-              ok = True
-          elif command[0].lower() == 'reset' and len(command) >= 2:
-            if command[1].lower() == 'rtt' or command[1].lower() == 'all':
-              in_pipe.latency = 0
-              out_pipe.latency = 0
-              ok = True
-            if command[1].lower() == 'inkbps' or command[1].lower() == 'all':
-              in_pipe.kbps = 0
-              ok = True
-            if command[1].lower() == 'outkbps' or command[1].lower() == 'all':
-              out_pipe.kbps = 0
-              ok = True
-            if command[1].lower() == 'mapports' or command[1].lower() == 'all':
-              port_mappings = {}
-              ok = True
+def calculate_histograms(directory, histograms_file, force):
+  if not os.path.isfile(histograms_file) or force:
+    try:
+      extension = None
+      directory = os.path.realpath(directory)
+      first_frame = os.path.join(directory, 'ms_000000')
+      if os.path.isfile(first_frame + '.png'):
+        extension = '.png'
+      elif os.path.isfile(first_frame + '.jpg'):
+        extension = '.jpg'
+      if extension is not None:
+        histograms = []
+        frames = sorted(glob.glob(os.path.join(directory, 'ms_*' + extension)))
+        match = re.compile('ms_(?P<ms>[0-9]+)\.')
+        for frame in frames:
+          m = re.search(match, frame)
+          if m is not None:
+            frame_time = int(m.groupdict().get('ms'))
+            histogram = calculate_image_histogram(frame)
+            gc.collect()
+            if histogram is not None:
+              histograms.append({'time': frame_time, 'histogram': histogram})
+        if os.path.isfile(histograms_file):
+          os.remove(histograms_file)
+        f = gzip.open(histograms_file, 'wb')
+        json.dump(histograms, f)
+        f.close()
+      else:
+        logging.critical('No video frames found in ' + directory)
+    except:
+      logging.exception('Error calculating histograms')
+  else:
+    logging.debug('Histograms file {0} already exists'.format(histograms_file))
 
-          if ok:
-            needs_flush = True
-      except:
-        pass
-      if not ok:
-        PrintMessage('ERROR')
+
+def calculate_image_histogram(file):
+  logging.debug('Calculating histogram for ' + file)
+  try:
+    from PIL import Image
+
+    im = Image.open(file)
+    width, height = im.size
+    pixels = im.load()
+    histogram = {'r': [0 for i in xrange(256)],
+                 'g': [0 for i in xrange(256)],
+                 'b': [0 for i in xrange(256)]}
+    for y in xrange(height):
+      for x in xrange(width):
+        try:
+          pixel = pixels[x, y]
+          # Don't include White pixels (with a tiny bit of slop for compression artifacts)
+          if pixel[0] < 250 or pixel[1] < 250 or pixel[2] < 250:
+            histogram['r'][pixel[0]] += 1
+            histogram['g'][pixel[1]] += 1
+            histogram['b'][pixel[2]] += 1
+        except:
+          pass
+  except:
+    histogram = None
+    logging.exception('Error calculating histogram for ' + file)
+  return histogram
+
+
+########################################################################################################################
+#   JPEG conversion
+########################################################################################################################
+
+
+def convert_to_jpeg(directory, quality):
+  directory = os.path.realpath(directory)
+  files = sorted(glob.glob(os.path.join(directory, 'ms_*.png')))
+  match = re.compile('(?P<base>ms_[0-9]+\.)')
+  for file in files:
+    m = re.search(match, file)
+    if m is not None:
+      dest = os.path.join(directory, m.groupdict().get('base') + 'jpg')
+      if os.path.isfile(dest):
+        os.remove(dest)
+      command = 'convert "{0}" -set colorspace sRGB -quality {1:d} "{2}"'.format(file, quality, dest)
+      subprocess.call(command, shell=True)
+      if os.path.isfile(dest):
+        os.remove(file)
+
+
+########################################################################################################################
+#   Reduce the number of saved video frames if necessary
+########################################################################################################################
+def cap_frame_count(directory, maxframes):
+  directory = os.path.realpath(directory)
+  frames = sorted(glob.glob(os.path.join(directory, 'ms_*.png')))
+  frame_count = len(frames)
+  if frame_count > maxframes:
+    # First pass, sample all video frames at 10fps instead of 60fps, keeping the first 20% of the target
+    logging.debug('Sampling 10fps: Reducing {0:d} frames to target of {1:d}...'.format(frame_count, maxframes))
+    skip_frames = int(maxframes * 0.2)
+    sample_frames(frames, 100, 0, skip_frames)
+
+    frames = sorted(glob.glob(os.path.join(directory, 'ms_*.png')))
+    frame_count = len(frames)
+    if frame_count > maxframes:
+      # Second pass, sample all video frames after the first 5 seconds at 2fps, keeping the first 40% of the target
+      logging.debug('Sampling 2fps: Reducing {0:d} frames to target of {1:d}...'.format(frame_count, maxframes))
+      skip_frames = int(maxframes * 0.4)
+      sample_frames(frames, 500, 5000, skip_frames)
+
+      frames = sorted(glob.glob(os.path.join(directory, 'ms_*.png')))
+      frame_count = len(frames)
+      if frame_count > maxframes:
+        # Third pass, sample all video frames after the first 10 seconds at 1fps, keeping the first 60% of the target
+        logging.debug('Sampling 1fps: Reducing {0:d} frames to target of {1:d}...'.format(frame_count, maxframes))
+        skip_frames = int(maxframes * 0.6)
+        sample_frames(frames, 1000, 10000, skip_frames)
+
+  logging.debug('{0:d} frames final count with a target max of {1:d} frames...'.format(frame_count, maxframes))
+
+
+def sample_frames(frames, interval, start_ms, skip_frames):
+  frame_count = len(frames)
+  if frame_count > 3:
+    # Always keep the first and last frames, only sample in the middle
+    first_frame = frames[0]
+    first_change = frames[1]
+    last_frame = frames[-1]
+    match = re.compile('ms_(?P<ms>[0-9]+)\.')
+    m = re.search(match, first_change)
+    first_change_time = 0
+    if m is not None:
+      first_change_time = int(m.groupdict().get('ms'))
+    last_bucket = None
+    logging.debug('Sapling frames in {0:d}ms intervals after {1:d} ms, skipping {2:d} frames...'.format(interval,
+                                                                                                        first_change_time + start_ms,
+                                                                                                        skip_frames))
+    frame_count = 0;
+    for frame in frames:
+      m = re.search(match, frame)
+      if m is not None:
+        frame_count += 1
+        frame_time = int(m.groupdict().get('ms'))
+        frame_bucket = int(math.floor(frame_time / interval))
+        if (frame_time > first_change_time + start_ms and
+                frame_bucket == last_bucket and
+                frame != first_frame and
+                frame != first_change and
+                frame != last_frame and
+                frame_count > skip_frames):
+          logging.debug('Removing sampled frame ' + frame)
+          os.remove(frame)
+        last_bucket = frame_bucket
+
+
+########################################################################################################################
+#   Visual Metrics
+########################################################################################################################
+
+
+def calculate_visual_metrics(histograms_file, start, end, perceptual, dirs):
+  metrics = None
+  histograms = load_histograms(histograms_file, start, end)
+  if histograms is not None and len(histograms) > 0:
+    progress = calculate_visual_progress(histograms)
+    if len(histograms) > 1:
+      metrics = [
+        {'name': 'First Visual Change', 'value': histograms[1]['time']},
+        {'name': 'Last Visual Change', 'value': histograms[-1]['time']},
+        {'name': 'Speed Index', 'value': calculate_speed_index(progress)}
+      ]
+      if perceptual:
+        metrics.append({'name': 'Perceptual Speed Index',
+                        'value': calculate_perceptual_speed_index(progress, dirs)})
+    else:
+      metrics = [
+        {'name': 'First Visual Change', 'value': histograms[0]['time']},
+        {'name': 'Last Visual Change', 'value': histograms[0]['time']},
+        {'name': 'Visually Complete', 'value': histograms[0]['time']},
+        {'name': 'Speed Index', 'value': 0}
+      ]
+      if perceptual:
+        metrics.append({'name': 'Perceptual Speed Index', 'value': 0})
+    prog = ''
+    for p in progress:
+      if len(prog):
+        prog += ", "
+      prog += '{0:d}={1:d}%'.format(p['time'], int(p['progress']))
+    metrics.append({'name': 'Visual Progress', 'value': prog})
+
+  return metrics
+
+
+def load_histograms(histograms_file, start, end):
+  histograms = None
+  if os.path.isfile(histograms_file):
+    f = gzip.open(histograms_file)
+    original = json.load(f)
+    f.close()
+    if start != 0 or end != 0:
+      histograms = []
+      for histogram in original:
+        if histogram['time'] <= start:
+          histogram['time'] = start
+          histograms = [histogram]
+        elif histogram['time'] <= end:
+          histograms.append(histogram)
+        else:
+          break
+    else:
+      histograms = original
+  return histograms
+
+
+def calculate_visual_progress(histograms):
+  progress = []
+  first = histograms[0]['histogram']
+  last = histograms[-1]['histogram']
+  for index, histogram in enumerate(histograms):
+    p = calculate_frame_progress(histogram['histogram'], first, last)
+    progress.append({'time': histogram['time'],
+                     'progress': p})
+    logging.debug('{0:d}ms - {1:d}% Complete'.format(histogram['time'], int(p)))
+  return progress
+
+
+def calculate_frame_progress(histogram, start, final):
+  total = 0;
+  matched = 0;
+  slop = 5  # allow for matching slight color variations
+  channels = ['r', 'g', 'b']
+  for channel in channels:
+    channel_total = 0
+    channel_matched = 0
+    buckets = 256
+    available = [0 for i in xrange(buckets)]
+    for i in xrange(buckets):
+      available[i] = abs(histogram[channel][i] - start[channel][i])
+    for i in xrange(buckets):
+      target = abs(final[channel][i] - start[channel][i])
+      if (target):
+        channel_total += target
+        low = max(0, i - slop)
+        high = min(buckets, i + slop)
+        for j in xrange(low, high):
+          this_match = min(target, available[j])
+          available[j] -= this_match
+          channel_matched += this_match
+          target -= this_match
+    total += channel_total
+    matched += channel_matched
+  progress = (float(matched) / float(total)) if total else 1
+  return math.floor(progress * 100)
+
+
+def find_visually_complete(progress):
+  time = 0
+  for p in progress:
+    if int(p['progress']) == 100:
+      time = p['time']
+      break
+    elif time == 0:
+      time = p['time']
+  return time
+
+
+def calculate_speed_index(progress):
+  si = 0
+  last_ms = progress[0]['time']
+  last_progress = progress[0]['progress']
+  for p in progress:
+    elapsed = p['time'] - last_ms
+    si += elapsed * (1.0 - last_progress)
+    last_ms = p['time']
+    last_progress = p['progress'] / 100.0
+  return int(si)
+
+
+def calculate_perceptual_speed_index(progress, directory):
+  from ssim import compute_ssim
+  x = len(progress)
+  dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
+  first_paint_frame = os.path.join(dir, "ms_{0:06d}.png".format(progress[1]["time"]))
+  target_frame = os.path.join(dir, "ms_{0:06d}.png".format(progress[x - 1]["time"]))
+  ssim_1 = compute_ssim(first_paint_frame, target_frame)
+  per_si = float(progress[1]['time'])
+  last_ms = progress[1]['time']
+  # Full Path of the Target Frame
+  logging.debug("Target image for perSI is %s" % target_frame)
+  ssim = ssim_1
+  for p in progress[1:]:
+    elapsed = p['time'] - last_ms
+    # print '*******elapsed %f'%elapsed
+    # Full Path of the Current Frame
+    current_frame = os.path.join(dir, "ms_{0:06d}.png".format(p["time"]))
+    logging.debug("Current Image is %s" % current_frame)
+    # Takes full path of PNG frames to compute SSIM value
+    per_si += elapsed * (1.0 - ssim)
+    ssim = compute_ssim(current_frame, target_frame)
+    gc.collect()
+    last_ms = p['time']
+  return int(per_si)
+
+
+########################################################################################################################
+#   Check any dependencies
+########################################################################################################################
+
+
+def check_config():
+  ok = True
+
+  print 'ffmpeg:  ',
+  if get_decimate_filter() is not None:
+    print 'OK'
+  else:
+    print 'FAIL'
+    ok = False
+
+  print 'convert: ',
+  if check_process('convert -version', 'ImageMagick'):
+    print 'OK'
+  else:
+    print 'FAIL'
+    ok = False
+
+  print 'compare: ',
+  if check_process('compare -version', 'ImageMagick'):
+    print 'OK'
+  else:
+    print 'FAIL'
+    ok = False
+
+  print 'Pillow:  ',
+  try:
+    from PIL import Image, ImageDraw
+
+    print 'OK'
+  except:
+    print 'FAIL'
+    ok = False
+
+  print 'SSIM:    ',
+  try:
+    from ssim import compute_ssim
+
+    print 'OK'
+  except:
+    print 'FAIL'
+    ok = False
+
+  return ok
+
+
+def check_process(command, output):
+  ok = False
+  try:
+    out = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=True)
+    if out.find(output) > -1:
+      ok = True
+  except:
+    ok = False
+  return ok
 
 
 ########################################################################################################################
 #   Main Entry Point
 ########################################################################################################################
+
+
 def main():
-  global server
-  global options
-  global in_pipe
-  global out_pipe
-  global dest_addresses
-  global port_mappings
-  global map_localhost
   import argparse
-  global REMOVE_TCP_OVERHEAD
-  parser = argparse.ArgumentParser(description='Traffic-shaping socks5 proxy.',
-                                   prog='tsproxy')
-  parser.add_argument('-v', '--verbose', action='count', help="Increase verbosity (specify multiple times for more). -vvvv for full debug output.")
-  parser.add_argument('-b', '--bind', default='localhost', help="Server interface address (defaults to localhost).")
-  parser.add_argument('-p', '--port', type=int, default=1080, help="Server port (defaults to 1080, use 0 for randomly assigned).")
-  parser.add_argument('-r', '--rtt', type=float, default=.0, help="Round Trip Time Latency (in ms).")
-  parser.add_argument('-i', '--inkbps', type=float, default=.0, help="Download Bandwidth (in 1000 bits/s - Kbps).")
-  parser.add_argument('-o', '--outkbps', type=float, default=.0, help="Upload Bandwidth (in 1000 bits/s - Kbps).")
-  parser.add_argument('-w', '--window', type=int, default=10, help="Emulated TCP initial congestion window (defaults to 10).")
-  parser.add_argument('-d', '--desthost', help="Redirect all outbound connections to the specified host.")
-  parser.add_argument('-m', '--mapports', help="Remap outbound ports. Comma-separated list of original:new with * as a wildcard. --mapports '443:8443,*:8080'")
-  parser.add_argument('-l', '--localhost', action='store_true', default=False,
-                      help="Include connections already destined for localhost/127.0.0.1 in the host and port remapping.")
+  global options
+
+  parser = argparse.ArgumentParser(description='Calculate visual performance metrics from a video.',
+                                   prog='visualmetrics')
+  parser.add_argument('--version', action='version', version='%(prog)s 0.1')
+  parser.add_argument('-c', '--check', action='store_true', default=False,
+                      help="Check dependencies (ffmpeg, imagemagick, PIL, SSIM).")
+  parser.add_argument('-v', '--verbose', action='count', help="Increase verbosity (specify multiple times for more).")
+  parser.add_argument('-i', '--video', help="Input video file.")
+  parser.add_argument('-d', '--dir', help="Directory of video frames "
+                                          "(as input if exists or as output if a video file is specified).")
+  parser.add_argument('-g', '--histogram', help="Histogram file (as input if exists or as output if "
+                                                "histograms need to be calculated).")
+  parser.add_argument('-m', '--timeline', help="Timeline capture from Chrome dev tools. Used to synchronize the video"
+                                               " start time and only applies when orange frames are removed "
+                                               "(see --orange). The timeline file can be gzipped if it ends in .gz")
+  parser.add_argument('-q', '--quality', type=int, help="JPEG Quality "
+                                                        "(if specified, frames will be converted to JPEG).")
+  parser.add_argument('-l', '--full', action='store_true', default=False,
+                      help="Keep full-resolution images instead of resizing to 400x400 pixels")
+  parser.add_argument('-f', '--force', action='store_true', default=False,
+                      help="Force processing of a video file (overwrite existing directory).")
+  parser.add_argument('-o', '--orange', action='store_true', default=False,
+                      help="Remove orange-colored frames from the beginning of the video.")
+  parser.add_argument('--multiple', action='store_true', default=False,
+                      help="Multiple videos are combined, separated by orange frames."
+                           "In this mode only the extraction is done and analysis needs to be run separetely on "
+                           "each directory. Numbered directories will be created for each video under the output "
+                           "directory.")
+  parser.add_argument('-n', '--notification', action='store_true', default=False,
+                      help="Trim the notification and home bars from the window.")
+  parser.add_argument('-p', '--viewport', action='store_true', default=False,
+                      help="Locate and use the viewport from the first video frame.")
+  parser.add_argument('-t', '--viewporttime',
+                      help="Time of the video frame to use for identifying the viewport (in HH:MM:SS.xx format).")
+  parser.add_argument('-s', '--start', type=int, default=0, help="Start time (in milliseconds) for calculating "
+                                                                 "visual metrics.")
+  parser.add_argument('-e', '--end', type=int, default=0, help="End time (in milliseconds) for calculating "
+                                                               "visual metrics.")
+  parser.add_argument('--findstart', type=int, default=0, help="Find the start of activity by looking at the top X% "
+                                                               "of the video (like a browser address bar).")
+  parser.add_argument('--renderignore', type=int, default=0, help="Ignore the center X% of the frame when looking for "
+                                                                  "the first rendered frame (useful for Opera mini).")
+  parser.add_argument('--forceblank', action='store_true', default=False,
+                      help="Force the first frame to be blank white.")
+  parser.add_argument('--trimend', type=int, default=0, help="Time to trim from the end of the video "
+                                                             "(in milliseconds).")
+  parser.add_argument('--maxframes', type=int, default=0, help="Maximum number of video frames before reducing by "
+                                                               "sampling (to 10fps, 1fps, etc).")
+  parser.add_argument('-k', '--perceptual', action='store_true', default=False,
+                      help="Calculate perceptual Speed Index")
+  parser.add_argument('-j', '--json', action='store_true', default=False,
+                      help="Set output format to JSON")
+
   options = parser.parse_args()
+
+  if not options.check and not options.dir and not options.video and not options.histogram:
+    parser.error("A video, Directory of images or histograms file needs to be provided.\n\n"
+                 "Use -h to see available options")
+
+  if options.perceptual:
+    if not options.video:
+      parser.error("A video file needs to be provided.\n\n" "Use -h to see available options")
+
+  temp_dir = tempfile.mkdtemp(prefix='vis-')
+  directory = temp_dir
+  if options.dir is not None:
+    directory = options.dir
+  if options.histogram is not None:
+    histogram_file = options.histogram
+  else:
+    histogram_file = os.path.join(temp_dir, 'histograms.json.gz')
 
   # Set up logging
   log_level = logging.CRITICAL
@@ -610,106 +1222,54 @@ def main():
     log_level = logging.DEBUG
   logging.basicConfig(level=log_level, format="%(asctime)s.%(msecs)03d - %(message)s", datefmt="%H:%M:%S")
 
-  # Parse any port mappings
-  if options.mapports:
-    SetPortMappings(options.mapports)
+  if options.multiple:
+    options.orange = True
 
-  map_localhost = options.localhost
+  ok = False
+  try:
+    if not options.check:
+      viewport = None
+      if options.video:
+        orange_file = None
+        if options.orange:
+          orange_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'orange.png')
+        if options.orange and \
+            not os.path.isfile(orange_file):
+          orange_file = os.path.join(temp_dir, 'orange.png')
+          generate_orange_png(orange_file)
+        video_to_frames(options.video, directory, options.force, orange_file, options.multiple,
+                        options.viewport, options.viewporttime, options.full, options.timeline, options.trimend)
+      if not options.multiple:
+        # Calculate the histograms and visual metrics
+        calculate_histograms(directory, histogram_file, options.force)
+        metrics = calculate_visual_metrics(histogram_file, options.start, options.end, options.perceptual,
+                                           directory)
+        # JPEG conversion
+        if options.dir is not None and options.quality is not None:
+          convert_to_jpeg(directory, options.quality)
 
-  # Resolve the address for a rewrite destination host if one was specified
-  if options.desthost:
-    logging.debug('Startup - calling getaddrinfo for {0}:{1:d}'.format(options.desthost, GetDestPort(80)))
-    dest_addresses = socket.getaddrinfo(options.desthost, GetDestPort(80))
-
-  # Set up the pipes.  1/2 of the latency gets applied in each direction (and /1000 to convert to seconds)
-  in_pipe = TSPipe(TSPipe.PIPE_IN, options.rtt / 2000.0, options.inkbps * REMOVE_TCP_OVERHEAD)
-  out_pipe = TSPipe(TSPipe.PIPE_OUT, options.rtt / 2000.0, options.outkbps * REMOVE_TCP_OVERHEAD)
-
-  signal.signal(signal.SIGINT, signal_handler)
-  server = Socks5Server(options.bind, options.port)
-  command_processor = CommandProcessor()
-  PrintMessage('Started Socks5 proxy server on {0}:{1:d}\nHit Ctrl-C to exit.'.format(server.ipaddr, server.port))
-  run_loop()
-
-def signal_handler(signal, frame):
-  global server
-  global must_exit
-  logging.error('Exiting...')
-  must_exit = True
-  del server
-
-
-# Wrapper around the asyncore loop that lets us poll the in/out pipes every 1ms
-def run_loop():
-  global must_exit
-  global in_pipe
-  global out_pipe
-  global needs_flush
-  global flush_pipes
-  gc_check_count = 0
-  winmm = None
-
-  # increase the windows timer resolution to 1ms
-  if platform.system() == "Windows":
-    try:
-      import ctypes
-      winmm = ctypes.WinDLL('winmm')
-      winmm.timeBeginPeriod(1)
-    except:
-      pass
-
-  last_activity = time.clock()
-  # disable gc to avoid pauses during traffic shaping/proxying
-  gc.disable()
-  while not must_exit:
-    asyncore.poll(0.001, asyncore.socket_map)
-    if needs_flush:
-      flush_pipes = True
-      needs_flush = False
-    if in_pipe.tick():
-      last_activity = time.clock()
-    if out_pipe.tick():
-      last_activity = time.clock()
-    if flush_pipes:
-      PrintMessage('OK')
-      flush_pipes = False
-    # Every 500 loops (~0.5 second) check to see if it is a good time to do a gc
-    if gc_check_count > 1000:
-      gc_check_count = 0
-      # manually gc after 5 seconds of idle
-      if time.clock() - last_activity >= 5:
-        last_activity = time.clock()
-        logging.debug("Triggering manual GC")
-        gc.collect()
+        if metrics is not None:
+          ok = True
+          if options.json:
+            data = dict()
+            for metric in metrics:
+              data[metric['name'].replace(' ', '')] = metric['value']
+            print json.dumps(data)
+          else:
+            for metric in metrics:
+              print "{0}: {1}".format(metric['name'], metric['value'])
     else:
-      gc_check_count += 1
+      ok = check_config()
+  except Exception as e:
+    logging.exception(e)
+    ok = False
 
-  if winmm is not None:
-    winmm.timeEndPeriod(1)
-
-def GetDestPort(port):
-  global port_mappings
-  if port_mappings is not None:
-    src_port = str(port)
-    if src_port in port_mappings:
-      return port_mappings[src_port]
-    elif 'default' in port_mappings:
-      return port_mappings['default']
-  return port
-
-
-def SetPortMappings(map_string):
-  global port_mappings
-  port_mappings = {}
-  map_string = map_string.strip('\'" \t\r\n')
-  for pair in map_string.split(','):
-    (src, dest) = pair.split(':')
-    if src == '*':
-      port_mappings['default'] = int(dest)
-      logging.debug("Default port mapped to port {0}".format(dest))
-    else:
-      logging.debug("Port {0} mapped to port {1}".format(src, dest))
-      port_mappings[src] = int(dest)
+  # Clean up
+  shutil.rmtree(temp_dir)
+  if ok:
+    exit(0)
+  else:
+    exit(1)
 
 
 if '__main__' == __name__:
