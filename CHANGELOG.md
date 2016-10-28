@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+UNRELEASED 
+-------------------------
+* Updated TS proxy that roll back the slow start changes to have less 
+ complex code.
+
 version 1.0-beta.9 2016-10-16
 -------------------------
 ### Fixed
