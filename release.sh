@@ -8,8 +8,9 @@ np $1
 
 PACKAGE_VERSION=$(grep -m1 version package.json | awk -F: '{ print $2 }' | sed 's/[", ]//g')
 
-docker build --no-cache -t sitespeedio/browsertime:$PACKAGE_VERSION .
+docker build --no-cache -t sitespeedio/browsertime:$PACKAGE_VERSION -t sitespeedio/browsertime:latest .
 
 docker login
 
 docker push sitespeedio/browsertime:$PACKAGE_VERSION
+docker push sitespeedio/browsertime:latest
