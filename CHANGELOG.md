@@ -1,4 +1,8 @@
 # Browsertime changelog
+UNRELEASED
+-------------------------
+### Fixed 
+* New TSProxy that is less complex
 
 version 1.0-beta.9 2016-10-16
 -------------------------
