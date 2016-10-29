@@ -2,6 +2,7 @@
 UNRELEASED
 -------------------------
 ### Fixed 
+* Entry timings in HAR files from Chrome were strings instead of numbers.
 * New TSProxy that is less complex
 
 version 1.0-beta.9 2016-10-16
