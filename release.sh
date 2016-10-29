@@ -1,4 +1,4 @@
- #!/bin/bash
+#!/bin/bash
 set -e
 # Super simple release script for browsertime
 # Lets use it it for now and make it better over time :)
@@ -6,7 +6,7 @@ set -e
 # npm install --global np
 np $1
 
-PACKAGE_VERSION=$(grep -m1 version package.json | awk -F: '{ print $2 }' | sed 's/[", ]//g')
+PACKAGE_VERSION=$(node -e 'console.log(require("./package").version)')
 
 docker build --no-cache -t sitespeedio/browsertime:$PACKAGE_VERSION -t sitespeedio/browsertime:latest .
 
