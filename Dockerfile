@@ -1,4 +1,4 @@
-FROM sitespeedio/webbrowsers
+FROM sitespeedio/webbrowsers:firefox-49.0-chrome-54.0
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 VOLUME /browsertime-results
 
 COPY package.json /usr/src/app/
-RUN npm install
+RUN npm install --production
 COPY . /usr/src/app
 
 WORKDIR /

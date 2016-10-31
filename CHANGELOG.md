@@ -1,15 +1,47 @@
 # Browsertime changelog
-
 UNRELEASED
+-------------------------
+### Fixed 
+* Entry timings in HAR files from Chrome were strings instead of numbers.
+* New TSProxy that is less complex
+
+version 1.0-beta.9 2016-10-16
+-------------------------
+### Fixed
+* Set default device to eth0 when running tc (without using the CLI).
+
+
+version 1.0-beta.8 2016-10-16
+-------------------------
+### Fixed
+* Also count the main request in number of requests when printing to the log.
+* And output the total transfer size of the tested page.
+* New version of TSProxy hopefully fixing the connect problems for some 
+sites (wikipedia) see https://github.com/WPO-Foundation/tsproxy/issues/9 
+
+
+### Changed
+* Removed option to not get statistics for the runs.
+* Rollbacked SLTC so we only use tc, to make it work out of the box on Ubuntu.
+
+version 1.0-beta.7 2016-10-17
+-------------------------
+### Changed
+* Moved the summary line to the logs and inside the engine so users of the API will get
+the same treatment.
+
+version 1.0-beta.6 2016-09-29
 -------------------------
 ### Added
 * Add chrome-esque summary line to stdout #189 thank you @moos for the PR!
 
+### Changed
+* Removed JSON input for setting connectivity custom profile, use cli params instead.
 
 version 1.0-beta.5 2016-09-22
 -------------------------
 ### Changed
-* Updated to Selenium v3.0.0-beta-3 
+* Updated to Selenium v3.0.0-beta-3
 * Updated to HAR export trigger beta 10 to make FF 49 functional
 
 version 1.0-beta.4 2016-09-19
