@@ -1,13 +1,8 @@
 'use strict';
 
-let SeleniumRunner = require('../lib/core/seleniumRunner');
+const SeleniumRunner = require('../lib/core/seleniumRunner');
 
-let isWindows = process.platform === 'win32';
-
-let BROWSERS = ['chrome', 'firefox'];
-if (isWindows) {
-  BROWSERS.push('ie');
-}
+const BROWSERS = ['chrome', 'firefox'];
 
 describe('SeleniumRunner', function() {
   let runner;

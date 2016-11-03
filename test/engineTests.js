@@ -1,13 +1,9 @@
 'use strict';
 
-let path = require('path'),
+const path = require('path'),
   Engine = require('../lib/core/engine');
 
-let BROWSERS = ['chrome', 'firefox'];
-
-if (process.platform === 'win32') {
-  BROWSERS.push('ie');
-}
+const BROWSERS = ['chrome', 'firefox'];
 
 describe('Engine', function() {
   let engine;
