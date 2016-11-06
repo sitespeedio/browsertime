@@ -1,6 +1,9 @@
 # Browsertime changelog
 UNRELEASED
 -------------------------
+### Added
+* Added initiator of each request entry to chrome HAR
+
 ### Fixed 
 * Entry timings in HAR files from Chrome were strings instead of numbers.
 * New TSProxy that is less complex
