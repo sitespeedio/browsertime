@@ -12,6 +12,7 @@ UNRELEASED
 * Upgraded Selenium to 3.0.0 (no beta!)
 * Upgraded Geckodriver to 0.11.1
 * Updated minimum NodeJS to 6.9.0 (same as Selenium). IMPORTANT: Selenium 3.0.0 will not work on NodeJS 4.x so you need to update.
+* Export chrome perflog dumps as json in extraJson property of the result, instead of a string in the extras property. Only relevant to api users.
 
 version 1.0-beta.9 2016-10-16
 -------------------------

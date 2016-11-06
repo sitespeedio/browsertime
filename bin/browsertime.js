@@ -66,8 +66,8 @@ function run(url, options) {
       if (result.har) {
         saveOperations.push(storageManager.writeJson(harName + '.har', result.har));
       }
-      forEach(result.extras, (value, key) =>
-        saveOperations.push(storageManager.writeData(key, value)));
+      forEach(result.extraJson, (value, key) =>
+        saveOperations.push(storageManager.writeJson(key, value)));
       forEach(result.screenshots, (value, index) =>
         saveOperations.push(storageManager.writeData(`screenshot-${index}.png`, value)));
 
