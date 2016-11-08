@@ -5,4 +5,5 @@ chromedriver.log
 doc/sequence-diagrams/*.png
 *.log
 *.iml
+.vscode
 /browsertime-results/
