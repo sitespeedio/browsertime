@@ -3,6 +3,7 @@ UNRELEASED
 -------------------------
 ### Added
 * Added initiator of each request entry to chrome HAR
+* Output SpeedIndex & firstVisualChange in the logs if you use VisualMetrics
 
 ### Fixed 
 * Entry timings in HAR files from Chrome were strings instead of numbers.
