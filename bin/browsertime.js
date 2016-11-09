@@ -13,7 +13,8 @@ let Engine = require('../').Engine,
   pick = require('lodash.pick'),
   fs = require('fs'),
   path = require('path'),
-  log = require('intel');
+  log = require('intel'),
+  Xvfb = require('xvfb');
 
 Promise.promisifyAll(fs);
 
@@ -49,7 +50,23 @@ function run(url, options) {
       (scriptsByCategory, userScripts) => merge(scriptsByCategory, userScripts));
   }
 
-  engine.start()
+let xvfb;
+if (options.xvfb) {
+    const width = options.chrome ? options.chrome.mobileEmulation.width : undefined;
+    const height = options.chrome ? options.chrome.mobileEmulation.height: undefined;
+
+    let widthAndHeight = (width && height) ? width + 'x' + height : options.viewPort;
+
+    xvfb = new Xvfb({
+        displayNum: '99',
+        silent: false,
+        reuse: true,
+        xvfb_args: ['-ac', '-nolisten', 'tcp', '-screen', 0, widthAndHeight + 'x16']
+    });
+    xvfb.startSync();
+}
+
+engine.start()
     .then(function() {
       return engine.run(url, scriptsByCategory);
     })
@@ -96,7 +113,12 @@ function run(url, options) {
     .catch(function() {
       process.exitCode = 1;
     })
-    .finally(process.exit); // explicitly exit to avoid a hanging process
+    .finally(() => {
+      if (xvfb) {
+        xvfb.stopSync();
+      }
+      process.exit;
+    }); // explicitly exit to avoid a hanging process
 }
 
 let cliResult = cli.parseCommandLine();
