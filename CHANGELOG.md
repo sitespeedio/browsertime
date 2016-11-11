@@ -11,6 +11,7 @@ UNRELEASED
  size for mdev fixing many numbers for SpeedIndex. 
 
 ### Changed
+* Configure proxies with --proxy.http and --proxy.https
 * New TSProxy that is less complex
 * Upgraded Selenium to 3.0.1 (no beta!)
 * Upgraded Geckodriver to 0.11.1
