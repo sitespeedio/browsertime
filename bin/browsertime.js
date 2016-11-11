@@ -49,7 +49,7 @@ function run(url, options) {
       (scriptsByCategory, userScripts) => merge(scriptsByCategory, userScripts));
   }
 
-  engine.start()
+engine.start()
     .then(function() {
       return engine.run(url, scriptsByCategory);
     })

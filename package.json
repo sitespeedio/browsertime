@@ -23,7 +23,8 @@
     "soprano-saxophone": "0.11.1",
     "tough-cookie": "2.3.2",
     "valid-url": "1.0.9",
-    "yargs": "5.0.0"
+    "yargs": "5.0.0",
+    "xvfb": "0.2.3"
   },
   "devDependencies": {
     "chai": "^3.4.0",
