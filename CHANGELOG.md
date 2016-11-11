@@ -6,6 +6,7 @@ UNRELEASED
 * Output SpeedIndex & firstVisualChange in the logs if you use VisualMetrics
 
 ### Fixed 
+* Generating HAR files from Chrome caused a crash in some cases. (#209)
 * Entry timings in HAR files from Chrome were strings instead of numbers.
 * One extra fix for outputing timing metrics in the console:  If timing metrics is < 1000 ms don't convert to seconds and let always have fixed\
  size for mdev fixing many numbers for SpeedIndex. 
