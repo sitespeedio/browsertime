@@ -1,5 +1,6 @@
 # Browsertime changelog
-UNRELEASED
+
+version 1.0-beta.10 2016-11-11
 -------------------------
 ### Added
 * Added initiator of each request entry to chrome HAR
