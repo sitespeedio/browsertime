@@ -4,7 +4,7 @@ set -e
 # Lets use it it for now and make it better over time :)
 # You need np for this to work
 # npm install --global np
-np $1
+np $*
 
 PACKAGE_VERSION=$(node -e 'console.log(require("./package").version)')
 
