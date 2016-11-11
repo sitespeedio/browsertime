@@ -36,6 +36,13 @@ To get the HAR from Firefox we use the [HAR Export Trigger](https://github.com/f
 
 Oh and you can run your own Selenium script before (<code>--preScript</code>) and after (<code>--postScript</code>) a URL is accessed so you can login/logout or do whatever you want.
 
+## Test using Docker
+You can build and test changes using Docker locally. Using Docker is cool because we have ready made containers with Firefox/Chrome and all the dependencies needed for running [VisualMetrics](https://github.com/WPO-Foundation/visualmetrics) to get SpeedIndex.
+
+<pre>
+$ docker build -t sitespeedio/browsertime .
+$ docker run --privileged --shm-size=1g --rm -v "$(pwd)":/browsertime-results sitespeedio/browsertime -n 1 --connectivity.engine tc -c cable --experimental.video https://www.sitespeed.io/
+</pre>
 
 ## The rewrite to 1.0
 The master is to a large degree a re-write of the internal implementation, the cli interface, and the node API. It's
