@@ -7,6 +7,8 @@ UNRELEASED
 
 ### Fixed 
 * Entry timings in HAR files from Chrome were strings instead of numbers.
+* One extra fix for outputing timing metrics in the console:  If timing metrics is < 1000 ms don't convert to seconds and let always have fixed\
+ size for mdev fixing many numbers for SpeedIndex. 
 
 ### Changed
 * New TSProxy that is less complex
@@ -15,6 +17,7 @@ UNRELEASED
 * Updated minimum NodeJS to 6.9.0 (same as Selenium). IMPORTANT: Selenium 3.0.0 will not work on NodeJS 4.x so you need to update.
 * Export chrome perflog dumps as json in extraJson property of the result, instead of a string in the extras property. Only relevant to api users.
 * Upgraded sltc so we use 0.6.0 with simplified tc that actually works
+* We now run xvfb from inside NodeJS so we can set the screen size, making it easy to record the correct size for VisualMetrics. We also use environment variables that starts with BROWSERTIME so we can turn on xvfb easily on Docker.
 
 version 1.0-beta.9 2016-10-16
 -------------------------
