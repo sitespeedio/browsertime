@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+UNRELEASED
+-------------------------
+### Fixed
+* Disabled infobars in Chrome (they messed up start render and SpeedIndex).
+
 version 1.0-beta.10 2016-11-11
 -------------------------
 ### Added
