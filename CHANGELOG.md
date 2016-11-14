@@ -2,6 +2,9 @@
 
 UNRELEASED
 -------------------------
+
+version 1.0-beta.11 2016-11-13
+-------------------------
 ### Fixed
 * Disabled infobars in Chrome (they messed up start render and SpeedIndex).
 
