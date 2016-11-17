@@ -39,7 +39,7 @@ addons:
     - python-sympy
     - python-nose
     - xz-utils
-  firefox: "49.0"
+  firefox: "latest"
 before_install:
 - pip install --user --upgrade pip
 - pip --version
