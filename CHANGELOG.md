@@ -55,6 +55,9 @@ version 1.0-beta.7 2016-10-17
 * Moved the summary line to the logs and inside the engine so users of the API will get
 the same treatment.
 
+### Unreleased
+* Defaulting video screensize to 1280x1024 for Firefox issue
+
 version 1.0-beta.6 2016-09-29
 -------------------------
 ### Added
