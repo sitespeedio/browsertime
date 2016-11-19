@@ -2,6 +2,8 @@
 
 UNRELEASED
 -------------------------
+### Added
+* Add a alias/custom name to your connectivity profile. Thank you @jpvincent for the idea! https://github.com/sitespeedio/sitespeed.io/issues/1329
 
 version 1.0-beta.11 2016-11-13
 -------------------------
