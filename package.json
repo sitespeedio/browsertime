@@ -17,7 +17,7 @@
     "lodash.pick": "4.4.0",
     "lodash.set": "4.3.2",
     "mkdirp": "0.5.1",
-    "moment": "2.15.2",
+    "moment": "2.16.0",
     "selenium-webdriver": "3.0.1",
     "sltc": "0.6.0",
     "soprano-saxophone": "0.11.1",
