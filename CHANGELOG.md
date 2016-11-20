@@ -4,6 +4,12 @@ UNRELEASED
 -------------------------
 ### Added
 * Add a alias/custom name to your connectivity profile. Thank you @jpvincent for the idea! https://github.com/sitespeedio/sitespeed.io/issues/1329
+* Cli option to remove the created video (record the video to get SpeedIndex and then remove the video).
+* Video is now mp4.
+
+
+### Fixed
+* Better exit handling when killing FFMpeg , overall code cleanup for ffmpeg/video
 
 version 1.0-beta.11 2016-11-13
 -------------------------
