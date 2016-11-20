@@ -7,9 +7,11 @@ UNRELEASED
 * Cli option to remove the created video (record the video to get SpeedIndex and then remove the video).
 * Video is now mp4.
 
-
 ### Fixed
 * Better exit handling when killing FFMpeg , overall code cleanup for ffmpeg/video
+
+### Changed
+* Videos are now named after the run.
 
 version 1.0-beta.11 2016-11-13
 -------------------------
@@ -22,11 +24,11 @@ version 1.0-beta.10 2016-11-11
 * Added initiator of each request entry to chrome HAR
 * Output SpeedIndex & firstVisualChange in the logs if you use VisualMetrics
 
-### Fixed 
+### Fixed
 * Generating HAR files from Chrome caused a crash in some cases. (#209)
 * Entry timings in HAR files from Chrome were strings instead of numbers.
 * One extra fix for outputing timing metrics in the console:  If timing metrics is < 1000 ms don't convert to seconds and let always have fixed\
- size for mdev fixing many numbers for SpeedIndex. 
+ size for mdev fixing many numbers for SpeedIndex.
 
 ### Changed
 * Configure proxies with --proxy.http and --proxy.https
@@ -49,8 +51,8 @@ version 1.0-beta.8 2016-10-16
 ### Fixed
 * Also count the main request in number of requests when printing to the log.
 * And output the total transfer size of the tested page.
-* New version of TSProxy hopefully fixing the connect problems for some 
-sites (wikipedia) see https://github.com/WPO-Foundation/tsproxy/issues/9 
+* New version of TSProxy hopefully fixing the connect problems for some
+sites (wikipedia) see https://github.com/WPO-Foundation/tsproxy/issues/9
 
 
 ### Changed
