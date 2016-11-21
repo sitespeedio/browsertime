@@ -207,7 +207,8 @@ describe('Engine', function() {
       });
 
       it('should run pre and post tasks', function() {
-        return engine.run('http://httpbin.org/html', {scripts});
+        return engine.run('data:text/html;charset=utf-8,', {scripts});
+
       });
 
 

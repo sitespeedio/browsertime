@@ -88,7 +88,7 @@ describe('SeleniumRunner', function() {
         });
         return runner.start()
           .then(function() {
-            return runner.loadAndWait('http://httpbin.org/html');
+            return runner.loadAndWait('data:text/html;charset=utf-8,');
           });
       });
 
@@ -148,7 +148,7 @@ describe('SeleniumRunner', function() {
         });
         return runner.start()
           .then(function() {
-            return runner.loadAndWait('http://httpbin.org/html');
+            return runner.loadAndWait('data:text/html;charset=utf-8,');
           });
       });
 
