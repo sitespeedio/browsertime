@@ -1,4 +1,9 @@
 # Browsertime changelog
+UNRELEASED
+-------------------------
+### Added
+* Default resource timing buffer is now 600 when you run with video. 
+
 
 version 1.0-beta.12 2016-11-20
 -------------------------
