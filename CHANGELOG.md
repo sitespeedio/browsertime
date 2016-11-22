@@ -9,6 +9,7 @@ version 1.0-beta.12 2016-11-20
 
 ### Fixed
 * Better exit handling when killing FFMpeg , overall code cleanup for ffmpeg/video
+* Introduced small wait time before record video that makes the connection problem for 3g using tc go away (hopefully).
 
 ### Changed
 * Videos are now named after the run.
