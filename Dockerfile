@@ -14,5 +14,6 @@ COPY . /usr/src/app
 WORKDIR /
 
 COPY docker/scripts/start.sh /start.sh
+COPY docker/Roboto-Black.ttf /Roboto-Black.ttf
 
 ENTRYPOINT ["/start.sh"]
