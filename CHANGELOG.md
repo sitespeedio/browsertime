@@ -2,8 +2,13 @@
 UNRELEASED
 -------------------------
 ### Added
-* Default resource timing buffer is now 600 when you run with video. 
+* Default resource timing buffer is now 600 when you run with video.
+* Set your own alias for connectivity https://github.com/sitespeedio/browsertime/pull/222
 
+### Fixed
+* The final mp4 is now compatible with all modern browsers, thank you [Walter Elbert](https://github.com/walterebert) for the help!
+
+* Local cache HAR entries in Firefox is removed https://github.com/sitespeedio/browsertime/pull/227
 
 version 1.0-beta.12 2016-11-20
 -------------------------
