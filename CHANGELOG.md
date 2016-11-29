@@ -10,6 +10,9 @@ UNRELEASED
 
 * Local cache HAR entries in Firefox is removed https://github.com/sitespeedio/browsertime/pull/227
 
+* Beta.12 broke android tetsing by setting viewport, fixed for next release.
+
+
 version 1.0-beta.12 2016-11-20
 -------------------------
 ### Added
