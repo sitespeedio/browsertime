@@ -41,7 +41,7 @@ You can build and test changes using Docker locally. Using Docker is cool becaus
 
 <pre>
 $ docker build -t sitespeedio/browsertime .
-$ docker run --privileged --shm-size=1g --rm -v "$(pwd)":/browsertime-results sitespeedio/browsertime -n 1 --connectivity.engine tc -c cable --experimental.video https://www.sitespeed.io/
+$ docker run --privileged --shm-size=1g --rm -v "$(pwd)":/browsertime-results sitespeedio/browsertime -n 1 --connectivity.engine tc -c cable --video --speedindex https://www.sitespeed.io/
 </pre>
 
 ## The rewrite to 1.0
