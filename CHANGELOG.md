@@ -10,11 +10,9 @@ UNRELEASED
 
 ### Fixed
 * The final mp4 is now compatible with all modern browsers, thank you [Walter Elbert](https://github.com/walterebert) for the help!
-
 * Local cache HAR entries in Firefox is removed https://github.com/sitespeedio/browsertime/pull/227
-
-* Beta.12 broke android tetsing by setting viewport, fixed for next release.
-
+* Beta.12 broke android testing by setting viewport, fixed for next release.
+* Chrome now always start inside of Docker, we finally got rid of the Chrome doesn't start in time https://github.com/SeleniumHQ/docker-selenium/issues/87#issuecomment-250475864
 
 version 1.0-beta.12 2016-11-20
 -------------------------
