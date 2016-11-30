@@ -1,9 +1,11 @@
-FROM sitespeedio/webbrowsers:firefox-50.0-chrome-54.0
+FROM sitespeedio/webbrowsers:firefox-50.0-chrome-54.0-1
 
 ENV BROWSERTIME_XVFB true
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
+
+RUN sudo apt-get update && sudo apt-get -qyy install dbus-x11
 
 VOLUME /browsertime-results
 
