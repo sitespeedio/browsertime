@@ -4,6 +4,8 @@ UNRELEASED
 ### Added
 * Default resource timing buffer is now 600 when you run with video.
 * Set your own alias for connectivity https://github.com/sitespeedio/browsertime/pull/222
+* Remove the orange color from the video (that makes us sync start) and added optional timer and metrics in the HTML
+* You can now choose if you want to have a video: --video and --speedindex
 
 ### Fixed
 * The final mp4 is now compatible with all modern browsers, thank you [Walter Elbert](https://github.com/walterebert) for the help!
