@@ -5,6 +5,9 @@ UNRELEASED
 ### Added
 * Display lastVisualChange in the video (and 2px smaller texts for metrics)
 
+### Fixed
+* Finetune the values on when to catch the first frame #236 to make firstVisualRender more accurate when using preURL
+
 version 1.0-beta.13 2016-11-30
 -------------------------
 ### Added
