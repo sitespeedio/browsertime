@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+UNRELEASED
+-------------------------
+### Added
+* Log last visual change in the info logs after a run.
+
 version 1.0-beta.14 2016-12-06
 -------------------------
 ### Added
