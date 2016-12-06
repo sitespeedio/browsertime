@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+UNRELEASED
+-------------------------
+### Added
+* Display lastVisualChange in the video (and 2px smaller texts for metrics)
+
 version 1.0-beta.13 2016-11-30
 -------------------------
 ### Added
