@@ -5,6 +5,9 @@ UNRELEASED
 ### Added
 * Log last visual change in the info logs after a run.
 
+### Fixed
+* Skip checking the first 5 frames when looking for when the video start (that makes the firstVisualRender more stable).
+
 version 1.0-beta.14 2016-12-06
 -------------------------
 ### Added
