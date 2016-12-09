@@ -7,6 +7,7 @@ UNRELEASED
 
 ### Fixed
 * Skip checking the first 5 frames when looking for when the video start (that makes the firstVisualRender more stable).
+* Getting right URL for initiator in Chrome.
 
 version 1.0-beta.14 2016-12-06
 -------------------------
