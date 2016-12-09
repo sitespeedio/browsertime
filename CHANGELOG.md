@@ -4,6 +4,7 @@ UNRELEASED
 -------------------------
 ### Added
 * Log last visual change in the info logs after a run.
+* Added _was_pushed using same standard as WebPageTest.
 
 ### Fixed
 * Skip checking the first 5 frames when looking for when the video start (that makes the firstVisualRender more stable).
