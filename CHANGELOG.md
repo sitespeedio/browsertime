@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-UNRELEASED
+version 1.0-beta.15 2016-12-10
 -------------------------
 ### Added
 * Log last visual change in the info logs after a run.
@@ -16,7 +16,7 @@ version 1.0-beta.14 2016-12-06
 * Display lastVisualChange in the video (and 2px smaller texts for metrics)
 
 ### Fixed
-* Finetune the values on when to catch the first frame #236 to make firstVisualRender more accurate when using preURL
+* Fine tune the values on when to catch the first frame #236 to make firstVisualRender more accurate when using preURL
 
 version 1.0-beta.13 2016-11-30
 -------------------------
