@@ -2,6 +2,7 @@
 UNRELEASED
 -------------------------
 ### Fixed
+* Increased time to wait for browser to start before starting video (now 1.5 s)
 
 version 1.0-beta.15 2016-12-10
 -------------------------
