@@ -1,5 +1,6 @@
 # Browsertime changelog
-UNRELEASED
+
+version 1.0-beta.16 2016-12-12
 -------------------------
 ### Fixed
 * Increased time to wait for browser to start before starting video (now 1.5 s)
