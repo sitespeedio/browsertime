@@ -1,6 +1,6 @@
 {
   "description": "Browsertime",
-  "version": "1.0.0-beta.15",
+  "version": "1.0.0-beta.16",
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "alto-saxophone": "2.25.0",
