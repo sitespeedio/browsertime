@@ -30,7 +30,7 @@
   "devDependencies": {
     "chai": "^3.4.0",
     "chai-as-promised": "^6.0.0",
-    "eslint": "^3.10.2",
+    "eslint": "^3.12.1",
     "longjohn": "^0.2.11",
     "mocha": "^3.1.2",
     "sequencediagrams": "0.0.8"
