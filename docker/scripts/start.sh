@@ -14,4 +14,15 @@ service dbus status > /dev/null
 export $(dbus-launch)
 export NSS_USE_SHARED_DB=ENABLED
 
-exec /usr/src/app/bin/browsertime.js "$@"
+# Inspired by docker-selenium way of shutting down
+function shutdown {
+  kill -s SIGTERM $PID
+  wait $PID
+}
+
+exec /usr/src/app/bin/browsertime.js "$@" &
+
+PID=$!
+
+trap shutdown SIGTERM SIGINT
+wait $PID
