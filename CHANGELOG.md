@@ -1,4 +1,8 @@
 # Browsertime changelog
+UNRELEASED
+-------------------------
+### Fixed
+* Skip checking the first 10 frames to make firstVisualRender even more stable.
 
 version 1.0-beta.15 2016-12-10
 -------------------------
