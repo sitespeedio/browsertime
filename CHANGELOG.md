@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+UNRELEASED
+-------------------------
+### Added
+* Upgraded to Chromedriver 2.26
+
 version 1.0-beta.17 2016-12-13
 -------------------------
 ### Fixed
