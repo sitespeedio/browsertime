@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+UNRELEASED
+-------------------------
+### Fixed
+* Setting 'network.dns.disableIPv6': true for Firefox makes Firefox in Docker 5s faster :/
+
 version 1.0-beta.16 2016-12-12
 -------------------------
 ### Fixed
