@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-UNRELEASED
+version 1.0-beta.18 2016-12-14
 -------------------------
 ### Added
 * Upgraded to Chromedriver 2.26
