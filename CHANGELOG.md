@@ -5,6 +5,10 @@ UNRELEASED
 ### Added
 * Upgraded to Chromedriver 2.26
 
+### Fixed
+* Changed to use straight walltime when generating HAR for HTTP/2 in Chrome (fixes problems when assets was in wrong order)
+* Log request missing matching request id on debug level instead of warning
+
 version 1.0-beta.17 2016-12-13
 -------------------------
 ### Fixed
