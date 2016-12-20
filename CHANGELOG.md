@@ -1,4 +1,8 @@
 # Browsertime changelog
+UNRELEASED
+-------------------------
+### Fixed
+* Use VisualMetrics with viewport config to best case find better start values
 
 version 1.0-beta.18 2016-12-14
 -------------------------
