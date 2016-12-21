@@ -3,6 +3,7 @@ UNRELEASED
 -------------------------
 ### Fixed
 * Use VisualMetrics with viewport config to best case find better start values
+* Ignore 5% of the height/width when calculate firstVisualChange fixed #244
 
 version 1.0-beta.18 2016-12-14
 -------------------------
