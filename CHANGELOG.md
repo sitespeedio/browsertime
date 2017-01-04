@@ -4,6 +4,7 @@ UNRELEASED
 ### Added
 * Upgraded to Geckodriver 0.12.0 
 * Pickup changed prio when Chrome changes prio for requests
+* Updated the Docker container to use ImageMagick 6.9.7-2 to fix https://github.com/sitespeedio/browsertime/issues/247
 
 version 1.0.0-beta.18 2016-12-22
 -------------------------
