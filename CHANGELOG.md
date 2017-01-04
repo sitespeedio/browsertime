@@ -3,6 +3,7 @@ UNRELEASED
 -------------------------
 ### Added
 * Upgraded to Geckodriver 0.12.0 
+* Pickup changed prio when Chrome changes prio for requests
 
 version 1.0.0-beta.18 2016-12-22
 -------------------------
