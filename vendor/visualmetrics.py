@@ -211,7 +211,7 @@ def remove_orange_frames(directory, orange_file):
       if is_orange_frame(frame, orange_file):
         logging.debug("Removing Orange frame: " + frame)
         os.remove(frame)
-      if frame_count > 20:
+      if frame_count > 120:
         break
     for frame in reversed(frames):
       if is_orange_frame(frame, orange_file):
