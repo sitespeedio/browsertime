@@ -1,13 +1,15 @@
 # Browsertime changelog
-UNRELEASED
+
+version 1.0.0-beta.20 2017-01-05
 -------------------------
 ### Added
 * Upgraded to Geckodriver 0.12.0
 * Pickup changed prio when Chrome changes prio for requests
 * Updated the Docker container to use ImageMagick 6.9.7-2 to fix https://github.com/sitespeedio/browsertime/issues/247
 * Added 3g connectivity profile 3gem for Emerging markets to keep in sync with WebPageTest.
+* Removed crf settings when recording a video to fix https://github.com/sitespeedio/browsertime/issues/247
 
-version 1.0.0-beta.18 2016-12-22
+version 1.0.0-beta.19 2016-12-22
 -------------------------
 ### Fixed
 * Use VisualMetrics with viewport config to best case find better start values
