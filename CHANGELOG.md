@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+UNRELEASED
+-------------------------
+### Added
+* Upgraded to Geckodriver 0.13.0
+
 version 1.0.0-beta.20 2017-01-05
 -------------------------
 ### Added

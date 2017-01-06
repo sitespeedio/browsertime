@@ -21,7 +21,7 @@
     "moment": "2.17.1",
     "selenium-webdriver": "3.0.1",
     "sltc": "0.6.0",
-    "soprano-saxophone": "0.12.0",
+    "soprano-saxophone": "0.13.0",
     "tough-cookie": "2.3.2",
     "valid-url": "1.0.9",
     "xvfb": "0.2.3",
