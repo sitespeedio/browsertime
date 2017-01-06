@@ -4,6 +4,7 @@ UNRELEASED
 -------------------------
 ### Added
 * Upgraded to Geckodriver 0.13.0
+* Upgraded to Chromedriver 2.27.0
 
 version 1.0.0-beta.20 2017-01-05
 -------------------------
