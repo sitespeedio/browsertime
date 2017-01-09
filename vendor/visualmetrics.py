@@ -637,13 +637,13 @@ def clean_directory(directory):
 def is_orange_frame(file, orange_file):
   orange = False
   if os.path.isfile(orange_file):
-    command = ('convert "{0}" "(" "{1}" -gravity Center -crop 50%x33%+0+0 -resize 200x200! ")" miff:- | '
+    command = ('convert "{0}" "(" "{1}" -resize 200x200! ")" miff:- | '
                'compare -metric AE - -fuzz 10% null:').format(orange_file, file)
     compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
     out, err = compare.communicate()
     if re.match('^[0-9]+$', err):
       different_pixels = int(err)
-      if different_pixels < 100:
+      if different_pixels < options.orangelimitdiff:
         orange = True
 
   return orange
@@ -653,7 +653,7 @@ def is_white_frame(file, white_file):
   global client_viewport
   white = False
   if os.path.isfile(white_file):
-    command = ('convert "{0}" "(" "{1}" -gravity Center -crop 50%x33%+0+0 -resize 200x200! ")" miff:- | '
+    command = ('convert "{0}" "(" "{1}" -resize 200x200! ")" miff:- | '
                'compare -metric AE - -fuzz 10% null:').format(white_file, file)
     if client_viewport is not None:
       crop = '{0:d}x{1:d}+{2:d}+{3:d}'.format(client_viewport['width'], client_viewport['height'], client_viewport['x'], client_viewport['y'])
@@ -1280,6 +1280,8 @@ def main():
                       help="Calculate perceptual Speed Index")
   parser.add_argument('-j', '--json', action='store_true', default=False,
                       help="Set output format to JSON")
+  parser.add_argument('--orangelimitdiff', type=int, default=30000,
+                    help="The limit when to the decice if the difference between frames makes a frame orange")
 
   options = parser.parse_args()
 
