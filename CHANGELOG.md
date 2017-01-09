@@ -1,10 +1,14 @@
 # Browsertime changelog
 
-UNRELEASED
+version 1.0.0-beta.21 2017-01-09
 -------------------------
 ### Added
 * Upgraded to Geckodriver 0.13.0
 * Upgraded to Chromedriver 2.27.0
+* Eliminate the risk to get a too early first visual change that happens sometimes in Chrome by changing VisualMetrics (see #247 and #255):
+  * We removed the center cropping of images when visual metrics checks if an image is orange/white. The cropping made us miss the small orange lines that sometimes appear only in Chrome.
+  * We also fine tuned (and made configurable) the number when the diff of two images (orange and white) is ... orange.
+  * We re-arranged how we record the screen to record as little extra video as possible.
 
 version 1.0.0-beta.20 2017-01-05
 -------------------------
