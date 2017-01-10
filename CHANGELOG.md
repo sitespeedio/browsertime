@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-UNRELEASED
+version 1.0.0-beta.22 2017-01-10
 -------------------------
 ### Fixed
 * Different values for Chrome/Firefox to define when the screen is still orange, to make sure VisualMetrics doesn't pick up the 
