@@ -1,4 +1,9 @@
 # Browsertime changelog
+version 1.0.0-beta.23 2017-01-10
+-------------------------
+### Fixed
+* The combination of not cropping out the center of the screen and changin back to default values for Firefox deciding when the screen is orange, 
+  made all metrics happen to early for FF.
 
 version 1.0.0-beta.22 2017-01-10
 -------------------------
