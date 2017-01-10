@@ -4,6 +4,10 @@ set -e
 # Lets use it it for now and make it better over time :)
 # You need np for this to work
 # npm install --global np
+
+# Remove the node modules to start clean
+rm -fR node_modules
+
 np $*
 
 PACKAGE_VERSION=$(node -e 'console.log(require("./package").version)')
