@@ -25,7 +25,7 @@ module.exports = {
           loginInput.sendKeys(userName);
           var passwordInput = driver.findElement(webdriver.By.id('wpPassword1'));
           passwordInput.sendKeys(password);
-          return loginForm.click();
+          return loginForm.submit();
           // this example skips waiting for the next page and validating that the login was successful.
         });
     })
