@@ -1,4 +1,9 @@
 # Browsertime changelog
+UNRELEASED
+-------------------------
+### Fixed
+* Updated example of login via pre-script to properly wait for login form to be submitted before continuing.
+
 version 1.0.0-beta.23 2017-01-10
 -------------------------
 ### Fixed
