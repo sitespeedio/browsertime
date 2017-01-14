@@ -3,6 +3,7 @@ UNRELEASED
 -------------------------
 ### Fixed
 * Updated example of login via pre-script to properly wait for login form to be submitted before continuing.
+* Renamed _was_push to _was_pushed as following same name standard as WPT if an entry is HTTP/2 pushed
 
 version 1.0.0-beta.23 2017-01-10
 -------------------------
