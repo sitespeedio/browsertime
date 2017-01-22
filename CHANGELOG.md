@@ -5,6 +5,7 @@ UNRELEASED
 * Updated example of login via pre-script to properly wait for login form to be submitted before continuing.
 * Simpliefied check in Chrome if a response is pushed (only use pushStart)
 * Renamed _was_push to _was_pushed as following same name standard as WPT if an entry is HTTP/2 pushed
+* Aligned priority information in HAR with WebPageTest.
 
 version 1.0.0-beta.23 2017-01-10
 -------------------------
