@@ -1,6 +1,9 @@
 # Browsertime changelog
 UNRELEASED
 -------------------------
+### Added
+* New option `--userTimingWhitelist` to pass a whitelist regex for filtering userTimings from results
+
 ### Fixed
 * Updated example of login via pre-script to properly wait for login form to be submitted before continuing.
 * Simpliefied check in Chrome if a response is pushed (only use pushStart)
