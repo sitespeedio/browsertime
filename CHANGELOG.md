@@ -1,5 +1,6 @@
 # Browsertime changelog
-UNRELEASED
+
+version 1.0.0-beta.24 2017-02-10
 -------------------------
 ### Added
 * New option `--userTimingWhitelist` to pass a whitelist regex for filtering userTimings from results
