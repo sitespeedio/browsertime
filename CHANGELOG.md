@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+UNRELEASED
+-------------------------
+### Added
+* Improved detection of http2 pushed assets for Chrome. #261
+
 version 1.0.0-beta.25 2017-02-15
 -------------------------
 ### Added
