@@ -4,6 +4,7 @@ UNRELEASED
 -------------------------
 ### Added
 * Make it possible to include response bodies in the HAR from Firefox using --firefox.includeResponseBodies [#264](https://github.com/sitespeedio/browsertime/pull/264/)
+* Set Firefox preferences through the CLI [#268](https://github.com/sitespeedio/browsertime/issues/268)
 
 version 1.0.0-beta.24 2017-02-10
 -------------------------
