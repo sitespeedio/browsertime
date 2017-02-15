@@ -6,6 +6,9 @@ UNRELEASED
 * Make it possible to include response bodies in the HAR from Firefox using --firefox.includeResponseBodies [#264](https://github.com/sitespeedio/browsertime/pull/264/)
 * Set Firefox preferences through the CLI [#268](https://github.com/sitespeedio/browsertime/issues/268)
 
+### Fixed
+* Add check if entry is not undefined and request exists when creating the Chrome HAR fixes[#272](https://github.com/sitespeedio/browsertime/issues/272)
+
 version 1.0.0-beta.24 2017-02-10
 -------------------------
 ### Added
