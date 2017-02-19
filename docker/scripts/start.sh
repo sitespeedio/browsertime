@@ -26,3 +26,8 @@ PID=$!
 
 trap shutdown SIGTERM SIGINT
 wait $PID
+
+RESULTDIR="/browsertime-results"
+if [ -d $RESULTDIR ]; then 
+  chown -R `stat -c "%u:%g" ${RESULTDIR}` ${RESULTDIR}
+fi
