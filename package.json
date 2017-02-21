@@ -25,7 +25,7 @@
     "tough-cookie": "2.3.2",
     "valid-url": "1.0.9",
     "xvfb": "0.2.3",
-    "yargs": "6.5.0"
+    "yargs": "6.6.0"
   },
   "devDependencies": {
     "chai": "^3.4.0",
