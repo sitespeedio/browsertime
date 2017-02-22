@@ -3,7 +3,8 @@
 UNRELEASED
 -------------------------
 ### Added
-* Improved detection of http2 pushed assets for Chrome. #261
+* Improved detection of http2 pushed assets for Chrome. [#261](https://github.com/sitespeedio/browsertime/issues/261)
+* Added connectivity.engine external to use when you set the connectivity outside of Browsertime [#277](https://github.com/sitespeedio/browsertime/pull/277)
 
 version 1.0.0-beta.25 2017-02-15
 -------------------------
