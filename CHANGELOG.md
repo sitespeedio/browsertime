@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-UNRELEASED
+version 1.0.0-beta.26 2017-02-22
 -------------------------
 ### Added
 * Improved detection of http2 pushed assets for Chrome. [#261](https://github.com/sitespeedio/browsertime/issues/261)
