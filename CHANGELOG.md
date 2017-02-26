@@ -1,5 +1,11 @@
 # Browsertime changelog
 
+version 1.0.0-beta.27 2017-02-26
+-------------------------
+### Added
+* You can dump the Chrome trace categories to disk by using --chrome.dumpTraceCategoriesLog and load the file in Chrome timeline.
+You can also choose which trace categories you wanna use with --chrome.traceCategories.  [#270](https://github.com/sitespeedio/browsertime/issues/270)
+
 version 1.0.0-beta.26 2017-02-22
 -------------------------
 ### Added
@@ -30,13 +36,13 @@ version 1.0.0-beta.24 2017-02-10
 version 1.0.0-beta.23 2017-01-10
 -------------------------
 ### Fixed
-* The combination of not cropping out the center of the screen and changin back to default values for Firefox deciding when the screen is orange, 
+* The combination of not cropping out the center of the screen and changin back to default values for Firefox deciding when the screen is orange,
   made all metrics happen to early for FF.
 
 version 1.0.0-beta.22 2017-01-10
 -------------------------
 ### Fixed
-* Different values for Chrome/Firefox to define when the screen is still orange, to make sure VisualMetrics doesn't pick up the 
+* Different values for Chrome/Firefox to define when the screen is still orange, to make sure VisualMetrics doesn't pick up the
   orange screen.
 
 version 1.0.0-beta.21 2017-01-09
