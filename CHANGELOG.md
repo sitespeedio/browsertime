@@ -1,8 +1,9 @@
 # Browsertime changelog
-UNRELEASED
+
+version 1.0.0-beta.28 2017-02-27
 -------------------------
 ### Fixed
-* Smarter way to parse (or rather cleanup) the trace logs, following the code in Lighthouse: https://github.com/GoogleChrome/lighthouse/pull/538. Mad props for cleaning up the log :) Fixes [#281](https://github.com/sitespeedio/browsertime/issues/281)
+* Smarter way to parse (or rather cleanup) the Chrome trace logs, following the code in Lighthouse: https://github.com/GoogleChrome/lighthouse/pull/538. Mad props for cleaning up the log :) Fixes [#281](https://github.com/sitespeedio/browsertime/issues/281)
 
 
 version 1.0.0-beta.27 2017-02-26
