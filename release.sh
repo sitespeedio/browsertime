@@ -5,8 +5,8 @@ set -e
 # You need np for this to work
 # npm install --global np
 
-# Remove the node modules to start clean
-rm -fR node_modules
+# Remove the node modules and the result dir to start clean
+rm -fR browsertime-results node_modules
 
 np $*
 
