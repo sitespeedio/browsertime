@@ -1,5 +1,6 @@
 # Browsertime changelog
-UNRELEASED
+
+version 1.0.0-beta.29 2017-03-02
 -------------------------
 ### Added
 * New metric when you collect video/SpeedIndex: VisualComplete85% as suggested by @jeroenvdb
