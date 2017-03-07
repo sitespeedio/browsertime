@@ -65,9 +65,9 @@ script:
 - ./vendor/visualmetrics.py --check
 - npm run lint
 - npm test
-- node ./bin/browsertime.js -b firefox -n 2 --timeouts.browserStart=60000 http://www.browsertime.net --preTask test/prepostscripts/preSample.js --postTask test/prepostscripts/postSample2.js --connectivity.profile cable --connectivity.engine tc
-- node ./bin/browsertime.js -b chrome --skipHar -n 2 https://www.sitespeed.io/
-- node ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --video --speedIndex -n 1 --chrome.dumpTraceCategoriesLog https://www.sitespeed.io/
+- node ./bin/browsertime.js -b firefox -n 2 http://www.browsertime.net --preTask test/prepostscripts/preSample.js --postTask test/prepostscripts/postSample2.js --connectivity.profile cable --connectivity.engine tc
+- node ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ https://www.sitespeed.io/documentation/
+- node ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --video --screenshot --speedIndex -n 1 --chrome.dumpTraceCategoriesLog https://www.sitespeed.io/
 
 notifications:
   slack:
