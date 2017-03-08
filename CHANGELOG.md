@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-UNRELEASED
+version 1.0.0-beta.30 2017-03-08
 -------------------------
 ### Added 
 * Extracted (and improved) Chrome perflog->HAR parsing to separate npm module.
