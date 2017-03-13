@@ -1,4 +1,8 @@
 # Browsertime changelog
+-------------------------
+version 1.0.0-beta.31 2017-03-13
+### Added 
+* Use Chromedriver 2.28
 
 version 1.0.0-beta.30 2017-03-08
 -------------------------
