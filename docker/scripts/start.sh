@@ -16,7 +16,7 @@ export NSS_USE_SHARED_DB=ENABLED
 
 # Inspired by docker-selenium way of shutting down
 function shutdown {
-  kill -s SIGTERM $PID
+  kill -s SIGTERM ${PID}
   wait $PID
 }
 
