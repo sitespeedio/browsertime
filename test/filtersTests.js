@@ -12,7 +12,7 @@ describe('filters', function() {
         let timings = path.resolve(datadir, 'timings.json');
 
         let userTimings = JSON.parse(fs.readFileSync(timings, 'utf-8'));
-        let results = filters.userTimingWhitelist(userTimings, "foo_")
+        let results = filters.userTimingWhitelist(userTimings, 'foo_');
         assert.equal(JSON.stringify(results.timings.userTimings.marks), '[{"name":"foo_test","startTime":"1500.111"},{"name":"foo_test2","startTime":"1100.111"}]');
         assert.equal(JSON.stringify(results.timings.userTimings.measures), '[{"name":"foo_test3","startTime":"1500.111"},{"name":"foo_test4","startTime":"1100.111"}]');
     });
