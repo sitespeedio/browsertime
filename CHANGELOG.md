@@ -1,6 +1,13 @@
 # Browsertime changelog
 -------------------------
+UNRELEASED
+-------------------------
+### Added
+* Collect and save Chromes netlog with --experimental.dumpChromeNetlog - thank you https://github.com/worenga
+* Option to maximize browser window [#275](https://github.com/sitespeedio/browsertime/pull/275) thanks again @worenga
+
 version 1.0.0-beta.31 2017-03-13
+-------------------------
 ### Added 
 * Use Chromedriver 2.28
 
