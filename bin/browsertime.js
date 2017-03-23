@@ -13,7 +13,7 @@ let Engine = require('../').Engine,
   pick = require('lodash.pick'),
   fs = require('fs'),
   path = require('path'),
-  log = require('intel');
+  log = require('intel').getLogger('browsertime');
 
 Promise.promisifyAll(fs);
 
