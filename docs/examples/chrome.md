@@ -7,7 +7,7 @@ browsertime https://www.sitespeed.io -b chrome
 
 - Will use chrome's native performance logs to generate a HAR file.
 
-browsertime https://www.sitespeed.io --chrome.collectChromePerflog -b chrome
+browsertime https://www.sitespeed.io --chrome.collectPerfLog -b chrome
 
 - Used for debugging  chrome's native HAR export you can have it additionally output the Chrome performance logs.
 
