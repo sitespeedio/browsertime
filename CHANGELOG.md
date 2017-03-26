@@ -6,10 +6,6 @@ UNRELEASED
 * Collect and save Chromes netlog with --experimental.dumpChromeNetlog - thank you https://github.com/worenga
 * Option to maximize browser window [#275](https://github.com/sitespeedio/browsertime/pull/275) thanks again @worenga
 
-### Changed
-* Output files will now be created directly at the path given by --resultDir. Previously they were put inside a
-directory named after the current timestamp.
-
 ### Fixed
 * Ensure output directory is created before starting a run (and before storageManager is passed to preScripts).
 
