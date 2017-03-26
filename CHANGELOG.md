@@ -3,9 +3,15 @@
 UNRELEASED
 -------------------------
 ### Added
-* Collect and save Chromes netlog with --experimental.dumpChromeNetlog - thank you https://github.com/worenga
+* Collect and save Chrome's netlog with --chrome.collectNetLog - thank you https://github.com/worenga
 * Option to maximize browser window [#275](https://github.com/sitespeedio/browsertime/pull/275) thanks again @worenga
 * Add --chrome.chromedriverPath option, for using a custom chromedriver binary.
+
+### Changed
+* Renamed experimental.dumpChromePerflog to chrome.collectPerfLog. The previous name is deprecated, but will still 
+work for now.
+* Renamed chrome.dumpTraceCategoriesLog to chrome.collectTracingEvents. The previous name is deprecated, but will still
+work for now.
 
 version 1.0.0-beta.31 2017-03-13
 -------------------------
