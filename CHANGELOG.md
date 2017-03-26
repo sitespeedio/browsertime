@@ -13,6 +13,9 @@ work for now.
 * Renamed chrome.dumpTraceCategoriesLog to chrome.collectTracingEvents. The previous name is deprecated, but will still
 work for now.
 
+### Fixed
+* Ensure output directory is created before starting a run (and before storageManager is passed to preScripts).
+
 version 1.0.0-beta.31 2017-03-13
 -------------------------
 ### Added 
