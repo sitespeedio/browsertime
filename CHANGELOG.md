@@ -6,6 +6,7 @@ UNRELEASED
 * Collect and save Chrome's netlog with --chrome.collectNetLog - thank you https://github.com/worenga
 * Option to maximize browser window [#275](https://github.com/sitespeedio/browsertime/pull/275) thanks again @worenga
 * Add --chrome.chromedriverPath option, for using a custom chromedriver binary.
+* Show VisualComplete 85% in the video and in the CLI summary.
 
 ### Changed
 * Renamed experimental.dumpChromePerflog to chrome.collectPerfLog. The previous name is deprecated, but will still 
