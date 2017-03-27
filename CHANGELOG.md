@@ -7,6 +7,7 @@ UNRELEASED
 * Option to maximize browser window [#275](https://github.com/sitespeedio/browsertime/pull/275) thanks again @worenga
 * Add --chrome.chromedriverPath option, for using a custom chromedriver binary.
 * Show VisualComplete 85% in the video and in the CLI summary.
+* Include _timestamps_ entry in result json, with timestamps for when each iteration starts.
 
 ### Changed
 * Renamed experimental.dumpChromePerflog to chrome.collectPerfLog. The previous name is deprecated, but will still 
