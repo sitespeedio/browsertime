@@ -1,6 +1,6 @@
 # Browsertime changelog
 -------------------------
-UNRELEASED
+version 1.0.0-beta.32 2017-03-28
 -------------------------
 ### Added
 * Collect and save Chrome's netlog with --chrome.collectNetLog - thank you https://github.com/worenga
