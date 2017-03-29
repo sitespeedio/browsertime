@@ -4,6 +4,8 @@
 !package.json
 !docker
 !vendor
+!.eslint*
+!test
 !browserscripts
 !browsersupport
 !index.js
