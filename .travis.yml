@@ -5,7 +5,7 @@ dist: trusty
 before_install:
 - docker build -t sitespeedio/browsertime .
 - docker build -f ./Dockerfile-test -t sitespeedio/browsertime-test .
-- docker run --shm-size=1g --rm -v "$(pwd)":/browsertime-results sitespeedio/browsertime -V
+- docker run --rm sitespeedio/browsertime -V
 
 script:
 - docker run --rm sitespeedio/browsertime-test npm run lint
