@@ -1,5 +1,11 @@
 # Browsertime changelog
 -------------------------
+UNRELEASED
+-------------------------
+### Fixed
+* Support legacy option for experimental.dumpChromePerflog and chrome.dumpTraceCategoriesLog from the CLI
+
+
 version 1.0.0-beta.32 2017-03-28
 -------------------------
 ### Added
