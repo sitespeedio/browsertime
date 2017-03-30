@@ -2,7 +2,7 @@ language: node_js
 
 dist: trusty
 
-before_install:
+install:
 - docker build -t sitespeedio/browsertime .
 - docker build -f ./Dockerfile-test -t sitespeedio/browsertime-test .
 - docker run --rm sitespeedio/browsertime -V
