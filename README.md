@@ -52,6 +52,63 @@ $ docker build -t sitespeedio/browsertime .
 $ docker run --privileged --shm-size=1g --rm -v "$(pwd)":/browsertime-results sitespeedio/browsertime -n 1 -c cable --video --speedIndex https://www.sitespeed.io/
 </pre>
 
+## Connectivity
+
+You can throttle the connection to make the connectivity slower to make it easier to catch regressions. The best way to do that is to setup a network bridge in Docker.
+
+Default we use [TSProxy](https://github.com/WPO-Foundation/tsproxy) because it's only dependency is Python 2.7 but we have a problem with that together with Selenium, so that it is kind of unusable right now. Help us fix that in [#229](https://github.com/sitespeedio/browsertime/issues/229).
+
+If you run Docker you can use tc as connectivity engine but that will only set the latency, if you want to set the download speed you need to create a network bridge in Docker.
+
+Here's an full example to setup up Docker network bridges on a server that has tc installed:
+
+~~~bash
+#!/bin/bash
+echo 'Starting Docker networks'
+docker network create --driver bridge --subnet=192.168.33.0/24 --gateway=192.168.33.10 --opt "com.docker.network.bridge.name"="docker1" 3g
+tc qdisc add dev docker1 root handle 1: htb default 12
+tc class add dev docker1 parent 1:1 classid 1:12 htb rate 1.6mbit ceil 1.6mbit
+tc qdisc add dev docker1 parent 1:12 netem delay 300ms
+
+docker network create --driver bridge --subnet=192.168.34.0/24 --gateway=192.168.34.10 --opt "com.docker.network.bridge.name"="docker2" cable
+tc qdisc add dev docker2 root handle 1: htb default 12
+tc class add dev docker2 parent 1:1 classid 1:12 htb rate 5mbit ceil 5mbit
+tc qdisc add dev docker2 parent 1:12 netem delay 28ms
+
+docker network create --driver bridge --subnet=192.168.35.0/24 --gateway=192.168.35.10 --opt "com.docker.network.bridge.name"="docker3" 3gfast
+tc qdisc add dev docker3 root handle 1: htb default 12
+tc class add dev docker3 parent 1:1 classid 1:12 htb rate 1.6mbit ceil 1.6mbit
+tc qdisc add dev docker3 parent 1:12 netem delay 150ms
+
+docker network create --driver bridge --subnet=192.168.36.0/24 --gateway=192.168.36.10 --opt "com.docker.network.bridge.name"="docker4" 3gem
+tc qdisc add dev docker4 root handle 1: htb default 12
+tc class add dev docker4 parent 1:1 classid 1:12 htb rate 0.4mbit ceil 0.4mbit
+tc qdisc add dev docker4 parent 1:12 netem delay 400ms
+~~~
+
+Then when you run your container you add the network with <code>--network cable</code>. You should also tell Browsertime that you set the connectivity external from BT. A full example running running with cable:
+
+~~~bash
+$ docker run --privileged --shm-size=1g --network=cable --rm sitespeedio/browsertime -c cable --connectivity.engine external https://www.sitespeed.io/
+~~~
+
+And using the 3g network:
+
+~~~bash
+$ docker run --privileged --shm-size=1g --network=3g --rm sitespeedio/browsertime -c 3g --connectivity.engine external https://www.sitespeed.io/
+~~~
+
+And if you want to remove the networks:
+
+~~~bash
+#!/bin/bash
+echo 'Stopping Docker networks'
+docker network rm 3g
+docker network rm 3gfast
+docker network rm 3gem
+docker network rm cable
+~~~
+
 ## Configuration
 Run <code>$ bin/browsertime.js --help</code> and you can see the configuration options:
 
