@@ -17,11 +17,17 @@ Browsertime allows you to:
 
 ## A simple example
 
+Use our Docker image (with Chrome, Firefox, XVFB and the dependencies needed to record a video):
+<pre>
+$ docker run --shm-size=1g --rm -v "$(pwd)":/browsertime-results sitespeedio/browsertime --video --speedIndex https://www.sitespeed.io/
+</pre>
+
+Or using node:
 <pre>
 $ bin/browsertime.js https://www.sitespeed.io
 </pre>
 
-Load https://www.sitespeed.io in Chrome three times. Results are stored in a JSON file (browsertime.json) with the timing data, and a HAR file (browsertime.har) in browsertime-results/www.sitespeed.io/$date/
+Load https://www.sitespeed.io/ in Chrome three times. Results are stored in a JSON file (browsertime.json) with the timing data, and a HAR file (browsertime.har) in browsertime-results/www.sitespeed.io/$date/
 
 ## I want more examples
 Checkout the [examples](docs/examples/README.md).
@@ -50,7 +56,7 @@ You can build and test changes using Docker locally.
 
 <pre>
 $ docker build -t sitespeedio/browsertime .
-$ docker run --privileged --shm-size=1g --rm -v "$(pwd)":/browsertime-results sitespeedio/browsertime -n 1 -c cable --video --speedIndex https://www.sitespeed.io/
+$ docker run --shm-size=1g --rm -v "$(pwd)":/browsertime-results sitespeedio/browsertime -n 1 --video --speedIndex https://www.sitespeed.io/
 </pre>
 
 ## Connectivity
@@ -90,13 +96,13 @@ tc qdisc add dev docker4 parent 1:12 netem delay 400ms
 Then when you run your container you add the network with <code>--network cable</code>. You should also tell Browsertime that you set the connectivity external from BT. A full example running running with cable:
 
 ~~~bash
-$ docker run --privileged --shm-size=1g --network=cable --rm sitespeedio/browsertime -c cable --connectivity.engine external https://www.sitespeed.io/
+$ docker run --shm-size=1g --network=cable --rm sitespeedio/browsertime -c cable --connectivity.engine external --speedIndex --video https://www.sitespeed.io/
 ~~~
 
 And using the 3g network:
 
 ~~~bash
-$ docker run --privileged --shm-size=1g --network=3g --rm sitespeedio/browsertime -c 3g --connectivity.engine external https://www.sitespeed.io/
+$ docker run --shm-size=1g --network=3g --rm sitespeedio/browsertime -c 3g --nnconnectivity.engine external --speedIndex --video https://www.sitespeed.io/
 ~~~
 
 And if you want to remove the networks:
