@@ -1,6 +1,7 @@
 # Browsertime - Your browser, your page, your scripts!
 [![Build status][travis-image]][travis-url]
 [![Downloads][downloads-image]][downloads-url]
+[![Downloads total][downloads-total-image]][downloads-url]
 [![Stars][stars-image]][stars-url]
 
 ![Browsertime](browsertime.png)
@@ -203,5 +204,6 @@ Options:
 [travis-url]: https://travis-ci.org/sitespeedio/browsertime
 [stars-url]: https://github.com/tobli/sitespeedio/stargazers
 [stars-image]: https://img.shields.io/github/stars/sitespeedio/browsertime.svg?style=flat-square
-[downloads-image]: http://img.shields.io/npm/dm/browsertime.svg?style=flat-square
+[downloads-total-image]: https://img.shields.io/npm/dt/browsertime.svg?style=flat-square
+[downloads-image]: https://img.shields.io/npm/dm/browsertime.svg?style=flat-square
 [downloads-url]: https://npmjs.org/package/browsertime
