@@ -1,12 +1,13 @@
 # Browsertime changelog
 -------------------------
-UNRELEASED
+version 1.0.0-beta.33 2017-04-04
 -------------------------
 ### Fixed
-* Support legacy option for experimental.dumpChromePerflog and chrome.dumpTraceCategoriesLog from the CLI
+* Support legacy option for experimental.dumpChromePerflog and chrome.dumpTraceCategoriesLog from the CLI.
+* Catch all type of errors if the browsers fail to start and do a retry.
 
 ### Added
-* Show backendtime in the summary output in the CLI
+* Show backendtime in the summary output in the CLI.
 
 version 1.0.0-beta.32 2017-03-28
 -------------------------
@@ -18,7 +19,7 @@ version 1.0.0-beta.32 2017-03-28
 * Include _timestamps_ entry in result json, with timestamps for when each iteration starts.
 
 ### Changed
-* Renamed experimental.dumpChromePerflog to chrome.collectPerfLog. The previous name is deprecated, but will still 
+* Renamed experimental.dumpChromePerflog to chrome.collectPerfLog. The previous name is deprecated, but will still
 work for now.
 * Renamed chrome.dumpTraceCategoriesLog to chrome.collectTracingEvents. The previous name is deprecated, but will still
 work for now.
@@ -28,12 +29,12 @@ work for now.
 
 version 1.0.0-beta.31 2017-03-13
 -------------------------
-### Added 
+### Added
 * Use Chromedriver 2.28
 
 version 1.0.0-beta.30 2017-03-08
 -------------------------
-### Added 
+### Added
 * Extracted (and improved) Chrome perflog->HAR parsing to separate npm module.
 
 version 1.0.0-beta.29 2017-03-02
