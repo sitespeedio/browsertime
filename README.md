@@ -116,11 +116,24 @@ docker network rm 3gem
 docker network rm cable
 ~~~
 
+## Test on your mobile device
+Browsertime supports Chrome on Android: Collecting SpeedIndex, HAR and video!
+
+You need to [install adb](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#desktop) and [prepare your phone](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#on-your-phone) before you start.
+
+The current version doesn't support Docker so you need to [install the requirements](https://github.com/sitespeedio/docker-visualmetrics-deps/blob/master/Dockerfile) for VisualMetrics yourself on your machine before you start.
+
+If you want to set connectivity you need to use something like [Micro device lab](https://github.com/phuedx/micro-device-lab).
+
+<pre>
+browsertime --browsertime.chrome.android.package com.android.chrome https://www.sitespeed.io --video --speedIndex
+</pre>
+
 ## Configuration
 Run <code>$ bin/browsertime.js --help</code> and you can see the configuration options:
 
 <pre>
-bin/browsertime.js [options] <url>
+browsertime [options] <url>
 
 timeouts
   --timeouts.browserStart       Timeout when waiting for browser to start, in milliseconds                                           [number] [default: 60000]
