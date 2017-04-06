@@ -117,7 +117,7 @@ docker network rm cable
 ~~~
 
 ## Test on your mobile device
-Browsertime supports Chrome on Android: Collecting SpeedIndex, HAR and video!
+Browsertime supports Chrome on Android: Collecting SpeedIndex, HAR and video! This is still really new, let us know if you find any bugs.
 
 You need to [install adb](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#desktop) and [prepare your phone](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#on-your-phone) before you start.
 
