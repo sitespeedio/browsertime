@@ -39,9 +39,6 @@
   "engines": {
     "node": ">=6.9.0"
   },
-  "publishConfig": {
-    "tag": "canary"
-  },
   "main": "index.js",
   "scripts": {
     "test": "mocha",
