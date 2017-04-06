@@ -1,5 +1,10 @@
 # Browsertime changelog
 -------------------------
+version 1.0.0-beta.34 2017-04-06
+-------------------------
+### Added
+* Support for video and SpeedIndex on Android. This is still experimental and we need help to test it on different devices!
+
 version 1.0.0-beta.33 2017-04-04
 -------------------------
 ### Fixed
