@@ -1,5 +1,11 @@
 # Browsertime changelog
 -------------------------
+version 1.0.0 2017-04-07
+-------------------------
+### Changed
+* Same code as beta 34, but a different feeling. =)
+
+-------------------------
 version 1.0.0-beta.34 2017-04-06
 -------------------------
 ### Added
