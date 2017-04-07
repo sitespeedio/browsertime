@@ -8,7 +8,7 @@ set -e
 # Remove the node modules and the result dir to start clean
 rm -fR browsertime-results node_modules
 
-np $*
+np $* --no-yarn
 
 PACKAGE_VERSION=$(node -e 'console.log(require("./package").version)')
 
