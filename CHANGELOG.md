@@ -1,5 +1,10 @@
 # Browsertime changelog
 -------------------------
+version 1.1.0-beta1 2017-04-17
+-------------------------
+### Added
+* Use Browser extension to block request and add request headers. Only works in Chrome in this beta release.
+
 version 1.0.0 2017-04-07
 -------------------------
 ### Changed
