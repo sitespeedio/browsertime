@@ -4,7 +4,7 @@
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "adbkit": "2.8.1",
-    "alto-saxophone": "2.28.0",
+    "alto-saxophone": "2.29.0",
     "bluebird": "3.5.0",
     "chrome-har": "0.1.0",
     "execa": "0.6.1",
