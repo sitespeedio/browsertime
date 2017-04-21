@@ -52,9 +52,13 @@ describe('SeleniumRunner', function() {
         return runner.loadAndWait('http://httpbin.org/html').should.be.fulfilled;
       });
 
-      it('should fail if url takes too long to load', function() {
-        return runner.loadAndWait('http://httpbin.org/delay/20', 'return true').should.be.rejected;
-      });
+      // See https://github.com/sitespeedio/browsertime/issues/316
+      // When FF53 and Selenium works again we should enable it again.
+      if (browser !== 'firefox') {
+        it('should fail if url takes too long to load', function() {
+          return runner.loadAndWait('http://httpbin.org/delay/20', 'return true').should.be.rejected;
+        });
+      }
 
       it('should fail if wait script never returns true', function() {
         return runner.loadAndWait('http://httpbin.org/html', 'return false').should.be.rejected;
