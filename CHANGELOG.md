@@ -1,5 +1,10 @@
 # Browsertime changelog
 -------------------------
+Unreleased
+-------------------------
+### Changed
+* Upgrade to Selenium 3.4.0 and geckodriver 0.16.0 to get Firefox 53.0 working again.
+-------------------------
 version 1.1.0-beta1 2017-04-17
 -------------------------
 ### Added
