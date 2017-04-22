@@ -3,7 +3,9 @@
 Unreleased
 -------------------------
 ### Changed
-* Upgrade to Selenium 3.4.0 and geckodriver 0.16.0 to get Firefox 53.0 working again.
+* Upgrade to Selenium 3.4.0 and Geckodriver 0.16.0 to get Firefox 53.0 working again.
+* Docker container now uses Chrome 58 and Firefox 53.
+
 -------------------------
 version 1.1.0-beta1 2017-04-17
 -------------------------
