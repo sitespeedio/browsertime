@@ -1,16 +1,12 @@
 # Browsertime changelog
 -------------------------
-Unreleased
+
+version 1.1.0 2017-04-22
 -------------------------
 ### Changed
-* Upgrade to Selenium 3.4.0 and Geckodriver 0.16.0 to get Firefox 53.0 working again.
+* Block requests by domain (--block) and add request headers (-r name:value). Only works in Chrome for now, it will get fixed for Firefox when https://github.com/SeleniumHQ/selenium/pull/3846 is released in Selenium.
+* Upgrade to Selenium 3.4.0 and Geckodriver 0.16.0 to get Firefox 53.0 working.
 * Docker container now uses Chrome 58 and Firefox 53.
-
--------------------------
-version 1.1.0-beta1 2017-04-17
--------------------------
-### Added
-* Use Browser extension to block request and add request headers. Only works in Chrome in this beta release.
 
 version 1.0.0 2017-04-07
 -------------------------
