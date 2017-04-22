@@ -1,4 +1,4 @@
-FROM sitespeedio/webbrowsers:firefox-52.0.1-chrome-58.0
+FROM sitespeedio/webbrowsers:firefox-53.0-chrome-58.0
  
 ENV BROWSERTIME_XVFB true
 ENV BROWSERTIME_CONNECTIVITY__ENGINE tc
