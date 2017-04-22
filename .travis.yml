@@ -68,7 +68,7 @@ script:
 - node ./bin/browsertime.js -b firefox -n 2 http://www.browsertime.net --preTask test/prepostscripts/preSample.js
   --postTask test/prepostscripts/postSample2.js --connectivity.profile cable --connectivity.engine
   tc
-- node ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/
+- node ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value
   https://www.sitespeed.io/documentation/
 - node ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --video --screenshot
   --speedIndex -n 1 --chrome.collectTracingEvents https://www.sitespeed.io/
