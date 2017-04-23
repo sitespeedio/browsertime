@@ -1,7 +1,7 @@
 # Browsertime changelog
 -------------------------
 
-UNRELEASED
+version 1.1.0 2017-04-23
 -------------------------
 ### Changed
 * Block requests by domain (--block) and add request headers (-r name:value). Only works in Chrome for now, it will get fixed for Firefox when https://github.com/SeleniumHQ/selenium/pull/3846 is released in Selenium.
