@@ -123,7 +123,7 @@ You need to [install adb](https://www.sitespeed.io/documentation/sitespeed.io/mo
 
 The current version doesn't support Docker so you need to [install the requirements](https://github.com/sitespeedio/docker-visualmetrics-deps/blob/master/Dockerfile) for VisualMetrics yourself on your machine before you start.
 
-If you want to set connectivity you need to use something like [Micro device lab](https://github.com/phuedx/micro-device-lab).
+If you want to set connectivity you need to use something like [Micro device lab](https://github.com/phuedx/micro-device-lab) or [TSProxy](https://github.com/WPO-Foundation/tsproxy).
 
 <pre>
 browsertime --browsertime.chrome.android.package com.android.chrome https://www.sitespeed.io --video --speedIndex
