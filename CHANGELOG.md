@@ -1,6 +1,12 @@
 # Browsertime changelog
 -------------------------
 
+version 1.1.1 2017-04-23
+-------------------------
+### Fixed
+* New version of the browsertime extension to turn off save password bubble for Chrome.
+
+
 version 1.1.0 2017-04-23
 -------------------------
 ### Changed
