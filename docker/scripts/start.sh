@@ -14,6 +14,11 @@ service dbus status > /dev/null
 export $(dbus-launch)
 export NSS_USE_SHARED_DB=ENABLED
 
+# Only run this on demand in the future
+sudo adb start-server
+sudo adb devices
+
+
 # Inspired by docker-selenium way of shutting down
 function shutdown {
   kill -s SIGTERM ${PID}
