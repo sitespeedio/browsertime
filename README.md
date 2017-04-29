@@ -121,12 +121,22 @@ Browsertime supports Chrome on Android: Collecting SpeedIndex, HAR and video! Th
 
 You need to [install adb](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#desktop) and [prepare your phone](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#on-your-phone) before you start.
 
-The current version doesn't support Docker so you need to [install the requirements](https://github.com/sitespeedio/docker-visualmetrics-deps/blob/master/Dockerfile) for VisualMetrics yourself on your machine before you start.
-
 If you want to set connectivity you need to use something like [Micro device lab](https://github.com/phuedx/micro-device-lab) or [TSProxy](https://github.com/WPO-Foundation/tsproxy).
 
 <pre>
-browsertime --browsertime.chrome.android.package com.android.chrome https://www.sitespeed.io --video --speedIndex
+$ browsertime --browsertime.chrome.android.package com.android.chrome https://www.sitespeed.io --video --speedIndex
+</pre>
+
+If you are on Linux (we have tested Ubuntu 16) you can use our Docker container to drive your Android phone. A couple of things to remember:
+ * You need to run in privileged mode *--privileged*
+ * You need to share the USB ports *-v /dev/bus/usb:/dev/bus/usb*
+ * Add *-e START_ADB_SERVER=true* to start the adb server
+ * Turn of xvfb *--xvfb false* (we start that automatically)
+
+If you use Docker you will automatically get support for video and SpeedIndex. You can get that without Docker but then need to [install VisualMetrics dependencies](https://github.com/sitespeedio/docker-visualmetrics-deps/blob/master/Dockerfile) yourself.
+
+<pre>
+$ docker run --privileged -v /dev/bus/usb:/dev/bus/usb -e START_ADB_SERVER=true --shm-size=1g --rm -v "$(pwd)":/browsertime-results sitespeedio/browsertime -n 1 --chrome.android.package com.android.chrome --xvfb false --speedIndex --video https://en.m.wikipedia.org/wiki/Barack_Obama
 </pre>
 
 ## Configuration
