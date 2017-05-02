@@ -1,15 +1,15 @@
 # Browsertime changelog
 -------------------------
-UNRELEASED
+
+version 1.1.2 2017-05-02
 -------------------------
-### Added
+### Fixed
 * You can now run Android devices in your Docker container on Ubuntu. Check the [README](https://github.com/sitespeedio/browsertime#test-on-your-mobile-device) for more info. Inspired by [https://github.com/sorccu/docker-adb](https://github.com/sorccu/docker-adb).
 
 version 1.1.1 2017-04-23
 -------------------------
 ### Fixed
 * New version of the browsertime extension to turn off save password bubble for Chrome.
-
 
 version 1.1.0 2017-04-23
 -------------------------
