@@ -37,6 +37,7 @@ Browsertime supports Firefox and Chrome on desktop. On Android we support Chrome
 
 But we want to [support Opera (on Android)](https://github.com/tobli/browsertime/issues/150)  and when(?!) iOS Safari supports WebDriver we will add that too.
 
+
 ## How does it work
 Browsertime uses Selenium NodeJS to drive the browser. It starts the browser, load a URL, executes configurable Javascripts to collect metrics, collect a HAR file.
 
@@ -223,6 +224,17 @@ Options:
   -h, --help             Show help                                                                                                                                                 [boolean]
   -V, --version          Show version number                                                                                                                                       [boolean]
   </pre>
+
+
+## Running on Saucelabs
+
+Sitespeed.io can run your tests on saucelabs. The capabilities for saucelabs can be passed in the `options`. For example,
+
+```
+bin/browsertime.js https://www.sitespeed.io --username <username> --accessKey <saucelabsAccessKey> --browserName chrome --platform 'macOS 10.12' --selenium 'http://<username>:<sauceLabsAccessKey>@ondemand.saucelabs.com:80/wd/hub.
+```
+
+Please note that the `--browserName` option is specifically for saucelabs configuration and is different from Browsertime's `--browser` option.
 
 [travis-image]: https://img.shields.io/travis/sitespeedio/browsertime.svg?style=flat-square
 [travis-url]: https://travis-ci.org/sitespeedio/browsertime
