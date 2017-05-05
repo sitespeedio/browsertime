@@ -124,7 +124,7 @@ You need to [install adb](https://www.sitespeed.io/documentation/sitespeed.io/mo
 If you want to set connectivity you need to use something like [Micro device lab](https://github.com/phuedx/micro-device-lab) or [TSProxy](https://github.com/WPO-Foundation/tsproxy).
 
 <pre>
-$ browsertime --browsertime.chrome.android.package com.android.chrome https://www.sitespeed.io --video --speedIndex
+$ browsertime --chrome.android.package com.android.chrome https://www.sitespeed.io --video --speedIndex
 </pre>
 
 If you are on Linux (we have tested Ubuntu 16) you can use our Docker container to drive your Android phone. A couple of things to remember:
