@@ -6,6 +6,9 @@ UNRELEASED
 ### Fixed
 * Removed the black borders in the video from Firefox [#285](https://github.com/sitespeedio/browsertime/issues/285).
 
+### Added
+* Support for Basic Auth in Chrome (Firefox will have it in 54 as long as https://github.com/SeleniumHQ/selenium/pull/3846 gets released). Use --basicAuth username@password
+
 version 1.1.2 2017-05-02
 -------------------------
 ### Fixed
