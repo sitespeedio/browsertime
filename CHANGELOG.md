@@ -1,6 +1,11 @@
 # Browsertime changelog
 -------------------------
 
+version 1.2.1 2017-05-09
+-------------------------
+### Fixed
+* Remove a couple of more black pixels in the video from Firefox
+
 version 1.2.0 2017-05-09
 -------------------------
 ### Fixed
