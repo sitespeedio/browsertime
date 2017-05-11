@@ -1,10 +1,11 @@
 # Browsertime changelog
 -------------------------
-UNRELEASED
+
+version 1.2.2 2017-05-11
 -------------------------
 ### Fixed
 * The video for Firefox now works with different view ports [#329](https://github.com/sitespeedio/browsertime/issues/329).
-* More safe way to find the first white frame when cutting an creating the video [[#331](https://github.com/sitespeedio/browsertime/pull/331)]
+* More safe way to find the first white frame when cutting an creating the video [#331](https://github.com/sitespeedio/browsertime/pull/331)]
 * Get Chrome NetLog (--chrome.collectNetLog) now also works on Android [#306](https://github.com/sitespeedio/browsertime/issues/306)
 
 version 1.2.1 2017-05-09
