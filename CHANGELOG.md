@@ -1,5 +1,9 @@
 # Browsertime changelog
 -------------------------
+UNRELEASED
+-------------------------
+### Fixed
+* The video for Firefox now works with different view ports #[329](https://github.com/sitespeedio/browsertime/issues/329).
 
 version 1.2.1 2017-05-09
 -------------------------
