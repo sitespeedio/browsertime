@@ -1,5 +1,10 @@
 # Browsertime changelog
 -------------------------
+UNRELEASED
+-------------------------
+### Fixed
+* Internal: New version of VisualMetrics that catches frames that is partly in one (gray/orange) color.
+
 version 1.2.3 2017-05-12
 -------------------------
 ### Fixed
