@@ -1,5 +1,11 @@
 # Browsertime changelog
 -------------------------
+version 1.2.3 2017-05-12
+-------------------------
+### Fixed
+* URLs with a comma-sign (",") broke Browsertime if you also collected VisualMetrics [#333](https://github.com/sitespeedio/browsertime/issues/333).
+
+* New version of VisaulMetrics (thanks Pat) that makes possible to remove those grey background that started to appear in Chrome 58 if you run it in emulated mode. The original bug created to early first visual render in emulated mode  [#323](https://github.com/sitespeedio/browsertime/issues/323).
 
 version 1.2.2 2017-05-11
 -------------------------
