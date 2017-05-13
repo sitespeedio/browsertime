@@ -1,6 +1,6 @@
 {
   "description": "Browsertime",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "adbkit": "2.8.1",
