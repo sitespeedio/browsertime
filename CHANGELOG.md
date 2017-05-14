@@ -1,6 +1,11 @@
 # Browsertime changelog
 -------------------------
 
+version 1.2.5 2017-05-14
+-------------------------
+### Fixed
+* Reverted changes in 1.2.4 since it caused firstVisualChange to fire to early on desktop. [#335](https://github.com/sitespeedio/browsertime/issues/335)
+
 version 1.2.4 2017-05-13
 -------------------------
 ### Fixed
