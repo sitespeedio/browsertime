@@ -1,6 +1,7 @@
 # Browsertime changelog
 -------------------------
-UNRELEASED
+
+version 1.2.6 2017-05-21
 -------------------------
 ### Fixed
 * Setting Firefox preferences with values true/false didn't work as expected. [#336](https://github.com/sitespeedio/browsertime/issues/336)
