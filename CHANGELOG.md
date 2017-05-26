@@ -1,5 +1,9 @@
 # Browsertime changelog
 -------------------------
+version 1.2.7 2017-05-26
+-------------------------
+### Fixed
+* Downgraded to Chromedriver 2.29 to 2.28 to get --chrome.collectTracingEvents to work again (hope for a fix in 2.30).
 
 version 1.2.6 2017-05-21
 -------------------------
