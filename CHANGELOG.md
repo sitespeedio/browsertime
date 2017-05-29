@@ -1,5 +1,9 @@
 # Browsertime changelog
 -------------------------
+UNRELEASED
+-------------------------
+* Added --preURLDelay (in ms) so you can choose how long time you want to wait until you hit the main URL after the pre URL.
+
 version 1.2.7 2017-05-26
 -------------------------
 ### Fixed
