@@ -192,7 +192,8 @@ connectivity
   --connectivity.tc.device       The connectivity device. Used for engine tc.                                                                                              [default: "eth0"]
   --connectivity.engine          The engine for connectivity. TC (Linux Traffic Control) needs tc work but will only setup upload and latency. Use external if you set the connectivity
                                  outside of Browsertime. The best way do to this is described in https://github.com/sitespeedio/browsertime#connectivity
-                                                                                                                                           [choices: "tc", "external"] [default: "external"]
+capabilities
+   -- capabilities       Custom capabilites for selenium webdriver                                                                                                                                        [choices: "tc", "external"] [default: "external"]
 
 Options:
   --video                Record a video. Requires FFMpeg to be installed                                                                                                           [boolean]
@@ -226,15 +227,38 @@ Options:
   </pre>
 
 
-## Running on Saucelabs
+## Running on external cloud device farm, eg. Saucelabs, TestObject or Browserstack
 
-Sitespeed.io can run your tests on saucelabs. The capabilities for saucelabs can be passed in the `options`. For example,
+Sitespeed.io can run your tests on cloud device farms. The capabilities for saucelabs can be passed in the `options`. For example, in case of saucelabs, the command will be below
 
 ```
 bin/browsertime.js https://www.sitespeed.io --username <username> --accessKey <saucelabsAccessKey> --browserName chrome --platform 'macOS 10.12' --selenium 'http://<username>:<sauceLabsAccessKey>@ondemand.saucelabs.com:80/wd/hub.
 ```
 
 Please note that the `--browserName` option is specifically for saucelabs configuration and is different from Browsertime's `--browser` option.
+
+An example of custom `capabilites` object would be
+
+```
+    var options =
+    {
+        browsertime:{
+            capabilities:{
+                'username': '<username>',
+                'accessKey' :'<accessKey>',
+                'browserName': 'chrome',
+                'enablePerformanceLogging': 'true',
+                'iterations': 1
+            },
+            selenium: {
+                url: '<selenium url>'
+            }
+
+        },
+        'urls': ["https://www.google.com"]
+    }
+
+```
 
 [travis-image]: https://img.shields.io/travis/sitespeedio/browsertime.svg?style=flat-square
 [travis-url]: https://travis-ci.org/sitespeedio/browsertime

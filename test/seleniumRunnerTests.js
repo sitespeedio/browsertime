@@ -31,6 +31,30 @@ describe('SeleniumRunner', function() {
         })
         .should.be.rejected;
     });
+    it('should be able to accept the custom capabilities', function(){
+        runner = new SeleniumRunner({
+            'browser': "chrome",
+            'timeouts': {
+                'browserStart': 60000,
+                'scripts': 5000,
+                'pageLoad': 10000,
+                'pageCompleteCheck': 10000
+            }
+        });
+        const options = {
+            'browserName': 'chrome',
+            'enablePerformanceLogging': 'true',
+            'iterations': 1,
+            'custom_capability': 'xyz'
+        };
+
+        return runner.start(options)
+            .then(function() {
+               return runner.loadAndWait('http://httpbin.org/html').should.be.fulfilled;
+
+            })
+    });
+
   });
 
   BROWSERS.forEach(function(browser) {
@@ -158,4 +182,5 @@ describe('SeleniumRunner', function() {
     });
 
   });
+
 });
