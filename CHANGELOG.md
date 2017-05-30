@@ -1,5 +1,55 @@
 # Browsertime changelog
 -------------------------
+UNRELEASED
+-------------------------
+* Added --preURLDelay (in ms) so you can choose how long time you want to wait until you hit the main URL after the pre URL.
+
+version 1.2.7 2017-05-26
+-------------------------
+### Fixed
+* Downgraded to Chromedriver 2.29 to 2.28 to get --chrome.collectTracingEvents to work again (hope for a fix in 2.30).
+
+version 1.2.6 2017-05-21
+-------------------------
+### Fixed
+* Setting Firefox preferences with values true/false didn't work as expected. [#336](https://github.com/sitespeedio/browsertime/issues/336)
+
+version 1.2.5 2017-05-14
+-------------------------
+### Fixed
+* Reverted changes in 1.2.4 since it caused firstVisualChange to fire to early on desktop. [#335](https://github.com/sitespeedio/browsertime/issues/335)
+
+version 1.2.4 2017-05-13
+-------------------------
+### Fixed
+* Internal: New version of VisualMetrics that catches frames that is partly in one (gray/orange) color.
+
+version 1.2.3 2017-05-12
+-------------------------
+### Fixed
+* URLs with a comma-sign (",") broke Browsertime if you also collected VisualMetrics [#333](https://github.com/sitespeedio/browsertime/issues/333).
+
+* New version of VisaulMetrics (thanks Pat) that makes possible to remove those grey background that started to appear in Chrome 58 if you run it in emulated mode. The original bug created to early first visual render in emulated mode  [#323](https://github.com/sitespeedio/browsertime/issues/323).
+
+version 1.2.2 2017-05-11
+-------------------------
+### Fixed
+* The video for Firefox now works with different view ports [#329](https://github.com/sitespeedio/browsertime/issues/329).
+* More safe way to find the first white frame when cutting an creating the video [#331](https://github.com/sitespeedio/browsertime/pull/331)]
+* Get Chrome NetLog (--chrome.collectNetLog) now also works on Android [#306](https://github.com/sitespeedio/browsertime/issues/306)
+
+version 1.2.1 2017-05-09
+-------------------------
+### Fixed
+* Remove a couple of more black pixels in the video from Firefox
+
+version 1.2.0 2017-05-09
+-------------------------
+### Fixed
+* Removed the black borders in the video from Firefox [#285](https://github.com/sitespeedio/browsertime/issues/285).
+
+### Added
+* Support for Basic Auth in Chrome (Firefox will have it in 54 as long as https://github.com/SeleniumHQ/selenium/pull/3846 gets released). Use --basicAuth username@password [#328](https://github.com/sitespeedio/browsertime/pull/328).
 
 version 1.1.2 2017-05-02
 -------------------------
