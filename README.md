@@ -247,9 +247,9 @@ An example of custom `capabilites` object would be
                 'username': '<username>',
                 'accessKey' :'<accessKey>',
                 'browserName': 'chrome',
-                'enablePerformanceLogging': 'true',
-                'iterations': 1
+                'enablePerformanceLogging': 'true'
             },
+            iterations: 1
             selenium: {
                 url: '<selenium url>'
             }
