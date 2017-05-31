@@ -227,25 +227,16 @@ Options:
   </pre>
 
 
-## Running on external cloud device farm, eg. Saucelabs, TestObject or Browserstack
+## Setting your own custom capabilities
 
-Sitespeed.io can run your tests on cloud device farms. The capabilities for saucelabs can be passed in the `options`. For example, in case of saucelabs, the command will be below
+In order to set your own custom capabilities for selenium-webdriver, you can pass in as follows :
 
-```
-bin/browsertime.js https://www.sitespeed.io --username <username> --accessKey <saucelabsAccessKey> --browserName chrome --platform 'macOS 10.12' --selenium 'http://<username>:<sauceLabsAccessKey>@ondemand.saucelabs.com:80/wd/hub.
-```
-
-Please note that the `--browserName` option is specifically for saucelabs configuration and is different from Browsertime's `--browser` option.
-
-An example of custom `capabilites` object would be
 
 ```
     var options =
     {
         browsertime:{
             capabilities:{
-                'username': '<username>',
-                'accessKey' :'<accessKey>',
                 'browserName': 'chrome',
                 'enablePerformanceLogging': 'true'
             },
@@ -259,6 +250,7 @@ An example of custom `capabilites` object would be
     }
 
 ```
+
 
 [travis-image]: https://img.shields.io/travis/sitespeedio/browsertime.svg?style=flat-square
 [travis-url]: https://travis-ci.org/sitespeedio/browsertime
