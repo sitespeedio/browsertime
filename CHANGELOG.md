@@ -2,7 +2,12 @@
 -------------------------
 UNRELEASED
 -------------------------
+### Added
+
 * Added --preURLDelay (in ms) so you can choose how long time you want to wait until you hit the main URL after the pre URL.
+
+### Fixed
+* Fixed setting proxy using --proxy.http and --proxy.https [#338](https://github.com/sitespeedio/browsertime/issues/338)
 
 version 1.2.7 2017-05-26
 -------------------------
