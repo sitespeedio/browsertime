@@ -1,6 +1,7 @@
 # Browsertime changelog
 -------------------------
-UNRELEASED
+
+version 1.3.0 2017-06-01
 -------------------------
 ### Added
 
