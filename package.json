@@ -1,12 +1,12 @@
 {
   "description": "Browsertime",
-  "version": "1.2.7",
+  "version": "1.3.0",
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "adbkit": "2.8.1",
     "alto-saxophone": "2.28.0",
     "bluebird": "3.5.0",
-    "chrome-har": "0.1.0",
+    "chrome-har": "0.2.1",
     "execa": "0.6.1",
     "fast-stats": "0.0.3",
     "hasbin": "1.2.3",
