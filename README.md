@@ -11,7 +11,7 @@ Access the Web Performance Timeline, from your browser, in your terminal!
 Browsertime allows you to:
  1. Query timing data directly from the browser, to access [Navigation Timing](http://kaaes.github.io/timing/info.html), [User Timing](http://www.html5rocks.com/en/tutorials/webperformance/usertiming/),
 [Resource Timing](http://www.w3.org/TR/resource-timing/), first paint and [RUM Speed Index](https://github.com/WPO-Foundation/RUM-SpeedIndex).
- 1. Generate [HAR](http://www.softwareishard.com/blog/har-12-spec/) files (using [HAR Export trigger] (https://github.com/firebug/har-export-trigger) for Firefox and parsing the Chrome log for Chrome).
+ 1. Generate [HAR](http://www.softwareishard.com/blog/har-12-spec/) files (using [HAR Export trigger](https://github.com/firebug/har-export-trigger) for Firefox and parsing the Chrome log for Chrome).
  1. Run custom Javascript scripts in the browser and get statistics for each run.
  1. Record a video of the screen and analyze the result to get First Visual Change, Speed Index, Visual Complete 85 % and Last Visual Change.
 
@@ -36,7 +36,6 @@ Checkout the [examples](docs/examples/README.md).
 Browsertime supports Firefox and Chrome on desktop. On Android we support Chrome.
 
 But we want to [support Opera (on Android)](https://github.com/tobli/browsertime/issues/150)  and when(?!) iOS Safari supports WebDriver we will add that too.
-
 
 ## How does it work
 Browsertime uses Selenium NodeJS to drive the browser. It starts the browser, load a URL, executes configurable Javascripts to collect metrics, collect a HAR file.
@@ -192,8 +191,7 @@ connectivity
   --connectivity.tc.device       The connectivity device. Used for engine tc.                                                                                              [default: "eth0"]
   --connectivity.engine          The engine for connectivity. TC (Linux Traffic Control) needs tc work but will only setup upload and latency. Use external if you set the connectivity
                                  outside of Browsertime. The best way do to this is described in https://github.com/sitespeedio/browsertime#connectivity
-capabilities
-   -- capabilities       Custom capabilites for selenium webdriver                                                                                                                                        [choices: "tc", "external"] [default: "external"]
+                                                                                                                                           [choices: "tc", "external"] [default: "external"]
 
 Options:
   --video                Record a video. Requires FFMpeg to be installed                                                                                                           [boolean]
@@ -225,32 +223,6 @@ Options:
   -h, --help             Show help                                                                                                                                                 [boolean]
   -V, --version          Show version number                                                                                                                                       [boolean]
   </pre>
-
-
-## Setting your own custom capabilities
-
-In order to set your own custom capabilities for selenium-webdriver, you can pass in as follows :
-
-
-```
-    var options =
-    {
-        browsertime:{
-            capabilities:{
-                'browserName': 'chrome',
-                'enablePerformanceLogging': 'true'
-            },
-            iterations: 1
-            selenium: {
-                url: '<selenium url>'
-            }
-
-        },
-        'urls': ["https://www.google.com"]
-    }
-
-```
-
 
 [travis-image]: https://img.shields.io/travis/sitespeedio/browsertime.svg?style=flat-square
 [travis-url]: https://travis-ci.org/sitespeedio/browsertime
