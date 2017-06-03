@@ -1,10 +1,10 @@
 # Browsertime changelog
 -------------------------
 
-UNRELEASED
+version 1.4.0 2017-06-03
 -------------------------
 ### Fixed
-* Updated to latest nodejs and FFMPeg in the Docker container
+* Updated to latest NodeJS and FFMPeg in the Docker container.
 
 ### Added
 * Set Selenium capabilities (hidden pro feature for now).
