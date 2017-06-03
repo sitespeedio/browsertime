@@ -1,6 +1,14 @@
 # Browsertime changelog
 -------------------------
 
+UNRELEASED
+-------------------------
+### Fixed
+* Updated to latest nodejs and FFMPeg in the Docker container
+
+### Added
+* Set Selenium capabilities (hidden pro feature for now).
+
 version 1.3.0 2017-06-01
 -------------------------
 ### Added
@@ -9,7 +17,7 @@ version 1.3.0 2017-06-01
 
 ### Fixed
 * Fixed setting proxy using --proxy.http and --proxy.https [#338](https://github.com/sitespeedio/browsertime/issues/338)
-* Updated to chrome-har 0.2.1 that: add "serverIPAddress" field to entries, set bodySize for requests correctly, set bodySize and compression for responses correctly, and add _transferSize field for responses, just like Chrome does.
+* Updated to chrome-har 0.2.1 that: add "serverIPAddress" field to entries, set bodySize for requests correctly, set bodySize and compression for responses correctly, and add \_transferSize field for responses, just like Chrome does.
 
 version 1.2.7 2017-05-26
 -------------------------
