@@ -1,6 +1,11 @@
 # Browsertime changelog
 -------------------------
 
+UNRELEASED
+-------------------------
+### Added
+* Upgraded to Chromedriver 2.30.0 fixes [#337](https://github.com/sitespeedio/browsertime/issues/337).
+
 version 1.4.0 2017-06-03
 -------------------------
 ### Fixed
