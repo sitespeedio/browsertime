@@ -59,7 +59,7 @@ engine.start()
       const storageManager = new StorageManager(url, options);
       const harName = (options.har) ? (options.har) : 'browsertime';
       const jsonName = (options.output) ? (options.output) : 'browsertime';
-      const btData = pick(result, ['info', 'browserScripts', 'statistics', 'visualMetrics', 'timestamps']);
+      const btData = pick(result, ['info', 'browserScripts', 'statistics', 'visualMetrics', 'consoleLog','timestamps']);
       if (!isEmpty(btData)) {
         saveOperations.push(storageManager.writeJson(jsonName + '.json', btData));
       }
