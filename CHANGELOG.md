@@ -5,6 +5,8 @@ UNRELEASED
 -------------------------
 ### Added
 * Upgraded to Chromedriver 2.30.0 fixes [#337](https://github.com/sitespeedio/browsertime/issues/337).
+* Upgraderd to Geckodriver 0.17.0 seems to fix [#321](https://github.com/sitespeedio/browsertime/issues/321)
+
 
 version 1.4.0 2017-06-03
 -------------------------
