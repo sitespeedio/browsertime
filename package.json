@@ -1,12 +1,12 @@
 {
   "description": "Browsertime",
-  "version": "1.1.0-beta1",
+  "version": "1.4.0",
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "adbkit": "2.8.1",
-    "alto-saxophone": "2.29.0",
+    "alto-saxophone": "2.30.0",
     "bluebird": "3.5.0",
-    "chrome-har": "0.1.0",
+    "chrome-har": "0.2.1",
     "execa": "0.6.1",
     "fast-stats": "0.0.3",
     "hasbin": "1.2.3",
@@ -21,12 +21,12 @@
     "lodash.set": "4.3.2",
     "mkdirp": "0.5.1",
     "moment": "2.17.1",
-    "selenium-webdriver": "3.3.0",
+    "selenium-webdriver": "3.4.0",
     "sltc": "0.6.0",
-    "soprano-saxophone": "0.14.0",
+    "soprano-saxophone": "0.17.0",
     "valid-url": "1.0.9",
     "xvfb": "0.2.3",
-    "yargs": "7.0.2"
+    "yargs": "7.1.0"
   },
   "devDependencies": {
     "chai": "^3.4.0",
@@ -38,9 +38,6 @@
   },
   "engines": {
     "node": ">=6.9.0"
-  },
-  "publishConfig": {
-    "tag": "canary"
   },
   "main": "index.js",
   "scripts": {

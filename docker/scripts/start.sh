@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-google-chrome-stable --version
+google-chrome --version
 firefox --version
 
 # Here's a hack for fixing the problem with Chrome not starting in time
@@ -13,6 +13,12 @@ sudo service dbus restart > /dev/null
 service dbus status > /dev/null
 export $(dbus-launch)
 export NSS_USE_SHARED_DB=ENABLED
+
+# Start adb server and list connected devices
+if [ -n "$START_ADB_SERVER" ] ; then
+  sudo adb start-server
+  sudo adb devices
+fi
 
 # Inspired by docker-selenium way of shutting down
 function shutdown {

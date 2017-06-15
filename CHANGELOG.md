@@ -1,9 +1,95 @@
 # Browsertime changelog
 -------------------------
-version 1.1.0-beta1 2017-04-17
+
+UNRELEASED
 -------------------------
 ### Added
-* Use Browser extension to block request and add request headers. Only works in Chrome in this beta release.
+* Upgraded to Chromedriver 2.30.0 fixes [#337](https://github.com/sitespeedio/browsertime/issues/337).
+* Upgraderd to Geckodriver 0.17.0 seems to fix [#321](https://github.com/sitespeedio/browsertime/issues/321)
+* Pickup metrics from the Paint Timing API [#344](https://github.com/sitespeedio/browsertime/pull/344), will work in Chrome 60.
+* Updated the Docker container to Firefox 54 and Chrome 61 (dev) to fix the background color problem.
+
+version 1.4.0 2017-06-03
+-------------------------
+### Fixed
+* Updated to latest NodeJS and FFMPeg in the Docker container.
+
+### Added
+* Set Selenium capabilities (hidden pro feature for now).
+
+version 1.3.0 2017-06-01
+-------------------------
+### Added
+
+* Added --preURLDelay (in ms) so you can choose how long time you want to wait until you hit the main URL after the pre URL.
+
+### Fixed
+* Fixed setting proxy using --proxy.http and --proxy.https [#338](https://github.com/sitespeedio/browsertime/issues/338)
+* Updated to chrome-har 0.2.1 that: add "serverIPAddress" field to entries, set bodySize for requests correctly, set bodySize and compression for responses correctly, and add \_transferSize field for responses, just like Chrome does.
+
+version 1.2.7 2017-05-26
+-------------------------
+### Fixed
+* Downgraded to Chromedriver 2.29 to 2.28 to get --chrome.collectTracingEvents to work again (hope for a fix in 2.30).
+
+version 1.2.6 2017-05-21
+-------------------------
+### Fixed
+* Setting Firefox preferences with values true/false didn't work as expected. [#336](https://github.com/sitespeedio/browsertime/issues/336)
+
+version 1.2.5 2017-05-14
+-------------------------
+### Fixed
+* Reverted changes in 1.2.4 since it caused firstVisualChange to fire to early on desktop. [#335](https://github.com/sitespeedio/browsertime/issues/335)
+
+version 1.2.4 2017-05-13
+-------------------------
+### Fixed
+* Internal: New version of VisualMetrics that catches frames that is partly in one (gray/orange) color.
+
+version 1.2.3 2017-05-12
+-------------------------
+### Fixed
+* URLs with a comma-sign (",") broke Browsertime if you also collected VisualMetrics [#333](https://github.com/sitespeedio/browsertime/issues/333).
+
+* New version of VisaulMetrics (thanks Pat) that makes possible to remove those grey background that started to appear in Chrome 58 if you run it in emulated mode. The original bug created to early first visual render in emulated mode  [#323](https://github.com/sitespeedio/browsertime/issues/323).
+
+version 1.2.2 2017-05-11
+-------------------------
+### Fixed
+* The video for Firefox now works with different view ports [#329](https://github.com/sitespeedio/browsertime/issues/329).
+* More safe way to find the first white frame when cutting an creating the video [#331](https://github.com/sitespeedio/browsertime/pull/331)]
+* Get Chrome NetLog (--chrome.collectNetLog) now also works on Android [#306](https://github.com/sitespeedio/browsertime/issues/306)
+
+version 1.2.1 2017-05-09
+-------------------------
+### Fixed
+* Remove a couple of more black pixels in the video from Firefox
+
+version 1.2.0 2017-05-09
+-------------------------
+### Fixed
+* Removed the black borders in the video from Firefox [#285](https://github.com/sitespeedio/browsertime/issues/285).
+
+### Added
+* Support for Basic Auth in Chrome (Firefox will have it in 54 as long as https://github.com/SeleniumHQ/selenium/pull/3846 gets released). Use --basicAuth username@password [#328](https://github.com/sitespeedio/browsertime/pull/328).
+
+version 1.1.2 2017-05-02
+-------------------------
+### Fixed
+* You can now run Android devices in your Docker container on Ubuntu. Check the [README](https://github.com/sitespeedio/browsertime#test-on-your-mobile-device) for more info. Inspired by [https://github.com/sorccu/docker-adb](https://github.com/sorccu/docker-adb).
+
+version 1.1.1 2017-04-23
+-------------------------
+### Fixed
+* New version of the browsertime extension to turn off save password bubble for Chrome.
+
+version 1.1.0 2017-04-23
+-------------------------
+### Changed
+* Block requests by domain (--block) and add request headers (-r name:value). Only works in Chrome for now, it will get fixed for Firefox when https://github.com/SeleniumHQ/selenium/pull/3846 is released in Selenium.
+* Upgrade to Selenium 3.4.0 and Geckodriver 0.15.0 to get Firefox 53.0 working.
+* Docker container now uses Chrome 58 and Firefox 53.
 
 version 1.0.0 2017-04-07
 -------------------------
