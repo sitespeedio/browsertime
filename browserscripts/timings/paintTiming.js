@@ -5,7 +5,7 @@
 
   if (entries.length > 0) {
     for (var entry of entries) {
-      values[entry.name] = {startTime: entry.startTime, duration: entry.duration};
+      values[entry.name] =  entry.startTime;
     }
     return values;
   }
