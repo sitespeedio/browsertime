@@ -1,13 +1,13 @@
 # Browsertime changelog
 -------------------------
 
-UNRELEASED
+version 1.5.0 2017-06-22
 -------------------------
 ### Added
 * Upgraded to Chromedriver 2.30.0 fixes [#337](https://github.com/sitespeedio/browsertime/issues/337).
 * Upgraded to Geckodriver 0.17.0 seems to fix [#321](https://github.com/sitespeedio/browsertime/issues/321)
 * Pickup metrics from the Paint Timing API [#344](https://github.com/sitespeedio/browsertime/pull/344), will work in Chrome 60.
-* Updated the Docker container to Firefox 54 and Chrome 61 (dev) to fix the background color problem.
+* Updated the Docker container to Firefox 54 and Chrome 60 (beta) to fix the background color problem. [Chrome bug 727046](https://bugs.chromium.org/p/chromium/issues/detail?id=727046)
 
 version 1.4.0 2017-06-03
 -------------------------
