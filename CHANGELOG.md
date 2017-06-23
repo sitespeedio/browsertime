@@ -1,5 +1,9 @@
 # Browsertime changelog
 -------------------------
+version 1.5.2 2017-06-23
+-------------------------
+### Fixed
+* Upgraded (again) from Chromedriver 2.28 to 2.30 with a very special hack [#347](https://github.com/sitespeedio/browsertime/pull/347).
 
 version 1.5.1 2017-06-22
 -------------------------
