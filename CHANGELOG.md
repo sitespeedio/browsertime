@@ -1,5 +1,12 @@
 # Browsertime changelog
 -------------------------
+
+version 1.5.3 2017-06-30
+-------------------------
+### Fixed 
+* Upgraded chrome-har to fix https://github.com/sitespeedio/sitespeed.io/issues/1654
+* Upgraded Docker to use latest Chrome beta and include fonts for Hindi, Thai, Japanese, Chinese and Korean.
+
 version 1.5.2 2017-06-23
 -------------------------
 ### Fixed
