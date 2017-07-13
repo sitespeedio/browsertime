@@ -5,6 +5,7 @@ UNRELEASED
 -------------------------
 ### Fixed
 * Latest NodeJS 6.11.1 in the Docker container.
+* Upgrade to Geckodriver 0.18.0 for Firefox.
 
 version 1.5.3 2017-06-30
 -------------------------
