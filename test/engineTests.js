@@ -107,51 +107,15 @@ describe('Engine', function() {
       });
 
       it('should be able to run async fetch script', function() {
-        let browserScripts = engine.run('http://examples.sitespeed.io/3.0/2014-12-15-22-16-30/', null, {
+        let browserScripts = engine.run('http://httpbin.org/html', null, {
             scripts: {
-              stylesheets: `(function() {
-            'use strict';
-
-            function getAbsoluteURL(url) {
-              var a = window.document.createElement('a');
-              a.href = url;
-              return a.href;
-            }
-
-            if (!window.fetch) {
-              return {};
-            }
-
+              fetched: `(function() {
             var request = new Request(document.URL, {
               redirect: 'follow',
               destination: 'document'
             });
 
-            return fetch(request)
-              .then(function(response) {
-                return response.text();
-              })
-              .then(function(text) {
-                var parser = new DOMParser();
-                var doc = parser.parseFromString(text, "text/html");
-
-                var links = Array.prototype.slice.call(doc.head.getElementsByTagName('link'));
-
-                return links.filter(function(link) {
-                    return (link.rel === 'stylesheet');
-                  })
-                  .filter(function(link) {
-                    var url = getAbsoluteURL(link.attributes['href'].value);
-                    return /^http(s)?:\/\//.test(url);
-                  })
-                  .map(function(link) {
-                    return {
-                      href: getAbsoluteURL(link.attributes['href'].value),
-                      media: link.media,
-                      rel: link.rel
-                    };
-                  });
-              });
+            return fetch(request).then(response => response.ok);
           })()`
             }
           })
@@ -161,18 +125,7 @@ describe('Engine', function() {
         return browserScripts.should.become([
           {
             scripts: {
-              stylesheets: [
-                {
-                  'href': 'http://examples.sitespeed.io/3.0/2014-12-15-22-16-30/css/bootstrap.min.css',
-                  'media': '',
-                  'rel': 'stylesheet'
-                },
-                {
-                  'href': 'http://examples.sitespeed.io/3.0/2014-12-15-22-16-30/css/bootstrap-overrides.css',
-                  'media': '',
-                  'rel': 'stylesheet'
-                }
-              ]
+              fetched: true
             }
           }]);
       });
