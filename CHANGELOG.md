@@ -1,7 +1,7 @@
 # Browsertime changelog
 -------------------------
 
-UNRELEASED
+version 1.5.4 2017-07-19
 -------------------------
 ### Fixed
 * Latest NodeJS 6.11.1 in the Docker container.
