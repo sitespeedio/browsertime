@@ -6,6 +6,7 @@ UNRELEASED
 ### Fixed
 * Latest NodeJS 6.11.1 in the Docker container.
 * Upgrade to Geckodriver 0.18.0 for Firefox.
+* Finetuning choosing orange frames see [#1673 sitespeed.io](https://github.com/sitespeedio/sitespeed.io/issues/1673)
 
 version 1.5.3 2017-06-30
 -------------------------
