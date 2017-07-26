@@ -1,5 +1,9 @@
 # Browsertime changelog
 -------------------------
+UNRELEASED
+-------------------------
+### Fixed
+* Upgrade to Chrome 60 stable from 60 beta in the Docker container
 
 version 1.5.4 2017-07-19
 -------------------------
