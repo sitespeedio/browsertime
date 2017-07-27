@@ -21,5 +21,7 @@ ADD docker/adb/insecure_shared_adbkey.pub /root/.android/adbkey.pub
 WORKDIR /
 
 COPY docker/scripts/start.sh /start.sh
+# Patch until https://github.com/SeleniumHQ/selenium/pull/3846 gets released
+COPY docker/selenium/extension.js /usr/src/app/node_modules/selenium-webdriver/firefox/extension.js
 
 ENTRYPOINT ["/start.sh"]
