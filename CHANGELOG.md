@@ -4,6 +4,8 @@ UNRELEASED
 -------------------------
 ### Fixed
 * Upgrade to Chrome 60 stable from 60 beta in the Docker container
+* Chromedriver 2.31.0
+* Selenium 3.5
 
 version 1.5.4 2017-07-19
 -------------------------
