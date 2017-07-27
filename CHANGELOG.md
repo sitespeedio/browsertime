@@ -1,12 +1,14 @@
 # Browsertime changelog
 -------------------------
-UNRELEASED
+version 1.6.0 2017-07-27
 -------------------------
 ### Fixed
 * Upgrade to Chrome 60 stable from 60 beta in the Docker container
 * Upgrading to Chromedriver 2.31.0
 * Upgrading to Selenium 3.5
-* We now support adding request headers, blocking domains and using basic auth in Firefox since latest Selenium and @tobli:s PR
+
+### Added
+* We now support adding request headers, blocking domains and using basic auth in Firefox since latest Selenium and @tobli:s [PR](https://github.com/SeleniumHQ/selenium/pull/3846) for supporting Web Extensions in Firefox!
 
 version 1.5.4 2017-07-19
 -------------------------
