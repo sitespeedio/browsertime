@@ -4,19 +4,20 @@ UNRELEASED
 -------------------------
 ### Fixed
 * Upgrade to Chrome 60 stable from 60 beta in the Docker container
-* Chromedriver 2.31.0
-* Selenium 3.5
+* Upgrading to Chromedriver 2.31.0
+* Upgrading to Selenium 3.5
+* We now support adding request headers, blocking domains and using basic auth in Firefox since latest Selenium and @tobli:s PR
 
 version 1.5.4 2017-07-19
 -------------------------
 ### Fixed
 * Latest NodeJS 6.11.1 in the Docker container.
 * Upgrade to Geckodriver 0.18.0 for Firefox.
-* Finetuning choosing orange frames see [#1673 sitespeed.io](https://github.com/sitespeedio/sitespeed.io/issues/1673)
+* Fine tuning choosing orange frames see [#1673 sitespeed.io](https://github.com/sitespeedio/sitespeed.io/issues/1673)
 
 version 1.5.3 2017-06-30
 -------------------------
-### Fixed 
+### Fixed
 * Upgraded chrome-har to fix https://github.com/sitespeedio/sitespeed.io/issues/1654
 * Upgraded Docker to use latest Chrome beta and include fonts for Hindi, Thai, Japanese, Chinese and Korean.
 
