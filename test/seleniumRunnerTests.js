@@ -93,7 +93,7 @@ describe('SeleniumRunner', function() {
       });
 
       it('should handle a boolean return', function() {
-        return runner.runScript('return true;').should.become.true;
+        return runner.runScript('return true;').should.become(true);
       });
 
       it('should handle a number return', function() {

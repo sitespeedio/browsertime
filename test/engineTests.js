@@ -60,7 +60,7 @@ describe('Engine', function() {
         // somewhat clunky way to ignore generated har data in test.
         return engine.run('http://httpbin.org/html', {scripts})
           .then(function(r) {
-            return r.har.should.have.deep.property('log.entries[0].request.url');
+            return r.har.should.have.nested.property('log.entries[0].request.url');
           });
       });
 

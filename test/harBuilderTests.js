@@ -29,22 +29,22 @@ describe('har_builder', function() {
     it('should add creator if missing', function() {
       builder.addCreator(har, 'foo');
 
-      expect(har).to.have.deep.property('log.creator.name', 'Browsertime');
-      expect(har).to.have.deep.property('log.creator.comment', 'foo');
+      expect(har).to.have.nested.property('log.creator.name', 'Browsertime');
+      expect(har).to.have.nested.property('log.creator.comment', 'foo');
     });
 
     it('should not add comment to creator unless specified', function() {
       builder.addCreator(har);
 
-      expect(har).to.have.deep.property('log.creator.name', 'Browsertime');
-      expect(har).to.not.have.deep.property('log.creator.comment');
+      expect(har).to.have.nested.property('log.creator.name', 'Browsertime');
+      expect(har).to.not.have.nested.property('log.creator.comment');
     });
 
     it('should not add empty comment to creator', function() {
       builder.addCreator(har, '');
 
-      expect(har).to.have.deep.property('log.creator.name', 'Browsertime');
-      expect(har).to.not.have.deep.property('log.creator.comment');
+      expect(har).to.have.nested.property('log.creator.name', 'Browsertime');
+      expect(har).to.not.have.nested.property('log.creator.comment');
     });
   });
 
@@ -97,8 +97,8 @@ describe('har_builder', function() {
         {
           'pageref': 'page_1'
         }]);
-      expect(combinedHar).to.have.deep.property('log.version', '1.2');
-      expect(combinedHar).to.have.deep.property('log.creator.name', 'Browsertime');
+      expect(combinedHar).to.have.nested.property('log.version', '1.2');
+      expect(combinedHar).to.have.nested.property('log.creator.name', 'Browsertime');
     });
   });
 });
