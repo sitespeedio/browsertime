@@ -63,8 +63,7 @@ before_install:
   --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1600x1024x16
 script:
 - ./vendor/visualmetrics.py --check
-- npm run lint
-- npm test
+- npm run travis
 - node ./bin/browsertime.js -b firefox -n 2 http://www.browsertime.net --preTask test/prepostscripts/preSample.js
   --postTask test/prepostscripts/postSample2.js --connectivity.profile cable --connectivity.engine
   tc
