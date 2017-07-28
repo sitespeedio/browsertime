@@ -18,13 +18,16 @@ let Engine = require('../').Engine,
 Promise.promisifyAll(fs);
 
 function parseUserScripts(scripts) {
-  if (!Array.isArray(scripts))
-    scripts = [scripts];
+  if (!Array.isArray(scripts)) scripts = [scripts];
 
-  return Promise.reduce(scripts, (results, script) =>
-      browserScripts.findAndParseScripts(path.resolve(script), 'custom')
-        .then((scripts) => merge(results, scripts)),
-    {});
+  return Promise.reduce(
+    scripts,
+    (results, script) =>
+      browserScripts
+        .findAndParseScripts(path.resolve(script), 'custom')
+        .then(scripts => merge(results, scripts)),
+    {}
+  );
 }
 
 function run(url, options) {
@@ -41,15 +44,21 @@ function run(url, options) {
   }
 
   const scriptCategories = browserScripts.allScriptCategories;
-  let scriptsByCategory = browserScripts.getScriptsForCategories(scriptCategories);
+  let scriptsByCategory = browserScripts.getScriptsForCategories(
+    scriptCategories
+  );
 
   if (options.script) {
     const userScripts = parseUserScripts(options.script);
-    scriptsByCategory = Promise.join(scriptsByCategory, userScripts,
-      (scriptsByCategory, userScripts) => merge(scriptsByCategory, userScripts));
+    scriptsByCategory = Promise.join(
+      scriptsByCategory,
+      userScripts,
+      (scriptsByCategory, userScripts) => merge(scriptsByCategory, userScripts)
+    );
   }
 
-engine.start()
+  engine
+    .start()
     .then(function() {
       return engine.run(url, scriptsByCategory);
     })
@@ -57,25 +66,41 @@ engine.start()
       let saveOperations = [];
 
       const storageManager = new StorageManager(url, options);
-      const harName = (options.har) ? (options.har) : 'browsertime';
-      const jsonName = (options.output) ? (options.output) : 'browsertime';
-      const btData = pick(result, ['info', 'browserScripts', 'statistics', 'visualMetrics', 'timestamps']);
+      const harName = options.har ? options.har : 'browsertime';
+      const jsonName = options.output ? options.output : 'browsertime';
+      const btData = pick(result, [
+        'info',
+        'browserScripts',
+        'statistics',
+        'visualMetrics',
+        'timestamps'
+      ]);
       if (!isEmpty(btData)) {
-        saveOperations.push(storageManager.writeJson(jsonName + '.json', btData));
+        saveOperations.push(
+          storageManager.writeJson(jsonName + '.json', btData)
+        );
       }
       if (result.har) {
-        saveOperations.push(storageManager.writeJson(harName + '.har', result.har));
+        saveOperations.push(
+          storageManager.writeJson(harName + '.har', result.har)
+        );
       }
       forEach(result.extraJson, (value, key) =>
-        saveOperations.push(storageManager.writeJson(key, value)));
+        saveOperations.push(storageManager.writeJson(key, value))
+      );
       forEach(result.screenshots, (value, index) =>
-        saveOperations.push(storageManager.writeData(`screenshot-${index}.png`, value)));
+        saveOperations.push(
+          storageManager.writeData(`screenshot-${index}.png`, value)
+        )
+      );
 
-      return Promise.all(saveOperations)
-        .then(() => {
-          log.info('Wrote data to %s', path.relative(process.cwd(), storageManager.directory));
-          return result;
-        });
+      return Promise.all(saveOperations).then(() => {
+        log.info(
+          'Wrote data to %s',
+          path.relative(process.cwd(), storageManager.directory)
+        );
+        return result;
+      });
     })
     .catch(function(e) {
       log.error('Error running browsertime', e);
@@ -83,11 +108,12 @@ engine.start()
     })
     .finally(function() {
       log.debug('Stopping Browsertime');
-      return engine.stop()
+      return engine
+        .stop()
         .tap(() => {
           log.debug('Stopped Browsertime');
         })
-        .catch((e) => {
+        .catch(e => {
           log.error('Error stopping Browsertime!', e);
 
           process.exitCode = 1;
@@ -103,7 +129,8 @@ let cliResult = cli.parseCommandLine();
 
 logging.configure(cliResult.options);
 
-if (log.isEnabledFor(log.CRITICAL)) { // TODO change the threshold to VERBOSE before releasing 1.0
+if (log.isEnabledFor(log.CRITICAL)) {
+  // TODO change the threshold to VERBOSE before releasing 1.0
   Promise.longStackTraces();
 }
 

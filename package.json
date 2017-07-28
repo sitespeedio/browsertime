@@ -32,8 +32,11 @@
     "chai": "^4.1.0",
     "chai-as-promised": "^7.1.1",
     "eslint": "^4.2.0",
+    "eslint-config-prettier": "^2.3.0",
+    "eslint-plugin-prettier": "^2.1.2",
     "longjohn": "^0.2.11",
     "mocha": "^3.1.2",
+    "prettier": "^1.5.3",
     "sequencediagrams": "0.0.8"
   },
   "engines": {
@@ -43,6 +46,9 @@
   "scripts": {
     "test": "mocha",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+    "travis": "npm run eslint-check && npm run lint && npm run test",
     "generateDocs": "sequencediagrams docs/sequence-diagrams"
   },
   "name": "browsertime",

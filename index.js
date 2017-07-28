@@ -7,5 +7,9 @@ const Engine = require('./lib/core/engine'),
   logging = require('./lib/support/logging');
 
 module.exports = {
-  Engine, SeleniumRunner, errors, logging, browserScripts
+  Engine,
+  SeleniumRunner,
+  errors,
+  logging,
+  browserScripts
 };
