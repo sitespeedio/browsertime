@@ -1,8 +1,14 @@
 'use strict';
 
-const SeleniumRunner = require('../lib/core/seleniumRunner');
+const SeleniumRunner = require('../../lib/core/seleniumRunner');
 
-const BROWSERS = ['chrome', 'firefox'];
+const BROWSERS = [];
+
+if (process.env.BROWSERTIME_TEST_BROWSER) {
+  BROWSERS.push(process.env.BROWSERTIME_TEST_BROWSER);
+} else {
+  BROWSERS.push('chrome', 'firefox');
+}
 
 describe('SeleniumRunner', function() {
   let runner;
@@ -15,20 +21,22 @@ describe('SeleniumRunner', function() {
       return runner.start().should.be.rejected;
     });
 
-    it.skip('should handle if Chrome crashes', function() {
-      runner = new SeleniumRunner({
-        browser: 'chrome',
-        chrome: {
-          args: '--crash-test'
-        },
-        verbose: true
-      });
+    if (BROWSERS.includes('chrome')) {
+      it.skip('should handle if Chrome crashes', function() {
+        runner = new SeleniumRunner({
+          browser: 'chrome',
+          chrome: {
+            args: '--crash-test'
+          },
+          verbose: true
+        });
 
-      // Wait for session to actually have Chrome start up.
-      return runner.start().catch(function(e) {
-        throw e;
-      }).should.be.rejected;
-    });
+        // Wait for session to actually have Chrome start up.
+        return runner.start().catch(function(e) {
+          throw e;
+        }).should.be.rejected;
+      });
+    }
   });
 
   BROWSERS.forEach(function(browser) {

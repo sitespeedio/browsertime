@@ -1,7 +1,7 @@
 'use strict';
 
 let assert = require('assert'),
-  Statistics = require('../lib/support/statistics').Statistics;
+  Statistics = require('../../lib/support/statistics').Statistics;
 
 describe('statistics', function() {
   let stats;

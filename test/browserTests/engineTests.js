@@ -1,9 +1,15 @@
 'use strict';
 
 const path = require('path'),
-  Engine = require('../lib/core/engine');
+  Engine = require('../../lib/core/engine');
 
-const BROWSERS = ['chrome', 'firefox'];
+const BROWSERS = [];
+
+if (process.env.BROWSERTIME_TEST_BROWSER) {
+  BROWSERS.push(...process.env.BROWSERTIME_TEST_BROWSER.split(' '));
+} else {
+  BROWSERS.push('chrome', 'firefox');
+}
 
 describe('Engine', function() {
   let engine;
