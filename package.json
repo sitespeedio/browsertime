@@ -44,7 +44,9 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha test/unitTests test/browserTests",
+    "test:unit": "mocha test/unitTests",
+    "test:browser": "mocha test/browserTests",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
