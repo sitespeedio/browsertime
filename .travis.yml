@@ -3,9 +3,8 @@ language: node_js
 dist: trusty
 
 install:
-- docker build -t sitespeedio/browsertime .
 - docker build -f ./Dockerfile-test -t sitespeedio/browsertime-test .
-- docker run --rm sitespeedio/browsertime -V
+- docker run --rm sitespeedio/browsertime-test -V
 
 script:
 - docker run --rm sitespeedio/browsertime-test npm run lint
