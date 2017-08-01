@@ -43,7 +43,6 @@ before_install:
 - pip --version
 - pip install --user Pillow
 - pip install --user pyssim
-- ls -la /usr/local/lib/
 - pip show Pillow
 - pip show pyssim
 - mkdir /tmp/ffmpeg
