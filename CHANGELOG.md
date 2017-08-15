@@ -5,6 +5,7 @@ UNRELEASED
 ### Fixed
 * Correct naming in the CLI help when emulating an iPhone ('iPhone 6'). It was changed in Chromedriver 2.31.0.
 * Added missing browser name in the HAR when you run as Chrome as emulated.
+* Upgraded to Firefox 55.0 in the Docker file.
 
 version 1.6.0 2017-07-27
 -------------------------
