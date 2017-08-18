@@ -87,14 +87,14 @@ def video_to_frames(video, directory, force, orange_file, white_file, gray_file,
                             remove_frames_before_orange(dir, orange_file)
                             remove_orange_frames(dir, orange_file)
                         find_first_frame(dir, white_file)
-                        find_render_start(dir, gray_file)
+                        blank_first_frame(dir)
+                        find_render_start(dir, orange_file, gray_file)
                         find_last_frame(dir, white_file)
                         adjust_frame_times(dir)
                         if timeline_file is not None and not multiple:
                             synchronize_to_timeline(dir, timeline_file)
                         eliminate_duplicate_frames(dir)
                         eliminate_similar_frames(dir)
-                        blank_first_frame(dir)
                         # See if we are limiting the number of frames to keep
                         # (before processing them to save processing time)
                         if options.maxframes > 0:
@@ -208,7 +208,7 @@ def remove_frames_before_orange(directory, orange_file):
             if is_color_frame(frame, orange_file):
                 found_orange = True
                 break
-            if frame_count > 40:
+            if frame_count > 20:
                 break
             remove_frames.append(frame)
 
@@ -219,22 +219,15 @@ def remove_frames_before_orange(directory, orange_file):
 
 
 def remove_orange_frames(directory, orange_file):
-    """Remove orange frames from the video"""
+    """Remove orange frames from the beginning of the video"""
     frames = sorted(glob.glob(os.path.join(directory, 'video-*.png')))
     if len(frames):
-        # go through the first 20 frames and remove any orange ones. Unfortunately
-        # sometimes the video blinks from orange to white and back to orange as Chrome flips in
-        # an old render surface. Orange frames from the middle need to be
-        # dropped silently.
         logging.debug("Scanning for orange frames...")
-        frame_count = 0
         for frame in frames:
-            frame_count += 1
             if is_color_frame(frame, orange_file):
                 logging.debug("Removing Orange frame: %s", frame)
                 os.remove(frame)
-                frame_count = 0
-            if frame_count > 40:
+            else:
                 break
         for frame in reversed(frames):
             if is_color_frame(frame, orange_file):
@@ -514,8 +507,7 @@ def find_last_frame(directory, white_file):
         logging.exception('Error finding last frame')
 
 
-def find_render_start(directory, gray_file):
-    logging.debug('find_render_start')
+def find_render_start(directory, orange_file, gray_file):
     global options
     global client_viewport
     try:
@@ -567,17 +559,18 @@ def find_render_start(directory, gray_file):
                     top += client_viewport['y']
                 crop = '{0:d}x{1:d}+{2:d}+{3:d}'.format(
                     width, height, left, top)
-                logging.debug('Looping to remove frames ....')
                 for i in xrange(1, count):
                     if frames_match(first, files[i], 10, 500, crop, mask):
                         logging.debug('Removing pre-render frame %s', files[i])
+                        os.remove(files[i])
+                    elif orange_file is not None and is_color_frame(files[i], orange_file):
+                        logging.debug('Removing orange frame %s', files[i])
                         os.remove(files[i])
                     elif gray_file is not None and is_color_frame(files[i], gray_file):
                         logging.debug('Removing gray frame %s', files[i])
                         os.remove(files[i])
                     else:
-                        logging.debug('No match %s of %s', i, count)
-                        continue
+                        break
     except BaseException:
         logging.exception('Error getting render start')
 
@@ -696,7 +689,7 @@ def blank_first_frame(directory):
     global options
     try:
         if options.forceblank:
-            files = sorted(glob.glob(os.path.join(directory, 'ms_*.png')))
+            files = sorted(glob.glob(os.path.join(directory, 'video-*.png')))
             count = len(files)
             if count > 1:
                 from PIL import Image
@@ -759,17 +752,39 @@ def clean_directory(directory):
 
 
 def is_color_frame(file, color_file):
+    """Check a section from the middle, top and bottom of the viewport to see if it matches"""
     match = False
     if os.path.isfile(color_file):
-        command = ('convert "{0}" "(" "{1}" -resize 200x200! ")"'
-                   ' miff:- | compare -metric AE - -fuzz 10% null:').format(color_file, file)
-        compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
-        out, err = compare.communicate()
-        if re.match('^[0-9]+$', err):
-            different_pixels = int(err)
-            logging.debug('Diff pixels %s', different_pixels)
-            if different_pixels < options.orangelimitdiff:
-                match = True
+        try:
+            from PIL import Image
+            with Image.open(file) as img:
+                width, height = img.size
+            crops = []
+            # Middle
+            crops.append('{0:d}x{1:d}+{2:d}+{3:d}'.format(
+                int(width / 2), int(height / 3),
+                int(width / 4), int(height / 3)))
+            # Top
+            crops.append('{0:d}x{1:d}+{2:d}+{3:d}'.format(
+                int(width / 2), int(height / 5),
+                int(width / 4), 50))
+            # Bottom
+            crops.append('{0:d}x{1:d}+{2:d}+{3:d}'.format(
+                int(width / 2), int(height / 5),
+                int(width / 4), height - int(height / 5) - 50))
+            for crop in crops:
+                command = ('convert "{0}" "(" "{1}" -crop {2} -resize 200x200! ")"'
+                           ' miff:- | compare -metric AE - -fuzz 10% null:'
+                          ).format(color_file, file, crop)
+                compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
+                out, err = compare.communicate()
+                if re.match('^[0-9]+$', err):
+                    different_pixels = int(err)
+                    if different_pixels < 100:
+                        match = True
+                        break
+        except Exception:
+            pass
     return match
 
 
@@ -1546,10 +1561,10 @@ def main():
     parser.add_argument('-e', '--end', type=int, default=0,
                         help="End time (in milliseconds) for calculating visual metrics.")
     parser.add_argument('--findstart', type=int, default=0,
-                        help="Find the start of activity by looking at the top X% "
+                        help="Find the start of activity by looking at the top X%% "
                              "of the video (like a browser address bar).")
     parser.add_argument('--renderignore', type=int, default=0,
-                        help="Ignore the center X% of the frame when looking for "
+                        help="Ignore the center X%% of the frame when looking for "
                              "the first rendered frame (useful for Opera mini).")
     parser.add_argument('--startwhite', action='store_true', default=False,
                         help="Find the first fully white frame as the start of the video.")
@@ -1567,8 +1582,7 @@ def main():
                         help="Calculate perceptual Speed Index")
     parser.add_argument('-j', '--json', action='store_true', default=False,
                         help="Set output format to JSON")
-    parser.add_argument('--orangelimitdiff', type=int, default=100,
-                        help="The limit when to the decice if the difference between frames makes a frame orange")
+
     options = parser.parse_args()
 
     if not options.check and not options.dir and not options.video and not options.histogram:
