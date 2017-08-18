@@ -797,8 +797,8 @@ def is_white_frame(file, white_file):
             command = ('convert "{0}" "(" "{1}" -resize 200x200! ")" miff:- | '
                        'compare -metric AE - -fuzz 10% null:').format(white_file, file)
         else:
-            command = ('convert "{0}" "(" "{1}" -gravity Center -crop 50%x33%+0+0 -resize 200x200! ")" miff:- | '
-                       'compare -metric AE - -fuzz 10% null:').format(white_file, file)
+            command = ('convert "{0}" "(" "{1}" -gravity Center -resize 200x200! ")" miff:- | '
+                       'compare -metric AE - -fuzz 2% null:').format(white_file, file)
         if client_viewport is not None:
             crop = '{0:d}x{1:d}+{2:d}+{3:d}'.format(
                 client_viewport['width'],
