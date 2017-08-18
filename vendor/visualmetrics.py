@@ -208,7 +208,7 @@ def remove_frames_before_orange(directory, orange_file):
             if is_color_frame(frame, orange_file):
                 found_orange = True
                 break
-            if frame_count > 20:
+            if frame_count > 40:
                 break
             remove_frames.append(frame)
 
