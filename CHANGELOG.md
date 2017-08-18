@@ -1,9 +1,10 @@
 # Browsertime changelog
 -------------------------
-UNRELEASED
+
+version 1.6.1 2017-08-18
 -------------------------
 ### Fixed
-* Correct naming in the CLI help when emulating an iPhone ('iPhone 6'). It was changed in Chromedriver 2.31.0.
+* Correct naming in the CLI help when emulating an iPhone ('iPhone 6'). It was changed in Chromedriver 2.31.0 (or was it 2.30.0?).
 * Added missing browser name in the HAR when you run as Chrome as emulated.
 * New go at VisualMetrics to try to avoid those partly orange screens for Chrome.
 
