@@ -1,6 +1,11 @@
 # Browsertime changelog
 -------------------------
 
+UNRELEASED
+-------------------------
+### Added
+* More metrics in the HAR: We now add Visual metrics, connectivity and domContentLoadedTime/domInteractiveTime. They are then picked up by PerfCascade. This was earlier done in sitespeed.io
+
 version 1.6.1 2017-08-18
 -------------------------
 ### Fixed
