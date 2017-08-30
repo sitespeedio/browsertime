@@ -1,6 +1,12 @@
 # Browsertime changelog
 -------------------------
 
+UNRELEASED
+-------------------------
+### Added 
+* Easy to run Firefox Nightly, just pass --firefox.nightly (and -b firefox)
+* Support for running Firefox and Chrome in headless mode --headless. You need Firefox Nightly or Chrome stagble  [#361](https://github.com/sitespeedio/browsertime/pull/361)
+
 version 1.7.0 2017-08-29
 -------------------------
 ### Added
