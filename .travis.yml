@@ -15,7 +15,6 @@ addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
-    - google-chrome
     packages:
     - google-chrome-stable
     - ipython
