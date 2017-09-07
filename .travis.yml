@@ -33,7 +33,7 @@ addons:
     - python-sympy
     - python-nose
     - xz-utils
-  firefox: "54.0"
+  firefox: '54.0'
 before_install:
 - pip install --user --upgrade pip
 - pip --version
