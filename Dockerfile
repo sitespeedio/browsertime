@@ -7,7 +7,7 @@ ENV BROWSERTIME_CHROME__ARGS no-sandbox
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-VOLUME /browsertime-results
+VOLUME /browsertime
 
 COPY package.json /usr/src/app/
 RUN npm install --production
@@ -18,7 +18,7 @@ RUN mkdir -m 0750 /root/.android
 ADD docker/adb/insecure_shared_adbkey /root/.android/adbkey
 ADD docker/adb/insecure_shared_adbkey.pub /root/.android/adbkey.pub
 
-WORKDIR /
+WORKDIR /browsertime
 
 COPY docker/scripts/start.sh /start.sh
 

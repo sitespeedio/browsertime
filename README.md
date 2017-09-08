@@ -19,7 +19,7 @@ Browsertime allows you to:
 
 Use our Docker image (with Chrome, Firefox, XVFB and the dependencies needed to record a video):
 <pre>
-$ docker run --shm-size=1g --rm -v "$(pwd)":/browsertime-results sitespeedio/browsertime --video --speedIndex https://www.sitespeed.io/
+$ docker run --shm-size=1g --rm -v "$(pwd)":/browsertime sitespeedio/browsertime --video --speedIndex https://www.sitespeed.io/
 </pre>
 
 Or using node:
@@ -56,7 +56,7 @@ You can build and test changes using Docker locally.
 
 <pre>
 $ docker build -t sitespeedio/browsertime .
-$ docker run --shm-size=1g --rm -v "$(pwd)":/browsertime-results sitespeedio/browsertime -n 1 --video --speedIndex https://www.sitespeed.io/
+$ docker run --shm-size=1g --rm -v "$(pwd)":/browsertime sitespeedio/browsertime -n 1 --video --speedIndex https://www.sitespeed.io/
 </pre>
 
 ## Connectivity
@@ -102,7 +102,7 @@ $ docker run --shm-size=1g --network=cable --rm sitespeedio/browsertime -c cable
 And using the 3g network:
 
 ~~~bash
-$ docker run --shm-size=1g --network=3g --rm sitespeedio/browsertime -c 3g --nnconnectivity.engine external --speedIndex --video https://www.sitespeed.io/
+$ docker run --shm-size=1g --network=3g --rm sitespeedio/browsertime -c 3g --connectivity.engine external --speedIndex --video https://www.sitespeed.io/
 ~~~
 
 And if you want to remove the networks:
