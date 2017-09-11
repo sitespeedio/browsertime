@@ -7,6 +7,12 @@ UNRELEASED
 * Easy to run Firefox Nightly, just pass --firefox.nightly (and -b firefox)
 * Support for running Firefox and Chrome in headless mode --headless. You need Firefox Nightly or Chrome stagble  [#361](https://github.com/sitespeedio/browsertime/pull/361)
 * Upgraded to Chrome 61 in the Dockerfile
+* You can now change the framerate of the video with --videoParams.framerate
+* You can also change the constant rate factor of the video --videoParams.crf see https://trac.ffmpeg.org/wiki/Encode/H.264#crf
+
+### Changed
+* Old parameter videoRaw is renamed to --videoParams.addTimer to toogle timer/text in the video (old videoRaw is deprecated)
+
 
 ### Fixed
 * Changed Docker workdir so it is possible to use pre/post script in Docker. This means you need to map your volume as "$(pwd)":/browsertime [#363](https://github.com/sitespeedio/browsertime/pull/363)
