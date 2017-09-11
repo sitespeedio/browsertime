@@ -47,7 +47,7 @@ Oh and you can run your own Selenium script before (<code>--preScript</code>) an
 # Speed Index and video
 It's easiest to run [our ready made Docker container](https://hub.docker.com/r/sitespeedio/browsertime/) to be able to record a video and calculate SpeedIndex because then you get all dependencies needed for free to run [VisualMetrics](https://github.com/WPO-Foundation/visualmetrics).
 
-The default video will include a timer and showing when the metrics happens, but you can turn that off using <code>--videoRaw</code>.
+The default video will include a timer and showing when the metrics happens, but you can turn that off using <code>--video.addTimer false</code>.
 
 <img src="https://raw.githubusercontent.com/sitespeedio/sitespeed.io/master/docs/img/video-example.gif">
 
