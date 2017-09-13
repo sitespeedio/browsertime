@@ -1,7 +1,7 @@
 # Browsertime changelog
 -------------------------
 
-UNRELEASED
+version 1.8.0 2017-09-13
 -------------------------
 ### Added 
 * Easy to run Firefox Nightly, just pass --firefox.nightly (and -b firefox)
@@ -9,11 +9,10 @@ UNRELEASED
 * Upgraded to Chrome 61 in the Dockerfile
 * You can now change the framerate of the video with --videoParams.framerate
 * You can also change the constant rate factor of the video --videoParams.crf see https://trac.ffmpeg.org/wiki/Encode/H.264#crf
-* Added visualComplete95 and visualComplete99
+* Added visualComplete95 and visualComplete99 metrics.
 
 ### Changed
-* Old parameter videoRaw is renamed to --videoParams.addTimer to toogle timer/text in the video (old videoRaw is deprecated)
-
+* Old parameter videoRaw is renamed to --videoParams.addTimer to toogle timer/text in the video (old videoRaw is deprecated but still works).
 
 ### Fixed
 * Changed Docker workdir so it is possible to use pre/post script in Docker. This means you need to map your volume as "$(pwd)":/browsertime [#363](https://github.com/sitespeedio/browsertime/pull/363)
