@@ -1,6 +1,11 @@
 # Browsertime changelog
 -------------------------
 
+version 1.8.1 2017-09-16
+-------------------------
+### Fixed
+* Even bigger bottom margin (20px) for videos to make emulated mobile lastVisualChange correct.
+
 version 1.8.0 2017-09-13
 -------------------------
 ### Added 
