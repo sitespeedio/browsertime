@@ -2,7 +2,7 @@ FROM sitespeedio/webbrowsers:firefox-54.0-chrome-61.0
 
 ENV BROWSERTIME_XVFB true
 ENV BROWSERTIME_CONNECTIVITY__ENGINE tc
-ENV BROWSERTIME_CHROME__ARGS no-sandbox
+ENV BROWSERTIME_DOCKER true
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app

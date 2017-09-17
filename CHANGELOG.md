@@ -1,5 +1,9 @@
 # Browsertime changelog
 -------------------------
+UNRELEASED
+-------------------------
+### Fixed
+* Always (yes always) use no-sandbox for Chrome when running in Docker.
 
 version 1.8.1 2017-09-16
 -------------------------
