@@ -29,7 +29,7 @@
     "yargs": "7.1.0"
   },
   "devDependencies": {
-    "chai": "~4.1.0",
+    "chai": "^4.1.2",
     "chai-as-promised": "~7.1.1",
     "eslint": "~4.2.0",
     "eslint-config-prettier": "~2.3.0",
