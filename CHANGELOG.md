@@ -4,6 +4,7 @@ UNRELEASED
 -------------------------
 ### Fixed
 * Let VisualMetrics use the same bottom margin as WebaPageTest.
+* Use Chromedriver 2.32.0
 
 version 1.8.2 2017-09-17
 -------------------------
