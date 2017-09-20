@@ -593,7 +593,7 @@ def eliminate_duplicate_frames(directory):
             # Figure out the region of the image that we care about
             top = 6
             right_margin = 6
-            bottom_margin = 20
+            bottom_margin = 25
             if height > 400 or width > 400:
                 top = int(math.ceil(float(height) * 0.03))
                 right_margin = int(math.ceil(float(width) * 0.03))
