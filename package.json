@@ -49,7 +49,7 @@
     "test:browser": "mocha test/browserTests",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+    "eslint-check": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
     "travis": "npm run eslint-check && npm run lint && npm run test",
     "generateDocs": "sequencediagrams docs/sequence-diagrams"
   },
