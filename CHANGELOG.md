@@ -6,6 +6,9 @@ UNRELEASED
 * Let VisualMetrics use the same bottom margin as WebaPageTest.
 * Use Chromedriver 2.32.0
 
+### Added
+* New way to throttle your connection using Throttle: https://github.com/sitespeedio/throttle - still very early release, test at your own risk :)
+
 version 1.8.2 2017-09-17
 -------------------------
 ### Fixed
