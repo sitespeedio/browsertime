@@ -5,6 +5,7 @@ UNRELEASED
 ### Fixed
 * Let VisualMetrics use the same bottom margin as WebaPageTest.
 * Use Chromedriver 2.32.0
+* Silence XVFB by default. Add -vv (or higher) to let XVFB send to default stderr.
 
 ### Added
 * New way to throttle your connection using Throttle: https://github.com/sitespeedio/throttle - still very early release, test at your own risk :)
