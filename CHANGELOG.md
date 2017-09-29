@@ -1,10 +1,11 @@
 # Browsertime changelog
 -------------------------
-UNRELEASED
+
+version 1.9.1 2017-09-29
 -------------------------
 ### Fixed
 * Fixed log check for missmatch between iterations and created pages.
-
+* Upgaded Throttle with a bug fix so that the ingress filter is removed in Linux.
 
 version 1.9.0 2017-09-29
 -------------------------
