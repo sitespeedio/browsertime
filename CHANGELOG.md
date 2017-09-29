@@ -1,5 +1,11 @@
+
 # Browsertime changelog
 -------------------------
+
+version 1.9.2 2017-09-29
+-------------------------
+### Fixed
+* Larger default bottom margin when calculating Visual Metrics [#375](https://github.com/sitespeedio/browsertime/issues/375).
 
 version 1.9.1 2017-09-29
 -------------------------
