@@ -1,6 +1,7 @@
 # Browsertime changelog
 -------------------------
-UNRELEASED
+
+version 1.9.0 2017-09-29
 -------------------------
 ### Fixed
 * Let VisualMetrics use the same bottom margin as WebaPageTest.
