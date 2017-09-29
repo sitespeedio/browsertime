@@ -1,5 +1,10 @@
 # Browsertime changelog
 -------------------------
+UNRELEASED
+-------------------------
+### Fixed
+* Fixed log check for missmatch between iterations and created pages.
+
 
 version 1.9.0 2017-09-29
 -------------------------
