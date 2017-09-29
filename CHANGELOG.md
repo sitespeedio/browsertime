@@ -1,6 +1,10 @@
-
 # Browsertime changelog
 -------------------------
+
+UNRELEASED
+-------------------------
+### Fixed
+* Updated version of throttle so that route runs with sudo.
 
 version 1.9.2 2017-09-29
 -------------------------
