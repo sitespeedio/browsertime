@@ -1,10 +1,10 @@
 # Browsertime changelog
 -------------------------
-
-UNRELEASED
+version 1.9.3 2017-09-29
 -------------------------
 ### Fixed
 * Updated version of throttle so that route runs with sudo.
+* Removed the check for custom connectivity so you ca set just latency if that's what you want.
 
 version 1.9.2 2017-09-29
 -------------------------
