@@ -60,7 +60,7 @@ before_script:
 script:
 - ./vendor/visualmetrics.py --check
 - npm run travis
-- node ./bin/browsertime.js -b firefox -n 2 http://www.browsertime.net --preTask test/prepostscripts/preSample.js
+- node ./bin/browsertime.js -b firefox -n 2 https://www.sitespeed.io --preTask test/prepostscripts/preSample.js
   --postTask test/prepostscripts/postSample2.js --connectivity.profile cable --connectivity.engine
   tc
 - node ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value
