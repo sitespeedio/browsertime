@@ -1,5 +1,11 @@
 # Browsertime changelog
 -------------------------
+
+UNRELEASED
+-------------------------
+### Fixed
+* Updated version of throttle that sets the correct delay on localhost (before the delay was *2).
+
 version 1.9.3 2017-09-29
 -------------------------
 ### Fixed
