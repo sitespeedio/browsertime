@@ -224,6 +224,14 @@ Options:
   -V, --version          Show version number                                                                                                                                       [boolean]
   </pre>
 
+## Send metrics to Graphite
+The easiest way to send metrics is to install [jq](https://stedolan.github.io/jq/) and use it to pick the values you wanna track.
+
+Here's an exampl on how you pickup the median SpeedIndex from Browsertime and send it to your Graphite instance.
+<pre>
+echo "browsertime.your.key.SpeedIndex.median" $(cat /tmp/browsertime/browsertime.json | jq .statistics.visualMetrics.SpeedIndex.median) "`date +%s`" | nc -q0 my.graphite.com 2003
+</pre>
+
 [travis-image]: https://img.shields.io/travis/sitespeedio/browsertime.svg?style=flat-square
 [travis-url]: https://travis-ci.org/sitespeedio/browsertime
 [stars-url]: https://github.com/tobli/sitespeedio/stargazers
