@@ -5,6 +5,7 @@ UNRELEASED
 -------------------------
 ### Fixed
 * Updated version of throttle that sets the correct delay on localhost (before the delay was *2).
+* Upgraded to Chromedriver 2.33.0 that fixes running Chrome > 61
 
 version 1.9.3 2017-09-29
 -------------------------
