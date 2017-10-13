@@ -3,7 +3,7 @@
 UNRELEASED
 -------------------------
 ### Fixed
-* Updated to Throttle 0.0.7 that fixes a bug so we get a promise when we set connectivity on localhost on Linux.
+* Updated to Throttle 0.1.0 that fixes a bug so we get a promise when we set connectivity on localhost on Linux and always remove filters before setting new ones.
 
 version 1.9.4 2017-10-04 
 -------------------------
