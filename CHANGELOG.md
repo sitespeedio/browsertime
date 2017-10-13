@@ -1,5 +1,9 @@
 # Browsertime changelog
 -------------------------
+UNRELEASED
+-------------------------
+### Fixed
+* Updated to Throttle 0.0.7 that fixes a bug so we get a promise when we set connectivity on localhost on Linux.
 
 version 1.9.4 2017-10-04 
 -------------------------
