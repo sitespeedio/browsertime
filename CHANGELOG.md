@@ -3,6 +3,8 @@
 
 ## UNRELEASED 2.0 ALPHA
 -------------------------
+### Added
+* Recording videos is now done in two steps: First record as loseless as possible and then convert to a viewable format [#378](https://github.com/sitespeedio/browsertime/pull/378).
 
 version 1.9.5 2017-10-14
 -------------------------
