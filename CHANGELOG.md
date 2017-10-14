@@ -1,6 +1,14 @@
 # Browsertime changelog
 -------------------------
 
+## UNRELEASED 2.0 ALPHA
+-------------------------
+
+version 1.9.5 2017-10-14
+-------------------------
+### Fixed
+* Updated to Throttle 0.1.0 that fixes a bug so we get a promise when we set connectivity on localhost on Linux and always remove filters before setting new ones. Throttle is now more robust.
+
 version 1.9.4 2017-10-04 
 -------------------------
 ### Fixed
