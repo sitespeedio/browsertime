@@ -6,6 +6,9 @@
 ### Added
 * Recording videos is now done in two steps: First record as loseless as possible and then convert to a viewable format [#378](https://github.com/sitespeedio/browsertime/pull/378).
 
+### Removed
+* We removed TSProxy and tc(sltc) as connectivity engines since none of them worked 100%. Instead user Docker networks or the new Throttle engine [#379](https://github.com/sitespeedio/browsertime/pull/379/).
+
 version 1.9.5 2017-10-14
 -------------------------
 ### Fixed
