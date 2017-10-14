@@ -14,6 +14,8 @@ Browsertime allows you to:
  1. Generate [HAR](http://www.softwareishard.com/blog/har-12-spec/) files (using [HAR Export trigger](https://github.com/firebug/har-export-trigger) for Firefox and parsing the Chrome log for Chrome).
  1. Run custom Javascript scripts in the browser and get statistics for each run.
  1. Record a video of the screen and analyze the result to get First Visual Change, Speed Index, Visual Complete 85 % and Last Visual Change.
+ 
+ **IMPORTANT!** The master branch is now the coming 2.0.0 alpha release and [1.x](https://github.com/sitespeedio/browsertime/tree/1.x) is the latest stable release.
 
 ## A simple example
 
