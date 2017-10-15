@@ -9,12 +9,14 @@
 ### Removed/changed
 * We removed TSProxy and tc (sltc) as connectivity engines since none of them worked 100%. Instead user Docker networks or the new Throttle engine [#379](https://github.com/sitespeedio/browsertime/pull/379/). The default engine when you run in Docker is now external, before it was tc.
 
+* The default framerate for video is now 30 (before 60). See --videoParams.framerate. We have done a lot of testing on C4.large on AWS and 60 fps adds too much overhead that makes metrics unstable.
+
 version 1.9.5 2017-10-14
 -------------------------
 ### Fixed
 * Updated to Throttle 0.1.0 that fixes a bug so we get a promise when we set connectivity on localhost on Linux and always remove filters before setting new ones. Throttle is now more robust.
 
-version 1.9.4 2017-10-04 
+version 1.9.4 2017-10-04
 -------------------------
 ### Fixed
 * Updated version of throttle that sets the correct delay on localhost (before the delay was *2).
