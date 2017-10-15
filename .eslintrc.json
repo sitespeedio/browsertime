@@ -1,10 +1,11 @@
 {
   "root": true,
   "env": {
-    "node": true
+    "node": true,
+    "es6": true
   },
   "parserOptions": {
-    "ecmaVersion": 2017
+    "ecmaVersion": 8
   },
   "plugins": ["prettier"],
   "extends": "eslint:recommended",
