@@ -21,7 +21,7 @@
     "lodash.set": "4.3.2",
     "mkdirp": "0.5.1",
     "moment": "2.18.1",
-    "selenium-webdriver": "3.5.0",
+    "selenium-webdriver": "3.6.0",
     "@sitespeed.io/throttle": "0.1.0",
     "soprano-saxophone": "0.18.0",
     "valid-url": "1.0.9",
