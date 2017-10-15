@@ -6,7 +6,7 @@
     "adbkit": "2.8.1",
     "alto-saxophone": "2.33.0",
     "bluebird": "3.5.0",
-    "chrome-har": "0.2.2",
+    "chrome-har": "0.2.3",
     "execa": "0.6.1",
     "fast-stats": "0.0.3",
     "hasbin": "1.2.3",
