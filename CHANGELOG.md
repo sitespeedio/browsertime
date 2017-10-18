@@ -12,6 +12,8 @@
 
 * The default framerate for video is now 30 (before 60). See --videoParams.framerate. We have done a lot of testing on C4.large on AWS and 60 fps adds too much overhead that makes metrics unstable.
 
+* We upgraded to use NodeJS 8 and you should do that too.
+
 version 1.9.5 2017-10-14
 -------------------------
 ### Fixed
