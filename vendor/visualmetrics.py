@@ -1596,6 +1596,7 @@ def main():
                 "Use -h to see available options")
 
     temp_dir = tempfile.mkdtemp(prefix='vis-')
+    colors_temp_dir = tempfile.mkdtemp(prefix='vis-color-')
     directory = temp_dir
     if options.dir is not None:
         directory = options.dir
@@ -1636,21 +1637,21 @@ def main():
                     orange_file = os.path.join(os.path.dirname(
                         os.path.realpath(__file__)), 'orange.png')
                     if not os.path.isfile(orange_file):
-                        orange_file = os.path.join(temp_dir, 'orange.png')
+                        orange_file = os.path.join(colors_temp_dir, 'orange.png')
                         generate_orange_png(orange_file)
                 white_file = None
                 if options.white or options.startwhite or options.endwhite:
                     white_file = os.path.join(os.path.dirname(
                         os.path.realpath(__file__)), 'white.png')
                     if not os.path.isfile(white_file):
-                        white_file = os.path.join(temp_dir, 'white.png')
+                        white_file = os.path.join(colors_temp_dir, 'white.png')
                         generate_white_png(white_file)
                 gray_file = None
                 if options.gray:
                     gray_file = os.path.join(os.path.dirname(
                         os.path.realpath(__file__)), 'gray.png')
                     if not os.path.isfile(gray_file):
-                        gray_file = os.path.join(temp_dir, 'gray.png')
+                        gray_file = os.path.join(colors_temp_dir, 'gray.png')
                         generate_gray_png(gray_file)
                 video_to_frames(options.video, directory, options.force, orange_file,
                                 white_file, gray_file, options.multiple, options.viewport,
