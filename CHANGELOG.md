@@ -6,6 +6,7 @@
 * Recording videos is now done in two steps: First record as loseless as possible and then convert to a viewable format [#378](https://github.com/sitespeedio/browsertime/pull/378).
 * Upgraded to Selenium 3.6 [#380](https://github.com/sitespeedio/browsertime/pull/380).
 * You can now turn on/off the filmstrip screenshots (--videoParams.createFilmstrip), set the quality (--videoParams.filmstripQuality), and choose if you want them in full video size (--videoParams.filmstripFullSize) [#385](https://github.com/sitespeedio/browsertime/pull/385).
+* It is now easy to run Firefox Nightly, Beta and Developer edition on Mac OS X. Just add --firefox.nightly, --firefox.beta or --firefox.developer to the cli (for Linux you need point out the location with --firefox.binaryPath  [#384](https://github.com/sitespeedio/browsertime/pull/384)
 
 ### Removed/changed
 * We removed TSProxy and tc (sltc) as connectivity engines since none of them worked 100%. Instead user Docker networks or the new Throttle engine [#379](https://github.com/sitespeedio/browsertime/pull/379/). The default engine when you run in Docker is now external, before it was tc.
