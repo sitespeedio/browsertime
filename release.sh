@@ -8,13 +8,15 @@ set -e
 # Remove the node modules and the result dir to start clean
 rm -fR browsertime-results node_modules
 
+bin/browsertime.js --help >> ../sitespeed.io/docs/documentation/browsertime/config.md
+
+docker login
+
 np $* --no-yarn
 
 PACKAGE_VERSION=$(node -e 'console.log(require("./package").version)')
 
 docker build --no-cache -t sitespeedio/browsertime:${PACKAGE_VERSION} -t sitespeedio/browsertime:latest .
-
-docker login
 
 docker push sitespeedio/browsertime:${PACKAGE_VERSION}
 docker push sitespeedio/browsertime:latest
