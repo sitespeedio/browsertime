@@ -42,6 +42,9 @@
   "engines": {
     "node": ">=8.7.0"
   },
+  "publishConfig": {            
+     "tag": "canary"                    
+   },
   "main": "index.js",
   "scripts": {
     "test": "mocha test/unitTests test/browserTests",
