@@ -3,6 +3,8 @@ FROM sitespeedio/webbrowsers:firefox-54.0-chrome-62.0-chrome-beta-3
 ENV BROWSERTIME_XVFB true
 ENV BROWSERTIME_CONNECTIVITY__ENGINE external
 ENV BROWSERTIME_DOCKER true
+ENV BROWSERTIME_VIDEO true
+ENV BROWSERTIME_speedIndex true
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
