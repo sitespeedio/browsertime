@@ -8,4 +8,3 @@ doc/sequence-diagrams/*.png
 .vscode
 /browsertime-results/
 .tern-project
-package-lock.json
