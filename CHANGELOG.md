@@ -19,6 +19,9 @@
 
 * We upgraded to use NodeJS 8 and you should do that too.
 
+### Fixed
+* Always run the extension first, then prescripts [#395](https://github.com/sitespeedio/browsertime/pull/395).
+
 version 1.9.5 2017-10-14
 -------------------------
 ### Fixed
