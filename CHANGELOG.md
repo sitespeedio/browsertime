@@ -11,6 +11,8 @@
 * Automatically collect video and visual metrics in Docker.
 * Setting default values for video parameters, making it easier to run Browsertime in NodeJS [#394](https://github.com/sitespeedio/browsertime/pull/394).
 * Added configurable wait time (--videoParams.androidVideoWaitTime default is 5000 ms) for pulling the video from mobile to the server [#393](https://github.com/sitespeedio/browsertime/pull/393).
+* You can now run Firefox against insecure certs --firefox.acceptInsecureCerts [#399](https://github.com/sitespeedio/browsertime/pull/399)
+
 
 ### Removed/changed
 * We removed TSProxy and tc (sltc) as connectivity engines since none of them worked 100%. Instead user Docker networks or the new Throttle engine [#379](https://github.com/sitespeedio/browsertime/pull/379/). The default engine when you run in Docker is now external, before it was tc.
