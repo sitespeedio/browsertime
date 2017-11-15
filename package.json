@@ -23,7 +23,7 @@
     "moment": "2.18.1",
     "selenium-webdriver": "3.6.0",
     "@sitespeed.io/throttle": "0.1.0",
-    "soprano-saxophone": "0.18.0",
+    "soprano-saxophone": "0.19.1",
     "valid-url": "1.0.9",
     "xvfb": "0.2.3",
     "yargs": "9.0.1"
