@@ -24,6 +24,7 @@
 ### Fixed
 * Always run the extension first, then prescripts [#395](https://github.com/sitespeedio/browsertime/pull/395).
 * Tighten Firefox settings (calling home etc).
+* Escape path names with = sign for FFProbe.
 
 version 1.9.5 2017-10-14
 -------------------------
