@@ -1,5 +1,6 @@
 (function() {
-  var firstPaint, timing = window.performance.timing;
+  var firstPaint,
+    timing = window.performance.timing;
 
   if (window.chrome && window.chrome.loadTimes) {
     var loadTimes = window.chrome.loadTimes();
@@ -14,6 +15,8 @@
     if (firstPaint > 0) {
       return firstPaint;
     }
+  } else if (timing.timeToNonBlankPaint) {
+    return timing.timeToNonBlankPaint - timing.navigationStart;
   }
 
   return undefined;
