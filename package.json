@@ -3,6 +3,7 @@
   "version": "2.0.0-alpha.5",
   "bin": "./bin/browsertime.js",
   "dependencies": {
+    "@sitespeed.io/throttle": "0.1.0",
     "adbkit": "2.8.1",
     "alto-saxophone": "2.33.0",
     "bluebird": "3.5.0",
@@ -22,7 +23,6 @@
     "mkdirp": "0.5.1",
     "moment": "2.18.1",
     "selenium-webdriver": "3.6.0",
-    "@sitespeed.io/throttle": "0.1.0",
     "soprano-saxophone": "0.19.1",
     "valid-url": "1.0.9",
     "xvfb": "0.2.3",
