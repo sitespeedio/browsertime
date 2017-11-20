@@ -3,6 +3,7 @@
 ## UNRELEASED 2.0 ALPHA
 -------------------------
 ### Added
+* Adding package-lock.json via node 8 for consistent dependency install
 * Recording videos is now done in two steps: First record as loseless as possible and then convert to a viewable format [#378](https://github.com/sitespeedio/browsertime/pull/378).
 * Upgraded to Selenium 3.6 [#380](https://github.com/sitespeedio/browsertime/pull/380).
 * You can now turn on/off the filmstrip screenshots (--videoParams.createFilmstrip), set the quality (--videoParams.filmstripQuality), and choose if you want them in full video size (--videoParams.filmstripFullSize) [#385](https://github.com/sitespeedio/browsertime/pull/385).

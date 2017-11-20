@@ -11,7 +11,7 @@ WORKDIR /usr/src/app
 
 VOLUME /browsertime
 
-COPY package.json /usr/src/app/
+COPY package.* /usr/src/app/
 RUN npm install --production
 COPY . /usr/src/app
 
