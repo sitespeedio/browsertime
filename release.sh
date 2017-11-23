@@ -6,7 +6,7 @@ set -e
 # npm install --global np
 
 # Remove the node modules and the result dir to start clean
-rm -fR browsertime-results node_modules
+rm -fR browsertime-results
 
 bin/browsertime.js --help > ../sitespeed.io/docs/documentation/browsertime/config.md
 
