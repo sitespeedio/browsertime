@@ -1,10 +1,16 @@
 # Browsertime changelog
 
-## UNRELEASED 2.0 ALPHA
+version 2.0.0 2017-11-23
 -------------------------
+
+## IMPORTANT UPGRADE NOTICE
+* We now use latest NodeJS 8.9, so you need to upgrade
+* The default framerate for video is now 30, before it was 60. If you want to keep using 60, add ```--videoParams.framerate 60```
+* The default engine when you run in Docker is now "external" instead of tc, that means if you want to change the connectivity you need to do that with Docker networks or use the bundled Throttle engine. We also removed TSProxy and tc. Please use Docker networks or Throttle as engine.
+
 ### Added
-* Adding package-lock.json via node 8 for consistent dependency install
-* Recording videos is now done in two steps: First record as loseless as possible and then convert to a viewable format [#378](https://github.com/sitespeedio/browsertime/pull/378).
+
+* Recording videos is now done in two steps: First record as lossless as possible and then convert to a viewable format [#378](https://github.com/sitespeedio/browsertime/pull/378).
 * Upgraded to Selenium 3.6 [#380](https://github.com/sitespeedio/browsertime/pull/380).
 * You can now turn on/off the filmstrip screenshots (```--videoParams.createFilmstrip```), set the quality (```--videoParams.filmstripQuality```), and choose if you want them in full video size (```--videoParams.filmstripFullSize```) [#385](https://github.com/sitespeedio/browsertime/pull/385).
 * It is now easy to run Firefox Nightly, Beta and Developer edition on Mac OS X. Just add ```--firefox.nightly```, ```--firefox.beta``` or ```--firefox.developer``` to the cli (for Linux you need point out the location with ```--firefox.binaryPath```  [#384](https://github.com/sitespeedio/browsertime/pull/384)
@@ -14,6 +20,8 @@
 * Added configurable wait time (```--videoParams.androidVideoWaitTime``` default is 5000 ms) for pulling the video from mobile to the server [#393](https://github.com/sitespeedio/browsertime/pull/393).
 * You can now run Firefox against insecure certs ```--firefox.acceptInsecureCerts``` [#399](https://github.com/sitespeedio/browsertime/pull/399)
 * Added TimeToNonBlank for Firefox.
+* You can now create a video that includes what you run in preScript and postScript by ```--videoParams.combine```
+* Adding package-lock.json via node 8 for consistent dependency install
 
 ### Removed/changed
 * We removed TSProxy and tc (sltc) as connectivity engines since none of them worked 100%. Instead user Docker networks or the new Throttle engine [#379](https://github.com/sitespeedio/browsertime/pull/379/). The default engine when you run in Docker is now external, before it was tc.
