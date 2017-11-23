@@ -8,7 +8,7 @@ set -e
 # Remove the node modules and the result dir to start clean
 rm -fR browsertime-results
 
-bin/browsertime.js --help > ../sitespeed.io/docs/documentation/browsertime/config.md
+bin/browsertime.js --help > ../sitespeed.io/docs/documentation/browsertime/configuration/config.md
 
 docker login
 
