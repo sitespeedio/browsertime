@@ -14,12 +14,12 @@ Browsertime allows you to:
  1. Generate [HAR](http://www.softwareishard.com/blog/har-12-spec/) files (using [HAR Export trigger](https://github.com/firebug/har-export-trigger) for Firefox and parsing the Chrome log for Chrome).
  1. Run custom Javascript scripts in the browser and get statistics for each run.
  1. Record a video of the screen and analyze the result to get First Visual Change, Speed Index, Visual Complete 85 % and Last Visual Change.
- 
+
 ## A simple example
 
 Use our Docker image (with Chrome, Firefox, XVFB and the dependencies needed to record a video):
 <pre>
-$ docker run --shm-size=1g --rm -v "$(pwd)":/browsertime sitespeedio/browsertime --video --speedIndex https://www.sitespeed.io/
+$ docker run --shm-size=1g --rm -v "$(pwd)":/browsertime sitespeedio/browsertime https://www.sitespeed.io/
 </pre>
 
 Or using node:
