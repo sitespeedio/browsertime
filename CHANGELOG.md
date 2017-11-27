@@ -1,5 +1,14 @@
 # Browsertime changelog
 
+UNRELEASED
+-------------------------
+
+### Fixed
+* Some Android phones video didn't work as we expected, having different values when analyzing the white background  [#408](https://github.com/sitespeedio/browsertime/pull/408).
+
+### Internally
+* We have started using await/async 
+
 version 2.0.0 2017-11-23
 -------------------------
 
