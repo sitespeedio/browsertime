@@ -1,13 +1,15 @@
 # Browsertime changelog
 
-UNRELEASED
+version 2.0.1 2017-11-28
 -------------------------
 
 ### Fixed
 * Some Android phones video didn't work as we expected, having different values when analyzing the white background  [#408](https://github.com/sitespeedio/browsertime/pull/408).
 
+* Instead of hardcoded path to the sdcard for Android, we now fetch it dynamically [#409](https://github.com/sitespeedio/browsertime/pull/409).
+
 ### Internally
-* We have started using await/async 
+* We have started using await/async!
 
 version 2.0.0 2017-11-23
 -------------------------
