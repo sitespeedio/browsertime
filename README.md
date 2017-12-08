@@ -179,7 +179,7 @@ $ docker run --privileged -v /dev/bus/usb:/dev/bus/usb -e START_ADB_SERVER=true 
 Run <code>$ bin/browsertime.js --help</code> and you can see the configuration options.
 
 ## Using WebPageReplay
-The Browsertime docker container comes with [WebPageReplay](https://github.com/catapult-project/catapult/blob/master/web_page_replay_go/README.md) installed.
+The Browsertime docker container with FF 57 comes with [WebPageReplay](https://github.com/catapult-project/catapult/blob/master/web_page_replay_go/README.md) installed.
 
 WebPageReplay will let you replay your page locally (getting rid of server latency etc) and makes it easier to find front end regressions.
 
@@ -196,13 +196,13 @@ You can change browser, latency and number of runs with BROWSER, LATENCY and RUN
 Default browser is Chrome:
 
 ```
-docker run --cap-add=NET_ADMIN --shm-size=1g --rm -v "$(pwd)":/browsertime -e REPLAY=true -e RUNS=11 -e LATENCY=100 sitespeedio/browsertime https://en.wikipedia.org/wiki/Barack_Obama
+docker run --cap-add=NET_ADMIN --shm-size=1g --rm -v "$(pwd)":/browsertime -e REPLAY=true -e RUNS=11 -e LATENCY=100 sitespeedio/browsertime:2.1.0-ff57 https://en.wikipedia.org/wiki/Barack_Obama
 ```
 
 Use Firefox:
 
 ```
-docker run --cap-add=NET_ADMIN --shm-size=1g --rm -v "$(pwd)":/browsertime -e REPLAY=true -e BROWSER=firefox -e RUNS=11 -e LATENCY=100 sitespeedio/browsertime https://en.wikipedia.org/wiki/Barack_Obama
+docker run --cap-add=NET_ADMIN --shm-size=1g --rm -v "$(pwd)":/browsertime -e REPLAY=true -e BROWSER=firefox -e RUNS=11 -e LATENCY=100 sitespeedio/browsertime:2.1.0-ff57 https://en.wikipedia.org/wiki/Barack_Obama
 ```
 
 ## Send metrics to Graphite
