@@ -204,6 +204,7 @@ Use Firefox:
 ```
 docker run --cap-add=NET_ADMIN --shm-size=1g --rm -v "$(pwd)":/browsertime -e REPLAY=true -e BROWSER=firefox -e RUNS=11 -e LATENCY=100 sitespeedio/browsertime:2.1.0-ff57 https://en.wikipedia.org/wiki/Barack_Obama
 ```
+IMPORTANT: We use Firefox 57 for WebPageReplay because we need to run a higher version than 54, that means we cannot get a HAR file until Mozilla releases the new way of getting that HAR.
 
 ## Send metrics to Graphite
 The easiest way to send metrics is to install [jq](https://stedolan.github.io/jq/) and use it to pick the values you wanna track.
