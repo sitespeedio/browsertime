@@ -179,7 +179,7 @@ $ docker run --privileged -v /dev/bus/usb:/dev/bus/usb -e START_ADB_SERVER=true 
 Run <code>$ bin/browsertime.js --help</code> and you can see the configuration options.
 
 ## Using WebPageReplay
-The Browsertime docker container with FF 57 comes with [WebPageReplay](https://github.com/catapult-project/catapult/blob/master/web_page_replay_go/README.md) installed.
+The Browsertime docker container with FF 57 comes with [WebPageReplay](https://github.com/catapult-project/catapult/blob/master/web_page_replay_go/README.md) installed. This is a really early alpha release but we think you should try it out.
 
 WebPageReplay will let you replay your page locally (getting rid of server latency etc) and makes it easier to find front end regressions.
 
@@ -191,18 +191,18 @@ It works like this:
 5. Browsertime access the URL so many times you choose
 6. WebPageReplay in replay mode is closed down
 
-You can change browser, latency and number of runs with BROWSER, LATENCY and RUNS. Use REPLAY to turn on the reply functionality.
+You can change browser, latency and number of runs with BROWSER, LATENCY and RUNS. Use REPLAY to turn on the reply functionality. Do not use the default cli params.
 
 Default browser is Chrome:
 
 ```
-docker run --cap-add=NET_ADMIN --shm-size=1g --rm -v "$(pwd)":/browsertime -e REPLAY=true -e RUNS=11 -e LATENCY=100 sitespeedio/browsertime:2.1.0-wpr https://en.wikipedia.org/wiki/Barack_Obama
+docker run --cap-add=NET_ADMIN --shm-size=1g --rm -v "$(pwd)":/browsertime -e REPLAY=true -e RUNS=11 -e LATENCY=100 sitespeedio/browsertime:2.1.0-wpr-alpha https://en.wikipedia.org/wiki/Barack_Obama
 ```
 
 Use Firefox:
 
 ```
-docker run --cap-add=NET_ADMIN --shm-size=1g --rm -v "$(pwd)":/browsertime -e REPLAY=true -e BROWSER=firefox -e RUNS=11 -e LATENCY=100 sitespeedio/browsertime:2.1.0-wpr https://en.wikipedia.org/wiki/Barack_Obama
+docker run --cap-add=NET_ADMIN --shm-size=1g --rm -v "$(pwd)":/browsertime -e REPLAY=true -e BROWSER=firefox -e RUNS=11 -e LATENCY=100 sitespeedio/browsertime:2.1.0-wpr-alpha https://en.wikipedia.org/wiki/Barack_Obama
 ```
 IMPORTANT: We use Firefox 57 for WebPageReplay because we need to run a higher version than 54, that means we cannot get a HAR file until Mozilla releases the new way of getting that HAR.
 
