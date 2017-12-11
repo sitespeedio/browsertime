@@ -1,9 +1,10 @@
 # Browsertime changelog
 
-UNRELEASED
+version 2.1.0 2017-12-12
 -------------------------
 ### Added
-* Upgrade to Chrome 63 in the Dockerfile
+* Upgrade to Chrome 63 in the default Dockerfile
+* There's a new experimental Docker container including WebPageReplay, it's kind of a alpha feature and you can test it out if you want: https://github.com/sitespeedio/browsertime#using-webpagereplay
 
 version 2.0.1 2017-11-28
 -------------------------
