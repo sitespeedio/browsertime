@@ -23,5 +23,5 @@ docker push sitespeedio/browsertime:latest
 
 bin/browsertime.js --version > ../sitespeed.io/docs/version/browsertime.txt
 
-docker build -f Dockerfile.wpr --no-cache -t sitespeedio/browsertime:${PACKAGE_VERSION}-ff57 .
-docker push sitespeedio/browsertime:${PACKAGE_VERSION}-ff57
+docker build -f Dockerfile.wpr --no-cache -t sitespeedio/browsertime:${PACKAGE_VERSION}-wpr .
+docker push sitespeedio/browsertime:${PACKAGE_VERSION}-wpr
