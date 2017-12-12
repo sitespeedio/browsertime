@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+version 2.1.1 2017-12-13
+-------------------------
+* The new experimental alpha Docker container including WebPageReplay, wasn't working completely, updated version https://github.com/sitespeedio/browsertime#using-webpagereplay
+
 version 2.1.0 2017-12-12
 -------------------------
 ### Added
