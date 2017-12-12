@@ -4,6 +4,7 @@ set -e
 google-chrome --version
 firefox --version
 
+BROWSERTIME_RECORD=/usr/src/app/bin/browsertimeWebPageReplay.js
 BROWSERTIME=/usr/src/app/bin/browsertime.js
 
 # Here's a hack for fixing the problem with Chrome not starting in time
@@ -28,9 +29,7 @@ function setupADB(){
 
 function runWebPageReplay() {
 
-  RUNS="${RUNS:-5}"
   LATENCY=${LATENCY:-100}
-  BROWSER=${BROWSER:-'chrome'}
   HTTP_PORT=80
   HTTPS_PORT=443
   WPR_PATH=/root/go/src/github.com/catapult-project/catapult/web_page_replay_go
@@ -38,23 +37,13 @@ function runWebPageReplay() {
 
   webpagereplaywrapper record --start $WPR_PARAMS
 
-  if [ $BROWSER = 'chrome' ]
-  then
-    $BROWSERTIME -b $BROWSER -n 1 --chrome.args host-resolver-rules="MAP *:$HTTP_PORT 127.0.0.1:$HTTP_PORT,MAP *:$HTTPS_PORT 127.0.0.1:$HTTPS_PORT,EXCLUDE localhost" --pageCompleteCheck "return true;" "$@"
-  else
-    $BROWSERTIME -b $BROWSER -n 1 --firefox.preference network.dns.forceResolve:127.0.0.1 --firefox.acceptInsecureCerts --skipHar --pageCompleteCheck "return true;" "$@"
-  fi
+  $BROWSERTIME_RECORD  --firefox.preference network.dns.forceResolve:127.0.0.1 --firefox.acceptInsecureCerts --chrome.args host-resolver-rules="MAP *:$HTTP_PORT 127.0.0.1:$HTTP_PORT,MAP *:$HTTPS_PORT 127.0.0.1:$HTTPS_PORT,EXCLUDE localhost" --pageCompleteCheck "return (function() {try { if (performance.now() > ((performance.timing.loadEventEnd - performance.timing.navigationStart) + 2000)) {return true;} else return false;} catch(e) {return true;}})()" "$@"
 
   webpagereplaywrapper record --stop $WPR_PARAMS
 
   webpagereplaywrapper replay --start $WPR_PARAMS
 
-  if [ $BROWSER = 'chrome' ]
-  then
-    $BROWSERTIME -b $BROWSER -n $RUNS --chrome.args host-resolver-rules="MAP *:$HTTP_PORT 127.0.0.1:$HTTP_PORT,MAP *:$HTTPS_PORT 127.0.0.1:$HTTPS_PORT,EXCLUDE localhost" --video --speedIndex --pageCompleteCheck "return true;" --connectivity.engine throttle --connectivity.throttle.localhost --connectivity.profile custom --connectivity.latency $LATENCY "$@"
-  else
-    $BROWSERTIME -b $BROWSER -n $RUNS --firefox.preference network.dns.forceResolve:127.0.0.1 --video --speedIndex --pageCompleteCheck "return true;" --connectivity.engine throttle --connectivity.throttle.localhost --connectivity.profile custom --connectivity.latency $LATENCY --skipHar --firefox.acceptInsecureCerts "$@"
-  fi
+  $BROWSERTIME --firefox.acceptInsecureCerts --firefox.preference network.dns.forceResolve:127.0.0.1 --chrome.args host-resolver-rules="MAP *:$HTTP_PORT 127.0.0.1:$HTTP_PORT,MAP *:$HTTPS_PORT 127.0.0.1:$HTTPS_PORT,EXCLUDE localhost" --video --speedIndex --pageCompleteCheck "return (function() {try { if (performance.now() > ((performance.timing.loadEventEnd - performance.timing.navigationStart) + 2000)) {return true;} else return false;} catch(e) {return true;}})()" --connectivity.engine throttle --connectivity.throttle.localhost --connectivity.profile custom --connectivity.latency $LATENCY "$@"
 
   webpagereplaywrapper replay --stop $WPR_PARAMS
 }
