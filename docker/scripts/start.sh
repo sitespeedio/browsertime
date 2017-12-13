@@ -29,6 +29,12 @@ function setupADB(){
 
 function runWebPageReplay() {
 
+  function shutdown {
+    webpagereplaywrapper replay --stop $WPR_PARAMS
+    kill -s SIGTERM ${PID}
+    wait $PID
+  }
+
   LATENCY=${LATENCY:-100}
   HTTP_PORT=80
   HTTPS_PORT=443
@@ -43,7 +49,12 @@ function runWebPageReplay() {
 
   webpagereplaywrapper replay --start $WPR_PARAMS
 
-  $BROWSERTIME --firefox.acceptInsecureCerts --firefox.preference network.dns.forceResolve:127.0.0.1 --chrome.args host-resolver-rules="MAP *:$HTTP_PORT 127.0.0.1:$HTTP_PORT,MAP *:$HTTPS_PORT 127.0.0.1:$HTTPS_PORT,EXCLUDE localhost" --video --speedIndex --pageCompleteCheck "return (function() {try { if (performance.now() > ((performance.timing.loadEventEnd - performance.timing.navigationStart) + 2000)) {return true;} else return false;} catch(e) {return true;}})()" --connectivity.engine throttle --connectivity.throttle.localhost --connectivity.profile custom --connectivity.latency $LATENCY "$@"
+  exec $BROWSERTIME --firefox.acceptInsecureCerts --firefox.preference network.dns.forceResolve:127.0.0.1 --chrome.args host-resolver-rules="MAP *:$HTTP_PORT 127.0.0.1:$HTTP_PORT,MAP *:$HTTPS_PORT 127.0.0.1:$HTTPS_PORT,EXCLUDE localhost" --video --speedIndex --pageCompleteCheck "return (function() {try { if (performance.now() > ((performance.timing.loadEventEnd - performance.timing.navigationStart) + 2000)) {return true;} else return false;} catch(e) {return true;}})()" --connectivity.engine throttle --connectivity.throttle.localhost --connectivity.profile custom --connectivity.latency $LATENCY "$@" &
+
+  PID=$!
+
+  trap shutdown SIGTERM SIGINT
+  wait $PID
 
   webpagereplaywrapper replay --stop $WPR_PARAMS
 }
