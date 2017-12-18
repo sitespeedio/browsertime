@@ -2,7 +2,9 @@
 
 UNRELEASED
 -------------------------
+### Fixed
 * Trap WebPageReplay so you can stop running the command line.
+* Updated to Chromedriver 2.34
 
 version 2.1.1 2017-12-13
 -------------------------
