@@ -1,13 +1,14 @@
 # Browsertime changelog
 
-UNRELEASED
+version 2.1.2 2017-12-18
 -------------------------
 ### Fixed
-* Trap WebPageReplay so you can stop running the command line.
+* Trap WebPageReplay so you can stop running it the command line (WebPageReplay Docker container).
 * Updated to Chromedriver 2.34
 
 version 2.1.1 2017-12-13
 -------------------------
+### Fixed
 * The new experimental alpha Docker container including WebPageReplay, wasn't working completely, updated version https://github.com/sitespeedio/browsertime#using-webpagereplay
 
 version 2.1.0 2017-12-12
