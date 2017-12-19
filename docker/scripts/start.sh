@@ -25,6 +25,11 @@ function setupADB(){
     sudo adb start-server
     sudo adb devices
   fi
+
+  if [ $REPLAY ] ; then
+      sudo adb reverse tcp:80 tcp:80
+      sudo adb reverse tcp:443 tcp:443
+  fi
 }
 
 function runWebPageReplay() {
