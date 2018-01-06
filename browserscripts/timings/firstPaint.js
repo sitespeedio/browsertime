@@ -1,15 +1,15 @@
 (function() {
   var firstPaint,
-    timing = window.performance.timing;
-
-  if (window.chrome && window.chrome.loadTimes) {
-    var loadTimes = window.chrome.loadTimes();
-    firstPaint = (loadTimes.firstPaintTime - loadTimes.requestTime) * 1000;
-
-    if (firstPaint > 0) {
-      return Number(firstPaint.toFixed(0));
-    }
-  } else if (typeof timing.msFirstPaint === 'number') {
+    p = window.performance,
+    timing = p.timing,
+    entries = p.getEntriesByType('paint');
+  
+    if (entries.length > 0) {
+      for (var entry of entries) {
+        if (entry.name === 'first-paint')
+        return entry.startTime;
+      }
+     } else if (typeof timing.msFirstPaint === 'number') {
     firstPaint = timing.msFirstPaint - timing.navigationStart;
 
     if (firstPaint > 0) {
