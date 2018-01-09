@@ -18,14 +18,15 @@ module.exports = {
           // we fetch the selenium webdriver from context
           var webdriver = context.webdriver;
           // before you start, make your username and password
-          var userName = 'YOUR_USERNAME_HERE';
+          var userName = 'YOUR_NAME_HERE';
           var password = 'YOUR_PASSWORD_HERE';
           var loginForm = driver.findElement(webdriver.By.css('form'));
           var loginInput = driver.findElement(webdriver.By.id('wpName1'));
           loginInput.sendKeys(userName);
           var passwordInput = driver.findElement(webdriver.By.id('wpPassword1'));
           passwordInput.sendKeys(password);
-          return loginForm.submit();
+          var loginButton = driver.findElement(webdriver.By.id('wpLoginAttempt'));
+          return loginButton.click();
           // this example skips waiting for the next page and validating that the login was successful.
         });
     })
