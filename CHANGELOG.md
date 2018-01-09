@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+UNRELEASED
+-------------------------
+### Fixed
+* Removed chrome.loadTimes that will be deprecated in Chrome 64 [#417](https://github.com/sitespeedio/browsertime/issues/417). Instead use the paint timing API.
+
 version 2.1.2 2017-12-18
 -------------------------
 ### Fixed
