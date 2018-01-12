@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+UNRELEASED
+-------------------------
+### Fixed
+* You can now run WebPageReplay in the Docker container together with your Android phone.
+
 version 2.1.3 2018-01-10
 -------------------------
 ### Fixed
