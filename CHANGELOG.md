@@ -1,9 +1,11 @@
 # Browsertime changelog
 
-UNRELEASED
+version 2.1.4 2018-01-23
 -------------------------
 ### Fixed
 * You can now run WebPageReplay in the Docker container together with your Android phone.
+
+* The WPR Docker is updated with Firefox 58.
 
 * Updated to Chromedriver 2.35.0
 
