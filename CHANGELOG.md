@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+version 2.1.5 2018-01-24
+-------------------------
+### Fixed
+* Replaying and ADB failed in the WebPageReplay Docker container (always trying to reply).
+
 version 2.1.4 2018-01-23
 -------------------------
 ### Fixed
