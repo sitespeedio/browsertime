@@ -1,5 +1,11 @@
 # Browsertime changelog
 
+
+version 2.1.6 2018-01-24
+-------------------------
+### Fixed
+* Another WebPageReplay bug: Setting correct ports for WebPageReplaying
+
 version 2.1.5 2018-01-24
 -------------------------
 ### Fixed

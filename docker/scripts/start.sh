@@ -7,6 +7,9 @@ firefox --version
 BROWSERTIME_RECORD=/usr/src/app/bin/browsertimeWebPageReplay.js
 BROWSERTIME=/usr/src/app/bin/browsertime.js
 
+HTTP_PORT=80
+HTTPS_PORT=443
+
 if [ -n "$START_ADB_SERVER" ] ; then
   WPR_HTTP_PORT=8080
   WPR_HTTPS_PORT=8081
@@ -56,6 +59,9 @@ function runWebPageReplay() {
 
   webpagereplaywrapper record --start $WPR_PARAMS
 
+  echo 'hej'
+  echo $LATENCY
+  
   $BROWSERTIME_RECORD  --firefox.preference network.dns.forceResolve:127.0.0.1 --firefox.acceptInsecureCerts --chrome.args host-resolver-rules="MAP *:$HTTP_PORT 127.0.0.1:$WPR_HTTP_PORT,MAP *:$HTTPS_PORT 127.0.0.1:$WPR_HTTPS_PORT,EXCLUDE localhost" --pageCompleteCheck "return (function() {try { if (performance.now() > ((performance.timing.loadEventEnd - performance.timing.navigationStart) + $WAIT)) {return true;} else return false;} catch(e) {return true;}})()" "$@"
 
   webpagereplaywrapper record --stop $WPR_PARAMS
