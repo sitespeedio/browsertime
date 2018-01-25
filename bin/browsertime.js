@@ -73,6 +73,7 @@ function run(url, options) {
         'browserScripts',
         'statistics',
         'visualMetrics',
+        'cpu',
         'timestamps'
       ]);
       if (!isEmpty(btData)) {
