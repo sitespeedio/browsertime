@@ -97,7 +97,7 @@ setupADB
 
 if [ $REPLAY ]
 then
-  runWebPageReplay $@
+  runWebPageReplay "$@"
 else
-  runBrowsertime $@
+  runBrowsertime "$@"
 fi
