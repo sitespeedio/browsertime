@@ -5,6 +5,8 @@ version 2.1.7 2018-01-25
 ### Fixed
 * The start script in the Docker file handled parameters wrong. [#430](https://github.com/sitespeedio/browsertime/issues/430).
 
+* Updated to Chrome 64 in the WebPageReplay Docker container.
+
 version 2.1.6 2018-01-24
 -------------------------
 ### Fixed
