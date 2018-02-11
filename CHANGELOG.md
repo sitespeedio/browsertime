@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+UNRELEASED
+-------------------------
+### Added
+* You can now get more meaningful CPU metrics out of Chrome (both by category and per event type). Use it by adding --chrome.traceCategories devtools.timeline --chrome.collectTracingEvents --chrome.collectCPUMetrics. 
+
 version 2.1.7 2018-01-25
 -------------------------
 ### Fixed
