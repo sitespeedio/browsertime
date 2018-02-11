@@ -73,7 +73,8 @@ function run(url, options) {
         'browserScripts',
         'statistics',
         'visualMetrics',
-        'timestamps'
+        'timestamps',
+        'cpu'
       ]);
       if (!isEmpty(btData)) {
         saveOperations.push(
