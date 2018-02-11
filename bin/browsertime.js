@@ -74,7 +74,7 @@ function run(url, options) {
         'statistics',
         'visualMetrics',
         'timestamps',
-        'consoleLog'
+        'consoleLog',
         'cpu'
       ]);
       if (!isEmpty(btData)) {
