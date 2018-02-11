@@ -1,10 +1,227 @@
 # Browsertime changelog
--------------------------
 
 UNRELEASED
 -------------------------
 ### Added
+* You can now get more meaningful CPU metrics out of Chrome (both by category and per event type). Use it by adding --chrome.traceCategories devtools.timeline --chrome.collectTracingEvents --chrome.collectCPUMetrics. [#434](https://github.com/sitespeedio/browsertime/pull/434). We use [https://github.com/WPO-Foundation/trace-parser](https://github.com/WPO-Foundation/trace-parser) to parse the Chrome trace log. 
+
+### Fixed
+* We increased the probesize again for FFMPEG [#441](https://github.com/sitespeedio/browsertime/pull/441), maybe it can help people running without setting connectivity and have video problems.
+
+version 2.1.7 2018-01-25
+-------------------------
+### Fixed
+* The start script in the Docker file handled parameters wrong. [#430](https://github.com/sitespeedio/browsertime/issues/430).
+
+* Updated to Chrome 64 in the WebPageReplay Docker container.
+
+version 2.1.6 2018-01-24
+-------------------------
+### Fixed
+* Another WebPageReplay bug: Setting correct ports for WebPageReplaying
+
+version 2.1.5 2018-01-24
+-------------------------
+### Fixed
+* Replaying and ADB failed in the WebPageReplay Docker container (always trying to reply).
+
+version 2.1.4 2018-01-23
+-------------------------
+### Fixed
+* You can now run WebPageReplay in the Docker container together with your Android phone.
+
+* The WPR Docker is updated with Firefox 58.
+
+* Updated to Chromedriver 2.35.0
+
+version 2.1.3 2018-01-10
+-------------------------
+### Fixed
+* Removed chrome.loadTimes that will be deprecated in Chrome 64 [#417](https://github.com/sitespeedio/browsertime/issues/417). Instead use the paint timing API.
+
+* We had introduced a problem with getting the trace log from Chrome that could make getting the log tiemout see [#420](https://github.com/sitespeedio/browsertime/issues/420), the original issue is a bug in Chromedriver 2.29+ see [#337](https://github.com/sitespeedio/browsertime/issues/337)
+
+version 2.1.2 2017-12-18
+-------------------------
+### Fixed
+* Trap WebPageReplay so you can stop running it the command line (WebPageReplay Docker container).
+* Updated to Chromedriver 2.34
+
+version 2.1.1 2017-12-13
+-------------------------
+### Fixed
+* The new experimental alpha Docker container including WebPageReplay, wasn't working completely, updated version https://github.com/sitespeedio/browsertime#using-webpagereplay
+
+version 2.1.0 2017-12-12
+-------------------------
+### Added
+* Upgrade to Chrome 63 in the default Dockerfile
+* There's a new experimental Docker container including WebPageReplay, it's kind of a alpha feature and you can test it out if you want: https://github.com/sitespeedio/browsertime#using-webpagereplay
+
+version 2.0.1 2017-11-28
+-------------------------
+
+### Fixed
+* Some Android phones video didn't work as we expected, having different values when analyzing the white background  [#408](https://github.com/sitespeedio/browsertime/pull/408).
+
+* Instead of hardcoded path to the sdcard for Android, we now fetch it dynamically [#409](https://github.com/sitespeedio/browsertime/pull/409).
+
+### Internally
+* We have started using await/async!
+
+version 2.0.0 2017-11-23
+-------------------------
+
+## IMPORTANT UPGRADE NOTICE
+* We now use latest NodeJS 8.9, so you need to upgrade
+* The default framerate for video is now 30, before it was 60. If you want to keep using 60, add ```--videoParams.framerate 60```
+* The default engine when you run in Docker is now "external" instead of tc, that means if you want to change the connectivity you need to do that with Docker networks or use the bundled Throttle engine. We also removed TSProxy and tc. Please use Docker networks or Throttle as engine.
+
+### Added
+
+* Recording videos is now done in two steps: First record as lossless as possible and then convert to a viewable format [#378](https://github.com/sitespeedio/browsertime/pull/378).
+* Upgraded to Selenium 3.6 [#380](https://github.com/sitespeedio/browsertime/pull/380).
+* You can now turn on/off the filmstrip screenshots (```--videoParams.createFilmstrip```), set the quality (```--videoParams.filmstripQuality```), and choose if you want them in full video size (```--videoParams.filmstripFullSize```) [#385](https://github.com/sitespeedio/browsertime/pull/385).
+* It is now easy to run Firefox Nightly, Beta and Developer edition on Mac OS X. Just add ```--firefox.nightly```, ```--firefox.beta``` or ```--firefox.developer``` to the cli (for Linux you need point out the location with ```--firefox.binaryPath```  [#384](https://github.com/sitespeedio/browsertime/pull/384)
+* You can now configure which display number xvfb will use (default 99) [#389](https://github.com/sitespeedio/browsertime/pull/389).
+* Automatically collect video and visual metrics in Docker.
+* Setting default values for video parameters, making it easier to run Browsertime in NodeJS [#394](https://github.com/sitespeedio/browsertime/pull/394).
+* Added configurable wait time (```--videoParams.androidVideoWaitTime``` default is 5000 ms) for pulling the video from mobile to the server [#393](https://github.com/sitespeedio/browsertime/pull/393).
+* You can now run Firefox against insecure certs ```--firefox.acceptInsecureCerts``` [#399](https://github.com/sitespeedio/browsertime/pull/399)
+* Added TimeToNonBlank for Firefox.
+* You can now create a video that includes what you run in preScript and postScript by ```--videoParams.combine```
+* Adding package-lock.json via node 8 for consistent dependency install
+
+### Removed/changed
+* We removed TSProxy and tc (sltc) as connectivity engines since none of them worked 100%. Instead user Docker networks or the new Throttle engine [#379](https://github.com/sitespeedio/browsertime/pull/379/). The default engine when you run in Docker is now external, before it was tc.
+
+* The default framerate for video is now 30 (before 60). See ```--videoParams.framerate```. We have done a lot of testing on C4.large on AWS and 60 fps adds too much overhead that makes metrics unstable.
+
+* We upgraded to use NodeJS 8 and you should do that too.
+
+### Fixed
+* Always run the extension first, then prescripts [#395](https://github.com/sitespeedio/browsertime/pull/395).
+* Tighten Firefox settings (calling home etc).
+* Escape path names with = sign for FFProbe.
+
+version 1.9.5 2017-10-14
+-------------------------
+### Fixed
+* Updated to Throttle 0.1.0 that fixes a bug so we get a promise when we set connectivity on localhost on Linux and always remove filters before setting new ones. Throttle is now more robust.
+
+version 1.9.4 2017-10-04
+-------------------------
+### Fixed
+* Updated version of throttle that sets the correct delay on localhost (before the delay was *2).
+* Upgraded to Chromedriver 2.33.0 that fixes running Chrome > 61
+
+version 1.9.3 2017-09-29
+-------------------------
+### Fixed
+* Updated version of throttle so that route runs with sudo.
+* Removed the check for custom connectivity so you ca set just latency if that's what you want.
+
+version 1.9.2 2017-09-29
+-------------------------
+### Fixed
+* Larger default bottom margin when calculating Visual Metrics [#375](https://github.com/sitespeedio/browsertime/issues/375).
+
+version 1.9.1 2017-09-29
+-------------------------
+### Fixed
+* Fixed log check for missmatch between iterations and created pages.
+* Upgaded Throttle with a bug fix so that the ingress filter is removed in Linux.
+
+version 1.9.0 2017-09-29
+-------------------------
+### Fixed
+* Let VisualMetrics use the same bottom margin as WebaPageTest.
+* Use Chromedriver 2.32.0
+* Silence XVFB by default. Add -vv (or higher) to let XVFB send to default stderr.
+
+### Added
+* New way to throttle your connection using Throttle: https://github.com/sitespeedio/throttle - still very early release, test at your own risk :)
+
+version 1.8.2 2017-09-17
+-------------------------
+### Fixed
+* Always (yes always) use no-sandbox for Chrome when running in Docker.
+
+version 1.8.1 2017-09-16
+-------------------------
+### Fixed
+* Even bigger bottom margin (20px) for videos to make emulated mobile lastVisualChange correct.
+
+version 1.8.0 2017-09-13
+-------------------------
+### Added
+* Easy to run Firefox Nightly, just pass --firefox.nightly (and -b firefox)
+* Support for running Firefox and Chrome in headless mode --headless. You need Firefox Nightly or Chrome stable  [#361](https://github.com/sitespeedio/browsertime/pull/361)
+* Upgraded to Chrome 61 in the Dockerfile
+* You can now change the framerate of the video with --videoParams.framerate
+* You can also change the constant rate factor of the video --videoParams.crf see https://trac.ffmpeg.org/wiki/Encode/H.264#crf
+* Added visualComplete95 and visualComplete99 metrics.
+
+### Changed
+* Old parameter videoRaw is renamed to --videoParams.addTimer to toogle timer/text in the video (old videoRaw is deprecated but still works).
+
+### Fixed
+* Changed Docker workdir so it is possible to use pre/post script in Docker. This means you need to map your volume as "$(pwd)":/browsertime [#363](https://github.com/sitespeedio/browsertime/pull/363)
+
+* Changed the bottom margin for videos (made it a little larger) to fix lastVisualChange when emulating mobile [sitespeed.io #1690](https://github.com/sitespeedio/sitespeed.io/issues/1690)
+
+version 1.7.0 2017-08-29
+-------------------------
+### Added
+* More metrics in the HAR: We now add Visual metrics, connectivity and domContentLoadedTime/domInteractiveTime. They are then picked up by PerfCascade. This was earlier done in sitespeed.io.
+
+version 1.6.1 2017-08-18
+-------------------------
+### Fixed
+* Correct naming in the CLI help when emulating an iPhone ('iPhone 6'). It was changed in Chromedriver 2.31.0 (or was it 2.30.0?).
+* Added missing browser name in the HAR when you run as Chrome as emulated.
+* New go at VisualMetrics to try to avoid those partly orange screens for Chrome.
+
+version 1.6.0 2017-07-27
+-------------------------
+### Fixed
+* Upgrade to Chrome 60 stable from 60 beta in the Docker container
+* Upgrading to Chromedriver 2.31.0
+* Upgrading to Selenium 3.5
+
+### Added
+* We now support adding request headers, blocking domains and using basic auth in Firefox since latest Selenium and @tobli:s [PR](https://github.com/SeleniumHQ/selenium/pull/3846) for supporting Web Extensions in Firefox!
+
+version 1.5.4 2017-07-19
+-------------------------
+### Fixed
+* Latest NodeJS 6.11.1 in the Docker container.
+* Upgrade to Geckodriver 0.18.0 for Firefox.
+* Fine tuning choosing orange frames see [#1673 sitespeed.io](https://github.com/sitespeedio/sitespeed.io/issues/1673)
+
+version 1.5.3 2017-06-30
+-------------------------
+### Fixed
+* Upgraded chrome-har to fix https://github.com/sitespeedio/sitespeed.io/issues/1654
+* Upgraded Docker to use latest Chrome beta and include fonts for Hindi, Thai, Japanese, Chinese and Korean.
+
+version 1.5.2 2017-06-23
+-------------------------
+### Fixed
+* Upgraded (again) from Chromedriver 2.28 to 2.30 with a very special hack [#347](https://github.com/sitespeedio/browsertime/pull/347).
+
+version 1.5.1 2017-06-22
+-------------------------
+### Fixed
+* Downgraded (again) from Chromedriver 2.30 to 2.28 to get --chrome.collectTracingEvents to work again.
+
+version 1.5.0 2017-06-22
+-------------------------
+### Added
 * Upgraded to Chromedriver 2.30.0 fixes [#337](https://github.com/sitespeedio/browsertime/issues/337).
+* Upgraded to Geckodriver 0.17.0 seems to fix [#321](https://github.com/sitespeedio/browsertime/issues/321)
+* Pickup metrics from the Paint Timing API [#344](https://github.com/sitespeedio/browsertime/pull/344), will work in Chrome 60.
+* Updated the Docker container to Firefox 54 and Chrome 60 (beta) to fix the background color problem. [Chrome bug 727046](https://bugs.chromium.org/p/chromium/issues/detail?id=727046)
 
 version 1.4.0 2017-06-03
 -------------------------

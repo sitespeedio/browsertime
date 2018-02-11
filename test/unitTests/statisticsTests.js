@@ -1,7 +1,7 @@
 'use strict';
 
 let assert = require('assert'),
-  Statistics = require('../lib/support/statistics').Statistics;
+  Statistics = require('../../lib/support/statistics').Statistics;
 
 describe('statistics', function() {
   let stats;
@@ -66,19 +66,23 @@ describe('statistics', function() {
     });
 
     it('should be possible to add an array of objects with numeric values', function() {
-      let samples = [{
-        a: 1,
-        b: 2,
-        c: 3
-      }, {
-        a: 2,
-        b: 2,
-        c: 2
-      }, {
-        a: 3,
-        b: 2,
-        c: 1
-      }];
+      let samples = [
+        {
+          a: 1,
+          b: 2,
+          c: 3
+        },
+        {
+          a: 2,
+          b: 2,
+          c: 2
+        },
+        {
+          a: 3,
+          b: 2,
+          c: 1
+        }
+      ];
       stats.addAll(samples);
 
       let result = stats.summarize();
@@ -97,35 +101,38 @@ describe('statistics', function() {
           d: 3
         }
       });
-      stats.addDeep({
-        "userTimings": {
-          "marks": [
-            {
-              "name": "headerTime",
-              "startTime": 2457.125
-            },
-            {
-              "name": "logoTime",
-              "startTime": 2654.805
-            }
-          ],
-          "measures": []
-        }
-      }, (keyPath, value) => {
-        if (keyPath === 'userTimings.marks') {
-          return value.reduce((result, mark) => {
-            result[mark.name] = mark.startTime;
-            return result;
-          }, {});
-        } else if (keyPath === 'userTimings.measure') {
-          return value.reduce((result, mark) => {
-            result[mark.name] = mark.duration;
-            return result;
-          }, {});
-        }
+      stats.addDeep(
+        {
+          userTimings: {
+            marks: [
+              {
+                name: 'headerTime',
+                startTime: 2457.125
+              },
+              {
+                name: 'logoTime',
+                startTime: 2654.805
+              }
+            ],
+            measures: []
+          }
+        },
+        (keyPath, value) => {
+          if (keyPath === 'userTimings.marks') {
+            return value.reduce((result, mark) => {
+              result[mark.name] = mark.startTime;
+              return result;
+            }, {});
+          } else if (keyPath === 'userTimings.measure') {
+            return value.reduce((result, mark) => {
+              result[mark.name] = mark.duration;
+              return result;
+            }, {});
+          }
 
-        return value;
-      });
+          return value;
+        }
+      );
       stats.addDeep({
         a: 3,
         b: {
@@ -192,7 +199,7 @@ describe('statistics', function() {
       });
 
       let result = stats.summarize({
-        'percentiles': [0, 99, 99.9]
+        percentiles: [0, 99, 99.9]
       });
       assert.equal(1, result.a.min);
       assert.equal(3, result.a.p99);

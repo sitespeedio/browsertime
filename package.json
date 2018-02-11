@@ -1,16 +1,17 @@
 {
   "description": "Browsertime",
-  "version": "1.4.0",
+  "version": "2.1.7",
   "bin": "./bin/browsertime.js",
   "dependencies": {
-    "adbkit": "2.8.1",
-    "alto-saxophone": "2.30.0",
+    "@sitespeed.io/throttle": "0.1.0",
+    "adbkit": "2.11.0",
+    "alto-saxophone": "2.35.0",
     "bluebird": "3.5.0",
-    "chrome-har": "0.2.1",
+    "chrome-har": "0.2.3",
     "execa": "0.6.1",
     "fast-stats": "0.0.3",
     "hasbin": "1.2.3",
-    "intel": "1.1.2",
+    "intel": "1.2.0",
     "lodash.foreach": "4.5.0",
     "lodash.get": "4.4.2",
     "lodash.groupby": "4.6.0",
@@ -20,29 +21,36 @@
     "lodash.remove": "4.7.0",
     "lodash.set": "4.3.2",
     "mkdirp": "0.5.1",
-    "moment": "2.17.1",
-    "selenium-webdriver": "3.4.0",
-    "sltc": "0.6.0",
-    "soprano-saxophone": "0.15.0",
+    "moment": "2.18.1",
+    "selenium-webdriver": "3.6.0",
+    "soprano-saxophone": "0.19.1",
     "valid-url": "1.0.9",
     "xvfb": "0.2.3",
-    "yargs": "7.1.0"
+    "yargs": "9.0.1"
   },
   "devDependencies": {
-    "chai": "^3.4.0",
-    "chai-as-promised": "^6.0.0",
-    "eslint": "^3.12.1",
-    "longjohn": "^0.2.11",
-    "mocha": "^3.1.2",
+    "chai": "^4.1.2",
+    "chai-as-promised": "~7.1.1",
+    "eslint": "^4.11.0",
+    "eslint-config-prettier": "^2.7.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "longjohn": "0.2.11",
+    "mocha": "~3.1.2",
+    "prettier": "^1.8.2",
     "sequencediagrams": "0.0.8"
   },
   "engines": {
-    "node": ">=6.9.0"
+    "node": ">=8.9.0"
   },
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha test/unitTests test/browserTests",
+    "test:unit": "mocha test/unitTests",
+    "test:browser": "mocha test/browserTests",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "eslint-check": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
+    "travis": "npm run eslint-check && npm run lint && npm run test",
     "generateDocs": "sequencediagrams docs/sequence-diagrams"
   },
   "name": "browsertime",
@@ -59,6 +67,6 @@
     "type": "git",
     "url": "https://github.com/sitespeedio/browsertime.git"
   },
-  "homepage": "http://browsertime.net",
+  "homepage": "https://www.sitespeed.io/documentation/browsertime/",
   "license": "MIT"
 }

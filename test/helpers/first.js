@@ -6,8 +6,8 @@ var Bluebird = require('bluebird'),
   intel = require('intel');
 
 intel.basicConfig({
-  'level': intel.INFO,
-  'format': '[%(date)s][%(levelname)s] %(message)s'
+  level: intel.INFO,
+  format: '[%(date)s][%(levelname)s] %(message)s'
 });
 
 chai.use(chaiAsPromised);

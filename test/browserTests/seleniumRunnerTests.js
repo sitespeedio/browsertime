@@ -1,8 +1,14 @@
 'use strict';
 
-const SeleniumRunner = require('../lib/core/seleniumRunner');
+const SeleniumRunner = require('../../lib/core/seleniumRunner');
 
-const BROWSERS = ['chrome', 'firefox'];
+const BROWSERS = [];
+
+if (process.env.BROWSERTIME_TEST_BROWSER) {
+  BROWSERS.push(process.env.BROWSERTIME_TEST_BROWSER);
+} else {
+  BROWSERS.push('chrome', 'firefox');
+}
 
 describe('SeleniumRunner', function() {
   let runner;
@@ -10,62 +16,76 @@ describe('SeleniumRunner', function() {
   describe('#start', function() {
     it('should reject when passed incorrect configuration', function() {
       runner = new SeleniumRunner({
-        'browser': 'invalid'
+        browser: 'invalid'
       });
       return runner.start().should.be.rejected;
     });
 
-    it.skip('should handle if Chrome crashes', function() {
-      runner = new SeleniumRunner({
-        'browser': 'chrome',
-        'chrome': {
-          'args': '--crash-test'
-        },
-        'verbose': true
-      });
+    if (BROWSERS.includes('chrome')) {
+      it.skip('should handle if Chrome crashes', function() {
+        runner = new SeleniumRunner({
+          browser: 'chrome',
+          chrome: {
+            args: '--crash-test'
+          },
+          verbose: true
+        });
 
-      // Wait for session to actually have Chrome start up.
-      return runner.start()
-        .catch(function(e) {
+        // Wait for session to actually have Chrome start up.
+        return runner.start().catch(function(e) {
           throw e;
-        })
-        .should.be.rejected;
-    });
+        }).should.be.rejected;
+      });
+    }
   });
 
   BROWSERS.forEach(function(browser) {
     describe('#loadAndWait - ' + browser, function() {
       beforeEach(function() {
         runner = new SeleniumRunner({
-          'browser': browser,
-          'timeouts': {
-            'browserStart': 60000,
-            'scripts': 5000,
-            'pageLoad': 10000,
-            'pageCompleteCheck': 10000
+          browser: browser,
+          timeouts: {
+            browserStart: 60000,
+            scripts: 5000,
+            pageLoad: 10000,
+            pageCompleteCheck: 10000
           }
         });
         return runner.start();
       });
 
       it('should be able to load a url', function() {
-        return runner.loadAndWait('http://httpbin.org/html').should.be.fulfilled;
+        return runner.loadAndWait(
+          'http://httpbin.org/html'
+        ).should.be.fulfilled;
       });
 
       it('should fail if url takes too long to load', function() {
-        return runner.loadAndWait('http://httpbin.org/delay/20', 'return true').should.be.rejected;
+        return runner.loadAndWait(
+          'http://httpbin.org/delay/20',
+          'return true'
+        ).should.be.rejected;
       });
 
       it('should fail if wait script never returns true', function() {
-        return runner.loadAndWait('http://httpbin.org/html', 'return false').should.be.rejected;
+        return runner.loadAndWait(
+          'http://httpbin.org/html',
+          'return false'
+        ).should.be.rejected;
       });
 
       it('should fail if wait script throws an exception', function() {
-        return runner.loadAndWait('http://httpbin.org/html', 'throw new Error("foo");').should.be.rejected;
+        return runner.loadAndWait(
+          'http://httpbin.org/html',
+          'throw new Error("foo");'
+        ).should.be.rejected;
       });
 
       it.skip('should fail if wait script hangs', function() {
-        return runner.loadAndWait('http://httpbin.org/html', 'while (true) {}; return true;').should.be.rejected;
+        return runner.loadAndWait(
+          'http://httpbin.org/html',
+          'while (true) {}; return true;'
+        ).should.be.rejected;
       });
 
       afterEach(function() {
@@ -78,22 +98,21 @@ describe('SeleniumRunner', function() {
     describe('#runScript - ' + browser, function() {
       beforeEach(function() {
         runner = new SeleniumRunner({
-          'browser': browser,
-          'timeouts': {
-            'browserStart': 60000,
-            'scripts': 5000,
-            'pageLoad': 10000,
-            'pageCompleteCheck': 10000
+          browser: browser,
+          timeouts: {
+            browserStart: 60000,
+            scripts: 5000,
+            pageLoad: 10000,
+            pageCompleteCheck: 10000
           }
         });
-        return runner.start()
-          .then(function() {
-            return runner.loadAndWait('data:text/html;charset=utf-8,');
-          });
+        return runner.start().then(function() {
+          return runner.loadAndWait('data:text/html;charset=utf-8,');
+        });
       });
 
       it('should handle a boolean return', function() {
-        return runner.runScript('return true;').should.become.true;
+        return runner.runScript('return true;').should.become(true);
       });
 
       it('should handle a number return', function() {
@@ -101,12 +120,14 @@ describe('SeleniumRunner', function() {
       });
 
       it('should handle an object return', function() {
-        return runner.runScript('return window.performance.timing;')
+        return runner
+          .runScript('return window.performance.timing;')
           .should.eventually.contain.all.keys('fetchStart', 'domInteractive');
       });
 
       it('should handle an array return', function() {
-        return runner.runScript('return window.performance.getEntriesByType("resource");')
+        return runner
+          .runScript('return window.performance.getEntriesByType("resource");')
           .should.eventually.be.an('array');
       });
 
@@ -125,7 +146,9 @@ describe('SeleniumRunner', function() {
        */
 
       it.skip('should fail if script hangs', function() {
-        return runner.runScript('while (true) {}; return true;').should.be.rejected;
+        return runner.runScript(
+          'while (true) {}; return true;'
+        ).should.be.rejected;
       });
 
       afterEach(function() {
@@ -138,24 +161,24 @@ describe('SeleniumRunner', function() {
     describe('#takeScreenshot - ' + browser, function() {
       beforeEach(function() {
         runner = new SeleniumRunner({
-          'browser': browser,
-          'timeouts': {
-            'browserStart': 60000,
-            'scripts': 5000,
-            'pageLoad': 10000,
-            'pageCompleteCheck': 10000
+          browser: browser,
+          timeouts: {
+            browserStart: 60000,
+            scripts: 5000,
+            pageLoad: 10000,
+            pageCompleteCheck: 10000
           }
         });
-        return runner.start()
-          .then(function() {
-            return runner.loadAndWait('data:text/html;charset=utf-8,');
-          });
+        return runner.start().then(function() {
+          return runner.loadAndWait('data:text/html;charset=utf-8,');
+        });
       });
 
       it('should take a screen shot', function() {
-        return runner.takeScreenshot().should.eventually.be.an.instanceof(Buffer);
+        return runner
+          .takeScreenshot()
+          .should.eventually.be.an.instanceof(Buffer);
       });
     });
-
   });
 });

@@ -11,7 +11,7 @@ browsertime https://www.sitespeed.io --preScript test/prepostscripts/preSample.j
 
 - You can pass in a file path to preScript you would like to executed arbitrary code before the tests begin. (Example: Login)
 
-browsertime https://www.sitespeed.io --preScript test/preposttscripts/postSample.js
+browsertime https://www.sitespeed.io --postScript test/preposttscripts/postSample.js
 
 - You can pass in a file path to postScript you would like to executed arbitrary code before the tests begin. (Example: Logout)
 
