@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# See https://github.com/SeleniumHQ/docker-selenium/issues/87
+export DBUS_SESSION_BUS_ADDRESS=/dev/null
+
 google-chrome --version
 firefox --version
 
