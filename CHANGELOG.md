@@ -8,6 +8,8 @@ UNRELEASED
 ### Fixed
 * We increased the probesize again for FFMPEG [#441](https://github.com/sitespeedio/browsertime/pull/441), maybe it can help people running without setting connectivity and have video problems.
 
+* Another go at fixing so that Chromedriver doesn't hang (sometimes) following https://github.com/SeleniumHQ/docker-selenium/issues/87 [#442](https://github.com/sitespeedio/browsertime/pull/442)
+
 version 2.1.7 2018-01-25
 -------------------------
 ### Fixed
