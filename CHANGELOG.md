@@ -1,9 +1,10 @@
 # Browsertime changelog
 
-UNRELEASED
+version 2.2.1 2018-02-14
 -------------------------
 ### Fixed
 * Return missing promises when getting the console log.
+* Use pre compiled version of WebPageReplay to minimise the size of the Docker container [#443](https://github.com/sitespeedio/browsertime/pull/443).
 
 version 2.2.0 2018-02-14
 -------------------------
