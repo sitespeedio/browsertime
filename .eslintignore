@@ -2,3 +2,4 @@ browserscripts/*
 tools/*
 test/browserscripts/*
 test/prepostscripts/*
+docker/webpagereplay/*
