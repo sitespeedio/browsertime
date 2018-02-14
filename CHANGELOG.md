@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-UNRELEASED
+version 2.2.0 2018-02-14
 -------------------------
 ### Added
 * You can now get more meaningful CPU metrics out of Chrome (both by category and per event type). Use it by adding --chrome.traceCategories devtools.timeline --chrome.collectTracingEvents --chrome.collectCPUMetrics. [#434](https://github.com/sitespeedio/browsertime/pull/434). We use [https://github.com/WPO-Foundation/trace-parser](https://github.com/WPO-Foundation/trace-parser) to parse the Chrome trace log. 
