@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+UNRELEASED
+-------------------------
+### Fixed
+* Return missing promises when getting the console log.
+
 version 2.2.0 2018-02-14
 -------------------------
 ### Added
