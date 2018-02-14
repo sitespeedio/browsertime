@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+UNRELEASED
+-------------------------
+### Fixed
+* New version of the trace parser (for CPU metrics) with updated feature list.
+
 version 2.2.1 2018-02-14
 -------------------------
 ### Fixed
