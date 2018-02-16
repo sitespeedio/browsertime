@@ -8,6 +8,8 @@
 
 Access the Web Performance Timeline, from your browser, in your terminal!
 
+**master** branch is now **hot** for the coming 3.0. Send bug fixes to the [2.x branch](https://github.com/sitespeedio/browsertime/tree/2.x) until we release 3.0.
+
 ## Introduction
 
 **Browsertime lets you *automate running JavaScript in your browser* primary used to collect performance metrics. What exactly does that mean?**
