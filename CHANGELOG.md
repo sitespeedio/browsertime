@@ -1,9 +1,10 @@
 # Browsertime changelog
 
-UNRELEASED
+UNRELEASED UPCOMING 3.0
 -------------------------
 ### Fixed
 * New version of the trace parser (for CPU metrics) with updated feature list.
+* Move video out of pre/post scripts. When we first started with the video we used the pre/post structure. That was ok to move fast but one of the negatives is that stopping the video happen after we collected all metrics. We now stop the video exactly when the the page is finished loading [#448](https://github.com/sitespeedio/browsertime/pull/448).
 
 version 2.2.1 2018-02-14
 -------------------------
