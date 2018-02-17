@@ -9,7 +9,6 @@ let Engine = require('../').Engine,
   Promise = require('bluebird'),
   merge = require('lodash.merge'),
   isEmpty = require('lodash.isempty'),
-  forEach = require('lodash.foreach'),
   pick = require('lodash.pick'),
   fs = require('fs'),
   path = require('path'),
@@ -86,15 +85,6 @@ function run(url, options) {
           storageManager.writeJson(harName + '.har', result.har)
         );
       }
-      forEach(result.extraJson, (value, key) =>
-        saveOperations.push(storageManager.writeJson(key, value))
-      );
-      forEach(result.screenshots, (value, index) =>
-        saveOperations.push(
-          storageManager.writeData(`screenshot-${index}.png`, value)
-        )
-      );
-
       return Promise.all(saveOperations).then(() => {
         log.info(
           'Wrote data to %s',
