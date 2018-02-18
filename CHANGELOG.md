@@ -12,6 +12,8 @@ UNRELEASED UPCOMING 3.0
 ### Changed
 * Create a unique Chromedriver log file per run (before ur was one large log file for all runs). Turn it on by setting the logging to verbose [#450](https://github.com/sitespeedio/browsertime/pull/450).
 
+* Store the Chromedriver log in the result directory (before it was stored where you run Browsertime) [#452](https://github.com/sitespeedio/browsertime/pull/452).
+
 ### BREAKING CHANGE
 * Store extra JSON and screenshots per run (and collect stats between runs).  We want to make Browsertime as mean and clean as possible: Store all extra JSONs (chrome trace categories, console log and more), and the screenshots between runs (before they where stored on exit). This is good because it will decrease the memory impact but it is non backward compatible change! Sitespeed.io and other tools need to change how they handle extra JSONs and the screenshot. Browsertime users that uses browsertime from the command line will not see any change. We also moved most stats to be collected between runs, that is needed for CPU stats since we store the data and throws it away between runs [#449](https://github.com/sitespeedio/browsertime/pull/449).
 
