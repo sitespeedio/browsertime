@@ -5,6 +5,7 @@ UNRELEASED UPCOMING 3.0
 ### Fixed
 * New version of the trace parser (for CPU metrics) with updated feature list.
 * Move video out of pre/post scripts. When we first started with the video we used the pre/post structure. That was ok to move fast but one of the negatives is that stopping the video happen after we collected all metrics. We now stop the video exactly when the the page is finished loading [#448](https://github.com/sitespeedio/browsertime/pull/448).
+* In the browsretime.json mdev was never formatted, now we use 4 decimals (make the JSON more readable) [#453](https://github.com/sitespeedio/browsertime/pull/453).
 
 ### Added
 * You can now turn on the MOZ HTTP log for Firefox with --firefox.collectMozLog [#451](https://github.com/sitespeedio/browsertime/pull/451) see [https://developer.mozilla.org/en-US/docs/Mozilla/Debugging/HTTP_logging](https://developer.mozilla.org/en-US/docs/Mozilla/Debugging/HTTP_logging) 
