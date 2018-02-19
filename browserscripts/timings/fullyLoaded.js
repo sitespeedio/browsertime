@@ -10,7 +10,7 @@
         max = resources[i].responseEnd;
       }
     }
-    return max;
+    return Number(max.toFixed(0));
   } else {
     return -1;
   }
