@@ -8,12 +8,14 @@ UNRELEASED UPCOMING 3.0
 * In the browsretime.json mdev was never formatted, now we use 4 decimals (make the JSON more readable) [#453](https://github.com/sitespeedio/browsertime/pull/453).
 
 ### Added
-* You can now turn on the MOZ HTTP log for Firefox with --firefox.collectMozLog [#451](https://github.com/sitespeedio/browsertime/pull/451) see [https://developer.mozilla.org/en-US/docs/Mozilla/Debugging/HTTP_logging](https://developer.mozilla.org/en-US/docs/Mozilla/Debugging/HTTP_logging) 
+* You can now turn on the MOZ HTTP log for Firefox with --firefox.collectMozLog [#451](https://github.com/sitespeedio/browsertime/pull/451) see [https://developer.mozilla.org/en-US/docs/Mozilla/Debugging/HTTP_logging](https://developer.mozilla.org/en-US/docs/Mozilla/Debugging/HTTP_logging)
 
 ### Changed
 * Create a unique Chromedriver log file per run (before ur was one large log file for all runs). Turn it on by setting the logging to verbose [#450](https://github.com/sitespeedio/browsertime/pull/450).
 
 * Store the Chromedriver log in the result directory (before it was stored where you run Browsertime) [#452](https://github.com/sitespeedio/browsertime/pull/452).
+
+* Metrics like first paint, resource timings and paint timings was reported with 8 decimals in worst cases. Reporting in full ms is ok.
 
 ### BREAKING CHANGE
 * Store extra JSON and screenshots per run (and collect stats between runs).  We want to make Browsertime as mean and clean as possible: Store all extra JSONs (chrome trace categories, console log and more), and the screenshots between runs (before they where stored on exit). This is good because it will decrease the memory impact but it is non backward compatible change! Sitespeed.io and other tools need to change how they handle extra JSONs and the screenshot. Browsertime users that uses browsertime from the command line will not see any change. We also moved most stats to be collected between runs, that is needed for CPU stats since we store the data and throws it away between runs [#449](https://github.com/sitespeedio/browsertime/pull/449).
@@ -27,7 +29,7 @@ version 2.2.1 2018-02-14
 version 2.2.0 2018-02-14
 -------------------------
 ### Added
-* You can now get more meaningful CPU metrics out of Chrome (both by category and per event type). Use it by adding --chrome.traceCategories devtools.timeline --chrome.collectTracingEvents --chrome.collectCPUMetrics. [#434](https://github.com/sitespeedio/browsertime/pull/434). We use [https://github.com/WPO-Foundation/trace-parser](https://github.com/WPO-Foundation/trace-parser) to parse the Chrome trace log. 
+* You can now get more meaningful CPU metrics out of Chrome (both by category and per event type). Use it by adding --chrome.traceCategories devtools.timeline --chrome.collectTracingEvents --chrome.collectCPUMetrics. [#434](https://github.com/sitespeedio/browsertime/pull/434). We use [https://github.com/WPO-Foundation/trace-parser](https://github.com/WPO-Foundation/trace-parser) to parse the Chrome trace log.
 
 * You can now get the Chrome console log by --chrome.collectConsoleLog. It will be written to disk (one file per run) [#345](https://github.com/sitespeedio/browsertime/pull/345).
 
