@@ -1,19 +1,17 @@
 (function() {
+  const resources = [];
   if (window.performance && window.performance.getEntriesByType) {
-    var timings = window.performance.getEntriesByType('resource');
-    var resources = [];
+    const timings = window.performance.getEntriesByType('resource');
+
     // we can do more cool stuff with resouce timing v2 in the
     // future
-    timings.forEach(function(resource) {
+    for (const resource of timings) {
       resources.push({
         name: resource.name,
         startTime: Number(resource.startTime.toFixed(2)),
         duration: Number(resource.duration.toFixed(2))
       });
-    });
-
-    return resources;
-  } else {
-    return [];
+    }
   }
+  return resources;
 })();
