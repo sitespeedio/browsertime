@@ -10,6 +10,8 @@ UNRELEASED UPCOMING 3.0
 ### Added
 * You can now turn on the MOZ HTTP log for Firefox with --firefox.collectMozLog [#451](https://github.com/sitespeedio/browsertime/pull/451) see [https://developer.mozilla.org/en-US/docs/Mozilla/Debugging/HTTP_logging](https://developer.mozilla.org/en-US/docs/Mozilla/Debugging/HTTP_logging)
 
+* Upgraded to new Browsertime extension with support for web sockets see https://github.com/sitespeedio/browsertime-extension/issues/5
+
 ### Changed
 * Create a unique Chromedriver log file per run (before ur was one large log file for all runs). Turn it on by setting the logging to verbose [#450](https://github.com/sitespeedio/browsertime/pull/450).
 
