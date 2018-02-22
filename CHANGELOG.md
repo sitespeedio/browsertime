@@ -4,6 +4,7 @@ UNRELEASED
 -------------------------
 ### Fixed
 * New version of the trace parser (for CPU metrics) with updated feature list.
+* New updated Browsertime extension adding support for web sockets.
 
 version 2.2.1 2018-02-14
 -------------------------
