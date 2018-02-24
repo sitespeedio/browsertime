@@ -1,6 +1,6 @@
 'use strict';
 
-const Engine = require('./lib/core/engine'),
+const Engine = require('./lib/core/engine/'),
   SeleniumRunner = require('./lib/core/seleniumRunner'),
   errors = require('./lib/support/errors'),
   browserScripts = require('./lib/support/browserScript'),
