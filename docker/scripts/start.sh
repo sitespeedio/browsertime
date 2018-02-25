@@ -64,13 +64,17 @@ function runWebPageReplay() {
   WPR_PARAMS="--http $WPR_HTTP_PORT --https $WPR_HTTPS_PORT --certFile $CERT_FILE --keyFile $KEY_FILE --injectScripts $SCRIPTS"
   WAIT=${WAIT:-2000}
 
+  declare -i RESULT=0
   webpagereplaywrapper record --start $WPR_PARAMS
-  
+  RESULT+=$?
+
   $BROWSERTIME_RECORD  --firefox.preference network.dns.forceResolve:127.0.0.1 --firefox.acceptInsecureCerts --chrome.args host-resolver-rules="MAP *:$HTTP_PORT 127.0.0.1:$WPR_HTTP_PORT,MAP *:$HTTPS_PORT 127.0.0.1:$WPR_HTTPS_PORT,EXCLUDE localhost" --pageCompleteCheck "return (function() {try { var end = window.performance.timing.loadEventEnd; var start= window.performance.timing.navigationStart; return (end > 0) && (performance.now() > end - start + 5000);} catch(e) {return true;}})()" "$@"
+  RESULT+=$?
 
   webpagereplaywrapper record --stop $WPR_PARAMS
+  RESULT+=$?
 
-  if [ $? -eq 0 ]
+  if [ $RESULT -eq 0 ]
     then
 
       webpagereplaywrapper replay --start $WPR_PARAMS
@@ -83,7 +87,8 @@ function runWebPageReplay() {
       wait $PID
       webpagereplaywrapper replay --stop $WPR_PARAMS
     else
-      echo "Could not stop the WebPageReplay record" >&2
+      echo "Recording or accessing the URL failed, will not replay" >&2
+      exit 1
   fi
 }
 
