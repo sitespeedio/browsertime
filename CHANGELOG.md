@@ -1,4 +1,7 @@
 # Browsertime changelog
+UNRELEASED
+-------------------------
+### Fixed better way to end the tests when running WebPageReplay [#460](https://github.com/sitespeedio/browsertime/issues/460).
 
 version 2.2.2 2018-02-22
 -------------------------
