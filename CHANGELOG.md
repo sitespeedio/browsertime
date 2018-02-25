@@ -3,7 +3,8 @@ UNRELEASED
 -------------------------
 ### 
 * Fixed better way to end the tests when running WebPageReplay [#460](https://github.com/sitespeedio/browsertime/issues/460).
-* Do not try to replay if recording fails
+* Do not try to replay if recording fails for WebPageReplay
+* Default wait time is loadEventEnd + 5 s (before 2s) for WebPageReplay
 
 version 2.2.2 2018-02-22
 -------------------------
