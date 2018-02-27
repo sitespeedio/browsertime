@@ -15,16 +15,21 @@ async function runBrowsertime() {
       default: 'chrome',
       choices: ['chrome', 'firefox'],
       describe: 'Specify browser'
+    })
+    .option('connectivity.latency', {
+      default: undefined,
+      group: 'connectivity'
     });
 
   const defaultConfig = {
     iterations: 1,
     connectivity: {
-      profile: 'native',
+      profile: 'custom',
       downstreamKbps: undefined,
       upstreamKbps: undefined,
       latency: undefined,
-      engine: 'external'
+      engine: 'throttle',
+      localhost: true
     },
     delay: 0,
     video: false,
