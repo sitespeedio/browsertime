@@ -64,16 +64,20 @@ describe('Engine', function() {
           }).should.be.fulfilled;
       });
 
-      it('should be able to generate a har', function() {
-        // somewhat clunky way to ignore generated har data in test.
-        return engine
-          .run('http://httpbin.org/html', { scripts })
-          .then(function(r) {
-            return r.har.should.have.nested.property(
-              'log.entries[0].request.url'
-            );
-          });
-      });
+      if (browser === 'chrome') {
+        it('should be able to generate a har', function() {
+          // somewhat clunky way to ignore generated har data in test.
+          return engine
+            .run('http://httpbin.org/html', { scripts })
+            .then(function(r) {
+              return r.har.should.have.nested.property(
+                'log.entries[0].request.url'
+              );
+            });
+        });
+      } else {
+        it.skip('Firefox cannot generate a HAR since Firefox 55');
+      }
 
       afterEach(function() {
         return engine
