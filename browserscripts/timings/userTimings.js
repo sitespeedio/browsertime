@@ -1,33 +1,34 @@
 (function() {
-  var measures = [];
-  var marks = [];
+  const measures = [];
+  const marks = [];
 
   if (window.performance && window.performance.getEntriesByType) {
+    const myMarks = Array.prototype.slice.call(
+      window.performance.getEntriesByType('mark')
+    );
 
-    var myMarks = Array.prototype.slice.call(window.performance.getEntriesByType('mark'));
-
-
-    myMarks.forEach(function(mark) {
+    for (const mark of myMarks) {
       marks.push({
         name: mark.name,
         startTime: mark.startTime
       });
-    });
+    }
 
-    var myMeasures = Array.prototype.slice.call(window.performance.getEntriesByType('measure'));
+    const myMeasures = Array.prototype.slice.call(
+      window.performance.getEntriesByType('measure')
+    );
 
-    myMeasures.forEach(function(measure) {
+    for (const measure of myMeasures) {
       measures.push({
         name: measure.name,
         duration: measure.duration,
         startTime: measure.startTime
-      })
-    });
+      });
+    }
   }
 
   return {
     marks: marks,
     measures: measures
   };
-
 })();
