@@ -26,10 +26,11 @@
     "mkdirp": "0.5.1",
     "moment": "2.18.1",
     "selenium-webdriver": "3.6.0",
+    "sharp": "0.19.1",
     "soprano-saxophone": "0.19.1",
     "valid-url": "1.0.9",
     "xvfb": "0.2.3",
-    "yargs": "9.0.1"
+    "yargs": "11.0.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
