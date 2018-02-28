@@ -6,6 +6,7 @@ UNRELEASED
 * Do not try to replay if recording fails for WebPageReplay
 * Default wait time is loadEventEnd + 5 s (before 2s) for WebPageReplay
 * If recording or accessing the URL fails then do to replay for WebPageReplay
+* Handle filenames with % for FFMPEG https://github.com/sitespeedio/sitespeed.io/issues/1911 
 
 version 2.2.2 2018-02-22
 -------------------------
