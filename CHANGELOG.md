@@ -26,6 +26,7 @@ UNRELEASED UPCOMING 3.0
 * We disabled getting a HAR for Firefox to be able to upgrade from Firefox 54 to Firefox 58 [#467](https://github.com/sitespeedio/browsertime/pull/467). We wait for [https://github.com/devtools-html/har-export-trigger/](https://github.com/devtools-html/har-export-trigger/) to be fully functional to enable HARs again for Firefox.
 
 * We use [sharp](http://sharp.pixelplumbing.com/) to store/convert screenshots. Screenshots are now located in the screenshots folder, named after each run. Default are now jpg screenshots. [#468](https://github.com/sitespeedio/browsertime/pull/468).
+* Remove deprecated (renamed) options experimental.dumpChromePerflog (use chrome.collectPerfLog) and chrome.dumpTraceCategoriesLog (use chrome.collectTracingEvents). 
 
 version 2.2.2 2018-02-22
 -------------------------
