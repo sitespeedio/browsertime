@@ -76,7 +76,10 @@ function runWebPageReplay() {
 
   if [ $RESULT -eq 0 ]
     then
-
+      # TODO We should check that starting really works
+      # Let us sleep for a while to make sure the recording session
+      # stored the file
+      sleep 5
       webpagereplaywrapper replay --start $WPR_PARAMS
 
       exec $BROWSERTIME --firefox.acceptInsecureCerts --firefox.preference network.dns.forceResolve:127.0.0.1 --chrome.args host-resolver-rules="MAP *:$HTTP_PORT 127.0.0.1:$WPR_HTTP_PORT,MAP *:$HTTPS_PORT 127.0.0.1:$WPR_HTTPS_PORT,EXCLUDE localhost" --video --speedIndex --pageCompleteCheck "return (function() {try { var end = window.performance.timing.loadEventEnd; var start= window.performance.timing.navigationStart; return (end > 0) && (performance.now() > end - start + $WAIT);} catch(e) {return true;}})()" --connectivity.engine throttle --connectivity.throttle.localhost --connectivity.profile custom --connectivity.latency $LATENCY "$@" &
