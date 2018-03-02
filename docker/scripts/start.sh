@@ -63,6 +63,7 @@ function runWebPageReplay() {
   LATENCY=${LATENCY:-100}
   WPR_PARAMS="--http $WPR_HTTP_PORT --https $WPR_HTTPS_PORT --certFile $CERT_FILE --keyFile $KEY_FILE --injectScripts $SCRIPTS"
   WAIT=${WAIT:-5000}
+  REPLAY_WAIT=${REPLAY_WAIT:-5}
 
   declare -i RESULT=0
   webpagereplaywrapper record --start $WPR_PARAMS
@@ -79,16 +80,22 @@ function runWebPageReplay() {
       # TODO We should check that starting really works
       # Let us sleep for a while to make sure the recording session
       # stored the file
-      sleep 5
+      sleep $REPLAY_WAIT
       webpagereplaywrapper replay --start $WPR_PARAMS
 
-      exec $BROWSERTIME --firefox.acceptInsecureCerts --firefox.preference network.dns.forceResolve:127.0.0.1 --chrome.args host-resolver-rules="MAP *:$HTTP_PORT 127.0.0.1:$WPR_HTTP_PORT,MAP *:$HTTPS_PORT 127.0.0.1:$WPR_HTTPS_PORT,EXCLUDE localhost" --video --speedIndex --pageCompleteCheck "return (function() {try { var end = window.performance.timing.loadEventEnd; var start= window.performance.timing.navigationStart; return (end > 0) && (performance.now() > end - start + $WAIT);} catch(e) {return true;}})()" --connectivity.engine throttle --connectivity.throttle.localhost --connectivity.profile custom --connectivity.latency $LATENCY "$@" &
+      if [ $? -eq 0 ]
+        then
+          exec $BROWSERTIME --firefox.acceptInsecureCerts --firefox.preference network.dns.forceResolve:127.0.0.1 --chrome.args host-resolver-rules="MAP *:$HTTP_PORT 127.0.0.1:$WPR_HTTP_PORT,MAP *:$HTTPS_PORT 127.0.0.1:$WPR_HTTPS_PORT,EXCLUDE localhost" --video --speedIndex --pageCompleteCheck "return (function() {try { var end = window.performance.timing.loadEventEnd; var start= window.performance.timing.navigationStart; return (end > 0) && (performance.now() > end - start + $WAIT);} catch(e) {return true;}})()" --connectivity.engine throttle --connectivity.throttle.localhost --connectivity.profile custom --connectivity.latency $LATENCY "$@" &
 
-      PID=$!
+          PID=$!
 
-      trap shutdown SIGTERM SIGINT
-      wait $PID
-      webpagereplaywrapper replay --stop $WPR_PARAMS
+          trap shutdown SIGTERM SIGINT
+          wait $PID
+          webpagereplaywrapper replay --stop $WPR_PARAMS
+        else
+          echo "The replay proxy didn't start ok" >&2
+          exit 1
+        fi
     else
       echo "Recording or accessing the URL failed, will not replay" >&2
       exit 1
