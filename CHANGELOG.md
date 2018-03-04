@@ -31,6 +31,7 @@
 * We use [sharp](http://sharp.pixelplumbing.com/) to store/convert screenshots. Screenshots are now located in the screenshots folder, named after each run. Default are now jpg screenshots. [#468](https://github.com/sitespeedio/browsertime/pull/468).
 * Remove deprecated (renamed) options experimental.dumpChromePerflog (use chrome.collectPerfLog) and chrome.dumpTraceCategoriesLog (use chrome.collectTracingEvents).
 * Remove broken support for video recording on macOS (Docker on mac still works).
+* Removed deprecated (renamed) option videoRaw. Always use --videoParams.addTimer (boolean) if you want to toggle timer/metrics in the video
 
 ## version 2.2.2 2018-02-22
 
