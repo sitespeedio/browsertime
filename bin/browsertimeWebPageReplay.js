@@ -33,7 +33,7 @@ async function runBrowsertime() {
     },
     delay: 0,
     video: false,
-    speedIndex: false,
+    visualMetrics: false,
     resultDir: '/tmp/browsertime'
   };
 
