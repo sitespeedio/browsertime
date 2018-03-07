@@ -29,7 +29,7 @@ function parseUserScripts(scripts) {
   );
 }
 
-function run(url, options) {
+async function run(url, options) {
   let dir = 'browsertime-results';
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir);
@@ -42,8 +42,8 @@ function run(url, options) {
     log.debug('Running with options: %:2j', options);
   }
 
-  const scriptCategories = browserScripts.allScriptCategories;
-  let scriptsByCategory = browserScripts.getScriptsForCategories(
+  const scriptCategories = await browserScripts.allScriptCategories;
+  let scriptsByCategory = await browserScripts.getScriptsForCategories(
     scriptCategories
   );
 
