@@ -32,7 +32,7 @@ addons:
     - python-sympy
     - python-nose
     - xz-utils
-  firefox: 'latest'
+  firefox: 'latest-nightly'
 before_install:
 - pip install --user --upgrade pip
 - pip --version
