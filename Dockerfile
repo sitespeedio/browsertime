@@ -4,7 +4,7 @@ ENV BROWSERTIME_XVFB true
 ENV BROWSERTIME_CONNECTIVITY__ENGINE external
 ENV BROWSERTIME_DOCKER true
 ENV BROWSERTIME_VIDEO true
-ENV BROWSERTIME_speedIndex true
+ENV BROWSERTIME_visualMetrics true
 
 COPY docker/webpagereplay/wpr /usr/local/bin/
 COPY docker/webpagereplay/wpr_cert.pem /webpagereplay/certs/

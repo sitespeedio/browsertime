@@ -10,6 +10,21 @@ if (process.env.BROWSERTIME_TEST_BROWSER) {
   BROWSERS.push('chrome', 'firefox');
 }
 
+function timeout(promise, ms, errorMessage) {
+  let timer = null;
+
+  return Promise.race([
+    new Promise((resolve, reject) => {
+      timer = setTimeout(reject, ms, new Error(errorMessage));
+      return timer;
+    }),
+    promise.then(value => {
+      clearTimeout(timer);
+      return value;
+    })
+  ]);
+}
+
 describe('SeleniumRunner', function() {
   let runner;
 
@@ -89,9 +104,11 @@ describe('SeleniumRunner', function() {
       });
 
       afterEach(function() {
-        return runner
-          .stop()
-          .timeout(10000, 'Waited for ' + browser + ' to quit for too long');
+        return timeout(
+          runner.stop(),
+          10000,
+          'Waited for ' + browser + ' to quit for too long'
+        );
       });
     });
 
@@ -152,9 +169,11 @@ describe('SeleniumRunner', function() {
       });
 
       afterEach(function() {
-        return runner
-          .stop()
-          .timeout(10000, 'Waited for ' + browser + ' to quit for too long');
+        return timeout(
+          runner.stop(),
+          10000,
+          'Waited for ' + browser + ' to quit for too long'
+        );
       });
     });
 
