@@ -16,6 +16,8 @@
 
 * Upgraded to new Browsertime extension with support for web sockets see https://github.com/sitespeedio/browsertime-extension/issues/5
 
+* You can now choose niceness level for FFMPEG during a recording using --videoParams.nice. With this you can finetune the prio for the FFMPEG process.
+
 ### Changed
 
 * Store the Chromedriver log in the result directory (before it was stored where you run Browsertime) [#452](https://github.com/sitespeedio/browsertime/pull/452).
