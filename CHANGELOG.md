@@ -36,6 +36,7 @@
 * Remove broken support for video recording on macOS (Docker on mac still works).
 * Removed deprecated (renamed) option videoRaw. Always use --videoParams.addTimer (boolean) if you want to toggle timer/metrics in the video
 * We now use pageLoadStrategy "none". That means if you run your own pageCompleteCheck you can now end your test whenever you want (before onLoad if you want) [#501](https://github.com/sitespeedio/browsertime/pull/501).
+* We changed how we change between orange to white when we record a video. Depending on your machine, Selenium/WebDriver introduced latency the old way we did the switch [#503](https://github.com/sitespeedio/browsertime/pull/503).
 
 
 ## version 2.2.2 2018-02-22
