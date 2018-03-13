@@ -3,7 +3,7 @@
 ## UNRELEASED
 
 ### Added
-* Updated to the new HAR Export plugin for Firefox, needs Firegox 60 to work (beta/nightly)
+* Updated to the new HAR Export plugin for Firefox, needs Firefox 60 to work (beta/nightly)
 * Updated Docker container to use Chrome 65 and Firefox 60 (currently nightly, soon beta)
 
 ### Fixed
@@ -14,6 +14,7 @@
 * If recording or accessing the URL fails then do to replay for WebPageReplay
 * Handle filenames with % for FFMPEG https://github.com/sitespeedio/sitespeed.io/issues/1911
 * Updated to Chromedriver 2.36
+* Updated to Geckodriver 0.20.0
 * Added offset for video in Chrome 65 (that broken infobar) [#489](https://github.com/sitespeedio/browsertime/issues/489).
 
 
