@@ -14,7 +14,8 @@
 * If recording or accessing the URL fails then do to replay for WebPageReplay
 * Handle filenames with % for FFMPEG https://github.com/sitespeedio/sitespeed.io/issues/1911
 * Updated to Chromedriver 2.36
-* Removed enable-automation switch to make vide recording work in Chrome 65 [#489](https://github.com/sitespeedio/browsertime/issues/489).
+* Added offset for video in Chrome 65 (that broken infobar) [#489](https://github.com/sitespeedio/browsertime/issues/489).
+
 
 ## version 2.2.2 2018-02-22
 
