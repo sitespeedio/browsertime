@@ -5,6 +5,7 @@
 ### Added
 * Updated to the new HAR Export plugin for Firefox, needs Firefox 60 to work (beta/nightly)
 * Updated Docker container to use Chrome 65 and Firefox 60 (currently nightly, soon beta)
+* If you run in verbose mode and the run fails, Browsertime will try to take a screenshot of the screen to make it esier to understand why it fails. Thanks [Vitaliy Honcharenko](https://github.com/vgoncharenko) for the PR! [#508](https://github.com/sitespeedio/browsertime/pull/508).
 
 ### Fixed
 
