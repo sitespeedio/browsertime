@@ -2,6 +2,10 @@
 
 ## UNRELEASED
 
+### Added
+* Updated to the new HAR Export plugin for Firefox, needs Firegox 60 to work (beta/nightly)
+* Updated Docker container to use Chrome 65 and Firefox 60 (currently nightly, soon beta)
+
 ### Fixed
 
 * Fixed better way to end the tests when running WebPageReplay [#460](https://github.com/sitespeedio/browsertime/issues/460).
