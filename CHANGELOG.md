@@ -16,6 +16,7 @@
 * Handle filenames with % for FFMPEG https://github.com/sitespeedio/sitespeed.io/issues/1911
 * Updated to Chromedriver 2.36
 * Updated to Geckodriver 0.20.0
+* Updated to Chrome-har 0.3.0
 * Added offset for video in Chrome 65 (that broken infobar) [#489](https://github.com/sitespeedio/browsertime/issues/489).
 * Turn off OCSP request for Firefox when running WebPageReplay
 * Parse --firefox.preferences values as Numbers if they are a number :)
