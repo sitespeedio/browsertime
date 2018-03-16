@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## UNRELEASED
+## version 2.3.0 2018-03-16
 
 ### Added
 * Updated to the new HAR Export plugin for Firefox, needs Firefox 60 to work (beta/nightly)
