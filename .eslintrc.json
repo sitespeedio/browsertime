@@ -15,6 +15,7 @@
       {
         "singleQuote": true
       }
-    ]
+    ],
+    "no-return-await": 2
   }
 }
