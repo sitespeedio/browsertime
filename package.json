@@ -14,7 +14,8 @@
     "docs",
     "index.js",
     "lib",
-    "package.json"
+    "package.json",
+    "vendor"
   ],
   "dependencies": {
     "@sitespeed.io/throttle": "0.1.0",
