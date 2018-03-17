@@ -2,6 +2,20 @@
   "description": "Browsertime",
   "version": "2.2.2",
   "bin": "./bin/browsertime.js",
+  "files": [
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "README.md",
+    "bin",
+    "browserscripts",
+    "browsersupport",
+    "browsertime.png",
+    "docs",
+    "index.js",
+    "lib",
+    "package.json"
+  ],
   "dependencies": {
     "@sitespeed.io/throttle": "0.1.0",
     "adbkit": "2.11.0",
