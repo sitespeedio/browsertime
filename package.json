@@ -10,7 +10,7 @@
     "adbkit": "2.11.0",
     "alto-saxophone": "2.36.0",
     "bluebird": "3.5.1",
-    "chrome-har": "0.2.3",
+    "chrome-har": "0.3.0",
     "execa": "0.6.1",
     "fast-stats": "0.0.3",
     "hasbin": "1.2.3",
@@ -46,6 +46,21 @@
   "engines": {
     "node": ">=8.9.0"
   },
+  "files": [
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "README.md",
+    "bin",
+    "browserscripts",
+    "browsersupport",
+    "browsertime.png",
+    "docs",
+    "index.js",
+    "lib",
+    "package.json",
+    "vendor"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "mocha test/unitTests test/browserTests",
