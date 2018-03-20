@@ -14,7 +14,9 @@ addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
+    - google-chrome
     packages:
+    - google-chrome-beta
     - ipython
     - ipython-notebook
     - libjpeg-dev
@@ -32,7 +34,6 @@ addons:
     - python-nose
     - xz-utils
   firefox: 'latest-nightly'
-  chrome: beta
 before_install:
 - pip install --user --upgrade pip
 - pip --version
