@@ -73,7 +73,8 @@ async function run(url, options) {
         'statistics',
         'visualMetrics',
         'timestamps',
-        'cpu'
+        'cpu',
+        'errors'
       ]);
       if (!isEmpty(btData)) {
         saveOperations.push(

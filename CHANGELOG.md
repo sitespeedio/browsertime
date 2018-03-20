@@ -18,6 +18,8 @@
 
 * You can now choose niceness level for FFMPEG during a recording using --videoParams.nice. With this you can finetune the prio for the FFMPEG process.
 
+* In the browsertime.json you now get errors in the errors array. This makes it possible for us to gracefully handle if one of the runs fails.
+
 ### Changed
 
 * Store the Chromedriver log in the result directory (before it was stored where you run Browsertime) [#452](https://github.com/sitespeedio/browsertime/pull/452).
@@ -35,6 +37,9 @@
 * Remove deprecated (renamed) options experimental.dumpChromePerflog (use chrome.collectPerfLog) and chrome.dumpTraceCategoriesLog (use chrome.collectTracingEvents).
 * Remove broken support for video recording on macOS (Docker on mac still works).
 * Removed deprecated (renamed) option videoRaw. Always use --videoParams.addTimer (boolean) if you want to toggle timer/metrics in the video
+* We now use pageLoadStrategy "none". That means if you run your own pageCompleteCheck you can now end your test whenever you want (before onLoad if you want) [#501](https://github.com/sitespeedio/browsertime/pull/501).
+* We changed how we change between orange to white when we record a video. Depending on your machine, Selenium/WebDriver introduced latency the old way we did the switch [#503](https://github.com/sitespeedio/browsertime/pull/503).
+* We removed collecting Resource Timing data as default [#505](https://github.com/sitespeedio/browsertime/pull/505). If you still need the metrics, you can still run the script: [https://github.com/sitespeedio/browsertime/blob/2.x/browserscripts/timings/resourceTimings.js](https://github.com/sitespeedio/browsertime/blob/2.x/browserscripts/timings/resourceTimings.js).
 
 ## version 2.2.2 2018-02-22
 
