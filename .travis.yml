@@ -15,7 +15,7 @@ addons:
     sources:
     - ubuntu-toolchain-r-test
     packages:
-    - google-chrome-stable
+    - google-chrome-beta
     - ipython
     - ipython-notebook
     - libjpeg-dev
