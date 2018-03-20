@@ -1,4 +1,9 @@
 # Browsertime changelog
+## version 2.4.0 2018-03-20
+### Fixed 
+* Reverting fix for Chrome 65 disabling infobars. We use Chrome 66 now.
+### Added
+* Updated Docker to use Chrome 66 beta and FF 61 Nightly
 
 ## version 2.3.0 2018-03-16
 
