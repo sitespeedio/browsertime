@@ -52,8 +52,8 @@ before_install:
 - which python
 - firefox --version 2>/dev/null
 - google-chrome-beta --version
-- rm /usr/bin/google-chrome
-- ln -s /usr/bin/google-chrome-beta /usr/bin/google-chrome
+- sudo rm /usr/bin/google-chrome
+- sudo ln -s /usr/bin/google-chrome-beta /usr/bin/google-chrome
 - which google-chrome
 
 before_script:
