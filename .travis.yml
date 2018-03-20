@@ -16,7 +16,7 @@ addons:
     - ubuntu-toolchain-r-test
     - google-chrome
     packages:
-    - google-chrome-beta
+    - google-chrome-beta	
     - ipython
     - ipython-notebook
     - libjpeg-dev
@@ -52,6 +52,9 @@ before_install:
 - which python
 - firefox --version 2>/dev/null
 - google-chrome --product-version
+- google-chrome-beta --version
+- which google-chrome-beta
+- which google-chrome
 
 before_script:
 - export DISPLAY=:99.0
