@@ -14,8 +14,6 @@ const fs = require('fs');
 const path = require('path');
 const log = require('intel');
 
-Promise.promisifyAll(fs);
-
 function parseUserScripts(scripts) {
   if (!Array.isArray(scripts)) scripts = [scripts];
 
