@@ -82,8 +82,9 @@ async function run(url, options) {
         );
       }
       if (result.har) {
+        const useGzip = options.gzipHar === true ? true : false;
         saveOperations.push(
-          storageManager.writeJson(harName + '.har', result.har)
+          storageManager.writeJson(harName + '.har', result.har, useGzip)
         );
       }
       return Promise.all(saveOperations).then(() => {
