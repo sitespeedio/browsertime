@@ -20,6 +20,8 @@
 
 * In the browsertime.json you now get errors in the errors array. This makes it possible for us to gracefully handle if one of the runs fails.
 
+* You can now gzip the HAR file by adding --gzipHar to your run.
+
 ### Changed
 
 * Store the Chromedriver log in the result directory (before it was stored where you run Browsertime) [#452](https://github.com/sitespeedio/browsertime/pull/452).
@@ -27,6 +29,8 @@
 * Metrics like first paint, resource timings and paint timings was reported with 8 decimals in worst cases. Reporting in full ms is ok [#455](https://github.com/sitespeedio/browsertime/pull/455).
 
 * The video now ends on Last Visual Change + 1 s (before it could go on as long as the video was recorded).
+
+* All Chrome trace files are now gzipped [#517](https://github.com/sitespeedio/browsertime/pull/517
 
 ### BREAKING CHANGE
 
@@ -40,6 +44,7 @@
 * We now use pageLoadStrategy "none". That means if you run your own pageCompleteCheck you can now end your test whenever you want (before onLoad if you want) [#501](https://github.com/sitespeedio/browsertime/pull/501).
 * We changed how we change between orange to white when we record a video. Depending on your machine, Selenium/WebDriver introduced latency the old way we did the switch [#503](https://github.com/sitespeedio/browsertime/pull/503).
 * We removed collecting Resource Timing data as default [#505](https://github.com/sitespeedio/browsertime/pull/505). If you still need the metrics, you can still run the script: [https://github.com/sitespeedio/browsertime/blob/2.x/browserscripts/timings/resourceTimings.js](https://github.com/sitespeedio/browsertime/blob/2.x/browserscripts/timings/resourceTimings.js).
+* You can now choose what kind of response bodies you want to store in your HAR file . Instead of using --firefox.includeResponseBodies to include all bodies you can now use --firefox.includeResponseBodies [none,all,html][#518](https://github.com/sitespeedio/browsertime/pull/518).
 
 ## version 2.2.2 2018-02-22
 
