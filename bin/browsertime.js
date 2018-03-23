@@ -1,20 +1,18 @@
 #!/usr/bin/env node
 'use strict';
 
-let Engine = require('../').Engine,
-  browserScripts = require('../lib/support/browserScript'),
-  logging = require('../').logging,
-  cli = require('../lib/support/cli'),
-  StorageManager = require('../lib/support/storageManager'),
-  Promise = require('bluebird'),
-  merge = require('lodash.merge'),
-  isEmpty = require('lodash.isempty'),
-  pick = require('lodash.pick'),
-  fs = require('fs'),
-  path = require('path'),
-  log = require('intel');
-
-Promise.promisifyAll(fs);
+const Engine = require('../').Engine;
+const browserScripts = require('../lib/support/browserScript');
+const logging = require('../').logging;
+const cli = require('../lib/support/cli');
+const StorageManager = require('../lib/support/storageManager');
+const Promise = require('bluebird');
+const merge = require('lodash.merge');
+const isEmpty = require('lodash.isempty');
+const pick = require('lodash.pick');
+const fs = require('fs');
+const path = require('path');
+const log = require('intel');
 
 function parseUserScripts(scripts) {
   if (!Array.isArray(scripts)) scripts = [scripts];
@@ -30,38 +28,37 @@ function parseUserScripts(scripts) {
 }
 
 async function run(url, options) {
-  let dir = 'browsertime-results';
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
-  }
+  try {
+    let dir = 'browsertime-results';
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir);
+    }
 
-  let engine = new Engine(options);
+    let engine = new Engine(options);
 
-  log.info('Running %s for url: %s', options.browser, url);
-  if (log.isEnabledFor(log.DEBUG)) {
-    log.debug('Running with options: %:2j', options);
-  }
+    log.info('Running %s for url: %s', options.browser, url);
+    if (log.isEnabledFor(log.DEBUG)) {
+      log.debug('Running with options: %:2j', options);
+    }
 
-  const scriptCategories = await browserScripts.allScriptCategories;
-  let scriptsByCategory = await browserScripts.getScriptsForCategories(
-    scriptCategories
-  );
-
-  if (options.script) {
-    const userScripts = parseUserScripts(options.script);
-    scriptsByCategory = Promise.join(
-      scriptsByCategory,
-      userScripts,
-      (scriptsByCategory, userScripts) => merge(scriptsByCategory, userScripts)
+    const scriptCategories = await browserScripts.allScriptCategories;
+    let scriptsByCategory = await browserScripts.getScriptsForCategories(
+      scriptCategories
     );
-  }
 
-  engine
-    .start()
-    .then(function() {
-      return engine.run(url, scriptsByCategory);
-    })
-    .then(function(result) {
+    if (options.script) {
+      const userScripts = parseUserScripts(options.script);
+      scriptsByCategory = Promise.join(
+        scriptsByCategory,
+        userScripts,
+        (scriptsByCategory, userScripts) =>
+          merge(scriptsByCategory, userScripts)
+      );
+    }
+
+    try {
+      await engine.start();
+      const result = await engine.run(url, scriptsByCategory);
       let saveOperations = [];
 
       const storageManager = new StorageManager(url, options);
@@ -82,40 +79,31 @@ async function run(url, options) {
         );
       }
       if (result.har) {
-        const useGzip = options.gzipHar === true ? true : false;
+        const useGzip = options.gzipHar === true;
         saveOperations.push(
           storageManager.writeJson(harName + '.har', result.har, useGzip)
         );
       }
-      return Promise.all(saveOperations).then(() => {
-        log.info(
-          'Wrote data to %s',
-          path.relative(process.cwd(), storageManager.directory)
-        );
-        return result;
-      });
-    })
-    .catch(function(e) {
-      log.error('Error running browsertime', e);
-      throw e;
-    })
-    .finally(function() {
-      log.debug('Stopping Browsertime');
-      return engine
-        .stop()
-        .tap(() => {
-          log.debug('Stopped Browsertime');
-        })
-        .catch(e => {
-          log.error('Error stopping Browsertime!', e);
+      await Promise.all(saveOperations);
 
-          process.exitCode = 1;
-        });
-    })
-    .catch(function() {
-      process.exitCode = 1;
-    })
-    .finally(process.exit); // explicitly exit to avoid a hanging process
+      const resultDir = path.relative(process.cwd(), storageManager.directory);
+      log.info(`Wrote data to ${resultDir}`);
+    } finally {
+      log.debug('Stopping Browsertime');
+      try {
+        await engine.stop();
+        log.debug('Stopped Browsertime');
+      } catch (e) {
+        log.error('Error stopping Browsertime!', e);
+        process.exitCode = 1;
+      }
+    }
+  } catch (e) {
+    log.error('Error running browsertime', e);
+    process.exitCode = 1;
+  } finally {
+    process.exit();
+  }
 }
 
 let cliResult = cli.parseCommandLine();
