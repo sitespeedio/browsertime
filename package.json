@@ -24,7 +24,6 @@
     "lodash.remove": "4.7.0",
     "lodash.set": "4.3.2",
     "mkdirp": "0.5.1",
-    "moment": "2.20.1",
     "selenium-webdriver": "3.6.0",
     "sharp": "0.19.1",
     "soprano-saxophone": "0.20.0",
