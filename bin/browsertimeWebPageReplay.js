@@ -2,9 +2,9 @@
 
 'use strict';
 
-let yargs = require('yargs'),
-  browsertime = require('../'),
-  merge = require('lodash.merge');
+const yargs = require('yargs');
+const browsertime = require('../');
+const merge = require('lodash.merge');
 
 async function runBrowsertime() {
   let parsed = yargs
@@ -41,10 +41,12 @@ async function runBrowsertime() {
   browsertime.logging.configure(parsed.argv);
 
   const engine = new browsertime.Engine(btOptions);
-  await engine
-    .start()
-    .then(() => engine.run(parsed.argv._[0]))
-    .finally(() => engine.stop());
+  try {
+    await engine.start();
+    await engine.run(parsed.argv._[0]);
+  } finally {
+    await engine.stop();
+  }
 }
 
 runBrowsertime();
