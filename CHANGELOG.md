@@ -9,6 +9,7 @@
 * In the browsretime.json mdev was never formatted, now we use 4 decimals (make the JSON more readable) [#453](https://github.com/sitespeedio/browsertime/pull/453).
 * Modernized the JavaScript we use to collect the metrics, see [#457](https://github.com/sitespeedio/browsertime/pull/457).
 * Fixed so that Chrome on Android can use the ExtensionServer (clear the cache, add request headers etc) [#470](https://github.com/sitespeedio/browsertime/issues/470).
+* Better handling of Chrome emulated mobile: We now set the correct window size for phones [#528](https://github.com/sitespeedio/browsertime/pull/528)
 
 ### Added
 
@@ -31,6 +32,8 @@
 * The video now ends on Last Visual Change + 1 s (before it could go on as long as the video was recorded).
 
 * All Chrome trace files are now gzipped [#517](https://github.com/sitespeedio/browsertime/pull/517
+
+* Firefox preferences now uses mostly the same settings as Mozilla do in their performance tests [#524](https://github.com/sitespeedio/browsertime/pull/524).
 
 ### BREAKING CHANGE
 
