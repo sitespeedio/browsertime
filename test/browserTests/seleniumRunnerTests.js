@@ -3,6 +3,7 @@
 const SeleniumRunner = require('../../lib/core/seleniumRunner');
 
 const BROWSERS = [];
+const BASE_PATH = '/tmp/';
 
 if (process.env.BROWSERTIME_TEST_BROWSER) {
   BROWSERS.push(process.env.BROWSERTIME_TEST_BROWSER);
@@ -30,7 +31,7 @@ describe('SeleniumRunner', function() {
 
   describe('#start', function() {
     it('should reject when passed incorrect configuration', function() {
-      runner = new SeleniumRunner({
+      runner = new SeleniumRunner(BASE_PATH, {
         browser: 'invalid'
       });
       return runner.start().should.be.rejected;
@@ -38,7 +39,7 @@ describe('SeleniumRunner', function() {
 
     if (BROWSERS.includes('chrome')) {
       it.skip('should handle if Chrome crashes', function() {
-        runner = new SeleniumRunner({
+        runner = new SeleniumRunner(BASE_PATH, {
           browser: 'chrome',
           chrome: {
             args: '--crash-test'
@@ -57,7 +58,7 @@ describe('SeleniumRunner', function() {
   BROWSERS.forEach(function(browser) {
     describe('#loadAndWait - ' + browser, function() {
       beforeEach(function() {
-        runner = new SeleniumRunner({
+        runner = new SeleniumRunner(BASE_PATH, {
           browser: browser,
           timeouts: {
             browserStart: 60000,
@@ -179,7 +180,7 @@ describe('SeleniumRunner', function() {
 
     describe('#takeScreenshot - ' + browser, function() {
       beforeEach(function() {
-        runner = new SeleniumRunner({
+        runner = new SeleniumRunner(BASE_PATH, {
           browser: browser,
           timeouts: {
             browserStart: 60000,
