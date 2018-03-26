@@ -80,7 +80,7 @@ describe('SeleniumRunner', function() {
         return runner.loadAndWait(
           'http://httpbin.org/delay/20',
           'return true'
-        ).should.be.rejected;
+        ).should.throw;
       });
 
       it('should fail if wait script never returns true', function() {
