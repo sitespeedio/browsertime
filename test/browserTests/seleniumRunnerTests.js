@@ -64,7 +64,7 @@ describe('SeleniumRunner', function() {
             browserStart: 60000,
             scripts: 5000,
             pageLoad: 10000,
-            pageCompleteCheck: 10000
+            pageCompleteCheck: 5000
           }
         });
         return runner.start();
@@ -75,7 +75,6 @@ describe('SeleniumRunner', function() {
           'https://httpbin.org/html'
         ).should.be.fulfilled;
       });
-
       it('should fail if url takes too long to load', function() {
         return runner.loadAndWait(
           'https://httpbin.org/delay/20',
