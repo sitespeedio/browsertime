@@ -64,7 +64,7 @@ describe('SeleniumRunner', function() {
             browserStart: 60000,
             scripts: 5000,
             pageLoad: 10000,
-            pageCompleteCheck: 10000
+            pageCompleteCheck: 5000
           }
         });
         return runner.start();
@@ -72,34 +72,33 @@ describe('SeleniumRunner', function() {
 
       it('should be able to load a url', function() {
         return runner.loadAndWait(
-          'http://httpbin.org/html'
+          'https://httpbin.org/html'
         ).should.be.fulfilled;
       });
-
       it('should fail if url takes too long to load', function() {
         return runner.loadAndWait(
-          'http://httpbin.org/delay/20',
+          'https://httpbin.org/delay/20',
           'return true'
         ).should.be.rejected;
       });
 
       it('should fail if wait script never returns true', function() {
         return runner.loadAndWait(
-          'http://httpbin.org/html',
+          'https://httpbin.org/html',
           'return false'
         ).should.be.rejected;
       });
 
       it('should fail if wait script throws an exception', function() {
         return runner.loadAndWait(
-          'http://httpbin.org/html',
+          'https://httpbin.org/html',
           'throw new Error("foo");'
         ).should.be.rejected;
       });
 
       it.skip('should fail if wait script hangs', function() {
         return runner.loadAndWait(
-          'http://httpbin.org/html',
+          'https://httpbin.org/html',
           'while (true) {}; return true;'
         ).should.be.rejected;
       });
