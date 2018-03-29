@@ -49,6 +49,7 @@
 * We removed collecting Resource Timing data as default [#505](https://github.com/sitespeedio/browsertime/pull/505). If you still need the metrics, you can still run the script: [https://github.com/sitespeedio/browsertime/blob/2.x/browserscripts/timings/resourceTimings.js](https://github.com/sitespeedio/browsertime/blob/2.x/browserscripts/timings/resourceTimings.js).
 * You can now choose what kind of response bodies you want to store in your HAR file . Instead of using --firefox.includeResponseBodies to include all bodies you can now use --firefox.includeResponseBodies [none,all,html][#518](https://github.com/sitespeedio/browsertime/pull/518).
 * We cleaned up how you collect trace logs from Chrome. If you want the devtools.timeline log (and CPU spent metrics), just use --chrome.timeline. If you want to configure trace categories yourself, use --chrome.traceCategories
+* File names are now based on 1 and not 0 so the first file from the first iteration is named something with -1. [#536](https://github.com/sitespeedio/browsertime/pull/536).
 
 ## version 2.2.2 2018-02-22
 
