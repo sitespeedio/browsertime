@@ -2,6 +2,11 @@
 
 ## UNRELEASED UPCOMING 3.0
 
+
+## 3.0.0-alpha.1
+
+This is an early alpha release of the coming 3.0.0. You can try it out but be-aware: APIs can still change. We hope to ship the first stable version of 3.0.0 before the summer.
+
 ### Fixed
 
 * New version of the trace parser (for CPU metrics) with updated feature list.
