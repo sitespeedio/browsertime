@@ -56,6 +56,33 @@ This is an early alpha release of the coming 3.0.0. You can try it out but be-aw
 * We cleaned up how you collect trace logs from Chrome. If you want the devtools.timeline log (and CPU spent metrics), just use --chrome.timeline. If you want to configure trace categories yourself, use --chrome.traceCategories
 * File names are now based on 1 and not 0 so the first file from the first iteration is named something with -1. [#536](https://github.com/sitespeedio/browsertime/pull/536).
 
+## version 2.4.0 2018-03-20
+### Fixed 
+* Reverting fix for Chrome 65 disabling infobars. We use Chrome 66 now.
+### Added
+* Updated Docker to use Chrome 66 beta and FF 61 Nightly
+
+## version 2.3.0 2018-03-16
+
+### Added
+* Updated to the new HAR Export plugin for Firefox, needs Firefox 60 to work (beta/nightly)
+* Updated Docker container to use Chrome 65 and Firefox 60 (currently nightly, soon beta)
+* If you run in verbose mode and the run fails, Browsertime will try to take a screenshot of the screen to make it esier to understand why it fails. Thanks [Vitaliy Honcharenko](https://github.com/vgoncharenko) for the PR! [#508](https://github.com/sitespeedio/browsertime/pull/508).
+
+### Fixed
+
+* Fixed better way to end the tests when running WebPageReplay [#460](https://github.com/sitespeedio/browsertime/issues/460).
+* Do not try to replay if recording fails for WebPageReplay
+* Default wait time is loadEventEnd + 5 s (before 2s) for WebPageReplay
+* If recording or accessing the URL fails then do to replay for WebPageReplay
+* Handle filenames with % for FFMPEG https://github.com/sitespeedio/sitespeed.io/issues/1911
+* Updated to Chromedriver 2.36
+* Updated to Geckodriver 0.20.0
+* Updated to Chrome-har 0.3.0
+* Added offset for video in Chrome 65 (that broken infobar) [#489](https://github.com/sitespeedio/browsertime/issues/489).
+* Turn off OCSP request for Firefox when running WebPageReplay
+* Parse --firefox.preferences values as Numbers if they are a number :)
+
 ## version 2.2.2 2018-02-22
 
 ### Fixed
