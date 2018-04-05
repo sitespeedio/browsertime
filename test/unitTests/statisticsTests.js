@@ -123,7 +123,7 @@ describe('statistics', function() {
               result[mark.name] = mark.startTime;
               return result;
             }, {});
-          } else if (keyPath === 'userTimings.measure') {
+          } else if (keyPath === 'userTimings.measures') {
             return value.reduce((result, mark) => {
               result[mark.name] = mark.duration;
               return result;
