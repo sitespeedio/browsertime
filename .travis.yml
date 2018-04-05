@@ -14,9 +14,8 @@ addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
-    - google-chrome
     packages:
-    - google-chrome-beta	
+    - google-chrome-stable
     - ipython
     - ipython-notebook
     - libjpeg-dev
@@ -51,10 +50,7 @@ before_install:
 - python --version
 - which python
 - firefox --version 2>/dev/null
-- google-chrome-beta --version
-- sudo rm /usr/bin/google-chrome
-- sudo ln -s /usr/bin/google-chrome-beta /usr/bin/google-chrome
-- which google-chrome
+- google-chrome --product-version
 
 before_script:
 - export DISPLAY=:99.0
@@ -65,11 +61,11 @@ script:
 - npm run travis
 - node ./bin/browsertime.js -b firefox -n 2 https://www.sitespeed.io --preTask test/prepostscripts/preSample.js
   --postTask test/prepostscripts/postSample2.js --connectivity.profile cable --connectivity.engine
-  tc
+  throttle
 - node ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value
   https://www.sitespeed.io/documentation/
 - node ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --video --screenshot
-  --speedIndex -n 1 --chrome.collectTracingEvents https://www.sitespeed.io/
+  --visualMetrics -n 1 --chrome.timeline https://www.sitespeed.io/
 notifications:
   slack:
     secure: V71EkIzwOf/fZnGTGIKAIFlDyLUit4tK97VDgdV9vZ7CbvOXI1ir3lwRZ57lNqiYD8BUaX+/wKDG+LyrBMgQ4JAGgQx0mECvmOKx1+10Yg9FAkUsMTWe7GOxcVMwhpS2OfHnXwMb0FjcuVl8ovowIZqCWOLeEAYVaTWHndDm2cA=
