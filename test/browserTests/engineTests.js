@@ -1,7 +1,8 @@
 'use strict';
 
-const path = require('path'),
-  Engine = require('../../lib/core/engine');
+const Promise = require('bluebird');
+const path = require('path');
+const Engine = require('../../lib/core/engine');
 
 const BROWSERS = [];
 
@@ -79,11 +80,12 @@ describe('Engine', function() {
         it.skip('Firefox cannot generate a HAR since Firefox 55');
       }
 
-      afterEach(function() {
-        return engine
-          .stop()
-          .timeout(10000, 'Waited for ' + browser + ' to quit for too long');
-      });
+      afterEach(() =>
+        Promise.resolve(engine.stop()).timeout(
+          10000,
+          'Waited for ' + browser + ' to quit for too long'
+        )
+      );
     });
 
     describe('#run async - ' + browser, function() {
@@ -153,11 +155,12 @@ describe('Engine', function() {
         ]);
       });
 
-      afterEach(function() {
-        return engine
-          .stop()
-          .timeout(10000, 'Waited for ' + browser + ' to quit for too long');
-      });
+      afterEach(() =>
+        Promise.resolve(engine.stop()).timeout(
+          10000,
+          'Waited for ' + browser + ' to quit for too long'
+        )
+      );
     });
 
     describe('#pre/post scripts - ' + browser, function() {
@@ -189,11 +192,12 @@ describe('Engine', function() {
         return engine.run('data:text/html;charset=utf-8,', { scripts });
       });
 
-      afterEach(function() {
-        return engine
-          .stop()
-          .timeout(10000, 'Waited for ' + browser + ' to quit for too long');
-      });
+      afterEach(() =>
+        Promise.resolve(engine.stop()).timeout(
+          10000,
+          'Waited for ' + browser + ' to quit for too long'
+        )
+      );
     });
   });
 });

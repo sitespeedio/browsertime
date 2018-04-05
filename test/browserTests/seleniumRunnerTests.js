@@ -3,6 +3,7 @@
 const SeleniumRunner = require('../../lib/core/seleniumRunner');
 
 const BROWSERS = [];
+const BASE_PATH = '/tmp/';
 
 if (process.env.BROWSERTIME_TEST_BROWSER) {
   BROWSERS.push(process.env.BROWSERTIME_TEST_BROWSER);
@@ -30,7 +31,7 @@ describe('SeleniumRunner', function() {
 
   describe('#start', function() {
     it('should reject when passed incorrect configuration', function() {
-      runner = new SeleniumRunner({
+      runner = new SeleniumRunner(BASE_PATH, {
         browser: 'invalid'
       });
       return runner.start().should.be.rejected;
@@ -38,7 +39,7 @@ describe('SeleniumRunner', function() {
 
     if (BROWSERS.includes('chrome')) {
       it.skip('should handle if Chrome crashes', function() {
-        runner = new SeleniumRunner({
+        runner = new SeleniumRunner(BASE_PATH, {
           browser: 'chrome',
           chrome: {
             args: '--crash-test'
@@ -57,13 +58,13 @@ describe('SeleniumRunner', function() {
   BROWSERS.forEach(function(browser) {
     describe('#loadAndWait - ' + browser, function() {
       beforeEach(function() {
-        runner = new SeleniumRunner({
+        runner = new SeleniumRunner(BASE_PATH, {
           browser: browser,
           timeouts: {
             browserStart: 60000,
             scripts: 5000,
             pageLoad: 10000,
-            pageCompleteCheck: 10000
+            pageCompleteCheck: 5000
           }
         });
         return runner.start();
@@ -71,34 +72,33 @@ describe('SeleniumRunner', function() {
 
       it('should be able to load a url', function() {
         return runner.loadAndWait(
-          'http://httpbin.org/html'
+          'https://httpbin.org/html'
         ).should.be.fulfilled;
       });
-
       it('should fail if url takes too long to load', function() {
         return runner.loadAndWait(
-          'http://httpbin.org/delay/20',
+          'https://httpbin.org/delay/20',
           'return true'
         ).should.be.rejected;
       });
 
       it('should fail if wait script never returns true', function() {
         return runner.loadAndWait(
-          'http://httpbin.org/html',
+          'https://httpbin.org/html',
           'return false'
         ).should.be.rejected;
       });
 
       it('should fail if wait script throws an exception', function() {
         return runner.loadAndWait(
-          'http://httpbin.org/html',
+          'https://httpbin.org/html',
           'throw new Error("foo");'
         ).should.be.rejected;
       });
 
       it.skip('should fail if wait script hangs', function() {
         return runner.loadAndWait(
-          'http://httpbin.org/html',
+          'https://httpbin.org/html',
           'while (true) {}; return true;'
         ).should.be.rejected;
       });
@@ -179,7 +179,7 @@ describe('SeleniumRunner', function() {
 
     describe('#takeScreenshot - ' + browser, function() {
       beforeEach(function() {
-        runner = new SeleniumRunner({
+        runner = new SeleniumRunner(BASE_PATH, {
           browser: browser,
           timeouts: {
             browserStart: 60000,
