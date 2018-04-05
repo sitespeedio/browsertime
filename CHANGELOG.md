@@ -2,6 +2,7 @@
 ## version 2.4.1 2018-04-05
 ### Fixed
 * User Timing measurements was handled incorrect so they was never sent correctly to Graphite. Thanks [@knaos](https://github.com/knaos) for reporting and finding the issue.
+* Firefox 60 vs 61 has changed what is returned by the HAR export trigger. We now handles both.
 
 ## version 2.4.0 2018-03-20
 ### Fixed 
