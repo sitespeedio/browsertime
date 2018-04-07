@@ -5,6 +5,7 @@
 ### Fixed
 * We now use the latest and greatest Visual Metrics [#542](https://github.com/sitespeedio/browsertime/pull/542) and always get the viewport, hopefully fixing the problem with last visual change that sometimes happens for emulated mobile.
 
+* Updated Chrome-HAR that fixes problems in Chrome 66.
 
 ## 3.0.0-alpha.1
 
