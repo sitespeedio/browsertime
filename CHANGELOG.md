@@ -7,6 +7,8 @@
 
 * Updated Chrome-HAR that fixes problems in Chrome 66.
 
+* Upgraded Sharp to 0.20.1 so when you install a request will be made to  https://github.com/lovell/sharp-libvips/releases to download a pre made binary
+
 ## 3.0.0-alpha.1
 
 This is an early alpha release of the coming 3.0.0. You can try it out but be-aware: APIs can still change. We hope to ship the first stable version of 3.0.0 before the summer.
