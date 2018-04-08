@@ -7,6 +7,8 @@
 
 * Updated Chrome-HAR that fixes problems in Chrome 66.
 
+* Firefox 61 changed what's returned from the HAR exporter compared to 60. We now handles both.
+
 * Upgraded Sharp to 0.20.1 so when you install a request will be made to  https://github.com/lovell/sharp-libvips/releases to download a pre made binary
 
 ## 3.0.0-alpha.1
