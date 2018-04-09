@@ -2,6 +2,9 @@
 
 ## UNRELEASED UPCOMING 3.0
 
+##  3.0.0-alpha.3
+* Quick fix for faulty Visual Metrics configuration
+
 ##  3.0.0-alpha.2
 
 ### Fixed
