@@ -547,7 +547,7 @@ def find_render_start(directory, orange_file, gray_file):
                     mask = None
                 top = 10
                 right_margin = 10
-                bottom_margin = 10
+                bottom_margin = 25
                 if height > 400 or width > 400:
                     top = int(math.ceil(float(height) * 0.03))
                     right_margin = int(math.ceil(float(width) * 0.04))
@@ -1703,7 +1703,7 @@ def main():
                     gray_file = os.path.join(os.path.dirname(
                         os.path.realpath(__file__)), 'gray.png')
                     if not os.path.isfile(gray_file):
-                        gray_file = os.path.join(temp_dir, 'gray.png')
+                        gray_file = os.path.join(colors_temp_dir, 'gray.png')
                         generate_gray_png(gray_file)
                 video_to_frames(options.video, directory, options.force, orange_file,
                                 white_file, gray_file, options.multiple, options.viewport,
