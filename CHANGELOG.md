@@ -2,6 +2,8 @@
 
 ## UNRELEASED UPCOMING 3.0
 
+* Rolling back more changes in Visual Metrics, we should do more PRs upstream.
+
 ##  3.0.0-alpha.5
 * Ooops, latest Firefox nightly broke the video. Let us rollback to last working version and rollforward later on.  
 
