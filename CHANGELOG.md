@@ -2,6 +2,9 @@
 
 ## UNRELEASED UPCOMING 3.0
 
+##  3.0.0-alpha.5
+* Ooops, latest Firefox nightly broke the video. Let us rollback to last working version and rollforward later on.  
+
 ##  3.0.0-alpha.4
 * Quick fix for faulty Visual Metrics configuration, the Visual Metrics is broken handling both orange/white frames. Upstream PR coming later.
 
