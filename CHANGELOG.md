@@ -2,6 +2,9 @@
 
 ## UNRELEASED UPCOMING 3.0
 
+##  3.0.0-alpha.4
+* Quick fix for faulty Visual Metrics configuration, the Visual Metrics is broken handling both orange/white frames. Upstream PR coming later.
+
 ##  3.0.0-alpha.3
 * Quick fix for faulty Visual Metrics configuration
 
