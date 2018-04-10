@@ -6,7 +6,6 @@ const browserScripts = require('../lib/support/browserScript');
 const logging = require('../').logging;
 const cli = require('../lib/support/cli');
 const StorageManager = require('../lib/support/storageManager');
-const Promise = require('bluebird');
 const merge = require('lodash.merge');
 const isEmpty = require('lodash.isempty');
 const pick = require('lodash.pick');
@@ -14,17 +13,17 @@ const fs = require('fs');
 const path = require('path');
 const log = require('intel');
 
-function parseUserScripts(scripts) {
+async function parseUserScripts(scripts) {
   if (!Array.isArray(scripts)) scripts = [scripts];
-
-  return Promise.reduce(
-    scripts,
-    (results, script) =>
-      browserScripts
-        .findAndParseScripts(path.resolve(script), 'custom')
-        .then(scripts => merge(results, scripts)),
-    {}
-  );
+  const results = {};
+  for (const script of scripts) {
+    const code = await browserScripts.findAndParseScripts(
+      path.resolve(script),
+      'custom'
+    );
+    merge(results, code);
+  }
+  return results;
 }
 
 async function run(url, options) {
@@ -47,13 +46,8 @@ async function run(url, options) {
     );
 
     if (options.script) {
-      const userScripts = parseUserScripts(options.script);
-      scriptsByCategory = Promise.join(
-        scriptsByCategory,
-        userScripts,
-        (scriptsByCategory, userScripts) =>
-          merge(scriptsByCategory, userScripts)
-      );
+      const userScripts = await parseUserScripts(options.script);
+      scriptsByCategory = merge(scriptsByCategory, userScripts);
     }
 
     try {
@@ -109,10 +103,5 @@ async function run(url, options) {
 let cliResult = cli.parseCommandLine();
 
 logging.configure(cliResult.options);
-
-if (log.isEnabledFor(log.CRITICAL)) {
-  // TODO change the threshold to VERBOSE before releasing 1.0
-  Promise.longStackTraces();
-}
 
 run(cliResult.url, cliResult.options);
