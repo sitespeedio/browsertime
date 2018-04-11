@@ -5,6 +5,8 @@
 * Rolling back more changes in Visual Metrics, we should do more PRs upstream.
 * Gzip the netlog for Chrome.
 * Bugfix: --script wasn't working
+* We removed the last use of Bluebird and now use async/await and native promises.
+* You can now install your own extension: [#552](https://github.com/sitespeedio/browsertime/pull/552).
 
 ##  3.0.0-alpha.5
 * Ooops, latest Firefox nightly broke the video. Let us rollback to last working version and rollforward later on.  
