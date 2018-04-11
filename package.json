@@ -9,7 +9,6 @@
     "@sitespeed.io/throttle": "0.2.0",
     "adbkit": "2.11.0",
     "alto-saxophone": "2.37.0",
-    "bluebird": "3.5.1",
     "chrome-har": "0.3.2",
     "execa": "0.10.0",
     "fast-stats": "0.0.3",
@@ -33,6 +32,7 @@
     "yargs": "11.0.0"
   },
   "devDependencies": {
+    "bluebird": "3.5.1",
     "chai": "^4.1.2",
     "chai-as-promised": "~7.1.1",
     "eslint": "^4.18.1",
