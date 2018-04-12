@@ -3,6 +3,7 @@
 ## UNRELEASED UPCOMING 3.0
 
 * Updated Throttle to 0.3
+* Whoa: DOMContentLoaded in the video!
 
 ##  3.0.0-alpha.6
 * Rolling back more changes in Visual Metrics, we should do more PRs upstream.
