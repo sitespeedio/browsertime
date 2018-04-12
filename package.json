@@ -6,7 +6,7 @@
   },
   "bin": "./bin/browsertime.js",
   "dependencies": {
-    "@sitespeed.io/throttle": "0.2.0",
+    "@sitespeed.io/throttle": "0.3.0",
     "adbkit": "2.11.0",
     "alto-saxophone": "2.37.0",
     "chrome-har": "0.3.2",
