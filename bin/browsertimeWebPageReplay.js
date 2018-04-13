@@ -34,7 +34,10 @@ async function runBrowsertime() {
     delay: 0,
     video: false,
     visualMetrics: false,
-    resultDir: '/tmp/browsertime'
+    resultDir: '/tmp/browsertime',
+    screenshotParams: {
+      type: 'jpg'
+    }
   };
 
   const btOptions = merge({}, parsed.argv, defaultConfig);
