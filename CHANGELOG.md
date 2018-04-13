@@ -4,6 +4,7 @@
 
 * Updated Throttle to 0.3
 * Whoa: DOMContentLoaded in the video!
+* You can now add a resultURL to the video/screenshots in the HAR
 
 ##  3.0.0-alpha.6
 * Rolling back more changes in Visual Metrics, we should do more PRs upstream.
