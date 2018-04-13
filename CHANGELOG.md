@@ -2,6 +2,7 @@
 
 ## UNRELEASED UPCOMING 3.0
 
+##  3.0.0-alpha.7
 * Updated Throttle to 0.3
 * Whoa: DOMContentLoaded in the video!
 * You can now add a resultURL to the video/screenshots in the HAR
