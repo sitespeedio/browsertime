@@ -2,6 +2,8 @@
 
 ## UNRELEASED UPCOMING 3.0
 
+* Added net-tools in the Docker file
+
 ##  3.0.0-alpha.8
 * Setting default image config when you run WebPageReplay
 
