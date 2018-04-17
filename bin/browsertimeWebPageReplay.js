@@ -24,11 +24,10 @@ async function runBrowsertime() {
   const defaultConfig = {
     iterations: 1,
     connectivity: {
-      profile: 'custom',
       downstreamKbps: undefined,
       upstreamKbps: undefined,
       latency: undefined,
-      engine: 'throttle',
+      engine: 'external',
       localhost: true
     },
     delay: 0,
