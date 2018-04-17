@@ -2,7 +2,10 @@
 
 ## UNRELEASED UPCOMING 3.0
 
+##  3.0.0-alpha.9
+
 * Added net-tools in the Docker file
+* We now use the new chrome-trace lib to parse the Chrome trace log.
 
 ##  3.0.0-alpha.8
 * Setting default image config when you run WebPageReplay
