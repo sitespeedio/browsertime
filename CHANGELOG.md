@@ -2,6 +2,8 @@
 
 ## UNRELEASED UPCOMING 3.0
 
+* Bugfix: Add visual metrics even though you only do one run
+
 ##  3.0.0-alpha.9
 
 * Added net-tools in the Docker file
