@@ -2,7 +2,10 @@
 
 ## UNRELEASED UPCOMING 3.0
 
+##  3.0.0-alpha.10
+
 * Bugfix: Add visual metrics even though you only do one run
+* Updated to lates chrome-trace
 
 ##  3.0.0-alpha.9
 
