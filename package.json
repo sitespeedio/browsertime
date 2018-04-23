@@ -1,6 +1,6 @@
 {
   "description": "Browsertime",
-  "version": "3.0.0-alpha.9",
+  "version": "3.0.0-alpha.10",
   "publishConfig": {
     "tag": "canary"
   },
@@ -8,7 +8,7 @@
   "dependencies": {
     "@sitespeed.io/throttle": "0.3.0",
     "adbkit": "2.11.0",
-    "alto-saxophone": "2.37.0",
+    "alto-saxophone": "2.38.0",
     "chrome-har": "0.3.2",
     "chrome-trace": "0.0.2",
     "execa": "0.10.0",
