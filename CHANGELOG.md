@@ -1,6 +1,8 @@
 # Browsertime changelog
 
 ## UNRELEASED UPCOMING 3.0
+* Change so errors now is an array of an array: one run can produce multiple errors.
+* Cleaner way to use WebPageReplay: Use the binary directly instead of the wrapper
 
 ##  3.0.0-alpha.10
 
