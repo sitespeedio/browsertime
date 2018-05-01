@@ -2,6 +2,10 @@
 
 ## UNRELEASED UPCOMING 3.0
 
+## UNRELEASED
+
+* Updated Visual Metrics with changes upstream for correct last visual change
+
 ##  3.0.0-alpha.11
 
 * Errors is now an array of an array: one run can produce multiple errors.
