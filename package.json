@@ -10,7 +10,7 @@
     "adbkit": "2.11.0",
     "alto-saxophone": "2.38.0",
     "chrome-har": "0.3.2",
-    "chrome-trace": "0.0.2",
+    "chrome-trace": "0.1.0",
     "execa": "0.10.0",
     "fast-stats": "0.0.3",
     "hasbin": "1.2.3",
