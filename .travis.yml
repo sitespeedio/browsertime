@@ -34,7 +34,6 @@ addons:
     - xz-utils
   firefox: 'latest-nightly'
 before_install:
-- pip install --user --upgrade pip
 - pip --version
 - pip install --user Pillow
 - pip install --user pyssim
