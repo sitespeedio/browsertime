@@ -2,9 +2,10 @@
 
 ## UNRELEASED UPCOMING 3.0
 
-## UNRELEASED
+##  3.0.0-alpha.12
 
 * Updated Visual Metrics with changes upstream for correct last visual change
+* New version of the Chrome-trace including more traces
 
 ##  3.0.0-alpha.11
 
