@@ -34,11 +34,11 @@ addons:
     - xz-utils
   firefox: 'latest-nightly'
 before_install:
-- pip --version
-- pip install --user Pillow
-- pip install --user pyssim
-- pip show Pillow
-- pip show pyssim
+- python -m pip --version
+- python -m pip install --user Pillow
+- python -m pip install --user pyssim
+- python -m pip show Pillow
+- python -m pip show pyssim
 - mkdir /tmp/ffmpeg
 - wget http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz
   -O /tmp/ffmpeg/download-ffmpeg.tar.xz
