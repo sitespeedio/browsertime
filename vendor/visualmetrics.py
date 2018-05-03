@@ -594,11 +594,11 @@ def eliminate_duplicate_frames(directory):
                     client_viewport = None
 
             # Figure out the region of the image that we care about
-            top = 8
-            right_margin = 8
-            bottom_margin = 25
+            top = 10
+            right_margin = 10
+            bottom_margin = 10
             if height > 400 or width > 400:
-                top = int(math.ceil(float(height) * 0.04))
+                top = int(math.ceil(float(height) * 0.03))
                 right_margin = int(math.ceil(float(width) * 0.04))
                 bottom_margin = int(math.ceil(float(width) * 0.04))
             height = max(height - top - bottom_margin, 1)
