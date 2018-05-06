@@ -2,6 +2,8 @@
 
 ## UNRELEASED UPCOMING 3.0
 
+* Increased the wait time before we start to check if the page is finished from 500 ms to 1000 ms.
+
 ##  3.0.0-alpha.12
 
 * Updated Visual Metrics with changes upstream for correct last visual change
