@@ -2,6 +2,9 @@
 
 ## UNRELEASED UPCOMING 3.0
 
+* Wait some extra time before we start tests on Androids
+* Bugfix: Exit with error code if we get one error (both default and for WebPageReplay).
+
 ##  3.0.0-alpha.13
 
 * Increased the wait time before we start to check if the page is finished from 500 ms to 1000 ms.
