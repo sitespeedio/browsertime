@@ -81,6 +81,13 @@ async function run(url, options) {
       await Promise.all(saveOperations);
 
       const resultDir = path.relative(process.cwd(), storageManager.directory);
+
+      // check for errors
+      for (let errors of result.errors) {
+        if (errors.length > 0) {
+          process.exitCode = 1;
+        }
+      }
       log.info(`Wrote data to ${resultDir}`);
     } finally {
       log.debug('Stopping Browsertime');
