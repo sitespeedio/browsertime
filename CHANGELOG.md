@@ -2,6 +2,7 @@
 
 ## UNRELEASED UPCOMING 3.0
 
+##  3.0.0-beta.1
 * Wait some extra time before we start tests on Androids
 * Bugfix: Exit with error code if we get one error (both default and for WebPageReplay).
 
