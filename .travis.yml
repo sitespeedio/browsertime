@@ -32,7 +32,7 @@ addons:
     - python-sympy
     - python-nose
     - xz-utils
-  firefox: 'latest-nightly'
+  firefox: 'latest-beta'
 before_install:
 - python -m pip --version
 - python -m pip install --user Pillow
