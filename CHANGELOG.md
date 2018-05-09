@@ -2,6 +2,11 @@
 
 ## UNRELEASED UPCOMING 3.0
 
+##  3.0.0-beta.2
+* Better log when URL fails
+* Option to end test on 5s of inactivity [#574](https://github.com/sitespeedio/browsertime/pull/574)
+* Use pkill when killing processes on newer Androids
+
 ##  3.0.0-beta.1
 * Wait some extra time before we start tests on Androids
 * Bugfix: Exit with error code if we get one error (both default and for WebPageReplay).
