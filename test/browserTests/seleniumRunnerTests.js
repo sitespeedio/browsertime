@@ -72,10 +72,10 @@ describe('SeleniumRunner', function() {
 
       it('should be able to load a url', function() {
         return runner.loadAndWait(
-          'https://httpbin.org/html'
+          'https://www.sitespeed.io/testcases/info/domElements.html'
         ).should.be.fulfilled;
       });
-      it('should fail if url takes too long to load', function() {
+      it.skip('should fail if url takes too long to load, enable this when httpbin works again', function() {
         return runner.loadAndWait(
           'https://httpbin.org/delay/20',
           'return true'
@@ -84,21 +84,21 @@ describe('SeleniumRunner', function() {
 
       it('should fail if wait script never returns true', function() {
         return runner.loadAndWait(
-          'https://httpbin.org/html',
+          'https://www.sitespeed.io/testcases/info/domElements.html',
           'return false'
         ).should.be.rejected;
       });
 
       it('should fail if wait script throws an exception', function() {
         return runner.loadAndWait(
-          'https://httpbin.org/html',
+          'https://www.sitespeed.io/testcases/info/domElements.html',
           'throw new Error("foo");'
         ).should.be.rejected;
       });
 
       it.skip('should fail if wait script hangs', function() {
         return runner.loadAndWait(
-          'https://httpbin.org/html',
+          'https://www.sitespeed.io/testcases/info/domElements.html',
           'while (true) {}; return true;'
         ).should.be.rejected;
       });
