@@ -31,7 +31,6 @@ We have worked a lot to make Browsertime 3.0 the best version so far. Read the [
 * Modernized the JavaScript we use to collect the metrics, see [#457](https://github.com/sitespeedio/browsertime/pull/457).
 * Fixed so that Chrome on Android can use the ExtensionServer (clear the cache, add request headers etc) [#470](https://github.com/sitespeedio/browsertime/issues/470).
 * Better handling of Chrome emulated mobile: We now set the correct window size for phones [#528](https://github.com/sitespeedio/browsertime/pull/528)
-
 * Errors is now an array of an array: one run can produce multiple errors.
 
 ### Changed
@@ -57,6 +56,19 @@ We have worked a lot to make Browsertime 3.0 the best version so far. Read the [
 * You can now choose what kind of response bodies you want to store in your HAR file . Instead of using ```--firefox.includeResponseBodies``` to include all bodies you can now use ```--firefox.includeResponseBodies``` [none,all,html] [#518](https://github.com/sitespeedio/browsertime/pull/518).
 * We cleaned up how you collect trace logs from Chrome. If you want the devtools.timeline log (and CPU spent metrics), just use ```--chrome.timeline```. If you want to configure trace categories yourself, use ```--chrome.traceCategories```
 * File names are now based on 1 and not 0 so the first file from the first iteration is named something with -1. [#536](https://github.com/sitespeedio/browsertime/pull/536).
+
+## version 2.5.0 2018-04-07
+### Fixed
+* We rollbacked the HAR exporter to the one that works in FF 54 and will wait on FF 61 until we update. That means that the 
+2.x branch and releases will stay locked to FF54 in the Docker file while we are working in Browsertime 3.0. The current way of 
+using the new HAR exporter adds about 1 second overhead on our test pages on dasgboard.sitespeed.io.
+
+* Upgraded Chrome-HAR with fixes for Chrome 66 and when network error happans.
+
+## version 2.4.1 2018-04-05
+### Fixed
+* User Timing measurements was handled incorrect so they was never sent correctly to Graphite. Thanks [@knaos](https://github.com/knaos) for reporting and finding the issue.
+* Firefox 60 vs 61 has changed what is returned by the HAR export trigger. We now handles both.
 
 ## version 2.4.0 2018-03-20
 ### Fixed 
