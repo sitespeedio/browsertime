@@ -9,37 +9,22 @@ We have worked a lot to make Browsertime 3.0 the best version so far. Read the [
 ## Added
 
 * We updated the browsers in the Docker container to Chrome 66 and latest Firefox 61 beta.
-
 * You can now turn on the MOZ HTTP log for Firefox with ```--firefox.collectMozLog``` [#451](https://github.com/sitespeedio/browsertime/pull/451) see [https://developer.mozilla.org/en-US/docs/Mozilla/Debugging/HTTP_logging](https://developer.mozilla.org/en-US/docs/Mozilla/Debugging/HTTP_logging)
-
-* Upgraded to new Browsertime extension with support for web sockets see https://github.com/sitespeedio/browsertime-extension/issues/5
-
+* Upgraded to new Browsertime extension with [support for web sockets](https://github.com/sitespeedio/browsertime-extension/issues/5).
 * You can now choose niceness level for FFMPEG during a recording using ```--videoParams.nice```. With this you can finetune the prio for the FFMPEG process.
-
 * In the browsertime.json you now get errors in the errors array. This makes it possible for us to gracefully handle if one of the runs fails.
-
 * You can now gzip the HAR file by adding ```--gzipHar``` to your run.
-
-* Option to end test on 5s of inactivity [#574](https://github.com/sitespeedio/browsertime/pull/574). Do it by adding ```--pageCompleteCheckInactivity```
-
-* Updated [Throttle](https://github.com/sitespeedio/throttle) to 0.3
-
-* You can now add a resultURL to the video/screenshots in the HAR
-
+* Option to end test on 5s of inactivity [#574](https://github.com/sitespeedio/browsertime/pull/574). Do it by adding ```--pageCompleteCheckInactivity```.
+* Updated [Throttle](https://github.com/sitespeedio/throttle) to 0.3.
+* You can now add a resultURL to the video/screenshots in the HAR.
 * The netlog is now gzipped from Chrome.
-
 * You can now install your own extension: [#552](https://github.com/sitespeedio/browsertime/pull/552).
 
 ## Fixed
 
 * We now use the latest and greatest Visual Metrics [#542](https://github.com/sitespeedio/browsertime/pull/542) and always get the viewport, hopefully fixing the problem with last visual change that sometimes happens for emulated mobile.
-
 * Updated Chrome-HAR that fixes problems in Chrome 66.
-
-* Firefox 61 changed what's returned from the HAR exporter compared to 60. We now handles both.
-
 * Upgraded Sharp to 0.20.1 so when you install a request will be made to  https://github.com/lovell/sharp-libvips/releases to download a pre made binary
-
 * New version of the trace parser (for CPU metrics) with updated feature list.
 * Move video out of pre/post scripts. When we first started with the video we used the pre/post structure. That was ok to move fast but one of the negatives is that stopping the video happen after we collected all metrics. We now stop the video exactly when the the page is finished loading [#448](https://github.com/sitespeedio/browsertime/pull/448).
 * In the browsretime.json mdev was never formatted, now we use 4 decimals (make the JSON more readable) [#453](https://github.com/sitespeedio/browsertime/pull/453).
@@ -52,13 +37,9 @@ We have worked a lot to make Browsertime 3.0 the best version so far. Read the [
 ### Changed
 
 * Store the Chromedriver log in the result directory (before it was stored where you run Browsertime) [#452](https://github.com/sitespeedio/browsertime/pull/452).
-
 * Metrics like first paint, resource timings and paint timings was reported with 8 decimals in worst cases. Reporting in full ms is ok [#455](https://github.com/sitespeedio/browsertime/pull/455).
-
 * The video now ends on Last Visual Change + 1 s (before it could go on as long as the video was recorded).
-
-* All Chrome trace files are now gzipped [#517](https://github.com/sitespeedio/browsertime/pull/517
-
+* All Chrome trace files are now gzipped [#517](https://github.com/sitespeedio/browsertime/pull/517)
 * Firefox preferences now uses mostly the same settings as Mozilla do in their performance tests [#524](https://github.com/sitespeedio/browsertime/pull/524).
 
 ### BREAKING CHANGE
@@ -73,10 +54,9 @@ We have worked a lot to make Browsertime 3.0 the best version so far. Read the [
 * We now use pageLoadStrategy "none". That means if you run your own pageCompleteCheck you can now end your test whenever you want (before onLoad if you want) [#501](https://github.com/sitespeedio/browsertime/pull/501).
 * We changed how we change between orange to white when we record a video. Depending on your machine, Selenium/WebDriver introduced latency the old way we did the switch [#503](https://github.com/sitespeedio/browsertime/pull/503).
 * We removed collecting Resource Timing data as default [#505](https://github.com/sitespeedio/browsertime/pull/505). If you still need the metrics, you can still run the script: [https://github.com/sitespeedio/browsertime/blob/2.x/browserscripts/timings/resourceTimings.js](https://github.com/sitespeedio/browsertime/blob/2.x/browserscripts/timings/resourceTimings.js).
-* You can now choose what kind of response bodies you want to store in your HAR file . Instead of using --firefox.includeResponseBodies to include all bodies you can now use --firefox.includeResponseBodies [none,all,html][#518](https://github.com/sitespeedio/browsertime/pull/518).
+* You can now choose what kind of response bodies you want to store in your HAR file . Instead of using ```--firefox.includeResponseBodies``` to include all bodies you can now use ```--firefox.includeResponseBodies``` [none,all,html] [#518](https://github.com/sitespeedio/browsertime/pull/518).
 * We cleaned up how you collect trace logs from Chrome. If you want the devtools.timeline log (and CPU spent metrics), just use ```--chrome.timeline```. If you want to configure trace categories yourself, use ```--chrome.traceCategories```
 * File names are now based on 1 and not 0 so the first file from the first iteration is named something with -1. [#536](https://github.com/sitespeedio/browsertime/pull/536).
-
 
 ## version 2.4.0 2018-03-20
 ### Fixed 
