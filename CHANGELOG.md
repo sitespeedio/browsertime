@@ -3,8 +3,10 @@
 ## 3.0.0
 We have worked a lot to make Browsertime 3.0 the best version so far. Read the [blog post](https://www.sitespeed.io/browsertime-3.0/) about the 3.0 release. And please read the [breaking changes](#breaking-change) before you update!
 
-## Internal changes
+## Internal changes/developers
 * We have removed the use of Bluebird Promises and now uses async/await and native Promises.
+* In some cases we leaked Bluebird promises, this is changed to native promises.
+* Running the engine took a promise that eventually became the scripts. Now you need to run with the scripts directly (no promises) to simplify the flow.
 
 ## Added
 
