@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 3.0.1 - 2018-05-12
+### Fixed
+* Removed chrome.loadTimes from RUMSpeedIndex to get rid of Chrome warnings.
+
 ## 3.0.0
 We have worked a lot to make Browsertime 3.0 the best version so far. Read the [blog post](https://www.sitespeed.io/browsertime-3.0/) about the 3.0 release. And please read the [breaking changes](#breaking-change) before you update!
 
