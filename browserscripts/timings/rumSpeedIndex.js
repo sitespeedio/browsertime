@@ -2,10 +2,10 @@
   /******************************************************************************
   Copyright (c) 2014, Google Inc.
   All rights reserved.
-
+  
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are met:
-
+  
       * Redistributions of source code must retain the above copyright notice,
         this list of conditions and the following disclaimer.
       * Redistributions in binary form must reproduce the above copyright notice,
@@ -14,7 +14,7 @@
       * Neither the name of the <ORGANIZATION> nor the names of its contributors
       may be used to endorse or promote products derived from this software
       without specific prior written permission.
-
+  
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -26,7 +26,7 @@
   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   ******************************************************************************/
-
+  
   /******************************************************************************
   *******************************************************************************
     Calculates the Speed Index for a page by:
@@ -37,7 +37,7 @@
     - Calculates the likely time that the background painted
     - Runs the various paint rectangles through the SpeedIndex calculation:
       https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/metrics/speed-index
-
+  
     TODO:
     - Improve the start render estimate
     - Handle overlapping rects (though maybe counting the area as multiple paints
@@ -47,11 +47,11 @@
     - Better error handling for browsers that don't support resource timing
   *******************************************************************************
   ******************************************************************************/
-
+  
   var RUMSpeedIndex = function(win) {
     win = win || window;
     var doc = win.document;
-
+      
     /****************************************************************************
       Support Routines
     ****************************************************************************/
@@ -73,7 +73,7 @@
       }
       return intersect;
     };
-
+  
     // Check a given element to see if it is visible
     var CheckElement = function(el, url) {
       if (url) {
@@ -85,7 +85,7 @@
         }
       }
     };
-
+  
     // Get the visible rectangles for elements that we care about
     var GetRects = function() {
       // Walk all of the elements in the DOM (try to only do this once)
@@ -94,7 +94,7 @@
       for (var i = 0; i < elements.length; i++) {
         var el = elements[i];
         var style = win.getComputedStyle(el);
-
+  
         // check for Images
         if (el.tagName == 'IMG') {
           CheckElement(el, el.src);
@@ -123,7 +123,7 @@
         }
       }
     };
-
+  
     // Get the time at which each external resource loaded
     var GetRectTimings = function() {
       var timings = {};
@@ -135,22 +135,24 @@
           rects[j].tm = timings[rects[j].url] !== undefined ? timings[rects[j].url] : 0;
       }
     };
-
+  
     // Get the first paint time.
     var GetFirstPaint = function() {
-      // If the browser supports a first paint event, just use what the browser reports
-      if ('msFirstPaint' in win.performance.timing)
-        firstPaint = win.performance.timing.msFirstPaint - navStart;
-      if ('chrome' in win && 'loadTimes' in win.chrome) {
-        var chromeTimes = win.chrome.loadTimes();
-        if ('firstPaintTime' in chromeTimes && chromeTimes.firstPaintTime > 0) {
-          var startTime = chromeTimes.startLoadTime;
-          if ('requestTime' in chromeTimes)
-            startTime = chromeTimes.requestTime;
-          if (chromeTimes.firstPaintTime >= startTime)
-            firstPaint = (chromeTimes.firstPaintTime - startTime) * 1000.0;
+      // Try the standardized paint timing api
+      try {
+        var entries = performance.getEntriesByType('paint');
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i]['name'] == 'first-paint') {
+            navStart = performance.getEntriesByType("navigation")[0].startTime;
+            firstPaint = entries[i].startTime - navStart;
+            break;
+          }
         }
+      } catch(e) {
       }
+      // If the browser supports a first paint event, just use what the browser reports
+      if (firstPaint === undefined && 'msFirstPaint' in win.performance.timing)
+        firstPaint = win.performance.timing.msFirstPaint - navStart;
       // For browsers that don't support first-paint or where we get insane values,
       // use the time of the last non-async script or css from the head.
       if (firstPaint === undefined || firstPaint < 0 || firstPaint > 120000) {
@@ -180,7 +182,7 @@
       }
       firstPaint = Math.max(firstPaint, 0);
     };
-
+  
     // Sort and group all of the paint rects by time and use them to
     // calculate the visual progress
     var CalculateVisualProgress = function() {
@@ -221,7 +223,7 @@
         }
       }
     };
-
+  
     // Given the visual progress information, Calculate the speed index.
     var CalculateSpeedIndex = function() {
       if (progress.length) {
@@ -239,7 +241,7 @@
         SpeedIndex = firstPaint;
       }
     };
-
+  
     /****************************************************************************
       Main flow
     ****************************************************************************/
@@ -269,7 +271,8 @@
     dbg += 'Speed Index: ' + SpeedIndex + "\n";
     console.log(dbg);
     */
-    return Number(SpeedIndex.toFixed(0));
+   return Number(SpeedIndex.toFixed(0));
   };
+  
   return RUMSpeedIndex()|| -1;
-})();
+  })();
