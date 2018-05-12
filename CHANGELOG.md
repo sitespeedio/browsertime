@@ -1,4 +1,7 @@
 # Browsertime changelog
+## UNRELEASED
+### Fixed
+* Updated Docker dependencies so downloaded files are remove -> smaller Docker file. Thanks [@sodabrew](https://github.com/sodabrew) for the PRs.
 
 ## 3.0.1 - 2018-05-12
 ### Fixed
