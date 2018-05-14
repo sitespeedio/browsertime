@@ -96,7 +96,6 @@ function runWebPageReplay() {
           trap shutdown SIGTERM SIGINT
           wait $PID
           kill -s SIGTERM $replay_pid
-          wait $replay_pid
 
         else
           echo "Replay server didn't start correctly" >&2
