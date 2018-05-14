@@ -44,7 +44,7 @@ function setupADB(){
     sudo adb start-server
     sudo adb devices
 
-    if [ $REPLAY ] ; then
+    if [ -n "$REPLAY" ] ; then
       sudo adb reverse tcp:$WPR_HTTP_PORT tcp:$WPR_HTTP_PORT
       sudo adb reverse tcp:$WPR_HTTPS_PORT tcp:$WPR_HTTPS_PORT
     fi
