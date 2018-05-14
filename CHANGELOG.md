@@ -1,7 +1,9 @@
 # Browsertime changelog
-## UNRELEASED
+## 3.0.2 - 2018-05-14
 ### Fixed
 * Updated Docker dependencies so downloaded files are remove -> smaller Docker file. Thanks [@sodabrew](https://github.com/sodabrew) for the PRs.
+* Another go at making WebPageReplay work with ADB (small fix)
+* Browsertime + WebPageReplay returned an error code instead of 0 after a succesful run (Docker container only).
 
 ## 3.0.1 - 2018-05-12
 ### Fixed
