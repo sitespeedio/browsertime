@@ -1,4 +1,10 @@
 # Browsertime changelog
+
+## UNRELEASED
+### Fixed
+* Updated WebPageReplay with fix for "Improve replay determinism". Build 2018-05-14.
+
+
 ## 3.0.2 - 2018-05-14
 ### Fixed
 * Updated Docker dependencies so downloaded files are remove -> smaller Docker file. Thanks [@sodabrew](https://github.com/sodabrew) for the PRs.
