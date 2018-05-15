@@ -3,7 +3,7 @@
 ## UNRELEASED
 ### Fixed
 * Updated WebPageReplay with fix for "Improve replay determinism". Build 2018-05-14.
-
+* Use -e to set which port to use for WebPageReplay: WPR_HTTP_PORT WPR_HTTPS_PORT
 
 ## 3.0.2 - 2018-05-14
 ### Fixed
