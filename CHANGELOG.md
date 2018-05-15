@@ -1,9 +1,10 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 3.0.3 - 2018-05-15
 ### Fixed
 * Updated WebPageReplay with fix for "Improve replay determinism". Build 2018-05-14.
-* Use -e to set which port to use for WebPageReplay: WPR_HTTP_PORT WPR_HTTPS_PORT
+* Use -e to set which port to use for WebPageReplay in Docker. Use -e WPR_HTTP_PORT=X and -e WPR_HTTPS_PORT=Y
+* Fixed broken license file for WPR.
 
 ## 3.0.2 - 2018-05-14
 ### Fixed
