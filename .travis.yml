@@ -14,7 +14,9 @@ addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
+    - sourceline: 'ppa:mc3man/trusty-media'
     packages:
+    - ffmpeg
     - google-chrome-stable
     - ipython
     - ipython-notebook
@@ -39,11 +41,10 @@ before_install:
 - python -m pip install --user pyssim
 - python -m pip show Pillow
 - python -m pip show pyssim
-- mkdir /tmp/ffmpeg
-- wget http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz
-  -O /tmp/ffmpeg/download-ffmpeg.tar.xz
-- tar -xf /tmp/ffmpeg/download-ffmpeg.tar.xz -C /tmp/ffmpeg/ --strip=1
-- export PATH=$PATH:/tmp/ffmpeg
+ sudo add-apt-repository ppa:mc3man/trusty-media
++  - sudo apt-get update
++  - sudo apt-get install ffmpeg gstreamer0.10-ffmpeg
+
 - ffmpeg -version
 - /usr/bin/python --version
 - python --version
