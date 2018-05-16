@@ -14,7 +14,6 @@ addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
-    - sourceline: 'ppa:mc3man/trusty-media'
     packages:
     - ffmpeg
     - google-chrome-stable
