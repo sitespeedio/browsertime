@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+## 3.0.4 - 2018-05-16
+### Fixed
+* Updated Firefox 61b3 to Firefox 61b5
+* Bugfix: Wait longer before Firefox has finished navigated see https://github.com/sitespeedio/sitespeed.io/issues/2040 fixed with [#584](https://github.com/sitespeedio/browsertime/pull/584).
+
 ## 3.0.3 - 2018-05-15
 ### Fixed
 * Updated WebPageReplay with fix for "Improve replay determinism". Build 2018-05-14.
