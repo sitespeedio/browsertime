@@ -32,6 +32,7 @@ addons:
     - python-pip
     - python-sympy
     - python-nose
+    - ttf-ubuntu-font-family
     - xz-utils
   firefox: 'latest-beta'
 before_install:
