@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* Increased wait time for Chrome to navigate from 1s -> 2s.
+
 ## 3.0.4 - 2018-05-16
 ### Fixed
 * Updated Firefox 61b3 to Firefox 61b5
