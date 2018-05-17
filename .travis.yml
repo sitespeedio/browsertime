@@ -14,7 +14,9 @@ addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
+    - sourceline: "ppa:mc3man/trusty-media"
     packages:
+    - ffmpeg
     - google-chrome-stable
     - ipython
     - ipython-notebook
@@ -31,6 +33,7 @@ addons:
     - python-pip
     - python-sympy
     - python-nose
+    - ttf-ubuntu-font-family
     - xz-utils
   firefox: 'latest-beta'
 before_install:
@@ -39,18 +42,13 @@ before_install:
 - python -m pip install --user pyssim
 - python -m pip show Pillow
 - python -m pip show pyssim
-- mkdir /tmp/ffmpeg
-- wget http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz
-  -O /tmp/ffmpeg/download-ffmpeg.tar.xz
-- tar -xf /tmp/ffmpeg/download-ffmpeg.tar.xz -C /tmp/ffmpeg/ --strip=1
-- export PATH=$PATH:/tmp/ffmpeg
 - ffmpeg -version
 - /usr/bin/python --version
 - python --version
 - which python
 - firefox --version 2>/dev/null
 - google-chrome --product-version
-
+- fc-list
 before_script:
 - export DISPLAY=:99.0
 - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile
@@ -64,7 +62,7 @@ script:
 - node ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value
   https://www.sitespeed.io/documentation/
 - node ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --video --screenshot
-  --visualMetrics -n 1 --chrome.timeline https://www.sitespeed.io/
+  --visualMetrics -n 1 --chrome.timeline --videoParams.fontPath /usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-R.ttf https://www.sitespeed.io/
 notifications:
   slack:
     secure: V71EkIzwOf/fZnGTGIKAIFlDyLUit4tK97VDgdV9vZ7CbvOXI1ir3lwRZ57lNqiYD8BUaX+/wKDG+LyrBMgQ4JAGgQx0mECvmOKx1+10Yg9FAkUsMTWe7GOxcVMwhpS2OfHnXwMb0FjcuVl8ovowIZqCWOLeEAYVaTWHndDm2cA=
