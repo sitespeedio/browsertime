@@ -1,4 +1,9 @@
 # Browsertime changelog
+## 3.0.5 - 2018-05-17
+### Fixed
+* We upgraded our own build of the HAR Export trigger to use the official one [#589](https://github.com/sitespeedio/browsertime/pull/589).
+* More solid solution to wait in navigation to start [#590](https://github.com/sitespeedio/browsertime/pull/590).
+* Better logs to understand why convert the video sometimes fails/halts.
 
 ## 3.0.4 - 2018-05-16
 ### Fixed
