@@ -1,4 +1,9 @@
 # Browsertime changelog
+
+## 3.0.7 - 2018-05-18
+### Fixed
+* The original problem of https://github.com/sitespeedio/sitespeed.io/issues/2040 happens if we set an output dir and the mp4 file already exits when we tries to convert it. This fix removes the file if it exists before converting [#594](https://github.com/sitespeedio/browsertime/pull/594).
+
 ## 3.0.6 - 2018-05-18
 ### Fixed
 * Use the stdin ignore flag when converting video files using FFMPEG, hopefully fixing freezing converts reported in https://github.com/sitespeedio/sitespeed.io/issues/2040 [#592](https://github.com/sitespeedio/browsertime/pull/592).
