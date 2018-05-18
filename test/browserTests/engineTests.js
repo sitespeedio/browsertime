@@ -93,8 +93,7 @@ describe('Engine', function() {
         Promise.resolve(engine.stop()).timeout(
           10000,
           'Waited for ' + browser + ' to quit for too long'
-        )
-      );
+        ));
     });
 
     describe('#run async - ' + browser, function() {
@@ -172,8 +171,7 @@ describe('Engine', function() {
         Promise.resolve(engine.stop()).timeout(
           10000,
           'Waited for ' + browser + ' to quit for too long'
-        )
-      );
+        ));
     });
 
     describe('#pre/post scripts - ' + browser, function() {
@@ -209,8 +207,7 @@ describe('Engine', function() {
         Promise.resolve(engine.stop()).timeout(
           10000,
           'Waited for ' + browser + ' to quit for too long'
-        )
-      );
+        ));
     });
   });
 });
