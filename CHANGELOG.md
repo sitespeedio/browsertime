@@ -1,4 +1,8 @@
 # Browsertime changelog
+## UNRELEASED
+### Fixed
+* Use the stdin ignore flag when converting video files using FFMPEG, hopefully fixing freezing converts reported in https://github.com/sitespeedio/sitespeed.io/issues/2040 [#592](https://github.com/sitespeedio/browsertime/pull/592).
+
 ## 3.0.5 - 2018-05-17
 ### Fixed
 * We upgraded our own build of the HAR Export trigger to use the official one [#589](https://github.com/sitespeedio/browsertime/pull/589).
