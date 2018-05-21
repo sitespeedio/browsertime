@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 3.0.8 - 2018-05-21
+### Fixed
+* Using --android flag to disable setting the window size didn't work. You need to do that to run on real devices on SauceLabs. We don't recommend to do it, but we know people do that so we want to keep it working.
+
 ## 3.0.7 - 2018-05-18
 ### Fixed
 * The original problem of https://github.com/sitespeedio/sitespeed.io/issues/2040 happens if we set an output dir and the mp4 file already exits when we tries to convert it. This fix removes the file if it exists before converting [#594](https://github.com/sitespeedio/browsertime/pull/594).
