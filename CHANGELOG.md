@@ -1,5 +1,22 @@
 # Browsertime changelog
 
+## 3.0.11 - 2018-05-22
+### Fixes
+* In Docker with  Firefox we now don't choose the netmonitor devtools tab, hopefully making less CPU impact when we collect the HAR [#598](https://github.com/sitespeedio/browsertime/pull/598).
+
+## 3.0.10 - 2018-05-22
+### Fixes
+* npm ping issues making our packages not go out as they should, lets try it again. The problem is the npm registry https://github.com/npm/registry/issues/327
+
+
+## 3.0.9 - 2018-05-22
+### Fixes
+* Another fix for making it possible to run on Android phones on SauceLabs: You can now use the Browsertime extension, for example --cacheClearRaw.
+
+## 3.0.8 - 2018-05-21
+### Fixed
+* Using --android flag to disable setting the window size didn't work. You need to do that to run on real devices on SauceLabs. We don't recommend to do it, but we know people do that so we want to keep it working.
+
 ## 3.0.7 - 2018-05-18
 ### Fixed
 * The original problem of https://github.com/sitespeedio/sitespeed.io/issues/2040 happens if we set an output dir and the mp4 file already exits when we tries to convert it. This fix removes the file if it exists before converting [#594](https://github.com/sitespeedio/browsertime/pull/594).
