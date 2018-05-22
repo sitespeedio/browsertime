@@ -1,8 +1,8 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 3.0.11 - 2018-05-22
 ### Fixes
-* In Docker and Firefox we now don't choose the netmonitor devtools tab, hopefully making less CPU impact when we collect the HAR [#598](https://github.com/sitespeedio/browsertime/pull/598).
+* In Docker with  Firefox we now don't choose the netmonitor devtools tab, hopefully making less CPU impact when we collect the HAR [#598](https://github.com/sitespeedio/browsertime/pull/598).
 
 ## 3.0.10 - 2018-05-22
 ### Fixes
