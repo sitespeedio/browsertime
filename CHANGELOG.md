@@ -1,8 +1,12 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixes
+* In Docker and Firefox we now don't choose the netmonitor devtools tab, hopefully making less CPU impact when we collect the HAR [#598](https://github.com/sitespeedio/browsertime/pull/598).
+
 ## 3.0.10 - 2018-05-22
 ### Fixes
-* npm ping issues making our packages not go out as they should, lets try it again.
+* npm ping issues making our packages not go out as they should, lets try it again. The problem is the npm registry https://github.com/npm/registry/issues/327
 
 
 ## 3.0.9 - 2018-05-22
