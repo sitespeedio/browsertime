@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixes
+* The current official version of the HAR Export Trigger doesn't work on 60 (you need 61). Let us not run the plugin on 60 [#603](https://github.com/sitespeedio/browsertime/pull/603).
+
 ## 3.0.12 - 2018-05-23
 ### Fixes
 * Rollbacked the Firefox HAR export since the new version breaks support for FF 60 (I missed that) and the new HAR misses content fields.
