@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 3.0.12 - 2018-05-23
+### Fixes
+* Rollbacked the Firefox HAR export since the new version breaks support for FF 60 (I missed that) and the new HAR misses content fields.
+
 ## 3.0.11 - 2018-05-22
 ### Fixes
 * In Docker with  Firefox we now don't choose the netmonitor devtools tab, hopefully making less CPU impact when we collect the HAR [#598](https://github.com/sitespeedio/browsertime/pull/598).
