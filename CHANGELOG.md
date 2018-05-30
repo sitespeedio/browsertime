@@ -1,4 +1,9 @@
 # Browsertime changelog
+
+## 3.0.16 - 2018-05-30
+### Fixes
+* Fixing setting ifb0 twice in Throttle.
+
 ## 3.0.15 - 2018-05-30
 ### Fixes
 * Another go trying to fix Throttle in Docker for multiple URLs.
