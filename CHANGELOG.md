@@ -3,6 +3,10 @@
 ### Fixes
 * Upgraded Throttle to 0.4.0 to fix https://github.com/sitespeedio/sitespeed.io/issues/2063
 
+## UNRELEASED
+### Fixes
+* Upgrade to chrome-har 0.4.0, with a fix for including HTTP/2 assets in HARs.
+
 ## 3.0.13 - 2018-05-23
 ### Fixes
 * The current official version of the HAR Export Trigger doesn't work on 60 (you need 61). Let us not run the plugin on 60 [#603](https://github.com/sitespeedio/browsertime/pull/603).
