@@ -2,6 +2,7 @@
 ## UNRELEASED
 ### Fixes
 * Upgraded Throttle to 0.4.0 to fix https://github.com/sitespeedio/sitespeed.io/issues/2063
+* Upgraded to Chrome-HAR to fix missing push information https://github.com/sitespeedio/browsertime/pull/605
 
 ## UNRELEASED
 ### Fixes
