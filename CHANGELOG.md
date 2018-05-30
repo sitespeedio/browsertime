@@ -1,4 +1,8 @@
 # Browsertime changelog
+## 3.0.15 - 2018-05-30
+### Fixes
+* Another go trying to fix Throttle in Docker for multiple URLs.
+
 ## 3.0.14 - 2018-05-30
 ### Fixes
 * Upgraded Throttle to 0.4.0 to hopefully fix https://github.com/sitespeedio/sitespeed.io/issues/2063
