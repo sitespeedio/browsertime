@@ -1,11 +1,7 @@
 # Browsertime changelog
-## UNRELEASED
+## 3.0.14 - 2018-05-30
 ### Fixes
-* Upgraded Throttle to 0.4.0 to fix https://github.com/sitespeedio/sitespeed.io/issues/2063
-* Upgraded to Chrome-HAR to fix missing push information https://github.com/sitespeedio/browsertime/pull/605
-
-## UNRELEASED
-### Fixes
+* Upgraded Throttle to 0.4.0 to hopefully fix https://github.com/sitespeedio/sitespeed.io/issues/2063
 * Upgrade to chrome-har 0.4.0, with a fix for including HTTP/2 assets in HARs.
 
 ## 3.0.13 - 2018-05-23
