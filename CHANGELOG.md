@@ -1,4 +1,7 @@
 # Browsertime changelog
+## UNRELEASED
+### Fixes
+* Upgraded Throttle to 0.4.0 to fix https://github.com/sitespeedio/sitespeed.io/issues/2063
 
 ## 3.0.13 - 2018-05-23
 ### Fixes
