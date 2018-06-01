@@ -1,4 +1,9 @@
 # Browsertime changelog
+
+## 3.1.1 - 2018-06-01
+### Fixed
+* Updated Chrome-HAR to 0.4.1 to be extra careful when we check for pushed responses.
+
 ## 3.1.0 - 2018-06-01
 ### Added
 * Upgraded to Chromedriver 2.39
