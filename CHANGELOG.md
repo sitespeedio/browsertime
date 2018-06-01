@@ -1,4 +1,8 @@
 # Browsertime changelog
+## UNRELEASED
+### Added
+* Upgraded to Chromedriver 2.39
+* Upgraded to Chrome 67
 
 ## 3.0.16 - 2018-05-30
 ### Fixes

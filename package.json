@@ -5,7 +5,7 @@
   "dependencies": {
     "@sitespeed.io/throttle": "0.4.2",
     "adbkit": "2.11.0",
-    "alto-saxophone": "2.38.0",
+    "alto-saxophone": "2.39.0",
     "chrome-har": "0.4.0",
     "chrome-trace": "0.1.0",
     "execa": "0.10.0",
