@@ -1,8 +1,11 @@
 # Browsertime changelog
-## UNRELEASED
+## 3.1.0 - 2018-06-01
 ### Added
 * Upgraded to Chromedriver 2.39
 * Upgraded to Chrome 67
+
+### Fixed
+*  We reverted the change of using pageLoadStrategy *none* as default (we now use normal as we done since day 1). This means it is easier for users that uses pre/post script = you will get control when the page has finished loading instead of when navigation starts. You can still use the none option by adding ```--pageLoadStrategy none``` to your run (that is useful if you want to end your tests earlier).
 
 ## 3.0.16 - 2018-05-30
 ### Fixes
