@@ -41,6 +41,7 @@ function chromeSetup() {
 function setupADB(){
   # Start adb server and list connected devices
   if [ -n "$START_ADB_SERVER" ] ; then
+    sudo adb version
     sudo adb start-server
     sudo adb devices
 
@@ -56,7 +57,7 @@ function runWebPageReplay() {
 
   function shutdown {
     kill -2 $replay_pid
-    wait $replay_pid 
+    wait $replay_pid
     kill -s SIGTERM ${PID}
     wait $PID
   }
