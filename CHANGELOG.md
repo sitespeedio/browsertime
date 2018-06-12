@@ -1,4 +1,9 @@
 # Browsertime changelog
+## UNRELEASED
+### Fixed
+* Upgraded Chromedriver to 2.40.0.
+* Upgraded ADB in the Docker container work with Chromedriver > 2.39.
+* Upgraded Firefox 61 to beta 13 (form beta 5) in Docker. 
 
 ## 3.1.1 - 2018-06-01
 ### Fixed
