@@ -42,7 +42,7 @@ function setupADB(){
   # Start adb server and list connected devices
   if [ -n "$START_ADB_SERVER" ] ; then
     export ANDROID_ADB_SERVER_PORT=${ADB_PORT:-5037}
-    -s emulator-5555
+    
     sudo adb version
     sudo adb start-server
     sudo adb devices
