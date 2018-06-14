@@ -1,7 +1,9 @@
 # Browsertime changelog
 ## UNRELEASED
-### Added
-* You can now set the device serial if you run multiple devices to reverse the traffic when you run Android devices from Ubuntu. Set -e DEVICE_SERIAL=PHONE_ID
+### Fixed
+* You can now set the device serial if you run multiple devices to reverse the traffic when you run Android devices from Ubuntu. Set -e DEVICE_SERIAL=PHONE_ID. If you run this before, the reverse of tcp failed.
+* We now clear the console log before testing (in Chrome) [#611](https://github.com/sitespeedio/browsertime/pull/611).
+* We fixed so that you can collect the netlog in Chrome even though you turn off getting the HAR [#612](https://github.com/sitespeedio/browsertime/pull/612).
 
 ##  3.1.2 - 2018-06-12
 ### Fixed
