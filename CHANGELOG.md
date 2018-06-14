@@ -1,4 +1,8 @@
 # Browsertime changelog
+## UNRELEASED
+### Added
+* You can now set the device serial if you run multiple devices to reverse the traffic when you run Android devices from Ubuntu. Set -e DEVICE_SERIAL=PHONE_ID
+
 ##  3.1.2 - 2018-06-12
 ### Fixed
 * Upgraded Chromedriver to 2.40.0.
