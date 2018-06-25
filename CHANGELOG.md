@@ -1,9 +1,9 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 3.1.4 - 2018-06-25
 ### Fixed
 * Upgraded to Geckodriver 0.21.0 https://github.com/mozilla/geckodriver/releases/tag/v0.21.0
-* The Docker container now uses Firefox 61 stable
+* The Docker container uses Firefox 61 stable.
 
 ## 3.1.3 - 2018-06-14
 ### Fixed
