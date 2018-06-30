@@ -1,4 +1,10 @@
 # Browsertime changelog
+## 3.2.0 - 2018-06-30
+### Fixed
+* The Browsertime-extension was broken in Firefox, probably since there was a change in extension handling in FF 55 and effecting us in FF 61.
+
+### Added
+* You can now easy add a cookie. At the moment we only support one cookie but let us fix that after the summer holiday ```--cookie name=value``` 
 
 ## 3.1.4 - 2018-06-25
 ### Fixed
