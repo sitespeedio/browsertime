@@ -1,4 +1,8 @@
 # Browsertime changelog
+## UNRELEASED
+### Fixed
+* Handle . (dot) in userTiming names [#618](https://github.com/sitespeedio/browsertime/pull/618)
+
 ## 3.2.0 - 2018-06-30
 ### Fixed
 * The Browsertime-extension was broken in Firefox, probably since there was a change in extension handling in FF 55 and effecting us in FF 61.
