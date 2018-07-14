@@ -35,7 +35,7 @@ addons:
     - python-nose
     - ttf-ubuntu-font-family
     - xz-utils
-  firefox: 'latest-beta'
+  firefox: 'latest'
 before_install:
 - python -m pip --version
 - python -m pip install --user Pillow
