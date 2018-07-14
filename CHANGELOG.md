@@ -2,6 +2,8 @@
 ## UNRELEASED
 ### Fixed
 * Handle . (dot) in userTiming names [#618](https://github.com/sitespeedio/browsertime/pull/618)
+* You can now add multiple cookies by adding --cookie multiple times [#619](https://github.com/sitespeedio/browsertime/pull/619)
+* Updated the [Browsertime extension](https://github.com/sitespeedio/browsertime-extension) to 0.13.0. The new version takes care of the difference on how Firefox and Chrome implements the API. In the old version, clearing the cache with --cacheClearRaw throwed an error. That is fixed now. 
 
 ## 3.2.0 - 2018-06-30
 ### Fixed
