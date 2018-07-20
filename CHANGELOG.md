@@ -1,4 +1,9 @@
 # Browsertime changelog
+
+## 3.2.2 - 2018-07-20
+### Fixed
+* If you configured to not keep the video, there was a miss-match when removing the video (we also tried to remove the screenshot dir), so you got an error in the log. That is fixed by [#621](https://github.com/sitespeedio/browsertime/pull/621).
+
 ## 3.2.1 - 2018-07-14
 ### Fixed
 * Handle . (dot) in userTiming names [#618](https://github.com/sitespeedio/browsertime/pull/618).
