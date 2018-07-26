@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Added
+* Updated to Chrome 68 in the Docker container.
+
 ## 3.2.3 - 2018-07-20
 ### Fixed
 * Increase timeout to wait for page navigation. Before it was 5s, now it is 50s [#623](https://github.com/sitespeedio/browsertime/pull/623).
