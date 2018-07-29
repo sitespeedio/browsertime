@@ -1,8 +1,11 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 3.3.0 - 2018-07-29
 ### Added
 * Updated to Chrome 68 in the Docker container.
+
+### Fixed
+* Added extra check for not use full time out if you navigate to the same URL [#625](https://github.com/sitespeedio/browsertime/pull/625).
 
 ## 3.2.3 - 2018-07-20
 ### Fixed
