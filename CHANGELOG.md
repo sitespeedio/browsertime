@@ -1,4 +1,7 @@
 # Browsertime changelog
+## UNRELEASED
+### Added
+* Browsertime now logs under the browsertime name and we unified the log format to be the same as sitespeed.io.
 
 ## 3.3.0 - 2018-07-29
 ### Added
