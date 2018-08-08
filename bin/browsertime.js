@@ -11,7 +11,7 @@ const isEmpty = require('lodash.isempty');
 const pick = require('lodash.pick');
 const fs = require('fs');
 const path = require('path');
-const log = require('intel');
+const log = require('intel').getLogger('browsertime');
 
 async function parseUserScripts(scripts) {
   if (!Array.isArray(scripts)) scripts = [scripts];
