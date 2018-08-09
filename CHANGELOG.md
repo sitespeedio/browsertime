@@ -1,4 +1,8 @@
 # Browsertime changelog
+## UNRELEASED
+### Added 
+* Upgraded to Chromedriver 2.41.0
+
 ## 3.3.1 - 2018-08-09
 ### Fixed
 * Tech: Browsertime now logs under the browsertime name and we unified the log format to be the same as sitespeed.io. Add --verbose to log by name (useful for running Browsertime in sitespeed.io) and log the pageComplete check JavaScript only in debug mode (instead of verbose).
