@@ -1,7 +1,7 @@
 # Browsertime changelog
 ## UNRELEASED
 ### Added
-* Browsertime now logs under the browsertime name and we unified the log format to be the same as sitespeed.io.
+* Browsertime now logs under the browsertime name and we unified the log format to be the same as sitespeed.io. Add --verbose to log by name (useful for running Browsertime in sitespeed.io) and log the pageComplete check JavaScript only in debug mode (instead of verbose).
 
 ## 3.3.0 - 2018-07-29
 ### Added
