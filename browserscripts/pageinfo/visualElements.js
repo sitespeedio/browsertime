@@ -27,26 +27,28 @@
         } else return areaByType[type] < area;
     }
 
-    // Inspired by
-    // https://gomakethings.com/how-to-test-if-an-element-is-in-the-viewport-with-vanilla-javascript/
-    // Only include elements that are fully within the viewport
-    function visibleInViewport(elem) {
-        const bounding = elem.getBoundingClientRect();
-        return (
-            bounding.height > 0 && // is visible
-            bounding.top >= 0 &&
-            bounding.left >= 0 &&
-            bounding.bottom <= document.documentElement.clientHeight &&
-            bounding.right <= document.documentElement.clientWidth
-        );
-    };
+    function isElementPartlyInViewportAndVisible (el) {
+        var rect = el.getBoundingClientRect();
+        return !(rect.bottom < 0 || rect.right < 0 || rect.left > window.innerWidth || rect.top > window.innerHeight || rect.height === 0)
+    }
 
-    function test(type, element) {
-        const rect = element.getBoundingClientRect();
-        const area = rect.width * rect.height;
+    function visibleArea(el) {
+        const rect = el.getBoundingClientRect();
+        const viewportWidth = document.documentElement.clientWidth;
+        const viewportHeight =  document.documentElement.clientHeight;
+
+        // TODO make this more readable
+        const width = rect.left < 0 ? rect.width + rect.left : (viewportWidth < rect.left + rect.width) ? viewportWidth  - rect.left : rect.width;
+        const height = rect.top < 0 ?  rect.height + rect.top : (viewportHeight < rect.top + rect.height) ? viewportHeight - rect.top : rect.height;
+
+        return width * height;
+      }
+
+    function keepLargestElementByType(type, element) {
+        const area = visibleArea(element);
         if (isLargest(type, area)) {
             const filename = element.src ? element.src.substring(element.src.lastIndexOf('/') + 1) : undefined;
-
+            const rect = element.getBoundingClientRect();
             elementByType[type] = {
                 name: type,
                 x: Math.round(rect.left),
@@ -68,8 +70,8 @@
             const selector = parts[1];
             const element = document.body.querySelector(selector);
             try {
-                 if (visibleInViewport(element)) {
-                     test(type, element);
+                 if (isElementPartlyInViewportAndVisible(element)) {
+                     keepLargestElementByType(type, element);
                  }
             } catch (e) {
                 throw new Error('Could not find matching element for selector:' + selector + ' using document.body.querySelector. Do that element exist on the page?');
@@ -78,16 +80,16 @@
     }
 
     let type = 'LargestImage';
-    imageTags.forEach(function (element) {    
-        if (visibleInViewport(element)) {
-            test(type, element);
+    imageTags.forEach(function (element) {   
+        if (isElementPartlyInViewportAndVisible(element)) {
+            keepLargestElementByType(type, element);
         }
     });
 
     type = 'Heading';
     h1Tags.forEach(function (element) {
-        if (visibleInViewport(element)) {
-            test(type, element);
+        if (isElementPartlyInViewportAndVisible(element)) {
+            keepLargestElementByType(type, element);
         }
     });
 
