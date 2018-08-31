@@ -642,7 +642,7 @@ def eliminate_duplicate_frames(directory):
                 baseline = files[0]
                 previous_frame = baseline
                 for i in xrange(1, count):
-                    if frames_match(baseline, files[i], 16, 0, crop, None):
+                    if frames_match(baseline, files[i], 10, 0, crop, None):
                         if previous_frame is baseline:
                             duplicates.append(previous_frame)
                         else:
