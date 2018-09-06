@@ -2,6 +2,7 @@
 ## UNRELEASED
 ### Added 
 * Upgraded to Chromedriver 2.41.0
+* Upgraded to Chrome 69 and Firefox 62 in the Docker container
 
 ## 3.3.1 - 2018-08-09
 ### Fixed

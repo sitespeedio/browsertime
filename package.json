@@ -3,7 +3,7 @@
   "version": "3.3.1",
   "bin": "./bin/browsertime.js",
   "dependencies": {
-    "@sitespeed.io/throttle": "0.4.2",
+    "@sitespeed.io/throttle": "0.4.3",
     "adbkit": "2.11.0",
     "alto-saxophone": "2.41.0",
     "chrome-har": "0.4.1",
