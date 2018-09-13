@@ -1,8 +1,11 @@
 # Browsertime changelog
-## UNRELEASED
+## 3.4.0 - 2018-09-13
 ### Added 
-* Upgraded to Chromedriver 2.41.0
-* Upgraded to Chrome 69 and Firefox 62 in the Docker container
+* Upgraded to Chromedriver 2.41.0.
+* Upgraded to Chrome 69 and Firefox 62 in the Docker container.
+
+### Fixed
+* There been several [reports on bugs](https://github.com/sitespeedio/sitespeed.io/issues/1949) when using a preScript to login and then measure a page. The problem has been how we find the first frame + a bug that didn't make the video with orange frames between different pages. Thats been fixed now in [#633](https://github.com/sitespeedio/browsertime/pull/633).
 
 ## 3.3.1 - 2018-08-09
 ### Fixed
