@@ -1,4 +1,9 @@
 # Browsertime changelog
+
+## 3.4.1 - 2018-09-13
+### Fixed
+* Tech: We unified how we change the background color from orange to white when we record the video (to be able to know when the navigation start) [PR 634](https://github.com/sitespeedio/browsertime/pull/634).
+
 ## 3.4.0 - 2018-09-13
 ### Added 
 * Upgraded to Chromedriver 2.41.0.
