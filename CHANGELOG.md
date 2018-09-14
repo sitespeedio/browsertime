@@ -1,4 +1,7 @@
 # Browsertime changelog
+## UNRELEASED
+### Fixed
+* In some cases Chrome returns an empty HAR and that made us throw an error. This make sure the HAR has a page before we use it [#630](https://github.com/sitespeedio/browsertime/pull/630).
 
 ## 3.4.1 - 2018-09-13
 ### Fixed
