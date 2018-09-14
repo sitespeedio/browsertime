@@ -5,6 +5,8 @@
 
 * We also added a new feature: If you run your own custom script you can now feed it with different input by using ```--scriptInput.*```. Say you have a script named myScript you can pass on data to it with ```--scriptInput.myScript 'super-secret-string' ```.
 
+* Upgraded to Chromedriver 2.42.0
+
 ### Fixed
 * In some cases Chrome returns an empty HAR and that made us throw an error. This make sure the HAR has a page before we use it [#630](https://github.com/sitespeedio/browsertime/pull/630).
 
