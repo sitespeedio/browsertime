@@ -1,9 +1,10 @@
 # Browsertime changelog
-## UNRELEASED
-### Added
-* We support timings for visual elements (```--visuaElements```). Browsertime picks up the largest image and the largest H1. You can also configure your own elements ```--scriptInput.visualElements```. First let give creds to the ones that deserves it: As far as we know [Sergey Chernyshev](https://twitter.com/sergeyche) was the first one that introduced the idea of measuring individual elements in his talk [Using Heat Maps to improve Web Performance Metrics](https://www.youtube.com/watch?v=t6l9U5bC8jA). A couple of years later this was implemented by the people behind [SpeedCurve](), that later on contributed back the implementation to WebPageTest (calling it "hero"-elements). [Patrick Meenan](https://twitter.com/patmeenan) (the creator of WebPageTest) moved on the implementation to [Visual Metrics](https://github.com/WPO-Foundation/visualmetrics) that Browsertime uses to pickup visual metrics from the video. 
+## 3.5.0 - 2018-09-15
 
-* We also added a new feature: If you run your own custom script you can now feed it with different input by using ```--scriptInput.*```. Say you have a script named myScript you can pass on data to it with ```--scriptInput.myScript 'super-secret-string' ```.
+### Added
+* We support timings for visual elements (by adding ```--visuaElements```). Browsertime picks up the largest image and the largest H1. You can also configure your own elements ```--scriptInput.visualElements```. First let give creds to the ones that deserves it: As far as we know [Sergey Chernyshev](https://twitter.com/sergeyche) was the first one that introduced the idea of measuring individual elements in his talk [Using Heat Maps to improve Web Performance Metrics](https://www.youtube.com/watch?v=t6l9U5bC8jA). A couple of years later this was implemented by the people behind [SpeedCurve](https://speedcurve.com/), that later on contributed back the implementation to WebPageTest (calling it "hero"-elements). [Patrick Meenan](https://twitter.com/patmeenan) (the creator of WebPageTest) moved on the implementation to [Visual Metrics](https://github.com/WPO-Foundation/visualmetrics) that Browsertime uses to pickup visual metrics from the video. We tuned the implementation a little and now it is ready to release.
+
+* We also added a new feature: If you run your own custom script you can now feed it with different input by using ```--scriptInput.*```. Say you have a script named myScript you can pass on data to it with ```--scriptInput.myScript 'super-secret-string' ```. More about this in the documentation the coming weeks.
 
 * Upgraded to Chromedriver 2.42.0
 
