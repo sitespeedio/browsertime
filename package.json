@@ -24,7 +24,7 @@
     "moment": "2.22.1",
     "selenium-webdriver": "3.6.0",
     "sharp": "0.20.2",
-    "soprano-saxophone": "0.22.0",
+    "soprano-saxophone": "0.21.0",
     "valid-url": "1.0.9",
     "xvfb": "0.2.3",
     "yargs": "11.0.0"

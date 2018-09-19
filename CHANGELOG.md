@@ -2,7 +2,6 @@
 
 ## UNRELEASED
 ### Added
-* Upgraded to Geckodriver 0.22.0
 
 ## 3.5.0 - 2018-09-15
 
