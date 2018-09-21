@@ -2,6 +2,7 @@
 
 ## UNRELEASED
 ### Added
+* Turned on the Firefox only metric: timeToDomContentFlushed [#637](https://github.com/sitespeedio/browsertime/pull/637).
 
 ## 3.5.0 - 2018-09-15
 
