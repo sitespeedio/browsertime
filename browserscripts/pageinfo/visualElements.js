@@ -28,7 +28,7 @@
     }
 
     function isElementPartlyInViewportAndVisible (el) {
-        var rect = el.getBoundingClientRect();
+        const rect = el.getBoundingClientRect();
         return !(rect.bottom < 0 || rect.right < 0 || rect.left > window.innerWidth || rect.top > window.innerHeight || rect.height === 0)
     }
 
@@ -79,17 +79,15 @@
         }
     }
 
-    let type = 'LargestImage';
     imageTags.forEach(function (element) {   
         if (isElementPartlyInViewportAndVisible(element)) {
-            keepLargestElementByType(type, element);
+            keepLargestElementByType('LargestImage', element);
         }
     });
 
-    type = 'Heading';
     h1Tags.forEach(function (element) {
         if (isElementPartlyInViewportAndVisible(element)) {
-            keepLargestElementByType(type, element);
+            keepLargestElementByType('Heading', element);
         }
     });
 
