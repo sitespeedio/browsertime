@@ -1,4 +1,10 @@
 # Browsertime changelog
+## UNRELEASED
+### Tech
+* Cleanup of the Visual Elements script [#641](https://github.com/sitespeedio/browsertime/pull/641).
+
+### Added
+* Automatically add all visual elements to the HAR timings (so you can see them in PerfCascade) [#642](https://github.com/sitespeedio/browsertime/pull/642).
 
 ## 3.6.0 - 2018-09-24
 ### Added
