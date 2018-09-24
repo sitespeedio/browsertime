@@ -74,7 +74,7 @@
                      keepLargestElementByType(type, element);
                  }
             } catch (e) {
-                throw new Error('Could not find matching element for selector:' + selector + ' using document.body.querySelector. Do that element exist on the page?');
+                console.error('Could not find matching element for selector:' + selector + ' using document.body.querySelector. Do that element exist on the page?');
             }
         }
     }
