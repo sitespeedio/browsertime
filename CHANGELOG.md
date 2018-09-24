@@ -4,6 +4,9 @@
 ### Added
 * Turned on the Firefox only metric: timeToDomContentFlushed [#637](https://github.com/sitespeedio/browsertime/pull/637).
 
+### Fixed
+* If a visualElement is missing, we log the error instead of throwing it [#639](https://github.com/sitespeedio/browsertime/pull/639).
+
 ## 3.5.0 - 2018-09-15
 
 ### Added
