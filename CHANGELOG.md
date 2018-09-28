@@ -6,6 +6,8 @@
 ### Added
 * Automatically add all visual elements to the HAR timings (so you can see them in PerfCascade) [#642](https://github.com/sitespeedio/browsertime/pull/642).
 
+* Added stddev for all metrics that are collected [#638](https://github.com/sitespeedio/browsertime/pull/638)
+
 ## 3.6.0 - 2018-09-24
 ### Added
 * Turned on the Firefox only metric: timeToDomContentFlushed [#637](https://github.com/sitespeedio/browsertime/pull/637).
