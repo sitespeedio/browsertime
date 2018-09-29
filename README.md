@@ -4,6 +4,8 @@
 [![Downloads total][downloads-total-image]][downloads-url]
 [![Stars][stars-image]][stars-url]
 
+[Documentation](https://www.sitespeed.io/documentation/browsertime/) | [Changelog](https://github.com/sitespeedio/browsertime/blob/master/CHANGELOG.md)
+
 ![Browsertime](browsertime.png)
 
 Access the Web Performance Timeline, from your browser, in your terminal!
