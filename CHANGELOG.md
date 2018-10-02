@@ -8,6 +8,12 @@
 
 * Added stddev for all metrics that are collected [#638](https://github.com/sitespeedio/browsertime/pull/638)
 
+* Ypu can now run your own JavaScript in Firefox that will be executed on document_start. Use --injectJs [#643](https://github.com/sitespeedio/browsertime/pull/643).
+
+### Fixed 
+* Upgrading to a new version of the Browsertime extension that sets a request header for basic auth instead of using internal WebExtension code [#643](https://github.com/sitespeedio/browsertime/pull/643). See [Bug #2151](https://github.com/sitespeedio/sitespeed.io/issues/2151).
+
+
 ## 3.6.0 - 2018-09-24
 ### Added
 * Turned on the Firefox only metric: timeToDomContentFlushed [#637](https://github.com/sitespeedio/browsertime/pull/637).
