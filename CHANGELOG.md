@@ -1,12 +1,12 @@
 # Browsertime changelog
-## UNRELEASED
+## 3.7.0 - 2018-10-02
 ### Tech
 * Cleanup of the Visual Elements script [#641](https://github.com/sitespeedio/browsertime/pull/641).
 
 ### Added
 * Automatically add all visual elements to the HAR timings (so you can see them in PerfCascade) [#642](https://github.com/sitespeedio/browsertime/pull/642).
 
-* You can now run your own JavaScript in Firefox that will be executed on document_start. Use --injectJs [#643](https://github.com/sitespeedio/browsertime/pull/643).
+* You can run your own JavaScript in Firefox that will be executed on document_start. Use --injectJs [#643](https://github.com/sitespeedio/browsertime/pull/643).
 
 ### Fixed 
 * Upgrading to a new version of the Browsertime extension that sets a request header for basic auth instead of using internal WebExtension code [#643](https://github.com/sitespeedio/browsertime/pull/643). See [Bug #2151](https://github.com/sitespeedio/sitespeed.io/issues/2151).
