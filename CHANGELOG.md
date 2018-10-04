@@ -1,4 +1,9 @@
 # Browsertime changelog
+
+## UNRELEASED
+### Fixed
+* Upgraded to Geckodriver 0.23.0
+
 ## 3.7.0 - 2018-10-02
 ### Tech
 * Cleanup of the Visual Elements script [#641](https://github.com/sitespeedio/browsertime/pull/641).
