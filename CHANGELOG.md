@@ -3,6 +3,7 @@
 ## 3.7.1 - 2018-10-05
 ### Fixed
 * Upgraded to Geckodriver 0.23.0
+* Upgraded to NodeJS 8.12.0 in the Docker container.
 
 ## 3.7.0 - 2018-10-02
 ### Tech
