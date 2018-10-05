@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 3.7.1 - 2018-10-05
 ### Fixed
 * Upgraded to Geckodriver 0.23.0
 
