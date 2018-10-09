@@ -209,5 +209,62 @@ describe('Engine', function() {
           'Waited for ' + browser + ' to quit for too long'
         ));
     });
+
+    describe('#pageCompleteCheck inline - ' + browser, function() {
+      const scripts = {
+        foo: '(function () {return "fff";})()',
+        uri: 'document.documentURI',
+        fourtytwo: '(function () {return 42;})()'
+      };
+
+      beforeEach(function() {
+        engine = new Engine({
+          browser: browser,
+          iterations: 1,
+          pageCompleteCheck:
+            'return (function() { try { var end = window.performance.timing.loadEventEnd; return (end > 0) && (Date.now() > end + 5000); } catch(e) { return true; }})();',
+          skipHar: true
+        });
+        return engine.start();
+      });
+
+      it('should run 5-second pageCompleteCheck from inline javascript', function() {
+        return engine.run('data:text/html;charset=utf-8,', { scripts });
+      });
+
+      afterEach(() =>
+        Promise.resolve(engine.stop()).timeout(
+          10000,
+          'Waited for ' + browser + ' to quit for too long'
+        ));
+    });
+
+    describe('#pageCompleteScript from file - ' + browser, function() {
+      const scripts = {
+        foo: '(function () {return "fff";})()',
+        uri: 'document.documentURI',
+        fourtytwo: '(function () {return 42;})()'
+      };
+
+      beforeEach(function() {
+        engine = new Engine({
+          browser: browser,
+          iterations: 1,
+          pageCompleteCheck: 'test/pagecompletescripts/pageComplete10sec.js',
+          skipHar: true
+        });
+        return engine.start();
+      });
+
+      it('should run 10-second pageCompleteScript from script file', function() {
+        return engine.run('data:text/html;charset=utf-8,', { scripts });
+      });
+
+      afterEach(() =>
+        Promise.resolve(engine.stop()).timeout(
+          10000,
+          'Waited for ' + browser + ' to quit for too long'
+        ));
+    });
   });
 });
