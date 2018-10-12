@@ -1,4 +1,10 @@
 # Browsertime changelog
+## UNRELEASED
+
+### Added
+* The --pageCompleteCheck now accepts an inline javascript (for backward compatibility) or a path to a javascript file (enhancement request). Thank you [Don Walling](https://github.com/donwalling) for the [PR](https://github.com/sitespeedio/browsertime/pull/646).
+
+
 ## 3.7.2 - 2018-10-10
 ### Fixed
 * We had a check that FF is 61 or later for the HAR export trigger to work. However that fix makes sitespeed.io break when you run with mobile options, see https://github.com/sitespeedio/sitespeed.io/issues/2178#issuecomment-428638659. It also makes Firefox tests to break as long as you set a different user agent. We are now on FF 62 so we can just remove the check.
