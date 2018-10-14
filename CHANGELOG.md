@@ -7,6 +7,7 @@
 ### Fixed
 * Updated to latest Chrome-har (0.5.0) that pickup navigations within the page.
 * Make sure the layer of orange is full screen, remove the layer instead of making it white and make sure visual metrics doesn't need to start white. All these three fixes helps us test pages in a flow of URLs. [#648](https://github.com/sitespeedio/browsertime/pull/648)
+* Upstream fixes of Visual Metrics, choosing max size of content widths to skip Chromes requests info [#645](https://github.com/sitespeedio/browsertime/pull/645/).
 
 ## 3.7.2 - 2018-10-10
 ### Fixed
