@@ -6,7 +6,7 @@
 
 ### Fixed
 * Updated to latest Chrome-har (0.5.0) that pickup navigations within the page.
-* Make sure the layer of orange is full screen, remove the layer instead of making it white and make sure visual metrics doesn't need to start white. All these three fixes helps us test pages in a flow of URLs. [#648](https://github.com/sitespeedio/browsertime/pull/648)
+* Fixes for video: Make sure the layer of orange is full screen. Remove the layer instead of making it white and make sure visual metrics doesn't need to start white. All these three fixes helps us test pages in a flow of URLs. [#648](https://github.com/sitespeedio/browsertime/pull/648). This will change the look and feel of he video when you test with --preURL: instead of starting white, it will start preURL content on the screen. The metrics will be the same, the video will look different.
 * Upstream fixes of Visual Metrics, choosing max size of content widths to skip Chromes requests info [#645](https://github.com/sitespeedio/browsertime/pull/645/).
 
 ## 3.7.2 - 2018-10-10
