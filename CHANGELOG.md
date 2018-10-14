@@ -2,10 +2,11 @@
 ## UNRELEASED
 
 ### Added
-* The --pageCompleteCheck now accepts an inline javascript (for backward compatibility) or a path to a javascript file (enhancement request). Thank you [Don Walling](https://github.com/donwalling) for the [PR](https://github.com/sitespeedio/browsertime/pull/646).
+* The --pageCompleteCheck now accepts an inline JavaScript (for backward compatibility) or a path to a javascript file (enhancement request). Thank you [Don Walling](https://github.com/donwalling) for the [PR](https://github.com/sitespeedio/browsertime/pull/646).
 
 ### Fixed
 * Updated to latest Chrome-har (0.5.0) that pickup navigations within the page.
+* Make sure the layer of orange is full screen, remove the layer instead of making it white and make sure visual metrics doesn't need to start white. All these three fixes helps us test pages in a flow of URLs. [#648](https://github.com/sitespeedio/browsertime/pull/648)
 
 ## 3.7.2 - 2018-10-10
 ### Fixed
