@@ -1,8 +1,8 @@
 # Browsertime changelog
-## UNRELEASED
+## 3.8.0 - 2018-10-15
 
 ### Added
-* The --pageCompleteCheck now accepts an inline JavaScript (for backward compatibility) or a path to a javascript file (enhancement request). Thank you [Don Walling](https://github.com/donwalling) for the [PR](https://github.com/sitespeedio/browsertime/pull/646).
+* The ```--pageCompleteCheck``` now accepts an inline JavaScript (for backward compatibility) or a path to a javascript file (enhancement request). Thank you [Don Walling](https://github.com/donwalling) for the [PR](https://github.com/sitespeedio/browsertime/pull/646).
 
 ### Fixed
 * Updated to latest Chrome-har (0.5.0) that pickup navigations within the page.
