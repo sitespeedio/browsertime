@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 3.8.2 
+### Fixed
+* The orange screen for Firefox was broken in 3.8.0 and in 3.8.1. Revert this for FF and let us take a new shot on this later on. [#650](https://github.com/sitespeedio/browsertime/pull/650).
+
 ## 3.8.1 - 2018-10-15
 
 ### Fixed
