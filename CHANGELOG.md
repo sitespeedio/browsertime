@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 3.9.0
 ### Added
 * Upgraded to Chrome 70 in the Docker file.
 * Upgraded to latest Chrome trace to support new trace in Chrome 70.
