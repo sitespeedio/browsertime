@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Added
+* Upgraded to Chrome 70 in the Docker file.
+* Upgraded to latest Chrome trace to support new trace in Chrome 70.
+
 ## 3.8.2 
 ### Fixed
 * The orange screen for Firefox was broken in 3.8.0 and in 3.8.1. Let me make it work in both Chrome and FF [#651](https://github.com/sitespeedio/browsertime/pull/651).
