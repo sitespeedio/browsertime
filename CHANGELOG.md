@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Added 
+* Chromedriver 2.43.0
+
 ## 3.9.0
 ### Added
 * Upgraded to Chrome 70 in the Docker file.
