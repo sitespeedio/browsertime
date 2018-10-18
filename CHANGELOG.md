@@ -1,8 +1,11 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 3.10.0
 ### Added 
 * Chromedriver 2.43.0
+
+### Fixed
+* Fixes the bug when you try to set the cookie but it is cleared by --cacheClearRaw. See [#13](https://github.com/sitespeedio/browsertime-extension/pull/13). And thank you [Omri](https://github.com/omrilotan) for the PR!
 
 ## 3.9.0
 ### Added
