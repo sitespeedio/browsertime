@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Added
+* Using Firefox 63 in the Docker container.
+
 ## 3.10.0
 ### Added 
 * Chromedriver 2.43.0
