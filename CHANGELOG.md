@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 3.11.1
 ### Fixed
 * Removing --startwhite in Visual Metrics introduced higher deviation in metrics for Chrome [#655](https://github.com/sitespeedio/browsertime/issues/655).
 
