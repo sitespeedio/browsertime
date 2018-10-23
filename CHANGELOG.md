@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 3.11.0
 ### Added
 * Using Firefox 63 in the Docker container.
 
