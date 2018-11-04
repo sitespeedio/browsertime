@@ -1,5 +1,14 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Added
+* Add --verbose and Visual Metrics will log to a log file in the video dir (that makes it easier for people that report bugs) [#662](https://github.com/sitespeedio/browsertime/pull/662).
+
+* Disable GPU for Chrome when running with xvfb [#659](https://github.com/sitespeedio/browsertime/pull/659).
+
+### Fixed
+* We changed how we remove the orange frames from the video when you collect visual metrics. In the old version we used ffprobe to find the start point. That sometimes made us inlcude the orange frame in the videos (it was broken when running on Android). We now get the value from VisualMetrics directly and tune the video in two steps: First remove the orange frames and then add the text [#665](https://github.com/sitespeedio/browsertime/pull/665).
+
 ## 3.11.1
 ### Fixed
 * Removing --startwhite in Visual Metrics introduced higher deviation in metrics for Chrome [#655](https://github.com/sitespeedio/browsertime/issues/655).
