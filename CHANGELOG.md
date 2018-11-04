@@ -6,6 +6,8 @@
 
 * Disable GPU for Chrome when running with xvfb [#659](https://github.com/sitespeedio/browsertime/pull/659).
 
+* Get Server Timings [#657](https://github.com/sitespeedio/browsertime/pull/657). This works fine in Chrome and should(?) work in Firefox but I cannot get it to work. I'll create an upstream issue when I get the time.
+
 ### Fixed
 * We changed how we remove the orange frames from the video when you collect visual metrics. In the old version we used ffprobe to find the start point. That sometimes made us inlcude the orange frame in the videos (it was broken when running on Android). We now get the value from VisualMetrics directly and tune the video in two steps: First remove the orange frames and then add the text [#665](https://github.com/sitespeedio/browsertime/pull/665).
 
