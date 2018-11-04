@@ -407,8 +407,13 @@ def trim_video_end(directory, trim_time):
 def adjust_frame_times(directory):
     offset = None
     frames = sorted(glob.glob(os.path.join(directory, 'video-*.png')))
+    # Special hack to the the video start 
+    # Let us tune this in the future to skip using a global
+    global videoRecordingStart
+    match = re.compile(r'video-(?P<ms>[0-9]+)\.png')
+    msFromFirstFrame = re.search(match, frames[0])
+    videoRecordingStart = int(msFromFirstFrame.groupdict().get('ms'))
     if len(frames):
-        match = re.compile(r'video-(?P<ms>[0-9]+)\.png')
         for frame in frames:
             m = re.search(match, frame)
             if m is not None:
@@ -1818,6 +1823,7 @@ def main():
                         for metric in metrics:
                             data[metric['name'].replace(
                                 ' ', '')] = metric['value']
+                        data['videoRecordingStart'] = videoRecordingStart       
                         print json.dumps(data)
                     else:
                         for metric in metrics:
