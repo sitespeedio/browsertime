@@ -237,8 +237,6 @@ module.exports = {
 };
 ~~~
 
-Note: You a
-
 ## Test on your mobile device
 Browsertime supports Chrome on Android: Collecting SpeedIndex, HAR and video! This is still really new, let us know if you find any bugs.
 
