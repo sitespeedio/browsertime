@@ -13,6 +13,9 @@
 ### Fixed
 * We changed how we remove the orange frames from the video when you collect visual metrics. In the old version we used ffprobe to find the start point. That sometimes made us inlcude the orange frame in the videos (it was broken when running on Android). We now get the value from VisualMetrics directly and tune the video in two steps: First remove the orange frames and then add the text [#665](https://github.com/sitespeedio/browsertime/pull/665).
 
+### Tech
+* Changed from moment to DayJS [#667](https://github.com/sitespeedio/browsertime/pull/667).
+
 ## 3.11.1
 ### Fixed
 * Removing --startwhite in Visual Metrics introduced higher deviation in metrics for Chrome [#655](https://github.com/sitespeedio/browsertime/issues/655).
