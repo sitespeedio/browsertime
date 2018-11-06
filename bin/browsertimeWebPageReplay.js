@@ -19,7 +19,9 @@ async function runBrowsertime() {
     .option('connectivity.latency', {
       default: undefined,
       group: 'connectivity'
-    });
+    })
+    .count('verbose')
+    .alias('v', 'verbose');
 
   const defaultConfig = {
     iterations: 1,
