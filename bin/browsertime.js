@@ -36,9 +36,6 @@ async function run(url, options) {
     let engine = new Engine(options);
 
     log.info('Running %s for url: %s', options.browser, url);
-    if (log.isEnabledFor(log.DEBUG)) {
-      log.debug('Running with options: %:2j', options);
-    }
 
     const scriptCategories = await browserScripts.allScriptCategories;
     let scriptsByCategory = await browserScripts.getScriptsForCategories(
