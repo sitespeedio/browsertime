@@ -1,4 +1,4 @@
-# Browsertime changelog
+f p# Browsertime changelog
 
 ## UNRELEASED
 ### Added
@@ -10,11 +10,19 @@
 
 * Support Firefox timeToFirstInteractive [#656](https://github.com/sitespeedio/browsertime/pull/656). This is Firefox Nightly at the moment, try it on an Mac with: ```browsertime --firefox.nightly https://www.wikipedia.org -n 1```. At the moment it looks like the metric takes some time for Firefox to calculate so we end the test before it is finished. You can try it out with changing ```--pageCompleteCheck```.
 
+* Chrome omn Android has a different CLI args setup [#668](https://github.com/sitespeedio/browsertime/pull/668).
+
 ### Fixed
 * We changed how we remove the orange frames from the video when you collect visual metrics. In the old version we used ffprobe to find the start point. That sometimes made us inlcude the orange frame in the videos (it was broken when running on Android). We now get the value from VisualMetrics directly and tune the video in two steps: First remove the orange frames and then add the text [#665](https://github.com/sitespeedio/browsertime/pull/665).
 
+* Running in Docker we always tried to do a hard kill on FFMPEG, but we onlyu need that on Docker desktop [#670](https://github.com/sitespeedio/browsertime/pull/670).
+
+* Fixed how we go from orange to white on an Android phone, by always making the screen orange and then unload it to white. This makes the visual metrics match the video [#672](https://github.com/sitespeedio/browsertime/pull/672).
+
 ### Tech
 * Changed from moment to DayJS [#667](https://github.com/sitespeedio/browsertime/pull/667).
+
+* Moved the logging of options from the CLI to the engine (using verbose) so you always have the ability to log the options [#671](https://github.com/sitespeedio/browsertime/pull/671).
 
 ## 3.11.1
 ### Fixed
