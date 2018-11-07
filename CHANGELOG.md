@@ -19,6 +19,8 @@ f p# Browsertime changelog
 
 * Fixed how we go from orange to white on an Android phone, by always making the screen orange and then unload it to white. This makes the visual metrics match the video [#672](https://github.com/sitespeedio/browsertime/pull/672).
 
+* If you run on ARM we just skip installing the Chromedriver instead of just hanging ...
+
 ### Tech
 * Changed from moment to DayJS [#667](https://github.com/sitespeedio/browsertime/pull/667).
 
