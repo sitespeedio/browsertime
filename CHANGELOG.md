@@ -1,6 +1,6 @@
-f p# Browsertime changelog
+# Browsertime changelog
 
-## UNRELEASED
+## 3.12.0
 ### Added
 * Add ```--verbose``` and Visual Metrics will log to a log file in the video dir (that makes it easier for people that report bugs) [#662](https://github.com/sitespeedio/browsertime/pull/662).
 
@@ -10,7 +10,7 @@ f p# Browsertime changelog
 
 * Support Firefox timeToFirstInteractive [#656](https://github.com/sitespeedio/browsertime/pull/656). This is Firefox Nightly at the moment, try it on an Mac with: ```browsertime --firefox.nightly https://www.wikipedia.org -n 1```. At the moment it looks like the metric takes some time for Firefox to calculate so we end the test before it is finished. You can try it out with changing ```--pageCompleteCheck```.
 
-* Chrome omn Android has a different CLI args setup [#668](https://github.com/sitespeedio/browsertime/pull/668).
+* Chrome on Android has a different CLI args setup [#668](https://github.com/sitespeedio/browsertime/pull/668).
 
 ### Fixed
 * We changed how we remove the orange frames from the video when you collect visual metrics. In the old version we used ffprobe to find the start point. That sometimes made us inlcude the orange frame in the videos (it was broken when running on Android). We now get the value from VisualMetrics directly and tune the video in two steps: First remove the orange frames and then add the text [#665](https://github.com/sitespeedio/browsertime/pull/665).
