@@ -185,34 +185,9 @@ Testing a page after you have logged in:
 ~~~javascript
 module.exports = {
   run(context, help) {
-        await help.navigate(
-        'https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page');
-        // we fetch the selenium webdriver from context
-        const webdriver = context.webdriver;
-        // and get hold of some goodies we want to use
-        const until = webdriver.until;
-        const By = webdriver.By;
-        // before you start, make your username and password
-        const userName = 'USERNAME';
-        const password = 'PASSWORD';
-        driver.findElement(By.id('wpName1')).sendKeys(userName);
-        driver.findElement(By.id('wpPassword1')).sendKeys(password);
-        const loginButton = driver.findElement(webdriver.By.id('wpLoginAttempt'));
-        loginButton.click();
-        // we wait for something on the page that verifies that we are logged in
-        await driver.wait(until.elementLocated(By.id('pt-userpage')), 6000);
-        // You are now logged in, navigate to the page that we want to measure
-        return help.startAndNavigate(context.url);
-    });
-  }
-};
-~~~
-
-And a example measuring the actual log in step:
-
-~~~javascript
-module.exports = {
-  run(context, help) {
+    return context.runWithDriver(async function(driver) {
+      return driver.get('https://en.wikipedia.org')
+        .then(async function() {
         await help.navigate(
             'https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page');
         // we fetch the selenium webdriver from context
@@ -232,6 +207,40 @@ module.exports = {
         loginButton.click();
         // we wait for something on the page that verifies that we are logged in
         return driver.wait(until.elementLocated(By.id('pt-userpage')), 6000);
+      });
+    });
+  }
+};
+~~~
+
+And a example measuring the actual log in step:
+
+~~~javascript
+module.exports = {
+  run(context, help) {
+    return context.runWithDriver(async function(driver) {
+      return driver.get('https://en.wikipedia.org')
+        .then(async function() {
+        await help.navigate(
+            'https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page');
+        // we fetch the selenium webdriver from context
+        const webdriver = context.webdriver;
+        // and get hold of some goodies we want to use
+        const until = webdriver.until;
+        const By = webdriver.By;
+        // before you start, make your username and password
+        const userName = 'USERNAME';
+        const password = 'PASSWORD';
+        driver.findElement(By.id('wpName1')).sendKeys(userName);
+        driver.findElement(By.id('wpPassword1')).sendKeys(password);
+        const loginButton = driver.findElement(webdriver.By.id('wpLoginAttempt'));
+        // Before we click on the login button, start the measurement
+        await help.start();
+        // Login the user
+        loginButton.click();
+        // we wait for something on the page that verifies that we are logged in
+        return driver.wait(until.elementLocated(By.id('pt-userpage')), 6000);
+      });
     });
   }
 };
