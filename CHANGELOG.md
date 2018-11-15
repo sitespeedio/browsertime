@@ -1,4 +1,8 @@
 # Browsertime changelog
+## UNRELEASED
+
+### Added
+* Support for coming timeToContentfulPaint in Firefox (Nigthly at the moment) [#675](https://github.com/sitespeedio/browsertime/pull/675).
 
 ## 3.12.0
 ### Added
