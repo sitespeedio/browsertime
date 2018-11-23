@@ -151,8 +151,10 @@ browsertime --connectivity.engine throttle -c cable https://www.sitespeed.io/
 
 You can also use Throttle inside of Docker but then the host need to be the same OS as in Docker. In practice you can only use it on Linux. And then make sure to run *sudo modprobe ifb numifbs=1* first and give the container the right privileges *--cap-add=NET_ADMIN*.
 
-## Script navigation
+## Script navigation [4.0 or later]
 If you need a more complicated test scenario, you can define your own (Selenium)test script that will do the testing. Use your own test script when you want to test your page as a logged in user, the login page or if you want to add things to your cart.
+
+You run you navigation script with ```--scriptNavigation```. 
 
 The context object:
 * *url* - The URL that you want are under test
