@@ -4,13 +4,18 @@
 ### Added
 * Support for coming timeToContentfulPaint in Firefox (Nigthly at the moment) [#675](https://github.com/sitespeedio/browsertime/pull/675).
 
+* Support for navigating bty script. More docs on the way [#666](https://github.com/sitespeedio/browsertime/pull/666).
+
+### Changed
+* New defaulty trace categories for chrome.timeline: ```-*,devtools.timeline -> -, devtools.timeline, disabled-by-default-devtools.timeline, disabled-by-default-devtools.timeline.stack, v8, v8.execute, blink``` [#677](https://github.com/sitespeedio/browsertime/pull/677)
+
 ## 3.12.0
 ### Added
 * Add ```--verbose``` and Visual Metrics will log to a log file in the video dir (that makes it easier for people that report bugs) [#662](https://github.com/sitespeedio/browsertime/pull/662).
 
 * Disable GPU for Chrome when running with xvfb [#659](https://github.com/sitespeedio/browsertime/pull/659).
 
-* Get Server Timings [#657](https://github.com/sitespeedio/browsertime/pull/657). This works fine in Chrome and should(?) work in Firefox but I cannot get it to work. I'll create an upstream issue when I get the time.
+* Get Server Timings [#657](https://github.com/sitespeedio/browsertime/pull/657). This works fine in Chrome and should(?) work in Firefox but I cannot get it to work. I'll create an upstream issue when I get the time.#
 
 * Support Firefox timeToFirstInteractive [#656](https://github.com/sitespeedio/browsertime/pull/656). This is Firefox Nightly at the moment, try it on an Mac with: ```browsertime --firefox.nightly https://www.wikipedia.org -n 1```. At the moment it looks like the metric takes some time for Firefox to calculate so we end the test before it is finished. You can try it out with changing ```--pageCompleteCheck```.
 
