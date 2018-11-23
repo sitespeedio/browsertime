@@ -72,8 +72,6 @@ Browsertime uses Selenium NodeJS to drive the browser. It starts the browser, lo
 
 To get the HAR from Firefox we use the [HAR Export Trigger](https://github.com/firebug/har-export-trigger) and Chrome we use [Chrome-HAR](https://github.com/sitespeedio/chrome-har) to parse the timeline log and generate the HAR file.
 
-Oh and you can run your own Selenium script before (<code>--preScript</code>) and after (<code>--postScript</code>) a URL is accessed so you can login/logout or do whatever you want.
-
 # Speed Index and video
 It's easiest to run [our ready made Docker container](https://hub.docker.com/r/sitespeedio/browsertime/) to be able to record a video and calculate SpeedIndex because then you get all dependencies needed for free to run [VisualMetrics](https://github.com/WPO-Foundation/visualmetrics).
 
@@ -152,6 +150,92 @@ browsertime --connectivity.engine throttle -c cable https://www.sitespeed.io/
 ~~~
 
 You can also use Throttle inside of Docker but then the host need to be the same OS as in Docker. In practice you can only use it on Linux. And then make sure to run *sudo modprobe ifb numifbs=1* first and give the container the right privileges *--cap-add=NET_ADMIN*.
+
+## Script navigation
+If you need a more complicated test scenario, you can define your own (Selenium)test script that will do the testing. Use your own test script when you want to test your page as a logged in user, the login page or if you want to add things to your cart.
+
+The context object:
+* *url* - The URL that you want are under test
+* *options* - All the options sent from the CLI to Browsertime
+* *log* - an instance to the log system so you can log from your navigation script
+* *index* - the index of the runs, so you can keep track of which run that is running
+* *storageManager* - The Browsertime storage manager that can help you get read/store files to disk.
+* *webdriver* -  The Selenium WebDriver object
+
+The helper object got three methods that you can use:
+* *start()* - Use this when you want to start to measure a page. This will start the video and prepare everything to collect metrics.
+* *navigate(URL)* - Use this if you want to use the exact way as Browsertime navigates to a new URL (same settings with pageCompleteCheck etc)
+* *startAndNavigate(URL)* - Start measuring and navigate to a new page in one go.
+
+The really simple version looks like this:
+
+~~~javascript
+module.exports = {
+  run(context, help) {
+    return context.runWithDriver(async function() {
+      context.log.info('Running script navigation');
+      return help.startAndNavigate('https://www.sitespeed.io/');
+    });
+  }
+};
+~~~
+
+Testing a page after you have logged in:
+
+~~~javascript
+module.exports = {
+  run(context, help) {
+        await help.navigate(
+        'https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page');
+        // we fetch the selenium webdriver from context
+        const webdriver = context.webdriver;
+        // and get hold of some goodies we want to use
+        const until = webdriver.until;
+        const By = webdriver.By;
+        // before you start, make your username and password
+        const userName = 'USERNAME';
+        const password = 'PASSWORD';
+        driver.findElement(By.id('wpName1')).sendKeys(userName);
+        driver.findElement(By.id('wpPassword1')).sendKeys(password);
+        const loginButton = driver.findElement(webdriver.By.id('wpLoginAttempt'));
+        loginButton.click();
+        // we wait for something on the page that verifies that we are logged in
+        await driver.wait(until.elementLocated(By.id('pt-userpage')), 6000);
+        // You are now logged in, navigate to the page that we want to measure
+        return help.startAndNavigate(context.url);
+    });
+  }
+};
+~~~
+
+And a example measuring the actual log in step:
+
+~~~javascript
+module.exports = {
+  run(context, help) {
+        await help.navigate(
+            'https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page');
+        // we fetch the selenium webdriver from context
+        const webdriver = context.webdriver;
+        // and get hold of some goodies we want to use
+        const until = webdriver.until;
+        const By = webdriver.By;
+        // before you start, make your username and password
+        const userName = 'USERNAME';
+        const password = 'PASSWORD';
+        driver.findElement(By.id('wpName1')).sendKeys(userName);
+        driver.findElement(By.id('wpPassword1')).sendKeys(password);
+        const loginButton = driver.findElement(webdriver.By.id('wpLoginAttempt'));
+        // Before we click on the login button, start the measurement
+        await help.start();
+        // Login the user
+        loginButton.click();
+        // we wait for something on the page that verifies that we are logged in
+        return driver.wait(until.elementLocated(By.id('pt-userpage')), 6000);
+    });
+  }
+};
+~~~
 
 ## Test on your mobile device
 Browsertime supports Chrome on Android: Collecting SpeedIndex, HAR and video! This is still really new, let us know if you find any bugs.
