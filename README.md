@@ -185,6 +185,7 @@ Testing a page after you have logged in:
 ~~~javascript
 module.exports = {
   run(context, help) {
+     return context.runWithDriver(async function() {
         await help.navigate(
         'https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page');
         // we fetch the selenium webdriver from context
@@ -213,6 +214,7 @@ And a example measuring the actual log in step:
 ~~~javascript
 module.exports = {
   run(context, help) {
+     return context.runWithDriver(async function() {
         await help.navigate(
             'https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page');
         // we fetch the selenium webdriver from context
