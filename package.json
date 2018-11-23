@@ -12,8 +12,8 @@
     "chrome-har": "0.6.0",
     "chrome-trace": "0.1.1",
     "dayjs": "1.7.7",
-    "execa": "0.10.0",
-    "fast-stats": "0.0.3",
+    "execa": "1.0.0",
+    "fast-stats": "0.0.4",
     "hasbin": "1.2.3",
     "intel": "1.2.0",
     "lodash.foreach": "4.5.0",
@@ -26,11 +26,11 @@
     "lodash.set": "4.3.2",
     "mkdirp": "0.5.1",
     "selenium-webdriver": "3.6.0",
-    "sharp": "0.20.2",
+    "sharp": "0.21.0",
     "soprano-saxophone": "0.23.0",
     "valid-url": "1.0.9",
     "xvfb": "0.2.3",
-    "yargs": "11.0.0"
+    "yargs": "12.0.5"
   },
   "devDependencies": {
     "bluebird": "3.5.1",
