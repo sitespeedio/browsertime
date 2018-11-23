@@ -9,7 +9,7 @@
     "@sitespeed.io/throttle": "0.4.3",
     "adbkit": "2.11.0",
     "alto-saxophone": "2.43.1",
-    "chrome-har": "0.6.0",
+    "chrome-har": "0.7.0",
     "chrome-trace": "0.1.1",
     "dayjs": "1.7.7",
     "execa": "1.0.0",

@@ -6,6 +6,8 @@
 
 * Support for navigating by script. More docs on the way [#666](https://github.com/sitespeedio/browsertime/pull/666).
 
+* Upgraded to Chrome-HAR 0.7.0.
+
 ### Changed
 * New default trace categories for chrome.timeline: ```-*,devtools.timeline -> -, devtools.timeline, disabled-by-default-devtools.timeline, disabled-by-default-devtools.timeline.stack``` [#677](https://github.com/sitespeedio/browsertime/pull/677) and [#679](https://github.com/sitespeedio/browsertime/pull/679).
 
