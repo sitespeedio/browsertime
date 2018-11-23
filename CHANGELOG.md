@@ -4,10 +4,10 @@
 ### Added
 * Support for coming timeToContentfulPaint in Firefox (Nigthly at the moment) [#675](https://github.com/sitespeedio/browsertime/pull/675).
 
-* Support for navigating bty script. More docs on the way [#666](https://github.com/sitespeedio/browsertime/pull/666).
+* Support for navigating by script. More docs on the way [#666](https://github.com/sitespeedio/browsertime/pull/666).
 
 ### Changed
-* New defaulty trace categories for chrome.timeline: ```-*,devtools.timeline -> -, devtools.timeline, disabled-by-default-devtools.timeline, disabled-by-default-devtools.timeline.stack, v8, v8.execute, blink``` [#677](https://github.com/sitespeedio/browsertime/pull/677)
+* New default trace categories for chrome.timeline: ```-*,devtools.timeline -> -, devtools.timeline, disabled-by-default-devtools.timeline, disabled-by-default-devtools.timeline.stack``` [#677](https://github.com/sitespeedio/browsertime/pull/677) and [#679](https://github.com/sitespeedio/browsertime/pull/679).
 
 ## 3.12.0
 ### Added
