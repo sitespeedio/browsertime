@@ -8,11 +8,12 @@ module.exports = {
       const until = webdriver.until;
       const By = webdriver.By;
       // before you start, make your username and password
-      await help.start();
+      await help.startMeasure();
       const docLink = driver.findElement(By.linkText('Documentation'));
       // Before we click on the link, start the measurement
       docLink.click();
-      return driver.wait(until.elementLocated(By.linkText('Chrome-HAR')), 6000);
+      await driver.wait(until.elementLocated(By.linkText('Chrome-HAR')), 6000);
+      return help.collect();
     });
   }
 };

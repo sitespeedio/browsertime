@@ -154,7 +154,7 @@ You can also use Throttle inside of Docker but then the host need to be the same
 ## Script navigation [4.0 or later]
 If you need a more complicated test scenario, you can define your own (Selenium)test script that will do the testing. Use your own test script when you want to test your page as a logged in user, the login page or if you want to add things to your cart.
 
-You run you navigation script with ```--scriptNavigation```. 
+You run your navigation script with ```--scriptNavigation```. 
 
 The context object:
 * *url* - The URL that you want are under test
@@ -165,9 +165,10 @@ The context object:
 * *webdriver* -  The Selenium WebDriver object
 
 The helper object got three methods that you can use:
-* *start()* - Use this when you want to start to measure a page. This will start the video and prepare everything to collect metrics.
-* *navigate(URL)* - Use this if you want to use the exact way as Browsertime navigates to a new URL (same settings with pageCompleteCheck etc)
-* *startAndNavigate(URL)* - Start measuring and navigate to a new page in one go.
+* *navigate(URL)* - Use this if you want to use the exact way as Browsertime navigates to a new URL (same settings with pageCompleteCheck etc). But that URL will not be measured automatically.
+* *measure(URL)* - Start measuring and navigate to a new page in one go and measure.
+* *startMeasure()* - Use this when you want to start to measure a page. This will start the video and prepare everything to collect metrics.
+* *collect()* - Collect metrics for a page.
 
 The really simple version looks like this:
 
@@ -176,7 +177,7 @@ module.exports = {
   run(context, help) {
     return context.runWithDriver(async function() {
       context.log.info('Running script navigation');
-      return help.startAndNavigate('https://www.sitespeed.io/');
+      return help.measure('https://www.sitespeed.io/');
     });
   }
 };
@@ -205,7 +206,7 @@ module.exports = {
         // we wait for something on the page that verifies that we are logged in
         await driver.wait(until.elementLocated(By.id('pt-userpage')), 6000);
         // You are now logged in, navigate to the page that we want to measure
-        return help.startAndNavigate(context.url);
+        return help.measure(context.url);
     });
   }
 };
@@ -231,11 +232,13 @@ module.exports = {
         driver.findElement(By.id('wpPassword1')).sendKeys(password);
         const loginButton = driver.findElement(webdriver.By.id('wpLoginAttempt'));
         // Before we click on the login button, start the measurement
-        await help.start();
+        await help.startMeasure();
         // Login the user
         loginButton.click();
         // we wait for something on the page that verifies that we are logged in
-        return driver.wait(until.elementLocated(By.id('pt-userpage')), 6000);
+        await driver.wait(until.elementLocated(By.id('pt-userpage')), 6000);
+        // Make sure to remember to collect the metrics
+        await helper.collect();
     });
   }
 };

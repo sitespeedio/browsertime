@@ -7,8 +7,6 @@ const logging = require('../').logging;
 const cli = require('../lib/support/cli');
 const StorageManager = require('../lib/support/storageManager');
 const merge = require('lodash.merge');
-const isEmpty = require('lodash.isempty');
-const pick = require('lodash.pick');
 const fs = require('fs');
 const path = require('path');
 const log = require('intel').getLogger('browsertime');
@@ -55,22 +53,7 @@ async function run(url, options) {
       const storageManager = new StorageManager(url, options);
       const harName = options.har ? options.har : 'browsertime';
       const jsonName = options.output ? options.output : 'browsertime';
-      /*
-      const btData = pick(result, [
-        'info',
-        'browserScripts',
-        'statistics',
-        'visualMetrics',
-        'timestamps',
-        'cpu',
-        'errors'
-      ]);
-      if (!isEmpty(btData)) {
-        saveOperations.push(
-          storageManager.writeJson(jsonName + '.json', btData)
-        );
-      }
-      */
+
       saveOperations.push(storageManager.writeJson(jsonName + '.json', result));
 
       if (result.har) {
