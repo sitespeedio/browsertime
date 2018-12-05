@@ -40,7 +40,7 @@ describe('Engine', function() {
             scripts
           })
           .then(function(r) {
-            return r.browserScripts;
+            return r[0].browserScripts;
           });
         return browserScripts.should.become([
           {
@@ -124,7 +124,7 @@ describe('Engine', function() {
             { scripts: asyncScripts }
           )
           .then(function(r) {
-            return r.browserScripts;
+            return r[0].browserScripts;
           });
         return browserScripts.should.become([
           {
