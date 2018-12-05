@@ -27,7 +27,8 @@ describe('Engine', function() {
         engine = new Engine({
           browser: browser,
           iterations: 2,
-          delay: 17
+          delay: 17,
+          headless: true
         });
         return engine.start();
       });
