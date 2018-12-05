@@ -152,7 +152,7 @@ describe('Engine', function() {
             }
           )
           .then(function(r) {
-            return r.browserScripts;
+            return r[0].browserScripts;
           });
         return browserScripts.should.become([
           {
