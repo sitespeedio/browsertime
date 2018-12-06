@@ -8,7 +8,7 @@
   "dependencies": {
     "@sitespeed.io/throttle": "0.4.3",
     "adbkit": "2.11.0",
-    "alto-saxophone": "2.43.1",
+    "alto-saxophone": "2.44.0",
     "chrome-har": "0.7.0",
     "chrome-trace": "0.1.1",
     "dayjs": "1.7.7",
