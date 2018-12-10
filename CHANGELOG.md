@@ -8,7 +8,7 @@
 
 * Upgraded to Chrome-HAR 0.7.0.
 
-* Updated Chrome to 71 in the Docker container.
+* Updated Chrome to 71 and Firefox 64 in the Docker container.
 
 * Updated to Chromedriver 2.44
 
