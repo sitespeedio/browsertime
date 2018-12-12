@@ -65,6 +65,8 @@ script:
   --visualMetrics -n 1 --chrome.timeline --videoParams.fontPath /usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-R.ttf --visuaElements https://www.sitespeed.io/
 - node ./bin/browsertime.js -b chrome --scriptNavigation test/navigationscript/measure.js https://test.org -n 1 
 - node ./bin/browsertime.js -b chrome --scriptNavigation test/navigationscript/navigatAndStartInTwoSteps.js https://www.sitespeed.io -n 1
+- node ./bin/browsertime.js -b firefox --scriptNavigation test/navigationscript/multi.js https://test.org -n 2
+- node ./bin/browsertime.js -b chrome --scriptNavigation test/navigationscript/multi.js https://test.org -n 3 --chrome.timeline --video --visualMetrics --videoParams.fontPath /usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-R.ttf --visuaElements 
 notifications:
   slack:
     secure: V71EkIzwOf/fZnGTGIKAIFlDyLUit4tK97VDgdV9vZ7CbvOXI1ir3lwRZ57lNqiYD8BUaX+/wKDG+LyrBMgQ4JAGgQx0mECvmOKx1+10Yg9FAkUsMTWe7GOxcVMwhpS2OfHnXwMb0FjcuVl8ovowIZqCWOLeEAYVaTWHndDm2cA=
