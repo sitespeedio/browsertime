@@ -27,7 +27,8 @@ describe('Engine', function() {
         engine = new Engine({
           browser: browser,
           iterations: 2,
-          delay: 17
+          delay: 17,
+          headless: true
         });
         return engine.start();
       });
@@ -39,7 +40,7 @@ describe('Engine', function() {
             scripts
           })
           .then(function(r) {
-            return r.browserScripts;
+            return r[0].browserScripts;
           });
         return browserScripts.should.become([
           {
@@ -71,23 +72,18 @@ describe('Engine', function() {
             );
           }).should.be.fulfilled;
       });
-
-      if (browser === 'chrome') {
-        it('should be able to generate a har', function() {
-          // somewhat clunky way to ignore generated har data in test.
-          return engine
-            .run('https://www.sitespeed.io/testcases/info/domElements.html', {
-              scripts
-            })
-            .then(function(r) {
-              return r.har.should.have.nested.property(
-                'log.entries[0].request.url'
-              );
-            });
-        });
-      } else {
-        it.skip('Firefox cannot generate a HAR since Firefox 55');
-      }
+      it('should be able to generate a har', function() {
+        // somewhat clunky way to ignore generated har data in test.
+        return engine
+          .run('https://www.sitespeed.io/testcases/info/domElements.html', {
+            scripts
+          })
+          .then(function(r) {
+            return r.har.should.have.nested.property(
+              'log.entries[0].request.url'
+            );
+          });
+      });
 
       afterEach(() =>
         Promise.resolve(engine.stop()).timeout(
@@ -123,7 +119,7 @@ describe('Engine', function() {
             { scripts: asyncScripts }
           )
           .then(function(r) {
-            return r.browserScripts;
+            return r[0].browserScripts;
           });
         return browserScripts.should.become([
           {
@@ -156,7 +152,7 @@ describe('Engine', function() {
             }
           )
           .then(function(r) {
-            return r.browserScripts;
+            return r[0].browserScripts;
           });
         return browserScripts.should.become([
           {

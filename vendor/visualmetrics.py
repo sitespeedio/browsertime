@@ -1707,11 +1707,11 @@ def main():
         parser.error("A video, Directory of images or histograms file needs to be provided.\n\n"
                      "Use -h to see available options")
 
-    if options.perceptual:
-        if not options.video:
-            parser.error(
-                "A video file needs to be provided.\n\n"
-                "Use -h to see available options")
+    #if options.perceptual:
+    #    if not options.video:
+    ##        parser.error(
+    #            "A video file needs to be provided.\n\n"
+    #            "Use -h to see available options")
 
     temp_dir = tempfile.mkdtemp(prefix='vis-')
     colors_temp_dir = tempfile.mkdtemp(prefix='vis-color-')
@@ -1823,7 +1823,8 @@ def main():
                         for metric in metrics:
                             data[metric['name'].replace(
                                 ' ', '')] = metric['value']
-                        data['videoRecordingStart'] = videoRecordingStart       
+                        if 'videoRecordingStart' in globals():        
+                            data['videoRecordingStart'] = videoRecordingStart       
                         print json.dumps(data)
                     else:
                         for metric in metrics:

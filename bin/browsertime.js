@@ -7,8 +7,6 @@ const logging = require('../').logging;
 const cli = require('../lib/support/cli');
 const StorageManager = require('../lib/support/storageManager');
 const merge = require('lodash.merge');
-const isEmpty = require('lodash.isempty');
-const pick = require('lodash.pick');
 const fs = require('fs');
 const path = require('path');
 const log = require('intel').getLogger('browsertime');
@@ -55,20 +53,9 @@ async function run(url, options) {
       const storageManager = new StorageManager(url, options);
       const harName = options.har ? options.har : 'browsertime';
       const jsonName = options.output ? options.output : 'browsertime';
-      const btData = pick(result, [
-        'info',
-        'browserScripts',
-        'statistics',
-        'visualMetrics',
-        'timestamps',
-        'cpu',
-        'errors'
-      ]);
-      if (!isEmpty(btData)) {
-        saveOperations.push(
-          storageManager.writeJson(jsonName + '.json', btData)
-        );
-      }
+
+      saveOperations.push(storageManager.writeJson(jsonName + '.json', result));
+
       if (result.har) {
         const useGzip = options.gzipHar === true;
         saveOperations.push(
@@ -80,9 +67,11 @@ async function run(url, options) {
       const resultDir = path.relative(process.cwd(), storageManager.directory);
 
       // check for errors
-      for (let errors of result.errors) {
-        if (errors.length > 0) {
-          process.exitCode = 1;
+      for (let eachRestult of result) {
+        for (let errors of eachRestult.errors) {
+          if (errors.length > 0) {
+            process.exitCode = 1;
+          }
         }
       }
       log.info(`Wrote data to ${resultDir}`);
