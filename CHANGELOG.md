@@ -4,16 +4,36 @@
 ### Added
 * Support for coming timeToContentfulPaint in Firefox (Nigthly at the moment) [#675](https://github.com/sitespeedio/browsertime/pull/675).
 
-* Support for navigating by script. More docs on the way [#666](https://github.com/sitespeedio/browsertime/pull/666).
-
 * Upgraded to Chrome-HAR 0.7.0.
 
 * Updated Chrome to 71 and Firefox 64 in the Docker container.
 
 * Updated to Chromedriver 2.44
 
+* Support for navigating by script. More docs on the way [#666](https://github.com/sitespeedio/browsertime/pull/666).
+
+* Support for testing multiple pages [#685](https://github.com/sitespeedio/browsertime/pull/685) with navigationScript. Documentation needed for this one :)
+
 ### Changed
 * New default trace categories for chrome.timeline: ```-*,devtools.timeline -> -, devtools.timeline, disabled-by-default-devtools.timeline, disabled-by-default-devtools.timeline.stack``` [#677](https://github.com/sitespeedio/browsertime/pull/677) and [#679](https://github.com/sitespeedio/browsertime/pull/679).
+
+* With the support of testing multiple pages, the structure of the result has changed (sorry there was no way avoiding that). The old structure of the result looked like: 
+``` {
+    "info": {
+        "browsertime": {
+            "version": "3.0.0"
+        }, ...
+```
+And the new one returns a array, where each tested page is an result in that array.  
+``` [{
+    "info": {
+        "browsertime": {
+            "version": "3.0.0"
+        }, ...
+```     
+That means JSON consumers needs to change the code, even if you only test one page. 
+
+The naming of videos, screenshots and trace logs has changed to include page number.
 
 ## 3.12.0
 ### Added
