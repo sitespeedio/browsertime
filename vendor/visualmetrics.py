@@ -1172,7 +1172,7 @@ def render_video(directory, video_file):
         if current_image is not None:
             command = ['ffmpeg', '-f', 'image2pipe', '-vcodec', 'png', '-r', '30', '-i', '-',
                        '-vcodec', 'libx264', '-r', '30', '-crf', '24', '-g', '15',
-                       '-preset', 'superfast', '-y', video_file]
+                       '-preset', 'superfast', '-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2', '-y', video_file]
             try:
                 proc = subprocess.Popen(command, stdin=subprocess.PIPE)
                 if proc:
