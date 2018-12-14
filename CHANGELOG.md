@@ -12,6 +12,7 @@
 * Support for navigating by script. More docs on the way [#666](https://github.com/sitespeedio/browsertime/pull/666).
 * Support for testing multiple pages [#685](https://github.com/sitespeedio/browsertime/pull/685) with navigationScript. Documentation needed for this one :)
 * Upgraded to newer version of installers of Chromedriver and Geckodriver: less dependencies and the ability to skip installing drivers [#681](https://github.com/sitespeedio/browsertime/pull/681).
+* It's now easier if you want to run stabel Chrome on Android. Just add --android (and make sure you started ADB) instead of setting application name and disable xvfb [#688](https://github.com/sitespeedio/browsertime/pull/688).
 
 ### Changed
 * New default trace categories for chrome.timeline: ```-*,devtools.timeline -> -, devtools.timeline, disabled-by-default-devtools.timeline, disabled-by-default-devtools.timeline.stack``` [#677](https://github.com/sitespeedio/browsertime/pull/677) and [#679](https://github.com/sitespeedio/browsertime/pull/679).
