@@ -1769,7 +1769,7 @@ def main():
                             image_magick['mogrify'] = mogrify
                             break
 
-    ok = False
+    ok = True
     try:
         if not options.check:
             viewport = None
