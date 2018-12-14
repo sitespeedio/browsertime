@@ -33,8 +33,6 @@ async function run(url, options) {
 
     let engine = new Engine(options);
 
-    log.info('Running %s for url: %s', options.browser, url);
-
     const scriptCategories = await browserScripts.allScriptCategories;
     let scriptsByCategory = await browserScripts.getScriptsForCategories(
       scriptCategories
