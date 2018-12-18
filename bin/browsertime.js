@@ -45,7 +45,7 @@ async function run(urls, options) {
 
     try {
       await engine.start();
-      const result = await engine.run(urls, scriptsByCategory);
+      const result = await engine.runMultiple(urls, scriptsByCategory);
       let saveOperations = [];
 
       // TODO setup by name
