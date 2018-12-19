@@ -175,81 +175,73 @@ The helper object got three methods that you can use:
 The really simple version looks like this:
 
 ~~~javascript
-module.exports = {
-  run(context) {
-    context.log.info('Running script navigation');
-    return context.h.measure('https://www.sitespeed.io/');
-  }
+module.exports = async function(context) {
+  context.log.info('Running script navigation');
+  return context.h.measure('https://www.sitespeed.io/');
 };
 ~~~
 
 Testing a page after you have logged in:
 
 ~~~javascript
-module.exports = {
-  run(context) {
-      await context.h.navigate(
-      'https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page');
-      // we fetch the selenium webdriver from context
-      const webdriver = context.webdriver;
-      const driver = context.driver;
-      // and get hold of some goodies we want to use
-      const until = webdriver.until;
-      const By = webdriver.By;
-      // before you start, make your username and password
-      const userName = 'USERNAME';
-      const password = 'PASSWORD';
-      driver.findElement(By.id('wpName1')).sendKeys(userName);
-      driver.findElement(By.id('wpPassword1')).sendKeys(password);
-      const loginButton = driver.findElement(webdriver.By.id('wpLoginAttempt'));
-      loginButton.click();
-      // we wait for something on the page that verifies that we are logged in
-      await driver.wait(until.elementLocated(By.id('pt-userpage')), 6000);
-      // You are now logged in, navigate to the page that we want to measure
-      return context.h.measure(context.url);
-  }
+module.exports = async function(context) {
+    await context.h.navigate(
+    'https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page');
+    // we fetch the selenium webdriver from context
+    const webdriver = context.webdriver;
+    const driver = context.driver;
+    // and get hold of some goodies we want to use
+    const until = webdriver.until;
+    const By = webdriver.By;
+    // before you start, make your username and password
+    const userName = 'USERNAME';
+    const password = 'PASSWORD';
+    driver.findElement(By.id('wpName1')).sendKeys(userName);
+    driver.findElement(By.id('wpPassword1')).sendKeys(password);
+    const loginButton = driver.findElement(webdriver.By.id('wpLoginAttempt'));
+    loginButton.click();
+    // we wait for something on the page that verifies that we are logged in
+    await driver.wait(until.elementLocated(By.id('pt-userpage')), 6000);
+    // You are now logged in, navigate to the page that we want to measure
+    return context.h.measure(context.url);
 };
 ~~~
 
 And a example measuring the actual log in step:
 
 ~~~javascript
-module.exports = {
-  run(context) {
-        await context.h.navigate(
-            'https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page');
-        // we fetch the selenium webdriver from context
-        const webdriver = context.webdriver;
-        const driver = context.driver;
-        // and get hold of some goodies we want to use
-        const until = webdriver.until;
-        const By = webdriver.By;
-        // before you start, make your username and password
-        const userName = 'USERNAME';
-        const password = 'PASSWORD';
-        driver.findElement(By.id('wpName1')).sendKeys(userName);
-        driver.findElement(By.id('wpPassword1')).sendKeys(password);
-        const loginButton = driver.findElement(webdriver.By.id('wpLoginAttempt'));
-        // Before we click on the login button, start the measurement
-        await context.h.startMeasure();
-        // Login the user
-        loginButton.click();
-        // we wait for something on the page that verifies that we are logged in
-        await driver.wait(until.elementLocated(By.id('pt-userpage')), 6000);
-        // Make sure to remember to collect the metrics
-        await context.h.stopMeasure();
-  }
+module.exports = async function(context) {
+  await context.h.navigate(
+      'https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page');
+  // we fetch the selenium webdriver from context
+  const webdriver = context.webdriver;
+  const driver = context.driver;
+  // and get hold of some goodies we want to use
+  const until = webdriver.until;
+  const By = webdriver.By;
+  // before you start, make your username and password
+  const userName = 'USERNAME';
+  const password = 'PASSWORD';
+  driver.findElement(By.id('wpName1')).sendKeys(userName);
+  driver.findElement(By.id('wpPassword1')).sendKeys(password);
+  const loginButton = driver.findElement(webdriver.By.id('wpLoginAttempt'));
+  // Before we click on the login button, start the measurement
+  await context.h.startMeasure();
+  // Login the user
+  loginButton.click();
+  // we wait for something on the page that verifies that we are logged in
+  await driver.wait(until.elementLocated(By.id('pt-userpage')), 6000);
+  // Make sure to remember to collect the metrics
+  await context.h.stopMeasure();
 };
 ~~~
 
 And test multiple pages:
 ~~~javascript
-module.exports = {
-  run(context) {
-    await context.h.measure('https://www.sitespeed.io');
-    await context.h.measure('https://www.sitespeed.io/examples/');
-    return context.h.measure('https://www.sitespeed.io/documentation/');
-  }
+module.exports = async function(context) {
+  await context.h.measure('https://www.sitespeed.io');
+  await context.h.measure('https://www.sitespeed.io/examples/');
+  return context.h.measure('https://www.sitespeed.io/documentation/');
 };
 ~~~
 
