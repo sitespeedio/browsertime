@@ -40,6 +40,8 @@ The naming of videos, screenshots and trace logs has changed to include page num
 
 * We removed pre/post scripts becasue now you can just run them without any extra parameters. You can now run your script like this:```browsertime preScript.js https://www.sitespeed.io postScript.js```. At the same time we added support for testing multiple pages after each other: ```browsertime https://www.sitespeed.io https://www.sitespeed.io/documentation/``` where the browser will stay open between the two different pages [#690](https://github.com/sitespeedio/browsertime/pull/690).
 
+* Changing default screen size from 1200x960 to 1366x768 [#691](https://github.com/sitespeedio/browsertime/pull/691).
+
 ### Tech
 * Updated all old dependencies [#682](https://github.com/sitespeedio/browsertime/pull/682) and [#678](https://github.com/sitespeedio/browsertime/pull/678).
 
