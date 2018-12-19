@@ -1,8 +1,4 @@
-module.exports = {
-  run(context, help) {
-    return context.runWithDriver(async function() {
-      context.log.info('Running script navigation');
-      return help.measure('https://www.sitespeed.io/');
-    });
-  }
+module.exports = async function(context) {
+  context.log.info('Running script navigation');
+  return context.h.measure('https://www.sitespeed.io/');
 };

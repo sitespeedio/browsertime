@@ -24,7 +24,7 @@ async function parseUserScripts(scripts) {
   return results;
 }
 
-async function run(url, options) {
+async function run(urls, options) {
   try {
     let dir = 'browsertime-results';
     if (!fs.existsSync(dir)) {
@@ -45,10 +45,11 @@ async function run(url, options) {
 
     try {
       await engine.start();
-      const result = await engine.run(url, scriptsByCategory);
+      const result = await engine.runMultiple(urls, scriptsByCategory);
       let saveOperations = [];
 
-      const storageManager = new StorageManager(url, options);
+      // TODO setup by name
+      const storageManager = new StorageManager(urls[0], options);
       const harName = options.har ? options.har : 'browsertime';
       const jsonName = options.output ? options.output : 'browsertime';
 
@@ -95,4 +96,4 @@ let cliResult = cli.parseCommandLine();
 
 logging.configure(cliResult.options);
 
-run(cliResult.url, cliResult.options);
+run(cliResult.urls, cliResult.options);
