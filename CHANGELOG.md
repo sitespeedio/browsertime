@@ -45,6 +45,9 @@ The naming of videos, screenshots and trace logs has changed to include page num
 ### Tech
 * Updated all old dependencies [#682](https://github.com/sitespeedio/browsertime/pull/682) and [#678](https://github.com/sitespeedio/browsertime/pull/678).
 
+### Known bugs
+* --videoParams.combine isn't implemented for the current version (yet).
+
 ## 3.12.0
 ### Added
 * Add ```--verbose``` and Visual Metrics will log to a log file in the video dir (that makes it easier for people that report bugs) [#662](https://github.com/sitespeedio/browsertime/pull/662).
