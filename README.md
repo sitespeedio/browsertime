@@ -198,7 +198,7 @@ The context object:
 The helper object got three methods that you can use:
 * *navigate(URL)* - Use this if you want to use the exact way as Browsertime navigates to a new URL (same settings with pageCompleteCheck etc). But that URL will not be measured automatically.
 * *measure(URL)* - Start measuring and navigate to a new page in one go and measure.
-* *startMeasure()* - Use this when you want to start to measure a page. This will start the video and prepare everything to collect metrics.
+* *startMeasure(URL)* - Use this when you want to start to measure a page. This will start the video and prepare everything to collect metrics.
 * *collect()* - Collect metrics for a page.
 
 The really simple version looks like this:
@@ -255,7 +255,7 @@ module.exports = async function(context) {
   driver.findElement(By.id('wpPassword1')).sendKeys(password);
   const loginButton = driver.findElement(webdriver.By.id('wpLoginAttempt'));
   // Before we click on the login button, start the measurement
-  await context.h.startMeasure();
+  await context.h.startMeasure('https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page');
   // Login the user
   loginButton.click();
   // we wait for something on the page that verifies that we are logged in
