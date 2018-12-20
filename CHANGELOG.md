@@ -8,13 +8,15 @@
 * Support for coming timeToContentfulPaint in Firefox (Nigthly at the moment) [#675](https://github.com/sitespeedio/browsertime/pull/675).
 * Upgraded to Chrome-HAR 0.7.1.
 * Updated Chrome to 71 and Firefox 64 in the Docker container.
-* Updated to Chromedriver 2.44
+* Updated to Chromedriver 2.44.
 * Support for navigating by script. More docs on the way [#666](https://github.com/sitespeedio/browsertime/pull/666).
-* Support for testing multiple pages [#685](https://github.com/sitespeedio/browsertime/pull/685) with navigationScript. Documentation needed for this one :)
+* Support for testing multiple pages [#685](https://github.com/sitespeedio/browsertime/pull/685) with navigationScript. [Read the documetation](https://github.com/sitespeedio/browsertime/#script-navigation-in-40-alpa1-or-later).
 * Upgraded to newer version of installers of Chromedriver and Geckodriver: less dependencies and the ability to skip installing drivers [#681](https://github.com/sitespeedio/browsertime/pull/681).
-* It's now easier if you want to run stabel Chrome on Android. Just add --android (and make sure you started ADB) instead of setting application name and disable xvfb [#688](https://github.com/sitespeedio/browsertime/pull/688).
+* It's now easier if you want to run stable Chrome on Android. Just add --android (and make sure you started ADB) instead of setting application name and disable xvfb [#688](https://github.com/sitespeedio/browsertime/pull/688).
 
 ### Changed
+Read about [what has changed in 4.0](https://github.com/sitespeedio/browsertime#upgrade-from-3x-to-40).
+
 * New default trace categories for chrome.timeline: ```-*,devtools.timeline -> -, devtools.timeline, disabled-by-default-devtools.timeline, disabled-by-default-devtools.timeline.stack``` [#677](https://github.com/sitespeedio/browsertime/pull/677) and [#679](https://github.com/sitespeedio/browsertime/pull/679).
 
 * With the support of testing multiple pages, the structure of the result has changed (sorry there was no way avoiding that). The old structure of the result looked like: 

@@ -151,19 +151,48 @@ browsertime --connectivity.engine throttle -c cable https://www.sitespeed.io/
 
 You can also use Throttle inside of Docker but then the host need to be the same OS as in Docker. In practice you can only use it on Linux. And then make sure to run *sudo modprobe ifb numifbs=1* first and give the container the right privileges *--cap-add=NET_ADMIN*.
 
-## Script navigation [in coming 4.0 or later]
+## Upgrade from 3.x to 4.0
+There are a couple of breaking changes introduce in 4.0.
+
+1. New structure of the result JSON. In 4.0 we introduce the ability to test multiple pages. That means that instead of returning one result object, we return an array. In 3.x the result looks like this:
+  ``` 
+  {
+  "info": {
+      "browsertime": {
+          "version": "3.0.0"
+      }, ...
+  ```
+  And the new one returns a array, where each tested page is an result in that array.  
+  ``` 
+  [{
+  "info": {
+      "browsertime": {
+          "version": "4.0.0"
+      }, ...
+  }}]
+  ``` 
+2. New naming of result files. Before files was named by iteration: 1-video.mp4. In the latest version they are also named by page number: 1-1-video.mp4 (pageNumber-iteration-type.filetype).   
+3. No more pre/post script! With 4.0 you can run your pre/post script by just give the order to browsertime:  ```browsertime preScript.js https://www.sitespeed.io/ postScripts.js```
+4. New layout of Selenium scripting. We simplified the layout of the script. The new version will be able to do the exact same thing as older versions but with a simpler layout:
+~~~javascript
+  module.exports = async function(context) {
+  // code
+  }
+~~~
+
+## Script navigation [in 4.0-alpa1 or later]
 If you need a more complicated test scenario, you can define your own (Selenium)test script that will do the testing. Use your own test script when you want to test your page as a logged in user, the login page or if you want to add things to your cart.
 
 You run your navigation script by loading the script instead of giving an URL. 
 
 The context object:
-* *url* - The URL that you want are under test
-* *options* - All the options sent from the CLI to Browsertime
-* *log* - an instance to the log system so you can log from your navigation script
-* *index* - the index of the runs, so you can keep track of which run that is running
+* *url* - The URL that you want are under test.
+* *options* - All the options sent from the CLI to Browsertime.
+* *log* - an instance to the log system so you can log from your navigation script.
+* *index* - the index of the runs, so you can keep track of which run that is running.
 * *storageManager* - The Browsertime storage manager that can help you get read/store files to disk.
-* *webdriver* -  The Selenium WebDriver object
-* *driver* - 
+* *webdriver* -  The Selenium [WebDriver public API object](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index.html).
+* *driver* - The [instantiated version of the WebDriver](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_WebDriver.html) driving the current version of the browser.
 * *h* - a helper object for navigation and measuring. See more below.
 
 The helper object got three methods that you can use:
@@ -246,7 +275,7 @@ module.exports = async function(context) {
 ~~~
 
 ## Test on your mobile device
-Browsertime supports Chrome on Android: Collecting SpeedIndex, HAR and video! This is still really new, let us know if you find any bugs.
+Browsertime supports Chrome on Android: Collecting SpeedIndex, HAR and video! 
 
 You need to [install adb](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#desktop) and [prepare your phone](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#on-your-phone) before you start.
 
@@ -256,16 +285,15 @@ If you want to set connectivity you need to use something like [Micro device lab
 $ browsertime --chrome.android.package com.android.chrome https://www.sitespeed.io --video --visualMetrics
 </pre>
 
-If you are on Linux (we have tested Ubuntu 16) you can use our Docker container to drive your Android phone. A couple of things to remember:
- * You need to run in privileged mode *--privileged*
- * You need to share the USB ports *-v /dev/bus/usb:/dev/bus/usb*
+If you are on Linux (we have tested Ubuntu 18) you can use our Docker container to drive your Android phone. A couple of things to remember:
+ * You need to run in privileged mode *--privileged* if you share the full usb bus
+ * You need to share the USB ports *-v /dev/bus/usb:/dev/bus/usb* or share a specific port with *--device=/dev/bus/usb/001/017* (use *lsusb* to find the right mapping)
  * Add *-e START_ADB_SERVER=true* to start the adb server
- * Turn of xvfb *--xvfb false* (we start that automatically)
 
 If you use Docker you will automatically get support for video and SpeedIndex. You can get that without Docker but then need to [install VisualMetrics dependencies](https://github.com/sitespeedio/docker-visualmetrics-deps/blob/master/Dockerfile) yourself.
 
 <pre>
-$ docker run --privileged -v /dev/bus/usb:/dev/bus/usb -e START_ADB_SERVER=true --shm-size=1g --rm -v "$(pwd)":/browsertime-results sitespeedio/browsertime -n 1 --chrome.android.package com.android.chrome --xvfb false --visualMetrics --video https://en.m.wikipedia.org/wiki/Barack_Obama
+$ docker run --privileged -v /dev/bus/usb:/dev/bus/usb -e START_ADB_SERVER=true --shm-size=1g --rm -v "$(pwd)":/browsertime-results sitespeedio/browsertime -n 1 --android --visualMetrics --video https://en.m.wikipedia.org/wiki/Barack_Obama
 </pre>
 
 ## Configuration
@@ -301,7 +329,7 @@ docker run --cap-add=NET_ADMIN --shm-size=1g --rm -v "$(pwd)":/browsertime -e RE
 And Chrome on your Android phone. This will only work on Linux because you need to be able to mount the usb port in Docker:
 
 ```
-docker run --privileged -v /dev/bus/usb:/dev/bus/usb -e START_ADB_SERVER=true --cap-add=NET_ADMIN --shm-size=1g --rm -v “$(pwd)“:/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime https://en.m.wikipedia.org/wiki/Barack_Obama --chrome.android.package com.android.chrome --xvfb false --chrome.args ignore-certificate-errors-spki-list=PhrPvGIaAMmd29hj8BCZOq096yj7uMpRNHpn5PDxI6I= -n 11 --chrome.args user-data-dir=/data/tmp/chrome
+docker run --privileged -v /dev/bus/usb:/dev/bus/usb -e START_ADB_SERVER=true --cap-add=NET_ADMIN --shm-size=1g --rm -v “$(pwd)“:/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime https://en.m.wikipedia.org/wiki/Barack_Obama --android --chrome.args ignore-certificate-errors-spki-list=PhrPvGIaAMmd29hj8BCZOq096yj7uMpRNHpn5PDxI6I= -n 11 --chrome.args user-data-dir=/data/tmp/chrome
 ```
 
 ## Send metrics to Graphite
