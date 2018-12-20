@@ -1,5 +1,8 @@
 # Browsertime changelog
-## UNRELEASED
+
+## UNRELEASED 
+
+## 4.0.0-alpha.1 - 2018-12-20
 
 ### Fixed
 * Fixed broken boolean preference for Firefox, thank you [@dpalmeiro)](https://github.com/dpalmeiro) for the fix [#683](https://github.com/sitespeedio/browsertime/pull/683).
@@ -10,7 +13,7 @@
 * Updated Chrome to 71 and Firefox 64 in the Docker container.
 * Updated to Chromedriver 2.44.
 * Support for navigating by script. More docs on the way [#666](https://github.com/sitespeedio/browsertime/pull/666).
-* Support for testing multiple pages [#685](https://github.com/sitespeedio/browsertime/pull/685) with navigationScript. [Read the documetation](https://github.com/sitespeedio/browsertime/#script-navigation-in-40-alpa1-or-later).
+* Support for testing multiple pages [#685](https://github.com/sitespeedio/browsertime/pull/685) with navigationScript. [Read the documentation](https://github.com/sitespeedio/browsertime/#script-navigation-in-40-alpa1-or-later).
 * Upgraded to newer version of installers of Chromedriver and Geckodriver: less dependencies and the ability to skip installing drivers [#681](https://github.com/sitespeedio/browsertime/pull/681).
 * It's now easier if you want to run stable Chrome on Android. Just add --android (and make sure you started ADB) instead of setting application name and disable xvfb [#688](https://github.com/sitespeedio/browsertime/pull/688).
 
