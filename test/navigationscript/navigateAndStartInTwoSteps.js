@@ -7,7 +7,7 @@ module.exports = async function(context) {
   const until = webdriver.until;
   const By = webdriver.By;
   // before you start, make your username and password
-  await context.h.startMeasure();
+  await context.h.startMeasure('https://www.sitespeed.io');
   const docLink = driver.findElement(By.linkText('Documentation'));
   // Before we click on the link, start the measurement
   docLink.click();
