@@ -285,11 +285,10 @@ If you want to set connectivity you need to use something like [Micro device lab
 $ browsertime --chrome.android.package com.android.chrome https://www.sitespeed.io --video --visualMetrics
 </pre>
 
-If you are on Linux (we have tested Ubuntu 16) you can use our Docker container to drive your Android phone. A couple of things to remember:
- * You need to run in privileged mode *--privileged*
- * You need to share the USB ports *-v /dev/bus/usb:/dev/bus/usb*
+If you are on Linux (we have tested Ubuntu 18) you can use our Docker container to drive your Android phone. A couple of things to remember:
+ * You need to run in privileged mode *--privileged* if you share the full usb bus
+ * You need to share the USB ports *-v /dev/bus/usb:/dev/bus/usb* or share a specific port with *--device=/dev/bus/usb/001/017* (use *lsusb* to find the right mapping)
  * Add *-e START_ADB_SERVER=true* to start the adb server
- * Turn of xvfb *--xvfb false* (we start that automatically)
 
 If you use Docker you will automatically get support for video and SpeedIndex. You can get that without Docker but then need to [install VisualMetrics dependencies](https://github.com/sitespeedio/docker-visualmetrics-deps/blob/master/Dockerfile) yourself.
 
