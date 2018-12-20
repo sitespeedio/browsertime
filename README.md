@@ -186,12 +186,12 @@ If you need a more complicated test scenario, you can define your own (Selenium)
 You run your navigation script by loading the script instead of giving an URL. 
 
 The context object:
-* *url* - The URL that you want are under test
-* *options* - All the options sent from the CLI to Browsertime
-* *log* - an instance to the log system so you can log from your navigation script
-* *index* - the index of the runs, so you can keep track of which run that is running
+* *url* - The URL that you want are under test.
+* *options* - All the options sent from the CLI to Browsertime.
+* *log* - an instance to the log system so you can log from your navigation script.
+* *index* - the index of the runs, so you can keep track of which run that is running.
 * *storageManager* - The Browsertime storage manager that can help you get read/store files to disk.
-* *webdriver* -  The Selenium [WebDriver public API object](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index.html)
+* *webdriver* -  The Selenium [WebDriver public API object](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index.html).
 * *driver* - The [instantiated version of the WebDriver](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_WebDriver.html) driving the current version of the browser.
 * *h* - a helper object for navigation and measuring. See more below.
 
