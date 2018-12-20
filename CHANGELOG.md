@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* Metrics wasn't insterted into right page in the HAR [#695](https://github.com/sitespeedio/browsertime/pull/695).
+
 ## 4.0.0-alpha.2 - 2018-12-20
 
 ### Changed
