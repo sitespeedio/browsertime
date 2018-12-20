@@ -1,6 +1,9 @@
 # Browsertime changelog
 
-## UNRELEASED 
+## 4.0.0-alpha.2 - 2018-12-20
+
+### Changed
+* All data files (videos/screenshots etc) follows the pattern of sitespeed.io and are stored in a folder strucure from the page URL[#694](https://github.com/sitespeedio/browsertime/pull/694). The files are referenced in the browsertime.json.
 
 ## 4.0.0-alpha.1 - 2018-12-20
 
