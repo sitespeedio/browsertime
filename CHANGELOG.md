@@ -60,6 +60,10 @@ The naming of videos, screenshots and trace logs has changed to include page num
 ### Known bugs
 * --videoParams.combine isn't implemented for the current version (yet).
 
+## 3.12.1
+### Fixed
+* Updated Docker to use latest Firefox and Chrome to avoid using the update me popup in Firefox.
+
 ## 3.12.0
 ### Added
 * Add ```--verbose``` and Visual Metrics will log to a log file in the video dir (that makes it easier for people that report bugs) [#662](https://github.com/sitespeedio/browsertime/pull/662).
