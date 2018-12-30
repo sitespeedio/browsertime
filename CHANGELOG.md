@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 4.0.0-alpha.4 - 2018-12-30
 ### Fixed
 * Another go trying to disable the Firefox updater [#696](https://github.com/sitespeedio/browsertime/pull/696).
 * Disable dev-shm by default for Chrome [#697](https://github.com/sitespeedio/browsertime/pull/697), thank you [Vitalii Tverdokhlib](https://github.com/vitaliytv) for the PR. Docs will be updated when we release next stable.
