@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* Create data dir before we try to store extra JSON files [#699](https://github.com/sitespeedio/browsertime/pull/699).
+
 ## 4.0.0-alpha.4 - 2018-12-30
 ### Fixed
 * Another go trying to disable the Firefox updater [#696](https://github.com/sitespeedio/browsertime/pull/696).
