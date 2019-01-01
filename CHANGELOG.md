@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* Shorter paths for using hash in URLs.
+* Make sure data dir use a fallback URL
+
 ## 4.0.0-alpha.5 - 2019-01-01
 ### Fixed
 * Create data dir before we try to store extra JSON files [#699](https://github.com/sitespeedio/browsertime/pull/699).
