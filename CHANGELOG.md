@@ -5,6 +5,9 @@
 * Shorter paths for using hash in URLs.
 * Make sure data dir use a fallback URL
 
+### Added
+* Added support for --spa configuration that will: Automatically use hash/params in file names and wait X seconds for no request in resource timing api as pageCompleteCheck [#700](https://github.com/sitespeedio/browsertime/pull/700) [#698](https://github.com/sitespeedio/browsertime/pull/698).
+
 ## 4.0.0-alpha.5 - 2019-01-01
 ### Fixed
 * Create data dir before we try to store extra JSON files [#699](https://github.com/sitespeedio/browsertime/pull/699).
