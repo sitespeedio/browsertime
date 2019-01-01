@@ -9,7 +9,7 @@
     "@sitespeed.io/throttle": "0.5.0",
     "adbkit": "2.11.0",
     "@sitespeed.io/chromedriver": "2.44.1",
-    "chrome-har": "0.7.1",
+    "chrome-har": "0.8.0",
     "chrome-trace": "0.2.0",
     "dayjs": "1.7.8",
     "execa": "1.0.0",

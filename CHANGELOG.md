@@ -1,8 +1,10 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 4.0.0-alpha.5 - 2019-01-01
 ### Fixed
 * Create data dir before we try to store extra JSON files [#699](https://github.com/sitespeedio/browsertime/pull/699).
+
+* Use latest Chrome-HAR 0.8.0
 
 ## 4.0.0-alpha.4 - 2018-12-30
 ### Fixed
