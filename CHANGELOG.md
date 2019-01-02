@@ -2,6 +2,11 @@
 
 ## UNRELEASED
 ### Fixed
+* Firefox proxy port not being set properly. Thank you [dpalmeiro](https://github.com/dpalmeiro) for the fix and PR
+[#702](https://github.com/sitespeedio/browsertime/pull/702).
+
+## 4.0.0-alpha.6 - 2019-01-01
+### Fixed
 * Shorter paths for using hash in URLs.
 * Make sure data dir use a fallback URL
 
