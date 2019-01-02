@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 4.0.0-alpha.8 - 2019-01-03
+### Fixed
+* Fixed broken console/netlod/performance log (from alpha 7). 
+
 ## 4.0.0-alpha.7 - 2019-01-03
 ### Fixed
 * Firefox proxy port not being set properly. Thank you [dpalmeiro](https://github.com/dpalmeiro) for the fix and PR
