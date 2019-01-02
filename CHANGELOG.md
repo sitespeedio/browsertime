@@ -1,12 +1,13 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 4.0.0-alpha.7 - 2019-01-03
 ### Fixed
 * Firefox proxy port not being set properly. Thank you [dpalmeiro](https://github.com/dpalmeiro) for the fix and PR
 [#702](https://github.com/sitespeedio/browsertime/pull/702).
+* New version of Chrome-HAR 0.8.1
 
 ### Added
-* Inlcude paths to the console log, performance log and net log for Chrome in the result JSON [#703](https://github.com/sitespeedio/browsertime/pull/703)
+* Include paths to the console log, performance log and net log for Chrome in the result JSON [#703](https://github.com/sitespeedio/browsertime/pull/703).
 
 ## 4.0.0-alpha.6 - 2019-01-01
 ### Fixed
