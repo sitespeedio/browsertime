@@ -5,13 +5,16 @@
 * Firefox proxy port not being set properly. Thank you [dpalmeiro](https://github.com/dpalmeiro) for the fix and PR
 [#702](https://github.com/sitespeedio/browsertime/pull/702).
 
+### Added
+* Inlcude paths to the console log, performance log and net log for Chrome in the result JSON [#703](https://github.com/sitespeedio/browsertime/pull/703)
+
 ## 4.0.0-alpha.6 - 2019-01-01
 ### Fixed
 * Shorter paths for using hash in URLs.
 * Make sure data dir use a fallback URL
 
 ### Added
-* Added support for --spa configuration that will: Automatically use hash/params in file names and wait X seconds for no request in resource timing api as pageCompleteCheck [#700](https://github.com/sitespeedio/browsertime/pull/700) [#698](https://github.com/sitespeedio/browsertime/pull/698).
+* Added support for ```--spa``` configuration that will: Automatically use hash/params in file names and wait X seconds for no request in resource timing api as pageCompleteCheck [#700](https://github.com/sitespeedio/browsertime/pull/700) [#698](https://github.com/sitespeedio/browsertime/pull/698).
 
 ## 4.0.0-alpha.5 - 2019-01-01
 ### Fixed
