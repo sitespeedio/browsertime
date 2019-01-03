@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 4.0.0-alpha.10 - 2019-01-03
+### Fixed
+* Another Chrome-HAR fix to actually keep the URL fragment (hash).
+
 ## 4.0.0-alpha.9 - 2019-01-03
 ### Fixed
 * Use Chrome-HAR 0.9.0 that doesn't strup the hash(#) out of the URL.
