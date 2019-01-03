@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* Use Chrome-HAR 0.9.0 that doesn't strup the hash(#) out of the URL.
+* Added .gz for missing file paths in the result JSON.
+
 ## 4.0.0-alpha.8 - 2019-01-03
 ### Fixed
 * Fixed broken console/netlod/performance log (from alpha 7). 
