@@ -1,4 +1,4 @@
-module.exports = async function(context) {
+module.exports = async function(context, commands) {
   context.log.info('Running script navigation');
-  return context.measure.startAndNavigate('https://www.sitespeed.io/');
+  return commands.measure.startAndNavigate('https://www.sitespeed.io/');
 };
