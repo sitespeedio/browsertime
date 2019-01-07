@@ -186,93 +186,81 @@ If you need a more complicated test scenario, you can define your own (Selenium)
 You run your navigation script by loading the script instead of giving an URL. 
 
 The context object:
-* *url* - The URL that you want are under test.
+* *navigate(URL)* - Use this if you want to use the exact way as Browsertime navigates to a new URL (same settings with pageCompleteCheck etc). But that URL will not be measured automatically.
+* *measure.startAndNavigate(URL)* - Start measuring and navigate to a new page in one go and measure.
+* *measure.start(URL)* - Use this when you want to start to measure a page. This will start the video and prepare everything to collect metrics. But it will not navigate to the URL.
+* *measure.stop()* - Collect metrics for a page.
+* *selenium.webdriver* -  The Selenium [WebDriver public API object](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index.html).
+* *selenium.driver* - The [instantiated version of the WebDriver](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_WebDriver.html) driving the current version of the browser.
 * *options* - All the options sent from the CLI to Browsertime.
 * *log* - an instance to the log system so you can log from your navigation script.
 * *index* - the index of the runs, so you can keep track of which run that is running.
 * *storageManager* - The Browsertime storage manager that can help you get read/store files to disk.
-* *webdriver* -  The Selenium [WebDriver public API object](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index.html).
-* *driver* - The [instantiated version of the WebDriver](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_WebDriver.html) driving the current version of the browser.
-* *h* - a helper object for navigation and measuring. See more below.
-
-The helper object got three methods that you can use:
-* *navigate(URL)* - Use this if you want to use the exact way as Browsertime navigates to a new URL (same settings with pageCompleteCheck etc). But that URL will not be measured automatically.
-* *measure(URL)* - Start measuring and navigate to a new page in one go and measure.
-* *startMeasure(URL)* - Use this when you want to start to measure a page. This will start the video and prepare everything to collect metrics.
-* *collect()* - Collect metrics for a page.
 
 The really simple version looks like this:
 
 ~~~javascript
 module.exports = async function(context) {
   context.log.info('Running script navigation');
-  return context.h.measure('https://www.sitespeed.io/');
+  return context.measure.startAndNavigate('https://www.sitespeed.io/');
+};
+~~~
+
+
+Measuring the actual log in step:
+
+~~~javascript
+module.exports = async function(context) {
+  await context.navigate(
+    'https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page'
+  );
+  // Add text into an input field y finding the field by id
+  await context.text.byId('login', 'wpName1');
+  await context.text.byId('password', 'wpPassword1');
+  await context.measure.start(
+    'https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page'
+  );
+
+  await context.click.byIdAndWait('wpLoginAttempt');
+
+  return context.measure.stop();
 };
 ~~~
 
 Testing a page after you have logged in:
+First create a script that logs in the user (login.js):
 
 ~~~javascript
 module.exports = async function(context) {
-    await context.h.navigate(
-    'https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page');
-    // we fetch the selenium webdriver from context
-    const webdriver = context.webdriver;
-    const driver = context.driver;
-    // and get hold of some goodies we want to use
-    const until = webdriver.until;
-    const By = webdriver.By;
-    // before you start, make your username and password
-    const userName = 'USERNAME';
-    const password = 'PASSWORD';
-    driver.findElement(By.id('wpName1')).sendKeys(userName);
-    driver.findElement(By.id('wpPassword1')).sendKeys(password);
-    const loginButton = driver.findElement(webdriver.By.id('wpLoginAttempt'));
-    loginButton.click();
-    // we wait for something on the page that verifies that we are logged in
-    await driver.wait(until.elementLocated(By.id('pt-userpage')), 6000);
-    // You are now logged in, navigate to the page that we want to measure
-    return context.h.measure(context.url);
+await context.navigate(
+    'https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page'
+  );
+
+  await context.text.byId('login', 'wpName1');
+  await context.text.byId('password', 'wpPassword1');
+  // Click on the submit button with id wpLoginAttempt
+  await context.click.byIdAndWait('wpLoginAttempt');
+  return context.wait.byId('pt-userpage', 10000);
 };
 ~~~
 
-And a example measuring the actual log in step:
+Then acceess the page that you want to test:
 
+~~~bash
+browsertime login.js https://en.wikipedia.org/wiki/Barack_Obama
+~~~
+
+
+And test multiple pages in a csript:
 ~~~javascript
 module.exports = async function(context) {
-  await context.h.navigate(
-      'https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page');
-  // we fetch the selenium webdriver from context
-  const webdriver = context.webdriver;
-  const driver = context.driver;
-  // and get hold of some goodies we want to use
-  const until = webdriver.until;
-  const By = webdriver.By;
-  // before you start, make your username and password
-  const userName = 'USERNAME';
-  const password = 'PASSWORD';
-  driver.findElement(By.id('wpName1')).sendKeys(userName);
-  driver.findElement(By.id('wpPassword1')).sendKeys(password);
-  const loginButton = driver.findElement(webdriver.By.id('wpLoginAttempt'));
-  // Before we click on the login button, start the measurement
-  await context.h.startMeasure('https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page');
-  // Login the user
-  loginButton.click();
-  // we wait for something on the page that verifies that we are logged in
-  await driver.wait(until.elementLocated(By.id('pt-userpage')), 6000);
-  // Make sure to remember to collect the metrics
-  await context.h.stopMeasure();
+  await context.measure.startAndNavigate('https://www.sitespeed.io');
+  await context.measure.startAndNavigate('https://www.sitespeed.io/examples/');
+  return context.measure.startAndNavigate('https://www.sitespeed.io/documentation/');
 };
 ~~~
 
-And test multiple pages:
-~~~javascript
-module.exports = async function(context) {
-  await context.h.measure('https://www.sitespeed.io');
-  await context.h.measure('https://www.sitespeed.io/examples/');
-  return context.h.measure('https://www.sitespeed.io/documentation/');
-};
-~~~
+If you need to do more complicated stuff, you can use Selenium directly. *selenium.webdriver* is the Selenium [WebDriver public API object](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index.html) and *selenium.driver* the [instantiated version of the WebDriver](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_WebDriver.html) driving the current version of the browser. That should cover most of your use cases, else let us know.
 
 ## Test on your mobile device
 Browsertime supports Chrome on Android: Collecting SpeedIndex, HAR and video! 
