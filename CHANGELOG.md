@@ -1,7 +1,11 @@
 # Browsertime changelog
+## 4.0.0-alpha.13 - 2019-01-07
+### Changed
+* And a bug fix. I think we are soon ready for first beta.
+
 ## 4.0.0-alpha.12 - 2019-01-07
 ### Changed
-* And last fixes for commands. I think we are soon ready for first beta.
+* And last fixes for commands.
 
 ## 4.0.0-alpha.11 - 2019-01-07
 ### Changed
