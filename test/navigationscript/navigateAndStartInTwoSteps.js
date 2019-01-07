@@ -9,7 +9,7 @@ module.exports = async function(context, commands) {
 
   const docLink = driver.findElement(By.linkText('Documentation'));
   // before you start, make your username and password
-  await commands.measure.start('https://www.sitespeed.io');
+  await commands.measure.start();
   // Before we click on the link, start the measurement
   docLink.click();
   await driver.wait(until.elementLocated(By.linkText('Chrome-HAR')), 6000);
