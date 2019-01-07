@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Changed
+* New structure to use help methods to navigate etc. This will make it cleaner to use.  Readme updated. [#704](https://github.com/sitespeedio/browsertime/pull/704).
+
 ## 4.0.0-alpha.10 - 2019-01-03
 ### Fixed
 * Another Chrome-HAR fix to actually keep the URL fragment (hash).
@@ -11,7 +15,7 @@
 
 ## 4.0.0-alpha.8 - 2019-01-03
 ### Fixed
-* Fixed broken console/netlod/performance log (from alpha 7). 
+* Fixed broken console/netlog/performance log (from alpha 7). 
 
 ## 4.0.0-alpha.7 - 2019-01-03
 ### Fixed
