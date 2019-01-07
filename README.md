@@ -185,24 +185,30 @@ If you need a more complicated test scenario, you can define your own (Selenium)
 
 You run your navigation script by loading the script instead of giving an URL. 
 
+Your script will get access to two objects: The *context* object that holds information about the current run and the *commands* object that has commands/shortcuts to navigate in the page,
+
 The context object:
-* *navigate(URL)* - Use this if you want to use the exact way as Browsertime navigates to a new URL (same settings with pageCompleteCheck etc). But that URL will not be measured automatically.
-* *measure.startAndNavigate(URL)* - Start measuring and navigate to a new page in one go and measure.
-* *measure.start(URL)* - Use this when you want to start to measure a page. This will start the video and prepare everything to collect metrics. But it will not navigate to the URL.
-* *measure.stop()* - Collect metrics for a page.
-* *selenium.webdriver* -  The Selenium [WebDriver public API object](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index.html).
-* *selenium.driver* - The [instantiated version of the WebDriver](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_WebDriver.html) driving the current version of the browser.
 * *options* - All the options sent from the CLI to Browsertime.
 * *log* - an instance to the log system so you can log from your navigation script.
 * *index* - the index of the runs, so you can keep track of which run that is running.
 * *storageManager* - The Browsertime storage manager that can help you get read/store files to disk.
+* *selenium.webdriver* -  The Selenium [WebDriver public API object](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index.html).
+* *selenium.driver* - The [instantiated version of the WebDriver](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_WebDriver.html) driving the current version of the browser.
+
+
+The commands object:
+* *navigate(URL)* - Use this if you want to use the exact way as Browsertime navigates to a new URL (same settings with pageCompleteCheck etc). But that URL will not be measured automatically.
+* *measure.startAndNavigate(URL)* - Start measuring and navigate to a new page in one go and measure.
+* *measure.start(URL)* - Use this when you want to start to measure a page. This will start the video and prepare everything to collect metrics. But it will not navigate to the URL.
+* *measure.stop()* - Collect metrics for a page.
+
 
 The really simple version looks like this:
 
 ~~~javascript
-module.exports = async function(context) {
+module.exports = async function(context, commands) {
   context.log.info('Running script navigation');
-  return context.measure.startAndNavigate('https://www.sitespeed.io/');
+  return commands.measure.startAndNavigate('https://www.sitespeed.io/');
 };
 ~~~
 
@@ -210,20 +216,21 @@ module.exports = async function(context) {
 Measuring the actual log in step:
 
 ~~~javascript
-module.exports = async function(context) {
-  await context.navigate(
+module.exports = async function(context, commands) {
+  await commands.navigate(
     'https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page'
   );
   // Add text into an input field y finding the field by id
-  await context.text.byId('login', 'wpName1');
-  await context.text.byId('password', 'wpPassword1');
-  await context.measure.start(
+  await commands.addText.byId('login', 'wpName1');
+  await commands.addText.byId('password', 'wpPassword1');
+  await commands.measure.start(
     'https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page'
   );
 
-  await context.click.byIdAndWait('wpLoginAttempt');
+  // find the sumbit button and click it
+  await commands.click.byIdAndWait('wpLoginAttempt');
 
-  return context.measure.stop();
+  return commands.measure.stop();
 };
 ~~~
 
@@ -231,16 +238,16 @@ Testing a page after you have logged in:
 First create a script that logs in the user (login.js):
 
 ~~~javascript
-module.exports = async function(context) {
-await context.navigate(
+module.exports = async function(context, commands) {
+await commands.navigate(
     'https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page'
   );
 
-  await context.text.byId('login', 'wpName1');
-  await context.text.byId('password', 'wpPassword1');
+  await commands.addText.byId('login', 'wpName1');
+  await commands.addText.byId('password', 'wpPassword1');
   // Click on the submit button with id wpLoginAttempt
-  await context.click.byIdAndWait('wpLoginAttempt');
-  return context.wait.byId('pt-userpage', 10000);
+  await commands.click.byIdAndWait('wpLoginAttempt');
+  return commands.wait.byId('pt-userpage', 10000);
 };
 ~~~
 
@@ -251,12 +258,13 @@ browsertime login.js https://en.wikipedia.org/wiki/Barack_Obama
 ~~~
 
 
-And test multiple pages in a csript:
+And test multiple pages in a script:
+
 ~~~javascript
-module.exports = async function(context) {
-  await context.measure.startAndNavigate('https://www.sitespeed.io');
-  await context.measure.startAndNavigate('https://www.sitespeed.io/examples/');
-  return context.measure.startAndNavigate('https://www.sitespeed.io/documentation/');
+module.exports = async function(context, commands) {
+  await commands.measure.startAndNavigate('https://www.sitespeed.io');
+  await commands.measure.startAndNavigate('https://www.sitespeed.io/examples/');
+  return commands.measure.startAndNavigate('https://www.sitespeed.io/documentation/');
 };
 ~~~
 
