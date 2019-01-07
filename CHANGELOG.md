@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 4.0.0-alpha.11 - 2019-01-07
 ### Changed
 * New structure to use help methods to navigate etc. This will make it cleaner to use.  Readme updated. [#704](https://github.com/sitespeedio/browsertime/pull/704).
 
