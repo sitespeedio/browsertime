@@ -1,4 +1,8 @@
 # Browsertime changelog
+## UNRELEASED
+### Fixed
+* Make it simpler to run measure.start and measure.statrt(URL) [#706](https://github.com/sitespeedio/browsertime/pull/706).
+
 ## 4.0.0-alpha.13 - 2019-01-07
 ### Changed
 * And a bug fix. I think we are soon ready for first beta.
