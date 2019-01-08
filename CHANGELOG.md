@@ -1,7 +1,11 @@
 # Browsertime changelog
 ## UNRELEASED
 ### Fixed
-* Make it simpler to run measure.start and measure.statrt(URL) [#706](https://github.com/sitespeedio/browsertime/pull/706).
+* Make it simpler to run measure.start and measure.statrt(URL) [#706](https://github.com/sitespeedio/browsertime/pull/4).
+* Try/catch all commands (so we log errors) [#707](https://github.com/sitespeedio/browsertime/pull/707)
+
+### Added
+* Make it easy to run JavaScript with a command.
 
 ## 4.0.0-alpha.13 - 2019-01-07
 ### Changed
