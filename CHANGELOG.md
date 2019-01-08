@@ -1,4 +1,9 @@
 # Browsertime changelog
+
+## UNRELEASED
+### Fixed
+* Storing screenshots was broken because of refactoring. Fixed in [#709](https://github.com/sitespeedio/browsertime/pull/709). 
+
 ## 4.0.0-alpha.14 - 2019-01-08
 ### Fixed
 * Make it simpler to run measure.start and measure.statrt(URL) [#706](https://github.com/sitespeedio/browsertime/pull/4).
