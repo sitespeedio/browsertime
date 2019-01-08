@@ -198,8 +198,8 @@ The context object:
 
 The commands object:
 * *navigate(URL)* - Use this if you want to use the exact way as Browsertime navigates to a new URL (same settings with pageCompleteCheck etc). But that URL will not be measured automatically.
-* *measure.startAndNavigate(URL)* - Start measuring and navigate to a new page in one go and measure.
-* *measure.start(URL)* - Use this when you want to start to measure a page. This will start the video and prepare everything to collect metrics. But it will not navigate to the URL.
+* *measure.start(URL)* - Start measuring and navigate to a new page in one go and measure.
+* *measure.start()* - Use this when you want to start to measure a page. This will start the video and prepare everything to collect metrics. But it will not navigate to the URL.
 * *measure.stop()* - Collect metrics for a page.
 
 
@@ -208,7 +208,7 @@ The really simple version looks like this:
 ~~~javascript
 module.exports = async function(context, commands) {
   context.log.info('Running script navigation');
-  return commands.measure.startAndNavigate('https://www.sitespeed.io/');
+  return commands.measure.start('https://www.sitespeed.io/');
 };
 ~~~
 
@@ -223,9 +223,7 @@ module.exports = async function(context, commands) {
   // Add text into an input field y finding the field by id
   await commands.addText.byId('login', 'wpName1');
   await commands.addText.byId('password', 'wpPassword1');
-  await commands.measure.start(
-    'https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page'
-  );
+  await commands.measure.start();
 
   // find the sumbit button and click it
   await commands.click.byIdAndWait('wpLoginAttempt');
@@ -262,9 +260,9 @@ And test multiple pages in a script:
 
 ~~~javascript
 module.exports = async function(context, commands) {
-  await commands.measure.startAndNavigate('https://www.sitespeed.io');
-  await commands.measure.startAndNavigate('https://www.sitespeed.io/examples/');
-  return commands.measure.startAndNavigate('https://www.sitespeed.io/documentation/');
+  await commands.measure.start('https://www.sitespeed.io');
+  await commands.measure.start('https://www.sitespeed.io/examples/');
+  return commands.measure.start('https://www.sitespeed.io/documentation/');
 };
 ~~~
 
