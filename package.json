@@ -1,6 +1,6 @@
 {
   "description": "Browsertime",
-  "version": "4.0.0-alpha.13",
+  "version": "4.0.0-alpha.14",
   "publishConfig": {
     "tag": "canary"
   },
