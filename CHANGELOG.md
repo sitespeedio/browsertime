@@ -1,8 +1,10 @@
 # Browsertime changelog
 
-## UNRELEASED
-* New Chrome-trace.
+## 4.0.0-alpha.16 - 2019-01-9
+### Fixed
+* New Chrome-trace that catch broken traces.
 * Catch if Chrome-trace is failing.
+* Get the URL from the browser window and add it to the HAR so that testing SPA can get the right URL [#710](https://github.com/sitespeedio/browsertime/pull/710).
 
 ## 4.0.0-alpha.15 - 2019-01-O8
 ### Fixed
