@@ -2,6 +2,7 @@
 
 ## UNRELEASED
 * New Chrome-trace.
+* Catch if Chrome-trace is failing.
 
 ## 4.0.0-alpha.15 - 2019-01-O8
 ### Fixed
