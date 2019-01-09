@@ -1,4 +1,7 @@
 # Browsertime changelog
+## 4.0.0-alpha.17 - 2019-01-9
+### Fixed
+* URLs with query parameters got the wrong path to the data folder. [#711](https://github.com/sitespeedio/browsertime/pull/711).
 
 ## 4.0.0-alpha.16 - 2019-01-9
 ### Fixed
