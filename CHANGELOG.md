@@ -1,5 +1,8 @@
 # Browsertime changelog
 
+## UNRELEASED
+* New Chrome-trace.
+
 ## 4.0.0-alpha.15 - 2019-01-O8
 ### Fixed
 * Storing screenshots was broken because of refactoring. Fixed in [#709](https://github.com/sitespeedio/browsertime/pull/709). 

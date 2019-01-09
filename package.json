@@ -10,7 +10,7 @@
     "adbkit": "2.11.0",
     "@sitespeed.io/chromedriver": "2.44.1",
     "chrome-har": "0.9.1",
-    "chrome-trace": "0.2.0",
+    "chrome-trace": "0.2.1",
     "dayjs": "1.7.8",
     "execa": "1.0.0",
     "fast-stats": "0.0.4",
