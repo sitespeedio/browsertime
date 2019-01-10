@@ -1,5 +1,3 @@
-module.exports = {
-    run(context) {
-      context.log.info('In posttask!!! (with results: ' + JSON.stringify(context.results) + ')');
-    }
-  };
+module.exports = async function(context) {
+  context.log.info('Post script example!');
+};

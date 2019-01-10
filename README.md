@@ -171,16 +171,16 @@ There are a couple of breaking changes introduce in 4.0.
       }, ...
   }}]
   ``` 
-2. New naming of result files. Before files was named by iteration: 1-video.mp4. In the latest version they are also named by page number: 1-1-video.mp4 (pageNumber-iteration-type.filetype).   
-3. No more pre/post script! With 4.0 you can run your pre/post script by just give the order to browsertime:  ```browsertime preScript.js https://www.sitespeed.io/ postScripts.js```
-4. New layout of Selenium scripting. We simplified the layout of the script. The new version will be able to do the exact same thing as older versions but with a simpler layout:
+2. New naming of result files. Before files was named by iteration: 1-video.mp4. In the latest version all extra files are stored in a folder structure and referenced in the JSON, starting with /pages/ (following the same pattern as sitespeed.io).
+3. New layout of Selenium scripting. We simplified the layout of the script. The new version will be able to do the exact same thing as older versions but with a simpler layout:
 ~~~javascript
-  module.exports = async function(context) {
+  module.exports = async function(context, commands) {
   // code
   }
 ~~~
+4. Pre/post scripts follow the new format as of the script in the third point.
 
-## Script navigation [in 4.0-alpa1 or later]
+## Navigate in a script [in 4.0-beta or later]
 If you need a more complicated test scenario, you can define your own (Selenium)test script that will do the testing. Use your own test script when you want to test your page as a logged in user, the login page or if you want to add things to your cart.
 
 You run your navigation script by loading the script instead of giving an URL. 
@@ -251,7 +251,7 @@ await commands.navigate(
 };
 ~~~
 
-Then acceess the page that you want to test:
+Then access the page that you want to test:
 
 ~~~bash
 browsertime login.js https://en.wikipedia.org/wiki/Barack_Obama

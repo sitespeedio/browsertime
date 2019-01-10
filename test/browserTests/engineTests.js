@@ -187,10 +187,7 @@ describe('Engine', function() {
           iterations: 1,
           skipHar: true,
           preTask: loadTaskFile('preSample.js'),
-          postTask: [
-            loadTaskFile('postSample.js'),
-            loadTaskFile('postSample2.js')
-          ]
+          postTask: [loadTaskFile('postSample.js')]
         });
         return engine.start();
       });
