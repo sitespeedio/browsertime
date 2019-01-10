@@ -199,7 +199,9 @@ The context object:
 The commands object:
 * *navigate(URL)* - Use this if you want to use the exact way as Browsertime navigates to a new URL (same settings with pageCompleteCheck etc). But that URL will not be measured automatically.
 * *measure.start(URL)* - Start measuring and navigate to a new page in one go and measure.
+* *measure.start(URL,alias)* - Start measuring and navigate to a new page in one go and measure. And register an alias for that URL.
 * *measure.start()* - Use this when you want to start to measure a page. This will start the video and prepare everything to collect metrics. But it will not navigate to the URL.
+* *measure.start(alias)* - Use this when you want to start to measure a page. This will start the video and prepare everything to collect metrics. But it will not navigate to the URL. The next URL that will be accessed will get the alias.
 * *measure.stop()* - Collect metrics for a page.
 
 
@@ -223,7 +225,7 @@ module.exports = async function(context, commands) {
   // Add text into an input field y finding the field by id
   await commands.addText.byId('login', 'wpName1');
   await commands.addText.byId('password', 'wpPassword1');
-  await commands.measure.start();
+  await commands.measure.start('login');
 
   // find the sumbit button and click it
   await commands.click.byIdAndWait('wpLoginAttempt');

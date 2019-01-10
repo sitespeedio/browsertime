@@ -1,4 +1,9 @@
 # Browsertime changelog
+
+## UNRELEASED
+### Added
+* Register alias for URLs when running a script [#712](https://github.com/sitespeedio/browsertime/pull/712).
+
 ## 4.0.0-alpha.17 - 2019-01-9
 ### Fixed
 * URLs with query parameters got the wrong path to the data folder. [#711](https://github.com/sitespeedio/browsertime/pull/711).
