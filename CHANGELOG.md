@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* Bugfix: measure without an alias broke.
+
 ## 4.0.0-alpha.18 - 2019-01-11
 ### Added
 * Register alias for URLs when running a script [#712](https://github.com/sitespeedio/browsertime/pull/712).
