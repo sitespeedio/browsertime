@@ -3,6 +3,12 @@
 ## UNRELEASED
 ### Added
 * Register alias for URLs when running a script [#712](https://github.com/sitespeedio/browsertime/pull/712).
+* Added tests for the new command functionality.
+* Safer way to always make sure we use the right URL [#714](https://github.com/sitespeedio/browsertime/pull/714).
+* We have pre/post tasks again! [#713](https://github.com/sitespeedio/browsertime/pull/713)
+
+### Fixed
+* Output to the cli when running multiple URLs where broken, fixed in [#715](https://github.com/sitespeedio/browsertime/pull/715)
 
 ## 4.0.0-alpha.17 - 2019-01-9
 ### Fixed
