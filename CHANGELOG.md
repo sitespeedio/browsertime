@@ -1,9 +1,10 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 4.0.0-alpha.19 - 2019-01-13
 ### Fixed
 * Bugfix: measure without an alias broke.
 * Bugfix: All command follow errors, so that you as a script writer couldn't act on failure. Now we rethrow: [#717](https://github.com/sitespeedio/browsertime/pull/717).
+* Orange frame was removed earlier than it should since alpha 14. Fixed in [#719](https://github.com/sitespeedio/browsertime/pull/719)
 
 ## 4.0.0-alpha.18 - 2019-01-11
 ### Added
