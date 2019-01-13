@@ -3,6 +3,7 @@
 ## UNRELEASED
 ### Fixed
 * Bugfix: measure without an alias broke.
+* Bugfix: All command follow errors, so that you as a script writer couldn't act on failure. Now we rethrow: [#717](https://github.com/sitespeedio/browsertime/pull/717).
 
 ## 4.0.0-alpha.18 - 2019-01-11
 ### Added
