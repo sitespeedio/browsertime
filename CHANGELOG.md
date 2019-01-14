@@ -1,122 +1,29 @@
 # Browsertime changelog
 
-## 4.0.0-alpha.19 - 2019-01-13
-### Fixed
-* Bugfix: measure without an alias broke.
-* Bugfix: All command follow errors, so that you as a script writer couldn't act on failure. Now we rethrow: [#717](https://github.com/sitespeedio/browsertime/pull/717).
-* Orange frame was removed earlier than it should since alpha 14. Fixed in [#719](https://github.com/sitespeedio/browsertime/pull/719)
+## 4.0.0-beta.1 - 2019-01-14
 
-## 4.0.0-alpha.18 - 2019-01-11
-### Added
-* Register alias for URLs when running a script [#712](https://github.com/sitespeedio/browsertime/pull/712).
-* Added tests for the new command functionality.
-* Safer way to always make sure we use the right URL [#714](https://github.com/sitespeedio/browsertime/pull/714).
-* We have pre/post tasks again! [#713](https://github.com/sitespeedio/browsertime/pull/713)
-
-### Fixed
-* Output to the cli when running multiple URLs where broken, fixed in [#715](https://github.com/sitespeedio/browsertime/pull/715)
-
-## 4.0.0-alpha.17 - 2019-01-9
-### Fixed
-* URLs with query parameters got the wrong path to the data folder. [#711](https://github.com/sitespeedio/browsertime/pull/711).
-
-## 4.0.0-alpha.16 - 2019-01-9
-### Fixed
-* New Chrome-trace that catch broken traces.
-* Catch if Chrome-trace is failing.
-* Get the URL from the browser window and add it to the HAR so that testing SPA can get the right URL [#710](https://github.com/sitespeedio/browsertime/pull/710).
-
-## 4.0.0-alpha.15 - 2019-01-O8
-### Fixed
-* Storing screenshots was broken because of refactoring. Fixed in [#709](https://github.com/sitespeedio/browsertime/pull/709). 
-
-## 4.0.0-alpha.14 - 2019-01-08
-### Fixed
-* Make it simpler to run measure.start and measure.statrt(URL) [#706](https://github.com/sitespeedio/browsertime/pull/4).
-* Try/catch all commands (so we log errors) [#707](https://github.com/sitespeedio/browsertime/pull/707)
-* If a trace log from Chrome doesn't have a main thread, use the one with most events as backup [#708](https://github.com/sitespeedio/browsertime/pull/708)
-
-### Added
-* Make it easy to run JavaScript with a command.
-
-## 4.0.0-alpha.13 - 2019-01-07
-### Changed
-* And a bug fix. I think we are soon ready for first beta.
-
-## 4.0.0-alpha.12 - 2019-01-07
-### Changed
-* And last fixes for commands.
-
-## 4.0.0-alpha.11 - 2019-01-07
-### Changed
-* New structure to use help methods to navigate etc. This will make it cleaner to use.  Readme updated. [#704](https://github.com/sitespeedio/browsertime/pull/704).
-
-## 4.0.0-alpha.10 - 2019-01-03
-### Fixed
-* Another Chrome-HAR fix to actually keep the URL fragment (hash).
-
-## 4.0.0-alpha.9 - 2019-01-03
-### Fixed
-* Use Chrome-HAR 0.9.0 that doesn't strup the hash(#) out of the URL.
-* Added .gz for missing file paths in the result JSON.
-
-## 4.0.0-alpha.8 - 2019-01-03
-### Fixed
-* Fixed broken console/netlog/performance log (from alpha 7). 
-
-## 4.0.0-alpha.7 - 2019-01-03
 ### Fixed
 * Firefox proxy port not being set properly. Thank you [dpalmeiro](https://github.com/dpalmeiro) for the fix and PR
 [#702](https://github.com/sitespeedio/browsertime/pull/702).
-* New version of Chrome-HAR 0.8.1
+* Disable dev-shm by default for Chrome [#697](https://github.com/sitespeedio/browsertime/pull/697), thank you [Vitalii Tverdokhlib](https://github.com/vitaliytv) for the PR. Docs will be updated when we release next stable.
+* Fixed broken boolean preference for Firefox, thank you [@dpalmeiro)](https://github.com/dpalmeiro) for the fix [#683](https://github.com/sitespeedio/browsertime/pull/683).
 
-### Added
-* Include paths to the console log, performance log and net log for Chrome in the result JSON [#703](https://github.com/sitespeedio/browsertime/pull/703).
-
-## 4.0.0-alpha.6 - 2019-01-01
-### Fixed
-* Shorter paths for using hash in URLs.
-* Make sure data dir use a fallback URL
 
 ### Added
 * Added support for ```--spa``` configuration that will: Automatically use hash/params in file names and wait X seconds for no request in resource timing api as pageCompleteCheck [#700](https://github.com/sitespeedio/browsertime/pull/700) [#698](https://github.com/sitespeedio/browsertime/pull/698).
+* Support for coming timeToContentfulPaint in Firefox (Nigthly at the moment) [#675](https://github.com/sitespeedio/browsertime/pull/675).
+* Upgraded to Chrome-HAR 0.9.1.
+* Updated Chrome to 71 and Firefox 64 in the Docker container.
+* Updated to Chromedriver 2.44.
+* Support for navigating by script. More docs on the way [#666](https://github.com/sitespeedio/browsertime/pull/666).
+* Support for testing multiple pages [#685](https://github.com/sitespeedio/browsertime/pull/685) with using a navigation script. [Read the documentation](https://github.com/sitespeedio/browsertime#navigate-in-a-script-in-40-beta-or-later).
+* Upgraded to newer version of installers of Chromedriver and Geckodriver: less dependencies and the ability to skip installing drivers [#681](https://github.com/sitespeedio/browsertime/pull/681).
+* It's now easier if you want to run stable Chrome on Android. Just add --android (and make sure you started ADB) instead of setting application name and disable xvfb [#688](https://github.com/sitespeedio/browsertime/pull/688).
 
-## 4.0.0-alpha.5 - 2019-01-01
-### Fixed
-* Create data dir before we try to store extra JSON files [#699](https://github.com/sitespeedio/browsertime/pull/699).
-
-* Use latest Chrome-HAR 0.8.0
-
-## 4.0.0-alpha.4 - 2018-12-30
-### Fixed
-* Another go trying to disable the Firefox updater [#696](https://github.com/sitespeedio/browsertime/pull/696).
-* Disable dev-shm by default for Chrome [#697](https://github.com/sitespeedio/browsertime/pull/697), thank you [Vitalii Tverdokhlib](https://github.com/vitaliytv) for the PR. Docs will be updated when we release next stable.
-
-## 4.0.0-alpha.3 - 2018-12-21
-### Fixed
-* Metrics wasn't insterted into right page in the HAR [#695](https://github.com/sitespeedio/browsertime/pull/695).
-
-## 4.0.0-alpha.2 - 2018-12-20
 
 ### Changed
 * All data files (videos/screenshots etc) follows the pattern of sitespeed.io and are stored in a folder strucure from the page URL[#694](https://github.com/sitespeedio/browsertime/pull/694). The files are referenced in the browsertime.json.
 
-## 4.0.0-alpha.1 - 2018-12-20
-
-### Fixed
-* Fixed broken boolean preference for Firefox, thank you [@dpalmeiro)](https://github.com/dpalmeiro) for the fix [#683](https://github.com/sitespeedio/browsertime/pull/683).
-
-### Added
-* Support for coming timeToContentfulPaint in Firefox (Nigthly at the moment) [#675](https://github.com/sitespeedio/browsertime/pull/675).
-* Upgraded to Chrome-HAR 0.7.1.
-* Updated Chrome to 71 and Firefox 64 in the Docker container.
-* Updated to Chromedriver 2.44.
-* Support for navigating by script. More docs on the way [#666](https://github.com/sitespeedio/browsertime/pull/666).
-* Support for testing multiple pages [#685](https://github.com/sitespeedio/browsertime/pull/685) with navigationScript. [Read the documentation](https://github.com/sitespeedio/browsertime/#script-navigation-in-40-alpa1-or-later).
-* Upgraded to newer version of installers of Chromedriver and Geckodriver: less dependencies and the ability to skip installing drivers [#681](https://github.com/sitespeedio/browsertime/pull/681).
-* It's now easier if you want to run stable Chrome on Android. Just add --android (and make sure you started ADB) instead of setting application name and disable xvfb [#688](https://github.com/sitespeedio/browsertime/pull/688).
-
-### Changed
 Read about [what has changed in 4.0](https://github.com/sitespeedio/browsertime#upgrade-from-3x-to-40).
 
 * New default trace categories for chrome.timeline: ```-*,devtools.timeline -> -, devtools.timeline, disabled-by-default-devtools.timeline, disabled-by-default-devtools.timeline.stack``` [#677](https://github.com/sitespeedio/browsertime/pull/677) and [#679](https://github.com/sitespeedio/browsertime/pull/679).
