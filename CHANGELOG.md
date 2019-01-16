@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Added
+* Get the Fully Loaded metric from the HAR instead of the Resource Timing API [#720](https://github.com/sitespeedio/browsertime/pull/720).
+
 ## 4.0.0-beta.1 - 2019-01-14
 
 ### Fixed
