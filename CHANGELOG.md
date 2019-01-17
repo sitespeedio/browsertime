@@ -1,5 +1,11 @@
 # Browsertime changelog
 
+## 4.0.0-beta.3 - 2019-01-17
+### Added 
+* New switch command to switch to other frames/windows [#721](https://github.com/sitespeedio/browsertime/pull/721) [#723](https://github.com/sitespeedio/browsertime/pull/723).
+
+* Added --videoParams.debug to get a video of a full iteration (all pre/post and script/URLs) [#722](https://github.com/sitespeedio/browsertime/pull/722).
+
 ## 4.0.0-beta.2 - 2019-01-16
 ### Added
 * Get the Fully Loaded metric from the HAR instead of the Resource Timing API [#720](https://github.com/sitespeedio/browsertime/pull/720).
