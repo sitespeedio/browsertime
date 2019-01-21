@@ -1,9 +1,6 @@
 {
   "description": "Browsertime",
   "version": "4.0.0-beta.3",
-  "publishConfig": {
-    "tag": "canary"
-  },
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "@sitespeed.io/throttle": "0.5.0",
