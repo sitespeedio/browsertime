@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 4.0.1 - 2019-01-21
+### Fixed
+* Doing a script navigation before measuring one URL broke Visual Metrics, fixed in [#726](https://github.com/sitespeedio/browsertime/pull/726).
+
 ## 4.0.0 - 2019-01-21
 
 ### Fixed
