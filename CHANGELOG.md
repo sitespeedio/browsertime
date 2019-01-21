@@ -32,7 +32,7 @@
 
 
 ### Changed
-* All data files (videos/screenshots etc) follows the pattern of sitespeed.io and are stored in a folder strucure from the page URL[#694](https://github.com/sitespeedio/browsertime/pull/694). The files are referenced in the browsertime.json.
+* All data files (videos/screenshots etc) follows the pattern of sitespeed.io and are stored in a folder strucure from the page URL[#694](https://github.com/sitespeedio/browsertime/pull/694). The files are referenced in the browsertime.json. If you just want to test one URL at each time, you can keep the old structure with  ```--useSameDir```.
 
 Read about [what has changed in 4.0](https://github.com/sitespeedio/browsertime#upgrade-from-3x-to-40).
 

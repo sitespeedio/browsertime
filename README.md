@@ -171,7 +171,7 @@ There are a couple of breaking changes introduce in 4.0.
       }, ...
   }}]
   ``` 
-2. New naming of result files. Before files was named by iteration: 1-video.mp4. In the latest version all extra files are stored in a folder structure and referenced in the JSON, starting with /pages/ (following the same pattern as sitespeed.io).
+2. New naming of result files. Before files was named by iteration: 1-video.mp4. In the latest version all extra files are stored in a folder structure and referenced in the JSON, starting with /pages/ (following the same pattern as sitespeed.io). If you just want to test one URL at each time, you can keep the old structure with  ```--useSameDir```.
 3. New layout of Selenium scripting. We simplified the layout of the script. The new version will be able to do the exact same thing as older versions but with a simpler layout:
 ~~~javascript
   module.exports = async function(context, commands) {
