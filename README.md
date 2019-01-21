@@ -48,7 +48,7 @@ The result of the run is a JSON file with all the JavaScript metrics collected, 
 
 Use our Docker image (with Chrome, Firefox, XVFB and the dependencies needed to record a video):
 <pre>
-$ docker run --shm-size=1g --rm -v "$(pwd)":/browsertime sitespeedio/browsertime https://www.sitespeed.io/
+$ docker run --rm -v "$(pwd)":/browsertime sitespeedio/browsertime https://www.sitespeed.io/
 </pre>
 
 Or using node:
@@ -84,7 +84,7 @@ You can build and test changes using Docker locally.
 
 <pre>
 $ docker build -t sitespeedio/browsertime .
-$ docker run --shm-size=1g --rm -v "$(pwd)":/browsertime sitespeedio/browsertime -n 1 https://www.sitespeed.io/
+$ docker run --rm -v "$(pwd)":/browsertime sitespeedio/browsertime -n 1 https://www.sitespeed.io/
 </pre>
 
 ## Connectivity
@@ -121,13 +121,13 @@ tc qdisc add dev docker4 parent 1:12 netem delay 200ms
 Then when you run your container you add the network with <code>--network cable</code>. You should also tell Browsertime that you set the connectivity external from BT. A full example running running with cable:
 
 ~~~bash
-$ docker run --shm-size=1g --network=cable --rm sitespeedio/browsertime -c cable --connectivity.engine external https://www.sitespeed.io/
+$ docker run --network=cable --rm sitespeedio/browsertime -c cable --connectivity.engine external https://www.sitespeed.io/
 ~~~
 
 And using the 3g network:
 
 ~~~bash
-$ docker run --shm-size=1g --network=3g --rm sitespeedio/browsertime -c 3g --connectivity.engine external https://www.sitespeed.io/
+$ docker run --network=3g --rm sitespeedio/browsertime -c 3g --connectivity.engine external https://www.sitespeed.io/
 ~~~
 
 And if you want to remove the networks:
@@ -289,7 +289,7 @@ If you are on Linux (we have tested Ubuntu 18) you can use our Docker container 
 If you use Docker you will automatically get support for video and SpeedIndex. You can get that without Docker but then need to [install VisualMetrics dependencies](https://github.com/sitespeedio/docker-visualmetrics-deps/blob/master/Dockerfile) yourself.
 
 <pre>
-$ docker run --privileged -v /dev/bus/usb:/dev/bus/usb -e START_ADB_SERVER=true --shm-size=1g --rm -v "$(pwd)":/browsertime-results sitespeedio/browsertime -n 1 --android --visualMetrics --video https://en.m.wikipedia.org/wiki/Barack_Obama
+$ docker run --privileged -v /dev/bus/usb:/dev/bus/usb -e START_ADB_SERVER=true --rm -v "$(pwd)":/browsertime-results sitespeedio/browsertime -n 1 --android --visualMetrics --video https://en.m.wikipedia.org/wiki/Barack_Obama
 </pre>
 
 ## Configuration
@@ -313,19 +313,19 @@ You can change latency by setting a Docker environment variable. Use REPLAY to t
 Default browser is Chrome:
 
 ```
-docker run --cap-add=NET_ADMIN --shm-size=1g --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:3.0.0 https://en.wikipedia.org/wiki/Barack_Obama
+docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:4.0.0 https://en.wikipedia.org/wiki/Barack_Obama
 ```
 
 Use Firefox:
 
 ```
-docker run --cap-add=NET_ADMIN --shm-size=1g --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:3.0.0 -b firefox -n 11 https://en.wikipedia.org/wiki/Barack_Obama
+docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:4.0.0 -b firefox -n 11 https://en.wikipedia.org/wiki/Barack_Obama
 ```
 
 And Chrome on your Android phone. This will only work on Linux because you need to be able to mount the usb port in Docker:
 
 ```
-docker run --privileged -v /dev/bus/usb:/dev/bus/usb -e START_ADB_SERVER=true --cap-add=NET_ADMIN --shm-size=1g --rm -v “$(pwd)“:/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime https://en.m.wikipedia.org/wiki/Barack_Obama --android --chrome.args ignore-certificate-errors-spki-list=PhrPvGIaAMmd29hj8BCZOq096yj7uMpRNHpn5PDxI6I= -n 11 --chrome.args user-data-dir=/data/tmp/chrome
+docker run --privileged -v /dev/bus/usb:/dev/bus/usb -e START_ADB_SERVER=true --cap-add=NET_ADMIN --rm -v “$(pwd)“:/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime https://en.m.wikipedia.org/wiki/Barack_Obama --android --chrome.args ignore-certificate-errors-spki-list=PhrPvGIaAMmd29hj8BCZOq096yj7uMpRNHpn5PDxI6I= -n 11 --chrome.args user-data-dir=/data/tmp/chrome
 ```
 
 ## Send metrics to Graphite
@@ -333,7 +333,7 @@ The easiest way to send metrics is to install [jq](https://stedolan.github.io/jq
 
 Here's an example on how you can pickup the median SpeedIndex from Browsertime and send it to your Graphite instance.
 <pre>
-echo "browsertime.your.key.SpeedIndex.median" $(cat /tmp/browsertime/browsertime.json | jq .statistics.visualMetrics.SpeedIndex.median) "`date +%s`" | nc -q0 my.graphite.com 2003
+echo "browsertime.your.key.SpeedIndex.median" $(cat /tmp/browsertime/browsertime.json | jq .[0].statistics.visualMetrics.SpeedIndex.median) "`date +%s`" | nc -q0 my.graphite.com 2003
 </pre>
 
 [travis-image]: https://img.shields.io/travis/sitespeedio/browsertime.svg?style=flat-square
