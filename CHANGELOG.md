@@ -1,16 +1,6 @@
 # Browsertime changelog
 
-## 4.0.0-beta.3 - 2019-01-17
-### Added 
-* New switch command to switch to other frames/windows [#721](https://github.com/sitespeedio/browsertime/pull/721) [#723](https://github.com/sitespeedio/browsertime/pull/723).
-
-* Added --videoParams.debug to get a video of a full iteration (all pre/post and script/URLs) [#722](https://github.com/sitespeedio/browsertime/pull/722).
-
-## 4.0.0-beta.2 - 2019-01-16
-### Added
-* Get the Fully Loaded metric from the HAR instead of the Resource Timing API [#720](https://github.com/sitespeedio/browsertime/pull/720).
-
-## 4.0.0-beta.1 - 2019-01-14
+## 4.0.0 - 2019-01-21
 
 ### Fixed
 * Firefox proxy port not being set properly. Thank you [dpalmeiro](https://github.com/dpalmeiro) for the fix and PR
@@ -29,7 +19,9 @@
 * Support for testing multiple pages [#685](https://github.com/sitespeedio/browsertime/pull/685) with using a navigation script. [Read the documentation](https://github.com/sitespeedio/browsertime#navigate-in-a-script-in-40-beta-or-later).
 * Upgraded to newer version of installers of Chromedriver and Geckodriver: less dependencies and the ability to skip installing drivers [#681](https://github.com/sitespeedio/browsertime/pull/681).
 * It's now easier if you want to run stable Chrome on Android. Just add --android (and make sure you started ADB) instead of setting application name and disable xvfb [#688](https://github.com/sitespeedio/browsertime/pull/688).
-
+* New switch command to switch to other frames/windows [#721](https://github.com/sitespeedio/browsertime/pull/721) [#723](https://github.com/sitespeedio/browsertime/pull/723).
+* Added --videoParams.debug to get a video of a full iteration (all pre/post and script/URLs) [#722](https://github.com/sitespeedio/browsertime/pull/722).
+* Get the Fully Loaded metric from the HAR instead of the Resource Timing API [#720](https://github.com/sitespeedio/browsertime/pull/720).
 
 ### Changed
 * All data files (videos/screenshots etc) follows the pattern of sitespeed.io and are stored in a folder strucure from the page URL[#694](https://github.com/sitespeedio/browsertime/pull/694). The files are referenced in the browsertime.json. If you just want to test one URL at each time, you can keep the old structure with  ```--useSameDir```.
@@ -53,7 +45,7 @@ And the new one returns a array, where each tested page is an result in that arr
     "browsertime": {
         "version": "3.0.0"
     }, ...
-}}]
+}]
 ```     
 That means JSON consumers needs to change the code, even if you only test one page. 
 
