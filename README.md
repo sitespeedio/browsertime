@@ -180,7 +180,7 @@ There are a couple of breaking changes introduce in 4.0.
 ~~~
 4. Pre/post scripts follow the new format as of the script in the third point.
 
-## Navigate in a script [in 4.0-beta or later]
+## Navigate in a script [in 4.0 or later]
 If you need a more complicated test scenario, you can define your own (Selenium)test script that will do the testing. Use your own test script when you want to test your page as a logged in user, the login page or if you want to add things to your cart.
 
 You run your navigation script by loading the script instead of giving an URL. 
@@ -269,6 +269,8 @@ module.exports = async function(context, commands) {
 ~~~
 
 If you need to do more complicated stuff, you can use Selenium directly. *selenium.webdriver* is the Selenium [WebDriver public API object](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index.html) and *selenium.driver* the [instantiated version of the WebDriver](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_WebDriver.html) driving the current version of the browser. That should cover most of your use cases, else let us know.
+
+[Scripting documentation](https://www.sitespeed.io/documentation/sitespeed.io/scripting/).
 
 ## Test on your mobile device
 Browsertime supports Chrome on Android: Collecting SpeedIndex, HAR and video! 
