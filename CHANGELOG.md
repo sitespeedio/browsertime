@@ -1,5 +1,13 @@
 # Browsertime changelog
 
+## 4.0.3 - 2019-01-24
+### Fixed
+* Bugfix: Calculating Visual Complete 85/95/99 was broken IF the complete process went backward (first hitting 85% and then going down to < than 85%). We used
+to always take the first metric over 85% and then stick to it. Now we choose the last time it breaks the 85/95/99% metric [#732](https://github.com/sitespeedio/browsertime/pull/732).
+
+* We updated the Visual Metrics lib to use the latest upstream version. We haven't updated for a while and we had issues where [the progress was calculated wrong](https://github.com/sitespeedio/sitespeed.io/issues/2259#issuecomment-456878707) [#730](https://github.com/sitespeedio/browsertime/pull/730).
+
+
 ## 4.0.2 - 2019-01-22
 ### Fixed
 * Clearing browser trace log (Chrome only) happend before we started the video instead of after the video [#727](https://github.com/sitespeedio/browsertime/pull/727).
