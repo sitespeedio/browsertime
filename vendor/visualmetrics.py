@@ -125,7 +125,7 @@ def extract_frames(video, directory, full_resolution, viewport):
             options.thumbsize)
         if full_resolution:
             scale = ''
-        # escape directory name 
+        # escape directory name
         # see https://en.wikibooks.org/wiki/FFMPEG_An_Intermediate_Guide/image_sequence#Percent_in_filename
         dir_escaped = directory.replace("%", "%%")
         command = ['ffmpeg', '-v', 'debug', '-i', video, '-vsync', '0',
@@ -414,6 +414,7 @@ def adjust_frame_times(directory):
     msFromFirstFrame = re.search(match, frames[0])
     videoRecordingStart = int(msFromFirstFrame.groupdict().get('ms'))
     if len(frames):
+        #match = re.compile(r'video-(?P<ms>[0-9]+)\.png')
         for frame in frames:
             m = re.search(match, frame)
             if m is not None:
@@ -552,11 +553,11 @@ def find_render_start(directory, orange_file, gray_file):
                     mask = None
                 top = 10
                 right_margin = 10
-                bottom_margin = 25
+                bottom_margin = 10
                 if height > 400 or width > 400:
-                    top = max(top, int(math.ceil(float(height) * 0.04)))
-                    right_margin = max(right_margin, int(math.ceil(float(width) * 0.04)))
-                    bottom_margin = max(bottom_margin, int(math.ceil(float(width) * 0.04)))
+                    top = int(math.ceil(float(height) * 0.03))
+                    right_margin = int(math.ceil(float(width) * 0.04))
+                    bottom_margin = int(math.ceil(float(width) * 0.04))
                 height = max(height - top - bottom_margin, 1)
                 left = 0
                 width = max(width - right_margin, 1)
@@ -569,7 +570,7 @@ def find_render_start(directory, orange_file, gray_file):
                 crop = '{0:d}x{1:d}+{2:d}+{3:d}'.format(
                     width, height, left, top)
                 for i in xrange(1, count):
-                    if frames_match(first, files[i], 10, 500, crop, mask):
+                    if frames_match(first, files[i], 10, 0, crop, mask):
                         logging.debug('Removing pre-render frame %s', files[i])
                         os.remove(files[i])
                     elif orange_file is not None and is_color_frame(files[i], orange_file):
@@ -599,11 +600,11 @@ def eliminate_duplicate_frames(directory):
                     client_viewport = None
 
             # Figure out the region of the image that we care about
-            top = 10
-            right_margin = 10
-            bottom_margin = 10
+            top = 8
+            right_margin = 8
+            bottom_margin = 20
             if height > 400 or width > 400:
-                top = int(math.ceil(float(height) * 0.03))
+                top = int(math.ceil(float(height) * 0.04))
                 right_margin = int(math.ceil(float(width) * 0.04))
                 bottom_margin = int(math.ceil(float(width) * 0.04))
             height = max(height - top - bottom_margin, 1)
@@ -647,7 +648,7 @@ def eliminate_duplicate_frames(directory):
                 baseline = files[0]
                 previous_frame = baseline
                 for i in xrange(1, count):
-                    if frames_match(baseline, files[i], 16, 0, crop, None):
+                    if frames_match(baseline, files[i], 10, 0, crop, None):
                         if previous_frame is baseline:
                             duplicates.append(previous_frame)
                         else:
@@ -1172,7 +1173,7 @@ def render_video(directory, video_file):
         if current_image is not None:
             command = ['ffmpeg', '-f', 'image2pipe', '-vcodec', 'png', '-r', '30', '-i', '-',
                        '-vcodec', 'libx264', '-r', '30', '-crf', '24', '-g', '15',
-                       '-preset', 'superfast', '-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2', '-y', video_file]
+                       '-preset', 'superfast', '-y', video_file]
             try:
                 proc = subprocess.Popen(command, stdin=subprocess.PIPE)
                 if proc:
@@ -1319,25 +1320,36 @@ def calculate_visual_metrics(histograms_file, start, end, perceptual, dirs, prog
                 metrics.append({'name': 'Perceptual Speed Index',
                                 'value': calculate_perceptual_speed_index(progress, dirs)})
             if hero_elements_file is not None and os.path.isfile(hero_elements_file):
+                logging.debug('Calculating hero element times')
                 hero_data = None
                 hero_f_in = gzip.open(hero_elements_file, 'rb')
                 try:
                     hero_data = json.load(hero_f_in)
                 except Exception as e:
+                    logging.exception('Could not load hero elements data')
                     logging.exception(e)
                 hero_f_in.close()
-                if hero_data is not None and hero_data['heroes'] is not None and hero_data['viewport'] is not None and len(hero_data['heroes']) > 0:
+
+                if hero_data is not None and hero_data['heroes'] is not None and \
+                        hero_data['viewport'] is not None and len(hero_data['heroes']) > 0:
                     viewport = hero_data['viewport']
                     hero_timings = []
                     for hero in hero_data['heroes']:
                         hero_timings.append({'name': hero['name'],
                                              'value': calculate_hero_time(progress, dirs, hero, viewport)})
                     hero_timings_sorted = sorted(hero_timings, key=lambda timing: timing['value'])
+                    #hero_timings.append({'name': 'FirstPaintedHero',
+                    #                     'value': hero_timings_sorted[0]['value']})
+                    #hero_timings.append({'name': 'LastPaintedHero',
+                    #                     'value': hero_timings_sorted[-1]['value']})
                     hero_data['timings'] = hero_timings
                     metrics += hero_timings
+
                     hero_f_out = gzip.open(hero_elements_file, 'wb', 7)
                     json.dump(hero_data, hero_f_out)
-                    hero_f_out.close()                    
+                    hero_f_out.close()
+            else:
+                logging.warn('Hero elements file is not valid: ' + str(hero_elements_file))
         else:
             metrics = [
                 {'name': 'First Visual Change',
@@ -1478,43 +1490,57 @@ def calculate_perceptual_speed_index(progress, directory):
 def calculate_hero_time(progress, directory, hero, viewport):
     dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
     n = len(progress)
-    target_frame = os.path.join(
-        dir, 'ms_{0:06d}'.format(progress[n - 1]['time']))
+    target_frame = os.path.join(dir, 'ms_{0:06d}'.format(progress[n - 1]['time']))
+
     extension = None
     if os.path.isfile(target_frame + '.png'):
         extension = '.png'
     elif os.path.isfile(target_frame + '.jpg'):
         extension = '.jpg'
     if extension is not None:
+        hero_width = int(hero['width'])
+        hero_height = int(hero['height'])
+        hero_x = int(hero['x'])
+        hero_y = int(hero['y'])
         target_frame = target_frame + extension
-        logging.debug('Target image for hero %s is %s' %
-                      (hero['name'], target_frame))
+        logging.debug('Target image for hero %s is %s' % (hero['name'], target_frame))
+
         from PIL import Image
         with Image.open(target_frame) as im:
             width, height = im.size
         if width != viewport['width']:
             scale = float(width) / float(viewport['width'])
-            logging.debug('Frames are %dpx wide but viewport was %dpx. Scaling by %f' % (
-                width, viewport['width'], scale))
+            logging.debug('Frames are %dpx wide but viewport was %dpx. Scaling by %f' % (width, viewport['width'], scale))
             hero_width = int(hero['width'] * scale)
             hero_height = int(hero['height'] * scale)
             hero_x = int(hero['x'] * scale)
             hero_y = int(hero['y'] * scale)
+
         logging.debug('Calculating render time for hero element "%s" at position [%d, %d, %d, %d]' % (hero['name'], hero['x'], hero['y'], hero['width'], hero['height']))
-         # Create a rectangular mask of the hero element position
+
+        # Create a rectangular mask of the hero element position
         hero_mask = os.path.join(dir, 'hero_{0}_mask.png'.format(hero['name']))
         command = '{0} -size {1}x{2} xc:black -fill white -draw "rectangle {3},{4} {5},{6}" PNG24:"{7}"'.format(
             image_magick['convert'], width, height, hero_x, hero_y, hero_x + hero_width, hero_y + hero_height, hero_mask)
         subprocess.call(command, shell=True)
-         # Apply the mask to the target frame to create the reference frame
+
+        # Apply the mask to the target frame to create the reference frame
         target_mask = os.path.join(dir, 'hero_{0}_ms_{1:06d}.png'.format(hero['name'], progress[n - 1]['time']))
         command = '{0} {1} {2} -alpha Off -compose CopyOpacity -composite {3}'.format(
             image_magick['convert'], target_frame, hero_mask, target_mask)
         subprocess.call(command, shell=True)
+
         def cleanup():
             os.remove(hero_mask)
             if os.path.isfile(target_mask):
                 os.remove(target_mask)
+
+        # Allow for small differences like scrollbars and overlaid UI elements
+        # by applying a 10% fuzz and allowing for up to 2% of the pixels to be
+        # different.
+        fuzz = 10
+        max_pixel_diff = math.ceil(hero_width * hero_height * 0.02)
+
         for p in progress:
             current_frame = os.path.join(dir, 'ms_{0:06d}'.format(p['time']))
             extension = None
@@ -1529,16 +1555,20 @@ def calculate_hero_time(progress, directory, hero, viewport):
                     image_magick['convert'], current_frame + extension, hero_mask, current_mask)
                 logging.debug(command)
                 subprocess.call(command, shell=True)
-                match = frames_match(target_mask, current_mask, 2, 0, None, None)
+                match = frames_match(target_mask, current_mask, fuzz, max_pixel_diff, None, None)
                 # Remove each mask after using it
                 os.remove(current_mask)
+
                 if match:
                     # Clean up masks as soon as a match is found
                     cleanup()
                     return p['time']
-         # No matches found; clean up masks
+
+        # No matches found; clean up masks
         cleanup()
+
     return None
+
 
 ##########################################################################
 #   Check any dependencies
@@ -1707,14 +1737,13 @@ def main():
         parser.error("A video, Directory of images or histograms file needs to be provided.\n\n"
                      "Use -h to see available options")
 
-    #if options.perceptual:
-    #    if not options.video:
-    ##        parser.error(
-    #            "A video file needs to be provided.\n\n"
-    #            "Use -h to see available options")
+    if options.perceptual:
+        if not options.video:
+            parser.error(
+                "A video file needs to be provided.\n\n"
+                "Use -h to see available options")
 
     temp_dir = tempfile.mkdtemp(prefix='vis-')
-    colors_temp_dir = tempfile.mkdtemp(prefix='vis-color-')
     directory = temp_dir
     if options.dir is not None:
         directory = options.dir
@@ -1769,7 +1798,7 @@ def main():
                             image_magick['mogrify'] = mogrify
                             break
 
-    ok = True
+    ok = False
     try:
         if not options.check:
             viewport = None
@@ -1779,22 +1808,21 @@ def main():
                     orange_file = os.path.join(os.path.dirname(
                         os.path.realpath(__file__)), 'orange.png')
                     if not os.path.isfile(orange_file):
-                        orange_file = os.path.join(
-                            colors_temp_dir, 'orange.png')
+                        orange_file = os.path.join(temp_dir, 'orange.png')
                         generate_orange_png(orange_file)
                 white_file = None
                 if options.white or options.startwhite or options.endwhite:
                     white_file = os.path.join(os.path.dirname(
                         os.path.realpath(__file__)), 'white.png')
                     if not os.path.isfile(white_file):
-                        white_file = os.path.join(colors_temp_dir, 'white.png')
+                        white_file = os.path.join(temp_dir, 'white.png')
                         generate_white_png(white_file)
                 gray_file = None
                 if options.gray:
                     gray_file = os.path.join(os.path.dirname(
                         os.path.realpath(__file__)), 'gray.png')
                     if not os.path.isfile(gray_file):
-                        gray_file = os.path.join(colors_temp_dir, 'gray.png')
+                        gray_file = os.path.join(temp_dir, 'gray.png')
                         generate_gray_png(gray_file)
                 video_to_frames(options.video, directory, options.force, orange_file,
                                 white_file, gray_file, options.multiple, options.viewport,
@@ -1803,10 +1831,13 @@ def main():
             if not options.multiple:
                 if options.render is not None:
                     render_video(directory, options.render)
+
                 # Calculate the histograms and visual metrics
                 calculate_histograms(directory, histogram_file, options.force)
                 metrics = calculate_visual_metrics(histogram_file, options.start, options.end,
-                                                   options.perceptual, directory, options.progress, options.herodata)
+                                                   options.perceptual, directory, options.progress,
+                                                   options.herodata)
+
                 if options.screenshot is not None:
                     quality = 30
                     if options.quality is not None:
@@ -1824,7 +1855,7 @@ def main():
                             data[metric['name'].replace(
                                 ' ', '')] = metric['value']
                         if 'videoRecordingStart' in globals():        
-                            data['videoRecordingStart'] = videoRecordingStart       
+                            data['videoRecordingStart'] = videoRecordingStart        
                         print json.dumps(data)
                     else:
                         for metric in metrics:
