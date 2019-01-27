@@ -2,7 +2,7 @@
 
 ## 4.0.4 - 2019-01-27
 ### Fixed
-* Bugfix: The fint in the video was to big when testing on mobile/emulated mobile in Chrome [#738](https://github.com/sitespeedio/browsertime/pull/738).
+* Bugfix: The font in the video was to big when testing on mobile/emulated mobile in Chrome [#738](https://github.com/sitespeedio/browsertime/pull/738).
 
 ## 4.0.3 - 2019-01-24
 ### Fixed
