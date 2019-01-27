@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 4.0.4 - 2019-01-27
+### Fixed
+* Bugfix: The fint in the video was to big when testing on mobile/emulated mobile in Chrome [#738](https://github.com/sitespeedio/browsertime/pull/738).
+
 ## 4.0.3 - 2019-01-24
 ### Fixed
 * Bugfix: Calculating Visual Complete 85/95/99 was broken IF the complete process went backward (first hitting 85% and then going down to < than 85%). We used
