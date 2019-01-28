@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 4.0.5 - 2019-01-28
+### Fixed
+* Bugfix: In 4.0.3 upgrade of Visual Metrics removed a couple fixes that should be there [#740](https://github.com/sitespeedio/browsertime/pull/740). 
+
 ## 4.0.4 - 2019-01-27
 ### Fixed
 * Bugfix: The font in the video was to big when testing on mobile/emulated mobile in Chrome [#738](https://github.com/sitespeedio/browsertime/pull/738).
