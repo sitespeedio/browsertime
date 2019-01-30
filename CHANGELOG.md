@@ -1,5 +1,12 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Added
+* Upgraded the Docker container to use Chrome 72 and Firefox 65
+* Upgraded to Chromedriveer 2.45.0 [#743](https://github.com/sitespeedio/browsertime/pull/743).
+* Upgraded to Geckkodriver 0.24.0 [#742](https://github.com/sitespeedio/browsertime/pull/742).
+* Disable Firefox updates during testing [#741](https://github.com/sitespeedio/browsertime/pull/741).
+
 ## 4.0.5 - 2019-01-28
 ### Fixed
 * Bugfix: In 4.0.3 upgrade of Visual Metrics removed a couple fixes that should be there [#740](https://github.com/sitespeedio/browsertime/pull/740). 
