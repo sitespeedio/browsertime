@@ -1,11 +1,12 @@
 # Browsertime changelog
 
-## UNRELEASED
+##  4.1.0 - 2019-01-31
 ### Added
 * Upgraded the Docker container to use Chrome 72 and Firefox 65
 * Upgraded to Chromedriveer 2.45.0 [#743](https://github.com/sitespeedio/browsertime/pull/743).
 * Upgraded to Geckkodriver 0.24.0 [#742](https://github.com/sitespeedio/browsertime/pull/742).
 * Disable Firefox updates during testing [#741](https://github.com/sitespeedio/browsertime/pull/741).
+* New command: ```js.runAndWait('')``` that makes it possible to run your own JavaScript, click a link and wait on page navigation [#747](https://github.com/sitespeedio/browsertime/pull/747).
 
 ## 4.0.5 - 2019-01-28
 ### Fixed
