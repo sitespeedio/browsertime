@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Added
+* Fixed so that js.run() returns whatever it gets back so you can script and get whatever you need from the HTML [#749](https://github.com/sitespeedio/browsertime/pull/749).
+
 ##  4.1.0 - 2019-01-31
 ### Added
 * Upgraded the Docker container to use Chrome 72 and Firefox 65
