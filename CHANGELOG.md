@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 4.2.1 - 2019-02-03
+### Fixed
+* Ooops, click.byClassName and click.byClassNameAndWait broke in 4.2.0 [#753](https://github.com/sitespeedio/browsertime/pull/753).
+
 ## 4.2.0 - 2019-02-03
 ### Fixed
 * Fixed so that ```js.run()``` returns whatever it gets back so you can script and get whatever you need from your page [#749](https://github.com/sitespeedio/browsertime/pull/749).
