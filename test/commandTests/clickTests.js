@@ -55,6 +55,18 @@ describe('command', function() {
         );
         result[0].info.alias.should.equal('documentation');
       });
+
+      it('should be able to measure the urls after multiple clicks', async function() {
+        const result = await engine.runMultiple(
+          [getPath('clickBackAndForth.js')],
+          {
+            scripts
+          }
+        );
+        result[0].browserScripts[0].scripts.uri.should.equal(
+          'https://www.sitespeed.io/documentation/'
+        );
+      });
     });
   });
 });
