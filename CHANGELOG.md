@@ -1,8 +1,8 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 4.2.0 - 2019-02-03
 ### Fixed
-* Fixed so that ```js.run()``` returns whatever it gets back so you can script and get whatever you need from the HTML [#749](https://github.com/sitespeedio/browsertime/pull/749).
+* Fixed so that ```js.run()``` returns whatever it gets back so you can script and get whatever you need from your page [#749](https://github.com/sitespeedio/browsertime/pull/749).
 
 ### Added
 * New help command **set** to set innerHtml, innerText and value of element. [#750](https://github.com/sitespeedio/browsertime/pull/750). 
