@@ -411,9 +411,9 @@ def adjust_frame_times(directory):
     # Let us tune this in the future to skip using a global
     global videoRecordingStart
     match = re.compile(r'video-(?P<ms>[0-9]+)\.png')
-    msFromFirstFrame = re.search(match, frames[0])
-    videoRecordingStart = int(msFromFirstFrame.groupdict().get('ms'))
     if len(frames):
+        msFromFirstFrame = re.search(match, frames[0])
+        videoRecordingStart = int(msFromFirstFrame.groupdict().get('ms'))
         #match = re.compile(r'video-(?P<ms>[0-9]+)\.png')
         for frame in frames:
             m = re.search(match, frame)
@@ -553,7 +553,7 @@ def find_render_start(directory, orange_file, gray_file):
                     mask = None
                 top = 10
                 right_margin = 10
-                bottom_margin = 25
+                bottom_margin = 10
                 if height > 400 or width > 400:
                     top =  max(top, int(math.ceil(float(height) * 0.03)))
                     right_margin = max(right_margin, int(math.ceil(float(width) * 0.04)))
@@ -1744,7 +1744,6 @@ def main():
                 "Use -h to see available options")
 
     temp_dir = tempfile.mkdtemp(prefix='vis-')
-    colors_temp_dir = tempfile.mkdtemp(prefix='vis-color-')
     directory = temp_dir
     if options.dir is not None:
         directory = options.dir
@@ -1809,21 +1808,21 @@ def main():
                     orange_file = os.path.join(os.path.dirname(
                         os.path.realpath(__file__)), 'orange.png')
                     if not os.path.isfile(orange_file):
-                        orange_file = os.path.join(colors_temp_dir, 'orange.png')
+                        orange_file = os.path.join(temp_dir, 'orange.png')
                         generate_orange_png(orange_file)
                 white_file = None
                 if options.white or options.startwhite or options.endwhite:
                     white_file = os.path.join(os.path.dirname(
                         os.path.realpath(__file__)), 'white.png')
                     if not os.path.isfile(white_file):
-                        white_file = os.path.join(colors_temp_dir, 'white.png')
+                        white_file = os.path.join(temp_dir, 'white.png')
                         generate_white_png(white_file)
                 gray_file = None
                 if options.gray:
                     gray_file = os.path.join(os.path.dirname(
                         os.path.realpath(__file__)), 'gray.png')
                     if not os.path.isfile(gray_file):
-                        gray_file = os.path.join(colors_temp_dir, 'gray.png')
+                        gray_file = os.path.join(temp_dir, 'gray.png')
                         generate_gray_png(gray_file)
                 video_to_frames(options.video, directory, options.force, orange_file,
                                 white_file, gray_file, options.multiple, options.viewport,
