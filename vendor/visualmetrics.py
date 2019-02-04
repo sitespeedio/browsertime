@@ -411,9 +411,9 @@ def adjust_frame_times(directory):
     # Let us tune this in the future to skip using a global
     global videoRecordingStart
     match = re.compile(r'video-(?P<ms>[0-9]+)\.png')
-    msFromFirstFrame = re.search(match, frames[0])
-    videoRecordingStart = int(msFromFirstFrame.groupdict().get('ms'))
     if len(frames):
+        msFromFirstFrame = re.search(match, frames[0])
+        videoRecordingStart = int(msFromFirstFrame.groupdict().get('ms'))
         #match = re.compile(r'video-(?P<ms>[0-9]+)\.png')
         for frame in frames:
             m = re.search(match, frame)
@@ -553,7 +553,7 @@ def find_render_start(directory, orange_file, gray_file):
                     mask = None
                 top = 10
                 right_margin = 10
-                bottom_margin = 25
+                bottom_margin = 10
                 if height > 400 or width > 400:
                     top =  max(top, int(math.ceil(float(height) * 0.03)))
                     right_margin = max(right_margin, int(math.ceil(float(width) * 0.04)))
