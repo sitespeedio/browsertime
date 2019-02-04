@@ -1,4 +1,7 @@
 # Browsertime changelog
+## 4.2.3 - 2019-02-04
+### Fixed
+* Rollbacked the the tmp dirs for Visual Metrics [#758](https://github.com/sitespeedio/browsertime/pull/758).
 
 ## 4.2.2 - 2019-02-04
 ### Fixed
