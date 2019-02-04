@@ -1,5 +1,11 @@
 # Browsertime changelog
 
+## 4.2.2 - 2019-02-04
+### Fixed
+* The HAR file had wrong visual metrics as reported in [#754](https://github.com/sitespeedio/browsertime/issues/754). Fixed in [#756](https://github.com/sitespeedio/browsertime/pull/756).
+
+* Fixed borders when running Visual Metrics to try to avoid small orange in the first frame for Chrome [#755](https://github.com/sitespeedio/browsertime/issues/755) fixed in [#757](https://github.com/sitespeedio/browsertime/pull/757).
+
 ## 4.2.1 - 2019-02-03
 ### Fixed
 * Ooops, click.byClassName and click.byClassNameAndWait broke in 4.2.0 [#753](https://github.com/sitespeedio/browsertime/pull/753).
