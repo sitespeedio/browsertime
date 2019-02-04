@@ -1,4 +1,8 @@
 # Browsertime changelog
+## 4.2.4 - 2019-02-04
+### Fixed
+* Commnad set.innerHtml was broken and click by xpath could not handle "-signs [#759](https://github.com/sitespeedio/browsertime/pull/759).
+
 ## 4.2.3 - 2019-02-04
 ### Fixed
 * Rollbacked the the tmp dirs for Visual Metrics [#758](https://github.com/sitespeedio/browsertime/pull/758).
