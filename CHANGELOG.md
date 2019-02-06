@@ -1,4 +1,8 @@
 # Browsertime changelog
+## 4.2.5 - 2019-02-06
+### Fixed
+* Inserting metrics into the HAR file calculated the wrong page number if you tested multiple pages [#760](https://github.com/sitespeedio/browsertime/pull/760).
+
 ## 4.2.4 - 2019-02-04
 ### Fixed
 * Commnad set.innerHtml was broken and click by xpath could not handle "-signs [#759](https://github.com/sitespeedio/browsertime/pull/759).
