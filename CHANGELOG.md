@@ -1,4 +1,10 @@
 # Browsertime changelog
+
+## 4.2.6 2019-02-08
+### Fixed
+* Command set value by id was broken, it used to set the value to the id [#761](https://github.com/sitespeedio/browsertime/pull/761). 
+* I've missed that for some URLs (as in this [login](https://github.com/sitespeedio/sitespeed.io/issues/2290#issuecomment-461601990) you could have an alias for an URL but the URL was actually slightly different. For example, you login to a site and the login step redirect to a URL and for that URL one value of a GET parameter differs. So with this fix we lock the alias tyo one specific URL. If your URL change and you use an alias, the first variation of the URL will be used [#763](https://github.com/sitespeedio/browsertime/pull/763).
+
 ## 4.2.5 - 2019-02-06
 ### Fixed
 * Inserting metrics into the HAR file calculated the wrong page number if you tested multiple pages [#760](https://github.com/sitespeedio/browsertime/pull/760).
