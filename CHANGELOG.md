@@ -1,5 +1,12 @@
 # Browsertime changelog
 
+## 4.3.0 2019-02-10
+### Added
+* Add text by CSS selector (new command) addText.bySelector(text, selector) [#764](https://github.com/sitespeedio/browsertime/pull/764),
+
+### Fixed
+* click.byJs and click.byJsAndWait now uses JavaScript in backend instead of Selenium = will work on hidden links [#765](https://github.com/sitespeedio/browsertime/pull/765).
+
 ## 4.2.6 2019-02-08
 ### Fixed
 * Command set value by id was broken, it used to set the value to the id [#761](https://github.com/sitespeedio/browsertime/pull/761). 
