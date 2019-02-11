@@ -1,5 +1,12 @@
 # Browsertime changelog
 
+## 4.4.0 - UNRELEASED
+
+### Fixed
+* Updated RUM Speed Index to include upstream fix [#766](https://github.com/sitespeedio/browsertime/pull/766).
+* Make sure the body of the page is shown when setting the fullscreen to orange (when recording the video) [#767](https://github.com/sitespeedio/browsertime/pull/767) 
+* Testing redirect URLs was broken since 8.0. If you test a URL, use that URL and if you click on a link, usethe URL from the browser [#768](https://github.com/sitespeedio/browsertime/pull/768).
+
 ## 4.3.0 2019-02-10
 ### Added
 * Add text by CSS selector (new command) addText.bySelector(text, selector) [#764](https://github.com/sitespeedio/browsertime/pull/764),
