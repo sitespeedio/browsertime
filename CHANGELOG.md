@@ -1,6 +1,8 @@
 # Browsertime changelog
 
 ## 4.4.0 - UNRELEASED
+### Added
+* There are two new cache clear commands: cache.clearKeepCookies() and cache.clear() (only working on Desktop) [#769](https://github.com/sitespeedio/browsertime/pull/769).
 
 ### Fixed
 * Updated RUM Speed Index to include upstream fix [#766](https://github.com/sitespeedio/browsertime/pull/766).
