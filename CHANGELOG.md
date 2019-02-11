@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## 4.4.0 - UNRELEASED
+## 4.4.0 - 2019-02-12
 ### Added
 * There are two new cache clear commands: cache.clearKeepCookies() and cache.clear() (only working on Desktop) [#769](https://github.com/sitespeedio/browsertime/pull/769).
 
