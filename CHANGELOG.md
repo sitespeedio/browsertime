@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* Print correct timestamp on the video [#770](https://github.com/sitespeedio/browsertime/pull/770) Thank you [ponyo877](https://github.com/ponyo877) for the fix!
+
 ## 4.4.0 - 2019-02-12
 ### Added
 * There are two new cache clear commands: cache.clearKeepCookies() and cache.clear() (only working on Desktop) [#769](https://github.com/sitespeedio/browsertime/pull/769).
