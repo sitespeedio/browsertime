@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 4.4.1 - 2019-02-13
 ### Fixed
 * Print correct timestamp on the video [#770](https://github.com/sitespeedio/browsertime/pull/770) Thank you [ponyo877](https://github.com/ponyo877) for the fix!
 
