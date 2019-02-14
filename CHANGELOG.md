@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 4.4.2 - 2019-02-14
+### Fixed
+* 4.4.1 introduced small flicker on the timer. [#772](https://github.com/sitespeedio/browsertime/pull/772) fixes that and change the look of the timer.
+
 ## 4.4.1 - 2019-02-13
 ### Fixed
 * Print correct timestamp on the video [#770](https://github.com/sitespeedio/browsertime/pull/770) Thank you [ponyo877](https://github.com/ponyo877) for the fix!
