@@ -1,5 +1,11 @@
 # Browsertime changelog
 
+## 4.4.3 - 2019-02-15
+### Fixed
+* Another go at fixing the flicker of the timer in the video [#773](https://github.com/sitespeedio/browsertime/pull/773). Thanks [ponyo877](https://github.com/ponyo877) for the PR.
+
+* When trying to find the last visual change, a 0.01 % difference in pixels are now OK. We had problems finding too small difference that was picked up by Visual Metrics [#774](https://github.com/sitespeedio/browsertime/pull/774).
+
 ## 4.4.2 - 2019-02-14
 ### Fixed
 * 4.4.1 introduced small flicker on the timer. [#772](https://github.com/sitespeedio/browsertime/pull/772) fixes that and change the look of the timer.
