@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 4.4.4 - 2019-02-15
+### Fixed
+* If a Visual Element wasn't found, we used to log that as an error, instead log as infon[#775](https://github.com/sitespeedio/browsertime/pull/775).
+
 ## 4.4.3 - 2019-02-15
 ### Fixed
 * Another go at fixing the flicker of the timer in the video [#773](https://github.com/sitespeedio/browsertime/pull/773). Thanks [ponyo877](https://github.com/ponyo877) for the PR.
