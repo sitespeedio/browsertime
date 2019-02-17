@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 4.4.5 - 2019-02-17
+### Fixed
+* Fine tuned and changed so 0.05 % (before it was 0.01%) of the pixels can differ when finding last visual change [#777](https://github.com/sitespeedio/browsertime/pull/777).
+
 ## 4.4.4 - 2019-02-15
 ### Fixed
 * If a Visual Element wasn't found, we used to log that as an error, instead log as info [#775](https://github.com/sitespeedio/browsertime/pull/775).
