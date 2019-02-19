@@ -1,5 +1,11 @@
 # Browsertime changelog
 
+## 4.4.6 - 2019-02-19
+### Fixed
+* Multiple fixes to make sure that if a URL fails, we should add that error to the error array of the Browsertime json instead of just failing [#779](https://github.com/sitespeedio/browsertime/pull/779), [#781](https://github.com/sitespeedio/browsertime/pull/781) and [#782](https://github.com/sitespeedio/browsertime/pull/782).
+
+* Fail fast if a user script can't be parsed [#783](https://github.com/sitespeedio/browsertime/pull/783).
+
 ## 4.4.5 - 2019-02-17
 ### Fixed
 * Fine tuned and changed so 0.05 % (before it was 0.01%) of the pixels can differ when finding last visual change [#777](https://github.com/sitespeedio/browsertime/pull/777).
