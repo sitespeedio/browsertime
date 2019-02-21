@@ -638,10 +638,8 @@ def eliminate_duplicate_frames(directory):
                     break
 
             # Do another pass looking for the last frame but with an allowance for up
-            # to a 10% difference in individual pixels to deal with noise
-            # around text. We can also have a diff of 0.05% of pixels, without that 
-            # we pickup small changes at the end of the video
-            max_pixel_diff = math.ceil(width * height * 0.0005)
+            # to a 15% difference in individual pixels to deal with noise
+            # around text.
             files = sorted(glob.glob(os.path.join(directory, 'ms_*.png')))
             count = len(files)
             duplicates = []
@@ -650,7 +648,7 @@ def eliminate_duplicate_frames(directory):
                 baseline = files[0]
                 previous_frame = baseline
                 for i in xrange(1, count):
-                    if frames_match(baseline, files[i], 10, max_pixel_diff, crop, None):
+                    if frames_match(baseline, files[i], 15, 0, crop, None):
                         if previous_frame is baseline:
                             duplicates.append(previous_frame)
                         else:
