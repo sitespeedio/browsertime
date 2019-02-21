@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 4.4.7 - UNRELEASED 
+### Fixed
+* Use 15% fuzz (instead of 10%) when finding the last visual frame in Visual Metrics and allow 0 pixels difference [#786](https://github.com/sitespeedio/browsertime/pull/786)
+
 ## 4.4.6 - 2019-02-19
 ### Fixed
 * Multiple fixes to make sure that if a URL fails, we should add that error to the error array of the Browsertime json instead of just failing [#779](https://github.com/sitespeedio/browsertime/pull/779), [#781](https://github.com/sitespeedio/browsertime/pull/781) and [#782](https://github.com/sitespeedio/browsertime/pull/782).
