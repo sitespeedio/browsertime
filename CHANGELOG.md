@@ -1,8 +1,9 @@
 # Browsertime changelog
 
-## 4.4.7 - UNRELEASED 
+## 4.4.7 - 2019-02-21
 ### Fixed
 * Use 15% fuzz (instead of 10%) when finding the last visual frame in Visual Metrics and allow 0 pixels difference [#786](https://github.com/sitespeedio/browsertime/pull/786)
+* Added extra check so that we don't add metrics to the HAR if we failed to get metrics.
 
 ## 4.4.6 - 2019-02-19
 ### Fixed
