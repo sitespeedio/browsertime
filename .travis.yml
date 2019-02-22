@@ -7,7 +7,7 @@ cache:
   apt: true
   pip: true
   directories:
-  - node_modules
+  - "$HOME/.npm"
   - $HOME/.local/lib/python2.7/site-packages
   - /usr/local/lib/python2.7/site-packages
 addons:
@@ -53,6 +53,8 @@ before_script:
 - export DISPLAY=:99.0
 - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile
   --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1600x1024x16
+install:
+- npm ci  
 script:
 - ./vendor/visualmetrics.py --check
 - npm run travis
