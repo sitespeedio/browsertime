@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* Add padding to video when using width/height not divisible by 2. Thank you [Ferdinand Holzer](https://github.com/fholzer) for the PR [#790](https://github.com/sitespeedio/browsertime/pull/790)
+
 ## 4.4.7 - 2019-02-21
 ### Fixed
 * Use 15% fuzz (instead of 10%) when finding the last visual frame in Visual Metrics and allow 0 pixels difference [#786](https://github.com/sitespeedio/browsertime/pull/786)
