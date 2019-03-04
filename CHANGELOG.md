@@ -1,8 +1,9 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 4.4.8 - 2019-03-04
 ### Fixed
 * Add padding to video when using width/height not divisible by 2. Thank you [Ferdinand Holzer](https://github.com/fholzer) for the PR [#790](https://github.com/sitespeedio/browsertime/pull/790)
+* Fixed broken delay time between runs (delay only worked when iterations > 2 and did not delay the last two runs) [#784](https://github.com/sitespeedio/browsertime/pull/784).
 
 ## 4.4.7 - 2019-02-21
 ### Fixed
