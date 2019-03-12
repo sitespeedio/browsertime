@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+## 4.4.9 - 2019-03-12
+### Fixed
+* Automatically catch if a user that uses a script misses calling measure.stop() [#798](https://github.com/sitespeedio/browsertime/pull/798).  
+* If a runs fail, make sure Browsertime fails more gracefully [#799](https://github.com/sitespeedio/browsertime/pull/799).
+
 ## 4.4.8 - 2019-03-04
 ### Fixed
 * Add padding to video when using width/height not divisible by 2. Thank you [Ferdinand Holzer](https://github.com/fholzer) for the PR [#790](https://github.com/sitespeedio/browsertime/pull/790)
