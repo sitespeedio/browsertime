@@ -5,7 +5,7 @@
   "dependencies": {
     "@sitespeed.io/throttle": "0.5.0",
     "adbkit": "2.11.0",
-    "@sitespeed.io/chromedriver": "2.45.0",
+    "@sitespeed.io/chromedriver": "73.0.3684",
     "chrome-har": "0.9.1",
     "chrome-trace": "0.2.1",
     "dayjs": "1.7.8",

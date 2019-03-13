@@ -29,12 +29,12 @@
       }
     },
     "@sitespeed.io/chromedriver": {
-      "version": "2.45.0",
-      "resolved": "https://registry.npmjs.org/@sitespeed.io/chromedriver/-/chromedriver-2.45.0.tgz",
-      "integrity": "sha512-Ib0YzorHbE0Dr8U40orYnzUzn84QWb4C6GE4kw0o6s5lbFLZEyWsnA1U+5yiAEUZOZzUobrgQJVrhcIYhixWow==",
+      "version": "73.0.3684",
+      "resolved": "https://registry.npmjs.org/@sitespeed.io/chromedriver/-/chromedriver-73.0.3684.tgz",
+      "integrity": "sha512-UH4pt/7PO7SozlkRHorQbeNssDGaEfsHfMi0MZ+DhJfScRKtA70XC2xRRSaTvrUG4G7id9DX3MlKr0lJcgiA1Q==",
       "requires": {
-        "node-downloader-helper": "1.0.9",
-        "node-stream-zip": "1.7.0"
+        "node-downloader-helper": "1.0.10",
+        "node-stream-zip": "1.8.0"
       },
       "dependencies": {
         "@babel/code-frame": {
@@ -793,14 +793,14 @@
           "integrity": "sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ=="
         },
         "node-downloader-helper": {
-          "version": "1.0.9",
-          "resolved": "https://registry.npmjs.org/node-downloader-helper/-/node-downloader-helper-1.0.9.tgz",
-          "integrity": "sha512-X2cuBotLy2D3LdQAvhOAZ6IfcMGT6ssn+hCEm6yPJzhjr+S/YjyTLTxhnAe1pr5/jxGABD+b3SN8WpuBL5J2Dw=="
+          "version": "1.0.10",
+          "resolved": "https://registry.npmjs.org/node-downloader-helper/-/node-downloader-helper-1.0.10.tgz",
+          "integrity": "sha512-oxR1Z3HqKLDCW9yR8kb8tclRIemCnXENiXLjNa9aXGL+UunfJFTJqtidUcmm1UdfuVhoA0ZSrnLBDItvO9SrJQ=="
         },
         "node-stream-zip": {
-          "version": "1.7.0",
-          "resolved": "https://registry.npmjs.org/node-stream-zip/-/node-stream-zip-1.7.0.tgz",
-          "integrity": "sha512-kYVtF3lK++53Bg6hZNplYVMrR7Lt0IYdLWehgoHUJLJcSwg/xd2Rm2Z7kJ5W8ZA7pdeg/DiUQDatbYwL3C7qSw=="
+          "version": "1.8.0",
+          "resolved": "https://registry.npmjs.org/node-stream-zip/-/node-stream-zip-1.8.0.tgz",
+          "integrity": "sha512-sFMswrGIZ8c4a9o82MiET1k/XMqnkVkoU/C4mL869ndDnzPLeVKWn/6qMdzGtZCbWeuZ9IRIbhHLliSs7QTEKg=="
         },
         "oauth-sign": {
           "version": "0.9.0",
