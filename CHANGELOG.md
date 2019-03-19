@@ -1,9 +1,9 @@
 # Browsertime changelog
 
-## 4.5.0 - UNRELEASED
+## 4.5.0 - 2019-03-19
 ### Added
 * Use Chrome 73 in the Docker container (and latest Chromedriver)
-* Use Firefox 66 in the Docker container
+* Use Firefox 66 in the Docker container.
 
 ## 4.4.9 - 2019-03-12
 ### Fixed
