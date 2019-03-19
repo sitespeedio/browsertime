@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+## 4.5.0 - UNRELEASED
+### Added
+* Use Chrome 73 in the Docker container (and latest Chromedriver)
+* Use Firefox 66 in the Docker container
+
 ## 4.4.9 - 2019-03-12
 ### Fixed
 * Automatically catch if a user that uses a script misses calling measure.stop() [#798](https://github.com/sitespeedio/browsertime/pull/798).  
