@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 4.5.2 - 2019-03-22
+### Fixed
+* Better logging if Visual Metrics fails. Add --verbose to see the output from Visual Metrics.
+
 ## 4.5.1 - 2019-03-22
 ### Fixed
 * Recording visual metrics and clicking on links (the combination) was broken on Android phones as reported in [#802](https://github.com/sitespeedio/browsertime/issues/802) fixed in [#803](https://github.com/sitespeedio/browsertime/pull/803).
