@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* The cli had wrong name for visualElements (was visuaElements). Fixed + alias to the old wrong one.
+
 ## 4.5.3 - 2019-03-23
 
 ### Fixed
