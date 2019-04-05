@@ -1,8 +1,14 @@
 # Browsertime changelog
 
 ## UNRELEASED
+
 ### Fixed
 * The cli had wrong name for visualElements (was visuaElements). Fixed + alias to the old wrong one.
+
+### Added
+* Enable use of [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/). We now uses a modified version of Selenium that can use CDP. We also automatically collect the CDP performance metrics *Performance.getMetrics
+* (you can turn that off with `--chrome.cdp.performance false`). We also enabled raw use of the CDP in scripting: `cdp.sendAndGet(command, args)` and `cdp.send(command, args)` [#807](https://github.com/sitespeedio/browsertime/pull/807)
+
 
 ## 4.5.3 - 2019-03-23
 
