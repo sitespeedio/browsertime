@@ -9,6 +9,8 @@
 * Enable use of [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/). We now uses a modified version of Selenium that can use CDP. We also automatically collect the CDP performance metrics *Performance.getMetrics
 * (you can turn that off with `--chrome.cdp.performance false`). We also enabled raw use of the CDP in scripting: `cdp.sendAndGet(command, args)` and `cdp.send(command, args)` [#807](https://github.com/sitespeedio/browsertime/pull/807)
 
+* Report loadEventEnd as a separate metric (you don't need to get it from the Navigation Timings section) [#808](https://github.com/sitespeedio/browsertime/pull/808).
+
 
 ## 4.5.3 - 2019-03-23
 
