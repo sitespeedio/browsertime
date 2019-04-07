@@ -1,4 +1,7 @@
 # Browsertime changelog
+## UNRELEASED
+### Fixed
+* Remove Timestamp from CDP performance.
 
 ## 4.6.0 - 2019-04-07
 
