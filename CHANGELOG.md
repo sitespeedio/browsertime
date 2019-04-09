@@ -1,4 +1,8 @@
 # Browsertime changelog
+
+## 4.6.2 - 2019-04-09
+* New release since npm had problem and broke the 4.6.1 release.
+
 ## 4.6.1 - 2019-04-09
 ### Fixed
 * Remove Timestamp from CDP performance.
