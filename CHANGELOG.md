@@ -1,5 +1,5 @@
 # Browsertime changelog
-## UNRELEASED
+## 4.6.1 - 2019-04-09
 ### Fixed
 * Remove Timestamp from CDP performance.
 * Report duration metrics in CDP performance in ms.
