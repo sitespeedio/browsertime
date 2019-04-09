@@ -2,6 +2,7 @@
 ## UNRELEASED
 ### Fixed
 * Remove Timestamp from CDP performance.
+* Report duration metrics in CDP performance in ms.
 
 ## 4.6.0 - 2019-04-07
 
