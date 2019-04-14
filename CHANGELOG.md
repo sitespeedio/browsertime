@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 4.6.3 - 2019-04-14
+### Fixed
+* Bugfix: If you test using a script and one of the URLs failed to load, the error was reported on wrong URL. Fixed in [#811](https://github.com/sitespeedio/browsertime/pull/811).
+
 ## 4.6.2 - 2019-04-09
 * New release since npm had problem and broke the 4.6.1 release.
 
