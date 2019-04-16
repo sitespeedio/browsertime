@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 4.6.4 - 2019-04-16
+### Fixed
+* Bugix: If a page failed, it was left out of the HAR file, making the flow broken if you used scripting [#812](https://github.com/sitespeedio/browsertime/pull/812).
+
 ## 4.6.3 - 2019-04-14
 ### Fixed
 * Bugfix: If you test using a script and one of the URLs failed to load, the error was reported on wrong URL. Fixed in [#811](https://github.com/sitespeedio/browsertime/pull/811).
