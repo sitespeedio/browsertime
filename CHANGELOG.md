@@ -1,8 +1,13 @@
 # Browsertime changelog
 
+## UNRELEASED
+
+### Added
+* You can add your own errors in scripting with `commands.error(message)` [#813](https://github.com/sitespeedio/browsertime/pull/813).
+
 ## 4.6.4 - 2019-04-16
 ### Fixed
-* Bugix: If a page failed, it was left out of the HAR file, making the flow broken if you used scripting [#812](https://github.com/sitespeedio/browsertime/pull/812).
+* Bugfix: If a page failed, it was left out of the HAR file, making the flow broken if you used scripting [#812](https://github.com/sitespeedio/browsertime/pull/812).
 
 ## 4.6.3 - 2019-04-14
 ### Fixed
