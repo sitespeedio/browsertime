@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## UNRELEASED
+##  4.7.0 - 2019-04-21
 
 ### Added
 * You can add your own errors in scripting with `commands.error(message)` [#813](https://github.com/sitespeedio/browsertime/pull/813).
