@@ -8,6 +8,7 @@
     "@sitespeed.io/chromedriver": "74.0.372-9.6-1",
     "chrome-har": "0.9.1",
     "dayjs": "1.8.13",
+    "del": "4.1.0",
     "execa": "1.0.0",
     "fast-stats": "0.0.5",
     "hasbin": "1.2.3",
