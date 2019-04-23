@@ -1,6 +1,11 @@
 # Browsertime changelog
 
-##  4.7.0 - 2019-04-21
+## 4.8.0 - 2019-04-23
+
+### Added
+* Scripting throws error with an exact error message of what went wrong instead of the wrapped Chromedriver error. The error is also added to the error array in the output json so you can see what goes wrong [#815](https://github.com/sitespeedio/browsertime/pull/815).
+
+## 4.7.0 - 2019-04-21
 
 ### Added
 * You can add your own errors in scripting with `commands.error(message)` [#813](https://github.com/sitespeedio/browsertime/pull/813).
