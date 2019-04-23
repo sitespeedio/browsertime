@@ -1,6 +1,6 @@
 {
   "description": "Browsertime",
-  "version": "4.9.2",
+  "version": "4.9.2-android",
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "@sitespeed.io/throttle": "0.5.1",
@@ -22,7 +22,7 @@
     "lodash.remove": "4.7.0",
     "lodash.set": "4.3.2",
     "mkdirp": "0.5.1",
-    "selenium-webdriver": "https://github.com/sitespeedio/selenium/archive/v3.6.0.tar.gz",
+    "selenium-webdriver": "https://github.com/mozilla/selenium/archive/v3.6.0-android.tar.gz",
     "sharp": "0.22.1",
     "@sitespeed.io/geckodriver": "0.24.0",
     "tracium": "0.2.0",

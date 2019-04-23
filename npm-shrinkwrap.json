@@ -1,6 +1,6 @@
 {
   "name": "browsertime",
-  "version": "4.9.2",
+  "version": "4.9.2-android",
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
@@ -4622,8 +4622,8 @@
       "integrity": "sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw=="
     },
     "selenium-webdriver": {
-      "version": "https://github.com/sitespeedio/selenium/archive/v3.6.0.tar.gz",
-      "integrity": "sha512-fO9kzx5Ft9JWbTREwmDIhM1xtr5Cpg7nCJVNLkqjMQk2L6oEHBvWtAaZPxK49MAWN5m77v+E29QBNGF1/zFwIA==",
+      "version": "https://github.com/mozilla/selenium/archive/v3.6.0-android.tar.gz",
+      "integrity": "sha512-KuXBGAHSK5C6/uH2F4QbXq+niX+p+LWqfT6wA5lwTyLb3Zts8/YUuPjDqstZ+9T0Eh8HRf++uFUyV04dYTK3jw==",
       "requires": {
         "jszip": "^3.1.3",
         "rimraf": "^2.5.4",
