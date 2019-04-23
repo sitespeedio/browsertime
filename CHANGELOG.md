@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Added
+* Chrome 74 in the Docker container and Chromedriver 74.
+
 ## 4.8.0 - 2019-04-23
 
 ### Added
