@@ -29,9 +29,9 @@
       }
     },
     "@sitespeed.io/chromedriver": {
-      "version": "74.0.372-9.6",
-      "resolved": "https://registry.npmjs.org/@sitespeed.io/chromedriver/-/chromedriver-74.0.372-9.6.tgz",
-      "integrity": "sha512-lrhyLr0V3eEAQi4iMstVGO4+k0Bn8gsr7fMKjWeku1poxKSxe53QswhH9FoYvZ7Y1XKl1/MU4VOcC2QovGCkBA==",
+      "version": "74.0.372-9.6-1",
+      "resolved": "https://registry.npmjs.org/@sitespeed.io/chromedriver/-/chromedriver-74.0.372-9.6-1.tgz",
+      "integrity": "sha512-xtQlxAG2YiRqmMBK5SpiFbFYZJgg30M3rQOuU0w5g+IvitxMrQv6Cx/rWa5JrTnEY9+fNkG13/eN1+B22gIbTg==",
       "requires": {
         "node-downloader-helper": "1.0.10",
         "node-stream-zip": "1.8.0"
@@ -675,9 +675,9 @@
           "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ=="
         },
         "js-yaml": {
-          "version": "3.12.1",
-          "resolved": "https://registry.npmjs.org/js-yaml/-/js-yaml-3.12.1.tgz",
-          "integrity": "sha512-um46hB9wNOKlwkHgiuyEVAybXBjwFUV0Z/RaHJblRd9DXltue9FTYvzCr9ErQrK9Adz5MU4gHWVaNUfdmrC8qA==",
+          "version": "3.13.1",
+          "resolved": "https://registry.npmjs.org/js-yaml/-/js-yaml-3.13.1.tgz",
+          "integrity": "sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==",
           "requires": {
             "argparse": "^1.0.7",
             "esprima": "^4.0.0"
