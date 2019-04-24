@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 4.9.1 - 2019-04-24
+### Fixed
+* The shrinkwrap file was broken with errors for the latest Chromedriver.
+
 ## 4.9.0 - 2019-04-24
 ### Added
 * Chrome 74 in the Docker container and Chromedriver 74.
