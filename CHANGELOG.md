@@ -1,4 +1,7 @@
 # Browsertime changelog
+## 4.9.2 - 2019-04-26
+### Fixed
+* Upgraded to Chrome-trace 0.2.2 that hopefully fixes the miss matched thread ids that happens for some URLs.
 
 ## 4.9.1 - 2019-04-24
 ### Fixed
