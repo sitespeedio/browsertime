@@ -1,6 +1,10 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 5.0.0 - UNRELEASED
+
+### Changed
+* Replaced [Chrome-trace](https://github.com/sitespeedio/chrome-trace) with [Tracium](https://github.com/aslushnikov/tracium) in [#816](https://github.com/sitespeedio/browsertime/pull/816/).
+
 ### Fixed
 * Bumped all dependencies that needed a bump [#817](https://github.com/sitespeedio/browsertime/pull/817).
 
