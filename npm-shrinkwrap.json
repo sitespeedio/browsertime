@@ -4954,9 +4954,9 @@
       }
     },
     "tracium": {
-      "version": "0.1.1",
-      "resolved": "https://registry.npmjs.org/tracium/-/tracium-0.1.1.tgz",
-      "integrity": "sha512-usamXMQDs9K82f2JtyCUC8gHqqEolmmVokh5849Wm3UFwCoRo3WKoCRdoLHcTxC6gg+ghY943F03KuQbv8wUyQ==",
+      "version": "0.2.0",
+      "resolved": "https://registry.npmjs.org/tracium/-/tracium-0.2.0.tgz",
+      "integrity": "sha512-5mzuDXuauD0TR7mwulMilfS5Dhs6W/J7pvtvGIkuHiCFEHN20mUJ8UygVBncacGtcOkFDfWjv5oFv483aklEzA==",
       "requires": {
         "debug": "^4.1.1"
       },
