@@ -3,13 +3,13 @@
   "version": "4.9.2",
   "bin": "./bin/browsertime.js",
   "dependencies": {
-    "@sitespeed.io/throttle": "0.5.0",
+    "@sitespeed.io/throttle": "0.5.1",
     "adbkit": "2.11.0",
     "@sitespeed.io/chromedriver": "74.0.372-9.6-1",
     "chrome-har": "0.9.1",
-    "dayjs": "1.7.8",
+    "dayjs": "1.8.13",
     "execa": "1.0.0",
-    "fast-stats": "0.0.4",
+    "fast-stats": "0.0.5",
     "hasbin": "1.2.3",
     "intel": "1.2.0",
     "lodash.foreach": "4.5.0",
@@ -22,12 +22,12 @@
     "lodash.set": "4.3.2",
     "mkdirp": "0.5.1",
     "selenium-webdriver": "https://github.com/sitespeedio/selenium/archive/v3.6.0.tar.gz",
-    "sharp": "0.21.1",
+    "sharp": "0.22.1",
     "@sitespeed.io/geckodriver": "0.24.0",
     "tracium": "0.2.0",
     "valid-url": "1.0.9",
     "@cypress/xvfb": "1.2.4",
-    "yargs": "12.0.5"
+    "yargs": "13.2.2"
   },
   "devDependencies": {
     "bluebird": "3.5.1",
