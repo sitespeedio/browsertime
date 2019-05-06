@@ -30,12 +30,12 @@
     "yargs": "13.2.2"
   },
   "devDependencies": {
-    "bluebird": "3.5.1",
-    "chai": "^4.1.2",
+    "bluebird": "3.5.4",
+    "chai": "^4.2.0",
     "chai-as-promised": "~7.1.1",
-    "eslint": "^4.19.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-prettier": "^2.6.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-prettier": "^3.0.1",
     "longjohn": "^0.2.12",
     "mocha": "^5.1.1",
     "prettier": "^1.12.1",
