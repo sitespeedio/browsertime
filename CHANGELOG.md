@@ -8,6 +8,10 @@
 ### Fixed
 * Bumped all dependencies that needed a bump [#817](https://github.com/sitespeedio/browsertime/pull/817).
 
+## 4.9.3 - 2019-05-05
+### Fixed
+* Upgraded the Docker container to use Firefox 66.0.4 that fixes the extension problems that broke getting the HAR.
+
 ## 4.9.2 - 2019-04-26
 ### Fixed
 * Upgraded to Chrome-trace 0.2.2 that hopefully fixes the miss matched thread ids that happens for some URLs.
