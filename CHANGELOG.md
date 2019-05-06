@@ -8,6 +8,11 @@
 ### Fixed
 * Bumped all dependencies that needed a bump [#817](https://github.com/sitespeedio/browsertime/pull/817).
 
+## Added
+* Collect CPU long tasks in Chrome using `--chrome.collectLongTasks` using the [Long Task API](https://developer.mozilla.org/en-US/docs/Web/API/Long_Tasks_API). For the long tasks to work, we inject JS using the Page.addScriptToEvaluateOnNewDocument devtools command. We collect all long tasks and related data (not so much at the moment but will get better/more useful information when browsers supports it) and count the total number of long tasks. Implemented in [#821](https://github.com/sitespeedio/browsertime/pull/821).
+
+* Throttle the CPU using Chrome with `--chrome.CPUThrottlingRate`. Enables CPU throttling to emulate slow CPUs. Throttling rate as a slowdown factor (1 is no throttle, 2 is 2x slowdown, etc). Implemented in [#819](https://github.com/sitespeedio/browsertime/pull/819).
+
 ## 4.9.3 - 2019-05-05
 ### Fixed
 * Upgraded the Docker container to use Firefox 66.0.4 that fixes the extension problems that broke getting the HAR.
