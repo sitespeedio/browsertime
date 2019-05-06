@@ -2,6 +2,9 @@
   "description": "Browsertime",
   "version": "4.9.2",
   "bin": "./bin/browsertime.js",
+  "publishConfig": {
+    "tag": "canary"
+  },
   "dependencies": {
     "@sitespeed.io/throttle": "0.5.1",
     "adbkit": "2.11.0",
