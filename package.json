@@ -30,16 +30,15 @@
     "yargs": "13.2.2"
   },
   "devDependencies": {
-    "bluebird": "3.5.1",
-    "chai": "^4.1.2",
+    "bluebird": "3.5.4",
+    "chai": "^4.2.0",
     "chai-as-promised": "~7.1.1",
-    "eslint": "^4.19.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-prettier": "^2.6.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-prettier": "^3.0.1",
     "longjohn": "^0.2.12",
     "mocha": "^5.1.1",
-    "prettier": "^1.12.1",
-    "sequencediagrams": "0.0.8"
+    "prettier": "^1.17.0"
   },
   "engines": {
     "node": ">=10.13.0"
@@ -68,8 +67,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "eslint-check": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
-    "travis": "npm run eslint-check && npm run lint && npm run test",
-    "generateDocs": "sequencediagrams docs/sequence-diagrams"
+    "travis": "npm run eslint-check && npm run lint && npm run test"
   },
   "name": "browsertime",
   "author": "Tobias Lidskog",
