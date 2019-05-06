@@ -1,73 +1,72 @@
 language: node_js
 node_js:
-- '10'
+  - "10"
 sudo: required
 dist: trusty
 cache:
   apt: true
   pip: true
   directories:
-  - "$HOME/.npm"
-  - $HOME/.local/lib/python2.7/site-packages
-  - /usr/local/lib/python2.7/site-packages
+    - "$HOME/.npm"
+    - $HOME/.local/lib/python2.7/site-packages
+    - /usr/local/lib/python2.7/site-packages
 addons:
   apt:
     sources:
-    - ubuntu-toolchain-r-test
-    - sourceline: "ppa:mc3man/trusty-media"
+      - ubuntu-toolchain-r-test
+      - sourceline: "ppa:mc3man/trusty-media"
     packages:
-    - ffmpeg
-    - google-chrome-stable
-    - ipython
-    - ipython-notebook
-    - libjpeg-dev
-    - libatlas-base-dev
-    - gfortran
-    - python
-    - python-dev
-    - python-imaging
-    - python-numpy
-    - python-scipy
-    - python-matplotlib
-    - python-pandas
-    - python-pip
-    - python-sympy
-    - python-nose
-    - ttf-ubuntu-font-family
-    - xz-utils
-  firefox: 'latest'
+      - ffmpeg
+      - google-chrome-stable
+      - ipython
+      - ipython-notebook
+      - libjpeg-dev
+      - libatlas-base-dev
+      - gfortran
+      - python
+      - python-dev
+      - python-imaging
+      - python-numpy
+      - python-scipy
+      - python-matplotlib
+      - python-pandas
+      - python-pip
+      - python-sympy
+      - python-nose
+      - ttf-ubuntu-font-family
+      - xz-utils
+  firefox: "latest"
 before_install:
-- python -m pip --version
-- python -m pip install --user Pillow
-- python -m pip install --user pyssim
-- python -m pip show Pillow
-- python -m pip show pyssim
-- ffmpeg -version
-- /usr/bin/python --version
-- python --version
-- which python
-- firefox --version 2>/dev/null
-- google-chrome --product-version
-- fc-list
+  - python -m pip --version
+  - python -m pip install --user Pillow
+  - python -m pip install --user pyssim
+  - python -m pip show Pillow
+  - python -m pip show pyssim
+  - ffmpeg -version
+  - /usr/bin/python --version
+  - python --version
+  - which python
+  - firefox --version 2>/dev/null
+  - google-chrome --product-version
+  - fc-list
 before_script:
-- export DISPLAY=:99.0
-- /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile
-  --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1600x1024x16
+  - export DISPLAY=:99.0
+  - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile
+    --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1600x1024x16
 install:
-- npm ci  
+  - npm ci
 script:
-- ./vendor/visualmetrics.py --check
-- npm run travis
-- node ./bin/browsertime.js -b firefox -n 2 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine
-  throttle
-- node ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value
-  https://www.sitespeed.io/documentation/
-- node ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --video --screenshot
-  --visualMetrics -n 1 --chrome.timeline --videoParams.fontPath /usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-R.ttf --visualElements https://www.sitespeed.io/
-- node ./bin/browsertime.js -b chrome test/navigationscript/measure.js -n 1 --preScript test/prepostscripts/preSample.js --postScript test/prepostscripts/postSample.js
-- node ./bin/browsertime.js -b chrome test/navigationscript/navigateAndStartInTwoSteps.js -n 1
-- node ./bin/browsertime.js -b firefox test/navigationscript/multi.js https://www.sitespeed.io/blog/ -n 1
-- node ./bin/browsertime.js -b chrome test/navigationscript/multi.js -n 3 --chrome.timeline --video --visualMetrics --videoParams.fontPath /usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-R.ttf --visualElements
+  - ./vendor/visualmetrics.py --check
+  - npm run travis
+  - node ./bin/browsertime.js -b firefox -n 2 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine
+    throttle
+  - node ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value --chrome.CPUThrottlingRate 2 --chrome.cdp.performance https://www.sitespeed.io/documentation/
+  - node ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --video --screenshot
+    --visualMetrics -n 1 --chrome.timeline --videoParams.fontPath /usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-R.ttf --visualElements --chrome.collectLongTasks https://www.sitespeed.io/
+  - node ./bin/browsertime.js -b chrome test/navigationscript/measure.js -n 1 --preScript test/prepostscripts/preSample.js --postScript test/prepostscripts/postSample.js
+  - node ./bin/browsertime.js -b chrome test/navigationscript/navigateAndStartInTwoSteps.js -n 1
+  - node ./bin/browsertime.js -b firefox test/navigationscript/multi.js https://www.sitespeed.io/blog/ -n 1
+  - node ./bin/browsertime.js -b chrome test/navigationscript/multi.js -n 3 --chrome.timeline --video --visualMetrics --videoParams.fontPath /usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-R.ttf --visualElements
 notifications:
   slack:
     secure: V71EkIzwOf/fZnGTGIKAIFlDyLUit4tK97VDgdV9vZ7CbvOXI1ir3lwRZ57lNqiYD8BUaX+/wKDG+LyrBMgQ4JAGgQx0mECvmOKx1+10Yg9FAkUsMTWe7GOxcVMwhpS2OfHnXwMb0FjcuVl8ovowIZqCWOLeEAYVaTWHndDm2cA=
