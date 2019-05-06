@@ -38,8 +38,7 @@
     "eslint-plugin-prettier": "^3.0.1",
     "longjohn": "^0.2.12",
     "mocha": "^5.1.1",
-    "prettier": "^1.17.0",
-    "sequencediagrams": "0.0.8"
+    "prettier": "^1.17.0"
   },
   "engines": {
     "node": ">=10.13.0"
@@ -68,8 +67,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "eslint-check": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
-    "travis": "npm run eslint-check && npm run lint && npm run test",
-    "generateDocs": "sequencediagrams docs/sequence-diagrams"
+    "travis": "npm run eslint-check && npm run lint && npm run test"
   },
   "name": "browsertime",
   "author": "Tobias Lidskog",
