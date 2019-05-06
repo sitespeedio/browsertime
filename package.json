@@ -38,7 +38,7 @@
     "eslint-plugin-prettier": "^3.0.1",
     "longjohn": "^0.2.12",
     "mocha": "^5.1.1",
-    "prettier": "^1.12.1",
+    "prettier": "^1.17.0",
     "sequencediagrams": "0.0.8"
   },
   "engines": {
