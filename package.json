@@ -10,6 +10,7 @@
     "dayjs": "1.8.13",
     "execa": "1.0.0",
     "fast-stats": "0.0.5",
+    "find-up": "3.0.0",
     "hasbin": "1.2.3",
     "intel": "1.2.0",
     "lodash.foreach": "4.5.0",
