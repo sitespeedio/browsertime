@@ -13,9 +13,6 @@
         a.containerName = at.containerName;
         a.containerSrc = at.containerSrc;
         a.containerType = at.containerType;
-        a.duration = at.duration;
-        a.name = at.name;
-        a.startTime = at.name;
         e.attribution.push(a);
       }
       cleaned.push(e);
