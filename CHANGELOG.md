@@ -1,6 +1,10 @@
 # Browsertime changelog
 
-## 5.0.0 - UNRELEASED
+## 5.0.0.beta-2
+### Fixed
+* Catch traces that doesn't include a nav start (to work with SPA) and log the URL that fails (if it fails).
+
+## 5.0.0.beta-1
 
 ### Changed
 * Replaced [Chrome-trace](https://github.com/sitespeedio/chrome-trace) with [Tracium](https://github.com/aslushnikov/tracium) in [#816](https://github.com/sitespeedio/browsertime/pull/816/). This means we use a Chrome blessed parser that will mean less work for us within the team! Enable it with `--chrome.timeline`. It also means two changes:
