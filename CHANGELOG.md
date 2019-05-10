@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 5.0.0.beta-3
+### Fixed
+* Try out our own hacked version of Tracium that removes the fail fast approach and instead tries to never fail :)
+
 ## 5.0.0.beta-2
 ### Fixed
 * Catch traces that doesn't include a nav start (to work with SPA) and log the URL that fails (if it fails).

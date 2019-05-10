@@ -28,7 +28,7 @@
     "selenium-webdriver": "https://github.com/sitespeedio/selenium/archive/v3.6.0.tar.gz",
     "sharp": "0.22.1",
     "@sitespeed.io/geckodriver": "0.24.0",
-    "tracium": "0.2.0",
+    "@sitespeed.io/tracium": "0.2.3",
     "valid-url": "1.0.9",
     "@cypress/xvfb": "1.2.4",
     "yargs": "13.2.2"
