@@ -10,6 +10,7 @@
     "adbkit": "2.11.0",
     "@sitespeed.io/chromedriver": "74.0.372-9.6-1",
     "chrome-har": "0.9.1",
+    "chrome-remote-interface": "0.27.1",
     "dayjs": "1.8.13",
     "execa": "1.0.0",
     "fast-stats": "0.0.5",
@@ -28,7 +29,7 @@
     "selenium-webdriver": "https://github.com/sitespeedio/selenium/archive/v3.6.0.tar.gz",
     "sharp": "0.22.1",
     "@sitespeed.io/geckodriver": "0.24.0",
-    "@sitespeed.io/tracium": "0.2.3",
+    "tracium": "0.2.0",
     "valid-url": "1.0.9",
     "@cypress/xvfb": "1.2.4",
     "yargs": "13.2.2"
