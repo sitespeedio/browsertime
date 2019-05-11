@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 5.0.0.beta-4
+### Fixed
+* Skipped using the Chromerdriver for getting the Chrome trace log. Instead we use CDP direclty and that seems to fix most problems we have seen on Tracium [#834](https://github.com/sitespeedio/browsertime/pull/834). 
+
 ## 5.0.0.beta-3
 ### Fixed
 * Try out our own hacked version of Tracium that removes the fail fast approach and instead tries to never fail :)
