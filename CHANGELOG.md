@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+## 5.0.0.beta-5
+### Fixed
+* The new CDP impl was broken when you tested multiple URLs within the same browser session. Fixed in
+[#835](https://github.com/sitespeedio/browsertime/pull/835). 
+
 ## 5.0.0.beta-4
 ### Fixed
 * Skipped using the Chromerdriver for getting the Chrome trace log. Instead we use CDP direclty and that seems to fix most problems we have seen on Tracium [#834](https://github.com/sitespeedio/browsertime/pull/834). 
