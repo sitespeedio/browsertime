@@ -1,4 +1,8 @@
 # Browsertime changelog
+## 5.0.0.beta-6
+### Fixed
+* Added back the ability to set trace categories for Chrome [#836](https://github.com/sitespeedio/browsertime/pull/836).
+* A better promise structure when turning on tracing and trying to minimize impact on metrics [#837](https://github.com/sitespeedio/browsertime/pull/837).
 
 ## 5.0.0.beta-5
 ### Fixed
