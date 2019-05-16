@@ -1,33 +1,6 @@
 # Browsertime changelog
 
-## UNRELEASED
-### Added
-* Use --blockDomainsExcept to block all domains except. Use it muliple times to have multiple domains. You can also use wildcard like *.sitespeed.io
-* Shortcut --cpu to enable --chrome.timeline and --chrome.collectLongTasks for Chrome.
-
-## 5.0.0.beta-6
-### Fixed
-* Added back the ability to set trace categories for Chrome [#836](https://github.com/sitespeedio/browsertime/pull/836).
-* A better promise structure when turning on tracing and trying to minimize impact on metrics [#837](https://github.com/sitespeedio/browsertime/pull/837).
-
-## 5.0.0.beta-5
-### Fixed
-* The new CDP impl was broken when you tested multiple URLs within the same browser session. Fixed in
-[#835](https://github.com/sitespeedio/browsertime/pull/835). 
-
-## 5.0.0.beta-4
-### Fixed
-* Skipped using the Chromerdriver for getting the Chrome trace log. Instead we use CDP direclty and that seems to fix most problems we have seen on Tracium [#834](https://github.com/sitespeedio/browsertime/pull/834). 
-
-## 5.0.0.beta-3
-### Fixed
-* Try out our own hacked version of Tracium that removes the fail fast approach and instead tries to never fail :)
-
-## 5.0.0.beta-2
-### Fixed
-* Catch traces that doesn't include a nav start (to work with SPA) and log the URL that fails (if it fails).
-
-## 5.0.0.beta-1
+## 5.0.0 - 2019-05-16
 
 ### Changed
 * Replaced [Chrome-trace](https://github.com/sitespeedio/chrome-trace) with [Tracium](https://github.com/aslushnikov/tracium) in [#816](https://github.com/sitespeedio/browsertime/pull/816/). This means we use a Chrome blessed parser that will mean less work for us within the team! Enable it with `--chrome.timeline`. It also means two changes:
@@ -35,17 +8,23 @@
  * Instead of reporting: Loading, Painting, Rendering, Scripting and Other we now report the same categories as Tracium: parseHTML, styleLayout, paintCompositeRender, scriptParseCompile,  scriptEvaluation, garbageCollection and other. This gives you a little more insights of CPU time spent.
  * We collect more trace log than before (following Lighthouse, the trace log will be larger on disk), this makes it easier for you when you want to debug problems.
 
-### Fixed
-* Bumped all dependencies that needed a bump [#817](https://github.com/sitespeedio/browsertime/pull/817).
-
 ## Added
-* Collect CPU long tasks in Chrome using `--chrome.collectLongTasks` using the [Long Task API](https://developer.mozilla.org/en-US/docs/Web/API/Long_Tasks_API). For the long tasks to work, we inject JS using the *Page.addScriptToEvaluateOnNewDocument* devtools command. We collect all long tasks and related data (not so much at the moment but will get better/more useful information when browsers supports it) and count the total number of long tasks, long tasks that happens before first paint and first contentful paint. Implemented in [#821](https://github.com/sitespeedio/browsertime/pull/821) and [#825](https://github.com/sitespeedio/browsertime/pull/825)
+* Collect CPU long tasks in Chrome using `--chrome.collectLongTasks` using the [Long Task API](https://developer.mozilla.org/en-US/docs/Web/API/Long_Tasks_API). For the long tasks to work, we inject JS using the *Page.addScriptToEvaluateOnNewDocument* devtools command. We collect all long tasks and related data (not so much at the moment but will get better/more useful information when browsers supports it) and count the total number of long tasks, long tasks that happens before first paint and first contentful paint. Implemented in [#821](https://github.com/sitespeedio/browsertime/pull/821) and [#825](https://github.com/sitespeedio/browsertime/pull/825).
+
+* By default a long task is >50ms. Wanna change that? Use `--minLongTaskLength` to set that yourselves (it needs to be larger than 50 ms though) [#838](https://github.com/sitespeedio/browsertime/pull/838).
 
 * Throttle the CPU using Chrome with `--chrome.CPUThrottlingRate`. Enables CPU throttling to emulate slow CPUs. Throttling rate as a slowdown factor (1 is no throttle, 2 is 2x slowdown, etc). Implemented in [#819](https://github.com/sitespeedio/browsertime/pull/819).
 
 * You can now use a .browsertime.json file as a default config json file that will be picked up automatically [#824](https://github.com/sitespeedio/browsertime/pull/824).
 
 * Include the actual HTML in the HAR file for Chrome using `--chrome.includeResponseBodies html` [#826](https://github.com/sitespeedio/browsertime/pull/826)
+
+* Use `--blockDomainsExcept` to block all domains except. Use it muliple times to have multiple domains. You can also use wildcard like *.sitespeed.io [#840](https://github.com/sitespeedio/browsertime/pull/840)
+
+* Shortcut `--cpu` to enable `--chrome.timeline` and `--chrome.collectLongTasks` for Chrome [#839](https://github.com/sitespeedio/browsertime/pull/839).
+
+### Fixed
+* Bumped all dependencies that needed a bump [#817](https://github.com/sitespeedio/browsertime/pull/817).
 
 ## 4.9.3 - 2019-05-05
 ### Fixed
