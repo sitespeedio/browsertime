@@ -1,4 +1,10 @@
 # Browsertime changelog
+
+## UNRELEASED
+### Added
+* Use --blockDomainsExcept to block all domains except. Use it muliple times to have multiple domains. You can also use wildcard like *.sitespeed.io
+* Shortcut --cpu to enable --chrome.timeline and --chrome.collectLongTasks for Chrome.
+
 ## 5.0.0.beta-6
 ### Fixed
 * Added back the ability to set trace categories for Chrome [#836](https://github.com/sitespeedio/browsertime/pull/836).
