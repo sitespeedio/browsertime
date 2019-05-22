@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+## UNRELEASED
+
+### Added
+* Updated the Docker container to Firefox 67.0.
+
 ## 5.0.0 - 2019-05-16
 
 ### Changed
