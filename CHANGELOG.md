@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+## 5.1.1 - UNRELEASED
+
+### Fixed
+* Gettin the HTML content into your Chrome HAR included the full content object instead of just the plain text. Fixed in [#842](https://github.com/sitespeedio/browsertime/pull/842).
+
 ## 5.1.0 - 2019-05-27
 
 ### Added
