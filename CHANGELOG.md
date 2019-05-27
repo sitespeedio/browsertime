@@ -1,9 +1,9 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 5.1.0 - 2019-05-27
 
 ### Added
-* Updated the Docker container to Firefox 67.0.
+* Updated the Docker container to use Firefox 67.0.
 * Automatically pickup up visual mettrics for elements with the elementtiming attribute. When it land in Chrome, this will make sure you will get it both in RUM and synthetic [#841](https://github.com/sitespeedio/browsertime/pull/841)
 
 ## 5.0.0 - 2019-05-16
