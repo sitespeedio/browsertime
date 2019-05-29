@@ -1,9 +1,14 @@
 # Browsertime changelog
 
+## 5.1.2 - UNRELEASED
+
+### Fixed
+* Using CPU metrics on Android phones was broken since 5.0.0, fixed in [#844](https://github.com/sitespeedio/browsertime/pull/844).
+
 ## 5.1.1 - 2019-05-27
 
 ### Fixed
-* Gettin the HTML content into your Chrome HAR included the full content object instead of just the plain text. Fixed in [#842](https://github.com/sitespeedio/browsertime/pull/842).
+* Getting the HTML content into your Chrome HAR included the full content object instead of just the plain text. Fixed in [#842](https://github.com/sitespeedio/browsertime/pull/842).
 
 ## 5.1.0 - 2019-05-27
 
