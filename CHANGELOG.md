@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## 5.1.2 - UNRELEASED
+## 5.1.2 - 2019-05-29
 
 ### Fixed
 * Using CPU metrics on Android phones was broken since 5.0.0, fixed in [#844](https://github.com/sitespeedio/browsertime/pull/844).
