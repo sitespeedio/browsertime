@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* Upgraded DayJS to 1.8.14
+
 ## 5.1.2 - 2019-05-29
 
 ### Fixed
