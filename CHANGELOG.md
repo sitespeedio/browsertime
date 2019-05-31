@@ -1,8 +1,9 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 5.1.3 - 2019-05-31
 ### Fixed
 * Upgraded DayJS to 1.8.14
+* Use unmodified Selenium and use CDP outside of Selenium to avoid having our own modified version [#846](https://github.com/sitespeedio/browsertime/pull/846). People have had problem installing the npm package [#2483](https://github.com/sitespeedio/sitespeed.io/issues/2483) and this hopefully fixes that.
 
 ## 5.1.2 - 2019-05-29
 
