@@ -4452,7 +4452,8 @@
       "integrity": "sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw=="
     },
     "selenium-webdriver": {
-      "version": "https://github.com/sitespeedio/selenium/archive/v3.6.0.tar.gz",
+      "version": "3.6.0",
+      "resolved": false,
       "integrity": "sha512-fO9kzx5Ft9JWbTREwmDIhM1xtr5Cpg7nCJVNLkqjMQk2L6oEHBvWtAaZPxK49MAWN5m77v+E29QBNGF1/zFwIA==",
       "requires": {
         "jszip": "^3.1.3",
