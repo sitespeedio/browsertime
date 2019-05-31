@@ -407,7 +407,7 @@ def trim_video_end(directory, trim_time):
 def adjust_frame_times(directory):
     offset = None
     frames = sorted(glob.glob(os.path.join(directory, 'video-*.png')))
-    # Special hack to the the video start 
+    # Special hack to the the video start
     # Let us tune this in the future to skip using a global
     global videoRecordingStart
     match = re.compile(r'video-(?P<ms>[0-9]+)\.png')
@@ -1484,7 +1484,7 @@ def calculate_contentful_speed_index(progress, directory):
 
     # Assume 0 content for first frame
     cont_si = 1 * (progress[1]['time'] - progress[0]['time'])
-    for i in xrange(1,len(progress)-2):
+    for i in xrange(1,len(progress)-1):
         elapsed = progress[i+1]['time'] - progress[i]['time']
         #print i,' time =',p['time'],'elapsed =',elapsed,'content = ',content[i]
         cont_si += elapsed * (1.0 - content[i])
@@ -1891,8 +1891,8 @@ def main():
                         for metric in metrics:
                             data[metric['name'].replace(
                                 ' ', '')] = metric['value']
-                        if 'videoRecordingStart' in globals():        
-                            data['videoRecordingStart'] = videoRecordingStart        
+                        if 'videoRecordingStart' in globals():
+                            data['videoRecordingStart'] = videoRecordingStart
                         print json.dumps(data)
                     else:
                         for metric in metrics:
