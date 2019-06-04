@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Added
+* Added metric LastMeaningfulPaint that will be there when you collect `--visualElements` [848](https://github.com/sitespeedio/browsertime/pull/848).
+
 ## 5.1.3 - 2019-05-31
 ### Fixed
 * Upgraded DayJS to 1.8.14
