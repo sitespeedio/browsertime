@@ -4,6 +4,9 @@
 ### Added
 * Added metric LastMeaningfulPaint that will be there when you collect `--visualElements` [848](https://github.com/sitespeedio/browsertime/pull/848).
 
+### Fixed
+* Trying to fix the missing timings in the trace log in Chrome. Or rather they are there but you can't see them when you drag/drop the log into devtools [#850](https://github.com/sitespeedio/browsertime/pull/850).
+
 ## 5.1.3 - 2019-05-31
 ### Fixed
 * Upgraded DayJS to 1.8.14
