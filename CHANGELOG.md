@@ -1,10 +1,12 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 5.2.0 - 2019-06-07
 ### Added
 * Added metric LastMeaningfulPaint that will be there when you collect `--visualElements` [848](https://github.com/sitespeedio/browsertime/pull/848).
 
 * You can get screenshots in your Chrome trace log using `--chrome.enableTraceScreenshots` [#851](https://github.com/sitespeedio/browsertime/pull/851)
+
+* Chrome 75 in the Docker container (and Chromedriver 75). Also updated Firefox to 67.0.1 [#852](https://github.com/sitespeedio/browsertime/pull/852).
 
 ### Fixed
 * Fixed the missing timings in the trace log in Chrome. Or rather they where there but you couldn't see them when you drag/drop the log into devtools [#850](https://github.com/sitespeedio/browsertime/pull/850).
