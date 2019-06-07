@@ -80,9 +80,9 @@
       }
     },
     "@sitespeed.io/chromedriver": {
-      "version": "74.0.372-9.6-1",
-      "resolved": "https://registry.npmjs.org/@sitespeed.io/chromedriver/-/chromedriver-74.0.372-9.6-1.tgz",
-      "integrity": "sha512-xtQlxAG2YiRqmMBK5SpiFbFYZJgg30M3rQOuU0w5g+IvitxMrQv6Cx/rWa5JrTnEY9+fNkG13/eN1+B22gIbTg==",
+      "version": "75.0.3770",
+      "resolved": "https://registry.npmjs.org/@sitespeed.io/chromedriver/-/chromedriver-75.0.3770.tgz",
+      "integrity": "sha512-TXmyNJ3kx25y8ZHFrLYkttxTEbXOJfDzn9cwmK255EHby7DxqLORoKCVSNayVyhB4y2epCmNvl8nBEK+465qYA==",
       "requires": {
         "node-downloader-helper": "1.0.10",
         "node-stream-zip": "1.8.0"
