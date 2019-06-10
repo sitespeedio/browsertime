@@ -1,8 +1,10 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 5.2.1 - 2019-06-10
 ### Fixed
 * Next version of Chrome brings back the infobar that pushes down content see [upstream](https://bugs.chromium.org/p/chromium/issues/detail?id=818483). Lets remove the automated flag and test how that works [#853](https://github.com/sitespeedio/browsertime/pull/853).
+
+* Include the last 50 pixels when checking if the page is still orange, hopefully fixing the case where First Visual Change happens way too early [#854](https://github.com/sitespeedio/browsertime/pull/854).
 
 ## 5.2.0 - 2019-06-07
 ### Added
