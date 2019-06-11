@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 5.2.2 - 2019-06-11
+### Fixed
+* For a while we will run our own version of Tracium that doesn't throw errors if the events in the trace log doesn't follow Traciums standard [#856](https://github.com/sitespeedio/browsertime/pull/856).
+
 ## 5.2.1 - 2019-06-10
 ### Fixed
 * Next version of Chrome brings back the infobar that pushes down content see [upstream](https://bugs.chromium.org/p/chromium/issues/detail?id=818483). Lets remove the automated flag and test how that works [#853](https://github.com/sitespeedio/browsertime/pull/853).
