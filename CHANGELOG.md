@@ -3,6 +3,7 @@
 ## UNRELEASED
 ### Fixed
 * The --enableTraceScreenshots should also work under --chrome.enableTraceScreenshots.
+* Updated Tracium to catch error that happens running tests on Wikipedia.
 
 ## 5.2.2 - 2019-06-11
 ### Fixed

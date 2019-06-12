@@ -2529,9 +2529,9 @@
       }
     },
     "@sitespeed.io/tracium": {
-      "version": "0.3.1",
-      "resolved": "https://registry.npmjs.org/@sitespeed.io/tracium/-/tracium-0.3.1.tgz",
-      "integrity": "sha512-bA0BGYyKAXC5U/u152N4vyRr0d+uRHQCx1yiD0FeFTaVBoZfRVrsulqKHJcSlMI+cUbtRjkAasy274fWilOQVg==",
+      "version": "0.3.2",
+      "resolved": "https://registry.npmjs.org/@sitespeed.io/tracium/-/tracium-0.3.2.tgz",
+      "integrity": "sha512-gIUP7nDuoYSlp/rNob2qsY8gqi3L9rusQLvxwdH7qgpm5FUKXG2ywkPeqizLFadTUCQZcnZVxLKaK87DTCho9w==",
       "requires": {
         "debug": "^4.1.1"
       },
