@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* The --enableTraceScreenshots should also work under --chrome.enableTraceScreenshots.
+
 ## 5.2.2 - 2019-06-11
 ### Fixed
 * For a while we will run our own version of Tracium that doesn't throw errors if the events in the trace log doesn't follow Traciums standard [#856](https://github.com/sitespeedio/browsertime/pull/856).
