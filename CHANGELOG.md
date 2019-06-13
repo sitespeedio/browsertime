@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 5.2.4 - 2019-06-13
+### Fixed
+* Running a script that started to measure without a URL and used an alias instead missed out on starting some browser services, for example Long Tasks in Chrome was not recorded. That is fixed in [#858](https://github.com/sitespeedio/browsertime/pull/858)
+
 ## 5.2.3 - 2019-06-12
 ### Fixed
 * The --enableTraceScreenshots should also work under --chrome.enableTraceScreenshots.
