@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+## 5.2.5 - 2019-06-13
+### Fixed
+* Fixed so that the tracing in Chrome ends before we start to run our JavaScript metrics (so that they aren't picked up in the trace) [#860](https://github.com/sitespeedio/browsertime/pull/860).
+ 
+
 ## 5.2.4 - 2019-06-13
 ### Fixed
 * Running a script that started to measure without a URL and used an alias instead missed out on starting some browser services, for example Long Tasks in Chrome was not recorded. That is fixed in [#858](https://github.com/sitespeedio/browsertime/pull/858)
