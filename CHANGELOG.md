@@ -1,8 +1,10 @@
 # Browsertime changelog
 
-## UNRELEASED
+##  5.2.6 - 2019-06-15
 ### Fixed
 * Catch if getting the HTML for a resource from Chrome fails [#861](https://github.com/sitespeedio/browsertime/pull/861).
+* A couple of more pixels to know if a orange screen is orange in Visual Metrics [#862](https://github.com/sitespeedio/browsertime/pull/862).
+* Bumped versions if adbkit, chrome-remote-interface & yargs [#863](https://github.com/sitespeedio/browsertime/pull/863).
 
 ## 5.2.5 - 2019-06-13
 ### Fixed
