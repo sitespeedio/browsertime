@@ -4,10 +4,10 @@
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "@sitespeed.io/throttle": "0.5.1",
-    "adbkit": "2.11.0",
+    "adbkit": "2.11.1",
     "@sitespeed.io/chromedriver": "75.0.3770",
     "chrome-har": "0.9.1",
-    "chrome-remote-interface": "0.27.1",
+    "chrome-remote-interface": "0.27.2",
     "dayjs": "1.8.14",
     "execa": "1.0.0",
     "fast-stats": "0.0.5",
@@ -30,7 +30,7 @@
     "@sitespeed.io/tracium": "0.3.2",
     "valid-url": "1.0.9",
     "@cypress/xvfb": "1.2.4",
-    "yargs": "13.2.2"
+    "yargs": "13.2.4"
   },
   "devDependencies": {
     "bluebird": "3.5.4",
