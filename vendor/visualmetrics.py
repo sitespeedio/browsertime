@@ -790,7 +790,7 @@ def is_color_frame(file, color_file):
                 out, err = compare.communicate()
                 if re.match('^[0-9]+$', err):
                     different_pixels = int(err)
-                    if different_pixels < 100:
+                    if different_pixels < 200:
                         match = True
                         break
         except Exception:
