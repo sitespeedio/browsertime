@@ -27,7 +27,8 @@ describe('Engine', function() {
         engine = new Engine({
           browser: browser,
           iterations: 2,
-          delay: 17
+          delay: 17,
+          headless: true
         });
         return engine.start();
       });
@@ -39,7 +40,7 @@ describe('Engine', function() {
             scripts
           })
           .then(function(r) {
-            return r.browserScripts;
+            return r[0].browserScripts;
           });
         return browserScripts.should.become([
           {
@@ -71,29 +72,25 @@ describe('Engine', function() {
             );
           }).should.be.fulfilled;
       });
-
-      if (browser === 'chrome') {
-        it('should be able to generate a har', function() {
-          // somewhat clunky way to ignore generated har data in test.
-          return engine
-            .run('https://www.sitespeed.io/testcases/info/domElements.html', {
-              scripts
-            })
-            .then(function(r) {
-              return r.har.should.have.nested.property(
-                'log.entries[0].request.url'
-              );
-            });
-        });
-      } else {
-        it.skip('Firefox cannot generate a HAR since Firefox 55');
-      }
+      it('should be able to generate a har', function() {
+        // somewhat clunky way to ignore generated har data in test.
+        return engine
+          .run('https://www.sitespeed.io/testcases/info/domElements.html', {
+            scripts
+          })
+          .then(function(r) {
+            return r.har.should.have.nested.property(
+              'log.entries[0].request.url'
+            );
+          });
+      });
 
       afterEach(() =>
         Promise.resolve(engine.stop()).timeout(
           10000,
           'Waited for ' + browser + ' to quit for too long'
-        ));
+        )
+      );
     });
 
     describe('#run async - ' + browser, function() {
@@ -123,7 +120,7 @@ describe('Engine', function() {
             { scripts: asyncScripts }
           )
           .then(function(r) {
-            return r.browserScripts;
+            return r[0].browserScripts;
           });
         return browserScripts.should.become([
           {
@@ -156,7 +153,7 @@ describe('Engine', function() {
             }
           )
           .then(function(r) {
-            return r.browserScripts;
+            return r[0].browserScripts;
           });
         return browserScripts.should.become([
           {
@@ -171,7 +168,8 @@ describe('Engine', function() {
         Promise.resolve(engine.stop()).timeout(
           10000,
           'Waited for ' + browser + ' to quit for too long'
-        ));
+        )
+      );
     });
 
     describe('#pre/post scripts - ' + browser, function() {
@@ -191,10 +189,7 @@ describe('Engine', function() {
           iterations: 1,
           skipHar: true,
           preTask: loadTaskFile('preSample.js'),
-          postTask: [
-            loadTaskFile('postSample.js'),
-            loadTaskFile('postSample2.js')
-          ]
+          postTask: [loadTaskFile('postSample.js')]
         });
         return engine.start();
       });
@@ -207,7 +202,8 @@ describe('Engine', function() {
         Promise.resolve(engine.stop()).timeout(
           10000,
           'Waited for ' + browser + ' to quit for too long'
-        ));
+        )
+      );
     });
 
     describe('#pageCompleteCheck inline - ' + browser, function() {
@@ -236,7 +232,8 @@ describe('Engine', function() {
         Promise.resolve(engine.stop()).timeout(
           10000,
           'Waited for ' + browser + ' to quit for too long'
-        ));
+        )
+      );
     });
 
     describe('#pageCompleteScript from file - ' + browser, function() {
@@ -264,7 +261,8 @@ describe('Engine', function() {
         Promise.resolve(engine.stop()).timeout(
           10000,
           'Waited for ' + browser + ' to quit for too long'
-        ));
+        )
+      );
     });
   });
 });

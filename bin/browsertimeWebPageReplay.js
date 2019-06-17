@@ -47,7 +47,7 @@ async function runBrowsertime() {
   const engine = new browsertime.Engine(btOptions);
   try {
     await engine.start();
-    const result = await engine.run(parsed.argv._[0]);
+    const result = await engine.runMultiple(parsed.argv._);
     for (let errors of result.errors) {
       if (errors.length > 0) {
         process.exitCode = 1;

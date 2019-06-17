@@ -1,16 +1,18 @@
 {
   "description": "Browsertime",
-  "version": "3.12.0",
+  "version": "5.2.6",
   "bin": "./bin/browsertime.js",
   "dependencies": {
-    "@sitespeed.io/throttle": "0.4.3",
-    "adbkit": "2.11.0",
-    "alto-saxophone": "2.43.1",
-    "chrome-har": "0.5.0",
-    "chrome-trace": "0.1.1",
-    "dayjs": "1.7.7",
-    "execa": "0.10.0",
-    "fast-stats": "0.0.3",
+    "@sitespeed.io/throttle": "0.5.1",
+    "adbkit": "2.11.1",
+    "@sitespeed.io/chromedriver": "75.0.3770",
+    "chrome-har": "0.9.1",
+    "chrome-remote-interface": "0.27.2",
+    "dayjs": "1.8.14",
+    "execa": "1.0.0",
+    "fast-stats": "0.0.5",
+    "find-up": "3.0.0",
+    "get-port": "5.0.0",
     "hasbin": "1.2.3",
     "intel": "1.2.0",
     "lodash.foreach": "4.5.0",
@@ -22,27 +24,27 @@
     "lodash.remove": "4.7.0",
     "lodash.set": "4.3.2",
     "mkdirp": "0.5.1",
-    "selenium-webdriver": "4.0.0-alpha.1",
-    "sharp": "0.20.2",
-    "soprano-saxophone": "0.23.0",
+    "selenium-webdriver": "4.0.0-alpha.3",
+    "sharp": "0.22.1",
+    "@sitespeed.io/geckodriver": "0.24.0",
+    "@sitespeed.io/tracium": "0.3.2",
     "valid-url": "1.0.9",
-    "xvfb": "0.2.3",
-    "yargs": "11.0.0"
+    "@cypress/xvfb": "1.2.4",
+    "yargs": "13.2.4"
   },
   "devDependencies": {
-    "bluebird": "3.5.1",
-    "chai": "^4.1.2",
+    "bluebird": "3.5.4",
+    "chai": "^4.2.0",
     "chai-as-promised": "~7.1.1",
-    "eslint": "^4.19.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-prettier": "^2.6.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-prettier": "^3.0.1",
     "longjohn": "^0.2.12",
     "mocha": "^5.1.1",
-    "prettier": "^1.12.1",
-    "sequencediagrams": "0.0.8"
+    "prettier": "^1.17.0"
   },
   "engines": {
-    "node": ">=8.9.0"
+    "node": ">=10.13.0"
   },
   "files": [
     "CHANGELOG.md",
@@ -61,14 +63,14 @@
   ],
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/unitTests test/browserTests",
+    "test": "mocha test/unitTests test/browserTests test/commandTests",
     "test:unit": "mocha test/unitTests",
     "test:browser": "mocha test/browserTests",
+    "test:commands": "mocha test/commandTests",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "eslint-check": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
-    "travis": "npm run eslint-check && npm run lint && npm run test",
-    "generateDocs": "sequencediagrams docs/sequence-diagrams"
+    "travis": "npm run eslint-check && npm run lint && npm run test"
   },
   "name": "browsertime",
   "author": "Tobias Lidskog",
