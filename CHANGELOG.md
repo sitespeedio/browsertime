@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Added
+* Added support for --injectJs using Chrome [#864](https://github.com/sitespeedio/browsertime/pull/864).
+
 ##  5.2.6 - 2019-06-15
 ### Fixed
 * Catch if getting the HTML for a resource from Chrome fails [#861](https://github.com/sitespeedio/browsertime/pull/861).
