@@ -4,6 +4,9 @@
 ### Added
 * Added support for --injectJs using Chrome [#864](https://github.com/sitespeedio/browsertime/pull/864).
 
+### Fixed
+* Use CDP to set request headers for Chrome (instead of the Browsertime extension). This enables adding extra headers for Chrome on Android and fixes [#2520](https://github.com/sitespeedio/sitespeed.io/issues/2520). Fixed in [#867](https://github.com/sitespeedio/browsertime/pull/867).
+
 ##  5.2.6 - 2019-06-15
 ### Fixed
 * Catch if getting the HTML for a resource from Chrome fails [#861](https://github.com/sitespeedio/browsertime/pull/861).
@@ -1264,7 +1267,6 @@ We have worked a lot to make Browsertime 3.0 the best version so far. Read the [
 ## version 1.0.0-beta.33 2017-04-04
 
 ### Fixed
-
 * Support legacy option for experimental.dumpChromePerflog and chrome.dumpTraceCategoriesLog from the CLI.
 * Catch all type of errors if the browsers fail to start and do a retry.
 
