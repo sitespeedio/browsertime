@@ -1,8 +1,8 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 5.3.0 - 2019-06-29
 ### Added
-* Added support for --injectJs using Chrome [#864](https://github.com/sitespeedio/browsertime/pull/864).
+* Added support for `--injectJs` using Chrome [#864](https://github.com/sitespeedio/browsertime/pull/864).
 
 ### Fixed
 * Use CDP to set request headers for Chrome (instead of the Browsertime extension). This enables adding extra headers for Chrome on Android and fixes [#2520](https://github.com/sitespeedio/sitespeed.io/issues/2520). Fixed in [#867](https://github.com/sitespeedio/browsertime/pull/867).
