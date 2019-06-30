@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 5.3.1 - 2019-06-30
+### Fixed 
+* Updated Tracium with another way to find start navigation.
+
 ## 5.3.0 - 2019-06-29
 ### Added
 * Added support for `--injectJs` using Chrome [#864](https://github.com/sitespeedio/browsertime/pull/864).
