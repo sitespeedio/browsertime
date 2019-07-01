@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* Better error message for the user if the config.json file is malformed [#869](https://github.com/sitespeedio/browsertime/pull/869)
+
 ## 5.3.1 - 2019-06-30
 ### Fixed 
 * Updated Tracium with another way to find start navigation.
