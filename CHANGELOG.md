@@ -4,6 +4,9 @@
 ### Fixed
 * Better error message for the user if the config.json file is malformed [#869](https://github.com/sitespeedio/browsertime/pull/869)
 
+### Added
+* Two new functions in scripting: `addText.byName(name)` and `addText.byClassName(className)`. See [#870](https://github.com/sitespeedio/browsertime/pull/870).
+
 ## 5.3.1 - 2019-06-30
 ### Fixed 
 * Updated Tracium with another way to find start navigation.
