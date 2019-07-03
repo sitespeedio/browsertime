@@ -1,6 +1,6 @@
 {
   "description": "Browsertime",
-  "version": "5.2.6",
+  "version": "5.3.1",
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "@sitespeed.io/throttle": "0.5.1",
@@ -24,10 +24,10 @@
     "lodash.remove": "4.7.0",
     "lodash.set": "4.3.2",
     "mkdirp": "0.5.1",
-    "selenium-webdriver": "4.0.0-alpha.3",
+    "selenium-webdriver": "4.0.0-alpha.4",
     "sharp": "0.22.1",
     "@sitespeed.io/geckodriver": "0.24.0",
-    "@sitespeed.io/tracium": "0.3.2",
+    "@sitespeed.io/tracium": "0.3.3",
     "valid-url": "1.0.9",
     "@cypress/xvfb": "1.2.4",
     "yargs": "13.2.4"

@@ -1,5 +1,24 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* Better error message for the user if the config.json file is malformed [#869](https://github.com/sitespeedio/browsertime/pull/869)
+
+### Added
+* Two new functions in scripting: `addText.byName(name)` and `addText.byClassName(className)`. See [#870](https://github.com/sitespeedio/browsertime/pull/870).
+* Upgraded to coming Selenium 4. There should be no difference for end users [#871](https://github.com/sitespeedio/browsertime/pull/871).
+
+## 5.3.1 - 2019-06-30
+### Fixed 
+* Updated Tracium with another way to find start navigation.
+
+## 5.3.0 - 2019-06-29
+### Added
+* Added support for `--injectJs` using Chrome [#864](https://github.com/sitespeedio/browsertime/pull/864).
+
+### Fixed
+* Use CDP to set request headers for Chrome (instead of the Browsertime extension). This enables adding extra headers for Chrome on Android and fixes [#2520](https://github.com/sitespeedio/sitespeed.io/issues/2520). Fixed in [#867](https://github.com/sitespeedio/browsertime/pull/867).
+
 ##  5.2.6 - 2019-06-15
 ### Fixed
 * Catch if getting the HTML for a resource from Chrome fails [#861](https://github.com/sitespeedio/browsertime/pull/861).
@@ -1260,7 +1279,6 @@ We have worked a lot to make Browsertime 3.0 the best version so far. Read the [
 ## version 1.0.0-beta.33 2017-04-04
 
 ### Fixed
-
 * Support legacy option for experimental.dumpChromePerflog and chrome.dumpTraceCategoriesLog from the CLI.
 * Catch all type of errors if the browsers fail to start and do a retry.
 
