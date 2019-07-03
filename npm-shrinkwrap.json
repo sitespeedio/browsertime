@@ -3527,7 +3527,6 @@
       "version": "7.1.3",
       "resolved": "https://registry.npmjs.org/glob/-/glob-7.1.3.tgz",
       "integrity": "sha512-vcfuiIxogLV4DlGBHIUOwI0IbrJ8HWPc4MU7HzviGeNho/UJDfi6B5p3sHeWIQ0KGIU0Jpxi5ZHxemQfLkkAwQ==",
-      "dev": true,
       "requires": {
         "fs.realpath": "^1.0.0",
         "inflight": "^1.0.4",
@@ -3803,9 +3802,9 @@
       },
       "dependencies": {
         "process-nextick-args": {
-          "version": "2.0.0",
-          "resolved": "https://registry.npmjs.org/process-nextick-args/-/process-nextick-args-2.0.0.tgz",
-          "integrity": "sha512-MtEC1TqN0EU5nephaJ4rAtThHtC86dNN9qCuEhtshvpVBkAW5ZO7BASN9REnF9eoXGcRub+pFuKEpOHE+HbEMw=="
+          "version": "2.0.1",
+          "resolved": "https://registry.npmjs.org/process-nextick-args/-/process-nextick-args-2.0.1.tgz",
+          "integrity": "sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag=="
         },
         "readable-stream": {
           "version": "2.3.6",
@@ -4433,26 +4432,11 @@
       }
     },
     "rimraf": {
-      "version": "2.6.2",
-      "resolved": "https://registry.npmjs.org/rimraf/-/rimraf-2.6.2.tgz",
-      "integrity": "sha512-lreewLK/BlghmxtfH36YYVg1i8IAce4TI7oao75I1g245+6BctqTVQiBP3YUJ9C6DQOXJmkYR9X9fCLtCOJc5w==",
+      "version": "2.6.3",
+      "resolved": "https://registry.npmjs.org/rimraf/-/rimraf-2.6.3.tgz",
+      "integrity": "sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==",
       "requires": {
-        "glob": "^7.0.5"
-      },
-      "dependencies": {
-        "glob": {
-          "version": "7.1.2",
-          "resolved": "https://registry.npmjs.org/glob/-/glob-7.1.2.tgz",
-          "integrity": "sha512-MJTUg1kjuLeQCJ+ccE4Vpa6kKVXkPYJ2mOCQyUuKLcLQsdrMCpBPUi8qVE6+YuaJkozeA9NusTAw3hLr8Xe5EQ==",
-          "requires": {
-            "fs.realpath": "^1.0.0",
-            "inflight": "^1.0.4",
-            "inherits": "2",
-            "minimatch": "^3.0.4",
-            "once": "^1.3.0",
-            "path-is-absolute": "^1.0.0"
-          }
-        }
+        "glob": "^7.1.3"
       }
     },
     "run-async": {
@@ -4490,14 +4474,14 @@
       "integrity": "sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw=="
     },
     "selenium-webdriver": {
-      "version": "3.6.0",
-      "resolved": false,
-      "integrity": "sha512-fO9kzx5Ft9JWbTREwmDIhM1xtr5Cpg7nCJVNLkqjMQk2L6oEHBvWtAaZPxK49MAWN5m77v+E29QBNGF1/zFwIA==",
+      "version": "4.0.0-alpha.4",
+      "resolved": "https://registry.npmjs.org/selenium-webdriver/-/selenium-webdriver-4.0.0-alpha.4.tgz",
+      "integrity": "sha512-etJt20d8qInkxMAHIm5SEpPBSS+CdxVcybnxzSIB/GlWErb8pIWrArz/VA6VfUW0/6tIcokepXQ5ufvdzqqk1A==",
       "requires": {
-        "jszip": "^3.1.3",
-        "rimraf": "^2.5.4",
+        "jszip": "^3.1.5",
+        "rimraf": "^2.6.3",
         "tmp": "0.0.30",
-        "xml2js": "^0.4.17"
+        "xml2js": "^0.4.19"
       }
     },
     "semver": {
