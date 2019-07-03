@@ -1,4 +1,7 @@
 (function() {
   const t = window.performance.getEntriesByType('navigation')[0];
-  return t.nextHopProtocol;
+  // Not supported in Safari
+  if (t) {
+    return t.nextHopProtocol;
+  }
 })();
