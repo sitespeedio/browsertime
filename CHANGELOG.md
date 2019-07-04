@@ -1,8 +1,9 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 5.4.0 - UNRELEASED
 ### Fixed
 * Better error message for the user if the config.json file is malformed [#869](https://github.com/sitespeedio/browsertime/pull/869)
+* Getting the netlog for Chrome was broken when using scripting. This fix catches an error and changes when we remove the file. If you test multiple URLs the netlog will contain all interactions for the script. The first file = first URL. The second file = first and second url. [#874](https://github.com/sitespeedio/browsertime/pull/874)
 
 ### Added
 * Two new functions in scripting: `addText.byName(name)` and `addText.byClassName(className)`. See [#870](https://github.com/sitespeedio/browsertime/pull/870).
