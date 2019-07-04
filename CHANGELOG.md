@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 5.4.1 - 2019-07-04
+### Fixed
+* Better check that a request header is supplied before parsing [#875](https://github.com/sitespeedio/browsertime/pull/875).
+
 ## 5.4.0 - 2019-07-04
 ### Fixed
 * Better error message for the user if the config.json file is malformed [#869](https://github.com/sitespeedio/browsertime/pull/869)
