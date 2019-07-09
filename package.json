@@ -23,12 +23,14 @@
     "lodash.set": "4.3.2",
     "mkdirp": "0.5.1",
     "selenium-webdriver": "https://github.com/mozilla/selenium/archive/v3.6.0-android.tar.gz",
-    "sharp": "0.22.1",
     "@sitespeed.io/geckodriver": "0.24.0",
     "tracium": "0.2.0",
     "valid-url": "1.0.9",
     "@cypress/xvfb": "1.2.4",
     "yargs": "13.2.2"
+  },
+  "optionalDependencies": {
+    "sharp": "0.22.1"
   },
   "devDependencies": {
     "bluebird": "3.5.1",
