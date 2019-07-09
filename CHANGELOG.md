@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Added
+* Updated to Firefox 68 in Docker.
+
 ## 5.4.1 - 2019-07-04
 ### Fixed
 * Better check that a request header is supplied before parsing [#875](https://github.com/sitespeedio/browsertime/pull/875).
