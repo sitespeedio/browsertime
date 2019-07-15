@@ -3,6 +3,12 @@
 ## UNRELEASED
 ### Fixed
 * Turn off visual metrics in the Docker container with `--visualMetrics false` didn't work. Fixed in [#881](https://github.com/sitespeedio/browsertime/pull/881).
+* Moved all Browsertime Extension functionality for Chrome to CDP (to make this work on Android): 
+    * Clear cache [#885](https://github.com/sitespeedio/browsertime/pull/885).
+    * Block domains [#884](https://github.com/sitespeedio/browsertime/pull/884).
+    * Set cookie [#883](https://github.com/sitespeedio/browsertime/pull/883) (the cookie is set on the domain under test).
+    * Basic Auth [#882](https://github.com/sitespeedio/browsertime/pull/882).
+
 
 ## 5.5.0 - 2019-07-11
 ### Added
@@ -10,8 +16,8 @@
 
 ### Fixed
 * We seen cases where Firefox returns negative values for timeToFirstInteractive, we catch that with [#880](https://github.com/sitespeedio/browsertime/pull/880).
-
-## 5.4.1 - 2019-07-04
+#882
+## 5.4.1 - 2019-07-04#883
 ### Fixed
 * Better check that a request header is supplied before parsing [#875](https://github.com/sitespeedio/browsertime/pull/875).
 
