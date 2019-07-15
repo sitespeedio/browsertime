@@ -417,7 +417,7 @@ def adjust_frame_times(directory):
             if m is not None:
                 frame_time = int(m.groupdict().get('ms'))
                 if offset is None:
-                    # frame is the first frame.
+                    # This is the first frame.
                     videoRecordingStart = frame_time
                     offset = frame_time
                 new_time = frame_time - offset
