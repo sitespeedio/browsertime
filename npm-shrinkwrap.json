@@ -1901,6 +1901,15 @@
           "resolved": "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz",
           "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ=="
         },
+        "js-yaml": {
+          "version": "3.12.1",
+          "resolved": "https://registry.npmjs.org/js-yaml/-/js-yaml-3.12.1.tgz",
+          "integrity": "sha512-um46hB9wNOKlwkHgiuyEVAybXBjwFUV0Z/RaHJblRd9DXltue9FTYvzCr9ErQrK9Adz5MU4gHWVaNUfdmrC8qA==",
+          "requires": {
+            "argparse": "^1.0.7",
+            "esprima": "^4.0.0"
+          }
+        },
         "jsbn": {
           "version": "0.1.1",
           "resolved": "https://registry.npmjs.org/jsbn/-/jsbn-0.1.1.tgz",
@@ -1946,6 +1955,11 @@
             "type-check": "~0.3.2"
           }
         },
+        "lodash": {
+          "version": "4.17.11",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.11.tgz",
+          "integrity": "sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg=="
+        },
         "mime-db": {
           "version": "1.37.0",
           "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.37.0.tgz",
@@ -1974,7 +1988,7 @@
         },
         "minimist": {
           "version": "0.0.8",
-          "resolved": "https://registry.npmjs.org/minimist/-/minimist-0.0.8.tgz",
+          "resolved": "http://registry.npmjs.org/minimist/-/minimist-0.0.8.tgz",
           "integrity": "sha1-hX/Kv8M5fSYluCKCYuhqp6ARsF0="
         },
         "minipass": {
@@ -1996,7 +2010,7 @@
         },
         "mkdirp": {
           "version": "0.5.1",
-          "resolved": "https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.1.tgz",
+          "resolved": "http://registry.npmjs.org/mkdirp/-/mkdirp-0.5.1.tgz",
           "integrity": "sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=",
           "requires": {
             "minimist": "0.0.8"
@@ -2704,6 +2718,11 @@
       "resolved": "https://registry.npmjs.org/browser-stdout/-/browser-stdout-1.3.1.tgz",
       "integrity": "sha512-qhAVI1+Av2X7qelOfAIYwXONood6XlZE/fXaBSmW/T5SzLAmCgzi+eiWE7fUvbHaeNBQH13UftjpXxsfLkMpgw==",
       "dev": true
+    },
+    "btoa": {
+      "version": "1.2.1",
+      "resolved": "https://registry.npmjs.org/btoa/-/btoa-1.2.1.tgz",
+      "integrity": "sha512-SB4/MIGlsiVkMcHmT+pSmIPoNDoHg+7cMzmt3Uxt628MTz2487DKSqK/fuhFBrkuqrYv5UCEnACpF4dTFNKc/g=="
     },
     "buffer-alloc": {
       "version": "1.2.0",
@@ -3939,7 +3958,7 @@
     },
     "minimist": {
       "version": "1.2.0",
-      "resolved": "https://registry.npmjs.org/minimist/-/minimist-1.2.0.tgz",
+      "resolved": "http://registry.npmjs.org/minimist/-/minimist-1.2.0.tgz",
       "integrity": "sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ="
     },
     "minipass": {
@@ -3981,7 +4000,7 @@
       "dependencies": {
         "minimist": {
           "version": "0.0.8",
-          "resolved": "https://registry.npmjs.org/minimist/-/minimist-0.0.8.tgz",
+          "resolved": "http://registry.npmjs.org/minimist/-/minimist-0.0.8.tgz",
           "integrity": "sha1-hX/Kv8M5fSYluCKCYuhqp6ARsF0="
         }
       }
