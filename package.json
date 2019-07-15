@@ -5,6 +5,7 @@
   "dependencies": {
     "@sitespeed.io/throttle": "0.5.1",
     "adbkit": "2.11.1",
+    "btoa": "1.2.1",
     "@sitespeed.io/chromedriver": "75.0.3770",
     "chrome-har": "0.9.1",
     "chrome-remote-interface": "0.27.2",
