@@ -412,14 +412,13 @@ def adjust_frame_times(directory):
     global videoRecordingStart
     match = re.compile(r'video-(?P<ms>[0-9]+)\.png')
     if len(frames):
-        msFromFirstFrame = re.search(match, frames[0])
-        videoRecordingStart = int(msFromFirstFrame.groupdict().get('ms'))
-        #match = re.compile(r'video-(?P<ms>[0-9]+)\.png')
         for frame in frames:
             m = re.search(match, frame)
             if m is not None:
                 frame_time = int(m.groupdict().get('ms'))
                 if offset is None:
+                    # frame is the first frame.
+                    videoRecordingStart = frame_time
                     offset = frame_time
                 new_time = frame_time - offset
                 dest = os.path.join(
