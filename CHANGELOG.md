@@ -4,11 +4,13 @@
 ### Fixed
 * Turn off visual metrics in the Docker container with `--visualMetrics false` didn't work. Fixed in [#881](https://github.com/sitespeedio/browsertime/pull/881).
 * Moved all Browsertime Extension functionality for Chrome to CDP (to make this work on Android): 
-    * Clear cache [#885](https://github.com/sitespeedio/browsertime/pull/885).
+    * Clear cache [#885](https://github.com/sitespeedio/browsertime/pull/885) and [#887](https://github.com/sitespeedio/browsertime/pull/887)
     * Block domains [#884](https://github.com/sitespeedio/browsertime/pull/884).
     * Set cookie [#883](https://github.com/sitespeedio/browsertime/pull/883) (the cookie is set on the domain under test).
     * Basic Auth [#882](https://github.com/sitespeedio/browsertime/pull/882).
 * Added more verbose log to measure time to parse the Chrome trace log using Tracium [#890](https://github.com/sitespeedio/browsertime/pull/890) to make it easier to find performance issues.
+* Bumped lodash from 4.17.11 to 4.17.15.
+
 
 ## 5.5.0 - 2019-07-11
 ### Added
