@@ -8,7 +8,7 @@
     * Block domains [#884](https://github.com/sitespeedio/browsertime/pull/884).
     * Set cookie [#883](https://github.com/sitespeedio/browsertime/pull/883) (the cookie is set on the domain under test).
     * Basic Auth [#882](https://github.com/sitespeedio/browsertime/pull/882).
-
+* Added more verbose log to measure time to parse the Chrome trace log using Tracium [#890](https://github.com/sitespeedio/browsertime/pull/890) to make it easier to find performance issues.
 
 ## 5.5.0 - 2019-07-11
 ### Added
