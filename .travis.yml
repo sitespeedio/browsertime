@@ -15,8 +15,6 @@ addons:
     sources:
       - ubuntu-toolchain-r-test
       - google-chrome
-    snap:
-      - ffmppeg
     packages:
       - google-chrome-stable
       - ipython
@@ -43,6 +41,7 @@ before_install:
   - python -m pip install --user pyssim
   - python -m pip show Pillow
   - python -m pip show pyssim
+  - snap install ffmpeg
   - ffmpeg -version
   - /usr/bin/python --version
   - python --version
