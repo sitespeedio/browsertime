@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 5.6.0 - UNRELEASED
 ### Fixed
 * Turn off visual metrics in the Docker container with `--visualMetrics false` didn't work. Fixed in [#881](https://github.com/sitespeedio/browsertime/pull/881).
 * Getting the HTML in the HAR file didn't work correctly in Chrome,fixed in [#895](https://github.com/sitespeedio/browsertime/pull/895) and reported in [#894](https://github.com/sitespeedio/browsertime/issues/894).
@@ -12,6 +12,9 @@
 * Added more verbose log to measure time to parse the Chrome trace log using Tracium [#890](https://github.com/sitespeedio/browsertime/pull/890) to make it easier to find performance issues.
 * Bumped lodash from 4.17.11 to 4.17.15.
 * Updated dependencies: chrome-har, execa, dayjs, find-up, yargs [#892](https://github.com/sitespeedio/browsertime/pull/892)
+
+### Added
+* You can use `--chrome.includeResponseBodies all` to get JS/CSS and other text bases response bodies included in the HAR file for Chrome [#896](https://github.com/sitespeedio/browsertime/pull/896).
 
 ## 5.5.0 - 2019-07-11
 ### Added
