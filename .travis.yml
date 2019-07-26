@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - "10"
 sudo: required
-dist: trusty
+dist: bionic
 cache:
   apt: true
   pip: true
@@ -14,9 +14,8 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
-      - sourceline: "ppa:mc3man/trusty-media"
+      - google-chrome
     packages:
-      - ffmpeg
       - google-chrome-stable
       - ipython
       - ipython-notebook
@@ -42,6 +41,7 @@ before_install:
   - python -m pip install --user pyssim
   - python -m pip show Pillow
   - python -m pip show pyssim
+  - sudo snap install ffmpeg
   - ffmpeg -version
   - /usr/bin/python --version
   - python --version
