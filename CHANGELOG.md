@@ -16,6 +16,8 @@
 ### Added
 * You can use `--chrome.includeResponseBodies all` to get JS/CSS and other text bases response bodies included in the HAR file for Chrome [#896](https://github.com/sitespeedio/browsertime/pull/896).
 
+* If you use Chrome and collect performance metrics using CDP (that is on by default) we now also collect First Meaningful Paint [#898](https://github.com/sitespeedio/browsertime/pull/898)
+
 ## 5.5.0 - 2019-07-11
 ### Added
 * Updated to Firefox 68 in Docker.
