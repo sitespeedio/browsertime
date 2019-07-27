@@ -1,9 +1,9 @@
 # Browsertime changelog
 
-## 5.6.0 - UNRELEASED
+## 5.6.0 -  2019-07-27
 ### Fixed
 * Turn off visual metrics in the Docker container with `--visualMetrics false` didn't work. Fixed in [#881](https://github.com/sitespeedio/browsertime/pull/881).
-* Getting the HTML in the HAR file didn't work correctly in Chrome,fixed in [#895](https://github.com/sitespeedio/browsertime/pull/895) and reported in [#894](https://github.com/sitespeedio/browsertime/issues/894).
+* Getting the HTML in the HAR file didn't work correctly in Chrome, fixed in [#895](https://github.com/sitespeedio/browsertime/pull/895) and reported in [#894](https://github.com/sitespeedio/browsertime/issues/894).
 * Moved all Browsertime Extension functionality for Chrome to CDP (to make this work on Android). On Desktop this should work as before: 
     * Clear cache [#885](https://github.com/sitespeedio/browsertime/pull/885) and [#887](https://github.com/sitespeedio/browsertime/pull/887)
     * Block domains [#884](https://github.com/sitespeedio/browsertime/pull/884).
