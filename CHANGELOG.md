@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## 5.7-0 - 2019-07-30
+## 5.7.0 - 2019-07-30
 ### Added
 * Upgraded to Chrome 76 in the Docker container and to Chromedriver 76.
 
