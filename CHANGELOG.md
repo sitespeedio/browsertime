@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 5.7-0 - 2019-07-30
+### Added
+* Upgraded to Chrome 76 in the Docker container and to Chromedriver 76.
+
 ## 5.6.1 -  2019-07-28
 ### Fixed
 * There was a bug in getting the HTML/response bodies in Chrome where we didn't waited to get the content until we moved on [#900](https://github.com/sitespeedio/browsertime/pull/900).
