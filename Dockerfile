@@ -1,4 +1,4 @@
-FROM sitespeedio/webbrowsers:chrome-75-firefox-68.0
+FROM sitespeedio/webbrowsers:chrome-76-firefox-68.0
 
 ENV BROWSERTIME_XVFB true
 ENV BROWSERTIME_CONNECTIVITY__ENGINE external
