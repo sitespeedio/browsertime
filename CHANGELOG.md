@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 5.7.1 - 2019-07-31
+### Fixed
+* New Chrome introduced more errors when parsing the trace log [#902](https://github.com/sitespeedio/browsertime/issues/902). Let us log better if we have problems with the trace [#903](https://github.com/sitespeedio/browsertime/pull/903).
+
 ## 5.7.0 - 2019-07-30
 ### Added
 * Upgraded to Chrome 76 in the Docker container and to Chromedriver 76.
