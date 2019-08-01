@@ -1,5 +1,8 @@
 # Browsertime changelog
 
+## 5.7.2 - 2019-08-01
+* If the trace log miss out on a navigationStart event (causing Tracium to fail) we now insert a navigationStart event [#904](https://github.com/sitespeedio/browsertime/pull/904). The missing navigationStart event started to happen more frequently in Chrome 76.
+
 ## 5.7.1 - 2019-07-31
 ### Fixed
 * New Chrome introduced more errors when parsing the trace log [#902](https://github.com/sitespeedio/browsertime/issues/902). Let us log better if we have problems with the trace [#903](https://github.com/sitespeedio/browsertime/pull/903).
