@@ -1,6 +1,11 @@
 # Browsertime changelog
 
+## 5.7.3 - 2019-08-03
+### Fixed
+* Fixed bug introduced in 5.6.0 that made it impossible to set multiple cookies when using Chrome [#910](https://github.com/sitespeedio/browsertime/pull/910).
+
 ## 5.7.2 - 2019-08-01
+### Fixed
 * If the trace log miss out on a navigationStart event (causing Tracium to fail) we now insert a navigationStart event [#904](https://github.com/sitespeedio/browsertime/pull/904). The missing navigationStart event started to happen more frequently in Chrome 76.
 
 ## 5.7.1 - 2019-07-31
