@@ -42,6 +42,7 @@ map_localhost = False
 needs_flush = False
 flush_pipes = False
 last_activity = None
+last_client_disconnected = None
 REMOVE_TCP_OVERHEAD = 1460.0 / 1500.0
 lock = threading.Lock()
 background_activity_count = 0
@@ -103,7 +104,7 @@ class TSPipe():
         pass
 
   def SendPeerMessage(self, message):
-    global last_activity
+    global last_activity, last_client_disconnected
     last_activity = current_time()
     message_sent = False
     connection_id = message['connection']
@@ -123,11 +124,15 @@ class TSPipe():
           except:
             pass
           del connections[connection_id]
+          if not connections:
+            last_client_disconnected = current_time()
+            logging.info('[{0:d}] Last connection closed'.format(self.client_id))
     return message_sent
 
   def tick(self):
     global connections
     global flush_pipes
+    next_packet_time = None
     processed_messages = False
     now = current_time()
     try:
@@ -159,7 +164,19 @@ class TSPipe():
       self.available_bytes = .0
     self.last_tick = now
 
-    return processed_messages
+    # Figure out how long until the next packet can be sent
+    if self.next_message is not None:
+      # First, just the latency
+      next_packet_time = self.next_message['time'] - now
+      # Additional time for bandwidth
+      if self.kbps > .0:
+        accumulated_bytes = self.available_bytes + next_packet_time * self.kbps * 1000.0 / 8.0
+        needed_bytes = self.next_message['size'] - accumulated_bytes
+        if needed_bytes > 0:
+          needed_time = needed_bytes / (self.kbps * 1000.0 / 8.0)
+          next_packet_time += needed_time
+
+    return next_packet_time
 
 
 ########################################################################################################################
@@ -245,6 +262,7 @@ class TCPConnection(asyncore.dispatcher):
       self.SendMessage('connected', {'success': False, 'address': self.addr})
 
   def handle_close(self):
+    global last_client_disconnected
     logging.info('[{0:d}] Server Connection Closed'.format(self.client_id))
     self.state = self.STATE_ERROR
     self.close()
@@ -256,6 +274,9 @@ class TCPConnection(asyncore.dispatcher):
           self.SendMessage('closed', {})
         else:
           del connections[self.client_id]
+        if not connections:
+          last_client_disconnected = current_time()
+          logging.info('[{0:d}] Last Browser disconnected'.format(self.client_id))
     except:
       pass
 
@@ -367,9 +388,10 @@ class Socks5Server(asyncore.dispatcher):
       exit(1)
 
   def handle_accept(self):
-    global connections
+    global connections, last_client_disconnected
     pair = self.accept()
     if pair is not None:
+      last_client_disconnected = None
       sock, addr = pair
       self.current_client_id += 1
       logging.info('[{0:d}] Incoming connection from {1}'.format(self.current_client_id, repr(addr)))
@@ -495,7 +517,7 @@ class Socks5Connection(asyncore.dispatcher):
                 self.port = 256 * ord(data[port_offset]) + ord(data[port_offset + 1])
                 if self.port:
                   if self.ip is None and self.hostname is not None:
-                    if self.hostname in dns_cache:
+                    if dns_cache is not None and self.hostname in dns_cache:
                       self.state = self.STATE_CONNECTING
                       cache_entry = dns_cache[self.hostname]
                       self.addresses = cache_entry['addresses']
@@ -514,6 +536,7 @@ class Socks5Connection(asyncore.dispatcher):
       pass
 
   def handle_close(self):
+    global last_client_disconnected
     logging.info('[{0:d}] Browser Connection Closed by browser'.format(self.client_id))
     self.state = self.STATE_ERROR
     self.close()
@@ -525,6 +548,9 @@ class Socks5Connection(asyncore.dispatcher):
           self.SendMessage('closed', {})
         else:
           del connections[self.client_id]
+        if not connections:
+          last_client_disconnected = current_time()
+          logging.info('[{0:d}] Last Browser disconnected'.format(self.client_id))
     except:
       pass
 
@@ -534,7 +560,8 @@ class Socks5Connection(asyncore.dispatcher):
       if 'addresses' in message and len(message['addresses']):
         self.state = self.STATE_CONNECTING
         self.addresses = message['addresses']
-        dns_cache[self.hostname] = {'addresses': self.addresses, 'localhost': message['localhost']}
+        if dns_cache is not None:
+          dns_cache[self.hostname] = {'addresses': self.addresses, 'localhost': message['localhost']}
         logging.debug('[{0:d}] Resolved {1}, Connecting'.format(self.client_id, self.hostname))
         self.SendMessage('connect', {'addresses': self.addresses, 'port': self.port, 'localhost': message['localhost']})
       else:
@@ -643,6 +670,7 @@ def main():
   global dest_addresses
   global port_mappings
   global map_localhost
+  global dns_cache
   import argparse
   global REMOVE_TCP_OVERHEAD
   parser = argparse.ArgumentParser(description='Traffic-shaping socks5 proxy.',
@@ -659,6 +687,8 @@ def main():
   parser.add_argument('-m', '--mapports', help="Remap outbound ports. Comma-separated list of original:new with * as a wildcard. --mapports '443:8443,*:8080'")
   parser.add_argument('-l', '--localhost', action='store_true', default=False,
                       help="Include connections already destined for localhost/127.0.0.1 in the host and port remapping.")
+  parser.add_argument('-n', '--nodnscache', action='store_true', default=False, help="Disable internal DNS cache.")
+  parser.add_argument('-f', '--flushdnscache', action='store_true', default=False, help="Automatically flush the DNS cache 500ms after the last client disconnects.")
   options = parser.parse_args()
 
   # Set up logging
@@ -680,6 +710,9 @@ def main():
   # Parse any port mappings
   if options.mapports:
     SetPortMappings(options.mapports)
+  
+  if options.nodnscache:
+    dns_cache = None
 
   map_localhost = options.localhost
 
@@ -714,6 +747,8 @@ def run_loop():
   global needs_flush
   global flush_pipes
   global last_activity
+  global last_client_disconnected
+  global dns_cache
   winmm = None
 
   # increase the windows timer resolution to 1ms
@@ -729,28 +764,42 @@ def run_loop():
   last_check = current_time()
   # disable gc to avoid pauses during traffic shaping/proxying
   gc.disable()
+  out_interval = None
+  in_interval = None
   while not must_exit:
     # Tick every 1ms if traffic-shaping is enabled and we have data or are doing background dns lookups, every 1 second otherwise
     lock.acquire()
     tick_interval = 0.001
+    if out_interval is not None:
+      tick_interval = max(tick_interval, out_interval)
+    if in_interval is not None:
+      tick_interval = max(tick_interval, in_interval)
     if background_activity_count == 0:
       if in_pipe.next_message is None and in_pipe.queue.empty() and out_pipe.next_message is None and out_pipe.queue.empty():
         tick_interval = 1.0
       elif in_pipe.kbps == .0 and in_pipe.latency == 0 and out_pipe.kbps == .0 and out_pipe.latency == 0:
         tick_interval = 1.0
     lock.release()
+    logging.debug("Tick Time: %0.3f", tick_interval)
     asyncore.poll(tick_interval, asyncore.socket_map)
     if needs_flush:
       flush_pipes = True
+      dns_cache = {}
       needs_flush = False
-    out_pipe.tick()
-    in_pipe.tick()
+    out_interval = out_pipe.tick()
+    in_interval = in_pipe.tick()
     if flush_pipes:
       PrintMessage('OK')
       flush_pipes = False
-    # Every 500 ms check to see if it is a good time to do a gc
     now = current_time()
-    if now - last_check > 0.5:
+    # Clear the DNS cache 500ms after the last client disconnects
+    if options.flushdnscache and last_client_disconnected is not None and dns_cache:
+      if now - last_client_disconnected >= 0.5:
+        dns_cache = {}
+        last_client_disconnected = None
+        logging.debug("Flushed DNS cache")
+    # Every 500 ms check to see if it is a good time to do a gc
+    if now - last_check >= 0.5:
       last_check = now
       # manually gc after 5 seconds of idle
       if now - last_activity >= 5:
