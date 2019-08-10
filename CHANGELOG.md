@@ -2,7 +2,8 @@
 
 ## 6.0.0 - UNRELEASE
 ### Added
-* Upgraded to Ubuntu Disco in the Docker container [#908](https://github.com/sitespeedio/browsertime/pull/908)
+* Upgraded to Ubuntu Disco in the Docker container [#908](https://github.com/sitespeedio/browsertime/pull/908).
+* Use Chrome 77 Beta in the Docker container [#913](https://github.com/sitespeedio/browsertime/pull/913).
 
 ## 5.7.3 - 2019-08-03
 ### Fixed
