@@ -13,8 +13,8 @@ cache:
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
-      - google-chrome
+      - sourceline: "ppa:ubuntu-toolchain-r/test"
+      - sourceline: "ppa:google-chrome"
     packages:
       - google-chrome-stable
       - ipython
