@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 6.0.0 - UNRELEASE
+### Added
+* Upgraded to Ubuntu Disco in the Docker container [#908](https://github.com/sitespeedio/browsertime/pull/908)
+
 ## 5.7.3 - 2019-08-03
 ### Fixed
 * Fixed bug introduced in 5.6.0 that made it impossible to set multiple cookies when using Chrome [#910](https://github.com/sitespeedio/browsertime/pull/910).
