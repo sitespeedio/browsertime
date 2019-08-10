@@ -1,6 +1,6 @@
 (function(minLength) {
   const observer = new PerformanceObserver(list => {});
-  observer.observe({ type: 'longtask', buffered: true });
+  observer.observe({ entryTypes: ['longtask'], buffered: true });
   const entries = observer.takeRecords();
   const cleaned = [];
   for (let event of entries) {
