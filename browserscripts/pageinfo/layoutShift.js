@@ -1,4 +1,5 @@
 (function() {
+  // See https://web.dev/layout-instability-api
   const observer = new PerformanceObserver(list => {});
   observer.observe({ type: 'layout-shift', buffered: true });
   const list = observer.takeRecords();
@@ -6,5 +7,5 @@
   for (let entry of list) {
     score += entry.value;
   }
-  return score;
+  return score * 100;
 })();
