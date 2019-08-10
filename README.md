@@ -91,7 +91,6 @@ $ docker run --rm -v "$(pwd)":/browsertime sitespeedio/browsertime -n 1 https://
 
 You can throttle the connection to make the connectivity slower to make it easier to catch regressions. The best way to do that is to setup a network bridge in Docker or use our connectivity engine Throttle.
 
-
 Here's an full example to setup up Docker network bridges on a server that has tc installed:
 
 ~~~bash
@@ -150,6 +149,12 @@ browsertime --connectivity.engine throttle -c cable https://www.sitespeed.io/
 ~~~
 
 You can also use Throttle inside of Docker but then the host need to be the same OS as in Docker. In practice you can only use it on Linux. And then make sure to run *sudo modprobe ifb numifbs=1* first and give the container the right privileges *--cap-add=NET_ADMIN*.
+
+If you are running Browsertime in Kubernetes you need to use [TSProxy](https://github.com/WPO-Foundation/tsproxy).
+
+~~~bash
+browsertime --connectivity.engine tsproxy -c cable https://www.sitespeed.io/
+~~~
 
 ## Upgrade from 3.x to 4.0
 There are a couple of breaking changes introduce in 4.0.
