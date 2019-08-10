@@ -4,7 +4,7 @@ set -e
 # See https://github.com/SeleniumHQ/docker-selenium/issues/87
 export DBUS_SESSION_BUS_ADDRESS=/dev/null
 
-google-chrome --version
+google-chrome-beta --version
 firefox --version
 
 BROWSERTIME_RECORD=/usr/src/app/bin/browsertimeWebPageReplay.js
