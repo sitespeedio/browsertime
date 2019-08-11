@@ -14,9 +14,7 @@ addons:
   apt:
     sources:
       - sourceline: "ppa:ubuntu-toolchain-r/test"
-      - sourceline: "google-chrome"
     packages:
-      - google-chrome-stable
       - ipython
       - ipython-notebook
       - libjpeg-dev
@@ -35,6 +33,7 @@ addons:
       - ttf-ubuntu-font-family
       - xz-utils
   firefox: "latest"
+  chrome: stable
 before_install:
   - python -m pip --version
   - python -m pip install --user Pillow
