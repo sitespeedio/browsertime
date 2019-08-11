@@ -16,28 +16,26 @@ addons:
       - sourceline: "ppa:ubuntu-toolchain-r/test"
     packages:
       - ipython
-      - ipython-notebook
       - libjpeg-dev
-      - libatlas-base-dev
-      - gfortran
       - python
       - python-dev
-      - python-imaging
+      - python-pil
       - python-numpy
       - python-scipy
       - python-matplotlib
       - python-pandas
       - python-pip
-      - python-pil
       - python-sympy
       - python-nose
+      - xz-utils
       - ttf-ubuntu-font-family
       - xz-utils
   firefox: "latest"
   chrome: stable
 before_install:
+  - python -m pip install --upgrade pip
+  - python -m pip install --upgrade setuptools
   - python -m pip --version
-  - python -m pip install --user Pillow
   - python -m pip install --user pyssim
   - python -m pip show Pillow
   - python -m pip show pyssim
