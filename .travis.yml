@@ -28,6 +28,7 @@ addons:
       - python-matplotlib
       - python-pandas
       - python-pip
+      - python-pil
       - python-sympy
       - python-nose
       - ttf-ubuntu-font-family
