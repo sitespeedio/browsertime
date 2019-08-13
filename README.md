@@ -59,6 +59,9 @@ $ browsertime https://www.sitespeed.io/
 
 Load https://www.sitespeed.io/ in Chrome three times. Results are stored in a JSON file (browsertime.json) with the timing data, and a HAR file (browsertime.har) in browsertime-results/www.sitespeed.io/$date/
 
+## Browsertime 6.0 coming soon
+The master branch is the coming version of Browsertime 6.0, released sometimes in September. A first alpha release coming soon.
+
 ## I want more examples
 Checkout the [examples](docs/examples/README.md).
 
