@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## 6.0.0 - UNRELEASED
+## 6.0.0-alpha.1 - 2019-08-14
 ### Added
 * Upgraded to Ubuntu Disco in the Docker container [#908](https://github.com/sitespeedio/browsertime/pull/908).
 * Use Chrome 77 Beta in the Docker container [#913](https://github.com/sitespeedio/browsertime/pull/913).
