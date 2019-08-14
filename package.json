@@ -1,6 +1,6 @@
 {
   "description": "Browsertime",
-  "version": "5.7.3",
+  "version": "6.0.0-alpha.1",
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "@sitespeed.io/throttle": "0.5.1",
@@ -48,8 +48,8 @@
   "engines": {
     "node": ">=10.13.0"
   },
-  "publishConfig": {		
-    "tag": "canary"		
+  "publishConfig": {
+    "tag": "canary"
   },
   "files": [
     "CHANGELOG.md",
