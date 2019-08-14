@@ -11,7 +11,8 @@
       loadTime: largestEntry.loadTime.toFixed(0),
       renderTime: largestEntry.renderTime.toFixed(0),
       size: largestEntry.size,
-      startTime: largestEntry.startTime.toFixed(0)
+      startTime: largestEntry.startTime.toFixed(0),
+      tagName: largestEntry.element.tagName
     };
   } else return;
 })();
