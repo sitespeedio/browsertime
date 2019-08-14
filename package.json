@@ -1,17 +1,18 @@
 {
   "description": "Browsertime",
-  "version": "5.3.1",
+  "version": "5.7.3",
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "@sitespeed.io/throttle": "0.5.1",
     "adbkit": "2.11.1",
-    "@sitespeed.io/chromedriver": "75.0.3770",
-    "chrome-har": "0.9.1",
+    "btoa": "1.2.1",
+    "@sitespeed.io/chromedriver": "76.0.3809-68",
+    "chrome-har": "0.11.0",
     "chrome-remote-interface": "0.27.2",
-    "dayjs": "1.8.14",
-    "execa": "1.0.0",
+    "dayjs": "1.8.15",
+    "execa": "2.0.3",
     "fast-stats": "0.0.5",
-    "find-up": "3.0.0",
+    "find-up": "4.1.0",
     "get-port": "5.0.0",
     "hasbin": "1.2.3",
     "intel": "1.2.0",
@@ -19,7 +20,7 @@
     "lodash.get": "4.4.2",
     "lodash.groupby": "4.6.0",
     "lodash.isempty": "4.4.0",
-    "lodash.merge": "4.6.1",
+    "lodash.merge": "4.6.2",
     "lodash.pick": "4.4.0",
     "lodash.remove": "4.7.0",
     "lodash.set": "4.3.2",
@@ -30,7 +31,7 @@
     "@sitespeed.io/tracium": "0.3.3",
     "valid-url": "1.0.9",
     "@cypress/xvfb": "1.2.4",
-    "yargs": "13.2.4"
+    "yargs": "13.3.0"
   },
   "devDependencies": {
     "bluebird": "3.5.4",
@@ -45,6 +46,9 @@
   },
   "engines": {
     "node": ">=10.13.0"
+  },
+  "publishConfig": {		
+    "tag": "canary"		
   },
   "files": [
     "CHANGELOG.md",
