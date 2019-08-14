@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 6.0.0-alpha.2 - UNRELEASED
+### Added
+* Report the tagName (which tag) that was picked for Largest Contentful Paint [#919](https://github.com/sitespeedio/browsertime/pull/919).
+
 ## 6.0.0-alpha.1 - 2019-08-14
 ### Added
 * Upgraded to Ubuntu Disco in the Docker container [#908](https://github.com/sitespeedio/browsertime/pull/908).
