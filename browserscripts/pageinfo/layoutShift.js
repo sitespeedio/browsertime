@@ -1,4 +1,8 @@
 (function() {
+  // Guard for Safari
+  if (typeof PerformanceObserver.entryTypes !== 'function') {
+    return;
+  }
   // See https://web.dev/layout-instability-api
   const observer = new PerformanceObserver(list => {});
   observer.observe({ type: 'layout-shift', buffered: true });
