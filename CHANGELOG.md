@@ -7,6 +7,7 @@
 
 ### Fixed
 * Fixed so LCP timings are reported as numbers, not strings [#920](https://github.com/sitespeedio/browsertime/pull/920).
+* Guard against Safaris limited PerformanceObserver [#922](https://github.com/sitespeedio/browsertime/pull/922).
 
 ## 6.0.0-alpha.1 - 2019-08-14
 ### Added
