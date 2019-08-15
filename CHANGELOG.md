@@ -3,6 +3,7 @@
 ## 6.0.0-alpha.2 - UNRELEASED
 ### Added
 * Report the tagName (which tag) that was picked for Largest Contentful Paint [#919](https://github.com/sitespeedio/browsertime/pull/919).
+* Collect element timings [#921](https://github.com/sitespeedio/browsertime/pull/921). All elements needs to have a unique identifier for this to work correctly.
 
 ### Fixed
 * Fixed so LCP timings are reported as numbers, not strings [#920](https://github.com/sitespeedio/browsertime/pull/920).
