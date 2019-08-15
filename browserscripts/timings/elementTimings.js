@@ -1,0 +1,23 @@
+(function() {
+  const observer = new PerformanceObserver(list => {});
+  observer.observe({ type: 'element', buffered: true });
+  const entries = observer.takeRecords();
+  const elements = [];
+  for (let entry of entries) {
+    // Look out for colliding identifiers and missing identifiers
+    const element = {};
+    element[entry.identifier] = {
+      duration: entry.duration,
+      identifier: entry.identifier,
+      url: entry.url,
+      loadTime: Number(entry.loadTime.toFixed(0)),
+      renderTime: Number(entry.renderTime.toFixed(0)),
+      startTime: Number(entry.startTime.toFixed(0)),
+      naturalHeight: entry.naturalHeight,
+      naturalWidth: entry.naturalWidth,
+      tagName: entry.element.tagName
+    };
+    elements.push(element);
+  }
+  return elements;
+})();
