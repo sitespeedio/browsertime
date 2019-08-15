@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 6.0.0-alpha.4 - UNRELEASED
+### Fixed
+* A better structure for Element Timings data [#926](https://github.com/sitespeedio/browsertime/pull/926) that makes them easier to use.
+
 ## 6.0.0-alpha.3 - 2019-08-15
 ### Fixed
 * Fixed over optimistic guard for using Performance Observer [#925](https://github.com/sitespeedio/browsertime/pull/925).
