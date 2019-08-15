@@ -1,4 +1,8 @@
 (function() {
+  // Guard for Safari
+  if (typeof PerformanceObserver.entryTypes !== 'function') {
+    return;
+  }
   const observer = new PerformanceObserver(list => {});
   observer.observe({ type: 'largest-contentful-paint', buffered: true });
   const entries = observer.takeRecords();
@@ -8,10 +12,11 @@
       duration: largestEntry.duration,
       id: largestEntry.id,
       url: largestEntry.url,
-      loadTime: largestEntry.loadTime.toFixed(0),
-      renderTime: largestEntry.renderTime.toFixed(0),
+      loadTime: Number(largestEntry.loadTime.toFixed(0)),
+      renderTime: Number(largestEntry.renderTime.toFixed(0)),
       size: largestEntry.size,
-      startTime: largestEntry.startTime.toFixed(0)
+      startTime: Number(largestEntry.startTime.toFixed(0)),
+      tagName: largestEntry.element.tagName
     };
   } else return;
 })();
