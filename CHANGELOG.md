@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 6.0.0-alpha.3 - 2019-08-15
+### Fixed
+* Fixed over optimistic guard for using Performance Observer [#925](https://github.com/sitespeedio/browsertime/pull/925).
+
 ## 6.0.0-alpha.2 - 2019-08-15
 ### Added
 * Report the tagName (which tag) that was picked for Largest Contentful Paint [#919](https://github.com/sitespeedio/browsertime/pull/919).
