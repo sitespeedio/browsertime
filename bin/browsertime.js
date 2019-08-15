@@ -66,8 +66,8 @@ async function run(urls, options) {
       const resultDir = path.relative(process.cwd(), storageManager.directory);
 
       // check for errors
-      for (let eachRestult of result) {
-        for (let errors of eachRestult.errors) {
+      for (let eachResult of result) {
+        for (let errors of eachResult.errors) {
           if (errors.length > 0) {
             process.exitCode = 1;
           }
