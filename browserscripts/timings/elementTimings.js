@@ -1,4 +1,8 @@
 (function() {
+  // Guard for Safari
+  if (typeof PerformanceObserver.entryTypes !== 'function') {
+    return;
+  }
   const observer = new PerformanceObserver(list => {});
   observer.observe({ type: 'element', buffered: true });
   const entries = observer.takeRecords();
