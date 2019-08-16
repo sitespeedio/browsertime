@@ -1,6 +1,6 @@
 (function() {
   const supported = PerformanceObserver.supportedEntryTypes;
-  if (supported.indexOf('element') === -1) {
+  if (!supported || supported.indexOf('element') === -1) {
     return;
   }
   const observer = new PerformanceObserver(list => {});

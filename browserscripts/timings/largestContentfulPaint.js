@@ -1,6 +1,6 @@
 (function() {
   const supported = PerformanceObserver.supportedEntryTypes;
-  if (supported.indexOf('largest-contentful-paint') === -1) {
+  if (!supported || supported.indexOf('largest-contentful-paint') === -1) {
     return;
   }
   const observer = new PerformanceObserver(list => {});
