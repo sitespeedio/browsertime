@@ -1,6 +1,6 @@
 (function() {
   const supported = PerformanceObserver.supportedEntryTypes;
-  if (supported.indexOf('layout-shift') === -1) {
+  if (!supported || supported.indexOf('layout-shift') === -1) {
     return;
   }
   // See https://web.dev/layout-instability-api
