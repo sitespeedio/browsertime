@@ -1,6 +1,10 @@
 # Browsertime changelog
 
 ## 6.0.0-alpha.4 - UNRELEASED
+
+### Added
+* Limited support to run Safari on iOS and OS X. To run on iOS you need iOS 13 and Mac OS Catalina. At the moment you get Navigation Timing and Resource Timing metrics. In the future lets hope we can add more metrics [#872](https://github.com/sitespeedio/browsertime/pull/872). 
+
 ### Fixed
 * A better structure for Element Timings data [#926](https://github.com/sitespeedio/browsertime/pull/926) that makes them easier to use.
 
