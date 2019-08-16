@@ -1,4 +1,8 @@
 (function() {
+  const supported = PerformanceObserver.supportedEntryTypes;
+  if (supported.indexOf('largest-contentful-paint') === -1) {
+    return;
+  }
   const observer = new PerformanceObserver(list => {});
   observer.observe({ type: 'largest-contentful-paint', buffered: true });
   const entries = observer.takeRecords();

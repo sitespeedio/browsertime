@@ -1,4 +1,8 @@
 (function() {
+  const supported = PerformanceObserver.supportedEntryTypes;
+  if (supported.indexOf('element') === -1) {
+    return;
+  }
   const observer = new PerformanceObserver(list => {});
   observer.observe({ type: 'element', buffered: true });
   const entries = observer.takeRecords();
