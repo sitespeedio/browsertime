@@ -1,4 +1,8 @@
 (function() {
+  const supported = PerformanceObserver.supportedEntryTypes;
+  if (supported.indexOf('layout-shift') === -1) {
+    return;
+  }
   // See https://web.dev/layout-instability-api
   const observer = new PerformanceObserver(list => {});
   observer.observe({ type: 'layout-shift', buffered: true });
