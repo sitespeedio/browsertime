@@ -1,18 +1,12 @@
 (function() {
-  // Guard for Safari
-  if (typeof PerformanceObserver.entryTypes !== 'function') {
-    return;
-  }
   const observer = new PerformanceObserver(list => {});
   observer.observe({ type: 'element', buffered: true });
   const entries = observer.takeRecords();
-  const elements = [];
+  const elements = {};
   for (let entry of entries) {
     // Look out for colliding identifiers and missing identifiers
-    const element = {};
-    element[entry.identifier] = {
+    elements[entry.identifier] = {
       duration: entry.duration,
-      identifier: entry.identifier,
       url: entry.url,
       loadTime: Number(entry.loadTime.toFixed(0)),
       renderTime: Number(entry.renderTime.toFixed(0)),
@@ -21,7 +15,6 @@
       naturalWidth: entry.naturalWidth,
       tagName: entry.element.tagName
     };
-    elements.push(element);
   }
   return elements;
 })();

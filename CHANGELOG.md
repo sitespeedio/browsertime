@@ -1,6 +1,14 @@
 # Browsertime changelog
 
-## 6.0.0-alpha.2 - UNRELEASED
+## 6.0.0-alpha.4 - UNRELEASED
+### Fixed
+* A better structure for Element Timings data [#926](https://github.com/sitespeedio/browsertime/pull/926) that makes them easier to use.
+
+## 6.0.0-alpha.3 - 2019-08-15
+### Fixed
+* Fixed over optimistic guard for using Performance Observer [#925](https://github.com/sitespeedio/browsertime/pull/925).
+
+## 6.0.0-alpha.2 - 2019-08-15
 ### Added
 * Report the tagName (which tag) that was picked for Largest Contentful Paint [#919](https://github.com/sitespeedio/browsertime/pull/919).
 * Collect element timings [#921](https://github.com/sitespeedio/browsertime/pull/921). All elements needs to have a unique identifier for this to work correctly.
