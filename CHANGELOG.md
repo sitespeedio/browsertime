@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 6.0.0-alpha.5 - 2019-08-18
+### Fixed
+* Fix to avoid Chrome vsync problem [#928](https://github.com/sitespeedio/browsertime/pull/928).
+
 ## 6.0.0-alpha.4 - 2019-08-16
 
 ### Added
