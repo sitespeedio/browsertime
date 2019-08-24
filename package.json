@@ -35,15 +35,15 @@
     "yargs": "13.3.0"
   },
   "devDependencies": {
-    "bluebird": "3.5.4",
-    "chai": "^4.2.0",
-    "chai-as-promised": "~7.1.1",
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^4.2.0",
-    "eslint-plugin-prettier": "^3.0.1",
-    "longjohn": "^0.2.12",
-    "mocha": "^5.1.1",
-    "prettier": "^1.17.0"
+    "bluebird": "3.5.5",
+    "chai": "4.2.0",
+    "chai-as-promised": "7.1.1",
+    "eslint": "6.2.2",
+    "eslint-config-prettier": "6.1.0",
+    "eslint-plugin-prettier": "3.1.0",
+    "longjohn": "0.2.12",
+    "mocha": "6.2.0",
+    "prettier": "1.18.2"
   },
   "engines": {
     "node": ">=10.13.0"
