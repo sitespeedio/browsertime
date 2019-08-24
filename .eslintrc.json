@@ -19,6 +19,7 @@
     "no-extra-semi": "off",
     "no-mixed-spaces-and-tabs": "off",
     "no-unexpected-multiline": "off",
-    "no-return-await": "error"
+    "no-return-await": "error",
+    "require-atomic-updates": "off"
   }
 }
