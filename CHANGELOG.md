@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+## UNRELESED
+
+### Tech
+* Updated dev dependencies and yargs, chrome-remote-interface, execa & sharp.
+
 ## 6.0.0-alpha.5 - 2019-08-18
 ### Fixed
 * Fix to avoid Chrome vsync problem [#928](https://github.com/sitespeedio/browsertime/pull/928).
