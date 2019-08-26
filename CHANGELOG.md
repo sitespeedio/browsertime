@@ -2,8 +2,11 @@
 
 ## UNRELESED
 
+### Fixed
+* Increase margin from 4 -> 6% of for the bottom part of the screen to elimanate Chromes info bar on emulated mobile [#935](https://github.com/sitespeedio/browsertime/pull/935)
+
 ### Tech
-* Updated dev dependencies and yargs, chrome-remote-interface, execa & sharp.
+* Updated dev dependencies and yargs, chrome-remote-interface, throttle, execa & sharp.
 
 ## 6.0.0-alpha.5 - 2019-08-18
 ### Fixed
