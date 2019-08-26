@@ -1,9 +1,11 @@
 # Browsertime changelog
 
-## UNRELESED
+##  6.0.0-alpha.6 - 2019-08-26
 
 ### Fixed
 * Increase margin from 4 -> 6% of for the bottom part of the screen to elimanate Chromes info bar on emulated mobile [#935](https://github.com/sitespeedio/browsertime/pull/935)
+
+* Categorise all mime types that has JSON as JSON for Chrome (to make it possible to store the JSON result in the HAR) [#930](https://github.com/sitespeedio/browsertime/pull/930).
 
 ### Tech
 * Updated dev dependencies and yargs, chrome-remote-interface, throttle, execa & sharp.
