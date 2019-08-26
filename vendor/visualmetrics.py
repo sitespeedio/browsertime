@@ -407,7 +407,7 @@ def trim_video_end(directory, trim_time):
 def adjust_frame_times(directory):
     offset = None
     frames = sorted(glob.glob(os.path.join(directory, 'video-*.png')))
-    # Special hack to the the video start 
+    # Special hack to the the video start
     # Let us tune this in the future to skip using a global
     global videoRecordingStart
     match = re.compile(r'video-(?P<ms>[0-9]+)\.png')
@@ -606,7 +606,7 @@ def eliminate_duplicate_frames(directory):
             if height > 400 or width > 400:
                 top = int(math.ceil(float(height) * 0.04))
                 right_margin = int(math.ceil(float(width) * 0.04))
-                bottom_margin = int(math.ceil(float(width) * 0.04))
+                bottom_margin = int(math.ceil(float(width) * 0.06))
             height = max(height - top - bottom_margin, 1)
             left = 0
             width = max(width - right_margin, 1)
@@ -1856,8 +1856,8 @@ def main():
                         for metric in metrics:
                             data[metric['name'].replace(
                                 ' ', '')] = metric['value']
-                        if 'videoRecordingStart' in globals():        
-                            data['videoRecordingStart'] = videoRecordingStart        
+                        if 'videoRecordingStart' in globals():
+                            data['videoRecordingStart'] = videoRecordingStart
                         print json.dumps(data)
                     else:
                         for metric in metrics:
