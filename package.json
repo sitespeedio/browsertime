@@ -3,7 +3,7 @@
   "version": "6.0.0-alpha.5",
   "bin": "./bin/browsertime.js",
   "dependencies": {
-    "@sitespeed.io/throttle": "0.5.1",
+    "@sitespeed.io/throttle": "0.5.2",
     "adbkit": "2.11.1",
     "btoa": "1.2.1",
     "@sitespeed.io/chromedriver": "76.0.3809-68",
