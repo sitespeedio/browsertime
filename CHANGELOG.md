@@ -1,7 +1,10 @@
 # Browsertime changelog
 
-##  6.0.0-alpha.6 - 2019-08-26
+##  6.0.0-alpha.7 - 2019-08-26
+### Fixed
+* Fixed broken Throttle (broken in alpha.6).
 
+##  6.0.0-alpha.6 - 2019-08-26
 ### Fixed
 * Increase margin from 4 -> 6% of for the bottom part of the screen to elimanate Chromes info bar on emulated mobile [#935](https://github.com/sitespeedio/browsertime/pull/935)
 
