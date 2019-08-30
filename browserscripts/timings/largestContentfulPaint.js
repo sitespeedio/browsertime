@@ -16,7 +16,7 @@
       renderTime: Number(largestEntry.renderTime.toFixed(0)),
       size: largestEntry.size,
       startTime: Number(largestEntry.startTime.toFixed(0)),
-      tagName: largestEntry.element.tagName
+      tagName: largestEntry.element ? largestEntry.element.tagName : ''
     };
   } else return;
 })();
