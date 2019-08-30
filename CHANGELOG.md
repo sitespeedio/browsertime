@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+##  6.0.0-alpha.8 - 2019-08-30
+### Fixed
+* Added guard against when LCP miss out on a element [#936](https://github.com/sitespeedio/browsertime/pull/936).
+* Make sure we have that page in the HAR before we try to add meta data [#937](https://github.com/sitespeedio/browsertime/pull/937).
+
 ##  6.0.0-alpha.7 - 2019-08-26
 ### Fixed
 * Fixed broken Throttle (broken in alpha.6).
