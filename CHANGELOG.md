@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+##  6.0.0-beta.1 - UNRELEASED
+### Changed 
+* Upgraded to yargs 14.1.0 that deep merge configuration files when you extend another configuration [#938](https://github.com/sitespeedio/browsertime/pull/938)
+
 ##  6.0.0-alpha.8 - 2019-08-30
 ### Fixed
 * Added guard against when LCP miss out on a element [#936](https://github.com/sitespeedio/browsertime/pull/936).
