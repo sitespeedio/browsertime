@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-##  6.0.0-beta.1 - UNRELEASED
+##  6.0.0-beta.1 - 2019-09-08
 ### Changed 
 * Upgraded to yargs 14.1.0 that deep merge configuration files when you extend another configuration [#938](https://github.com/sitespeedio/browsertime/pull/938)
 
