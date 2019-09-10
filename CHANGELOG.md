@@ -1,59 +1,12 @@
 # Browsertime changelog
 
-## UNRELEASED
-### Added
-* Use Chromedriver 77.
-
-##  6.0.0-beta.1 - 2019-09-08
-### Changed 
-* Upgraded to yargs 14.1.0 that deep merge configuration files when you extend another configuration [#938](https://github.com/sitespeedio/browsertime/pull/938)
-
-##  6.0.0-alpha.8 - 2019-08-30
-### Fixed
-* Added guard against when LCP miss out on a element [#936](https://github.com/sitespeedio/browsertime/pull/936).
-* Make sure we have that page in the HAR before we try to add meta data [#937](https://github.com/sitespeedio/browsertime/pull/937).
-
-##  6.0.0-alpha.7 - 2019-08-26
-### Fixed
-* Fixed broken Throttle (broken in alpha.6).
-
-##  6.0.0-alpha.6 - 2019-08-26
-### Fixed
-* Increase margin from 4 -> 6% of for the bottom part of the screen to elimanate Chromes info bar on emulated mobile [#935](https://github.com/sitespeedio/browsertime/pull/935)
-
-* Categorise all mime types that has JSON as JSON for Chrome (to make it possible to store the JSON result in the HAR) [#930](https://github.com/sitespeedio/browsertime/pull/930).
-
-### Tech
-* Updated dev dependencies and yargs, chrome-remote-interface, throttle, execa & sharp.
-
-## 6.0.0-alpha.5 - 2019-08-18
-### Fixed
-* Fix to avoid Chrome vsync problem [#928](https://github.com/sitespeedio/browsertime/pull/928).
-
-## 6.0.0-alpha.4 - 2019-08-16
+## 6.0.0 - UNRELEASED
 
 ### Added
+* Use Chromedriver 77 and Chrome 77.
 * Limited support to run Safari on iOS and OS X. To run on iOS you need iOS 13 and Mac OS Catalina. At the moment you get Navigation Timing and Resource Timing metrics. In the future lets hope we can add more metrics [#872](https://github.com/sitespeedio/browsertime/pull/872). 
-
-### Fixed
-* A better structure for Element Timings data [#926](https://github.com/sitespeedio/browsertime/pull/926) that makes them easier to use.
-
-## 6.0.0-alpha.3 - 2019-08-15
-### Fixed
-* Fixed over optimistic guard for using Performance Observer [#925](https://github.com/sitespeedio/browsertime/pull/925).
-
-## 6.0.0-alpha.2 - 2019-08-15
-### Added
 * Report the tagName (which tag) that was picked for Largest Contentful Paint [#919](https://github.com/sitespeedio/browsertime/pull/919).
 * Collect element timings [#921](https://github.com/sitespeedio/browsertime/pull/921). All elements needs to have a unique identifier for this to work correctly.
-
-### Fixed
-* Fixed so LCP timings are reported as numbers, not strings [#920](https://github.com/sitespeedio/browsertime/pull/920).
-* Guard against Safaris limited PerformanceObserver [#922](https://github.com/sitespeedio/browsertime/pull/922).
-* Removed decimals from FullyLoaded metric [#923](https://github.com/sitespeedio/browsertime/pull/923).
-
-## 6.0.0-alpha.1 - 2019-08-14
-### Added
 * Upgraded to Ubuntu Disco in the Docker container [#908](https://github.com/sitespeedio/browsertime/pull/908).
 * Use Chrome 77 Beta in the Docker container [#913](https://github.com/sitespeedio/browsertime/pull/913).
 * Use [TSProxy](https://github.com/WPO-Foundation/tsproxy) to throttle the connection. You should use TSProxy when you run on Kubernetes. Use it by `--connectivity.engine tsproxy`. We used to have support years ago but it never worked good on Mac/Linux so we dropped it. But it works now so we added it back [#891](https://github.com/sitespeedio/browsertime/pull/891).
@@ -62,11 +15,24 @@
 * You can now add your own metrics directly from your script (or post script) using *context.result.extras*. More info coming [#917](https://github.com/sitespeedio/browsertime/pull/917)
 * There's an alternative to collect Visual Metrics using the Chrome trace log, using [SpeedLine](https://github.com/paulirish/speedline) implemented in [#876](https://github.com/sitespeedio/browsertime/pull/876). Using video give more accurate metrics (at least in our testing) but maybe it could help running on Chrome on Android and add less overhead than recording a video. You can enable it with:  `--cpu --chrome.visualMetricsUsingTrace --chrome.enableTraceScreenshots`
 
+### Changed 
+* Upgraded to yargs 14.1.0 that deep merge configuration files when you extend another configuration [#938](https://github.com/sitespeedio/browsertime/pull/938)
+* We changed where the filmstrip screenshots are saved. Before it was *video/images*, now it is *filmstrip* both for VisualMetrics and SpeedLine [#876](https://github.com/sitespeedio/browsertime/pull/876).
+
 ### Fixed
+* Added guard against when LCP miss out on a element [#936](https://github.com/sitespeedio/browsertime/pull/936).
+* Make sure we have that page in the HAR before we try to add meta data [#937](https://github.com/sitespeedio/browsertime/pull/937).
+* Increase margin from 4 -> 6% of for the bottom part of the screen to elimanate Chromes info bar on emulated mobile [#935](https://github.com/sitespeedio/browsertime/pull/935)
+* Categorise all mime types that has JSON as JSON for Chrome (to make it possible to store the JSON result in the HAR) [#930](https://github.com/sitespeedio/browsertime/pull/930).
+* Fix to avoid Chrome vsync problem [#928](https://github.com/sitespeedio/browsertime/pull/928).
+* Fixed so LCP timings are reported as numbers, not strings [#920](https://github.com/sitespeedio/browsertime/pull/920).
+* Guard against Safaris limited PerformanceObserver [#922](https://github.com/sitespeedio/browsertime/pull/922).
+* Removed decimals from FullyLoaded metric [#923](https://github.com/sitespeedio/browsertime/pull/923).
 * Avoid using OS tmp dir (we have had people reporting permission errors) [#916](https://github.com/sitespeedio/browsertime/pull/916).
 
-### Changed
-* We changed where the filmstrip screenshots are saved. Before it was *video/images*, now it is *filmstrip* both for VisualMetrics and SpeedLine [#876](https://github.com/sitespeedio/browsertime/pull/876).
+
+### Tech
+* Updated dev dependencies and yargs, chrome-remote-interface, throttle, execa & sharp.
 
 ## 5.7.3 - 2019-08-03
 ### Fixed

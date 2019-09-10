@@ -48,9 +48,6 @@
   "engines": {
     "node": ">=10.13.0"
   },
-  "publishConfig": {
-    "tag": "canary"
-  },
   "files": [
     "CHANGELOG.md",
     "CONTRIBUTING.md",
