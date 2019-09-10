@@ -1,15 +1,14 @@
 # Browsertime changelog
 
-## 6.0.0 - UNRELEASED
+## 6.0.0 - 2019-09-10
 
 ### Added
-* Use Chromedriver 77 and Chrome 77.
+
 * Limited support to run Safari on iOS and OS X. To run on iOS you need iOS 13 and Mac OS Catalina. At the moment you get Navigation Timing and Resource Timing metrics. In the future lets hope we can add more metrics [#872](https://github.com/sitespeedio/browsertime/pull/872). 
-* Report the tagName (which tag) that was picked for Largest Contentful Paint [#919](https://github.com/sitespeedio/browsertime/pull/919).
-* Collect element timings [#921](https://github.com/sitespeedio/browsertime/pull/921). All elements needs to have a unique identifier for this to work correctly.
+* Collect element timings for Chrome [#921](https://github.com/sitespeedio/browsertime/pull/921). All elements needs to have a unique identifier for this to work correctly.
 * Upgraded to Ubuntu Disco in the Docker container [#908](https://github.com/sitespeedio/browsertime/pull/908).
-* Use Chrome 77 Beta in the Docker container [#913](https://github.com/sitespeedio/browsertime/pull/913).
-* Use [TSProxy](https://github.com/WPO-Foundation/tsproxy) to throttle the connection. You should use TSProxy when you run on Kubernetes. Use it by `--connectivity.engine tsproxy`. We used to have support years ago but it never worked good on Mac/Linux so we dropped it. But it works now so we added it back [#891](https://github.com/sitespeedio/browsertime/pull/891).
+* Use Chromedriver 77 and Chrome 77.
+* Use [TSProxy](https://github.com/WPO-Foundation/tsproxy) to throttle the connection. You should use TSProxy when you run on Kubernetes. Use it by `--connectivity.engine tsproxy`. We used to have support years ago but it never worked good on Mac/Linux so we dropped it. But it works better now so we added it back [#891](https://github.com/sitespeedio/browsertime/pull/891).
 * Using Chrome 77 (or later) you will now get a layout shift score (in percentage), see https://web.dev/layout-instability-api. [#905](https://github.com/sitespeedio/browsertime/pull/905).
 * Get LargestContentfulPaint in Chrome 77 (or later) [#906](https://github.com/sitespeedio/browsertime/pull/906).
 * You can now add your own metrics directly from your script (or post script) using *context.result.extras*. More info coming [#917](https://github.com/sitespeedio/browsertime/pull/917)
@@ -24,12 +23,9 @@
 * Make sure we have that page in the HAR before we try to add meta data [#937](https://github.com/sitespeedio/browsertime/pull/937).
 * Increase margin from 4 -> 6% of for the bottom part of the screen to elimanate Chromes info bar on emulated mobile [#935](https://github.com/sitespeedio/browsertime/pull/935)
 * Categorise all mime types that has JSON as JSON for Chrome (to make it possible to store the JSON result in the HAR) [#930](https://github.com/sitespeedio/browsertime/pull/930).
-* Fix to avoid Chrome vsync problem [#928](https://github.com/sitespeedio/browsertime/pull/928).
-* Fixed so LCP timings are reported as numbers, not strings [#920](https://github.com/sitespeedio/browsertime/pull/920).
 * Guard against Safaris limited PerformanceObserver [#922](https://github.com/sitespeedio/browsertime/pull/922).
 * Removed decimals from FullyLoaded metric [#923](https://github.com/sitespeedio/browsertime/pull/923).
 * Avoid using OS tmp dir (we have had people reporting permission errors) [#916](https://github.com/sitespeedio/browsertime/pull/916).
-
 
 ### Tech
 * Updated dev dependencies and yargs, chrome-remote-interface, throttle, execa & sharp.
