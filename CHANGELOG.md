@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Added
+* Updated to Chromedriver 77.0.3865.40.
+
 ## 6.0.0 - 2019-09-10
 
 ### Added
