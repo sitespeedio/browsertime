@@ -1,8 +1,10 @@
 # Browsertime changelog
 
-## UNRELEASED
-### Added
-* Updated to Chromedriver 77.0.3865.40.
+## 6.0.1 - 2019-09-12
+### Fixed
+* Updated to Chromedriver 77.0.3865.40 stable from beta version.
+* Do not log First paint as undefined when you run your tests on Safari [#941](https://github.com/sitespeedio/browsertime/pull/941)
+* Setup the browser the same way when measuring vs only navigating. This fixes the problem that you missed out on long task info if you first navigate to a URL to fill the cache and then measure the next URL [#940](https://github.com/sitespeedio/browsertime/pull/940).
 
 ## 6.0.0 - 2019-09-10
 
