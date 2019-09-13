@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 6.0.2 - UNRELEASED
+### Fixed
+* Fixed broken proxy setup for Firefox (and propably Chrome) [#943](https://github.com/sitespeedio/browsertime/pull/943).
+
 ## 6.0.1 - 2019-09-12
 ### Fixed
 * Updated to Chromedriver 77.0.3865.40 stable from beta version.
