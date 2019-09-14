@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* New chrome-har that handles when Chrome trace misses a response.
+
 ## 6.0.2 - 2019-09-14
 ### Fixed
 * Fixed broken proxy setup for Firefox (and propably Chrome) [#943](https://github.com/sitespeedio/browsertime/pull/943).
