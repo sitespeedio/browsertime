@@ -1,8 +1,9 @@
 # Browsertime changelog
 
-## 6.0.2 - UNRELEASED
+## 6.0.2 - 2019-09-14
 ### Fixed
 * Fixed broken proxy setup for Firefox (and propably Chrome) [#943](https://github.com/sitespeedio/browsertime/pull/943).
+* Fixed flickering timer in the video [#944](https://github.com/sitespeedio/browsertime/pull/944).
 
 ## 6.0.1 - 2019-09-12
 ### Fixed
