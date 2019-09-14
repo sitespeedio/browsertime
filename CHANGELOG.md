@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 6.0.3 - 2019-09-14
 ### Fixed
 * New chrome-har that handles when Chrome trace misses a response.
 
