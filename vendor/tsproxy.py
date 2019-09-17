@@ -20,8 +20,10 @@ import logging
 import platform
 try:
     from Queue import Queue
+    from Queue import Empty
 except ImportError:
     from queue import Queue
+    from queue import Empty
 import re
 import signal
 import socket
@@ -149,15 +151,16 @@ class TSPipe():
       while (self.next_message is not None) and\
           (flush_pipes or ((self.next_message['time'] <= now) and
                           (self.kbps <= .0 or self.next_message['size'] <= self.available_bytes))):
-        self.queue.task_done()
         processed_messages = True
         if self.kbps > .0:
           self.available_bytes -= self.next_message['size']
         self.SendPeerMessage(self.next_message)
         self.next_message = None
         self.next_message = self.queue.get_nowait()
-    except:
+    except Empty:
       pass
+    except Exception as e:
+      logging.exception('Tick Exception')
 
     # Only accumulate bytes while we have messages that are ready to send
     if self.next_message is None or self.next_message['time'] > now:
