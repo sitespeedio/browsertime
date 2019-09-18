@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* Upgraded TSProxy to 1.5 [#945](https://github.com/sitespeedio/browsertime/pull/945)
+
 ## 6.0.3 - 2019-09-14
 ### Fixed
 * New chrome-har that handles when Chrome trace misses a response.
