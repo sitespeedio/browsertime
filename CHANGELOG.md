@@ -1,8 +1,8 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 6.0.4 - UNRELEASED
 ### Fixed
-* Upgraded TSProxy to 1.5 [#945](https://github.com/sitespeedio/browsertime/pull/945)
+* Upgraded TSProxy to 1.5 [#945](https://github.com/sitespeedio/browsertime/pull/945) see [TSProxy issue #20](https://github.com/WPO-Foundation/tsproxy/issues/20) for more details.
 
 ## 6.0.3 - 2019-09-14
 ### Fixed
@@ -23,7 +23,7 @@
 
 ### Added
 
-* Limited support to run Safari on iOS and OS X. To run on iOS you need iOS 13 and Mac OS Catalina. At the moment you get Navigation Timing and Resource Timing metrics. In the future lets hope we can add more metrics [#872](https://github.com/sitespeedio/browsertime/pull/872). 
+* Limited support to run Safari on iOS and OS X. To run on iOS you need iOS 13 and Mac OS Catalina. At the moment you get Navigation Timing and Resource Timing metrics. In the future lets hope we can add more metrics [#872](https://github.com/sitespeedio/browsertime/pull/872).
 * Collect element timings for Chrome [#921](https://github.com/sitespeedio/browsertime/pull/921). All elements needs to have a unique identifier for this to work correctly.
 * Upgraded to Ubuntu Disco in the Docker container [#908](https://github.com/sitespeedio/browsertime/pull/908).
 * Use Chromedriver 77 and Chrome 77.
@@ -33,7 +33,7 @@
 * You can now add your own metrics directly from your script (or post script) using *context.result.extras*. More info coming [#917](https://github.com/sitespeedio/browsertime/pull/917)
 * There's an alternative to collect Visual Metrics using the Chrome trace log, using [SpeedLine](https://github.com/paulirish/speedline) implemented in [#876](https://github.com/sitespeedio/browsertime/pull/876). Using video give more accurate metrics (at least in our testing) but maybe it could help running on Chrome on Android and add less overhead than recording a video. You can enable it with:  `--cpu --chrome.visualMetricsUsingTrace --chrome.enableTraceScreenshots`
 
-### Changed 
+### Changed
 * Upgraded to yargs 14.1.0 that deep merge configuration files when you extend another configuration [#938](https://github.com/sitespeedio/browsertime/pull/938)
 * We changed where the filmstrip screenshots are saved. Before it was *video/images*, now it is *filmstrip* both for VisualMetrics and SpeedLine [#876](https://github.com/sitespeedio/browsertime/pull/876).
 
@@ -73,7 +73,7 @@
 ### Fixed
 * Turn off visual metrics in the Docker container with `--visualMetrics false` didn't work. Fixed in [#881](https://github.com/sitespeedio/browsertime/pull/881).
 * Getting the HTML in the HAR file didn't work correctly in Chrome, fixed in [#895](https://github.com/sitespeedio/browsertime/pull/895) and reported in [#894](https://github.com/sitespeedio/browsertime/issues/894).
-* Moved all Browsertime Extension functionality for Chrome to CDP (to make this work on Android). On Desktop this should work as before: 
+* Moved all Browsertime Extension functionality for Chrome to CDP (to make this work on Android). On Desktop this should work as before:
     * Clear cache [#885](https://github.com/sitespeedio/browsertime/pull/885) and [#887](https://github.com/sitespeedio/browsertime/pull/887)
     * Block domains [#884](https://github.com/sitespeedio/browsertime/pull/884).
     * Set cookie [#883](https://github.com/sitespeedio/browsertime/pull/883) (the cookie is set on the domain under test).
@@ -108,7 +108,7 @@
 * Upgraded to coming Selenium 4. There should be no difference for end users [#871](https://github.com/sitespeedio/browsertime/pull/871).
 
 ## 5.3.1 - 2019-06-30
-### Fixed 
+### Fixed
 * Updated Tracium with another way to find start navigation.
 
 ## 5.3.0 - 2019-06-29
@@ -127,7 +127,7 @@
 ## 5.2.5 - 2019-06-13
 ### Fixed
 * Fixed so that the tracing in Chrome ends before we start to run our JavaScript metrics (so that they aren't picked up in the trace) [#860](https://github.com/sitespeedio/browsertime/pull/860).
- 
+
 ## 5.2.4 - 2019-06-13
 ### Fixed
 * Running a script that started to measure without a URL and used an alias instead missed out on starting some browser services, for example Long Tasks in Chrome was not recorded. That is fixed in [#858](https://github.com/sitespeedio/browsertime/pull/858)
