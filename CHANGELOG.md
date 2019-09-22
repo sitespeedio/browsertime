@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## 6.0.4 - UNRELEASED
+## 6.0.4 - 2019-09-22
 ### Fixed
 * Upgraded TSProxy to 1.5 [#945](https://github.com/sitespeedio/browsertime/pull/945) see [TSProxy issue #20](https://github.com/WPO-Foundation/tsproxy/issues/20) for more details.
 * Upgraded to latest Chrome-har with extra guard if a response is missing respone data.
