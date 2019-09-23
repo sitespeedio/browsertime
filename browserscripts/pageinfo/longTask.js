@@ -19,6 +19,7 @@
         cleaned.push(e);
       }
     }
+    window.__bt_longtask.e = [];
     return cleaned;
   }
 })(arguments[arguments.length - 1]);
