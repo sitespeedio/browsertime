@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 6.1.1 - 2019-09-26
+### Fixed
+* If you are using SpeedLine with the trace to create VisualMetrics, metrics was strings instead of numbers in the result json [#951](https://github.com/sitespeedio/browsertime/pull/951).
+
 ## 6.1.0 - 2019-09-25
 ### Added
 * Get the first input in Chrome (useful for user journeys) [#948](https://github.com/sitespeedio/browsertime/pull/948).
