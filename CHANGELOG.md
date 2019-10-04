@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 6.1.2 - 2019-10-04
+### Fixed
+* Adding your own extension to Firefox was broken since 6.0 [#954](https://github.com/sitespeedio/browsertime/issues/954).
+
 ## 6.1.1 - 2019-09-26
 ### Fixed
 * If you are using SpeedLine with the trace to create VisualMetrics, metrics was strings instead of numbers in the result json [#951](https://github.com/sitespeedio/browsertime/pull/951).
