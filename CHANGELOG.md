@@ -1,8 +1,9 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 6.1.3 - 2019-10-07
 ### Fixed
-* Upgraded to Yargs 14.2.0 that makes it possible to extend configurations in multiple steps (old version only supported one step).
+* Upgraded to Yargs 14.2.0 that makes it possible to extend configurations in multiple steps (old version only supported one step and was broken for multiple steps).
+* TSProxy didn't work since last upgraded. Rollback to earlier TSProxy version in [#957](https://github.com/sitespeedio/browsertime/pull/957)
 
 ## 6.1.2 - 2019-10-04
 ### Fixed
