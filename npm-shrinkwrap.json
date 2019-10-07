@@ -7207,9 +7207,9 @@
       "integrity": "sha512-S+Zk8DEWE6oKpV+vI3qWkaK+jSbIK86pCwe2IF/xwIpQ8jEuxpw9NyaGjmp9+BoJv5FV2piqCDcoCtStppiq2A=="
     },
     "yargs": {
-      "version": "14.1.0",
-      "resolved": "https://registry.npmjs.org/yargs/-/yargs-14.1.0.tgz",
-      "integrity": "sha512-IdkQq1NiiV1fPwN5I2o4B0PKVjKh1EP71egpWO8dlovT8LG8JrXRmbH23v6I3CtjeEMnNC/IF3lq6XepPoELdg==",
+      "version": "14.2.0",
+      "resolved": "https://registry.npmjs.org/yargs/-/yargs-14.2.0.tgz",
+      "integrity": "sha512-/is78VKbKs70bVZH7w4YaZea6xcJWOAwkhbR0CFuZBmYtfTYF0xjGJF43AYd8g2Uii1yJwmS5GR2vBmrc32sbg==",
       "requires": {
         "cliui": "^5.0.0",
         "decamelize": "^1.2.0",
@@ -7221,7 +7221,7 @@
         "string-width": "^3.0.0",
         "which-module": "^2.0.0",
         "y18n": "^4.0.0",
-        "yargs-parser": "^14.0.0"
+        "yargs-parser": "^15.0.0"
       },
       "dependencies": {
         "ansi-regex": {
@@ -7285,9 +7285,9 @@
       }
     },
     "yargs-parser": {
-      "version": "14.0.0",
-      "resolved": "https://registry.npmjs.org/yargs-parser/-/yargs-parser-14.0.0.tgz",
-      "integrity": "sha512-zn/Mnx+tbFjkCFUodEpjXckNS65NfpB5oyqOkDDEG/8uxlfLZJu2IoBLQFjukUkn9rBbGkVYNzrDh6qy4NUd3g==",
+      "version": "15.0.0",
+      "resolved": "https://registry.npmjs.org/yargs-parser/-/yargs-parser-15.0.0.tgz",
+      "integrity": "sha512-xLTUnCMc4JhxrPEPUYD5IBR1mWCK/aT6+RJ/K29JY2y1vD+FhtgKK0AXRWvI262q3QSffAQuTouFIKUuHX89wQ==",
       "requires": {
         "camelcase": "^5.0.0",
         "decamelize": "^1.2.0"
