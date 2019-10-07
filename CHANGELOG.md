@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* Upgraded to Yargs 14.2.0 that makes it possible to extend configurations in multiple steps (old version only supported one step).
+
 ## 6.1.2 - 2019-10-04
 ### Fixed
 * Adding your own extension to Firefox was broken since 6.0 [#954](https://github.com/sitespeedio/browsertime/issues/954).
