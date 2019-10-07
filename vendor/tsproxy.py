@@ -152,14 +152,10 @@ class TSPipe():
           (flush_pipes or ((self.next_message['time'] <= now) and
                           (self.kbps <= .0 or self.next_message['size'] <= self.available_bytes))):
         processed_messages = True
-        message = self.next_message
-        self.next_message = None
         if self.kbps > .0:
           self.available_bytes -= self.next_message['size']
-        try:
-          self.SendPeerMessage(message)
-        except:
-          pass
+        self.SendPeerMessage(self.next_message)
+        self.next_message = None
         self.next_message = self.queue.get_nowait()
     except Empty:
       pass
