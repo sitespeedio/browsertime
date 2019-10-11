@@ -27,7 +27,7 @@
     "mkdirp": "0.5.1",
     "selenium-webdriver": "4.0.0-alpha.4",
     "sharp": "0.23.0",
-    "@sitespeed.io/geckodriver": "0.24.0",
+    "@sitespeed.io/geckodriver": "0.25.0",
     "@sitespeed.io/tracium": "0.3.3",
     "speedline-core": "1.4.2",
     "valid-url": "1.0.9",
