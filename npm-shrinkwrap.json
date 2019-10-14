@@ -1267,9 +1267,9 @@
       }
     },
     "@sitespeed.io/geckodriver": {
-      "version": "0.25.0",
-      "resolved": "https://registry.npmjs.org/@sitespeed.io/geckodriver/-/geckodriver-0.25.0.tgz",
-      "integrity": "sha512-VN/78a5fOwJguIFOGuNrnAT8HdHu3npDP29LKY0L9PTuBF6E181HBWFycZxCgAyxH4elI0Bh6Ye9ER6FbwME9w==",
+      "version": "0.26.0",
+      "resolved": "https://registry.npmjs.org/@sitespeed.io/geckodriver/-/geckodriver-0.26.0.tgz",
+      "integrity": "sha512-LkfgpY/xQctd4dv/MOaivB+GKoyxivPPo32aSl5uAngw414eM8PGGFJPCLY1tB14ZYhSSxDNPvVquiBFRPo4Bg==",
       "requires": {
         "node-downloader-helper": "1.0.9",
         "node-stream-zip": "1.7.0",
