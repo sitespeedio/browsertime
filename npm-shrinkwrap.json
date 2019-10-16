@@ -2989,9 +2989,9 @@
       "integrity": "sha512-GkfeAQh+QNy3wquu9oIZr6SS5x7wGdSgNQvD10X3r+AZr1Oys22HW8kAmDMvNg2+Dm0TeGaEuO8gFwdBXxwO8A=="
     },
     "chrome-har": {
-      "version": "0.11.3",
-      "resolved": "https://registry.npmjs.org/chrome-har/-/chrome-har-0.11.3.tgz",
-      "integrity": "sha512-vAF+cl5WMDyG2b5fAnoiJq2jKb7h20gunj8dTD7zCjgAIs3S4ThHL2VCeHdzCsNqwPGyJFf5OzK+3epcj0ajbg==",
+      "version": "0.11.4",
+      "resolved": "https://registry.npmjs.org/chrome-har/-/chrome-har-0.11.4.tgz",
+      "integrity": "sha512-RfL1csMqwXbWqIgR7B6FgR5T+DgzHGoW/LUT7dlKB4EooIGojvDrttOeL9kBlwe/IUEV9qh1CNgC4cnTwBJlEA==",
       "requires": {
         "dayjs": "1.7.7",
         "debug": "3.1.0",
