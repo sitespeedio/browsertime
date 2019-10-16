@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 6.1.4 - 2019-10-16
+### Fixed
+* Upgraded to Geckodriver 0.26.0.
+
 ## 6.1.3 - 2019-10-07
 ### Fixed
 * Upgraded to Yargs 14.2.0 that makes it possible to extend configurations in multiple steps (old version only supported one step and was broken for multiple steps).
