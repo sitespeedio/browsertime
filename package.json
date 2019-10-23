@@ -63,6 +63,9 @@
     "package.json",
     "vendor"
   ],
+  "publishConfig": {		
+    "tag": "canary"		
+  },
   "main": "index.js",
   "scripts": {
     "test": "mocha test/unitTests test/browserTests test/commandTests",
