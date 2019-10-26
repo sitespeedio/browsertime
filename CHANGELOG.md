@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 7.0.0-alpha.3 - UNRELEASED
+### Fixed
+* Rollback the latest Firefox and added back the ipv6 change.
+
 ## 7.0.0-alpha.2 - 2019-10-26
 ### Fixed
 * Hide sudo log when using Docker [#971](https://github.com/sitespeedio/browsertime/pull/971).
