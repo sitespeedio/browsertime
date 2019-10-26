@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+## 7.0.0-alpha.2 - UNRELEASED
+### Fixed
+* Hide sudo log when using Docker [#971](https://github.com/sitespeedio/browsertime/pull/971).
+* Rollbacked some Firefox settings to check how they impact performance [#972](https://github.com/sitespeedio/browsertime/pull/972).
+
 ## 7.0.0-alpha.1 - 2019-10-23
 ### Changed
 * Finally there's a fix for that the Docker container run Browsertime as root, generating otput owned by root as in [#1459](https://github.com/sitespeedio/sitespeed.io/issues/1459). The fix by [Mason Malone](https://github.com/MasonM) pickup the user of the output directory and uses that user. Thank you again [Mason Malone](https://github.com/MasonM) for the PR, originally in sitespeed.io [#2710](https://github.com/sitespeedio/sitespeed.io/pull/2710) and moved here [#964](https://github.com/sitespeedio/browsertime/pull/964).
