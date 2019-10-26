@@ -1,9 +1,12 @@
 # Browsertime changelog
 
-## 7.0.0-alpha.2 - UNRELEASED
+## 7.0.0-alpha.2 - 2019-10-26
 ### Fixed
 * Hide sudo log when using Docker [#971](https://github.com/sitespeedio/browsertime/pull/971).
 * Rollbacked some Firefox settings to check how they impact performance [#972](https://github.com/sitespeedio/browsertime/pull/972).
+
+### Added
+* A new way to set variance on your connectivity. Let us try this out and get back about later on [#973](https://github.com/sitespeedio/browsertime/pull/973).
 
 ## 7.0.0-alpha.1 - 2019-10-23
 ### Changed
