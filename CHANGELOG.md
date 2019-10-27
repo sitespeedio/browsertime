@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## 7.0.0-alpha.3 - UNRELEASED
+## 7.0.0-alpha.3 - 2019-10-27
 ### Fixed
 * Rollback the latest Firefox and added back the ipv6 change.
 
