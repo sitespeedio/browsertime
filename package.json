@@ -1,6 +1,6 @@
 {
   "description": "Browsertime",
-  "version": "7.0.0-alpha.3",
+  "version": "7.0.0-alpha.4",
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "@sitespeed.io/throttle": "0.5.4",
