@@ -1,8 +1,13 @@
 # Browsertime changelog
 
 ## 7.0.0-alpha.4 - 2019-10-28
-#### Added
+### Added
 * Added Contentful speed index is a new SI metric developed by Bas Schouten at Mozilla which uses edge detection to calculate the amount of "content" that is visible on each frame, thank you [dpalmeiro](https://github.com/dpalmeiro) for the PR [#976](https://github.com/sitespeedio/browsertime/pull/976).
+
+### Fixed
+* Reverted and remove the ipv6 change for FF.
+* We want to know what caused the FF regression in first visual change and we think the removal of data:text/html;charset=utf-8, as a start page could have casued it, so we rollback that change.
+
 
 ## 7.0.0-alpha.3 - 2019-10-27
 ### Fixed
