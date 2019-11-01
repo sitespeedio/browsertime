@@ -10,6 +10,7 @@
     "chrome-har": "0.11.4",
     "chrome-remote-interface": "0.28.0",
     "dayjs": "1.8.15",
+    "del": "4.1.1",
     "execa": "2.0.4",
     "fast-stats": "0.0.5",
     "find-up": "4.1.0",
