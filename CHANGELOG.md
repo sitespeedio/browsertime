@@ -1,44 +1,24 @@
 # Browsertime changelog
 
-## UNRELEASED
-### Fixed
-* Some URLs failed because of that the document.title was an image, as reported in [#979](https://github.com/sitespeedio/browsertime/issues/979) and fixed in [#980](https://github.com/sitespeedio/browsertime/pull/980).
+## 7.0.0-beta.1 - 2019-11-01
 
-## 7.0.0-alpha.4 - 2019-10-28
-### Added
-* Added Contentful speed index is a new SI metric developed by Bas Schouten at Mozilla which uses edge detection to calculate the amount of "content" that is visible on each frame, thank you [dpalmeiro](https://github.com/dpalmeiro) for the PR [#976](https://github.com/sitespeedio/browsertime/pull/976).
-
-### Fixed
-* Reverted and remove the ipv6 change for FF.
-* We want to know what caused the FF regression in first visual change and we think the removal of data:text/html;charset=utf-8, as a start page could have casued it, so we rollback that change.
-
-
-## 7.0.0-alpha.3 - 2019-10-27
-### Fixed
-* Rollback the latest Firefox and added back the ipv6 change.
-
-## 7.0.0-alpha.2 - 2019-10-26
-### Fixed
-* Hide sudo log when using Docker [#971](https://github.com/sitespeedio/browsertime/pull/971).
-* Rollbacked some Firefox settings to check how they impact performance [#972](https://github.com/sitespeedio/browsertime/pull/972).
-
-### Added
-* A new way to set variance on your connectivity. Let us try this out and get back about later on [#973](https://github.com/sitespeedio/browsertime/pull/973).
-
-## 7.0.0-alpha.1 - 2019-10-23
 ### Changed
 * Finally there's a fix for that the Docker container run Browsertime as root, generating otput owned by root as in [#1459](https://github.com/sitespeedio/sitespeed.io/issues/1459). The fix by [Mason Malone](https://github.com/MasonM) pickup the user of the output directory and uses that user. Thank you again [Mason Malone](https://github.com/MasonM) for the PR, originally in sitespeed.io [#2710](https://github.com/sitespeedio/sitespeed.io/pull/2710) and moved here [#964](https://github.com/sitespeedio/browsertime/pull/964).
-
-* Removed to start the browser with data:text/html;charset=utf-8 since Chrome now works without it [#966](https://github.com/sitespeedio/browsertime/pull/966)
-
 * Changed a couple of Firefox settings to follow the Mozilla teams downstream version [#965](https://github.com/sitespeedio/browsertime/pull/965).
 
+### Added
+* Added Contentful speed index is a new SI metric developed by Bas Schouten at Mozilla which uses edge detection to calculate the amount of "content" that is visible on each frame, thank you [dpalmeiro](https://github.com/dpalmeiro) for the PR [#976](https://github.com/sitespeedio/browsertime/pull/976).
+* Firefox 67 and above has a built-in window recorder ([bug 1536174](https://bugzilla.mozilla.org/show_bug.cgi?id=1536174)) that is able to dump PNG images of each frame that is painted to the window. This can be enabled and disabled in the browser console, or through the chrome context with selenium webdriver.
+This PR introduces a new privileged API that is able to execute JS in the chrome context, as well as support for generating a variable rate MP4 using the output images from the window recorder. The motivation for this work was to introduce a low-overhead video recorder that will not introduce performance disturbances during page loads. Thank you [dpalmeiro](https://github.com/dpalmeiro) for the PR [#978](https://github.com/sitespeedio/browsertime/pull/978).
+* There's a new way to set variance on your connectivity. At the moment you can only do that when you are using Throttle as engine. You can try it out with `--connectivity.variance 2` - that means the latency will have a variance of 2% between runs. Let us try this out and get back about later on [#973](https://github.com/sitespeedio/browsertime/pull/973).
+* Chrome/Chromedriver 78 and Firefox 70.
+
 ### Fixed
+* Some URLs failed because of that the document.title was an image, as reported in [#979](https://github.com/sitespeedio/browsertime/issues/979) and fixed in [#980](https://github.com/sitespeedio/browsertime/pull/980).
+* Hide sudo log when using Docker [#971](https://github.com/sitespeedio/browsertime/pull/971).
 * Better log message if the Browser fails to start, thank you [Mason Malone](https://github.com/MasonM) for the PR [#962](https://github.com/sitespeedio/browsertime/pull/962).
 * Make it possible to turn off video/visualMetrics using config json in Docker [#967](https://github.com/sitespeedio/browsertime/pull/967).
 
-### Added
-* Chrome/Chromedriver 78 and Firefox 70.
 
 ## 6.1.4 - 2019-10-16
 ### Fixed
