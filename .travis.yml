@@ -55,8 +55,7 @@ install:
 script:
   - ./vendor/visualmetrics.py --check
   - npm run travis
-  - node ./bin/browsertime.js -b firefox -n 2 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine
-    throttle
+  - node ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle 
   - node ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value --chrome.CPUThrottlingRate 2 --chrome.cdp.performance https://www.sitespeed.io/documentation/
   - node ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --video --screenshot --connectivity.engine tsproxy -c cable
     --visualMetrics -n 1 --chrome.timeline --videoParams.fontPath /usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-R.ttf --visualElements --chrome.collectLongTasks https://www.sitespeed.io/
