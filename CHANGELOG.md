@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+## 7.0.1 - 2019-11-07
+### Fixed
+* There was a bug how we handled data from postScript that made using axe in sitespeed.io in a script, testing multiple URLs fail. Fixed in [#985](https://github.com/sitespeedio/browsertime/pull/985)
+
+
 ## 7.0.0 - 2019-11-02
 
 ### Changed
@@ -182,7 +187,7 @@ This PR introduces a new privileged API that is able to execute JS in the chrome
 ### Fixed
 * The --enableTraceScreenshots should also work under --chrome.enableTraceScreenshots.
 * Updated Tracium to catch error that happens running tests on Wikipedia.
-
+t,
 ## 5.2.2 - 2019-06-11
 ### Fixed
 * For a while we will run our own version of Tracium that doesn't throw errors if the events in the trace log doesn't follow Traciums standard [#856](https://github.com/sitespeedio/browsertime/pull/856).
