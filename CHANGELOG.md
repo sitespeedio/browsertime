@@ -1,9 +1,13 @@
 # Browsertime changelog
 
+## 7.0.2 - 2019-11-13
+### Fixed
+* Use CDP to get Chrome name and version (instead of JS). This gives us the Chromee version used when running emulated mobile [#988](https://github.com/sitespeedio/browsertime/pull/988).
+* Add a HTML body of the first test page (that becomes orange) when we test with `--spa` [#987](https://github.com/sitespeedio/browsertime/pull/987).
+	
 ## 7.0.1 - 2019-11-07
 ### Fixed
 * There was a bug how we handled data from postScript that made using axe in sitespeed.io in a script, testing multiple URLs fail. Fixed in [#985](https://github.com/sitespeedio/browsertime/pull/985)
-
 
 ## 7.0.0 - 2019-11-02
 
