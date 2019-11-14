@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 7.1.0 -  2019-11-14
+### Added
+* Added Total Blocking Time (ttb) and maxPotentailFid in [#990](https://github.com/sitespeedio/browsertime/pull/990). This only works in Chrome at the moment, enable wiith `--cpu`.
+
 ## 7.0.2 - 2019-11-13
 ### Fixed
 * Use CDP to get Chrome name and version (instead of JS). This gives us the Chromee version used when running emulated mobile [#988](https://github.com/sitespeedio/browsertime/pull/988).
@@ -80,7 +84,6 @@ This PR introduces a new privileged API that is able to execute JS in the chrome
 
 * Limited support to run Safari on iOS and OS X. To run on iOS you need iOS 13 and Mac OS Catalina. At the moment you get Navigation Timing and Resource Timing metrics. In the future lets hope we can add more metrics [#872](https://github.com/sitespeedio/browsertime/pull/872).
 * Collect element timings for Chrome [#921](https://github.com/sitespeedio/browsertime/pull/921). All elements needs to have a unique identifier for this to work correctly.
-* Upgraded to Ubuntu Disco in the Docker container [#908](https://github.com/sitespeedio/browsertime/pull/908).
 * Use Chromedriver 77 and Chrome 77.
 * Use [TSProxy](https://github.com/WPO-Foundation/tsproxy) to throttle the connection. You should use TSProxy when you run on Kubernetes. Use it by `--connectivity.engine tsproxy`. We used to have support years ago but it never worked good on Mac/Linux so we dropped it. But it works better now so we added it back [#891](https://github.com/sitespeedio/browsertime/pull/891).
 * Using Chrome 77 (or later) you will now get a layout shift score (in percentage), see https://web.dev/layout-instability-api. [#905](https://github.com/sitespeedio/browsertime/pull/905).
