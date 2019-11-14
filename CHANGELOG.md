@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Added
+* Get phone and Android version from the phone [#991](https://github.com/sitespeedio/browsertime/pull/991).
+
 ## 7.1.0 -  2019-11-14
 ### Added
 * Added Total Blocking Time (ttb) and maxPotentailFid in [#990](https://github.com/sitespeedio/browsertime/pull/990). This only works in Chrome at the moment, enable wiith `--cpu`.
