@@ -4,6 +4,10 @@
 ### Added
 * Get phone and Android version from the phone [#991](https://github.com/sitespeedio/browsertime/pull/991).
 
+### Fixed
+* Take care of the case when a page overwrites the document.URL [#992](https://github.com/sitespeedio/browsertime/pull/992).
+
+
 ## 7.1.0 -  2019-11-14
 ### Added
 * Added Total Blocking Time (ttb) and maxPotentailFid in [#990](https://github.com/sitespeedio/browsertime/pull/990). This only works in Chrome at the moment, enable wiith `--cpu`.
@@ -12,7 +16,7 @@
 ### Fixed
 * Use CDP to get Chrome name and version (instead of JS). This gives us the Chromee version used when running emulated mobile [#988](https://github.com/sitespeedio/browsertime/pull/988).
 * Add a HTML body of the first test page (that becomes orange) when we test with `--spa` [#987](https://github.com/sitespeedio/browsertime/pull/987).
-	
+
 ## 7.0.1 - 2019-11-07
 ### Fixed
 * There was a bug how we handled data from postScript that made using axe in sitespeed.io in a script, testing multiple URLs fail. Fixed in [#985](https://github.com/sitespeedio/browsertime/pull/985)
