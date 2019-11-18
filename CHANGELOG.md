@@ -6,7 +6,7 @@
 
 ### Fixed
 * Take care of the case when a page overwrites the document.URL [#992](https://github.com/sitespeedio/browsertime/pull/992).
-
+* Stop the video recording when the test finished and not after we collected all JavaScript metrics [#994](https://github.com/sitespeedio/browsertime/pull/994).
 
 ## 7.1.0 -  2019-11-14
 ### Added
