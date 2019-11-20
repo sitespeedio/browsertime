@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## UNRELEASED
+##  7.2.0 - UNRELEASED
 ### Added
 * Get phone and Android version from the phone [#991](https://github.com/sitespeedio/browsertime/pull/991).
 
