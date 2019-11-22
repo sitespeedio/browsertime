@@ -1,8 +1,9 @@
 # Browsertime changelog
 
-##  7.2.1 - 2019-11-22
+##  7.2.2 - 2019-11-22
 ### Fixed
 * There was a bug introduced in 7.0.0 that made navigation fail on Safari [#997](https://github.com/sitespeedio/browsertime/pull/997).
+* NPM was broken for 7.2.1
 
 ##  7.2.0 - 2019-11-22
 ### Added
