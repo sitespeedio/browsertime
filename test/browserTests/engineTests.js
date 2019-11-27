@@ -107,7 +107,8 @@ describe('Engine', function() {
         engine = new Engine({
           browser: browser,
           iterations: 1,
-          skipHar: true
+          skipHar: true,
+          headless: true
         });
         return engine.start();
       });
@@ -189,7 +190,8 @@ describe('Engine', function() {
           iterations: 1,
           skipHar: true,
           preTask: loadTaskFile('preSample.js'),
-          postTask: [loadTaskFile('postSample.js')]
+          postTask: [loadTaskFile('postSample.js')],
+          headless: true
         });
         return engine.start();
       });
@@ -219,7 +221,8 @@ describe('Engine', function() {
           iterations: 1,
           pageCompleteCheck:
             'return (function() { try { var end = window.performance.timing.loadEventEnd; return (end > 0) && (Date.now() > end + 5000); } catch(e) { return true; }})();',
-          skipHar: true
+          skipHar: true,
+          headless: true
         });
         return engine.start();
       });
@@ -248,7 +251,8 @@ describe('Engine', function() {
           browser: browser,
           iterations: 1,
           pageCompleteCheck: 'test/pagecompletescripts/pageComplete10sec.js',
-          skipHar: true
+          skipHar: true,
+          headless: true
         });
         return engine.start();
       });

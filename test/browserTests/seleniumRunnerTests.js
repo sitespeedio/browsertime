@@ -44,7 +44,8 @@ describe('SeleniumRunner', function() {
           chrome: {
             args: '--crash-test'
           },
-          verbose: true
+          verbose: true,
+          headless: true
         });
 
         // Wait for session to actually have Chrome start up.
@@ -65,7 +66,8 @@ describe('SeleniumRunner', function() {
             scripts: 5000,
             pageLoad: 10000,
             pageCompleteCheck: 5000
-          }
+          },
+          headless: true
         });
         return runner.start();
       });
@@ -186,7 +188,8 @@ describe('SeleniumRunner', function() {
             scripts: 5000,
             pageLoad: 10000,
             pageCompleteCheck: 10000
-          }
+          },
+          headless: true
         });
         return runner.start().then(function() {
           return runner.loadAndWait('data:text/html;charset=utf-8,');
