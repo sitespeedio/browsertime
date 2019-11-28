@@ -1,12 +1,13 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 7.3.0 - 2019-11-28
 ### Added
 * Collect number of DOM elements as a part of the page info for each run [#1000](https://github.com/sitespeedio/browsertime/pull/1000).
 * Configure how often to check for the pageCompleteCheck. Default is every 200 ms, and it happens after the load event end (using the default pageLoadStrategy). Set it with `--pageCompleteCheckPollTimeout`(value in ms) [#998](https://github.com/sitespeedio/browsertime/pull/998).
 
 ### Fixed
 * Added missing pageLoadStrategy option in the CLI. The option worked but no visible cli help for it [#1001](https://github.com/sitespeedio/browsertime/pull/1001).
+* Do not load the Browsertime WebExtention for Chrome (it is not used anymore) and make it possible for Firefox to disable to use it with `--firefox.disableBrowsertimeExtension`. 
 
 ##  7.2.2 - 2019-11-22
 ### Fixed
