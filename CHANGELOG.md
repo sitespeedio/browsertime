@@ -1,4 +1,7 @@
 # Browsertime changelog
+## UNRELEASED
+### Added
+* Added configurable settle time for the browser to rest after the browser is open and before the tests starts to run. Use `--timeToSettle` in ms [#1003](https://github.com/sitespeedio/browsertime/pull/1003).
 
 ## 7.3.0 - 2019-11-28
 ### Added
