@@ -13,7 +13,8 @@
       name: entry.name,
       processingEnd: Number(entry.processingEnd.toFixed(0)),
       processingStart: Number(entry.processingStart.toFixed(0)),
-      startTime: Number(entry.startTime.toFixed(0))
+      startTime: Number(entry.startTime.toFixed(0)),
+      delay: Number((entry.processingStart - entry.startTime).toFixed(1))
     };
   } else return;
 })();
