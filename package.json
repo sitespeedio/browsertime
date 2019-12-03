@@ -31,7 +31,6 @@
     "@sitespeed.io/geckodriver": "0.26.0",
     "@sitespeed.io/tracium": "0.3.3",
     "speedline-core": "1.4.2",
-    "valid-url": "1.0.9",
     "@cypress/xvfb": "1.2.4",
     "yargs": "14.2.0"
   },
