@@ -1,5 +1,10 @@
 # Browsertime changelog
-## 7.34.0 - 2019-12-04
+
+## 7.4.1 - UNRELEASED
+### Fixed
+* A better fix for handling Arabic characters in the URL [#1012](https://github.com/sitespeedio/browsertime/pull/1012).
+
+## 7.4.0 - 2019-12-04
 ### Added
 * Added configurable settle time for the browser to rest after the browser is open and before the tests starts to run. Use `--timeToSettle` in ms [#1003](https://github.com/sitespeedio/browsertime/pull/1003).
 * Calculate FID instead of just report it [#1005](https://github.com/sitespeedio/browsertime/pull/1005)
