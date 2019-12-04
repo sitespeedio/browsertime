@@ -1463,32 +1463,37 @@ def calculate_speed_index(progress):
     return int(si)
 
 def calculate_contentful_speed_index(progress, directory):
-    dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
-    content = []
-    maxContent=0
-    for p in progress[1:]:
-        # Full Path of the Current Frame
-        current_frame = os.path.join(dir, "ms_{0:06d}.png".format(p["time"]))
-        logging.debug("contentfulSpeedIndex: Current Image is %s" % current_frame)
-        # Takes full path of PNG frames to compute contentfulness value
-        command = '{0} {1} -canny 2x2+8%+8% -define histogram:unique-colors=true -format %c histogram:info:-'.format(
-            image_magick['convert'], current_frame)
-        output = subprocess.check_output(command, shell=True)
-        value  = int(output.split()[7].split(':')[0])
-        if value > maxContent:
-            maxContent = value
-        content.append(value)
+    try:
+        dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
+        content = []
+        maxContent=0
+        for p in progress[1:]:
+            # Full Path of the Current Frame
+            current_frame = os.path.join(dir, "ms_{0:06d}.png".format(p["time"]))
+            logging.debug("contentfulSpeedIndex: Current Image is %s" % current_frame)
+            # Takes full path of PNG frames to compute contentfulness value
+            command = '{0} {1} -canny 2x2+8%+8% -define histogram:unique-colors=true -format %c histogram:info:-'.format(
+                image_magick['convert'], current_frame)
+            output = subprocess.check_output(command, shell=True)
+            logging.debug("Output %s" % output)
+            value  = int(output.split()[7].split(':')[0])
+            if value > maxContent:
+                maxContent = value
+            content.append(value)
 
-    for i,value in enumerate(content):
-        content[i] = float(content[i]) / float(maxContent)
+        for i,value in enumerate(content):
+            content[i] = float(content[i]) / float(maxContent)
 
-    # Assume 0 content for first frame
-    cont_si = 1 * (progress[1]['time'] - progress[0]['time'])
-    for i in xrange(1,len(progress)-1):
-        elapsed = progress[i+1]['time'] - progress[i]['time']
-        #print i,' time =',p['time'],'elapsed =',elapsed,'content = ',content[i]
-        cont_si += elapsed * (1.0 - content[i])
-    return int(cont_si)
+        # Assume 0 content for first frame
+        cont_si = 1 * (progress[1]['time'] - progress[0]['time'])
+        for i in xrange(1,len(progress)-1):
+            elapsed = progress[i+1]['time'] - progress[i]['time']
+            #print i,' time =',p['time'],'elapsed =',elapsed,'content = ',content[i]
+            cont_si += elapsed * (1.0 - content[i])
+        return int(cont_si)
+    except Exception as e:
+        logging.exception(e)
+        return -1
 
 def calculate_perceptual_speed_index(progress, directory):
     from ssim import compute_ssim
