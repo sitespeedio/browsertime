@@ -1,8 +1,9 @@
 # Browsertime changelog
 
-## 7.4.1 - UNRELEASED
+## 7.4.1 - 2019-12-04
 ### Fixed
 * A better fix for handling Arabic characters in the URL [#1012](https://github.com/sitespeedio/browsertime/pull/1012).
+* Catch if Contentful Speed Index fails [#1014](https://github.com/sitespeedio/browsertime/pull/1014) 
 
 ## 7.4.0 - 2019-12-04
 ### Added
