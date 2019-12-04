@@ -3,11 +3,13 @@
 ### Added
 * Added configurable settle time for the browser to rest after the browser is open and before the tests starts to run. Use `--timeToSettle` in ms [#1003](https://github.com/sitespeedio/browsertime/pull/1003).
 * Calculate FID instead of just report it [#1005](https://github.com/sitespeedio/browsertime/pull/1005)
+* You can now run ADB shell directly from your user script [#1007](https://github.com/sitespeedio/browsertime/pull/1007). Use `commands.android.shell('')`.
 
 ### Fixed
 * Arabic characters didn't work in the URL, fixed in [#1009](https://github.com/sitespeedio/browsertime/pull/1009).
 * Remove and simplify old code when running with pageLoadStrategy none. Introducing `--pageCompleteCheckStartWait` - The time in ms to wait for running the page complete check for the first time. Use this when you have a pageLoadStrategy set to none. [#1008](https://github.com/sitespeedio/browsertime/pull/1008)
 * Better guards when calculating Visual Metrics [#1006](https://github.com/sitespeedio/browsertime/pull/1006).
+* Fix for the using the Window recorder in Firefox 72. Thank you [Barret Rennie](https://github.com/brennie) for the PR [#995](https://github.com/sitespeedio/browsertime/pull/995).
 
 ## 7.3.0 - 2019-11-28
 ### Added
