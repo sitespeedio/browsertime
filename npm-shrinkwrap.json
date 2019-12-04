@@ -7033,11 +7033,6 @@
       "integrity": "sha512-usZBT3PW+LOjM25wbqIlZwPeJV+3OSz3M1k1Ws8snlW39dZyYL9lOGC5FgPVHfk0jKmjiDV8Z0mIbVQPiwFs7g==",
       "dev": true
     },
-    "valid-url": {
-      "version": "1.0.9",
-      "resolved": "https://registry.npmjs.org/valid-url/-/valid-url-1.0.9.tgz",
-      "integrity": "sha1-HBRHm0DxOXp1eC8RXkCGRHQzogA="
-    },
     "validate-npm-package-license": {
       "version": "3.0.4",
       "resolved": "https://registry.npmjs.org/validate-npm-package-license/-/validate-npm-package-license-3.0.4.tgz",
