@@ -1,4 +1,10 @@
 # Browsertime changelog
+
+## 7.5.0 - 2019-12-06
+### Added
+* Added Firefox 71 in the Docker container.
+* Added Firefox preferences from the Mozilla Performance Team to get as stable metrics as possible. Enable it with `--firefox.mozillaProPreferences` [#1016](https://github.com/sitespeedio/browsertime/pull/1016).
+
 ## 7.4.2 - 2019-12-05
 ### Fixed
 * Fix so that your own metrics (added by `measure.add` live in the same namespace (extras) both per run and in the statistics [#1015](https://github.com/sitespeedio/browsertime/pull/1015).
