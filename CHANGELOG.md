@@ -1,4 +1,7 @@
 # Browsertime changelog
+## UNRELEASED
+### Added
+* Disable safe browsing per default for Firefox. Enable it with `--firefox.disableSafeBrowsing false`[#1029](https://github.com/sitespeedio/browsertime/pull/1019).
 
 ## 7.5.0 - 2019-12-06
 ### Added
