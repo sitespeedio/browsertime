@@ -1,7 +1,8 @@
 # Browsertime changelog
-## UNRELEASED
+## 7.6.0 - 2019-12-07
 ### Added
 * Disable safe browsing per default for Firefox. Enable it with `--firefox.disableSafeBrowsing false`[#1029](https://github.com/sitespeedio/browsertime/pull/1019).
+* Disable traffic to detect portal for Firefox when you use `--firefox.mozillaProPreferences` [#1202](https://github.com/sitespeedio/browsertime/pull/1020).
 
 ## 7.5.0 - 2019-12-06
 ### Added
