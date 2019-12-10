@@ -1,4 +1,8 @@
 # Browsertime changelog
+## 7.6.1 - 2019-12-10
+### Fixed
+* Disable password save popup in Chrome [#1022](https://github.com/sitespeedio/browsertime/pull/1022). When we removed the Browsertime extension for Chrome, the save popup was added again.
+
 ## 7.6.0 - 2019-12-07
 ### Added
 * Disable safe browsing per default for Firefox. Enable it with `--firefox.disableSafeBrowsing false`[#1029](https://github.com/sitespeedio/browsertime/pull/1019).
