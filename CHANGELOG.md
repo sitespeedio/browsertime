@@ -1,4 +1,9 @@
 # Browsertime changelog
+
+## 7.7.0 - 2019-12-11
+### Added
+* Upgraded to Chrome and Chromedriver 79 [#1025](https://github.com/sitespeedio/browsertime/pull/1025).
+
 ## 7.6.1 - 2019-12-10
 ### Fixed
 * Disable password save popup in Chrome [#1022](https://github.com/sitespeedio/browsertime/pull/1022). When we removed the Browsertime extension for Chrome, the save popup was added again.
@@ -20,7 +25,7 @@
 ## 7.4.1 - 2019-12-04
 ### Fixed
 * A better fix for handling Arabic characters in the URL [#1012](https://github.com/sitespeedio/browsertime/pull/1012).
-* Catch if Contentful Speed Index fails [#1014](https://github.com/sitespeedio/browsertime/pull/1014) 
+* Catch if Contentful Speed Index fails [#1014](https://github.com/sitespeedio/browsertime/pull/1014)
 
 ## 7.4.0 - 2019-12-04
 ### Added
@@ -42,7 +47,7 @@
 
 ### Fixed
 * Added missing pageLoadStrategy option in the CLI. The option worked but no visible cli help for it [#1001](https://github.com/sitespeedio/browsertime/pull/1001).
-* Do not load the Browsertime WebExtention for Chrome (it is not used anymore) and make it possible for Firefox to disable to use it with `--firefox.disableBrowsertimeExtension`. 
+* Do not load the Browsertime WebExtention for Chrome (it is not used anymore) and make it possible for Firefox to disable to use it with `--firefox.disableBrowsertimeExtension`.
 
 ##  7.2.2 - 2019-11-22
 ### Fixed
