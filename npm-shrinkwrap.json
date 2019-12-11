@@ -88,9 +88,9 @@
       "integrity": "sha512-9NET910DNaIPngYnLLPeg+Ogzqsi9uM4mSboU5y6p8S5DzMTVEsJZrawi+BoDNUVBa2DhJqQYUFvMDfgU062LQ=="
     },
     "@sitespeed.io/chromedriver": {
-      "version": "78.0.3904-70",
-      "resolved": "https://registry.npmjs.org/@sitespeed.io/chromedriver/-/chromedriver-78.0.3904-70.tgz",
-      "integrity": "sha512-RptxGMy1UKlzLrbddswWcBTbdF3Is0v2wGvNVha8qWVZZLoNUzgD7lU2iwDh/2ncRt8rmzIJKNgb/NrZAQDfkw==",
+      "version": "79.0.3945-36",
+      "resolved": "https://registry.npmjs.org/@sitespeed.io/chromedriver/-/chromedriver-79.0.3945-36.tgz",
+      "integrity": "sha512-DNj5UWSWnc9M+uNj9hi6Kvc1UqScBrLv4qttJ99oX9xwNksqyLsPXbdzWdoYJyUzUERK51PPrGrWfQ8D+QeS8Q==",
       "requires": {
         "node-downloader-helper": "1.0.10",
         "node-stream-zip": "1.8.0"
