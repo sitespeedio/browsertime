@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 7.7.1 - 2019-12-12
+### Fixed
+* Catch when Visual Elements fails in Visual Metrics [#1026](https://github.com/sitespeedio/browsertime/pull/1026).
+
 ## 7.7.0 - 2019-12-11
 ### Added
 * Upgraded to Chrome and Chromedriver 79 [#1025](https://github.com/sitespeedio/browsertime/pull/1025).
