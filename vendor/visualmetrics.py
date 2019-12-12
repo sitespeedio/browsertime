@@ -1525,6 +1525,7 @@ def calculate_perceptual_speed_index(progress, directory):
 
 
 def calculate_hero_time(progress, directory, hero, viewport):
+  try:
     dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
     n = len(progress)
     target_frame = os.path.join(dir, 'ms_{0:06d}'.format(progress[n - 1]['time']))
@@ -1605,6 +1606,9 @@ def calculate_hero_time(progress, directory, hero, viewport):
         cleanup()
 
     return None
+  except Exception as e:
+        logging.exception(e)
+        return None
 
 
 ##########################################################################
