@@ -34,11 +34,6 @@
     "@cypress/xvfb": "1.2.4",
     "yargs": "14.2.0"
   },
-  "optionalDependencies": {
-    "@sitespeed.io/chromedriver": "74.0.372-9.6-1",
-    "@sitespeed.io/geckodriver": "0.24.0",
-    "sharp": "0.22.1"
-  },
   "devDependencies": {
     "bluebird": "3.5.5",
     "chai": "4.2.0",
