@@ -2,10 +2,8 @@
 """
 Copyright (c) 2014, Google Inc.
 All rights reserved.
-
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
-
     * Redistributions of source code must retain the above copyright notice,
       this list of conditions and the following disclaimer.
     * Redistributions in binary form must reproduce the above copyright notice,
@@ -14,7 +12,6 @@ are permitted provided that the following conditions are met:
     * Neither the name of the company nor the names of its contributors may be
       used to endorse or promote products derived from this software without
       specific prior written permission.
-
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -412,14 +409,13 @@ def adjust_frame_times(directory):
     global videoRecordingStart
     match = re.compile(r'video-(?P<ms>[0-9]+)\.png')
     if len(frames):
-        msFromFirstFrame = re.search(match, frames[0])
-        videoRecordingStart = int(msFromFirstFrame.groupdict().get('ms'))
-        #match = re.compile(r'video-(?P<ms>[0-9]+)\.png')
         for frame in frames:
             m = re.search(match, frame)
             if m is not None:
                 frame_time = int(m.groupdict().get('ms'))
                 if offset is None:
+                    # This is the first frame.
+                    videoRecordingStart = frame_time
                     offset = frame_time
                 new_time = frame_time - offset
                 dest = os.path.join(
@@ -1317,11 +1313,28 @@ def calculate_visual_metrics(histograms_file, start, end, perceptual, contentful
                  'value': calculate_speed_index(progress)}
             ]
             if perceptual:
-                metrics.append({'name': 'Perceptual Speed Index',
-                                'value': calculate_perceptual_speed_index(progress, dirs)})
+                value, value_progress = calculate_perceptual_speed_index(progress, dirs)
+                metrics.extend((
+                        {
+                            'name': 'Perceptual Speed Index',
+                            'value': value
+                        },
+                        {
+                            'name': 'Perceptual Speed Index Progress',
+                            'value': value_progress
+                        }))
             if contentful:
-                metrics.append({'name': 'Contentful Speed Index',
-                                'value': calculate_contentful_speed_index(progress, dirs)})
+                value, value_progress = calculate_contentful_speed_index(progress, dirs)
+
+                metrics.extend((
+                        {
+                            'name': 'Contentful Speed Index',
+                            'value': value
+                        },
+                        {
+                            'name': 'Contentful Speed Index Progress',
+                            'value': value_progress
+                        }))
             if hero_elements_file is not None and os.path.isfile(hero_elements_file):
                 logging.debug('Calculating hero element times')
                 hero_data = None
@@ -1369,7 +1382,7 @@ def calculate_visual_metrics(histograms_file, start, end, perceptual, contentful
         for p in progress:
             if len(prog):
                 prog += ", "
-            prog += '{0:d}={1:d}%'.format(p['time'], int(p['progress']))
+            prog += '{0:d}={1:d}'.format(p['time'], int(p['progress']))
         metrics.append({'name': 'Visual Progress', 'value': prog})
 
     return metrics
@@ -1486,11 +1499,20 @@ def calculate_contentful_speed_index(progress, directory):
 
         # Assume 0 content for first frame
         cont_si = 1 * (progress[1]['time'] - progress[0]['time'])
+        completeness_value = [(progress[1]['time'], int(cont_si))]
         for i in xrange(1,len(progress)-1):
             elapsed = progress[i+1]['time'] - progress[i]['time']
             #print i,' time =',p['time'],'elapsed =',elapsed,'content = ',content[i]
             cont_si += elapsed * (1.0 - content[i])
-        return int(cont_si)
+            completeness_value.append((progress[i+1]['time'], int(cont_si)))
+
+        cont_si = int(cont_si)
+        raw_progress_value = ["0=0"]
+        for timestamp, percent in completeness_value:
+            p = int(100 * float(percent) / float(cont_si))
+            raw_progress_value.append('%d=%d' % (timestamp, p))
+
+        return cont_si, ", ".join(raw_progress_value)
     except Exception as e:
         logging.exception(e)
         return -1
@@ -1510,6 +1532,7 @@ def calculate_perceptual_speed_index(progress, directory):
     # Full Path of the Target Frame
     logging.debug("Target image for perSI is %s" % target_frame)
     ssim = ssim_1
+    completeness_value = []
     for p in progress[1:]:
         elapsed = p['time'] - last_ms
         # print '*******elapsed %f'%elapsed
@@ -1521,11 +1544,18 @@ def calculate_perceptual_speed_index(progress, directory):
         ssim = compute_ssim(current_frame, target_frame)
         gc.collect()
         last_ms = p['time']
-    return int(per_si)
+        completeness_value.append((p['time'], int(per_si)))
+
+    per_si = int(per_si)
+    raw_progress_value = ["0=0"]
+    for timestamp, percent in completeness_value:
+        p = int(100 * float(percent) / float(per_si))
+        raw_progress_value.append('%d=%d' % (timestamp, p))
+
+    return per_si, ", ".join(raw_progress_value)
 
 
 def calculate_hero_time(progress, directory, hero, viewport):
-  try:
     dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
     n = len(progress)
     target_frame = os.path.join(dir, 'ms_{0:06d}'.format(progress[n - 1]['time']))
@@ -1606,9 +1636,6 @@ def calculate_hero_time(progress, directory, hero, viewport):
         cleanup()
 
     return None
-  except Exception as e:
-        logging.exception(e)
-        return None
 
 
 ##########################################################################

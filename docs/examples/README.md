@@ -6,3 +6,4 @@ All examples are under the assumption that the tool was installed via npm. If yo
 - [Advance](advance.md)
 - [Firefox](firefox.md)
 - [Chrome](chrome.md)
+- [Android](android.md)
