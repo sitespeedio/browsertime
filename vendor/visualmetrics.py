@@ -2,8 +2,10 @@
 """
 Copyright (c) 2014, Google Inc.
 All rights reserved.
+
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
+
     * Redistributions of source code must retain the above copyright notice,
       this list of conditions and the following disclaimer.
     * Redistributions in binary form must reproduce the above copyright notice,
@@ -12,6 +14,7 @@ are permitted provided that the following conditions are met:
     * Neither the name of the company nor the names of its contributors may be
       used to endorse or promote products derived from this software without
       specific prior written permission.
+
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -1556,86 +1559,90 @@ def calculate_perceptual_speed_index(progress, directory):
 
 
 def calculate_hero_time(progress, directory, hero, viewport):
-    dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
-    n = len(progress)
-    target_frame = os.path.join(dir, 'ms_{0:06d}'.format(progress[n - 1]['time']))
+    try:
+        dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
+        n = len(progress)
+        target_frame = os.path.join(dir, 'ms_{0:06d}'.format(progress[n - 1]['time']))
 
-    extension = None
-    if os.path.isfile(target_frame + '.png'):
-        extension = '.png'
-    elif os.path.isfile(target_frame + '.jpg'):
-        extension = '.jpg'
-    if extension is not None:
-        hero_width = int(hero['width'])
-        hero_height = int(hero['height'])
-        hero_x = int(hero['x'])
-        hero_y = int(hero['y'])
-        target_frame = target_frame + extension
-        logging.debug('Target image for hero %s is %s' % (hero['name'], target_frame))
+        extension = None
+        if os.path.isfile(target_frame + '.png'):
+            extension = '.png'
+        elif os.path.isfile(target_frame + '.jpg'):
+            extension = '.jpg'
+        if extension is not None:
+            hero_width = int(hero['width'])
+            hero_height = int(hero['height'])
+            hero_x = int(hero['x'])
+            hero_y = int(hero['y'])
+            target_frame = target_frame + extension
+            logging.debug('Target image for hero %s is %s' % (hero['name'], target_frame))
 
-        from PIL import Image
-        with Image.open(target_frame) as im:
-            width, height = im.size
-        if width != viewport['width']:
-            scale = float(width) / float(viewport['width'])
-            logging.debug('Frames are %dpx wide but viewport was %dpx. Scaling by %f' % (width, viewport['width'], scale))
-            hero_width = int(hero['width'] * scale)
-            hero_height = int(hero['height'] * scale)
-            hero_x = int(hero['x'] * scale)
-            hero_y = int(hero['y'] * scale)
+            from PIL import Image
+            with Image.open(target_frame) as im:
+                width, height = im.size
+            if width != viewport['width']:
+                scale = float(width) / float(viewport['width'])
+                logging.debug('Frames are %dpx wide but viewport was %dpx. Scaling by %f' % (width, viewport['width'], scale))
+                hero_width = int(hero['width'] * scale)
+                hero_height = int(hero['height'] * scale)
+                hero_x = int(hero['x'] * scale)
+                hero_y = int(hero['y'] * scale)
 
-        logging.debug('Calculating render time for hero element "%s" at position [%d, %d, %d, %d]' % (hero['name'], hero['x'], hero['y'], hero['width'], hero['height']))
+            logging.debug('Calculating render time for hero element "%s" at position [%d, %d, %d, %d]' % (hero['name'], hero['x'], hero['y'], hero['width'], hero['height']))
 
-        # Create a rectangular mask of the hero element position
-        hero_mask = os.path.join(dir, 'hero_{0}_mask.png'.format(hero['name']))
-        command = '{0} -size {1}x{2} xc:black -fill white -draw "rectangle {3},{4} {5},{6}" PNG24:"{7}"'.format(
-            image_magick['convert'], width, height, hero_x, hero_y, hero_x + hero_width, hero_y + hero_height, hero_mask)
-        subprocess.call(command, shell=True)
+            # Create a rectangular mask of the hero element position
+            hero_mask = os.path.join(dir, 'hero_{0}_mask.png'.format(hero['name']))
+            command = '{0} -size {1}x{2} xc:black -fill white -draw "rectangle {3},{4} {5},{6}" PNG24:"{7}"'.format(
+                image_magick['convert'], width, height, hero_x, hero_y, hero_x + hero_width, hero_y + hero_height, hero_mask)
+            subprocess.call(command, shell=True)
 
-        # Apply the mask to the target frame to create the reference frame
-        target_mask = os.path.join(dir, 'hero_{0}_ms_{1:06d}.png'.format(hero['name'], progress[n - 1]['time']))
-        command = '{0} {1} {2} -alpha Off -compose CopyOpacity -composite {3}'.format(
-            image_magick['convert'], target_frame, hero_mask, target_mask)
-        subprocess.call(command, shell=True)
+            # Apply the mask to the target frame to create the reference frame
+            target_mask = os.path.join(dir, 'hero_{0}_ms_{1:06d}.png'.format(hero['name'], progress[n - 1]['time']))
+            command = '{0} {1} {2} -alpha Off -compose CopyOpacity -composite {3}'.format(
+                image_magick['convert'], target_frame, hero_mask, target_mask)
+            subprocess.call(command, shell=True)
 
-        def cleanup():
-            os.remove(hero_mask)
-            if os.path.isfile(target_mask):
-                os.remove(target_mask)
+            def cleanup():
+                os.remove(hero_mask)
+                if os.path.isfile(target_mask):
+                    os.remove(target_mask)
 
-        # Allow for small differences like scrollbars and overlaid UI elements
-        # by applying a 10% fuzz and allowing for up to 2% of the pixels to be
-        # different.
-        fuzz = 10
-        max_pixel_diff = math.ceil(hero_width * hero_height * 0.02)
+            # Allow for small differences like scrollbars and overlaid UI elements
+            # by applying a 10% fuzz and allowing for up to 2% of the pixels to be
+            # different.
+            fuzz = 10
+            max_pixel_diff = math.ceil(hero_width * hero_height * 0.02)
 
-        for p in progress:
-            current_frame = os.path.join(dir, 'ms_{0:06d}'.format(p['time']))
-            extension = None
-            if os.path.isfile(current_frame + '.png'):
-                extension = '.png'
-            elif os.path.isfile(current_frame + '.jpg'):
-                extension = '.jpg'
-            if extension is not None:
-                current_mask = os.path.join(dir, 'hero_{0}_ms_{1:06d}.png'.format(hero['name'], p['time']))
-                # Apply the mask to the current frame
-                command = '{0} {1} {2} -alpha Off -compose CopyOpacity -composite {3}'.format(
-                    image_magick['convert'], current_frame + extension, hero_mask, current_mask)
-                logging.debug(command)
-                subprocess.call(command, shell=True)
-                match = frames_match(target_mask, current_mask, fuzz, max_pixel_diff, None, None)
-                # Remove each mask after using it
-                os.remove(current_mask)
+            for p in progress:
+                current_frame = os.path.join(dir, 'ms_{0:06d}'.format(p['time']))
+                extension = None
+                if os.path.isfile(current_frame + '.png'):
+                    extension = '.png'
+                elif os.path.isfile(current_frame + '.jpg'):
+                    extension = '.jpg'
+                if extension is not None:
+                    current_mask = os.path.join(dir, 'hero_{0}_ms_{1:06d}.png'.format(hero['name'], p['time']))
+                    # Apply the mask to the current frame
+                    command = '{0} {1} {2} -alpha Off -compose CopyOpacity -composite {3}'.format(
+                        image_magick['convert'], current_frame + extension, hero_mask, current_mask)
+                    logging.debug(command)
+                    subprocess.call(command, shell=True)
+                    match = frames_match(target_mask, current_mask, fuzz, max_pixel_diff, None, None)
+                    # Remove each mask after using it
+                    os.remove(current_mask)
 
-                if match:
-                    # Clean up masks as soon as a match is found
-                    cleanup()
-                    return p['time']
+                    if match:
+                        # Clean up masks as soon as a match is found
+                        cleanup()
+                        return p['time']
 
-        # No matches found; clean up masks
-        cleanup()
+            # No matches found; clean up masks
+            cleanup()
 
-    return None
+        return None
+    except Exception as e:
+        logging.exception(e)
+        return None
 
 
 ##########################################################################
