@@ -1,4 +1,8 @@
 # Browsertime changelog
+## 7.8.2 - 2019-12-16
+### Fixed
+* Fix race in SeleniumRunner#runPrivilegedAsyncScript that broke Firefox windowRecorder, thank you [Barret Rennie](https://github.com/brennie) for the PR [#1037](https://github.com/sitespeedio/browsertime/pull/1037).
+
 ## 7.8.1 - 2019-12-16
 ### Fixed
 * More sane logging if getting the HTML/body content for Chrome fails [#1036](https://github.com/sitespeedio/browsertime/pull/1036).
