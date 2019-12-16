@@ -1,4 +1,11 @@
 # Browsertime changelog
+## 7.8.0 - UNRELEASED
+### Added
+* There's a new waot command in scripting `await commands.wait.byPageToComplete()` that waits for the configured page complete check to run. This is useful if you are running your own Selenium scripts and navigate through JavaScript and wants to wait for the page to finish loading [#1024](https://github.com/sitespeedio/browsertime/pull/1024).
+
+### Fixed
+* A little safer check when getting the alias for page in scripting [#1031](https://github.com/sitespeedio/browsertime/pull/1031)
+* When getting content for a page to include in the HAR, we used to fail hard on first failure for Chrome. Now we catch that and try with the next response [#1029](https://github.com/sitespeedio/browsertime/pull/1029).
 
 ## 7.7.1 - 2019-12-12
 ### Fixed
