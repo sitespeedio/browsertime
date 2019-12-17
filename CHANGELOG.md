@@ -1,4 +1,8 @@
 # Browsertime changelog
+## 7.8.3 - UNRELEASED
+### Fixed
+* Sometimes [scripting](https://www.sitespeed.io/documentation/sitespeed.io/scripting/) can be hard to debug and the `--videoParams.debug` is your best friend. However before this fix the video wasn't stopped correctly if an error was thrown + if you hadn't started to test a url, the debug video also was broken [#1039](https://github.com/sitespeedio/browsertime/pull/1039).
+
 ## 7.8.2 - 2019-12-16
 ### Fixed
 * Fix race in SeleniumRunner#runPrivilegedAsyncScript that broke Firefox windowRecorder, thank you [Barret Rennie](https://github.com/brennie) for the PR [#1037](https://github.com/sitespeedio/browsertime/pull/1037).
