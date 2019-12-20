@@ -2,7 +2,7 @@
 
 ## 8.0.0-alpha.1 - UNRELEASED
 ### Added
-* Merge from Mozilla [#1028](https://github.com/sitespeedio/browsertime/pull/1028) - let add each feature one by one soon
+* Merge from Mozilla [#1028](https://github.com/sitespeedio/browsertime/pull/1028) - let add each feature one by one soon.
 
 ## 7.8.3 - 2019-12-18
 ### Fixed

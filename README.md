@@ -63,9 +63,8 @@ Load https://www.sitespeed.io/ in Chrome three times. Results are stored in a JS
 Checkout the [examples](docs/examples/README.md).
 
 ## Browsers
-Browsertime supports Firefox and Chrome on desktop. On Android we support Chrome.
+Browsertime supports Firefox and Chrome on desktop. Limited support for Safari on desktop. On Android we support Chrome and Firefox (from 8.0) and limited Safari on iOS.
 
-But we want to [support Opera (on Android)](https://github.com/tobli/browsertime/issues/150)  and when(?!) iOS Safari supports WebDriver we will add that too.
 
 ## How does it work
 Browsertime uses Selenium NodeJS to drive the browser. It starts the browser, load a URL, executes configurable Javascripts to collect metrics, collect a HAR file.
