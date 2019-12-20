@@ -84,6 +84,9 @@
       "name": "Jonathan Lee"
     }
   ],
+  "publishConfig": {
+    "tag": "canary"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/sitespeedio/browsertime.git"

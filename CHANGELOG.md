@@ -1,4 +1,9 @@
 # Browsertime changelog
+
+## 8.0.0-alpha.1 - UNRELEASED
+### Added
+* Merge from Mozilla [#1028](https://github.com/sitespeedio/browsertime/pull/1028) - let add each feature one by one soon
+
 ## 7.8.3 - 2019-12-18
 ### Fixed
 * Sometimes [scripting](https://www.sitespeed.io/documentation/sitespeed.io/scripting/) can be hard to debug and the `--videoParams.debug` is your best friend. However before this fix the video wasn't stopped correctly if an error was thrown + if you hadn't started to test a url, the debug video also was broken [#1039](https://github.com/sitespeedio/browsertime/pull/1039).
