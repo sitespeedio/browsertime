@@ -7,6 +7,7 @@
 ### Changed
 * Firefox uses preferences from the Mozilla performance team by default, to get as stable metrics as possible. This removes `--mozillaProPreferences` since those configurations are used by default [#1045](https://github.com/sitespeedio/browsertime/pull/1045).
 
+* The default page complete check now uses performance.now instead of Date to make default behavior work for pages/proxies that overrides Date [#1044](https://github.com/sitespeedio/browsertime/pull/1044).
 
 ## 7.8.3 - 2019-12-18
 ### Fixed
