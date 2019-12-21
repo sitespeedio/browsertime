@@ -2,7 +2,11 @@
 
 ## 8.0.0-alpha.1 - UNRELEASED
 ### Added
-* Merge from Mozilla [#1028](https://github.com/sitespeedio/browsertime/pull/1028) - let add each feature one by one soon.
+* New functionallity from the Mozilla perfromance team. Merge [#1028](https://github.com/sitespeedio/browsertime/pull/1028) - letus  add each feature one by one when they are tested and working.
+
+### Changed
+* Firefox uses preferences from the Mozilla performance team by default, to get as stable metrics as possible. This removes `--mozillaProPreferences` since those configurations are used by default [#1045](https://github.com/sitespeedio/browsertime/pull/1045).
+
 
 ## 7.8.3 - 2019-12-18
 ### Fixed
