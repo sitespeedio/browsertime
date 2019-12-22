@@ -1,20 +1,21 @@
 language: node_js
 node_js:
-  - "10"
+  - '10'
 sudo: required
 dist: bionic
 cache:
   apt: true
   pip: true
   directories:
-    - "$HOME/.npm"
+    - '$HOME/.npm'
     - $HOME/.local/lib/python2.7/site-packages
     - /usr/local/lib/python2.7/site-packages
 addons:
   apt:
     sources:
-      - sourceline: "ppa:ubuntu-toolchain-r/test"
+      - sourceline: 'ppa:ubuntu-toolchain-r/test'
     packages:
+      - imagemagick
       - ipython
       - libjpeg-dev
       - python
@@ -29,33 +30,30 @@ addons:
       - python-nose
       - xz-utils
       - ttf-ubuntu-font-family
-      - xz-utils
-  firefox: "latest"
+  firefox: 'latest'
   chrome: stable
 before_install:
+  - python -m pip install --upgrade --user pip
   - python -m pip install --upgrade --user setuptools
-  - python -m pip --version
   - python -m pip install --user pyssim
+  - python -m pip --version
   - python -m pip show Pillow
   - python -m pip show pyssim
   - sudo snap install ffmpeg
   - ffmpeg -version
-  - /usr/bin/python --version
   - python --version
-  - which python
   - firefox --version 2>/dev/null
   - google-chrome --product-version
-  - fc-list
 before_script:
   - export DISPLAY=:99.0
   - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile
     --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1600x1024x16
+  - ./vendor/visualmetrics.py --check
 install:
   - npm ci
 script:
-  - ./vendor/visualmetrics.py --check
-  - npm run travis
-  - node ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle 
+  - npm run eslint-check && npm run lint
+  - node ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle
   - node ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value --chrome.CPUThrottlingRate 2 --chrome.cdp.performance https://www.sitespeed.io/documentation/
   - node ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --video --screenshot --connectivity.engine tsproxy -c cable
     --visualMetrics -n 1 --chrome.timeline --videoParams.fontPath /usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-R.ttf --visualElements --chrome.collectLongTasks https://www.sitespeed.io/
@@ -63,6 +61,7 @@ script:
   - node ./bin/browsertime.js -b chrome test/navigationscript/navigateAndStartInTwoSteps.js -n 1
   - node ./bin/browsertime.js -b firefox test/navigationscript/multi.js https://www.sitespeed.io/blog/ -n 1
   - node ./bin/browsertime.js -b chrome test/navigationscript/multi.js -n 3 --chrome.timeline --video --visualMetrics --videoParams.fontPath /usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-R.ttf --visualElements
+  - npm run test
 notifications:
   slack:
     secure: V71EkIzwOf/fZnGTGIKAIFlDyLUit4tK97VDgdV9vZ7CbvOXI1ir3lwRZ57lNqiYD8BUaX+/wKDG+LyrBMgQ4JAGgQx0mECvmOKx1+10Yg9FAkUsMTWe7GOxcVMwhpS2OfHnXwMb0FjcuVl8ovowIZqCWOLeEAYVaTWHndDm2cA=
