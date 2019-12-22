@@ -30,20 +30,18 @@ addons:
       - python-nose
       - xz-utils
       - ttf-ubuntu-font-family
-      - xz-utils
   firefox: 'latest'
   chrome: stable
 before_install:
+  - python -m pip install --upgrade --user pip
   - python -m pip install --upgrade --user setuptools
-  - python -m pip --version
   - python -m pip install --user pyssim
+  - python -m pip --version
   - python -m pip show Pillow
   - python -m pip show pyssim
   - sudo snap install ffmpeg
   - ffmpeg -version
-  - /usr/bin/python --version
   - python --version
-  - which python
   - firefox --version 2>/dev/null
   - google-chrome --product-version
 before_script:
