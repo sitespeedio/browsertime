@@ -17,7 +17,7 @@
       startTime: Number(entry.startTime.toFixed(0)),
       naturalHeight: entry.naturalHeight,
       naturalWidth: entry.naturalWidth,
-      tagName: entry.element.tagName
+      tagName: entry.element ? entry.element.tagName : ''
     };
   }
   return elements;
