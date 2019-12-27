@@ -62,7 +62,6 @@ script:
   - node ./bin/browsertime.js -b firefox test/navigationscript/multi.js https://www.sitespeed.io/blog/ -n 1
   - node ./bin/browsertime.js -b chrome test/navigationscript/multi.js -n 3 --chrome.timeline --video --visualMetrics --videoParams.fontPath /usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-R.ttf --visualElements
   - node ./bin/browsertime.js -b firefox --firefox.geckoProfiler -n 1 https://www.sitespeed.io/
-  - node ./bin/browsertime.js -b firefox -n 1 --firefox.windowRecorder --video --visualMetrics https://www.sitespeed.io/
   - npm run test
 notifications:
   slack:
