@@ -1,6 +1,11 @@
 # Browsertime changelog
 
-## 8.0.0-alpha.1 - UNRELEASED
+## 8.0.0-alpha.2 - 2019-12-28
+### Fixed
+* Refactor and fixed Firefox Android code in [#1058](https://github.com/sitespeedio/browsertime/pull/1058) amd  [#1057](https://github.com/sitespeedio/browsertime/pull/1057).
+* Simplified the HAR export code for Firefox [#1059](https://github.com/sitespeedio/browsertime/pull/1059).
+ 
+## 8.0.0-alpha.1 - 2019-12-27 
 ### Added
 * New functionallity from the Mozilla perfromance team. Merge [#1028](https://github.com/sitespeedio/browsertime/pull/1028) - letus  add each feature one by one when they are tested and working.
 
