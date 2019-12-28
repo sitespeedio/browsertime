@@ -2,7 +2,8 @@
 
 ## 8.0.0-alpha.2 - 2019-12-28
 ### Fixed
-* Refactor and fixed Firefox Android code in [#1058](https://github.com/sitespeedio/browsertime/pull/1058) amd  [#1057](https://github.com/sitespeedio/browsertime/pull/1057).
+* Progress data from Visual Metrics don't need stats [#1060](https://github.com/sitespeedio/browsertime/pull/1060).
+* Refactor and fixed Firefox Android code in [#1058](https://github.com/sitespeedio/browsertime/pull/1058) and  [#1057](https://github.com/sitespeedio/browsertime/pull/1057).
 * Simplified the HAR export code for Firefox [#1059](https://github.com/sitespeedio/browsertime/pull/1059).
  
 ## 8.0.0-alpha.1 - 2019-12-27 
