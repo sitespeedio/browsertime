@@ -8,12 +8,19 @@
  
 ## 8.0.0-alpha.1 - 2019-12-27 
 ### Added
-* New functionallity from the Mozilla perfromance team. Merge [#1028](https://github.com/sitespeedio/browsertime/pull/1028) - letus  add each feature one by one when they are tested and working.
-
+* New functionallity from the Mozilla perfromance team. Merge [#1028](https://github.com/sitespeedio/browsertime/pull/1028) - let us add each feature one by one when they are tested and working:
+    * You can now collect a CPU profile using `--firefox.geckoProfiler`. You can also use: `--firefox.geckoProfilerParams.features`, `--firefox.geckoProfilerParams.threads`, `--firefox.geckoProfilerParams.interval` and `--firefox.geckoProfilerParams.bufferSize`to finetune what to get.
+    * Collect metrics using Firefox on Android! Enable using `-b firefox --android` and tune using: `--firefox.android.package`, `--firefox.android.activity`, `--firefox.android.deviceSerial` and `--firefox.android.intentArgument`.
+    * Start Firefox with a new profile cloned from a directory. Use this to pre-populate databases with
+    certificates, tracking protectionlists etc  `--firefox.profileTemplate`.
+    * Fixes so `--firefox.windowRecorder` works better (use it to record a video of the screen).
+    * You can now choose the Activity hosting the Chrome WebView on Android using `--chrome.android.activity`. You can also name the process of the Activity hosting the WebView using `--chrome.android.process`.                
 ### Changed
 * Firefox uses preferences from the Mozilla performance team by default, to get as stable metrics as possible. This removes `--mozillaProPreferences` since those configurations are used by default [#1045](https://github.com/sitespeedio/browsertime/pull/1045).
 
 * The default page complete check now uses performance.now instead of Date to make default behavior work for pages/proxies that overrides Date [#1044](https://github.com/sitespeedio/browsertime/pull/1044).
+
+* New data structure for VisualProgress of Visual Metrics. It's now an array with objects `{timestamp:x, percent:y}`.
 
 ## 7.8.3 - 2019-12-18
 ### Fixed
