@@ -11,7 +11,7 @@
     "chrome-remote-interface": "0.28.1",
     "dayjs": "1.8.18",
     "del": "4.1.1",
-    "execa": "2.0.4",
+    "execa": "4.0.0",
     "fast-stats": "0.0.5",
     "find-up": "4.1.0",
     "get-port": "5.1.0",
