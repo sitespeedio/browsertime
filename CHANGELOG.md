@@ -4,6 +4,9 @@
 * Gzip geckoProfile JSON. [#1062](https://github.com/sitespeedio/browsertime/pull/1062) and [#1064](https://github.com/sitespeedio/browsertime/pull/1064).
 * Updated dependencies yargs, selenium, dayjs, sharp, get-port, execa and chrome-remote-interface [#1068](https://github.com/sitespeedio/browsertime/pull/1068) and [#1069](https://github.com/sitespeedio/browsertime/pull/1069)
 
+### Fixed
+* Log screenshot errors when it happens so its easier to understand the root cause [#1070](https://github.com/sitespeedio/browsertime/pull/1070).
+
 ## 8.0.0-alpha.2 - 2019-12-28
 ### Fixed
 * Progress data from Visual Metrics don't need stats [#1060](https://github.com/sitespeedio/browsertime/pull/1060).
