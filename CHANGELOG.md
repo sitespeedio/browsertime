@@ -6,6 +6,7 @@
 
 ### Fixed
 * Log screenshot errors when it happens so its easier to understand the root cause [#1070](https://github.com/sitespeedio/browsertime/pull/1070).
+* Take screenshots before we run the JS to collect the metrics [#1071](https://github.com/sitespeedio/browsertime/pull/1071).
 
 ## 8.0.0-alpha.2 - 2019-12-28
 ### Fixed
