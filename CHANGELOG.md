@@ -1,4 +1,7 @@
 # Browsertime changelog
+
+## 8.0.0-alpha.4 - UNRELEASED
+
 ## 8.0.0-alpha.3 - 2012-01-08
 ### Added 
 * Gzip geckoProfile JSON. [#1062](https://github.com/sitespeedio/browsertime/pull/1062) and [#1064](https://github.com/sitespeedio/browsertime/pull/1064).
