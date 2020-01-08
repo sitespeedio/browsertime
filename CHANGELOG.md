@@ -3,11 +3,17 @@
 ### Added 
 * Gzip geckoProfile JSON. [#1062](https://github.com/sitespeedio/browsertime/pull/1062) and [#1064](https://github.com/sitespeedio/browsertime/pull/1064).
 * Updated dependencies yargs, selenium, dayjs, sharp, get-port, execa and chrome-remote-interface [#1068](https://github.com/sitespeedio/browsertime/pull/1068) and [#1069](https://github.com/sitespeedio/browsertime/pull/1069)
+* Retry three times if a URL fails to load (and refactor the loading code to make it easier to understand) [#1077](https://github.com/sitespeedio/browsertime/pull/1077)
+* Upgraded the HAR Export Trigger for Firefox to 0.6.1 [#1078](https://github.com/sitespeedio/browsertime/pull/1078)
 
 ### Fixed
 * Log screenshot errors when it happens so its easier to understand the root cause [#1070](https://github.com/sitespeedio/browsertime/pull/1070).
 * Take screenshots before we run the JS to collect the metrics [#1071](https://github.com/sitespeedio/browsertime/pull/1071).
 * Increased default max wait time per JavaScript from 80 s to 120 s [#1074](https://github.com/sitespeedio/browsertime/pull/1074).
+* Verify that the orange div for the video exists before moving on [#1076](https://github.com/sitespeedio/browsertime/pull/1076).
+
+### Tech
+* Naming cleanup [#1079](https://github.com/sitespeedio/browsertime/pull/1079),
 
 ## 8.0.0-alpha.2 - 2019-12-28
 ### Fixed
@@ -23,7 +29,17 @@
     * Start Firefox with a new profile cloned from a directory. Use this to pre-populate databases with
     certificates, tracking protectionlists etc  `--firefox.profileTemplate`.
     * Fixes so `--firefox.windowRecorder` works better (use it to record a video of the screen).
-    * You can now choose the Activity hosting the Chrome WebView on Android using `--chrome.android.activity`. You can also name the process of the Activity hosting the WebView using `--chrome.android.process`.                
+    * You can now choose the Activity hosting the Chrome WebView on Android using `--chrome.android.activity`. You can also name the process of the Activity hosting the WebView using `--chrome.android.process`.               
+Thank you to all new contributors: 
+* [Nick Alexander](https://github.com/ncalexan)
+* [https://github.com/dpalmeiro](https://github.com/dpalmeiro)
+* [Sean Feng](https://github.com/sefeng211)
+* [Chris Liu](https://github.com/cliu55)
+* [Will Hawkins](https://github.com/hawkinsw)
+* [Barret Rennie](https://github.com/brennie)
+* [Tarek Ziade](https://github.com/tarekziade)
+* [Gregory Mierzwinski](https://github.com/gmierz)
+
 ### Changed
 * Firefox uses preferences from the Mozilla performance team by default, to get as stable metrics as possible. This removes `--mozillaProPreferences` since those configurations are used by default [#1045](https://github.com/sitespeedio/browsertime/pull/1045).
 
