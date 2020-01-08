@@ -1,5 +1,5 @@
 # Browsertime changelog
-## 8.0.0-alpha.3 - UNRELEASED
+## 8.0.0-alpha.3 - 2012-01-08
 ### Added 
 * Gzip geckoProfile JSON. [#1062](https://github.com/sitespeedio/browsertime/pull/1062) and [#1064](https://github.com/sitespeedio/browsertime/pull/1064).
 * Updated dependencies yargs, selenium, dayjs, sharp, get-port, execa and chrome-remote-interface [#1068](https://github.com/sitespeedio/browsertime/pull/1068) and [#1069](https://github.com/sitespeedio/browsertime/pull/1069)
