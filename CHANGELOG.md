@@ -1,6 +1,9 @@
 # Browsertime changelog
 
 ## 8.0.0-alpha.4 - UNRELEASED
+### Added
+* Enable verbose logging when using geckodriver [#1083](https://github.com/sitespeedio/browsertime/pull/1083) by [Nick Alexander](https://github.com/ncalexan).
+* 
 
 ## 8.0.0-alpha.3 - 2012-01-08
 ### Added 
