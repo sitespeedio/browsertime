@@ -10,6 +10,7 @@
 ### Fixed
 * Remove the extra use of the pageCompleteWaitTime, we had re-used that config twice so after the page complete check run, we waited some extra seconds [#1087](https://github.com/sitespeedio/browsertime/pull/1087).
 * Running geckoProfiler on Android was previously broken with a refactor. Fixed by [#1088](https://github.com/sitespeedio/browsertime/pull/1088).
+* Fix font usage on macOS for video, thank you [Tarek Ziade](https://github.com/tarekziade) for the PR [#1089](https://github.com/sitespeedio/browsertime/pull/1089).
 
 ## 8.0.0-alpha.3 - 2012-01-08
 ### Added 
