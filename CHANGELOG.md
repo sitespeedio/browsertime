@@ -1,18 +1,19 @@
 # Browsertime changelog
 
-## 8.0.0-alpha.4 - UNRELEASED
+## 8.0.0-alpha.4 - 2020-01-10
 ### Added
 * Enable verbose logging when using geckodriver [#1083](https://github.com/sitespeedio/browsertime/pull/1083) by [Nick Alexander](https://github.com/ncalexan).
 * Pickup the Visual Metrics log file and if there's an error running Visual Metrics, log the information to our log. This will make easier and faster to find problems while running Visual Metrics and make it easier for users to report problems we can act on [#1085](https://github.com/sitespeedio/browsertime/pull/1085).
 * Increase wait time before next try when navigation fails. First 10s, then 20s then 30s [#1086](https://github.com/sitespeedio/browsertime/pull/1086)
 * Making Sharp an optional requirement as proposed by [Nick Alexander](https://github.com/ncalexan). If you don't install Sharp, screenshots will be stored as PNG as the current viewport size [#1084](https://github.com/sitespeedio/browsertime/pull/1084).
+* Make it easy to add trace categories on top of the default ones for Chrome. Use `--chrome.traceCategory` to add an category. Use it multiple times to add multiple categories [#1090](https://github.com/sitespeedio/browsertime/pull/1090).
 
 ### Fixed
 * Remove the extra use of the pageCompleteWaitTime, we had re-used that config twice so after the page complete check run, we waited some extra seconds [#1087](https://github.com/sitespeedio/browsertime/pull/1087).
 * Running geckoProfiler on Android was previously broken with a refactor. Fixed by [#1088](https://github.com/sitespeedio/browsertime/pull/1088).
 * Fix font usage on macOS for video, thank you [Tarek Ziade](https://github.com/tarekziade) for the PR [#1089](https://github.com/sitespeedio/browsertime/pull/1089).
 
-## 8.0.0-alpha.3 - 2012-01-08
+## 8.0.0-alpha.3 - 2020-01-08
 ### Added 
 * Gzip geckoProfile JSON. [#1062](https://github.com/sitespeedio/browsertime/pull/1062) and [#1064](https://github.com/sitespeedio/browsertime/pull/1064).
 * Updated dependencies yargs, selenium, dayjs, sharp, get-port, execa and chrome-remote-interface [#1068](https://github.com/sitespeedio/browsertime/pull/1068) and [#1069](https://github.com/sitespeedio/browsertime/pull/1069)
