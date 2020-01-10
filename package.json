@@ -27,12 +27,14 @@
     "lodash.set": "4.3.2",
     "mkdirp": "0.5.1",
     "selenium-webdriver": "4.0.0-alpha.5",
-    "sharp": "0.23.4",
     "@sitespeed.io/geckodriver": "0.26.0",
     "@sitespeed.io/tracium": "0.3.3",
     "speedline-core": "1.4.2",
     "@cypress/xvfb": "1.2.4",
     "yargs": "15.0.2"
+  },
+  "optionalDependencies": {
+    "sharp": "0.23.4"
   },
   "devDependencies": {
     "bluebird": "3.5.5",
