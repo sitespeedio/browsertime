@@ -3,7 +3,7 @@
 ## 8.0.0-alpha.4 - UNRELEASED
 ### Added
 * Enable verbose logging when using geckodriver [#1083](https://github.com/sitespeedio/browsertime/pull/1083) by [Nick Alexander](https://github.com/ncalexan).
-* 
+* Pickup the Visual Metrics log file and if there's an error running Visual Metrics, log the information to our log. This will make easier and faster to find problems while running Visual Metrics and make it easier for users to report problems we can act on [#1085](https://github.com/sitespeedio/browsertime/pull/1085).
 
 ## 8.0.0-alpha.3 - 2012-01-08
 ### Added 
