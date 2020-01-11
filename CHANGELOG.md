@@ -1,5 +1,13 @@
 # Browsertime changelog
 
+## 8.0.0-alpha.5 - UNRELEASED
+### Fixed
+* Fix broken recording on Android [#1095](https://github.com/sitespeedio/browsertime/pull/1095)
+* Fix calculating process time on Android (default setup for FF didn't work since refactor) [#1094](https://github.com/sitespeedio/browsertime/pull/1094).
+
+### Added
+* Always log configured features and threads when using geckoProfiler [#1092](https://github.com/sitespeedio/browsertime/pull/1092)
+
 ## 8.0.0-alpha.4 - 2020-01-10
 ### Added
 * Enable verbose logging when using geckodriver [#1083](https://github.com/sitespeedio/browsertime/pull/1083) by [Nick Alexander](https://github.com/ncalexan).
