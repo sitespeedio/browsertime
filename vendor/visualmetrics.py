@@ -1518,7 +1518,7 @@ def calculate_contentful_speed_index(progress, directory):
         return cont_si, ", ".join(raw_progress_value)
     except Exception as e:
         logging.exception(e)
-        return None
+        return None, None
 
 def calculate_perceptual_speed_index(progress, directory):
     from ssim import compute_ssim
