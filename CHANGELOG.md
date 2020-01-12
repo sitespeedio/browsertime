@@ -2,11 +2,16 @@
 
 ## 8.0.0-alpha.5 - UNRELEASED
 ### Fixed
-* Fix broken recording on Android [#1095](https://github.com/sitespeedio/browsertime/pull/1095)
+* Partly fixed broken recording on Android [#1095](https://github.com/sitespeedio/browsertime/pull/1095)
 * Fix calculating process time on Android (default setup for FF didn't work since refactor) [#1094](https://github.com/sitespeedio/browsertime/pull/1094).
+* Use FFMPEG as default recorder for Firefox [#1103](https://github.com/sitespeedio/browsertime/pull/1103) (at least for now).
+* Fixed so you can use Firefox preferences that has colon as value (using URLs was broken before) [#1101](https://github.com/sitespeedio/browsertime/pull/1101).
 
 ### Added
 * Always log configured features and threads when using geckoProfiler [#1092](https://github.com/sitespeedio/browsertime/pull/1092)
+
+### Tech
+* Refactor Firefox code in iteration and moved it to the Firfox delegate [#1100](https://github.com/sitespeedio/browsertime/pull/1100) and [#1102](https://github.com/sitespeedio/browsertime/pull/1102).
 
 ## 8.0.0-alpha.4 - 2020-01-10
 ### Added
