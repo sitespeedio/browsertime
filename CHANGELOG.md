@@ -1,5 +1,7 @@
 # Browsertime changelog
 
+## 8.0.0-alpha.6 - UNRELEASED 
+
 ## 8.0.0-alpha.5 - 2020-01-12
 ### Fixed
 * Partly fixed broken recording on Android [#1095](https://github.com/sitespeedio/browsertime/pull/1095)
