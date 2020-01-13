@@ -1,6 +1,8 @@
 # Browsertime changelog
 
-## 8.0.0-alpha.6 - UNRELEASED 
+## 8.0.0-alpha.6 - UNRELEASED
+### Fixed
+* Better error logs when Chrome fails to take screenshots and when page complete check timeouts [#1107](https://github.com/sitespeedio/browsertime/pull/1107) 
 
 ## 8.0.0-alpha.5 - 2020-01-12
 ### Fixed
