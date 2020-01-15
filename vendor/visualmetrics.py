@@ -605,7 +605,7 @@ def eliminate_duplicate_frames(directory):
             if height > 400 or width > 400:
                 top = int(math.ceil(float(height) * 0.04))
                 right_margin = int(math.ceil(float(width) * 0.04))
-                bottom_margin = int(math.ceil(float(width) * 0.04))
+                bottom_margin = int(math.ceil(float(width) * 0.06))
             height = max(height - top - bottom_margin, 1)
             left = 0
             width = max(width - right_margin, 1)
@@ -779,7 +779,7 @@ def is_color_frame(file, color_file):
             # Bottom
             crops.append('{0:d}x{1:d}+{2:d}+{3:d}'.format(
                 int(width / 2), int(height / 5),
-                int(width / 4), height - int(height / 5) - 50))
+                int(width / 4), height - int(height / 5)))
             for crop in crops:
                 command = ('{0} "{1}" "(" "{2}" -crop {3} -resize 200x200! ")"'
                            ' miff:- | {4} -metric AE - -fuzz 15% null:'
@@ -789,7 +789,7 @@ def is_color_frame(file, color_file):
                 out, err = compare.communicate()
                 if re.match('^[0-9]+$', err):
                     different_pixels = int(err)
-                    if different_pixels < 100:
+                    if different_pixels < 10000:
                         match = True
                         break
         except Exception:
@@ -1359,8 +1359,8 @@ def calculate_visual_metrics(histograms_file, start, end, perceptual, contentful
                     hero_timings_sorted = sorted(hero_timings, key=lambda timing: timing['value'])
                     #hero_timings.append({'name': 'FirstPaintedHero',
                     #                     'value': hero_timings_sorted[0]['value']})
-                    #hero_timings.append({'name': 'LastPaintedHero',
-                    #                     'value': hero_timings_sorted[-1]['value']})
+                    hero_timings.append({'name': 'LastMeaningfulPaint',
+                                         'value': hero_timings_sorted[-1]['value']})
                     hero_data['timings'] = hero_timings
                     metrics += hero_timings
 
@@ -1482,56 +1482,61 @@ def calculate_contentful_speed_index(progress, directory):
     # convert output comes out with lines that have this format:
     # <number>: <rgb color> #<hex color> <gray color>
     # This is CLI dependant and very fragile
-    matcher = re.compile(r'\d+: \S+ #[0-9A-F]+ (gray\(\d+\)|\d+)')
-    dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
-    content = []
-    maxContent=0
-    for p in progress[1:]:
-        # Full Path of the Current Frame
-        current_frame = os.path.join(dir, "ms_{0:06d}.png".format(p["time"]))
-        logging.debug("contentfulSpeedIndex: Current Image is %s" % current_frame)
-        # Takes full path of PNG frames to compute contentfulness value
-        command = '{0} {1} -canny 2x2+8%+8% -define histogram:unique-colors=true -format %c histogram:info:-'.format(
-            image_magick['convert'], current_frame)
-        output = subprocess.check_output(command, shell=True)
-        logging.debug("Output %s" % output)
+    matcher = re.compile(r'\d+: \S+ #[0-9A-F]+ (?:gray\((\d+)\)|(\d+)(?:))')
 
-        # take the last line of the convert call output
-        lines = [line.strip() for line in output.split("\n") if line.strip()]
-        if len(lines) == 0:
-            logging.debug("Could not find the contentfulness value")
-            return -1
+    try:
+        dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
+        content = []
+        maxContent=0
+        for p in progress[1:]:
+            # Full Path of the Current Frame
+            current_frame = os.path.join(dir, "ms_{0:06d}.png".format(p["time"]))
+            logging.debug("contentfulSpeedIndex: Current Image is %s" % current_frame)
+            # Takes full path of PNG frames to compute contentfulness value
+            command = '{0} {1} -canny 2x2+8%+8% -define histogram:unique-colors=true -format %c histogram:info:-'.format(
+                image_magick['convert'], current_frame)
+            output = subprocess.check_output(command, shell=True)
+            logging.debug("Output %s" % output)
 
-        # extract the value from the last line
-        match = matcher.findall(lines[0])
-        if match == []:
-            logging.debug("Could not find the contentfulness value")
-            return -1
+            # take the last line of the convert call output
+            lines = [line.strip() for line in output.split("\n") if line.strip()]
+            if len(lines) == 0:
+                logging.debug("Could not find the contentfulness value")
+                return -1
 
-        value = int(match[0])
-        if value > maxContent:
-            maxContent = value
-        content.append(value)
+            # extract the value from the last line
+            match = [[v for v in el if v] for el in matcher.findall(lines[0])]
+            if match == []:
+                logging.debug("Could not find the contentfulness value")
+                return -1
 
-    for i,value in enumerate(content):
-        content[i] = float(content[i]) / float(maxContent)
+            value = int(match[0][0])
+            if value > maxContent:
+                maxContent = value
+            content.append(value)
 
-    # Assume 0 content for first frame
-    cont_si = 1 * (progress[1]['time'] - progress[0]['time'])
-    completeness_value = [(progress[1]['time'], int(cont_si))]
-    for i in xrange(1,len(progress)-1):
-        elapsed = progress[i+1]['time'] - progress[i]['time']
-        #print i,' time =',p['time'],'elapsed =',elapsed,'content = ',content[i]
-        cont_si += elapsed * (1.0 - content[i])
-        completeness_value.append((progress[i+1]['time'], int(cont_si)))
+        for i, value in enumerate(content):
+            content[i] = maxcontent == 0 and 0.0 or float(content[i]) / float(maxContent)
 
-    cont_si = int(cont_si)
-    raw_progress_value = ["0=0"]
-    for timestamp, percent in completeness_value:
-        p = int(100 * float(percent) / float(cont_si))
-        raw_progress_value.append('%d=%d' % (timestamp, p))
+        # Assume 0 content for first frame
+        cont_si = 1 * (progress[1]['time'] - progress[0]['time'])
+        completeness_value = [(progress[1]['time'], int(cont_si))]
+        for i in xrange(1,len(progress)-1):
+            elapsed = progress[i+1]['time'] - progress[i]['time']
+            #print i,' time =',p['time'],'elapsed =',elapsed,'content = ',content[i]
+            cont_si += elapsed * (1.0 - content[i])
+            completeness_value.append((progress[i+1]['time'], int(cont_si)))
 
-    return cont_si, ", ".join(raw_progress_value)
+        cont_si = int(cont_si)
+        raw_progress_value = ["0=0"]
+        for timestamp, percent in completeness_value:
+            p = int(100 * float(percent) / float(cont_si))
+            raw_progress_value.append('%d=%d' % (timestamp, p))
+
+        return cont_si, ", ".join(raw_progress_value)
+    except Exception as e:
+        logging.exception(e)
+        return None, None
 
 def calculate_perceptual_speed_index(progress, directory):
     from ssim import compute_ssim
@@ -1572,86 +1577,90 @@ def calculate_perceptual_speed_index(progress, directory):
 
 
 def calculate_hero_time(progress, directory, hero, viewport):
-    dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
-    n = len(progress)
-    target_frame = os.path.join(dir, 'ms_{0:06d}'.format(progress[n - 1]['time']))
+    try:
+        dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
+        n = len(progress)
+        target_frame = os.path.join(dir, 'ms_{0:06d}'.format(progress[n - 1]['time']))
 
-    extension = None
-    if os.path.isfile(target_frame + '.png'):
-        extension = '.png'
-    elif os.path.isfile(target_frame + '.jpg'):
-        extension = '.jpg'
-    if extension is not None:
-        hero_width = int(hero['width'])
-        hero_height = int(hero['height'])
-        hero_x = int(hero['x'])
-        hero_y = int(hero['y'])
-        target_frame = target_frame + extension
-        logging.debug('Target image for hero %s is %s' % (hero['name'], target_frame))
+        extension = None
+        if os.path.isfile(target_frame + '.png'):
+            extension = '.png'
+        elif os.path.isfile(target_frame + '.jpg'):
+            extension = '.jpg'
+        if extension is not None:
+            hero_width = int(hero['width'])
+            hero_height = int(hero['height'])
+            hero_x = int(hero['x'])
+            hero_y = int(hero['y'])
+            target_frame = target_frame + extension
+            logging.debug('Target image for hero %s is %s' % (hero['name'], target_frame))
 
-        from PIL import Image
-        with Image.open(target_frame) as im:
-            width, height = im.size
-        if width != viewport['width']:
-            scale = float(width) / float(viewport['width'])
-            logging.debug('Frames are %dpx wide but viewport was %dpx. Scaling by %f' % (width, viewport['width'], scale))
-            hero_width = int(hero['width'] * scale)
-            hero_height = int(hero['height'] * scale)
-            hero_x = int(hero['x'] * scale)
-            hero_y = int(hero['y'] * scale)
+            from PIL import Image
+            with Image.open(target_frame) as im:
+                width, height = im.size
+            if width != viewport['width']:
+                scale = float(width) / float(viewport['width'])
+                logging.debug('Frames are %dpx wide but viewport was %dpx. Scaling by %f' % (width, viewport['width'], scale))
+                hero_width = int(hero['width'] * scale)
+                hero_height = int(hero['height'] * scale)
+                hero_x = int(hero['x'] * scale)
+                hero_y = int(hero['y'] * scale)
 
-        logging.debug('Calculating render time for hero element "%s" at position [%d, %d, %d, %d]' % (hero['name'], hero['x'], hero['y'], hero['width'], hero['height']))
+            logging.debug('Calculating render time for hero element "%s" at position [%d, %d, %d, %d]' % (hero['name'], hero['x'], hero['y'], hero['width'], hero['height']))
 
-        # Create a rectangular mask of the hero element position
-        hero_mask = os.path.join(dir, 'hero_{0}_mask.png'.format(hero['name']))
-        command = '{0} -size {1}x{2} xc:black -fill white -draw "rectangle {3},{4} {5},{6}" PNG24:"{7}"'.format(
-            image_magick['convert'], width, height, hero_x, hero_y, hero_x + hero_width, hero_y + hero_height, hero_mask)
-        subprocess.call(command, shell=True)
+            # Create a rectangular mask of the hero element position
+            hero_mask = os.path.join(dir, 'hero_{0}_mask.png'.format(hero['name']))
+            command = '{0} -size {1}x{2} xc:black -fill white -draw "rectangle {3},{4} {5},{6}" PNG24:"{7}"'.format(
+                image_magick['convert'], width, height, hero_x, hero_y, hero_x + hero_width, hero_y + hero_height, hero_mask)
+            subprocess.call(command, shell=True)
 
-        # Apply the mask to the target frame to create the reference frame
-        target_mask = os.path.join(dir, 'hero_{0}_ms_{1:06d}.png'.format(hero['name'], progress[n - 1]['time']))
-        command = '{0} {1} {2} -alpha Off -compose CopyOpacity -composite {3}'.format(
-            image_magick['convert'], target_frame, hero_mask, target_mask)
-        subprocess.call(command, shell=True)
+            # Apply the mask to the target frame to create the reference frame
+            target_mask = os.path.join(dir, 'hero_{0}_ms_{1:06d}.png'.format(hero['name'], progress[n - 1]['time']))
+            command = '{0} {1} {2} -alpha Off -compose CopyOpacity -composite {3}'.format(
+                image_magick['convert'], target_frame, hero_mask, target_mask)
+            subprocess.call(command, shell=True)
 
-        def cleanup():
-            os.remove(hero_mask)
-            if os.path.isfile(target_mask):
-                os.remove(target_mask)
+            def cleanup():
+                os.remove(hero_mask)
+                if os.path.isfile(target_mask):
+                    os.remove(target_mask)
 
-        # Allow for small differences like scrollbars and overlaid UI elements
-        # by applying a 10% fuzz and allowing for up to 2% of the pixels to be
-        # different.
-        fuzz = 10
-        max_pixel_diff = math.ceil(hero_width * hero_height * 0.02)
+            # Allow for small differences like scrollbars and overlaid UI elements
+            # by applying a 10% fuzz and allowing for up to 2% of the pixels to be
+            # different.
+            fuzz = 10
+            max_pixel_diff = math.ceil(hero_width * hero_height * 0.02)
 
-        for p in progress:
-            current_frame = os.path.join(dir, 'ms_{0:06d}'.format(p['time']))
-            extension = None
-            if os.path.isfile(current_frame + '.png'):
-                extension = '.png'
-            elif os.path.isfile(current_frame + '.jpg'):
-                extension = '.jpg'
-            if extension is not None:
-                current_mask = os.path.join(dir, 'hero_{0}_ms_{1:06d}.png'.format(hero['name'], p['time']))
-                # Apply the mask to the current frame
-                command = '{0} {1} {2} -alpha Off -compose CopyOpacity -composite {3}'.format(
-                    image_magick['convert'], current_frame + extension, hero_mask, current_mask)
-                logging.debug(command)
-                subprocess.call(command, shell=True)
-                match = frames_match(target_mask, current_mask, fuzz, max_pixel_diff, None, None)
-                # Remove each mask after using it
-                os.remove(current_mask)
+            for p in progress:
+                current_frame = os.path.join(dir, 'ms_{0:06d}'.format(p['time']))
+                extension = None
+                if os.path.isfile(current_frame + '.png'):
+                    extension = '.png'
+                elif os.path.isfile(current_frame + '.jpg'):
+                    extension = '.jpg'
+                if extension is not None:
+                    current_mask = os.path.join(dir, 'hero_{0}_ms_{1:06d}.png'.format(hero['name'], p['time']))
+                    # Apply the mask to the current frame
+                    command = '{0} {1} {2} -alpha Off -compose CopyOpacity -composite {3}'.format(
+                        image_magick['convert'], current_frame + extension, hero_mask, current_mask)
+                    logging.debug(command)
+                    subprocess.call(command, shell=True)
+                    match = frames_match(target_mask, current_mask, fuzz, max_pixel_diff, None, None)
+                    # Remove each mask after using it
+                    os.remove(current_mask)
 
-                if match:
-                    # Clean up masks as soon as a match is found
-                    cleanup()
-                    return p['time']
+                    if match:
+                        # Clean up masks as soon as a match is found
+                        cleanup()
+                        return p['time']
 
-        # No matches found; clean up masks
-        cleanup()
+            # No matches found; clean up masks
+            cleanup()
 
-    return None
+        return None
+    except Exception as e:
+        logging.exception(e)
+        return None
 
 
 ##########################################################################
