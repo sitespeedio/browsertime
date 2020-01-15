@@ -1479,6 +1479,10 @@ def calculate_speed_index(progress):
     return int(si)
 
 def calculate_contentful_speed_index(progress, directory):
+    # convert output comes out with lines that have this format:
+    # <number>: <rgb color> #<hex color> <gray color>
+    # This is CLI dependant and very fragile
+    matcher = re.compile(r'\d+: \S+ #[0-9A-F]+ (gray\(\d+\)|\d+)')
     dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
     content = []
     maxContent=0
@@ -1490,7 +1494,21 @@ def calculate_contentful_speed_index(progress, directory):
         command = '{0} {1} -canny 2x2+8%+8% -define histogram:unique-colors=true -format %c histogram:info:-'.format(
             image_magick['convert'], current_frame)
         output = subprocess.check_output(command, shell=True)
-        value  = int(output.split()[7].split(':')[0])
+        logging.debug("Output %s" % output)
+
+        # take the last line of the convert call output
+        lines = [line.strip() for line in output.split("\n") if line.strip()]
+        if len(lines) == 0:
+            logging.debug("Could not find the contentfulness value")
+            return -1
+
+        # extract the value from the last line
+        match = matcher.findall(lines[0])
+        if match == []:
+            logging.debug("Could not find the contentfulness value")
+            return -1
+
+        value = int(match[0])
         if value > maxContent:
             maxContent = value
         content.append(value)
