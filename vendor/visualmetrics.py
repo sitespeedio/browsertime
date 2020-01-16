@@ -1502,13 +1502,13 @@ def calculate_contentful_speed_index(progress, directory):
             lines = [line.strip() for line in output.split("\n") if line.strip()]
             if len(lines) == 0:
                 logging.debug("Could not find the contentfulness value")
-                return -1
+                return None, None
 
             # extract the value from the last line
             match = [[v for v in el if v] for el in matcher.findall(lines[0])]
             if match == []:
                 logging.debug("Could not find the contentfulness value")
-                return -1
+                return None, None
 
             value = int(match[0][0])
             if value > maxContent:
