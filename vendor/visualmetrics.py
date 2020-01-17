@@ -143,7 +143,7 @@ def extract_frames(video, directory, full_resolution, viewport):
             match = re.search(pattern, line)
             if match:
                 frame_count += 1
-                frame_time = int(math.ceil(float( \
+                frame_time = int(math.floor(float( \
                     match.groupdict().get('timecode')) * 1000))
                 src = os.path.join(
                     directory, 'img-{0:d}.png'.format(frame_count))
