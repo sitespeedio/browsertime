@@ -1479,6 +1479,11 @@ def calculate_speed_index(progress):
     return int(si)
 
 def calculate_contentful_speed_index(progress, directory):
+    # convert output comes out with lines that have this format:
+    # <number>: <rgb color> #<hex color> <gray color>
+    # This is CLI dependant and very fragile
+    matcher = re.compile(r'\d+: \S+ #[0-9A-F]+ (?:gray\((\d+)\)|(\d+)(?:))')
+
     try:
         dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
         content = []
@@ -1492,18 +1497,30 @@ def calculate_contentful_speed_index(progress, directory):
                 image_magick['convert'], current_frame)
             output = subprocess.check_output(command, shell=True)
             logging.debug("Output %s" % output)
-            value  = int(output.split()[7].split(':')[0])
+            # take the last line of the convert call output
+            lines = [line.strip().decode('utf8') for line in output.split(b"\n") if line.strip()]
+            if len(lines) == 0:
+                logging.debug("Could not find the contentfulness value")
+                return None, None
+
+            # extract the value from the last line
+            match = [[v for v in el if v] for el in matcher.findall(lines[-1])]
+            if match == []:
+                logging.debug("Could not find the contentfulness value")
+                return None, None
+
+            value = int(match[0][0])
             if value > maxContent:
                 maxContent = value
             content.append(value)
 
-        for i,value in enumerate(content):
-            content[i] = float(content[i]) / float(maxContent)
+        for i, value in enumerate(content):
+            content[i] = maxContent == 0 and 0.0 or float(content[i]) / float(maxContent)
 
         # Assume 0 content for first frame
         cont_si = 1 * (progress[1]['time'] - progress[0]['time'])
         completeness_value = [(progress[1]['time'], int(cont_si))]
-        for i in xrange(1,len(progress)-1):
+        for i in range(1, len(progress)-1):
             elapsed = progress[i+1]['time'] - progress[i]['time']
             #print i,' time =',p['time'],'elapsed =',elapsed,'content = ',content[i]
             cont_si += elapsed * (1.0 - content[i])
@@ -1653,43 +1670,43 @@ def calculate_hero_time(progress, directory, hero, viewport):
 def check_config():
     ok = True
 
-    print 'ffmpeg:  ',
+    print('ffmpeg:  ',)
     if get_decimate_filter() is not None:
-        print 'OK'
+        print('OK')
     else:
-        print 'FAIL'
+        print('FAIL')
         ok = False
 
-    print 'convert: ',
+    print('convert: ',)
     if check_process('{0} -version'.format(image_magick['convert']), 'ImageMagick'):
-        print 'OK'
+        print('OK')
     else:
-        print 'FAIL'
+        print('FAIL')
         ok = False
 
-    print 'compare: ',
+    print('compare: ',)
     if check_process('{0} -version'.format(image_magick['compare']), 'ImageMagick'):
-        print 'OK'
+        print('OK')
     else:
-        print 'FAIL'
+        print('FAIL')
         ok = False
 
-    print 'Pillow:  ',
+    print('Pillow:  ',)
     try:
         from PIL import Image, ImageDraw
 
-        print 'OK'
+        print('OK')
     except BaseException:
-        print 'FAIL'
+        print('FAIL')
         ok = False
 
-    print 'SSIM:    ',
+    print('SSIM:    ',)
     try:
         from ssim import compute_ssim
 
-        print 'OK'
+        print('OK')
     except BaseException:
-        print 'FAIL'
+        print('FAIL')
         ok = False
 
     return ok
@@ -1935,10 +1952,10 @@ def main():
                                 ' ', '')] = metric['value']
                         if 'videoRecordingStart' in globals():
                             data['videoRecordingStart'] = videoRecordingStart
-                        print json.dumps(data)
+                        print(json.dumps(data))
                     else:
                         for metric in metrics:
-                            print "{0}: {1}".format(metric['name'], metric['value'])
+                            print("{0}: {1}".format(metric['name'],metric['value']))
         else:
             ok = check_config()
     except Exception as e:
