@@ -28,6 +28,7 @@ addons:
       - python-pip
       - python-sympy
       - python-nose
+      - python-pytest
       - xz-utils
       - ttf-ubuntu-font-family
   firefox: 'latest'
