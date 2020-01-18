@@ -2,7 +2,16 @@
 
 ## 8.0.0-alpha.6 - UNRELEASED
 ### Fixed
-* Better error logs when Chrome fails to take screenshots and when page complete check timeouts [#1107](https://github.com/sitespeedio/browsertime/pull/1107) 
+* Better error logs when Chrome fails to take screenshots and when page complete check timeouts [#1107](https://github.com/sitespeedio/browsertime/pull/1107)
+* Increase to 5 tries (from 3) if navigation don't happen [#1124](https://github.com/sitespeedio/browsertime/pull/1124)
+* Fix the bug where a frame is missed after ffmpeg transformation [#1122](https://github.com/sitespeedio/browsertime/pull/1122) - thank you [Sean Feng](https://github.com/sefeng211) for the PR
+* Fix for Contentful Speed Index that sometimes failed [#1121](https://github.com/sitespeedio/browsertime/pull/1121) - thank you [Tarek Ziade](https://github.com/tarekziade)!
+* Automatically skip getting the HAR on Android for Firefox since it disn't work [#1119](https://github.com/sitespeedio/browsertime/pull/1119).
+* Fix for getting processStartTime on Android [#1118](https://github.com/sitespeedio/browsertime/pull/1118), thank you [Nick Alexander](https://github.com/ncalexan)!
+* Removing the faulty extra wait if you navigates to the same URL [#1112](https://github.com/sitespeedio/browsertime/pull/1112)
+
+### Added
+* Added `--firefox.args` and `--firefox.env` [1110](https://github.com/sitespeedio/browsertime/pull/1110), thank you [Nick Alexander](https://github.com/ncalexan)!
 
 ## 8.0.0-alpha.5 - 2020-01-12
 ### Fixed
