@@ -27,7 +27,8 @@ describe('command', function() {
         engine = new Engine({
           browser: browser,
           iterations: 1,
-          headless: true
+          headless: true,
+          retries: 0
         });
         await engine.start();
       });
