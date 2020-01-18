@@ -28,7 +28,8 @@ describe('Engine', function() {
           browser: browser,
           iterations: 2,
           delay: 17,
-          headless: true
+          headless: true,
+          retries: 0
         });
         return engine.start();
       });

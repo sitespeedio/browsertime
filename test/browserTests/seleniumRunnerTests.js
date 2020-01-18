@@ -65,7 +65,8 @@ describe('SeleniumRunner', function() {
             scripts: 5000,
             pageLoad: 10000,
             pageCompleteCheck: 5000
-          }
+          },
+          retries: 0
         });
         return runner.start();
       });
