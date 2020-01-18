@@ -28,6 +28,7 @@ addons:
       - python-pip
       - python-sympy
       - python-nose
+      - python-pytest
       - xz-utils
       - ttf-ubuntu-font-family
   firefox: 'latest'
@@ -40,6 +41,7 @@ before_install:
   - python -m pip --version
   - python -m pip show Pillow
   - python -m pip show pyssim
+  - python -m pip show pytest
   - sudo snap install ffmpeg
   - ffmpeg -version
   - python --version
