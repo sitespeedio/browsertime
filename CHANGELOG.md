@@ -6,6 +6,9 @@
 * Fix so we log a correct error message when taking a screenshot fails [#1131](https://github.com/sitespeedio/browsertime/pull/1131)
 * Fix so Chrome devtools trace log config default config is immutable [#1132](https://github.com/sitespeedio/browsertime/pull/1132).
 
+### Added
+* Enable Chromedriver log with `--chrome.enableChromeDriverLog` and gzip the log per iteration [#1133](https://github.com/sitespeedio/browsertime/pull/1133).
+
 ## 8.0.0-alpha.6 - 2020-01-18
 ### Fixed
 * Better error logs when Chrome fails to take screenshots and when page complete check timeouts [#1107](https://github.com/sitespeedio/browsertime/pull/1107)
