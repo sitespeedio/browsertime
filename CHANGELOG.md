@@ -6,6 +6,7 @@
 * Fix so we log a correct error message when taking a screenshot fails [#1131](https://github.com/sitespeedio/browsertime/pull/1131).
 * Fix so Chrome devtools trace log config default config is immutable [#1132](https://github.com/sitespeedio/browsertime/pull/1132).
 * Convert the video from Android to 60 FPS and use a monospace font on OS X [#1134](https://github.com/sitespeedio/browsertime/pull/1134) and [#1136](https://github.com/sitespeedio/browsertime/pull/1136).
+* Only start the HTTP server that is used by the extension for Firefox when it is actually needed (adding cookies/request headers etc) [#1137](https://github.com/sitespeedio/browsertime/pull/1137).
 
 ### Added
 * Enable Chromedriver log with `--chrome.enableChromeDriverLog` and gzip the log per iteration [#1133](https://github.com/sitespeedio/browsertime/pull/1133).
