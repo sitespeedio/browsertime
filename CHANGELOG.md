@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## 8.0.0-alpha.7 - UNRELEASED
+## 8.0.0-alpha.7 - 2020-01-21
 ### Fixed
 * If navigation never happens, make sure we log what's going on and fail hard by throwing an error [#1130](https://github.com/sitespeedio/browsertime/pull/1130).
 * Fix so we log a correct error message when taking a screenshot fails [#1131](https://github.com/sitespeedio/browsertime/pull/1131).
