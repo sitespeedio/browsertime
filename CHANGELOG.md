@@ -10,6 +10,7 @@
 
 ### Added
 * Enable Chromedriver log with `--chrome.enableChromeDriverLog` and gzip the log per iteration [#1133](https://github.com/sitespeedio/browsertime/pull/1133).
+* Support for running Edge for OS that supports it. Use `-b edge` and `--edge.edgedriverPath` with the path to the matching MSEdgeDriver. Edge use the same setup as Chrome, so you `--chrome.*` to configure Edge :) [#1140](https://github.com/sitespeedio/browsertime/pull/1140).
 
 ## 8.0.0-alpha.6 - 2020-01-18
 ### Fixed
