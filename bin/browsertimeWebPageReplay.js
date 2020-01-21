@@ -13,7 +13,7 @@ async function runBrowsertime() {
     .option('browser', {
       alias: 'b',
       default: 'chrome',
-      choices: ['chrome', 'firefox'],
+      choices: ['chrome', 'firefox', 'edge'],
       describe: 'Specify browser'
     })
     .option('connectivity.latency', {
