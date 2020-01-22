@@ -28,7 +28,6 @@ addons:
       - python-pip
       - python-sympy
       - python-nose
-      - python-pytest
       - xz-utils
       - ttf-ubuntu-font-family
   firefox: 'latest'
@@ -37,11 +36,9 @@ before_install:
   - python -m pip install --upgrade --user pip
   - python -m pip install --upgrade --user setuptools
   - python -m pip install --user pyssim
-  - python -m pip install --user pytest
   - python -m pip --version
   - python -m pip show Pillow
   - python -m pip show pyssim
-  - python -m pip show pytest
   - sudo snap install ffmpeg
   - ffmpeg -version
   - python --version
@@ -55,7 +52,7 @@ before_script:
 install:
   - npm ci
 script:
-  - pytest -sv browsertime/test_visualmetrics.py
+  - make test
   - npm run eslint-check && npm run lint
   - node ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle
   - node ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value --chrome.CPUThrottlingRate 2 --chrome.cdp.performance https://www.sitespeed.io/documentation/
