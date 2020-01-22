@@ -1,7 +1,7 @@
 import unittest
 import os
 
-from visualmetrics import calculate_contentful_speed_index
+from browsertime.visualmetrics import calculate_contentful_speed_index
 
 HERE = os.path.dirname(__file__)
 

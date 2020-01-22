@@ -51,11 +51,11 @@ before_script:
   - export DISPLAY=:99.0
   - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile
     --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1600x1024x16
-  - ./vendor/visualmetrics.py --check
+  - ./browsertime/visualmetrics.py --check
 install:
   - npm ci
 script:
-  - pytest -sv vendor/test_visualmetrics.py
+  - pytest -sv browsertime/test_visualmetrics.py
   - npm run eslint-check && npm run lint
   - node ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle
   - node ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value --chrome.CPUThrottlingRate 2 --chrome.cdp.performance https://www.sitespeed.io/documentation/
