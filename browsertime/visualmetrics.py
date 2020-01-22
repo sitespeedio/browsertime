@@ -458,7 +458,7 @@ def find_first_frame(directory, white_file):
             if count > 1:
                 from PIL import Image
 
-                for i in xrange(count):
+                for i in range(count):
                     if is_white_frame(files[i], white_file):
                         break
                     else:
@@ -485,7 +485,7 @@ def find_first_frame(directory, white_file):
                 first_frame = None
                 if white_file is None:
                     found_white_frame = True
-                for i in xrange(count):
+                for i in range(count):
                     if not found_first_change:
                         different = not frames_match(
                             files[i], files[i + 1], 5, 100, crop, None
@@ -534,7 +534,7 @@ def find_last_frame(directory, white_file):
                 found_end = False
                 from PIL import Image
 
-                for i in xrange(2, count):
+                for i in range(2, count):
                     if found_end:
                         logging.debug(
                             "Removing frame {0} from the end".format(files[i])
@@ -596,7 +596,7 @@ def find_render_start(directory, orange_file, gray_file):
                     left += client_viewport["x"]
                     top += client_viewport["y"]
                 crop = "{0:d}x{1:d}+{2:d}+{3:d}".format(width, height, left, top)
-                for i in xrange(1, count):
+                for i in range(1, count):
                     if frames_match(first, files[i], 10, 0, crop, mask):
                         logging.debug("Removing pre-render frame %s", files[i])
                         os.remove(files[i])
@@ -657,7 +657,7 @@ def eliminate_duplicate_frames(directory):
             # for up to a 10% per-pixel difference for noise in the white
             # field.
             count = len(files)
-            for i in xrange(1, count):
+            for i in range(1, count):
                 if frames_match(blank, files[i], 10, 0, crop, None):
                     logging.debug(
                         "Removing duplicate frame {0} from the beginning".format(
@@ -678,7 +678,7 @@ def eliminate_duplicate_frames(directory):
                 files.reverse()
                 baseline = files[0]
                 previous_frame = baseline
-                for i in xrange(1, count):
+                for i in range(1, count):
                     if frames_match(baseline, files[i], 15, 0, crop, None):
                         if previous_frame is baseline:
                             duplicates.append(previous_frame)
@@ -720,7 +720,7 @@ def eliminate_similar_frames(directory):
                         client_viewport["y"],
                     )
                 baseline = files[1]
-                for i in xrange(2, count - 1):
+                for i in range(2, count - 1):
                     if frames_match(baseline, files[i], 1, 0, crop, None):
                         logging.debug("Removing similar frame {0}".format(files[i]))
                         os.remove(files[i])
@@ -760,7 +760,7 @@ def crop_viewport(directory):
                     client_viewport["x"],
                     client_viewport["y"],
                 )
-                for i in xrange(count):
+                for i in range(count):
                     command = '{0} "{1}" -crop {2} "{1}"'.format(
                         image_magick["convert"], files[i], crop
                     )
@@ -902,7 +902,7 @@ def is_white_frame(file, white_file):
 def colors_are_similar(a, b, threshold=15):
     similar = True
     sum = 0
-    for x in xrange(3):
+    for x in range(3):
         delta = abs(a[x] - b[x])
         sum += delta
         if delta > threshold:
@@ -1200,9 +1200,9 @@ def calculate_image_histogram(file):
         width, height = im.size
         colors = im.getcolors(width * height)
         histogram = {
-            "r": [0 for i in xrange(256)],
-            "g": [0 for i in xrange(256)],
-            "b": [0 for i in xrange(256)],
+            "r": [0 for i in range(256)],
+            "g": [0 for i in range(256)],
+            "b": [0 for i in range(256)],
         }
         for entry in colors:
             try:
@@ -1337,7 +1337,7 @@ def render_video(directory, video_file):
                         current_frame += 1
                     # hold the end frame for one second so it's actually
                     # visible
-                    for i in xrange(30):
+                    for i in range(30):
                         proc.stdin.write(current_image)
                     proc.stdin.close()
                     proc.communicate()
@@ -1602,16 +1602,16 @@ def calculate_frame_progress(histogram, start, final):
         channel_total = 0
         channel_matched = 0
         buckets = 256
-        available = [0 for i in xrange(buckets)]
-        for i in xrange(buckets):
+        available = [0 for i in range(buckets)]
+        for i in range(buckets):
             available[i] = abs(histogram[channel][i] - start[channel][i])
-        for i in xrange(buckets):
+        for i in range(buckets):
             target = abs(final[channel][i] - start[channel][i])
             if target:
                 channel_total += target
                 low = max(0, i - slop)
                 high = min(buckets, i + slop)
-                for j in xrange(low, high):
+                for j in range(low, high):
                     this_match = min(target, available[j])
                     available[j] -= this_match
                     channel_matched += this_match
