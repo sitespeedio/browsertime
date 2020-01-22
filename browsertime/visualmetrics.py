@@ -333,7 +333,7 @@ def find_image_viewport(file):
             "height": (bottom - top),
         }
 
-    except Exception as e:
+    except Exception:
         viewport = None
 
     return viewport
@@ -397,7 +397,7 @@ def find_video_viewport(video, directory, find_viewport, viewport_time):
                 viewport = {"x": 0, "y": 0, "width": width, "height": height}
             os.remove(frame)
 
-    except Exception as e:
+    except Exception:
         viewport = None
 
     return viewport
@@ -532,7 +532,6 @@ def find_last_frame(directory, white_file):
             count = len(files)
             if count > 2:
                 found_end = False
-                from PIL import Image
 
                 for i in range(2, count):
                     if found_end:
@@ -1313,7 +1312,6 @@ def render_video(directory, video_file):
                     last_index = len(files) - 1
                     if m is not None:
                         next_image_time = int(m.group(1))
-                        next_image_file = files[file_index + 1]
                     done = False
                     current_frame = 0
                     while not done:
@@ -1330,7 +1328,6 @@ def render_video(directory, video_file):
                                 m = re.search(match, files[file_index + 1])
                                 if m:
                                     next_image_time = int(m.group(1))
-                                    next_image_file = files[file_index + 1]
                             else:
                                 done = True
                         proc.stdin.write(current_image)
@@ -1895,7 +1892,7 @@ def check_config():
 
     print("Pillow:  ",)
     try:
-        from PIL import Image, ImageDraw
+        from PIL import Image, ImageDraw  # noqa
 
         print("OK")
     except BaseException:
@@ -1904,7 +1901,7 @@ def check_config():
 
     print("SSIM:    ",)
     try:
-        from ssim import compute_ssim
+        from ssim import compute_ssim  # noqa
 
         print("OK")
     except BaseException:
@@ -2227,7 +2224,6 @@ def main():
     ok = False
     try:
         if not options.check:
-            viewport = None
             if options.video:
                 orange_file = None
                 if options.orange:
