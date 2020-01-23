@@ -7,7 +7,3 @@ requires = [
     "setuptools_scm >= 2.0.0, <3"
 ]
 build-backend = "setuptools.build_meta"
-
-[tool.flit.metadata]
-module = "browsertime.visualmetrics"
-author = "Browsertime"
