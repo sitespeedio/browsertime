@@ -8,3 +8,16 @@ doc/sequence-diagrams/*.png
 .vscode
 /browsertime-results/
 .tern-project
+.Python
+.tox/
+bin/activate*
+bin/easy_install*
+bin/pip*
+bin/python*
+bin/tox*
+bin/virtualenv
+bin/wheel
+browsertime.egg-info/
+*.pyc
+include/
+lib/python*

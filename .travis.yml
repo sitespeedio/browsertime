@@ -15,6 +15,8 @@ addons:
     sources:
       - sourceline: 'ppa:ubuntu-toolchain-r/test'
     packages:
+      - python3
+      - python3-pip
       - imagemagick
       - ipython
       - libjpeg-dev
@@ -28,7 +30,6 @@ addons:
       - python-pip
       - python-sympy
       - python-nose
-      - python-pytest
       - xz-utils
       - ttf-ubuntu-font-family
   firefox: 'latest'
@@ -37,11 +38,9 @@ before_install:
   - python -m pip install --upgrade --user pip
   - python -m pip install --upgrade --user setuptools
   - python -m pip install --user pyssim
-  - python -m pip install --user pytest
   - python -m pip --version
   - python -m pip show Pillow
   - python -m pip show pyssim
-  - python -m pip show pytest
   - sudo snap install ffmpeg
   - ffmpeg -version
   - python --version
@@ -51,11 +50,11 @@ before_script:
   - export DISPLAY=:99.0
   - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile
     --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1600x1024x16
-  - ./vendor/visualmetrics.py --check
+  - ./browsertime/visualmetrics.py --check
 install:
   - npm ci
 script:
-  - pytest -sv vendor/test_visualmetrics.py
+  - VTENV_OPTS="-p python3" make test
   - npm run eslint-check && npm run lint
   - node ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle
   - node ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value --chrome.CPUThrottlingRate 2 --chrome.cdp.performance https://www.sitespeed.io/documentation/

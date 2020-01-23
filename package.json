@@ -58,6 +58,7 @@
     "bin",
     "browserscripts",
     "browsersupport",
+    "browsertime",
     "browsertime.png",
     "docs",
     "index.js",
