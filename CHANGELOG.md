@@ -1,5 +1,17 @@
 # Browsertime changelog
 
+## 8.0.0-alpha.8 - UNRELEASED
+### Fixed
+* Ignore certificate errors by default when we record with WPR [#1150](https://github.com/sitespeedio/browsertime/pull/1150)
+* If Visual Metrics failed, the original error wasn't there in the log. Fixed by [#1149](https://github.com/sitespeedio/browsertime/pull/1149) 
+* Fix so the devtools port is added only one time on Android [#1145](https://github.com/sitespeedio/browsertime/pull/1145)
+* If Visual Metrics fails, let produce an error that ends up in the JSON [#1147](https://github.com/sitespeedio/browsertime/pull/1147) 
+* Cleanup WPR code to use default page complete check [#1143](https://github.com/sitespeedio/browsertime/pull/1143)
+
+### Added
+* Move visualmetrics.py to a python package [#1148](https://github.com/sitespeedio/browsertime/pull/1148) - thank you [Tarek Ziade](https://github.com/tarekziade)!
+* Run Safari on iOS with just `-b safari --ios` [#1141](https://github.com/sitespeedio/browsertime/pull/1141)
+
 ## 8.0.0-alpha.7 - 2020-01-21
 ### Fixed
 * If navigation never happens, make sure we log what's going on and fail hard by throwing an error [#1130](https://github.com/sitespeedio/browsertime/pull/1130).
@@ -41,7 +53,7 @@
 
 ## 8.0.0-alpha.4 - 2020-01-10
 ### Added
-* Enable verbose logging when using geckodriver [#1083](https://github.com/sitespeedio/browsertime/pull/1083) by [Nick Alexander](https://github.com/ncalexan).
+* Enable verbose logging when "using geckodriver [#1083](https://github.com/sitespeedio/browsertime/pull/1083) by [Nick Alexander](https://github.com/ncalexan).
 * Pickup the Visual Metrics log file and if there's an error running Visual Metrics, log the information to our log. This will make easier and faster to find problems while running Visual Metrics and make it easier for users to report problems we can act on [#1085](https://github.com/sitespeedio/browsertime/pull/1085).
 * Increase wait time before next try when navigation fails. First 10s, then 20s then 30s [#1086](https://github.com/sitespeedio/browsertime/pull/1086)
 * Making Sharp an optional requirement as proposed by [Nick Alexander](https://github.com/ncalexan). If you don't install Sharp, screenshots will be stored as PNG as the current viewport size [#1084](https://github.com/sitespeedio/browsertime/pull/1084).
