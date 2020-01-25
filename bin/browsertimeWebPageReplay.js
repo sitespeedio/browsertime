@@ -38,6 +38,9 @@ async function runBrowsertime() {
     resultDir: '/tmp/browsertime',
     screenshotParams: {
       type: 'jpg'
+    },
+    chrome: {
+      ignoreCertificateErrors: true
     }
   };
 
