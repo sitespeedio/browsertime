@@ -11,6 +11,8 @@ if (process.env.BROWSERTIME_TEST_BROWSER) {
   BROWSERS.push('chrome', 'firefox');
 }
 
+const PAGE_LOAD_STRATEGIES = ['normal', 'none'];
+
 function timeout(promise, ms, errorMessage) {
   let timer = null;
 
@@ -44,7 +46,8 @@ describe('SeleniumRunner', function() {
           chrome: {
             args: '--crash-test'
           },
-          verbose: true
+          verbose: true,
+          headless: true
         });
 
         // Wait for session to actually have Chrome start up.
@@ -66,6 +69,9 @@ describe('SeleniumRunner', function() {
             pageLoad: 10000,
             pageCompleteCheck: 5000
           },
+          pageLoadStrategy: 'normal',
+          pageCompleteWaitTime: 2000,
+          headless: true,
           retries: 0
         });
         return runner.start();
@@ -113,6 +119,41 @@ describe('SeleniumRunner', function() {
       });
     });
 
+    PAGE_LOAD_STRATEGIES.forEach(function(strategy) {
+      describe('#pageLoadStrategy - ' + browser + ' - ' + strategy, function() {
+        beforeEach(function() {
+          runner = new SeleniumRunner({
+            browser: browser,
+            timeouts: {
+              browserStart: 60000,
+              scripts: 5000,
+              pageLoad: 10000,
+              pageCompleteCheck: 10000
+            },
+            pageLoadStrategy: strategy,
+            headless: true
+          });
+          return runner.start().then(function() {
+            return runner.loadAndWait('data:text/html;charset=utf-8,');
+          });
+        });
+
+        it('should be able to load a url', function() {
+          return runner.loadAndWait(
+            'https://www.sitespeed.io/testcases/info/domElements.html'
+          ).should.be.fulfilled;
+        });
+
+        afterEach(function() {
+          return timeout(
+            runner.stop(),
+            10000,
+            'Waited for ' + browser + ' to quit for too long'
+          );
+        });
+      });
+    });
+
     describe('#runScript - ' + browser, function() {
       beforeEach(function() {
         runner = new SeleniumRunner({
@@ -122,7 +163,9 @@ describe('SeleniumRunner', function() {
             scripts: 5000,
             pageLoad: 10000,
             pageCompleteCheck: 10000
-          }
+          },
+          pageLoadStrategy: 'normal',
+          headless: true
         });
         return runner.start().then(function() {
           return runner.loadAndWait('data:text/html;charset=utf-8,');
@@ -187,7 +230,8 @@ describe('SeleniumRunner', function() {
             scripts: 5000,
             pageLoad: 10000,
             pageCompleteCheck: 10000
-          }
+          },
+          headless: true
         });
         return runner.start().then(function() {
           return runner.loadAndWait('data:text/html;charset=utf-8,');
