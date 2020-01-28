@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## 8.0.0-alpha.8 - UNRELEASED
+## 8.0.0-alpha.8 - 2020-01-28
 ### Fixed
 * Ignore certificate errors by default when we record with WPR [#1150](https://github.com/sitespeedio/browsertime/pull/1150)
 * If Visual Metrics failed, the original error wasn't there in the log. Fixed by [#1149](https://github.com/sitespeedio/browsertime/pull/1149) 
