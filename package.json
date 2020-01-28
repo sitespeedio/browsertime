@@ -71,6 +71,7 @@
     "test": "mocha test/unitTests test/browserTests test/commandTests",
     "test:unit": "mocha test/unitTests",
     "test:browser": "mocha test/browserTests",
+    "test:selenium": "mocha test/browserTests/seleniumRunnerTests.js",
     "test:commands": "mocha test/commandTests",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
