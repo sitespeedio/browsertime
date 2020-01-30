@@ -16,10 +16,10 @@ Access the Web Performance Timeline, from your browser, in your terminal!
 
 We think of a Browsertime as having four key capabilities:
 
- - It handles everything with the browser (Firefox/Chrome).
+ - It handles everything with the browser (Firefox/Chrome/Edge/Safari).
  - It executes a batch of default and configurable JavaScript when the URL has finished loading in the browser.
- - It records a video of the Browser screen used to calculate Visual Metrics.
- - It lets you run Selenium scripts before and after the browser access the URL (to login a user etc).
+ - It records a video of the Browser screen used to calculate [Visual Metrics](https://github.com/WPO-Foundation/visualmetrics).
+ - It lets you run your [scripting file to create and measure your users journey](https://www.sitespeed.io/documentation/sitespeed.io/scripting/).
 
 **What is Browsertime good for?**
 
@@ -28,10 +28,10 @@ It is usually used for two different things:
  - You run it as a standalone tool to collect performance timing metrics of your web site.
  - You integrate it in your tool as a JavaScript runner that collects whatever JavaScript metrics/information you want.
 
-To understand how Browsertime does these things, let's talk about how it works. Here's an example of what happens when you give Browsertime a URL to test:
+To understand how Browsertime do these things, let's talk about how it works. Here's an example of what happens when you give Browsertime a URL to test:
 
 1. You give your configuration to Browsertime.
-2. Browsertime uses the [WebDriver](https://www.w3.org/TR/webdriver/) (through [Selenium](http://seleniumhq.github.io/selenium/docs/api/javascript/index.html)) to start Firefox and Chrome (the implementations for the Webdriver is [Chromedriver](https://sites.google.com/a/chromium.org/chromedriver/)/[Geckodriver](https://github.com/mozilla/geckodriver/)).
+2. Browsertime uses the [WebDriver](https://www.w3.org/TR/webdriver/) (through [Selenium](http://seleniumhq.github.io/selenium/docs/api/javascript/index.html)) to start Firefox/Chrome/Safari/Edge.
 3. Browsertime starts FFMPEG to record a video of the browser screen
 4. The browser access the URL.
 5. When the page is finished loading (you can define yourself when that happens), Browsertime executes the default JavaScript timing metrics and collects:
@@ -63,8 +63,7 @@ Load https://www.sitespeed.io/ in Chrome three times. Results are stored in a JS
 Checkout the [examples](docs/examples/README.md).
 
 ## Browsers
-Browsertime supports Firefox and Chrome on desktop. Limited support for Safari on desktop. On Android we support Chrome and Firefox (from 8.0) and limited Safari on iOS.
-
+Browsertime supports Firefox, Chrome, and Edge (Chromium version) on desktop. There are also iimited support for Safari on desktop. On Android we support Chrome and Firefox (from 8.0) and Safari on iOS.
 
 ## How does it work
 Browsertime uses Selenium NodeJS to drive the browser. It starts the browser, load a URL, executes configurable Javascripts to collect metrics, collect a HAR file.
@@ -155,46 +154,17 @@ If you are running Browsertime in Kubernetes you need to use [TSProxy](https://g
 browsertime --connectivity.engine tsproxy -c cable https://www.sitespeed.io/
 ~~~
 
-## Upgrade from 3.x to 4.0
-There are a couple of breaking changes introduce in 4.0.
-
-1. New structure of the result JSON. In 4.0 we introduce the ability to test multiple pages. That means that instead of returning one result object, we return an array. In 3.x the result looks like this:
-  ``` 
-  {
-  "info": {
-      "browsertime": {
-          "version": "3.0.0"
-      }, ...
-  ```
-  And the new one returns a array, where each tested page is an result in that array.  
-  ``` 
-  [{
-  "info": {
-      "browsertime": {
-          "version": "4.0.0"
-      }, ...
-  }}]
-  ``` 
-2. New naming of result files. Before files was named by iteration: 1-video.mp4. In the latest version all extra files are stored in a folder structure and referenced in the JSON, starting with /pages/ (following the same pattern as sitespeed.io). If you just want to test one URL at each time, you can keep the old structure with  ```--useSameDir```.
-3. New layout of Selenium scripting. We simplified the layout of the script. The new version will be able to do the exact same thing as older versions but with a simpler layout:
-~~~javascript
-  module.exports = async function(context, commands) {
-  // code
-  }
-~~~
-4. Pre/post scripts follow the new format as of the script in the third point.
-
-## Navigate in a script [in 4.0 or later]
+## Navigate in a script
 If you need a more complicated test scenario, you can define your own (Selenium)test script that will do the testing. Use your own test script when you want to test your page as a logged in user, the login page or if you want to add things to your cart.
 
 We have a full section in the documentation about [scripting](https://www.sitespeed.io/documentation/sitespeed.io/scripting/).
 
 ## Test on your mobile device
-Browsertime supports Chrome on Android: Collecting SpeedIndex, HAR and video! 
+Browsertime supports Chrome and Firefox on Android: Collecting SpeedIndex, HAR and video! 
 
 You need to [install adb](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#desktop) and [prepare your phone](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#on-your-phone) before you start.
 
-If you want to set connectivity you need to use something like [Micro device lab](https://github.com/phuedx/micro-device-lab) or [TSProxy](https://github.com/WPO-Foundation/tsproxy).
+If you want to set connectivity you need to use something like [gnirehtet](https://github.com/Genymobile/gnirehtet) or [TSProxy](https://github.com/WPO-Foundation/tsproxy). Read more information [here](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#connectivity).
 
 <pre>
 $ browsertime --chrome.android.package com.android.chrome https://www.sitespeed.io --video --visualMetrics
