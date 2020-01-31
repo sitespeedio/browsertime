@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASDED
+### Fixed
+* Compare "bare" domain names in URL retry logic as equal. Thank you [Nick Alexander](https://github.com/ncalexan) for [#1158](https://github.com/sitespeedio/browsertime/pull/1158).
+
 ## 8.0.0-beta.1 - 2020-01-30
 
 Woho Browsertime 8.0.0 is coming! Planned stable release date: 4 Feb since we are waiting Chrome 80 to become stable (79 has a bug that freezes JS sometimes).
