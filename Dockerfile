@@ -11,7 +11,7 @@ COPY docker/webpagereplay/deterministic.js /webpagereplay/scripts/deterministic.
 COPY docker/webpagereplay/LICENSE /webpagereplay/
 
 RUN sudo apt-get update && sudo apt-get install libnss3-tools \
-  net-tools -y && \
+  net-tools tcpdump -y && \
   mkdir -p $HOME/.pki/nssdb && \
   certutil -d $HOME/.pki/nssdb -N
 
