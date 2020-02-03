@@ -2501,9 +2501,9 @@
       }
     },
     "@sitespeed.io/throttle": {
-      "version": "1.0.0",
-      "resolved": "https://registry.npmjs.org/@sitespeed.io/throttle/-/throttle-1.0.0.tgz",
-      "integrity": "sha512-usF1RAB5x7+G77IBrvZbP80QOKefGI/pBLNgsIQxqiCsKamekHWgbuEHVTYmaEljbcaNTAM2M/6oyLR+2hRRKg==",
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/@sitespeed.io/throttle/-/throttle-1.0.1.tgz",
+      "integrity": "sha512-/XVp44K73BeiLgGzYdvqynw4tgpJ06a7htkHsjWlFzfrAUGKeaJatvFqEWYvmmi5IRhAYpnqaR1kgZfLcLdcQg==",
       "requires": {
         "execa": "2.0.4",
         "minimist": "1.2.0",
