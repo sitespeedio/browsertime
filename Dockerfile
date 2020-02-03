@@ -11,7 +11,7 @@ COPY docker/webpagereplay/deterministic.js /webpagereplay/scripts/deterministic.
 COPY docker/webpagereplay/LICENSE /webpagereplay/
 
 RUN sudo apt-get update && sudo apt-get install libnss3-tools \
-  net-tools -y && \
+  net-tools tcpdump -y && \
   mkdir -p $HOME/.pki/nssdb && \
   certutil -d $HOME/.pki/nssdb -N
 
@@ -39,6 +39,6 @@ COPY docker/scripts/start.sh /start.sh
 
 # Allow all users to run commands needed by sitespeedio/throttle via sudo
 # See https://github.com/sitespeedio/throttle/blob/master/lib/tc.js
-RUN echo 'ALL ALL=NOPASSWD: /usr/sbin/tc, /usr/sbin/route, /usr/sbin/ip' > /etc/sudoers.d/tc
+RUN echo 'ALL ALL=NOPASSWD: /usr/sbin/tc, /usr/sbin/route, /usr/sbin/ip, /usr/sbin/tcpdump ' > /etc/sudoers.d/tc
 
 ENTRYPOINT ["/start.sh"]
