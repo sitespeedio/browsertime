@@ -1,26 +1,12 @@
 # Browsertime changelog
 
-## 8.0.0-beta.2 - 2020-02-05
-### Fixed
-* Compare "bare" domain names in URL retry logic as equal. Thank you [Nick Alexander](https://github.com/ncalexan) for [#1158](https://github.com/sitespeedio/browsertime/pull/1158).
-* Testing the same URL multiple times in a script was broken when you recorded a video, fixed in [#1161](https://github.com/sitespeedio/browsertime/pull/1161), reported in [#2842](https://github.com/sitespeedio/sitespeed.io/issues/2842).
+## 8.0.0 2020-02-05
 
-### Added
-* Support for getting tcpdumps (desktop only). A very special thanks to [Martino Trevisan](https://github.com/marty90) that started to add the support long time ago. You probably want to dump the SSL keyolog file and you can do that like this: `SSLKEYLOGFILE=/path/to/file browsertime --tcpdump https://www.sitespeed.io` or in Docker `docker run --rm -v "$(pwd)":/browsertime -e SSLKEYLOGFILE=/browsertime/keylog.txt sitespeedio/browsertime https://www.sitespeed.io/ -n 1 --tcpdump`. Implemented in [#1159](https://github.com/sitespeedio/browsertime/pull/1159).
+Woho Browsertime 8.0.0 is here!
 
-* Updated to Chrome 80 and Chromedriver 80 [#1162](https://github.com/sitespeedio/browsertime/pull/1162).
-
-### Changed
-* Rename latency to rtt/add 4g/add new profiles: Rename latency to rtt (this has been wrongly named for so long time), add 4g, changed 2g to become usable (follow WPT settings) and use the coming connectivity profiles with `--newConnectivityProfiles` (following the exact config as Throttle and WebPageTest) [#1160](https://github.com/sitespeedio/browsertime/pull/1160)
-
-
-## 8.0.0-beta.1 - 2020-01-30
-
-Woho Browsertime 8.0.0 is coming! Planned stable release date: 4 Feb since we are waiting Chrome 80 to become stable (79 has a bug that freezes JS sometimes).
-
-There's a lot of new things in 8.0.0. First: A big THANK YOU to all the people at Mozilla that have contributed with all the new stuff when using Firefox: 
+There's a lot of new things in 8.0.0. First: A big THANK YOU to all the people at Mozilla that have contributed with all the new stuff: 
 * [Nick Alexander](https://github.com/ncalexan)
-* [https://github.com/dpalmeiro](https://github.com/dpalmeiro)
+* [Denis Palmeiro](https://github.com/dpalmeiro)
 * [Sean Feng](https://github.com/sefeng211)
 * [Chris Liu](https://github.com/cliu55)
 * [Will Hawkins](https://github.com/hawkinsw)
@@ -34,6 +20,7 @@ Major new things:
 * Now the window recorder for Firefox works great. That means you can record a video of the loading of your page without using FFMPEG. Add `--firefox.windowRecorder` and `-video`to your run.
 * You can use the new Chromium based MS Edge on OS that support that browser.
 * There has been a lot of work minimizing the impact of the browser to make it easier to get as stable metrics as possible.
+* Use `--tcpdump` to get a tcpdump on desktop.
 
 Lets go through all the new things. There's a couple things that changes:
 
@@ -42,6 +29,7 @@ Lets go through all the new things. There's a couple things that changes:
 * The default page complete check now uses performance.now instead of Date to make default behavior work for pages/proxies that overrides Date [#1044](https://github.com/sitespeedio/browsertime/pull/1044).
 * New data structure for VisualProgress of Visual Metrics. It's now an array with objects `{timestamp:x, percent:y}`.
 * Use pageLoadStrategy *none* as default [#1151](https://github.com/sitespeedio/browsertime/pull/1151).
+* Rename latency to rtt/add 4g/add new profiles: Rename latency to rtt (this has been wrongly named for so long time), add 4g, changed 2g to become usable (follow WPT settings) and use the coming connectivity profiles with `--newConnectivityProfiles` (following the exact config as Throttle and WebPageTest) [#1160](https://github.com/sitespeedio/browsertime/pull/1160)
 
 ### Added
 * New functionallity from the Mozilla perfromance team. Merge [#1028](https://github.com/sitespeedio/browsertime/pull/1028) - let us add each feature one by one when they are tested and working:
@@ -67,6 +55,8 @@ Lets go through all the new things. There's a couple things that changes:
 * Updated dependencies yargs, selenium, dayjs, sharp, get-port, execa and chrome-remote-interface [#1068](https://github.com/sitespeedio/browsertime/pull/1068) and [#1069](https://github.com/sitespeedio/browsertime/pull/1069)
 * Retry three times if a URL fails to load (and refactor the loading code to make it easier to understand) [#1077](https://github.com/sitespeedio/browsertime/pull/1077)
 * Upgraded the HAR Export Trigger for Firefox to 0.6.1 [#1078](https://github.com/sitespeedio/browsertime/pull/1078)
+* Updated to Chrome 80 and Chromedriver 80 [#1162](https://github.com/sitespeedio/browsertime/pull/1162).
+* Support for getting tcpdumps (desktop only). A very special thanks to [Martino Trevisan](https://github.com/marty90) that started to add the support long time ago. You probably want to dump the SSL keyolog file and you can do that like this: `SSLKEYLOGFILE=/path/to/file browsertime --tcpdump https://www.sitespeed.io` or in Docker `docker run --rm -v "$(pwd)":/browsertime -e SSLKEYLOGFILE=/browsertime/keylog.txt sitespeedio/browsertime https://www.sitespeed.io/ -n 1 --tcpdump`. Implemented in [#1159](https://github.com/sitespeedio/browsertime/pull/1159).
 
 ### Fixed
 * Ignore certificate errors by default when we record with WPR [#1150](https://github.com/sitespeedio/browsertime/pull/1150)
@@ -102,6 +92,8 @@ Lets go through all the new things. There's a couple things that changes:
 * Progress data from Visual Metrics don't need stats [#1060](https://github.com/sitespeedio/browsertime/pull/1060).
 * Refactor and fixed Firefox Android code in [#1058](https://github.com/sitespeedio/browsertime/pull/1058) and  [#1057](https://github.com/sitespeedio/browsertime/pull/1057).
 * Simplified the HAR export code for Firefox [#1059](https://github.com/sitespeedio/browsertime/pull/1059).
+* Testing the same URL multiple times in a script was broken when you recorded a video, fixed in [#1161](https://github.com/sitespeedio/browsertime/pull/1161), reported in [#2842](https://github.com/sitespeedio/sitespeed.io/issues/2842).
+* Compare "bare" domain names in URL retry logic as equal. Thank you [Nick Alexander](https://github.com/ncalexan) for [#1158](https://github.com/sitespeedio/browsertime/pull/1158).
 
 ### Tech
 * Refactor Firefox code in iteration and moved it to the Firefox delegate [#1100](https://github.com/sitespeedio/browsertime/pull/1100) and [#1102](https://github.com/sitespeedio/browsertime/pull/1102).
