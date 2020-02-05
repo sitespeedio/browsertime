@@ -1,12 +1,18 @@
 # Browsertime changelog
 
-## UNRELEASDED
+## 8.0.0-beta.2 - 2020-02-05
 ### Fixed
 * Compare "bare" domain names in URL retry logic as equal. Thank you [Nick Alexander](https://github.com/ncalexan) for [#1158](https://github.com/sitespeedio/browsertime/pull/1158).
 * Testing the same URL multiple times in a script was broken when you recorded a video, fixed in [#1161](https://github.com/sitespeedio/browsertime/pull/1161), reported in [#2842](https://github.com/sitespeedio/sitespeed.io/issues/2842).
 
 ### Added
 * Support for getting tcpdumps (desktop only). A very special thanks to [Martino Trevisan](https://github.com/marty90) that started to add the support long time ago. You probably want to dump the SSL keyolog file and you can do that like this: `SSLKEYLOGFILE=/path/to/file browsertime --tcpdump https://www.sitespeed.io` or in Docker `docker run --rm -v "$(pwd)":/browsertime -e SSLKEYLOGFILE=/browsertime/keylog.txt sitespeedio/browsertime https://www.sitespeed.io/ -n 1 --tcpdump`. Implemented in [#1159](https://github.com/sitespeedio/browsertime/pull/1159).
+
+* Updated to Chrome 80 and Chromedriver 80 [#1162](https://github.com/sitespeedio/browsertime/pull/1162).
+
+### Changed
+* Rename latency to rtt/add 4g/add new profiles: Rename latency to rtt (this has been wrongly named for so long time), add 4g, changed 2g to become usable (follow WPT settings) and use the coming connectivity profiles with `--newConnectivityProfiles` (following the exact config as Throttle and WebPageTest) [#1160](https://github.com/sitespeedio/browsertime/pull/1160)
+
 
 ## 8.0.0-beta.1 - 2020-01-30
 
