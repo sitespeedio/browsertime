@@ -1,5 +1,5 @@
 (function() {
-  const resources = window.performance.getEntriesByType("resource");
+  const resources = window.performance.getEntriesByType('resource');
 
   let resourceDuration = 0;
   for (let i = 0; i < resources.length; i++) {
@@ -7,8 +7,8 @@
   }
 
   return {
-    resourceCount: Number(resources.length),
-    resourceDuration: Number(resourceDuration)
+    count: Number(resources.length),
+    duration: Number(resourceDuration)
   }
 })();
 
