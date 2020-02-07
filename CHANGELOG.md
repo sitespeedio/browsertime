@@ -8,6 +8,9 @@
 * Removed the lodash.remove dependency [#1174](https://github.com/sitespeedio/browsertime/pull/1174)
 * Removed the lodash.forEach dependency [#1175](https://github.com/sitespeedio/browsertime/pull/1175)
 
+### Added
+* Get total number of resources and total duration time (using the Resource Timing API). The metrics exists in *pageinfo.resources.duration* and *pageinfo.resources.count*. Thank you [Sean Feng](https://github.com/sefeng211) for PR [#1167](https://github.com/sitespeedio/browsertime/pull/1167) and [#1176](https://github.com/sitespeedio/browsertime/pull/1176).
+
 ## 8.0.1 2020-02-07
 
 ### Fixed
