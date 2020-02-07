@@ -4901,11 +4901,6 @@
       "resolved": "https://registry.npmjs.org/lodash.pick/-/lodash.pick-4.4.0.tgz",
       "integrity": "sha1-UvBWEP/53tQiYRRB7R/BI6AwAbM="
     },
-    "lodash.remove": {
-      "version": "4.7.0",
-      "resolved": "https://registry.npmjs.org/lodash.remove/-/lodash.remove-4.7.0.tgz",
-      "integrity": "sha1-8x0x58OaBpDVB07A02JxYjNO5iY="
-    },
     "lodash.set": {
       "version": "4.3.2",
       "resolved": "https://registry.npmjs.org/lodash.set/-/lodash.set-4.3.2.tgz",

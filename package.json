@@ -23,7 +23,6 @@
     "lodash.isempty": "4.4.0",
     "lodash.merge": "4.6.2",
     "lodash.pick": "4.4.0",
-    "lodash.remove": "4.7.0",
     "lodash.set": "4.3.2",
     "selenium-webdriver": "4.0.0-alpha.5",
     "@sitespeed.io/geckodriver": "0.26.0",
