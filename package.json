@@ -9,12 +9,12 @@
     "@sitespeed.io/chromedriver": "80.0.3987-16",
     "chrome-har": "0.11.4",
     "chrome-remote-interface": "0.28.1",
-    "dayjs": "1.8.18",
+    "dayjs": "1.8.20",
     "del": "4.1.1",
     "execa": "4.0.0",
     "fast-stats": "0.0.5",
     "find-up": "4.1.0",
-    "get-port": "5.1.0",
+    "get-port": "5.1.1",
     "hasbin": "1.2.3",
     "intel": "1.2.0",
     "lodash.foreach": "4.5.0",
@@ -31,10 +31,10 @@
     "@sitespeed.io/tracium": "0.3.3",
     "speedline-core": "1.4.2",
     "@cypress/xvfb": "1.2.4",
-    "yargs": "15.0.2"
+    "yargs": "15.1.0"
   },
   "optionalDependencies": {
-    "sharp": "0.23.4"
+    "sharp": "0.24.0"
   },
   "devDependencies": {
     "bluebird": "3.5.5",
