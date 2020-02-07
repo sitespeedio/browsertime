@@ -3,7 +3,7 @@
 ## UNRELEASED
 ### Fixed
 * Updated dependencies sharp, yargs, dayjs, get-port [#1171](https://github.com/sitespeedio/browsertime/pull/1171).
-* Removed the del depndency [#1172](https://github.com/sitespeedio/browsertime/pull/1172)
+* Removed the del dependency [#1172](https://github.com/sitespeedio/browsertime/pull/1172)
 * Removed the mkdirp dependency [#1173](https://github.com/sitespeedio/browsertime/pull/1173)
 * Removed the lodash.remove dependency [#1174](https://github.com/sitespeedio/browsertime/pull/1174)
 * Removed the lodash.forEach dependency [#1175](https://github.com/sitespeedio/browsertime/pull/1175)
