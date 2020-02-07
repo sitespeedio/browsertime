@@ -1,8 +1,16 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* Updated dependencies sharp, yargs, dayjs, get-port [#1171](https://github.com/sitespeedio/browsertime/pull/1171).
+* Removed the del depndency [#1172](https://github.com/sitespeedio/browsertime/pull/1172)
+* Removed the mkdirp dependency [#1173](https://github.com/sitespeedio/browsertime/pull/1173)
+* Removed the lodash.remove dependency [#1174](https://github.com/sitespeedio/browsertime/pull/1174)
+* Removed the lodash.forEach dependency [#1175](https://github.com/sitespeedio/browsertime/pull/1175)
+
 ## 8.0.1 2020-02-07
 
-### Fixes
+### Fixed
 * Fixed broken TSProxy, thank you [Kenrick](https://github.com/kenrick95) for the PR [#1169](https://github.com/sitespeedio/browsertime/pull/1169).
 * Keep the orange frame length to make it easier to debug if soemthing is wrong, thank you [Sean Feng](https://github.com/sefeng211) for PR [#1165](https://github.com/sitespeedio/browsertime/pull/1165).
 * Fix for "Visual metrics are not correct when running browsertime with the new Firefox for Android browser (Fenix) when WebRender is enabled, because there's a bug in WebRender. Thank you [Sean Feng](https://github.com/sefeng211) for PR [#1166](https://github.com/sitespeedio/browsertime/pull/1166).
