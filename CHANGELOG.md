@@ -1,5 +1,12 @@
 # Browsertime changelog
 
+## 8.0.1 2020-02-07
+
+### Fixes
+* Fixed broken TSProxy, thank you [Kenrick](https://github.com/kenrick95) for the PR [#1169](https://github.com/sitespeedio/browsertime/pull/1169).
+* Keep the orange frame length to make it easier to debug if soemthing is wrong, thank you [Sean Feng](https://github.com/sefeng211) for PR [#1165](https://github.com/sitespeedio/browsertime/pull/1165).
+* Fix for "Visual metrics are not correct when running browsertime with the new Firefox for Android browser (Fenix) when WebRender is enabled, because there's a bug in WebRender. Thank you [Sean Feng](https://github.com/sefeng211) for PR [#1166](https://github.com/sitespeedio/browsertime/pull/1166).
+
 ## 8.0.0 2020-02-05
 
 Woho Browsertime 8.0.0 is here!
@@ -18,7 +25,7 @@ Major new things:
 * You can collect CPU profiles from Firefox with `--firefox.geckoProfiler` and view them at https://profiler.firefox.com !
 * You can run Firefox on Android!
 * Now the window recorder for Firefox works great. That means you can record a video of the loading of your page without using FFMPEG. Add `--firefox.windowRecorder` and `-video`to your run.
-* You can use the new Chromium based MS Edge on OS that support that browser.
+* You can use the new Chrom5ium based MS Edge on OS that support that browser.
 * There has been a lot of work minimizing the impact of the browser to make it easier to get as stable metrics as possible.
 * Use `--tcpdump` to get a tcpdump on desktop.
 
