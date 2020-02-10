@@ -1,4 +1,7 @@
 language: node_js
+os:
+  - linux
+  - osx
 node_js:
   - '12'
 sudo: required
@@ -35,21 +38,22 @@ addons:
   firefox: 'latest'
   chrome: stable
 before_install:
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew update; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install ffmpeg; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo snap install ffmpeg; fi
   - python -m pip install --upgrade --user pip
   - python -m pip install --upgrade --user setuptools
   - python -m pip install --user pyssim
   - python -m pip --version
   - python -m pip show Pillow
   - python -m pip show pyssim
-  - sudo snap install ffmpeg
   - ffmpeg -version
   - python --version
-  - firefox --version 2>/dev/null
-  - google-chrome --product-version
+  -  if [ "$TRAVIS_OS_NAME" = "linux" ];firefox --version 2>/dev/null ; fi
+  -  if [ "$TRAVIS_OS_NAME" = "linux" ];google-chrome --product-version ; fi
 before_script:
-  - export DISPLAY=:99.0
-  - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile
-    --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1600x1024x16
+  -  if [ "$TRAVIS_OS_NAME" = "linux" ]; then export DISPLAY=:99.0;fi
+  -  if [ "$TRAVIS_OS_NAME" = "linux" ]; then /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1600x1024x16;fi
   - ./browsertime/visualmetrics.py --check
 install:
   - npm ci
