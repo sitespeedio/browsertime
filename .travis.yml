@@ -38,8 +38,8 @@ addons:
   firefox: 'latest'
   chrome: stable
 before_install:
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew update; fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install ffmpeg; fi
+ # - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew update; fi
+ # - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install ffmpeg; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo snap install ffmpeg; fi
   - python -m pip install --upgrade --user pip
   - python -m pip install --upgrade --user setuptools
