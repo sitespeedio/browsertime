@@ -20,8 +20,10 @@ class TestVisualMetrics(unittest.TestCase):
             return p
 
         progress = [_p(image) for image in images if image.startswith("ms_")]
-        res = calculate_contentful_speed_index(progress, directory)
-        self.assertTrue(res[0], 5080)
+        res = calculate_contentful_speed_index(sorted(progress,
+                                                      key = lambda image: image['time']),
+                                               directory)
+        self.assertEqual(res[0], 5080)
 
     def test_calculate_perceptual_speed_index(self):
         directory = "test_data"
@@ -33,5 +35,7 @@ class TestVisualMetrics(unittest.TestCase):
             return p
 
         progress = [_p(image) for image in images if image.startswith("ms_")]
-        res = calculate_perceptual_speed_index(progress, directory)
-        self.assertTrue(res[0], 5080)
+        res = calculate_perceptual_speed_index(sorted(progress,
+                                                      key = lambda image: image['time']),
+                                               directory)
+        self.assertEqual(res[0], 946)
