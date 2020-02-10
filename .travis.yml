@@ -49,11 +49,11 @@ before_install:
   - python -m pip show pyssim
   - ffmpeg -version
   - python --version
-  -  if [ "$TRAVIS_OS_NAME" = "linux" ];firefox --version 2>/dev/null ; fi
-  -  if [ "$TRAVIS_OS_NAME" = "linux" ];google-chrome --product-version ; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then firefox --version 2>/dev/null; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then google-chrome --product-version; fi
 before_script:
-  -  if [ "$TRAVIS_OS_NAME" = "linux" ]; then export DISPLAY=:99.0;fi
-  -  if [ "$TRAVIS_OS_NAME" = "linux" ]; then /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1600x1024x16;fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then export DISPLAY=:99.0;fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1600x1024x16;fi
   - ./browsertime/visualmetrics.py --check
 install:
   - npm ci
