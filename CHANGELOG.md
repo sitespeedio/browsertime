@@ -12,6 +12,7 @@
 ### Added
 * Get total number of resources and total duration time (using the Resource Timing API). The metrics exists in *pageinfo.resources.duration* and *pageinfo.resources.count*. Thank you [Sean Feng](https://github.com/sefeng211) for PR [#1167](https://github.com/sitespeedio/browsertime/pull/1167) and [#1176](https://github.com/sitespeedio/browsertime/pull/1176).
 * Make it possible to record video using FFMPEG on OS X [#1180](https://github.com/sitespeedio/browsertime/pull/1180).
+* Upgraded to Firefox 73 in the Docker container.
 
 ### Tech
 * Run Travis-CI tests on both Linux and OS X [#1183](https://github.com/sitespeedio/browsertime/pull/1183).
