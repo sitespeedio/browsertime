@@ -7,6 +7,7 @@
 * Removed the mkdirp dependency [#1173](https://github.com/sitespeedio/browsertime/pull/1173)
 * Removed the lodash.remove dependency [#1174](https://github.com/sitespeedio/browsertime/pull/1174)
 * Removed the lodash.forEach dependency [#1175](https://github.com/sitespeedio/browsertime/pull/1175)
+* Fixed bug for `--firefox.profileTemplate`, thank you [Gregory Mierzwinski](https://github.com/gmierz) - [#1185](https://github.com/sitespeedio/browsertime/pull/1185).
 
 ### Added
 * Get total number of resources and total duration time (using the Resource Timing API). The metrics exists in *pageinfo.resources.duration* and *pageinfo.resources.count*. Thank you [Sean Feng](https://github.com/sefeng211) for PR [#1167](https://github.com/sitespeedio/browsertime/pull/1167) and [#1176](https://github.com/sitespeedio/browsertime/pull/1176).
