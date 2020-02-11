@@ -68,8 +68,8 @@ script:
   - node ./bin/browsertime.js -b firefox test/navigationscript/multi.js https://www.sitespeed.io/blog/ -n 1
   - node ./bin/browsertime.js -b chrome test/navigationscript/multi.js -n 3 --chrome.timeline --video --visualMetrics --visualElements
   - node ./bin/browsertime.js -b firefox --firefox.geckoProfiler -n 1 https://www.sitespeed.io/ --spa
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then node ./bin/browsertime.js -b edge -n 1 --edge.edgedriverPath ./msedgedriver --video --visualMetrics https://www.sitespeed.io/ ; fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then node ./bin/browsertime.js -b safari -n 1 --video --visualMetrics https://www.sitespeed.io/ ;fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then node ./bin/browsertime.js -b edge -n 1 --edge.edgedriverPath ./msedgedriver --video --visualMetrics https://www.sitespeed.io/ --viewPort 1000x600; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then node ./bin/browsertime.js -b safari -n 1 --video --visualMetrics https://www.sitespeed.io/ --viewPort 1000x600;fi
   - npm run test
 notifications:
   slack:
