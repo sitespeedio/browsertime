@@ -28,7 +28,9 @@ matrix:
         #- choco install microsoft-edge
         - choco install chromedriver
         - choco install googlechrome
-        - refreshenv
+        - cmd.exe //c "RefreshEnv.cmd"
+        - node -v
+        - npm –v
         #- choco install ffmpeg
         #- choco install imagemagick.app
 cache:
