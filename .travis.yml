@@ -24,17 +24,24 @@ matrix:
         - /Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge --version
         - sudo safaridriver --enable
         - ./.travis.before_install-pip.sh
+      script:
+        - node ./bin/browsertime.js -b edge -n 1 --edge.edgedriverPath ./msedgedriver https://www.sitespeed.io/ --viewPort 1000x600
+        - node ./bin/browsertime.js -b safari -n 1 https://www.sitespeed.io/ --viewPort 1000x600
+        - node ./bin/browsertime.js -b chrome -n 1 https://www.sitespeed.io/ --viewPort 1000x600
+        - node ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io/ --viewPort 1000x600
     - name: "Test on Windows"
       os: windows         
       before_install:
         - choco install python 
-        - choco install firefox
+        # - choco install firefox
         - choco install microsoft-edge
         - choco install chromedriver
         - choco install googlechrome
         #- cmd.exe //c "RefreshEnv.cmd"
         - choco install ffmpeg
         - choco install imagemagick.app
+      script:
+        - node ./bin/browsertime.js -b chrome -n 1 https://www.sitespeed.io/documentation/
 cache:
   apt: true
   pip: true
@@ -67,27 +74,23 @@ addons:
   firefox: 'latest'
   chrome: stable
 before_script:
-  #- ffmpeg -version
-  #- python --version
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then firefox --version 2>/dev/null; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then google-chrome --product-version; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" || "$TRAVIS_OS_NAME" = "osx" ]; then ./browsertime/visualmetrics.py --check ; fi
 install:
   - npm ci
 script:
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then VTENV_OPTS="-p python3" make test; fi
+  - VTENV_OPTS="-p python3" make test
   - npm run eslint-check && npm run lint
   - node ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle
   - node ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value --chrome.CPUThrottlingRate 2 --chrome.cdp.performance --chrome.enableChromeDriverLog https://www.sitespeed.io/documentation/
-  -  if [ "$TRAVIS_OS_NAME" = "linux" ]; then  node ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --video --screenshot --connectivity.engine tsproxy -c cable --visualMetrics -n 1 --chrome.timeline --visualElements --chrome.collectLongTasks --cookie test=true https://www.sitespeed.io/;fi
+  - node ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --video --screenshot --connectivity.engine tsproxy -c cable --visualMetrics -n 1 --chrome.timeline --visualElements --chrome.collectLongTasks --cookie test=true https://www.sitespeed.io/
   - node ./bin/browsertime.js -b chrome test/navigationscript/measure.js -n 1 --preScript test/prepostscripts/preSample.js --postScript test/prepostscripts/postSample.js
   - node ./bin/browsertime.js -b chrome test/navigationscript/navigateAndStartInTwoSteps.js -n 1 --pageCompleteCheckInactivity --timeToSettle 1000
   - node ./bin/browsertime.js -b firefox test/navigationscript/multi.js https://www.sitespeed.io/blog/ -n 1
-  -  if [ "$TRAVIS_OS_NAME" = "linux" ]; then node ./bin/browsertime.js -b chrome test/navigationscript/multi.js -n 3 --chrome.timeline --video --visualMetrics --visualElements --viewPort 1000x600;fi
+  - node ./bin/browsertime.js -b chrome test/navigationscript/multi.js -n 3 --chrome.timeline --video --visualMetrics --visualElements --viewPort 1000x600
   - node ./bin/browsertime.js -b firefox --firefox.geckoProfiler -n 1 https://www.sitespeed.io/ --spa
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then node ./bin/browsertime.js -b edge -n 1 --edge.edgedriverPath ./msedgedriver https://www.sitespeed.io/ --viewPort 1000x600; fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then node ./bin/browsertime.js -b safari -n 1 https://www.sitespeed.io/ --viewPort 1000x600;fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then npm run test;fi
+  - npm run test
 notifications:
   slack:
     secure: V71EkIzwOf/fZnGTGIKAIFlDyLUit4tK97VDgdV9vZ7CbvOXI1ir3lwRZ57lNqiYD8BUaX+/wKDG+LyrBMgQ4JAGgQx0mECvmOKx1+10Yg9FAkUsMTWe7GOxcVMwhpS2OfHnXwMb0FjcuVl8ovowIZqCWOLeEAYVaTWHndDm2cA=
