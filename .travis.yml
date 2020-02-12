@@ -61,8 +61,8 @@ addons:
   firefox: 'latest'
   chrome: stable
 before_script:
-  - ffmpeg -version
-  - python --version
+  #- ffmpeg -version
+  #- python --version
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then firefox --version 2>/dev/null; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then google-chrome --product-version; fi
   - ./browsertime/visualmetrics.py --check
