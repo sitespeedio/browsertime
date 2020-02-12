@@ -8,7 +8,7 @@ matrix:
       dist: bionic
       before_install: sudo snap install ffmpeg
       before_script:
-        - export DISPLAY=:99.0;fi
+        - export DISPLAY=:99.0
         - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1600x1024x16
     - name: "Test on macOS"
       os: osx
@@ -26,6 +26,7 @@ matrix:
         - choco install chromedriver
         - choco install googlechrome
         - choco install ffmpeg
+        - choco install imagemagick.app
 cache:
   apt: true
   pip: true
