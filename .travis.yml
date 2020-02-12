@@ -28,7 +28,7 @@ matrix:
         - node ./bin/browsertime.js -b edge -n 1 --edge.edgedriverPath ./msedgedriver https://www.sitespeed.io/ --viewPort 1000x600
         - node ./bin/browsertime.js -b safari -n 1 https://www.sitespeed.io/ --viewPort 1000x600
         - node ./bin/browsertime.js -b chrome -n 1 https://www.sitespeed.io/ --viewPort 1000x600
-        - node ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io/ --viewPort 1000x600
+        - node ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io/ --viewPort 1000x600 --video --visualMetrics
     - name: "Test on Windows"
       os: windows         
       before_install:
