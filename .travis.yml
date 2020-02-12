@@ -70,7 +70,7 @@ script:
   - node ./bin/browsertime.js -b firefox --firefox.geckoProfiler -n 1 https://www.sitespeed.io/ --spa
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then node ./bin/browsertime.js -b edge -n 1 --edge.edgedriverPath ./msedgedriver https://www.sitespeed.io/ --viewPort 1000x600; fi
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then node ./bin/browsertime.js -b safari -n 1 https://www.sitespeed.io/ --viewPort 1000x600;fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ];npm run test;fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then npm run test;fi
 notifications:
   slack:
     secure: V71EkIzwOf/fZnGTGIKAIFlDyLUit4tK97VDgdV9vZ7CbvOXI1ir3lwRZ57lNqiYD8BUaX+/wKDG+LyrBMgQ4JAGgQx0mECvmOKx1+10Yg9FAkUsMTWe7GOxcVMwhpS2OfHnXwMb0FjcuVl8ovowIZqCWOLeEAYVaTWHndDm2cA=
