@@ -1,12 +1,31 @@
 language: node_js
-os:
-  - linux
-  - osx
-osx_image: xcode11.3
 node_js:
   - '12'
-sudo: required
-dist: bionic
+matrix:
+  include:
+    - name: "Test on Linux"
+      sudo: required
+      dist: bionic
+      before_install: sudo snap install ffmpeg
+      before_script:
+        - export DISPLAY=:99.0;fi
+        - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1600x1024x16
+    - name: "Test on macOS"
+      os: osx
+      osx_image: xcode11.3  
+      before_install: 
+        - ./.travis.before_install-osx.sh
+    - name: "Test on Windows"
+      os: windows         
+      language: shell 
+      before_install:
+        - choco install python 
+        - choco install nodejs
+        - choco install firefox
+        - choco install microsoft-edge
+        - choco install chromedriver
+        - choco install googlechrome
+        - choco install ffmpeg
 cache:
   apt: true
   pip: true
@@ -39,8 +58,6 @@ addons:
   firefox: 'latest'
   chrome: stable
 before_install:
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then ./.travis.before_install-osx.sh; fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo snap install ffmpeg; fi
   - python -m pip install --upgrade --user pip
   - python -m pip install --upgrade --user setuptools
   - python -m pip install --user pyssim
@@ -52,8 +69,6 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then firefox --version 2>/dev/null; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then google-chrome --product-version; fi
 before_script:
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then export DISPLAY=:99.0;fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1600x1024x16;fi
   - ./browsertime/visualmetrics.py --check
 install:
   - npm ci
