@@ -20,7 +20,6 @@ matrix:
         - ./.travis.before_install-pip.sh
     - name: "Test on Windows"
       os: windows         
-      language: shell 
       before_install:
         - choco install python 
         #- choco install firefox
