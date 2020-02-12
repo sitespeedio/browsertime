@@ -16,13 +16,19 @@ matrix:
       os: osx
       osx_image: xcode11.3  
       before_install: 
-        - ./.travis.before_install-osx.sh
+        - brew update
+        - brew install ffmpeg imagemagick unzip
+        - brew cask install microsoft-edge
+        - wget https://msedgedriver.azureedge.net/79.0.309.65/edgedriver_mac64.zip
+        - unzip edgedriver_mac64.zip
+        - /Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge --version
+        - sudo safaridriver --enable
         - ./.travis.before_install-pip.sh
     - name: "Test on Windows"
       os: windows         
       before_install:
         - choco install python 
-        #- choco install firefox
+        - choco install firefox
         - choco install microsoft-edge
         - choco install chromedriver
         - choco install googlechrome
@@ -65,7 +71,7 @@ before_script:
   #- python --version
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then firefox --version 2>/dev/null; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then google-chrome --product-version; fi
-  #- ./browsertime/visualmetrics.py --check
+  - if [ "$TRAVIS_OS_NAME" = "linux" || "$TRAVIS_OS_NAME" = "osx" ]; then ./browsertime/visualmetrics.py --check ; fi
 install:
   - npm ci
 script:
