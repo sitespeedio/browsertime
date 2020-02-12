@@ -42,6 +42,7 @@ matrix:
         - choco install imagemagick.app
       script:
         - node ./bin/browsertime.js -b chrome -n 1 https://www.sitespeed.io/documentation/
+        - node ./bin/browsertime.js -b chrome test/navigationscript/multi.js -n 3 --chrome.timeline --viewPort 1000x600
 cache:
   apt: true
   pip: true
@@ -76,7 +77,8 @@ addons:
 before_script:
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then firefox --version 2>/dev/null; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then google-chrome --product-version; fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" || "$TRAVIS_OS_NAME" = "osx" ]; then ./browsertime/visualmetrics.py --check ; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./browsertime/visualmetrics.py --check ; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then ./browsertime/visualmetrics.py --check ; fi
 install:
   - npm ci
 script:
