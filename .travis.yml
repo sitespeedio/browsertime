@@ -52,7 +52,7 @@ matrix:
       os: windows         
       before_install:
         - choco install python 
-        # - choco install firefox -y
+        - choco install firefox -y
         - choco install microsoft-edge
         - choco install chromedriver
         # See https://www.gep13.co.uk/blog/chocolatey-error-hashes-do-not-match#so-why-did-this-go-wrong
