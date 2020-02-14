@@ -41,15 +41,16 @@ matrix:
       os: windows         
       before_install:
         - choco install python 
-        # - choco install firefox
+        # - choco install firefox -y
         - choco install microsoft-edge
         - choco install chromedriver
-        - choco install googlechrome
+        # See https://www.gep13.co.uk/blog/chocolatey-error-hashes-do-not-match#so-why-did-this-go-wrong
+        - choco install googlechrome --ignore-checksums
         #- cmd.exe //c "RefreshEnv.cmd"
         - choco install ffmpeg
         - choco install imagemagick.app
       script:
-        - node ./bin/browsertime.js -b chrome -n 1 https://www.sitespeed.io/documentation/
+        - node ./bin/browsertime.js -b chrome -n 1 --cpu -r header:value --screenshot https://www.sitespeed.io/documentation/
         - node ./bin/browsertime.js -b chrome test/navigationscript/multi.js -n 3 --chrome.timeline --viewPort 1000x600
 cache:
   apt: true
