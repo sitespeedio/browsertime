@@ -41,9 +41,10 @@ matrix:
       os: windows         
       before_install:
         - choco install python 
-        # - choco install firefox
+        # - choco install firefox -y
         - choco install microsoft-edge
         - choco install chromedriver
+        # See https://www.gep13.co.uk/blog/chocolatey-error-hashes-do-not-match#so-why-did-this-go-wrong
         - choco install googlechrome --ignore-checksums
         #- cmd.exe //c "RefreshEnv.cmd"
         - choco install ffmpeg
