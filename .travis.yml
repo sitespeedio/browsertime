@@ -14,6 +14,8 @@ matrix:
       sudo: required
       dist: bionic
       before_script:
+      addons:
+      install:
         - docker build -t sitespeedio/browsertime .
       script: 
         - docker run --rm sitespeedio/browsertime https://www.sitespeed.io -n 1 -b chrome
