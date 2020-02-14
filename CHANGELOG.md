@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 8.1.0 - UNRELEASED
 ### Fixed
 * Updated dependencies sharp, yargs, dayjs, get-port [#1171](https://github.com/sitespeedio/browsertime/pull/1171).
 * Removed the del dependency [#1172](https://github.com/sitespeedio/browsertime/pull/1172)
@@ -8,14 +8,15 @@
 * Removed the lodash.remove dependency [#1174](https://github.com/sitespeedio/browsertime/pull/1174)
 * Removed the lodash.forEach dependency [#1175](https://github.com/sitespeedio/browsertime/pull/1175)
 * Fixed bug for `--firefox.profileTemplate`, thank you [Gregory Mierzwinski](https://github.com/gmierz) - [#1185](https://github.com/sitespeedio/browsertime/pull/1185).
+* If the browser failed to start, the exit code from Browsertime was 0 and the error wasn't included in the result JSON. Fixed in [#1188](https://github.com/sitespeedio/browsertime/pull/1188).
 
 ### Added
 * Get total number of resources and total duration time (using the Resource Timing API). The metrics exists in *pageinfo.resources.duration* and *pageinfo.resources.count*. Thank you [Sean Feng](https://github.com/sefeng211) for PR [#1167](https://github.com/sitespeedio/browsertime/pull/1167) and [#1176](https://github.com/sitespeedio/browsertime/pull/1176).
-* Make it possible to record video using FFMPEG on OS X [#1180](https://github.com/sitespeedio/browsertime/pull/1180).
+* Make it possible to record video using FFMPEG on OS X [#1180](https://github.com/sitespeedio/browsertime/pull/1180),[#1184](https://github.com/sitespeedio/browsertime/pull/1184) and [#1190](https://github.com/sitespeedio/browsertime/pull/1190)
 * Upgraded to Firefox 73 in the Docker container.
 
 ### Tech
-* Run Travis-CI tests on both Linux and OS X [#1183](https://github.com/sitespeedio/browsertime/pull/1183).
+* Run Travis-CI tests on both Linux, OS X and Windows [#1183](https://github.com/sitespeedio/browsertime/pull/1183) and [#1187](https://github.com/sitespeedio/browsertime/pull/1187).
 
 ## 8.0.1 2020-02-07
 
