@@ -10,6 +10,16 @@ matrix:
         - export DISPLAY=:99.0
         - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1600x1024x16
       script: npm run test
+    - name: "Docker on Linux"
+      sudo: required
+      dist: bionic
+      before_script:
+      addons:
+      install:
+        - docker build -t sitespeedio/browsertime .
+      script: 
+        - docker run --rm sitespeedio/browsertime https://www.sitespeed.io -n 1 -b chrome
+        - docker run --rm sitespeedio/browsertime https://www.sitespeed.io -n 1 -b firefox
     - name: "Browser tests on Linux"
       sudo: required
       dist: bionic
