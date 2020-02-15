@@ -42,7 +42,12 @@ matrix:
         - node ./bin/browsertime.js -b firefox --firefox.geckoProfiler -n 1 https://www.sitespeed.io/ --spa
     - name: "Browser tests on OS X"
       os: osx
-      osx_image: xcode11.3  
+      osx_image: xcode11.3
+      cache:
+        directories:
+          - $HOME/Library/Caches/Homebrew
+      before_cache:
+        - brew cleanup
       before_install: 
         - brew update
         - brew install ffmpeg imagemagick unzip
@@ -76,10 +81,6 @@ matrix:
 cache:
   apt: true
   pip: true
-  directories:
-    - '$HOME/.npm'
-    - $HOME/.local/lib/python2.7/site-packages
-    - /usr/local/lib/python2.7/site-packages
 addons:
   apt:
     sources:
