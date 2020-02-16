@@ -10,6 +10,16 @@ matrix:
         - export DISPLAY=:99.0
         - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1600x1024x16
       script: npm run test
+    - name: "Docker on Linux"
+      sudo: required
+      dist: bionic
+      before_script:
+      addons:
+      install:
+        - docker build -t sitespeedio/browsertime .
+      script: 
+        - docker run --rm sitespeedio/browsertime https://www.sitespeed.io -n 1 -b chrome
+        - docker run --rm sitespeedio/browsertime https://www.sitespeed.io -n 1 -b firefox
     - name: "Browser tests on Linux"
       sudo: required
       dist: bionic
@@ -32,19 +42,22 @@ matrix:
         - node ./bin/browsertime.js -b firefox --firefox.geckoProfiler -n 1 https://www.sitespeed.io/ --spa
     - name: "Browser tests on OS X"
       os: osx
-      osx_image: xcode11.3  
+      osx_image: xcode11.3
+      cache:
+        directories:
+          - $HOME/Library/Caches/Homebrew
+      before_cache:
+        - brew cleanup
       before_install: 
         - brew update
-        - brew install ffmpeg imagemagick unzip
+        - brew install ffmpeg imagemagick
         - brew cask install microsoft-edge
-        - wget https://msedgedriver.azureedge.net/79.0.309.65/edgedriver_mac64.zip
-        - unzip edgedriver_mac64.zip
         - /Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge --version
         - system_profiler SPDisplaysDataType |grep Resolution
         - sudo safaridriver --enable
         - ./.travis.before_install-pip.sh
       script:
-        - node ./bin/browsertime.js -b edge -n 1 --edge.edgedriverPath ./msedgedriver  --viewPort 1000x600  --video --visualMetrics https://www.sitespeed.io/
+        - node ./bin/browsertime.js -b edge -n 1 --viewPort 1000x600  --video --visualMetrics https://www.sitespeed.io/
         - node ./bin/browsertime.js -b safari -n 1 --viewPort 1000x600  --video --visualMetrics https://www.sitespeed.io/
         - node ./bin/browsertime.js -b chrome -n 1 --viewPort 1000x600  --video --visualMetrics --connectivity.profile cable --connectivity.engine throttle https://www.sitespeed.io/
         - node ./bin/browsertime.js -b firefox -n 1 --viewPort 800x600 --video --visualMetrics https://www.sitespeed.io/
@@ -54,7 +67,6 @@ matrix:
         - choco install python 
         - choco install firefox -y
         - choco install microsoft-edge
-        - choco install chromedriver
         # See https://www.gep13.co.uk/blog/chocolatey-error-hashes-do-not-match#so-why-did-this-go-wrong
         - choco install googlechrome --ignore-checksums
         #- cmd.exe //c "RefreshEnv.cmd"
@@ -63,13 +75,10 @@ matrix:
       script:
         - node ./bin/browsertime.js -b chrome -n 1 --cpu -r header:value --screenshot https://www.sitespeed.io/documentation/
         - node ./bin/browsertime.js -b chrome test/navigationscript/multi.js -n 3 --chrome.timeline --viewPort 1000x600
+        - node ./bin/browsertime.js -b edge -n 1 --screenshot https://www.sitespeed.io/
 cache:
   apt: true
   pip: true
-  directories:
-    - '$HOME/.npm'
-    - $HOME/.local/lib/python2.7/site-packages
-    - /usr/local/lib/python2.7/site-packages
 addons:
   apt:
     sources:
