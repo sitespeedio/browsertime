@@ -14,6 +14,7 @@
 * Get total number of resources and total duration time (using the Resource Timing API). The metrics exists in *pageinfo.resources.duration* and *pageinfo.resources.count*. Thank you [Sean Feng](https://github.com/sefeng211) for PR [#1167](https://github.com/sitespeedio/browsertime/pull/1167) and [#1176](https://github.com/sitespeedio/browsertime/pull/1176).
 * Make it possible to record video using FFMPEG on OS X [#1180](https://github.com/sitespeedio/browsertime/pull/1180),[#1184](https://github.com/sitespeedio/browsertime/pull/1184) and [#1190](https://github.com/sitespeedio/browsertime/pull/1190)
 * Upgraded to Firefox 73 in the Docker container.
+* Save TCPdump per package instead of using the buffer. Turn on with `--tcpdumpPacketBuffered` together with `--tcpdump` [#1198](https://github.com/sitespeedio/browsertime/pull/1198).
 
 ### Tech
 * Run Travis-CI tests on both Linux, OS X and Windows [#1183](https://github.com/sitespeedio/browsertime/pull/1183) and [#1187](https://github.com/sitespeedio/browsertime/pull/1187).
