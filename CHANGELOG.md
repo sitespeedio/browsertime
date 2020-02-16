@@ -16,6 +16,7 @@
 * Upgraded to Firefox 73 in the Docker container.
 * Save TCPdump per package instead of using the buffer. Turn on with `--tcpdumpPacketBuffered` together with `--tcpdump` [#1198](https://github.com/sitespeedio/browsertime/pull/1198).
 * Include Edgedriver by default (for OS that are supported) [#1199](https://github.com/sitespeedio/browsertime/pull/1199).
+* Updated driver wrappers so you always can choose which version to install [#1200](https://github.com/sitespeedio/browsertime/pull/1200).
 
 ### Tech
 * Run Travis-CI tests on both Linux, OS X and Windows [#1183](https://github.com/sitespeedio/browsertime/pull/1183) and [#1187](https://github.com/sitespeedio/browsertime/pull/1187).
