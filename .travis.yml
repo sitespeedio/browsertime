@@ -50,7 +50,7 @@ matrix:
         - brew cleanup
       before_install: 
         - brew update
-        - brew install ffmpeg imagemagick unzip
+        - brew install ffmpeg imagemagick
         - brew cask install microsoft-edge
         - /Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge --version
         - system_profiler SPDisplaysDataType |grep Resolution
