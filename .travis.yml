@@ -52,14 +52,12 @@ matrix:
         - brew update
         - brew install ffmpeg imagemagick unzip
         - brew cask install microsoft-edge
-        - wget https://msedgedriver.azureedge.net/79.0.309.65/edgedriver_mac64.zip
-        - unzip edgedriver_mac64.zip
         - /Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge --version
         - system_profiler SPDisplaysDataType |grep Resolution
         - sudo safaridriver --enable
         - ./.travis.before_install-pip.sh
       script:
-        - node ./bin/browsertime.js -b edge -n 1 --edge.edgedriverPath ./msedgedriver  --viewPort 1000x600  --video --visualMetrics https://www.sitespeed.io/
+        - node ./bin/browsertime.js -b edge -n 1 --viewPort 1000x600  --video --visualMetrics https://www.sitespeed.io/
         - node ./bin/browsertime.js -b safari -n 1 --viewPort 1000x600  --video --visualMetrics https://www.sitespeed.io/
         - node ./bin/browsertime.js -b chrome -n 1 --viewPort 1000x600  --video --visualMetrics --connectivity.profile cable --connectivity.engine throttle https://www.sitespeed.io/
         - node ./bin/browsertime.js -b firefox -n 1 --viewPort 800x600 --video --visualMetrics https://www.sitespeed.io/
@@ -78,6 +76,7 @@ matrix:
       script:
         - node ./bin/browsertime.js -b chrome -n 1 --cpu -r header:value --screenshot https://www.sitespeed.io/documentation/
         - node ./bin/browsertime.js -b chrome test/navigationscript/multi.js -n 3 --chrome.timeline --viewPort 1000x600
+        - node ./bin/browsertime.js -b edge -n 1 --screenshot https://www.sitespeed.io/
 cache:
   apt: true
   pip: true
