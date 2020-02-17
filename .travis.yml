@@ -73,7 +73,7 @@ matrix:
         - choco install ffmpeg
         - choco install imagemagick.app
       script:
-        - node ./bin/browsertime.js -b chrome -n 1 --cpu -r header:value --screenshot https://www.sitespeed.io/documentation/
+        - node ./bin/browsertime.js -b chrome -n 1 --cpu -r header:value --screenshot --connectivity.engine tsproxy -c cable https://www.sitespeed.io/documentation/
         - node ./bin/browsertime.js -b chrome test/navigationscript/multi.js -n 3 --chrome.timeline --viewPort 1000x600
         - node ./bin/browsertime.js -b edge -n 1 --screenshot https://www.sitespeed.io/
 cache:
