@@ -2172,7 +2172,7 @@ def main():
         log_level = logging.WARNING
     elif options.verbose == 3:
         log_level = logging.INFO
-    elif options.verbose >= 4:
+    elif options.verbose == 4:
         log_level = logging.DEBUG
     if options.logfile is not None:
         logging.basicConfig(
