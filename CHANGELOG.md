@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## 8.1.0 - UNRELEASED
+## 8.1.0 - 2020-02-20
 ### Fixed
 * Updated dependencies sharp, yargs, dayjs, get-port [#1171](https://github.com/sitespeedio/browsertime/pull/1171).
 * Removed the del dependency [#1172](https://github.com/sitespeedio/browsertime/pull/1172)
