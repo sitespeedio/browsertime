@@ -2305,6 +2305,7 @@ def main():
 
     # Clean up
     shutil.rmtree(temp_dir)
+    shutil.rmtree(colors_temp_dir)
     if ok:
         exit(0)
     else:
