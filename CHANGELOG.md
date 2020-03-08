@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 8.1.1 - 2020-03-08
 ### Fixed
 * Remove Visual Metrics vis-color color temp dir [#1210](https://github.com/sitespeedio/browsertime/pull/1210), thank you [dpalmeiro](https://github.com/dpalmeiro) for the PR.
 * Verify that you use at least NodeJS 10 when trying to run Browsertime [#1212](https://github.com/sitespeedio/browsertime/pull/1212).
