@@ -2,7 +2,6 @@
 !bin
 !lib
 !package.json
-!npm-shrinkwrap.json
 !docker
 !vendor
 !browsertime
