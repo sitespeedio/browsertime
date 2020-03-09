@@ -31,7 +31,7 @@
     "yargs": "15.1.0"
   },
   "optionalDependencies": {
-    "sharp": "0.24.0"
+    "jimp": "0.9.5"
   },
   "devDependencies": {
     "bluebird": "3.5.5",
