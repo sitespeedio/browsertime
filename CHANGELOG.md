@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 8.1.2 - 2020-03-09
+### Fixed
+* Removed the npm shrinkwrap file, updated dependencies that do not use one and introduced a package-lock file. Why? See https://github.com/sitespeedio/sitespeed.io/issues/2911#issuecomment-596538673.
+
 ## 8.1.1 - 2020-03-08
 ### Fixed
 * Remove Visual Metrics vis-color color temp dir [#1210](https://github.com/sitespeedio/browsertime/pull/1210), thank you [dpalmeiro](https://github.com/dpalmeiro) for the PR.
