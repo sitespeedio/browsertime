@@ -1,5 +1,11 @@
 # Browsertime changelog
 
+## 8.2.0 - 2020-03-11
+### Added
+* Upgraded to Firefox 74 in the Docker container
+* Removed the Sharp dependency and instead added jimp [#1128](https://github.com/sitespeedio/browsertime/pull/1218). This makes the package smaller and easier to install (only JS dependencies).
+* Cleaned up dependencies to not use shrinkwrap to minimize size see https://github.com/sitespeedio/sitespeed.io/issues/2911#issuecomment-596538673
+
 ## 8.1.2 - 2020-03-09
 ### Fixed
 * Removed the npm shrinkwrap file, updated dependencies that do not use one and introduced a package-lock file. Why? See https://github.com/sitespeedio/sitespeed.io/issues/2911#issuecomment-596538673.
