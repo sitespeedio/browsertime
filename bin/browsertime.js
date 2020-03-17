@@ -12,7 +12,6 @@ const path = require('path');
 const log = require('intel').getLogger('browsertime');
 const engineUtils = require('../lib/support/engineUtils');
 
-
 async function parseUserScripts(scripts) {
   if (!Array.isArray(scripts)) scripts = [scripts];
   const results = {};
@@ -113,9 +112,9 @@ let cliResult = cli.parseCommandLine();
 var tests = [];
 
 cliResult.urls.forEach(function convert(url) {
-   var testScript = engineUtils.loadScript(url);
-   // if the value is an url or a not an array we can return the original value
-   if (typeof testScript == "string" || !testScript instanceof Array) {
+  var testScript = engineUtils.loadScript(url);
+  // if the value is an url or a not an array we can return the original value
+  if (typeof testScript == 'string' || !(testScript instanceof Array)) {
     tests.push(url);
     return;
   }
