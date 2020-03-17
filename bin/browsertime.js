@@ -52,6 +52,7 @@ async function run(urls, options) {
 
       // TODO setup by name
       var first_url = urls[0];
+      // if the url is an array, it's of the form [filename, function]
       if (first_url instanceof Array) {
         first_url = first_url[0];
       }
@@ -99,6 +100,16 @@ async function run(urls, options) {
 }
 
 let cliResult = cli.parseCommandLine();
+
+/*
+  Each url can be:
+   - an url value
+   - an array of tests. In that case it's a mapping containing
+     theses values:
+     - test: an async function containing the test to run
+     - setUp: an async function for the preScript [optional]
+     - tearDown: an async function for the postScript [optional]
+*/
 var tests = [];
 
 cliResult.urls.forEach(function convert(url) {
@@ -120,9 +131,8 @@ cliResult.urls.forEach(function convert(url) {
     }
     cliResult.options.postScript.push(testScript.tearDown);
   }
-  testScript.tests.forEach(function convertTest(test) {
-    tests.push([url, test]);
-  });
+  // here, url is the filename containing the script, and test the callable.
+  tests.push([url, testScript.test]);
 });
 
 logging.configure(cliResult.options);
