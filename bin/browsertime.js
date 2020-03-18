@@ -11,6 +11,8 @@ const fs = require('fs');
 const path = require('path');
 const log = require('intel').getLogger('browsertime');
 const engineUtils = require('../lib/support/engineUtils');
+const AsyncFunction = Object.getPrototypeOf(async function() {}).constructor;
+
 
 async function parseUserScripts(scripts) {
   if (!Array.isArray(scripts)) scripts = [scripts];
@@ -113,11 +115,13 @@ var tests = [];
 
 cliResult.urls.forEach(function convert(url) {
   var testScript = engineUtils.loadScript(url);
+
   // if the value is an url or a not an array we can return the original value
-  if (typeof testScript == 'string' || !(testScript instanceof Array)) {
+  if (typeof testScript == 'string' || testScript instanceof AsyncFunction) {
     tests.push(url);
     return;
   }
+
   if (testScript.setUp) {
     if (!cliResult.options.preScript) {
       cliResult.options.preScript = [];
