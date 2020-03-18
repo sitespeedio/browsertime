@@ -1,13 +1,13 @@
 {
   "description": "Browsertime",
-  "version": "8.0.1",
+  "version": "8.2.0",
   "bin": "./bin/browsertime.js",
   "dependencies": {
-    "@sitespeed.io/throttle": "1.0.1",
+    "@sitespeed.io/throttle": "1.0.2",
     "adbkit": "2.11.1",
     "btoa": "1.2.1",
-    "@sitespeed.io/chromedriver": "80.0.3987-16",
-    "chrome-har": "0.11.4",
+    "@sitespeed.io/chromedriver": "80.0.3987-16d",
+    "chrome-har": "0.11.7",
     "chrome-remote-interface": "0.28.1",
     "dayjs": "1.8.20",
     "execa": "4.0.0",
@@ -23,14 +23,15 @@
     "lodash.pick": "4.4.0",
     "lodash.set": "4.3.2",
     "selenium-webdriver": "4.0.0-alpha.5",
-    "@sitespeed.io/geckodriver": "0.26.0",
+    "@sitespeed.io/edgedriver": "80.0.361-54d",
+    "@sitespeed.io/geckodriver": "0.26.0-d",
     "@sitespeed.io/tracium": "0.3.3",
     "speedline-core": "1.4.2",
     "@cypress/xvfb": "1.2.4",
     "yargs": "15.1.0"
   },
   "optionalDependencies": {
-    "sharp": "0.24.0"
+    "jimp": "0.9.5"
   },
   "devDependencies": {
     "bluebird": "3.5.5",

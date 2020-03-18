@@ -1,15 +1,40 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 8.2.0 - 2020-03-11
+### Added
+* Upgraded to Firefox 74 in the Docker container
+* Removed the Sharp dependency and instead added jimp [#1128](https://github.com/sitespeedio/browsertime/pull/1218). This makes the package smaller and easier to install (only JS dependencies).
+* Cleaned up dependencies to not use shrinkwrap to minimize size see https://github.com/sitespeedio/sitespeed.io/issues/2911#issuecomment-596538673
+
+## 8.1.2 - 2020-03-09
+### Fixed
+* Removed the npm shrinkwrap file, updated dependencies that do not use one and introduced a package-lock file. Why? See https://github.com/sitespeedio/sitespeed.io/issues/2911#issuecomment-596538673.
+
+## 8.1.1 - 2020-03-08
+### Fixed
+* Remove Visual Metrics vis-color color temp dir [#1210](https://github.com/sitespeedio/browsertime/pull/1210), thank you [dpalmeiro](https://github.com/dpalmeiro) for the PR.
+* Verify that you use at least NodeJS 10 when trying to run Browsertime [#1212](https://github.com/sitespeedio/browsertime/pull/1212).
+
+## 8.1.0 - 2020-02-20
 ### Fixed
 * Updated dependencies sharp, yargs, dayjs, get-port [#1171](https://github.com/sitespeedio/browsertime/pull/1171).
 * Removed the del dependency [#1172](https://github.com/sitespeedio/browsertime/pull/1172)
 * Removed the mkdirp dependency [#1173](https://github.com/sitespeedio/browsertime/pull/1173)
 * Removed the lodash.remove dependency [#1174](https://github.com/sitespeedio/browsertime/pull/1174)
 * Removed the lodash.forEach dependency [#1175](https://github.com/sitespeedio/browsertime/pull/1175)
+* Fixed bug for `--firefox.profileTemplate`, thank you [Gregory Mierzwinski](https://github.com/gmierz) - [#1185](https://github.com/sitespeedio/browsertime/pull/1185).
+* If the browser failed to start, the exit code from Browsertime was 0 and the error wasn't included in the result JSON. Fixed in [#1188](https://github.com/sitespeedio/browsertime/pull/1188).
 
 ### Added
 * Get total number of resources and total duration time (using the Resource Timing API). The metrics exists in *pageinfo.resources.duration* and *pageinfo.resources.count*. Thank you [Sean Feng](https://github.com/sefeng211) for PR [#1167](https://github.com/sitespeedio/browsertime/pull/1167) and [#1176](https://github.com/sitespeedio/browsertime/pull/1176).
+* Make it possible to record video using FFMPEG on OS X [#1180](https://github.com/sitespeedio/browsertime/pull/1180),[#1184](https://github.com/sitespeedio/browsertime/pull/1184) and [#1190](https://github.com/sitespeedio/browsertime/pull/1190)
+* Upgraded to Firefox 73 in the Docker container.
+* Save TCPdump per package instead of using the buffer. Turn on with `--tcpdumpPacketBuffered` together with `--tcpdump` [#1198](https://github.com/sitespeedio/browsertime/pull/1198).
+* Include Edgedriver by default (for OS that are supported) [#1199](https://github.com/sitespeedio/browsertime/pull/1199).
+* Updated driver wrappers so you always can choose which version to install [#1200](https://github.com/sitespeedio/browsertime/pull/1200).
+
+### Tech
+* Run Travis-CI tests on both Linux, OS X and Windows [#1183](https://github.com/sitespeedio/browsertime/pull/1183) and [#1187](https://github.com/sitespeedio/browsertime/pull/1187).
 
 ## 8.0.1 2020-02-07
 

@@ -1648,9 +1648,9 @@ def calculate_speed_index(progress):
 
 def calculate_contentful_speed_index(progress, directory):
     # convert output comes out with lines that have this format:
-    # <number>: <rgb color> #<hex color> <gray color>
+    # <pixel count>: <rgb color> #<hex color> <gray color>
     # This is CLI dependant and very fragile
-    matcher = re.compile(r"\d+: \S+ #[0-9A-F]+ (?:gray\((\d+)\)|(\d+)(?:))")
+    matcher = re.compile(r"(\d+?):")
 
     try:
         dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
@@ -1664,25 +1664,17 @@ def calculate_contentful_speed_index(progress, directory):
             command = "{0} {1} -canny 2x2+8%+8% -define histogram:unique-colors=true -format %c histogram:info:-".format(
                 image_magick["convert"], current_frame
             )
-            output = subprocess.check_output(command, shell=True)
+            output = subprocess.check_output(command, shell=True).decode('utf-8')
             logging.debug("Output %s" % output)
-            # take the last line of the convert call output
-            lines = [
-                line.strip().decode("utf8")
-                for line in output.split(b"\n")
-                if line.strip()
-            ]
-            if len(lines) == 0:
+
+            # Take the last matching pixel count, which is the pixel count from the last
+            # line
+            pixel_count = matcher.findall(output)[-1]
+            if not pixel_count:
                 logging.debug("Could not find the contentfulness value")
                 return None, None
 
-            # extract the value from the last line
-            match = [[v for v in el if v] for el in matcher.findall(lines[-1])]
-            if match == []:
-                logging.debug("Could not find the contentfulness value")
-                return None, None
-
-            value = int(match[0][0])
+            value = int(pixel_count)
             if value > maxContent:
                 maxContent = value
             content.append(value)
@@ -2077,14 +2069,14 @@ def main():
         "--findstart",
         type=int,
         default=0,
-        help="Find the start of activity by looking at the top X% "
+        help="Find the start of activity by looking at the top X%% "
         "of the video (like a browser address bar).",
     )
     parser.add_argument(
         "--renderignore",
         type=int,
         default=0,
-        help="Ignore the center X% of the frame when looking for "
+        help="Ignore the center X%% of the frame when looking for "
         "the first rendered frame (useful for Opera mini).",
     )
     parser.add_argument(
@@ -2180,7 +2172,7 @@ def main():
         log_level = logging.WARNING
     elif options.verbose == 3:
         log_level = logging.INFO
-    elif options.verbose >= 4:
+    elif options.verbose == 4:
         log_level = logging.DEBUG
     if options.logfile is not None:
         logging.basicConfig(
@@ -2313,6 +2305,7 @@ def main():
 
     # Clean up
     shutil.rmtree(temp_dir)
+    shutil.rmtree(colors_temp_dir)
     if ok:
         exit(0)
     else:
