@@ -110,12 +110,12 @@ let cliResult = cli.parseCommandLine();
      - setUp: an async function for the preScript [optional]
      - tearDown: an async function for the postScript [optional]
 */
-var tests = [];
+const tests = [];
 
 cliResult.urls.forEach(function convert(url) {
   // for each url, we try to load it as a script, that may contain
   // export a single function or an object containing setUp/test/tearDown functions.
-  var testScript = engineUtils.loadScript(url);
+  let testScript = engineUtils.loadScript(url);
 
   // if the value is an url or a not a single function,  we can return the original value
   if (typeof testScript == 'string' || testScript instanceof AsyncFunction) {
