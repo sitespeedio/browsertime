@@ -114,9 +114,11 @@ let cliResult = cli.parseCommandLine();
 var tests = [];
 
 cliResult.urls.forEach(function convert(url) {
+  // for each url, we try to load it as a script, that may contain
+  // export a single function or an object containing setUp/test/tearDown functions.
   var testScript = engineUtils.loadScript(url);
 
-  // if the value is an url or a not an array we can return the original value
+  // if the value is an url or a not a single function,  we can return the original value
   if (typeof testScript == 'string' || testScript instanceof AsyncFunction) {
     tests.push(url);
     return;
