@@ -43,6 +43,7 @@ matrix:
         - node ./bin/browsertime.js -b firefox test/navigationscript/multi.js https://www.sitespeed.io/blog/ -n 1
         - node ./bin/browsertime.js -b chrome test/navigationscript/multi.js -n 3 --chrome.timeline --video --visualMetrics --visualElements --viewPort 1000x600
         - node ./bin/browsertime.js -b firefox --firefox.geckoProfiler -n 1 https://www.sitespeed.io/ --spa
+        - node ./bin/browsertime.js -b firefox test/unifiedscripts/sample.js
     - name: "Browser tests on OS X"
       os: osx
       osx_image: xcode11.3
@@ -64,6 +65,7 @@ matrix:
         - node ./bin/browsertime.js -b safari -n 1 --viewPort 1000x600  --video --visualMetrics https://www.sitespeed.io/
         - node ./bin/browsertime.js -b chrome -n 1 --viewPort 1000x600  --video --visualMetrics --connectivity.profile cable --connectivity.engine throttle https://www.sitespeed.io/
         - node ./bin/browsertime.js -b firefox -n 1 --viewPort 800x600 --video --visualMetrics https://www.sitespeed.io/
+        - node ./bin/browsertime.js -b firefox test/unifiedscripts/sample.js
     - name: "Browser tests on Windows"
       os: windows         
       before_install:
@@ -79,6 +81,7 @@ matrix:
         - node ./bin/browsertime.js -b chrome -n 1 --cpu -r header:value --screenshot https://www.sitespeed.io/documentation/
         - node ./bin/browsertime.js -b chrome test/navigationscript/multi.js -n 3 --chrome.timeline --viewPort 1000x600
         - node ./bin/browsertime.js -b edge -n 1 --screenshot https://www.sitespeed.io/
+        - node ./bin/browsertime.js -b edge test/unifiedscripts/sample.js
 cache:
   apt: true
   pip: true
