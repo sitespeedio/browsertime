@@ -1,5 +1,13 @@
 # Browsertime changelog
 
+## 8.3.0 - 2020-03-20
+### Added
+* Upgraded from selenium-4.0.0-alpha.5 to selenium-4.0.0-alpha.7 [#1221](https://github.com/sitespeedio/browsertime/pull/1221).
+* Added supported for unified scripts Thank you [Tarek Ziade](https://github.com/tarekziade) for the PR [#1220](https://github.com/sitespeedio/browsertime/pull/1220). Checkout [#1216](https://github.com/sitespeedio/browsertime/issues/1216) for more info. 
+
+### Fixed
+* Running Chrome in emulated mobile mode sometimes picked up Chromes info bar as First Visual Change. The default bottom margin was changed from 10 pixels to 16 pixels [#1224](https://github.com/sitespeedio/browsertime/pull/1224).
+
 ## 8.2.0 - 2020-03-11
 ### Added
 * Upgraded to Firefox 74 in the Docker container
