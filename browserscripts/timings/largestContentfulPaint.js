@@ -13,7 +13,7 @@
       id: largestEntry.id,
       url: largestEntry.url,
       loadTime: Number(largestEntry.loadTime.toFixed(0)),
-      renderTime: Number(largestEntry.renderTime.toFixed(0)),
+      renderTime: Number(Math.max(largestEntry.renderTime,largestEntry.loadTime).toFixed(0)),
       size: largestEntry.size,
       startTime: Number(largestEntry.startTime.toFixed(0)),
       tagName: largestEntry.element ? largestEntry.element.tagName : ''
