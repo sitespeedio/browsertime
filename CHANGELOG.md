@@ -1,5 +1,11 @@
 # Browsertime changelog
 
+## 8.3.1 - 2020-03-26
+### Fixed
+* Back fill render time for LCP render time from load time [#1225](https://github.com/sitespeedio/browsertime/pull/1225).
+* [Skip including](https://github.com/sitespeedio/browsertime/commit/68607e8e9d2ef3b697b2a995a2f9bda50fd68976) videoRecordingStart in the HAR timings.
+* [Added CLI docs](https://github.com/sitespeedio/browsertime/commit/8ee3f1a811a5f3ee8db212b2bc971c8b611706a7) for example Chrome trace category.
+
 ## 8.3.0 - 2020-03-20
 ### Added
 * Upgraded from selenium-4.0.0-alpha.5 to selenium-4.0.0-alpha.7 [#1221](https://github.com/sitespeedio/browsertime/pull/1221).
