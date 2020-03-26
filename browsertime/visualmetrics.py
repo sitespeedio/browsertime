@@ -1649,8 +1649,8 @@ def calculate_speed_index(progress):
 def calculate_contentful_speed_index(progress, directory):
     try:
         dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
-        def get_filename(p):
-            return os.path.join(dir, "ms_{0:06d}.png".format(p["time"]));
+        def get_filename(t):
+            return os.path.join(dir, "ms_{0:06d}.png".format(t));
 
         matcher = re.compile(r"(\d+?):")
         def compute_contentfulness(frame):
@@ -1672,35 +1672,29 @@ def calculate_contentful_speed_index(progress, directory):
 
             return int(pixel_count)
 
-        content = []
-        maxContent = 0
-        for p in progress[1:]:
-            value = compute_contentfulness(get_filename(p))
-            if value > maxContent:
-                maxContent = value
-            content.append(value)
 
-        for i, value in enumerate(content):
-            content[i] = (
-                maxContent == 0 and 0.0 or float(content[i]) / float(maxContent)
-            )
+        frame_timestamps = [p["time"] for p in progress];
+        frame_durations = [frame_timestamps[i + 1] - frame_timestamps[i] for i in range(len(frame_timestamps) - 1)]
+        frame_contentfulness = [compute_contentfulness(get_filename(t)) for t in frame_timestamps]
+        frame_contentfulness[0] = 0 # Force 0 content for first frame. (not sure why, the previous code was doing this)
+        max_contentfulness = max(max(frame_contentfulness), 1) # make sure max_contentfulness is not zero
 
-        # Assume 0 content for first frame
-        cont_si = 1 * (progress[1]["time"] - progress[0]["time"])
-        completeness_value = [(progress[1]["time"], int(cont_si))]
-        for i in range(1, len(progress) - 1):
-            elapsed = progress[i + 1]["time"] - progress[i]["time"]
-            # print i,' time =',p['time'],'elapsed =',elapsed,'content = ',content[i]
-            cont_si += elapsed * (1.0 - content[i])
-            completeness_value.append((progress[i + 1]["time"], int(cont_si)))
+        csi_score = 0;
+        partial_sums = [];
 
-        cont_si = int(cont_si)
-        raw_progress_value = ["0=0"]
-        for timestamp, percent in completeness_value:
-            p = int(100 * float(percent) / float(cont_si))
-            raw_progress_value.append("%d=%d" % (timestamp, p))
+        for (contentfulness, duration) in zip(frame_contentfulness, frame_durations):
+            fract_contentfulness = contentfulness / max_contentfulness
+            frame_score = (1.0 - fract_contentfulness) * duration
+            csi_score += frame_score
+            partial_sums.append(csi_score)
 
-        return cont_si, ", ".join(raw_progress_value)
+        string_progress_values = []
+        for (timestamp, partial_sum) in zip(frame_timestamps, partial_sums):
+            percentage = int(100 * (partial_sum / csi_score))
+            string_progress_values.append("%d=%d" % (timestamp, percentage))
+
+        return csi_score, ",".join(string_progress_values)
+
     except Exception as e:
         logging.exception(e)
         return None, None
