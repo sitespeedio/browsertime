@@ -1647,22 +1647,19 @@ def calculate_speed_index(progress):
 
 
 def calculate_contentful_speed_index(progress, directory):
-    # convert output comes out with lines that have this format:
-    # <pixel count>: <rgb color> #<hex color> <gray color>
-    # This is CLI dependant and very fragile
-    matcher = re.compile(r"(\d+?):")
-
     try:
         dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
-        content = []
-        maxContent = 0
-        for p in progress[1:]:
-            # Full Path of the Current Frame
-            current_frame = os.path.join(dir, "ms_{0:06d}.png".format(p["time"]))
-            logging.debug("contentfulSpeedIndex: Current Image is %s" % current_frame)
-            # Takes full path of PNG frames to compute contentfulness value
+        def get_filename(p):
+            return os.path.join(dir, "ms_{0:06d}.png".format(p["time"]));
+
+        matcher = re.compile(r"(\d+?):")
+        def compute_contentfulness(frame):
+            logging.debug("contentfulSpeedIndex: Current Image is %s" % frame)
+            # convert output comes out with lines that have this format:
+            # <pixel count>: <rgb color> #<hex color> <gray color>
+            # This is CLI dependant and very fragile
             command = "{0} {1} -canny 2x2+8%+8% -define histogram:unique-colors=true -format %c histogram:info:-".format(
-                image_magick["convert"], current_frame
+                image_magick["convert"], frame
             )
             output = subprocess.check_output(command, shell=True).decode('utf-8')
             logging.debug("Output %s" % output)
@@ -1671,10 +1668,14 @@ def calculate_contentful_speed_index(progress, directory):
             # line
             pixel_count = matcher.findall(output)[-1]
             if not pixel_count:
-                logging.debug("Could not find the contentfulness value")
-                return None, None
+                raise Exception("Could not find the contentfulness value")
 
-            value = int(pixel_count)
+            return int(pixel_count)
+
+        content = []
+        maxContent = 0
+        for p in progress[1:]:
+            value = compute_contentfulness(get_filename(p))
             if value > maxContent:
                 maxContent = value
             content.append(value)
