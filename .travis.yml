@@ -70,7 +70,8 @@ matrix:
       before_install:
         - choco install python 
         # - choco install firefox -y
-        - choco install microsoft-edge
+        # - choco install microsoft-edge
+        - choco install microsoft-edge-insider-dev
         # See https://www.gep13.co.uk/blog/chocolatey-error-hashes-do-not-match#so-why-did-this-go-wrong
         - choco install googlechrome --ignore-checksums
         #- cmd.exe //c "RefreshEnv.cmd"
