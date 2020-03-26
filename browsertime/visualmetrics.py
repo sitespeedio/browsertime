@@ -1677,13 +1677,13 @@ def calculate_contentful_speed_index(progress, directory):
         frame_durations = [frame_timestamps[i + 1] - frame_timestamps[i] for i in range(len(frame_timestamps) - 1)]
         frame_contentfulness = [compute_contentfulness(get_filename(t)) for t in frame_timestamps]
         frame_contentfulness[0] = 0 # Force 0 content for first frame. (not sure why, the previous code was doing this)
-        max_contentfulness = max(max(frame_contentfulness), 1) # make sure max_contentfulness is not zero
+        final_contentfulness = max(frame_contentfulness[-1], 1) # make sure final_contentfulness is not zero
 
         csi_score = 0;
         partial_sums = [];
 
         for (contentfulness, duration) in zip(frame_contentfulness, frame_durations):
-            fract_contentfulness = contentfulness / max_contentfulness
+            fract_contentfulness = min(contentfulness, final_contentfulness) / final_contentfulness
             frame_score = (1.0 - fract_contentfulness) * duration
             csi_score += frame_score
             partial_sums.append(csi_score)
