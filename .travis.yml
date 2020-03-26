@@ -3,8 +3,7 @@ node_js:
   - 12
 matrix:
   allow_failures:
-    - os: 
-      - osx
+    - os: osx
   fast_finish: true
   include:
     - name: "Unit tests on Linux"
