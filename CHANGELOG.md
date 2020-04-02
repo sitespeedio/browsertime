@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 8.4.0 - UNRELEASED
+### Added
+* Add support for IQR filtering of metrics `--iqr` [#1229](https://github.com/sitespeedio/browsertime/pull/1229).
+
 ## 8.3.1 - 2020-03-26
 ### Fixed
 * Back fill render time for LCP render time from load time [#1225](https://github.com/sitespeedio/browsertime/pull/1225).
