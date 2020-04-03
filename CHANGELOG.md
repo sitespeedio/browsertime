@@ -1,8 +1,11 @@
 # Browsertime changelog
 
-## 8.4.0 - UNRELEASED
+## 8.4.0 - 2020-04-03
 ### Added
 * Add support for IQR filtering of metrics `--iqr` [#1229](https://github.com/sitespeedio/browsertime/pull/1229).
+
+### Fixed
+* Emptying the cache and other commands that uses the extension server for Firefox was broken when running scripting. Fixed in [#1230](https://github.com/sitespeedio/browsertime/pull/1230).
 
 ## 8.3.1 - 2020-03-26
 ### Fixed
