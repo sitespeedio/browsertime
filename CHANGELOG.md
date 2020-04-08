@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 8.5.0 - UNRELEASED
+### Added
+* Updated to Chromedriver 81. Updated to Chrome 81 and Firefox 75 in the Docker container.
+
 ## 8.4.0 - 2020-04-03
 ### Added
 * Add support for IQR filtering of metrics `--iqr` [#1229](https://github.com/sitespeedio/browsertime/pull/1229).
