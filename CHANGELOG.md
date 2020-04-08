@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## 8.5.0 - UNRELEASED
+## 8.5.0 - 2020-04-08
 ### Added
 * Updated to Chromedriver 81. Updated to Chrome 81 and Firefox 75 in the Docker container.
 
