@@ -39,6 +39,7 @@ import math
 import os
 import platform
 import re
+import sys
 import shutil
 import subprocess
 import tempfile
@@ -776,9 +777,10 @@ def crop_viewport(directory):
 def get_decimate_filter():
     decimate = None
     try:
-        filters = subprocess.check_output(
-            ["ffmpeg", "-filters"], stderr=subprocess.STDOUT
-        )
+        if (sys.version_info > (3, 0)):
+            filters = subprocess.check_output(['ffmpeg', '-filters'], stderr=subprocess.STDOUT, encoding='UTF-8')
+        else:
+            filters = subprocess.check_output(['ffmpeg', '-filters'], stderr=subprocess.STDOUT)
         lines = filters.split("\n")
         match = re.compile(
             r"(?P<filter>[\w]*decimate).*V->V.*Remove near-duplicate frames"
@@ -1910,7 +1912,10 @@ def check_config():
 def check_process(command, output):
     ok = False
     try:
-        out = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=True)
+        if (sys.version_info > (3, 0)):
+            out = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=True, encoding='UTF-8')
+        else:
+            out = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=True)
         if out.find(output) > -1:
             ok = True
     except BaseException:
