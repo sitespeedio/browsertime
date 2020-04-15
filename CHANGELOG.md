@@ -1,5 +1,12 @@
 # Browsertime changelog
 
+## 8.6.0 - UNRELEASED
+* Updated the Docker container to use Ubuntu 20.04
+* Updated the Docker container to use Python 3
+* Updated Visual Metrics to support Python 3
+
+All work in [#1234](https://github.com/sitespeedio/browsertime/pull/1234) and [#1235](https://github.com/sitespeedio/browsertime/pull/1235).
+
 ## 8.5.0 - 2020-04-08
 ### Added
 * Updated to Chromedriver 81. Updated to Chrome 81 and Firefox 75 in the Docker container.
