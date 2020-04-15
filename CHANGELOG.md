@@ -1,11 +1,14 @@
 # Browsertime changelog
 
-## 8.6.0 - UNRELEASED
+## 8.6.0 - 2020-04-15
+### Added
 * Updated the Docker container to use Ubuntu 20.04
 * Updated the Docker container to use Python 3
 * Updated Visual Metrics to support Python 3
 
 All work in [#1234](https://github.com/sitespeedio/browsertime/pull/1234) and [#1235](https://github.com/sitespeedio/browsertime/pull/1235).
+
+* Show FCP and LCP in the console after a succesful run (and removed RUM Speed Index) [#1237](https://github.com/sitespeedio/browsertime/pull/1237) and [#1238](https://github.com/sitespeedio/browsertime/pull/1238).
 
 ## 8.5.0 - 2020-04-08
 ### Added
