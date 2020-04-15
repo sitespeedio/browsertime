@@ -863,7 +863,11 @@ def is_color_frame(file, color_file):
                     crop,
                     image_magick["compare"],
                 )
-                compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
+
+                if (sys.version_info > (3, 0)):
+                   compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True, encoding='UTF-8')
+                else:
+                    compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
                 out, err = compare.communicate()
                 if re.match("^[0-9]+$", err):
                     different_pixels = int(err)
@@ -904,7 +908,10 @@ def is_white_frame(file, white_file):
             ).format(
                 image_magick["convert"], white_file, file, crop, image_magick["compare"]
             )
-        compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
+        if (sys.version_info > (3, 0)):
+            compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True, encoding='UTF-8')
+        else:    
+            compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
         out, err = compare.communicate()
         if re.match("^[0-9]+$", err):
             different_pixels = int(err)
@@ -959,7 +966,10 @@ def frames_match(image1, image2, fuzz_percent, max_differences, crop_region, mas
     )
     if platform.system() != "Windows":
         command = command.replace("(", "\\(").replace(")", "\\)")
-    compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
+    if (sys.version_info > (3, 0)):
+        compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True, encoding='UTF-8')
+    else:    
+        compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
     out, err = compare.communicate()
     if re.match("^[0-9]+$", err):
         different_pixels = int(err)
