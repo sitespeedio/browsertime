@@ -44,6 +44,13 @@ import shutil
 import subprocess
 import tempfile
 
+if (sys.version_info > (3, 0)):
+    GZIP_TEXT = 'wt'
+    GZIP_READ_TEXT = 'rt'
+else:
+    GZIP_TEXT = 'w'
+    GZIP_READ_TEXT = 'r'
+
 # Globals
 options = None
 client_viewport = None
@@ -162,7 +169,10 @@ def extract_frames(video, directory, full_resolution, viewport):
         ]
         logging.debug(" ".join(command))
         lines = []
-        proc = subprocess.Popen(command, stderr=subprocess.PIPE)
+        if (sys.version_info > (3, 0)):
+             proc = subprocess.Popen(command, stderr=subprocess.PIPE, encoding='UTF-8')
+        else:
+             proc = subprocess.Popen(command, stderr=subprocess.PIPE)
         while proc.poll() is None:
             lines.extend(iter(proc.stderr.readline, ""))
 
@@ -853,7 +863,11 @@ def is_color_frame(file, color_file):
                     crop,
                     image_magick["compare"],
                 )
-                compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
+
+                if (sys.version_info > (3, 0)):
+                   compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True, encoding='UTF-8')
+                else:
+                    compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
                 out, err = compare.communicate()
                 if re.match("^[0-9]+$", err):
                     different_pixels = int(err)
@@ -894,7 +908,10 @@ def is_white_frame(file, white_file):
             ).format(
                 image_magick["convert"], white_file, file, crop, image_magick["compare"]
             )
-        compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
+        if (sys.version_info > (3, 0)):
+            compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True, encoding='UTF-8')
+        else:    
+            compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
         out, err = compare.communicate()
         if re.match("^[0-9]+$", err):
             different_pixels = int(err)
@@ -949,7 +966,10 @@ def frames_match(image1, image2, fuzz_percent, max_differences, crop_region, mas
     )
     if platform.system() != "Windows":
         command = command.replace("(", "\\(").replace(")", "\\)")
-    compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
+    if (sys.version_info > (3, 0)):
+        compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True, encoding='UTF-8')
+    else:    
+        compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
     out, err = compare.communicate()
     if re.match("^[0-9]+$", err):
         different_pixels = int(err)
@@ -1024,7 +1044,7 @@ def get_timeline_offset(timeline_file):
     try:
         file_name, ext = os.path.splitext(timeline_file)
         if ext.lower() == ".gz":
-            f = gzip.open(timeline_file, "rb")
+            f = gzip.open(timeline_file, GZIP_READ_TEXT)
         else:
             f = open(timeline_file, "r")
         timeline = json.load(f)
@@ -1184,7 +1204,7 @@ def calculate_histograms(directory, histograms_file, force):
                             )
                 if os.path.isfile(histograms_file):
                     os.remove(histograms_file)
-                f = gzip.open(histograms_file, "wb")
+                f = gzip.open(histograms_file, GZIP_TEXT)
                 json.dump(histograms, f)
                 f.close()
             else:
@@ -1459,9 +1479,9 @@ def calculate_visual_metrics(
         if progress and progress_file is not None:
             file_name, ext = os.path.splitext(progress_file)
             if ext.lower() == ".gz":
-                f = gzip.open(progress_file, "wb", 7)
+                f = gzip.open(progress_file, GZIP_TEXT, 7)
             else:
-                f = open(progress_file, "wb")
+                f = open(progress_file, "w")
             json.dump(progress, f)
             f.close()
         if len(histograms) > 1:
@@ -1496,7 +1516,7 @@ def calculate_visual_metrics(
             if hero_elements_file is not None and os.path.isfile(hero_elements_file):
                 logging.debug("Calculating hero element times")
                 hero_data = None
-                hero_f_in = gzip.open(hero_elements_file, "rb")
+                hero_f_in = gzip.open(hero_elements_file, GZIP_READ_TEXT)
                 try:
                     hero_data = json.load(hero_f_in)
                 except Exception as e:
@@ -1535,7 +1555,7 @@ def calculate_visual_metrics(
                     hero_data["timings"] = hero_timings
                     metrics += hero_timings
 
-                    hero_f_out = gzip.open(hero_elements_file, "wb", 7)
+                    hero_f_out = gzip.open(hero_elements_file, GZIP_TEXT, 7)
                     json.dump(hero_data, hero_f_out)
                     hero_f_out.close()
             else:
