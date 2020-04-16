@@ -1,5 +1,11 @@
 # Browsertime changelog
 
+## 8.6.1 - 2020-04-16
+### Fixed
+* Crawling on Android in sitespeed.io failed because the wrong port for CDP was used, fixed in [#1240](https://github.com/sitespeedio/browsertime/pull/1240).
+* Catch and log if CDP isn't setup correctly [#1241](https://github.com/sitespeedio/browsertime/pull/1241).
+* When we run on Android for Chrome we leaked one adb forward for devtools per test. It wasn't from Browsertime directly so either from Selenium/Chromedriver. Now we close them all for that device that runs the test [#1243](https://github.com/sitespeedio/browsertime/pull/1243).
+
 ## 8.6.0 - 2020-04-15
 ### Added
 * Updated the Docker container to use Ubuntu 20.04
