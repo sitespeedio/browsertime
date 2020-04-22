@@ -1,5 +1,14 @@
 # Browsertime changelog
 
+## 8.7.0 - UNRELEASED
+### Fixed
+* Fixed typo in an error message of click.js, fixed in [#1246](https://github.com/sitespeedio/browsertime/pull/1246), thank you [petemyron](https://github.com/petemyron).
+* Mouse focus on element won't be lost at script measurement start, fixed in [#1248](https://github.com/sitespeedio/browsertime/pull/1248). Thank you [Icecold777](https://github.com/Icecold777).
+
+### Added
+* New command `wait.bySelector(selector, maxTime)` implemented in [#1247](https://github.com/sitespeedio/browsertime/pull/1247)
+* Adding screenshots in scripting is a great feature and one thing that was missing was that the result JSON do not include any references to the screenshots, so tools that uses browsertime, didn't know that they exist. In sitespeed.ios case the screenshots are stored to disk but now shown. [#1245](https://github.com/sitespeedio/browsertime/pull/1245)
+
 ## 8.6.1 - 2020-04-16
 ### Fixed
 * Crawling on Android in sitespeed.io failed because the wrong port for CDP was used, fixed in [#1240](https://github.com/sitespeedio/browsertime/pull/1240).
