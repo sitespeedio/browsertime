@@ -2,12 +2,13 @@
 
 ## UNRELEASED
 ### Added
-* Extra love running on rooted Android devices: I've moved over Mozillas [best practices getting stable metrics](https://dxr.mozilla.org/mozilla-central/source/testing/raptor/raptor/performance_tuning.py) on Android. There are some extra love there for Moto G5 and Pixel 2. Turn on with `--androidRooted`, see [#1255](https://github.com/sitespeedio/browsertime/pull/1255). 
+* Extra love running on rooted Android devices: I've moved over Mozillas [best practices getting stable metrics](https://dxr.mozilla.org/mozilla-central/source/testing/raptor/raptor/performance_tuning.py) on Android. There are some extra love there for Moto G5 and Pixel 2. Turn on with `--androidRooted`, see [#1255](https://github.com/sitespeedio/browsertime/pull/1255). Be careful though: We will setup everything for performance and the phone will keep that state even after the tests.
+
 * Always keep Android phones awake when running on USB [#1257](https://github.com/sitespeedio/browsertime/pull/1257).
 
 ## 8.7.1 - 2020-04-28
 ### Fixed
-* Fix nan check for Firefox preferences as reportd in [#1254](https://github.com/sitespeedio/browsertime/issues/1254) and fixed by [#1256](https://github.com/sitespeedio/browsertime/pull/1256).
+* Fix nan check for Firefox preferences as reported in [#1254](https://github.com/sitespeedio/browsertime/issues/1254) and fixed by [#1256](https://github.com/sitespeedio/browsertime/pull/1256).
 
 ## 8.7.0 - 2020-04-24
 ### Fixed
