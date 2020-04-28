@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 8.7.1 - 2020-04-28
+### Fixed
+* Fix nan check for Firefox preferences as reportd in [#1254](https://github.com/sitespeedio/browsertime/issues/1254) and fixed by [#1256](https://github.com/sitespeedio/browsertime/pull/1256).
+
 ## 8.7.0 - 2020-04-24
 ### Fixed
 * Fixed typo in an error message of click.js, fixed in [#1246](https://github.com/sitespeedio/browsertime/pull/1246), thank you [petemyron](https://github.com/petemyron).
