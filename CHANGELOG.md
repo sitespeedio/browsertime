@@ -1,10 +1,13 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 8.8.0 - 2020-04-29
 ### Added
 * Extra love running on rooted Android devices: I've moved over Mozillas [best practices getting stable metrics](https://dxr.mozilla.org/mozilla-central/source/testing/raptor/raptor/performance_tuning.py) on Android. There are some extra love there for Moto G5 and Pixel 2. Turn on with `--androidRooted`, see [#1255](https://github.com/sitespeedio/browsertime/pull/1255). Be careful though: We will setup everything for performance and the phone will keep that state even after the tests.
 
 * Always keep Android phones awake when running on USB [#1257](https://github.com/sitespeedio/browsertime/pull/1257).
+
+### Fixed
+* Verify that FF data (appConstant etc) exist before trying to delete it. The bug [#1261](https://github.com/sitespeedio/browsertime/issues/1261) was introduced in 8.7.0 and fixed in PR [#1262](https://github.com/sitespeedio/browsertime/pull/1262).
 
 ## 8.7.1 - 2020-04-28
 ### Fixed
