@@ -1,8 +1,11 @@
 # Browsertime changelog
 
-## 8.9.0 - UNRELEASED
+## 8.9.0 - 2020-04-30
 ### Added
 * Collect Android model data and include it in the result.json and log it [#1263](https://github.com/sitespeedio/browsertime/pull/1263).
+
+### Fixed
+* Still issues with removing Firefox appConstant data. It seems like sometimes we don't get the browser info at all. Let us be even more safe when we try to remove it [#1265](https://github.com/sitespeedio/browsertime/pull/1265).
 
 ## 8.8.0 - 2020-04-29
 ### Added
