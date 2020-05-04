@@ -1,5 +1,11 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* Reverted to Python 2 in the Docker container to make TSProxy work again.
+* Kernel fix when running on rooted Android devices [#1267](https://github.com/sitespeedio/browsertime/pull/1267).
+* Smaller font for Visual Metrics in the video to fit on Android devices [#1268](https://github.com/sitespeedio/browsertime/pull/1268).
+
 ## 8.9.0 - 2020-04-30
 ### Added
 * Collect Android model data and include it in the result.json and log it [#1263](https://github.com/sitespeedio/browsertime/pull/1263).
