@@ -1,10 +1,11 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 8.9.1 - 2020-05-05
 ### Fixed
 * Reverted to Python 2 in the Docker container to make TSProxy work again.
 * Kernel fix when running on rooted Android devices [#1267](https://github.com/sitespeedio/browsertime/pull/1267).
-* Smaller font for Visual Metrics in the video to fit on Android devices [#1268](https://github.com/sitespeedio/browsertime/pull/1268).
+* Smaller font for Visual Metrics in the video to fit on Android devices [#1268](https://github.com/sitespeedio/browsertime/pull/1268) and [#1269](https://github.com/sitespeedio/browsertime/pull/1269)
+* Fixed so Visual Metrics and the timer us a Mono space font in Docker to avoid flicker [#1270](https://github.com/sitespeedio/browsertime/pull/1270).
 
 ## 8.9.0 - 2020-04-30
 ### Added
