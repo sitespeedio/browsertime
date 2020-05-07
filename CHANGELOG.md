@@ -1,8 +1,8 @@
 # Browsertime changelog
 
-## UNRELEASED
+##  8.10.0 - 2020-05-07
 ### Added
-* Changed to Firefox 76 in the Docker container.
+* Upgraded to Firefox 76 in the Docker container.
 
 ## 8.9.1 - 2020-05-05
 ### Fixed
