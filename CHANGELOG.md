@@ -1,5 +1,11 @@
 # Browsertime changelog
 
+## 8.11.0 - UNRELEASED
+### Added
+* Output TBT, CLS and TTFBin the CLI summary when availible [#1276](https://github.com/sitespeedio/browsertime/pull/1276).
+* New build of WebPageReplay in the Docker container [#1271](https://github.com/sitespeedio/browsertime/pull/1271).
+* Make it possible to enable Safe Browsing and Tracking protection for Firefox. Fireefox precerences was messed up before. Set `--firefox.disableSafeBrowsing false --firefox.disableTrackingProtection false` and let the browser settle for 30 seconds to download the lists and they are enabled. In the future we want it to be enabled by default [#1272](https://github.com/sitespeedio/browsertime/pull/1272).
+
 ##  8.10.0 - 2020-05-07
 ### Added
 * Upgraded to Firefox 76 in the Docker container.
