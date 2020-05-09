@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 8.11.1 - 2020-05-09
+### Fixed
+* Metrics output was broken in 8.11.0 if you only do one run [#1278](https://github.com/sitespeedio/browsertime/pull/1278).
+
 ## 8.11.0 - 2020-05-09
 ### Added
 * Output TBT, CLS and TTFB in the CLI summary when availible [#1276](https://github.com/sitespeedio/browsertime/pull/1276) and per run. Also unify how we output metrics from thee CLI [#1277](https://github.com/sitespeedio/browsertime/pull/1277).
