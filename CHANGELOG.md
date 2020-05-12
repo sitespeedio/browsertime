@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 8.12.0 - UNRELEASED
+### Added
+* Run tests with Safari Technology Preview using `--safari.useTechnologyPreview` [#1280](https://github.com/sitespeedio/browsertime/pull/1280).
+
 ## 8.11.1 - 2020-05-09
 ### Fixed
 * Metrics output was broken in 8.11.0 if you only do one run [#1278](https://github.com/sitespeedio/browsertime/pull/1278).
