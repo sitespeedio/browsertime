@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## 8.12.0 - UNRELEASED
+## 8.12.0 - 2020-05-12
 ### Added
 * Run tests with Safari Technology Preview using `--safari.useTechnologyPreview` [#1280](https://github.com/sitespeedio/browsertime/pull/1280).
 
