@@ -11,5 +11,5 @@
   for (let entry of list) {
     score += entry.value;
   }
-  return score * 100;
+  return score;
 })();
