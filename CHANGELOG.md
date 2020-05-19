@@ -1,5 +1,12 @@
 # Browsertime changelog
 
+## 8.13.0 - 2020-05-19
+### Added
+* Upgraded to Chromedriver 83 Upgraded to Chrome 83 in the Docker container.
+* Include FCP and LCP in the timings in the HAR file [#1285](https://github.com/sitespeedio/browsertime/pull/1285).
+### Fixed
+* Fixed decimal formating in statistics [#1286](https://github.com/sitespeedio/browsertime/pull/1286)
+
 ## 8.12.1 - 2020-05-19
 ### Fixed
 * Fixed so metrics in the CLI always shows two decimals [#1282](https://github.com/sitespeedio/browsertime/pull/1282). 
