@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+## 8.12.1 - 2020-05-19
+### Fixed
+* Fixed so metrics in the CLI always shows two decimals [#1282](https://github.com/sitespeedio/browsertime/pull/1282). 
+* Adopt the rename of layout-instability-api to CLS and remove report in percentage since it do not make sense [#1283](https://github.com/sitespeedio/browsertime/pull/1283) and [#1284](https://github.com/sitespeedio/browsertime/pull/1284).
+
 ## 8.12.0 - 2020-05-12
 ### Added
 * Run tests with Safari Technology Preview using `--safari.useTechnologyPreview` [#1280](https://github.com/sitespeedio/browsertime/pull/1280).
