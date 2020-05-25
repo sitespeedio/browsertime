@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* The log was putting CLS in % even though it isn't [#1288](https://github.com/sitespeedio/browsertime/pull/1288).
+
 ## 8.13.0 - 2020-05-19
 ### Added
 * Upgraded to Chromedriver 83 Upgraded to Chrome 83 in the Docker container.
