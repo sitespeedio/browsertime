@@ -11,5 +11,5 @@ do
     docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime sitespeedio/browsertime-autobuild https://www.sitespeed.io/ --cpu --connectivity.engine throttle -c cable
     docker run --cap-add=NET_ADMIN --shm-size 2g --rm -v "$(pwd)":/browsertime sitespeedio/browsertime-autobuild https://www.sitespeed.io/ -b firefox --firefox.geckoProfiler --connectivity.engine throttle -c cable
     rm -fR browsertime-results
-    delay 120 
+    sleep 120 
 done
