@@ -5,11 +5,15 @@ set -eu
 
 sudo modprobe ifb numifbs=1
 
+FIREFOX_SETTINGS="-b firefox --firefox.geckoProfiler --firefox.windowRecorder"
+CHROME_SETTINGS="--cpu"
+
 while true
 do
     git pull
-    docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime sitespeedio/browsertime-autobuild https://www.sitespeed.io/ --cpu --connectivity.engine throttle -c cable
-    docker run --cap-add=NET_ADMIN --shm-size 2g --rm -v "$(pwd)":/browsertime sitespeedio/browsertime-autobuild https://www.sitespeed.io/ -b firefox --firefox.geckoProfiler --connectivity.engine throttle -c cable
+    docker pull sitespeedio/browsertime-autobuild
+    docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime sitespeedio/browsertime-autobuild https://www.sitespeed.io/ --connectivity.engine throttle -c cable $CHROME_SETTINGS
+    docker run --cap-add=NET_ADMIN --shm-size 2g --rm -v "$(pwd)":/browsertime sitespeedio/browsertime-autobuild https://www.sitespeed.io/  --connectivity.engine throttle -c cable $FIREFOX_SETTINGS
     rm -fR browsertime-results
-    sleep 120 
+    sleep 180 
 done
