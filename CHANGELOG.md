@@ -1,8 +1,9 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 8.13.1 - 2020-05-26
 ### Fixed
 * The log was putting CLS in % even though it isn't [#1288](https://github.com/sitespeedio/browsertime/pull/1288).
+* Updated dependencies: chrome-har, execa, chrome-remote-interface and dayjs [#1290](https://github.com/sitespeedio/browsertime/pull/1290) and [#1289](https://github.com/sitespeedio/browsertime/pull/1289)
 
 ## 8.13.0 - 2020-05-19
 ### Added
