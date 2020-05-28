@@ -1,5 +1,12 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Added
+* Option to configure number of browser restart tries [#1292](https://github.com/sitespeedio/browsertime/pull/1292). Use `--browserRestartTries`.
+
+### Fixed
+* Running wiothout the CLI caused error logs removing Firefox appconstants [#1294](https://github.com/sitespeedio/browsertime/pull/1294).
+
 ## 8.13.1 - 2020-05-26
 ### Fixed
 * The log was putting CLS in % even though it isn't [#1288](https://github.com/sitespeedio/browsertime/pull/1288).
