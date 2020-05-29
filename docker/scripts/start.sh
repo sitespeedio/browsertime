@@ -116,8 +116,9 @@ function runWebPageReplay() {
 
           trap shutdown SIGTERM SIGINT
           wait $PID
+          EXIT_STATUS=$?
           kill -s SIGTERM $replay_pid
-
+          exit $EXIT_STATUS
         else
           echo "Replay server didn't start correctly" >&2
           exit 1
