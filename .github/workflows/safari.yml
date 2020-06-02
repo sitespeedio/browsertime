@@ -13,7 +13,11 @@ jobs:
     - run: npm ci
     - run: brew update
     - run: brew install ffmpeg imagemagick
-    - run: brew cask install microsoft-edge
-    - run: /Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge --version
+    - run: python -m pip install --upgrade --user pip
+    - run: python -m pip install --upgrade --user setuptools
+    - run: python -m pip install --user pyssim
+    - run: python -m pip --version
+    - run: python -m pip show Pillow
+    - run: python -m pip show pyssim
     - run: ./browsertime/visualmetrics.py --check
     - run: node ./bin/browsertime.js -b safari -n 1 --viewPort 1000x600  --video --visualMetrics https://www.sitespeed.io/
