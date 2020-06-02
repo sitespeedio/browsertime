@@ -26,7 +26,7 @@ jobs:
     - run: sudo modprobe ifb numifbs=1
     - run: xvfb-run ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle
     - run: xvfb-run node ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value --chrome.CPUThrottlingRate 2 --chrome.cdp.performance --chrome.enableChromeDriverLog https://www.sitespeed.io/documentation/
-    - run: xvfb-run -n :99 --server-args="-screen 0 1600x1024x16" node ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --video --screenshot --connectivity.engine tsproxy -c cable --visualMetrics -n 1 --chrome.timeline --visualElements --chrome.collectLongTasks --cookie test=true https://www.sitespeed.io/
+    - run: xvfb-run -n 99 --server-args="-screen 0 1600x1024x16" node ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --video --screenshot --connectivity.engine tsproxy -c cable --visualMetrics -n 1 --chrome.timeline --visualElements --chrome.collectLongTasks --cookie test=true https://www.sitespeed.io/
     - run: xvfb-run node ./bin/browsertime.js -b chrome test/navigationscript/measure.js -n 1 --preScript test/prepostscripts/preSample.js --postScript test/prepostscripts/postSample.js
     - run: xvfb-run node ./bin/browsertime.js -b chrome test/navigationscript/navigateAndStartInTwoSteps.js -n 1 --pageCompleteCheckInactivity --timeToSettle 1000
     - run: xvfb-run node ./bin/browsertime.js -b firefox test/navigationscript/multi.js https://www.sitespeed.io/blog/ -n 1
