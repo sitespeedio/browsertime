@@ -20,4 +20,6 @@ jobs:
     - run: python -m pip show Pillow
     - run: python -m pip show pyssim
     - run: ./browsertime/visualmetrics.py --check
-    - run: node ./bin/browsertime.js -b safari -n 1 --viewPort 1000x600  --video --visualMetrics https://www.sitespeed.io/
+    - run: system_profiler SPDisplaysDataType |grep Resolution
+    - run: ./bin/browsertime.js -b safari -n 1 https://www.sitespeed.io/
+    - run: ./bin/browsertime.js -b safari -n 1 --viewPort 1000x600  --video --visualMetrics https://www.sitespeed.io/
