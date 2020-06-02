@@ -1,0 +1,22 @@
+name: Run browser test Windows
+on: [push]
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - run: npm ci
+      env:
+        CHROMEDRIVER_SKIP_DOWNLOAD: true
+        GECKODRIVER_SKIP_DOWNLOAD: true
+    - run: choco install ffmpeg
+    - run: choco install imagemagick.app
+    - run: choco install python
+    - name: Run Edge test
+      run: node bin/browsertime.js -b edge -n 1 --screenshot https://www.sitespeed.io/
+      shell: cmd
+      

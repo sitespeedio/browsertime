@@ -1,0 +1,16 @@
+name: Run browser test Safari
+on: [push]
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - run: sudo safaridriver --enable
+    - run: npm ci
+    - run: brew update
+    - run: brew install ffmpeg imagemagick
+    - run: node ./bin/browsertime.js -b safari -n 1 --viewPort 1000x600  --video --visualMetrics https://www.sitespeed.io/
