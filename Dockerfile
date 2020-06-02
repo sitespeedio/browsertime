@@ -1,4 +1,4 @@
-FROM sitespeedio/webbrowsers:chrome-83.0-firefox-76.0
+FROM sitespeedio/webbrowsers:chrome-83.0-firefox-77.0
 
 ENV BROWSERTIME_XVFB true
 ENV BROWSERTIME_CONNECTIVITY__ENGINE external
@@ -10,7 +10,7 @@ COPY docker/webpagereplay/wpr_key.pem /webpagereplay/certs/
 COPY docker/webpagereplay/deterministic.js /webpagereplay/scripts/deterministic.js
 COPY docker/webpagereplay/LICENSE /webpagereplay/
 
-RUN sudo apt-get update && sudo apt-get install libnss3-tools \
+RUN sudo apt-get update && DEBIAN_FRONTEND=noninteractive sudo apt-get install libnss3-tools \
   net-tools tcpdump -y && \
   mkdir -p $HOME/.pki/nssdb && \
   certutil -d $HOME/.pki/nssdb -N
