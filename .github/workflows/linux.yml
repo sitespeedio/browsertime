@@ -21,7 +21,7 @@ jobs:
     - run: python -m pip --version
     - run: python -m pip show Pillow
     - run: python -m pip show pyssim
-    - run: node ./browsertime/visualmetrics.py --check
+    - run: ./browsertime/visualmetrics.py --check
     - run: xvfb-run node ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle
     - run: xvfb-run node ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value --chrome.CPUThrottlingRate 2 --chrome.cdp.performance --chrome.enableChromeDriverLog https://www.sitespeed.io/documentation/
     - run: xvfb-run node ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --video --screenshot --connectivity.engine tsproxy -c cable --visualMetrics -n 1 --chrome.timeline --visualElements --chrome.collectLongTasks --cookie test=true https://www.sitespeed.io/
