@@ -16,6 +16,7 @@ jobs:
     - run: choco install ffmpeg
     - run: choco install imagemagick.app
     - run: choco install python
+    - run: choco install microsoft-edge
     - name: Run Edge test
       run: node bin/browsertime.js -b edge -n 1 --screenshot https://www.sitespeed.io/
       shell: cmd
