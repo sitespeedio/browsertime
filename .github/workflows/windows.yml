@@ -17,6 +17,12 @@ jobs:
     - run: choco install imagemagick.app
     - run: choco install python
     - run: choco install microsoft-edge
+    - run: python -m pip install --upgrade --user pip
+    - run: python -m pip install --upgrade --user setuptools
+    - run: python -m pip install --user pyssim
+    - run: python -m pip --version
+    - run: python -m pip show Pillow
+    - run: python -m pip show pyssim
     - name: Run Edge test
       run: node bin/browsertime.js -b edge -n 1 --screenshot https://www.sitespeed.io/
       shell: cmd
