@@ -23,10 +23,13 @@ jobs:
     - run: python -m pip --version
     - run: python -m pip show Pillow
     - run: python -m pip show pyssim
+    - name: Run Visual Metrics test
+      run: python ./browsertime/visualmetrics.py --check
+      shell: cmd
     - name: Run Edge test
       run: node bin/browsertime.js -b edge -n 1 --screenshot https://www.sitespeed.io/
       shell: cmd
-    - name: Run Visual Metrics test
-      run: python ./browsertime/visualmetrics.py --check
+    - name: Run Edge test with video
+      run: node bin/browsertime.js -b edge -n 1 --screenshot --video --visualMetrics https://www.sitespeed.io/
       shell: cmd
       
