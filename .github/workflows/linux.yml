@@ -24,6 +24,7 @@ jobs:
     - run: python -m pip show pyssim
     - run: ./browsertime/visualmetrics.py --check
     - run: sudo modprobe ifb numifbs=1
+    - run: VTENV_OPTS="-p python3" make test
     - run: ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle --xvfb
     - run: ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value --chrome.CPUThrottlingRate 2 --chrome.cdp.performance --xvfb --chrome.enableChromeDriverLog https://www.sitespeed.io/documentation/
     - run: ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --video --screenshot --connectivity.engine tsproxy -c cable --visualMetrics -n 1 --chrome.timeline --visualElements --chrome.collectLongTasks --cookie test=true --xvfb https://www.sitespeed.io/
