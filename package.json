@@ -23,7 +23,7 @@
     "lodash.pick": "4.4.0",
     "lodash.set": "4.3.2",
     "selenium-webdriver": "4.0.0-alpha.7",
-    "@sitespeed.io/edgedriver": "80.0.361-54d",
+    "@sitespeed.io/edgedriver": "83.0.478-44",
     "@sitespeed.io/geckodriver": "0.26.0-d",
     "@sitespeed.io/tracium": "0.3.3",
     "speedline-core": "1.4.2",
