@@ -4,7 +4,7 @@
 ### Added
 * Option to configure number of browser restart tries [#1292](https://github.com/sitespeedio/browsertime/pull/1292). Use `--browserRestartTries`.
 * Use Firefox 77 in the Docker container.
-* Add support for Android power testing [#1296](https://github.com/sitespeedio/browsertime/pull/1296). Thank you [Gregory Mierzwinski](https://github.com/gmierz) for the PR!
+* Add support for Android power testing [#1296](https://github.com/sitespeedio/browsertime/pull/1296). Thank you [Gregory Mierzwinski](https://github.com/gmierz) for the PR! Also [#1300](https://github.com/sitespeedio/browsertime/pull/1300) adds supports for power testing on Chrome.
 
 ### Fixed
 * Running wiothout the CLI caused error logs removing Firefox appconstants [#1294](https://github.com/sitespeedio/browsertime/pull/1294).
