@@ -1,11 +1,14 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 8.14.0 - 2020-06-03
 ### Added
 * Option to configure number of browser restart tries [#1292](https://github.com/sitespeedio/browsertime/pull/1292). Use `--browserRestartTries`.
+* Use Firefox 77 in the Docker container.
+* Add support for Android power testing [#1296](https://github.com/sitespeedio/browsertime/pull/1296). Thank you [Gregory Mierzwinski](https://github.com/gmierz) for the PR!
 
 ### Fixed
 * Running wiothout the CLI caused error logs removing Firefox appconstants [#1294](https://github.com/sitespeedio/browsertime/pull/1294).
+* Fixed broken MS Edge support (since 80?) and upgraded to Edgedriver 83 [#1298](https://github.com/sitespeedio/browsertime/pull/1298)
 
 ## 8.13.1 - 2020-05-26
 ### Fixed
