@@ -11,17 +11,17 @@ jobs:
         node-version: '12.x'
     - name: Install dependencies
     - run: |
-      sudo safaridriver --enable
-      npm ci
-      brew update
-      brew install ffmpeg imagemagick
-      python -m pip install --upgrade --user pip
-      python -m pip install --upgrade --user setuptools
-      python -m pip install --user pyssim
-      python -m pip --version
-      python -m pip show Pillow
-      python -m pip show pyssim
-      system_profiler SPDisplaysDataType |grep Resolution
+        sudo safaridriver --enable
+        npm ci
+        brew update
+        brew install ffmpeg imagemagick
+        python -m pip install --upgrade --user pip
+        python -m pip install --upgrade --user setuptools
+        python -m pip install --user pyssim
+        python -m pip --version
+        python -m pip show Pillow
+        python -m pip show pyssim
+        system_profiler SPDisplaysDataType |grep Resolution
     - name: Check Visual Metrics dependencies
       run: ./browsertime/visualmetrics.py --check
     - name: Test Safari without vidoe 

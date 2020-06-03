@@ -13,20 +13,20 @@ jobs:
 #    - run: sudo apt-get upgrade google-chrome-stable -y
     - name: Install dependencies
     - run: |
-      sudo apt-get install net-tools -y
-      google-chrome --version
-      firefox --version
-      npm ci
-      sudo snap install ffmpeg
-      python -m pip install --upgrade --user pip
-      python -m pip install --upgrade --user setuptools
-      python -m pip install --user pyssim
-      python -m pip --version
-      python -m pip show Pillow
-      python -m pip show pyssim
-      python -m pip install virtualenv
-      ./browsertime/visualmetrics.py --check
-      sudo modprobe ifb numifbs=1
+        sudo apt-get install net-tools -y
+        google-chrome --version
+        firefox --version
+        npm ci
+        sudo snap install ffmpeg
+        python -m pip install --upgrade --user pip
+        python -m pip install --upgrade --user setuptools
+        python -m pip install --user pyssim
+        python -m pip --version
+        python -m pip show Pillow
+        python -m pip show pyssim
+        python -m pip install virtualenv
+        ./browsertime/visualmetrics.py --check
+        sudo modprobe ifb numifbs=1
     # - run: VTENV_OPTS="-p python3" make test
     - name: Test Firefox with throttle
       run: ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle --xvfb

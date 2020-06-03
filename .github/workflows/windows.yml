@@ -15,16 +15,16 @@ jobs:
         GECKODRIVER_SKIP_DOWNLOAD: true
     - name: Install dependencies
       run: |
-      choco install ffmpeg
-      choco install imagemagick.app -PackageParameters LegacySupport=true
-      choco install python
-      choco install microsoft-edge
-      python -m pip install --upgrade --user pip
-      python -m pip install --upgrade --user setuptools
-      python -m pip install --user pyssim
-      python -m pip --version
-      python -m pip show Pillow
-      python -m pip show pyssim
+        choco install ffmpeg
+        choco install imagemagick.app -PackageParameters LegacySupport=true
+        choco install python
+        choco install microsoft-edge
+        python -m pip install --upgrade --user pip
+        python -m pip install --upgrade --user setuptools
+        python -m pip install --user pyssim
+        python -m pip --version
+        python -m pip show Pillow
+        python -m pip show pyssim
     - name: Run Visual Metrics test
       run: python ./browsertime/visualmetrics.py --check
       shell: cmd
