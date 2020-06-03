@@ -1,0 +1,122 @@
+language: node_js
+node_js:
+  - 12
+matrix:
+  allow_failures:
+    - os: osx
+  fast_finish: true
+  include:
+    - name: "Unit tests on Linux"
+      sudo: required
+      dist: bionic
+      before_script:
+        - export DISPLAY=:99.0
+        - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1600x1024x16
+      script: npm run test
+    - name: "Docker on Linux"
+      sudo: required
+      dist: bionic
+      before_script:
+      addons:
+      install:
+        - docker build -t sitespeedio/browsertime .
+      script: 
+        - docker run --rm sitespeedio/browsertime https://www.sitespeed.io -n 1 -b chrome
+        - docker run --rm sitespeedio/browsertime https://www.sitespeed.io -n 1 -b firefox
+        - docker run --cap-add=NET_ADMIN --rm  -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime https://www.sitespeed.io -n 1 -b chrome  
+    - name: "Browser tests on Linux"
+      sudo: required
+      dist: bionic
+      before_install: 
+        - sudo snap install ffmpeg
+        - ./.travis.before_install-pip.sh
+      before_script:
+        - export DISPLAY=:99.0
+        - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1600x1024x16
+      script:
+        - VTENV_OPTS="-p python3" make test
+        - npm run eslint-check && npm run lint
+        - node ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle
+        - node ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value --chrome.CPUThrottlingRate 2 --chrome.cdp.performance --chrome.enableChromeDriverLog https://www.sitespeed.io/documentation/
+        - node ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --video --screenshot --connectivity.engine tsproxy -c cable --visualMetrics -n 1 --chrome.timeline --visualElements --chrome.collectLongTasks --cookie test=true https://www.sitespeed.io/
+        - node ./bin/browsertime.js -b chrome test/navigationscript/measure.js -n 1 --preScript test/prepostscripts/preSample.js --postScript test/prepostscripts/postSample.js
+        - node ./bin/browsertime.js -b chrome test/navigationscript/navigateAndStartInTwoSteps.js -n 1 --pageCompleteCheckInactivity --timeToSettle 1000
+        - node ./bin/browsertime.js -b firefox test/navigationscript/multi.js https://www.sitespeed.io/blog/ -n 1
+        - node ./bin/browsertime.js -b chrome test/navigationscript/multi.js -n 3 --chrome.timeline --video --visualMetrics --visualElements --viewPort 1000x600
+        - node ./bin/browsertime.js -b firefox --firefox.geckoProfiler -n 1 https://www.sitespeed.io/ --spa
+        - node ./bin/browsertime.js -b firefox test/unifiedscripts/sample.js
+    - name: "Browser tests on OS X"
+      os: osx
+      osx_image: xcode11.3
+      cache:
+        directories:
+          - $HOME/Library/Caches/Homebrew
+      before_cache:
+        - brew cleanup
+      before_install: 
+        - brew update
+        - brew install ffmpeg imagemagick
+        - brew cask install microsoft-edge
+        - /Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge --version
+        - system_profiler SPDisplaysDataType |grep Resolution
+        - sudo safaridriver --enable
+        - ./.travis.before_install-pip.sh
+      script:
+        - node ./bin/browsertime.js -b edge -n 1 --viewPort 1000x600  --video --visualMetrics https://www.sitespeed.io/
+        - node ./bin/browsertime.js -b safari -n 1 --viewPort 1000x600  --video --visualMetrics https://www.sitespeed.io/
+        - node ./bin/browsertime.js -b chrome -n 1 --viewPort 1000x600  --video --visualMetrics --connectivity.profile cable --connectivity.engine throttle https://www.sitespeed.io/
+        - node ./bin/browsertime.js -b firefox -n 1 --viewPort 800x600 --video --visualMetrics https://www.sitespeed.io/
+    - name: "Browser tests on Windows"
+      os: windows         
+      before_install:
+        - choco install python 
+        # - choco install firefox -y
+        # - choco install microsoft-edge
+        - choco install microsoft-edge-insider-dev
+        # See https://www.gep13.co.uk/blog/chocolatey-error-hashes-do-not-match#so-why-did-this-go-wrong
+        - choco install googlechrome --ignore-checksums
+        #- cmd.exe //c "RefreshEnv.cmd"
+        - choco install ffmpeg
+        - choco install imagemagick.app
+      script:
+        - node ./bin/browsertime.js -b chrome -n 1 --cpu -r header:value --screenshot https://www.sitespeed.io/documentation/
+        - node ./bin/browsertime.js -b chrome test/navigationscript/multi.js -n 3 --chrome.timeline --viewPort 1000x600
+        - node ./bin/browsertime.js -b edge -n 1 --screenshot https://www.sitespeed.io/
+cache:
+  apt: true
+  pip: true
+addons:
+  apt:
+    sources:
+      - sourceline: 'ppa:ubuntu-toolchain-r/test'
+    packages:
+      - python3
+      - python3-pip
+      - imagemagick
+      - ipython
+      - libjpeg-dev
+      - python
+      - python-dev
+      - python-pil
+      - python-numpy
+      - python-scipy
+      - python-matplotlib
+      - python-pandas
+      - python-pip
+      - python-sympy
+      - python-nose
+      - xz-utils
+      - ttf-ubuntu-font-family
+  firefox: 'latest'
+  chrome: stable
+before_script:
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then firefox --version 2>/dev/null; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then google-chrome --product-version; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./browsertime/visualmetrics.py --check ; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then ./browsertime/visualmetrics.py --check ; fi
+install:
+  - npm ci
+notifications:
+  slack:
+    secure: V71EkIzwOf/fZnGTGIKAIFlDyLUit4tK97VDgdV9vZ7CbvOXI1ir3lwRZ57lNqiYD8BUaX+/wKDG+LyrBMgQ4JAGgQx0mECvmOKx1+10Yg9FAkUsMTWe7GOxcVMwhpS2OfHnXwMb0FjcuVl8ovowIZqCWOLeEAYVaTWHndDm2cA=
+    
