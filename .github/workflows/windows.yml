@@ -9,7 +9,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    - run: npm ci
+    - name: Install Browsertime
+      run: npm ci
       env:
         CHROMEDRIVER_SKIP_DOWNLOAD: true
         GECKODRIVER_SKIP_DOWNLOAD: true
