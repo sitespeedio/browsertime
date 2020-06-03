@@ -61,6 +61,7 @@ matrix:
         - system_profiler SPDisplaysDataType |grep Resolution
         - sudo safaridriver --enable
         - ./.travis.before_install-pip.sh
+        - ffmpeg -hide_banner -f avfoundation -list_devices true -i 0
       script:
         - node ./bin/browsertime.js -b edge -n 1 --viewPort 1000x600  --video --visualMetrics https://www.sitespeed.io/
         - node ./bin/browsertime.js -b safari -n 1 --viewPort 1000x600  --video --visualMetrics https://www.sitespeed.io/
