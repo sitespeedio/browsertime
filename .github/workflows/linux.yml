@@ -12,7 +12,7 @@ jobs:
 #    - run: sudo apt-get update
 #    - run: sudo apt-get upgrade google-chrome-stable -y
     - name: Install dependencies
-    - run: |
+      run: |
         sudo apt-get install net-tools -y
         google-chrome --version
         firefox --version
