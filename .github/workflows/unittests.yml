@@ -13,7 +13,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
-    - run: npm run lint
+    - name: Lint
+      run: npm run lint
     - name: Run unit tests
       uses: GabrielBB/xvfb-action@v1.2
       with:

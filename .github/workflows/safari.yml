@@ -9,17 +9,22 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    - run: sudo safaridriver --enable
-    - run: npm ci
-    - run: brew update
-    - run: brew install ffmpeg imagemagick
-    - run: python -m pip install --upgrade --user pip
-    - run: python -m pip install --upgrade --user setuptools
-    - run: python -m pip install --user pyssim
-    - run: python -m pip --version
-    - run: python -m pip show Pillow
-    - run: python -m pip show pyssim
-    - run: ./browsertime/visualmetrics.py --check
-    - run: system_profiler SPDisplaysDataType |grep Resolution
-    - run: ./bin/browsertime.js -b safari -n 1 https://www.sitespeed.io/
-    - run: ./bin/browsertime.js -b safari -n 1 --viewPort 1000x600  --video --visualMetrics https://www.sitespeed.io/
+    - name: Install dependencies
+    - run: |
+      sudo safaridriver --enable
+      npm ci
+      brew update
+      brew install ffmpeg imagemagick
+      python -m pip install --upgrade --user pip
+      python -m pip install --upgrade --user setuptools
+      python -m pip install --user pyssim
+      python -m pip --version
+      python -m pip show Pillow
+      python -m pip show pyssim
+      system_profiler SPDisplaysDataType |grep Resolution
+    - name: Check Visual Metrics dependencies
+      run: ./browsertime/visualmetrics.py --check
+    - name: Test Safari without vidoe 
+      run: ./bin/browsertime.js -b safari -n 1 https://www.sitespeed.io/
+    - name: Test Safari with video and Visual Metrics
+      run: ./bin/browsertime.js -b safari -n 1 --viewPort 1000x600  --video --visualMetrics https://www.sitespeed.io/

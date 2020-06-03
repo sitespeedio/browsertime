@@ -13,16 +13,18 @@ jobs:
       env:
         CHROMEDRIVER_SKIP_DOWNLOAD: true
         GECKODRIVER_SKIP_DOWNLOAD: true
-    - run: choco install ffmpeg
-    - run: choco install imagemagick.app -PackageParameters LegacySupport=true
-    - run: choco install python
-    - run: choco install microsoft-edge
-    - run: python -m pip install --upgrade --user pip
-    - run: python -m pip install --upgrade --user setuptools
-    - run: python -m pip install --user pyssim
-    - run: python -m pip --version
-    - run: python -m pip show Pillow
-    - run: python -m pip show pyssim
+    - name: Install dependencies
+      run: |
+      choco install ffmpeg
+      choco install imagemagick.app -PackageParameters LegacySupport=true
+      choco install python
+      choco install microsoft-edge
+      python -m pip install --upgrade --user pip
+      python -m pip install --upgrade --user setuptools
+      python -m pip install --user pyssim
+      python -m pip --version
+      python -m pip show Pillow
+      python -m pip show pyssim
     - name: Run Visual Metrics test
       run: python ./browsertime/visualmetrics.py --check
       shell: cmd
