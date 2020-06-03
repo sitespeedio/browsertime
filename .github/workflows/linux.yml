@@ -41,7 +41,7 @@ jobs:
     - name: Test multi pages
       run: ./bin/browsertime.js -b firefox test/navigationscript/multi.js https://www.sitespeed.io/blog/ -n 1 --xvfb
     - name: Test multi pages with video and visual metrics
-    - run: ./bin/browsertime.js -b chrome test/navigationscript/multi.js -n 3 --chrome.timeline --video --visualMetrics --visualElements --viewPort 1000x600 --xvfb
+      run: ./bin/browsertime.js -b chrome test/navigationscript/multi.js -n 3 --chrome.timeline --video --visualMetrics --visualElements --viewPort 1000x600 --xvfb
     - name: Test Firefox Geckoprofiler
       run: ./bin/browsertime.js -b firefox --firefox.geckoProfiler -n 1 https://www.sitespeed.io/ --spa --xvfb
     - name: Test Firefox with scripting
