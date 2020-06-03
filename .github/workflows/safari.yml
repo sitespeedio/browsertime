@@ -3,6 +3,7 @@ on: [push]
 jobs:
   build:
     runs-on: macos-10.15
+    timeout-minutes: 20
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js
@@ -23,6 +24,7 @@ jobs:
         python -m pip show Pillow
         python -m pip show pyssim
         system_profiler SPDisplaysDataType |grep Resolution
+        ffmpeg -version
     - name: Check Visual Metrics dependencies
       run: ./browsertime/visualmetrics.py --check
     - name: Test Safari without video 
