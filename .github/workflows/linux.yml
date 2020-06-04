@@ -1,4 +1,4 @@
-name: Linux briwsers
+name: Linux browsers
 on:
   push:
     branches:
