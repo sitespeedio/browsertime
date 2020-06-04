@@ -1,0 +1,18 @@
+name: Build and run Docker containers
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the container
+      run: docker build -t sitespeedio/browsertime .
+    - name: Test Chrome
+      run: docker run --rm sitespeedio/browsertime https://www.sitespeed.io -n 1 -b chrome
+    - name: Test Firefox
+      run: docker run --rm sitespeedio/browsertime https://www.sitespeed.io -n 1 -b firefox
+    - name: Test WebPageReplay
+      run: docker run --cap-add=NET_ADMIN --rm  -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime https://www.sitespeed.io -n 1 -b chrome 
+
+ 
+        

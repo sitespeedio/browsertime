@@ -1,0 +1,51 @@
+name: Run browser tests Linux
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+#    - run: sudo apt-get update
+#    - run: sudo apt-get upgrade google-chrome-stable -y
+    - name: Install Browsertime
+      run: npm ci
+    - name: Install dependencies
+      run: |
+        sudo apt-get install net-tools -y
+        sudo snap install ffmpeg
+        python -m pip install --upgrade --user pip
+        python -m pip install --upgrade --user setuptools
+        python -m pip install --user pyssim
+        python -m pip --version
+        python -m pip show Pillow
+        python -m pip show pyssim
+        python -m pip install virtualenv
+        ./browsertime/visualmetrics.py --check
+        sudo modprobe ifb numifbs=1
+    - name: Browser versions
+      run: |
+        google-chrome --version
+        firefox --version
+    # - run: VTENV_OPTS="-p python3" make test
+    - name: Test Firefox with throttle
+      run: ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle --xvfb
+    - name: TestChrome with CPU throttle and preURL
+      run: ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value --chrome.CPUThrottlingRate 2 --chrome.cdp.performance --xvfb --chrome.enableChromeDriverLog https://www.sitespeed.io/documentation/
+    - name: Test video and visual metrics
+      run: ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --video --screenshot --connectivity.engine tsproxy -c cable --visualMetrics -n 1 --chrome.timeline --visualElements --chrome.collectLongTasks --cookie test=true --xvfb https://www.sitespeed.io/
+    - name: Test pre/post scripts
+      run: ./bin/browsertime.js -b chrome test/navigationscript/measure.js -n 1 --preScript test/prepostscripts/preSample.js --postScript test/prepostscripts/postSample.js --xvfb
+    - name: Test navigation and page complete check inactivity
+      run: ./bin/browsertime.js -b chrome test/navigationscript/navigateAndStartInTwoSteps.js -n 1 --pageCompleteCheckInactivity --timeToSettle 1000 --xvfb
+    - name: Test multi pages
+      run: ./bin/browsertime.js -b firefox test/navigationscript/multi.js https://www.sitespeed.io/blog/ -n 1 --xvfb
+    - name: Test multi pages with video and visual metrics
+      run: ./bin/browsertime.js -b chrome test/navigationscript/multi.js -n 3 --chrome.timeline --video --visualMetrics --visualElements --viewPort 1000x600 --xvfb
+    - name: Test Firefox Geckoprofiler
+      run: ./bin/browsertime.js -b firefox --firefox.geckoProfiler -n 1 https://www.sitespeed.io/ --spa --xvfb
+    - name: Test Firefox with scripting
+      run: ./bin/browsertime.js -b firefox test/unifiedscripts/sample.js --xvfb

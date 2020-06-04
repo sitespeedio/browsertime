@@ -56,10 +56,11 @@ matrix:
       before_install: 
         - brew update
         - brew install ffmpeg imagemagick
-        - brew cask install microsoft-edge
+        - brew install microsoft-edge
         - /Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge --version
         - system_profiler SPDisplaysDataType |grep Resolution
         - sudo safaridriver --enable
+        - ffmpeg -hide_banner -f avfoundation -list_devices true -i 0
         - ./.travis.before_install-pip.sh
       script:
         - node ./bin/browsertime.js -b edge -n 1 --viewPort 1000x600  --video --visualMetrics https://www.sitespeed.io/
