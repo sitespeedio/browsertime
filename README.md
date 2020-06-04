@@ -1,5 +1,4 @@
 # Browsertime - Your browser, your page, your scripts!
-[![Build status][travis-image]][travis-url]
 [![Downloads][downloads-image]][downloads-url]
 [![Downloads total][downloads-total-image]][downloads-url]
 [![Stars][stars-image]][stars-url]
