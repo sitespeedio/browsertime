@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* Fix correct path to screenshots in the result.json [#1305](https://github.com/sitespeedio/browsertime/pull/1305).
+
 ## 8.14.0 - 2020-06-03
 ### Added
 * Option to configure number of browser restart tries [#1292](https://github.com/sitespeedio/browsertime/pull/1292). Use `--browserRestartTries`.
