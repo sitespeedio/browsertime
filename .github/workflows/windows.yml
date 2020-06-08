@@ -17,9 +17,6 @@ jobs:
         node-version: '12.x'
     - name: Install Browsertime
       run: npm ci
-      env:
-        CHROMEDRIVER_SKIP_DOWNLOAD: true
-        GECKODRIVER_SKIP_DOWNLOAD: true
     - name: Install dependencies
       run: |
         choco install ffmpeg
