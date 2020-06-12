@@ -1,14 +1,14 @@
 # Browsertime - Your browser, your page, your scripts!
-![Run Docker](https://github.com/sitespeedio/browsertime/workflows/Run%20Docker/badge.svg?branch=master)
-![Unit tests](https://github.com/sitespeedio/browsertime/workflows/Unit%20tests/badge.svg?branch=master)
-![Windows Edge](https://github.com/sitespeedio/browsertime/workflows/Windows%20Edge/badge.svg?branch=master)
-![OSX Safari](https://github.com/sitespeedio/browsertime/workflows/OSX%20Safari/badge.svg?branch=master)
-![Linux browsers](https://github.com/sitespeedio/browsertime/workflows/Linux%20browsers/badge.svg?branch=master)
+![Run Docker](https://github.com/sitespeedio/browsertime/workflows/Run%20Docker/badge.svg?branch=main)
+![Unit tests](https://github.com/sitespeedio/browsertime/workflows/Unit%20tests/badge.svg?branch=main)
+![Windows Edge](https://github.com/sitespeedio/browsertime/workflows/Windows%20Edge/badge.svg?branch=main)
+![OSX Safari](https://github.com/sitespeedio/browsertime/workflows/OSX%20Safari/badge.svg?branch=main)
+![Linux browsers](https://github.com/sitespeedio/browsertime/workflows/Linux%20browsers/badge.svg?branch=main)
 [![Downloads][downloads-image]][downloads-url]
 [![Downloads total][downloads-total-image]][downloads-url]
 [![Stars][stars-image]][stars-url]
 
-[Documentation](https://www.sitespeed.io/documentation/browsertime/) | [Changelog](https://github.com/sitespeedio/browsertime/blob/master/CHANGELOG.md)
+[Documentation](https://www.sitespeed.io/documentation/browsertime/) | [Changelog](https://github.com/sitespeedio/browsertime/blob/main/CHANGELOG.md)
 
 ![Browsertime](browsertime.png)
 
@@ -79,7 +79,7 @@ It's easiest to run [our ready made Docker container](https://hub.docker.com/r/s
 
 The default video will include a timer and showing when the metrics happens, but you can turn that off using <code>--video.addTimer false</code>.
 
-<img src="https://raw.githubusercontent.com/sitespeedio/sitespeed.io/master/docs/img/video-example.gif">
+<img src="https://raw.githubusercontent.com/sitespeedio/sitespeed.io/main/docs/img/video-example.gif">
 
 ## Test using Docker
 You can build and test changes using Docker locally.
@@ -179,7 +179,7 @@ If you are on Linux (we have tested Ubuntu 18) you can use our Docker container 
  * You need to share the USB ports *-v /dev/bus/usb:/dev/bus/usb* or share a specific port with *--device=/dev/bus/usb/001/017* (use *lsusb* to find the right mapping)
  * Add *-e START_ADB_SERVER=true* to start the adb server
 
-If you use Docker you will automatically get support for video and SpeedIndex. You can get that without Docker but then need to [install VisualMetrics dependencies](https://github.com/sitespeedio/docker-visualmetrics-deps/blob/master/Dockerfile) yourself.
+If you use Docker you will automatically get support for video and SpeedIndex. You can get that without Docker but then need to [install VisualMetrics dependencies](https://github.com/sitespeedio/docker-visualmetrics-deps/blob/main/Dockerfile) yourself.
 
 <pre>
 $ docker run --privileged -v /dev/bus/usb:/dev/bus/usb -e START_ADB_SERVER=true --rm -v "$(pwd)":/browsertime-results sitespeedio/browsertime -n 1 --android --visualMetrics --video https://en.m.wikipedia.org/wiki/Barack_Obama
@@ -189,7 +189,7 @@ $ docker run --privileged -v /dev/bus/usb:/dev/bus/usb -e START_ADB_SERVER=true 
 Run <code>$ bin/browsertime.js --help</code> and you can see the configuration options.
 
 ## Using WebPageReplay
-Our Docker container now included [WebPageReplay](https://github.com/catapult-project/catapult/blob/master/web_page_replay_go/README.md).
+Our Docker container now included [WebPageReplay](https://github.com/catapult-project/catapult/blob/main/web_page_replay_go/README.md).
 
 WebPageReplay will let you replay your page locally (getting rid of server latency etc) and makes it easier to find front end regressions.
 
