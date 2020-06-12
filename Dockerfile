@@ -38,7 +38,7 @@ WORKDIR /browsertime
 COPY docker/scripts/start.sh /start.sh
 
 # Allow all users to run commands needed by sitespeedio/throttle via sudo
-# See https://github.com/sitespeedio/throttle/blob/master/lib/tc.js
+# See https://github.com/sitespeedio/throttle/blob/main/lib/tc.js
 RUN echo 'ALL ALL=NOPASSWD: /usr/sbin/tc, /usr/sbin/route, /usr/sbin/ip, /usr/sbin/tcpdump ' > /etc/sudoers.d/tc
 
 ENTRYPOINT ["/start.sh"]
