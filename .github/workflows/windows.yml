@@ -17,9 +17,6 @@ jobs:
         node-version: '12.x'
     - name: Install Browsertime
       run: npm ci
-      env:
-        CHROMEDRIVER_SKIP_DOWNLOAD: true
-        GECKODRIVER_SKIP_DOWNLOAD: true
     - name: Install dependencies
       run: |
         choco install ffmpeg
@@ -41,4 +38,9 @@ jobs:
     - name: Run Edge test with video
       run: node bin/browsertime.js -b edge -n 1 --screenshot --video --visualMetrics --viewPort 1000x600 https://www.sitespeed.io/
       shell: cmd
-      
+    - name: Run Chrome test
+      run: node bin/browsertime.js -b chrome -n 1 https://www.sitespeed.io/
+      shell: cmd
+    - name: Run Firefox test
+      run: node bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io/
+      shell: cmd
