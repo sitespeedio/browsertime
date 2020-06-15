@@ -12,7 +12,7 @@ bin/browsertime.js --help > ../sitespeed.io/docs/documentation/browsertime/confi
 
 docker login
 
-np $* --no-yarn
+np $* --no-yarn --any-branch
 
 PACKAGE_VERSION=$(node -e 'console.log(require("./package").version)')
 
