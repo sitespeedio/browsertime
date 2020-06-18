@@ -1,8 +1,15 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 9.0.0-beta.1 - 2020-06-18
 ### Fixed
 * Fix correct path to screenshots in the result.json [#1305](https://github.com/sitespeedio/browsertime/pull/1305).
+
+### Added
+* Add support to run privileged JavaScript in scripts and wait for page to load [#1314](https://github.com/sitespeedio/browsertime/pull/1314).
+
+### Changed
+* Change how screenshot are stored to support multiple screenshots for one run. Screenshots per run is an array,
+store screenshots per folder per run *screenshoots/1/* and name the default screenshot to afterPageCompleteCheck[#1312](https://github.com/sitespeedio/browsertime/pull/1312).
 
 ## 8.14.0 - 2020-06-03
 ### Added
