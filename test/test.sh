@@ -11,9 +11,9 @@ CHROME_SETTINGS="--cpu"
 while true
 do
     git pull
-    docker pull sitespeedio/browsertime-autobuild
-    docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime sitespeedio/browsertime-autobuild https://www.sitespeed.io/ --connectivity.engine throttle -c cable $CHROME_SETTINGS
-    docker run --cap-add=NET_ADMIN --shm-size 2g --rm -v "$(pwd)":/browsertime sitespeedio/browsertime-autobuild https://www.sitespeed.io/  --connectivity.engine throttle -c cable $FIREFOX_SETTINGS
+    docker pull sitespeedio/browsertime-autobuild:main
+    docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime sitespeedio/browsertime-autobuild:main https://www.sitespeed.io/ --connectivity.engine throttle -c cable $CHROME_SETTINGS
+    docker run --cap-add=NET_ADMIN --shm-size 2g --rm -v "$(pwd)":/browsertime sitespeedio/browsertime-autobuild:main https://www.sitespeed.io/  --connectivity.engine throttle -c cable $FIREFOX_SETTINGS
     rm -fR browsertime-results
     sleep 180 
 done
