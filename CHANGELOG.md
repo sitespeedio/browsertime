@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASD
+### Fixed
+* Updated to latest throttle.
+
 ## 9.0.0-beta.1 - 2020-06-18
 ### Fixed
 * Fix correct path to screenshots in the result.json [#1305](https://github.com/sitespeedio/browsertime/pull/1305).
