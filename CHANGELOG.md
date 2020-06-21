@@ -2,7 +2,7 @@
 
 ## UNRELEASD
 ### Fixed
-* Updated to latest throttle.
+* Updated to latest throttle, jimp, day-js.
 
 ## 9.0.0-beta.1 - 2020-06-18
 ### Fixed
