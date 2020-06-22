@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## UNRELEASD
+## 9.0.0-beta.2 - 2020-06-22
 ### Fixed
 * Updated to latest throttle, jimp, day-js.
 
