@@ -206,13 +206,13 @@ You can change latency by setting a Docker environment variable. Use REPLAY to t
 Default browser is Chrome:
 
 ```
-docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:4.0.0 https://en.wikipedia.org/wiki/Barack_Obama
+docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:9.0.0 https://en.wikipedia.org/wiki/Barack_Obama
 ```
 
 Use Firefox:
 
 ```
-docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:4.0.0 -b firefox -n 11 https://en.wikipedia.org/wiki/Barack_Obama
+docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:9.0.0 -b firefox -n 11 https://en.wikipedia.org/wiki/Barack_Obama
 ```
 
 And Chrome on your Android phone. This will only work on Linux because you need to be able to mount the usb port in Docker:
