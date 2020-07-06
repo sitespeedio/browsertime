@@ -1,6 +1,10 @@
 # Browsertime changelog
 
-## 9.0.0  - 2020-06-26
+## 9.0.1 - UNRELEASED
+### Fixed
+* Fix support for running setup & teardown in a script. This was working fine from the CLI but not running it programmatically as reported in [sitespeed.io #3068](https://github.com/sitespeedio/sitespeed.io/issues/3068). [#1317](https://github.com/sitespeedio/browsertime/pull/1317).
+
+## 9.0.0 - 2020-06-26
 ### Changed
 * Change how screenshot are stored to support multiple screenshots for one run. Screenshots per run is an array, store screenshots per folder per run *screenshoots/1/* and name the default screenshot to afterPageCompleteCheck[#1312](https://github.com/sitespeedio/browsertime/pull/1312).
 
