@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## 9.0.1 - UNRELEASED
+## 9.0.1 - 2020-07-07
 ### Fixed
 * Fix support for running setup & teardown in a script. This was working fine from the CLI but not running it programmatically as reported in [sitespeed.io #3068](https://github.com/sitespeedio/sitespeed.io/issues/3068). [#1317](https://github.com/sitespeedio/browsertime/pull/1317).
 
