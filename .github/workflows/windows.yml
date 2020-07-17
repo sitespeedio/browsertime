@@ -23,6 +23,7 @@ jobs:
         choco install imagemagick.app -PackageParameters LegacySupport=true
         choco install python
         choco install microsoft-edge
+        choco install googlechrome
         python -m pip install --upgrade --user pip
         python -m pip install --upgrade --user setuptools
         python -m pip install --user pyssim
