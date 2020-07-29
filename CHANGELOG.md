@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASEED
+### Fixed
+* New chrome-har and updated day-js dependency.
+
 ## 9.2.0 - 2020-07-28
 ### Added
 * Updated to Firefox 79 in the Docker container.
