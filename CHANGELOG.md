@@ -1,5 +1,13 @@
 # Browsertime changelog
 
+## UNRELEASEED
+### Fixed
+* New chrome-har and updated day-js dependency.
+
+## 9.2.0 - 2020-07-28
+### Added
+* Updated to Firefox 79 in the Docker container.
+
 ## 9.1.0 - 2020-07-17
 ### Added
 * Updated to Chromedriver and Edgedriver 84, Chrome 84 and Firefox 78 in the Docker container [1323](https://github.com/sitespeedio/browsertime/pull/1323).
