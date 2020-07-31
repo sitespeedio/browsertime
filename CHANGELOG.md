@@ -1,8 +1,9 @@
 # Browsertime changelog
 
-## UNRELEASEED
+##  9.2.1 - 2020-07-31
 ### Fixed
 * New chrome-har and updated day-js dependency.
+* Ignore a couple of more pixels at the bottom of the browser screen to ignore Chromiums loading info bar, thank you [Pan Alexey](https://github.com/pan-alexey) for the PR [#1327](https://github.com/sitespeedio/browsertime/pull/1327).
 
 ## 9.2.0 - 2020-07-28
 ### Added
