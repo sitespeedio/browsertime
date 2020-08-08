@@ -4,6 +4,9 @@
 ### Added
 * Updated to Geckodriver 0.27.0 [#1330](https://github.com/sitespeedio/browsertime/pull/1330).
 
+### Fixed
+* Updated Chrome-HAR to 0.11.11.
+
 ##  9.2.1 - 2020-07-31
 ### Fixed
 * New chrome-har and updated day-js dependency.

@@ -7,7 +7,7 @@
     "adbkit": "2.11.1",
     "btoa": "1.2.1",
     "@sitespeed.io/chromedriver": "84.0.4147-30",
-    "chrome-har": "0.11.10",
+    "chrome-har": "0.11.11",
     "chrome-remote-interface": "0.28.2",
     "dayjs": "1.8.31",
     "execa": "4.0.2",
