@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Added
+* Updated to Geckodriver 0.27.0 [#1330](https://github.com/sitespeedio/browsertime/pull/1330).
+
 ##  9.2.1 - 2020-07-31
 ### Fixed
 * New chrome-har and updated day-js dependency.
