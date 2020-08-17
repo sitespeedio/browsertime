@@ -1,11 +1,12 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 9.3.0 - 2020-08-17
 ### Added
 * Updated to Geckodriver 0.27.0 [#1330](https://github.com/sitespeedio/browsertime/pull/1330).
 
 ### Fixed
 * Updated Chrome-HAR to 0.11.11.
+* Fix to include visual metrics in the HAR, thank you [Mason Malone](https://github.com/MasonM) for the PR [#1335](https://github.com/sitespeedio/browsertime/pull/1335).
 
 ##  9.2.1 - 2020-07-31
 ### Fixed
