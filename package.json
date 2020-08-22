@@ -3,7 +3,7 @@
   "version": "9.3.0",
   "bin": "./bin/browsertime.js",
   "dependencies": {
-    "@sitespeed.io/throttle": "1.0.3",
+    "@sitespeed.io/throttle": "2.0.1",
     "adbkit": "2.11.1",
     "btoa": "1.2.1",
     "@sitespeed.io/chromedriver": "84.0.4147-30",
