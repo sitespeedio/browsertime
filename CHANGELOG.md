@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+## 9.3.1 - 2020-08-24
+* Use the correct settings to set the emulation for Chrome [#1340](https://github.com/sitespeedio/browsertime/pull/1340).
+* Bump versions: dayjs, execs, speedline-core, yargs. jimp [#1339](https://github.com/sitespeedio/browsertime/pull/1339).
+* Updated to Throttle 2.0.1 [#1338](https://github.com/sitespeedio/browsertime/pull/1338).
+
 ## 9.3.0 - 2020-08-17
 ### Added
 * Updated to Geckodriver 0.27.0 [#1330](https://github.com/sitespeedio/browsertime/pull/1330).
