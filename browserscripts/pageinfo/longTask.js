@@ -7,8 +7,7 @@
   longTaskObserver.observe({type: 'longtask', buffered: true});
   const cleaned = [];
   for (let entry of longTaskObserver.takeRecords()) {
-    console.log(entry);
-    if (entry.duration >= 50) {
+    if (entry.duration >= minLength) {
       const e = {};
       e.duration = entry.duration;
       e.name = entry.name;
