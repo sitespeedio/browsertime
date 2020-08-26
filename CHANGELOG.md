@@ -1,6 +1,12 @@
 # Browsertime changelog
 
+## 9.4.0 - 2020-08-26
+### Added
+* [Added Chromedriver 85](https://github.com/sitespeedio/browsertime/pull/1342).
+* Updated to Chrome 85 and Firefox 80 in the Docker container.
+
 ## 9.3.1 - 2020-08-24
+### Fixed
 * Use the correct settings to set the emulation for Chrome [#1340](https://github.com/sitespeedio/browsertime/pull/1340).
 * Bump versions: dayjs, execs, speedline-core, yargs. jimp [#1339](https://github.com/sitespeedio/browsertime/pull/1339).
 * Updated to Throttle 2.0.1 [#1338](https://github.com/sitespeedio/browsertime/pull/1338).
