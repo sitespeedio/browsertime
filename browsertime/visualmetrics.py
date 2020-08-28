@@ -592,7 +592,7 @@ def find_render_start(directory, orange_file, gray_file):
                     mask = None
                 top = 10
                 right_margin = 10
-                bottom_margin = 16
+                bottom_margin = 24
                 if height > 400 or width > 400:
                     top = max(top, int(math.ceil(float(height) * 0.03)))
                     right_margin = max(

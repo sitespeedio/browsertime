@@ -114,4 +114,107 @@ describe('har_builder', function() {
       );
     });
   });
+
+  describe('#addExtraFieldsToHar', function() {
+    let options;
+    let totalResults;
+
+    beforeEach(function() {
+      options = {
+        iterations: 1
+      };
+      totalResults = [
+        {
+          visualMetrics: [
+            {
+              SpeedIndex: 100,
+              PerceptualSpeedIndex: 200,
+              ContentfulSpeedIndex: 300,
+              VisualProgress: [
+                { timestamp: 0, percent: 0 },
+                { timestamp: 10, percent: 50 },
+                { timestamp: 20, percent: 100 }
+              ]
+            }
+          ],
+          info: {
+            url: 'https://example.com'
+          },
+          cpu: [
+            {
+              longTasks: {
+                tasks: 1,
+                totalBlockingTime: 10
+              }
+            }
+          ],
+          browserScripts: [
+            {
+              timings: {
+                firstPaint: 100,
+                largestContentfulPaint: {
+                  renderTime: 200
+                }
+              }
+            }
+          ]
+        }
+      ];
+    });
+
+    it('should gracefully handle missing data', function() {
+      builder.addExtraFieldsToHar();
+    });
+
+    it('should add visual metrics if given', function() {
+      har.log.pages[0].pageTimings = {};
+      builder.addExtraFieldsToHar(totalResults, har, options);
+
+      expect(har.log.pages[0]).to.eql({
+        id: 'page_0',
+        _meta: {
+          connectivity: 'native'
+        },
+        _visualMetrics: {
+          SpeedIndex: 100,
+          PerceptualSpeedIndex: 200,
+          ContentfulSpeedIndex: 300,
+          VisualProgress: {
+            '0': 0,
+            '10': 50,
+            '20': 100
+          }
+        },
+        pageTimings: {
+          _largestContentfulPaint: 200
+        },
+        _cpu: {
+          longTasks: {
+            tasks: 1,
+            totalBlockingTime: 10
+          }
+        }
+      });
+    });
+
+    it('should gracefully handle missing cpu and visual metrics', function() {
+      har.log.pages[0].pageTimings = {};
+      totalResults[0].visualMetrics = [];
+      totalResults[0].cpu = [{}];
+      builder.addExtraFieldsToHar(totalResults, har, options);
+
+      expect(har.log.pages[0]).to.eql({
+        id: 'page_0',
+        _meta: {
+          connectivity: 'native'
+        },
+        _cpu: {},
+        _visualMetrics: {},
+        pageTimings: {
+          _firstPaint: 100,
+          _largestContentfulPaint: 200
+        }
+      });
+    });
+  });
 });
