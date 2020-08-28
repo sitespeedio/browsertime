@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+## 9.4.1 - 2020-08-28
+### Fixed
+* Fix broken Android shell command. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR  [#1345](https://github.com/sitespeedio/browsertime/pull/1345).
+* Check if pathname exists before splitting. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1343](https://github.com/sitespeedio/browsertime/pull/1343).
+
 ## 9.4.0 - 2020-08-26
 ### Added
 * [Added Chromedriver 85](https://github.com/sitespeedio/browsertime/pull/1342).
