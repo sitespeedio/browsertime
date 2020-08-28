@@ -8,7 +8,8 @@
       if (entry.name === 'first-paint')
         return Number(entry.startTime.toFixed(0));
     }
-  } else if (timing.timeToNonBlankPaint) {
+  }
+  if (timing.timeToNonBlankPaint) {
     return Number(
       (timing.timeToNonBlankPaint - timing.navigationStart).toFixed(0)
     );
