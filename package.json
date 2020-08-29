@@ -1,12 +1,15 @@
 {
   "description": "Browsertime",
-  "version": "9.3.1",
+  "version": "9.4.2",
   "bin": "./bin/browsertime.js",
+  "publishConfig": {
+    "tag": "canary"
+  },
   "dependencies": {
     "@sitespeed.io/throttle": "2.0.1",
     "adbkit": "2.11.1",
     "btoa": "1.2.1",
-    "@sitespeed.io/chromedriver": "84.0.4147-30",
+    "@sitespeed.io/chromedriver": "85.0.4183-83",
     "chrome-har": "0.11.11",
     "chrome-remote-interface": "0.28.2",
     "dayjs": "1.8.34",

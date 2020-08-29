@@ -1,6 +1,21 @@
 # Browsertime changelog
 
+## 9.4.2 - 2020-08-29
+### Fixed
+* Make sure First Paint is collected when First Contentful Paint exists in Firefox. Thank you [Sean Feng](https://github.com/sefeng211) for the PR [#1347](https://github.com/sitespeedio/browsertime/pull/1347).
+
+## 9.4.1 - 2020-08-28
+### Fixed
+* Fix broken Android shell command. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR  [#1345](https://github.com/sitespeedio/browsertime/pull/1345).
+* Check if pathname exists before splitting. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1343](https://github.com/sitespeedio/browsertime/pull/1343).
+
+## 9.4.0 - 2020-08-26
+### Added
+* [Added Chromedriver 85](https://github.com/sitespeedio/browsertime/pull/1342).
+* Updated to Chrome 85 and Firefox 80 in the Docker container.
+
 ## 9.3.1 - 2020-08-24
+### Fixed
 * Use the correct settings to set the emulation for Chrome [#1340](https://github.com/sitespeedio/browsertime/pull/1340).
 * Bump versions: dayjs, execs, speedline-core, yargs. jimp [#1339](https://github.com/sitespeedio/browsertime/pull/1339).
 * Updated to Throttle 2.0.1 [#1338](https://github.com/sitespeedio/browsertime/pull/1338).
