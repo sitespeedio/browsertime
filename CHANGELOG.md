@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 9.4.2 - 2020-08-29
+### Fixed
+* Make sure First Paint is collected when First Contentful Paint exists in Firefox. Thank you [Sean Feng](https://github.com/sefeng211) for the PR [#1347](https://github.com/sitespeedio/browsertime/pull/1347).
+
 ## 9.4.1 - 2020-08-28
 ### Fixed
 * Fix broken Android shell command. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR  [#1345](https://github.com/sitespeedio/browsertime/pull/1345).
