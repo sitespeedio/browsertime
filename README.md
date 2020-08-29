@@ -1,10 +1,14 @@
 # Browsertime - Your browser, your page, your scripts!
-[![Build status][travis-image]][travis-url]
+![Run Docker](https://github.com/sitespeedio/browsertime/workflows/Run%20Docker/badge.svg?branch=main)
+![Unit tests](https://github.com/sitespeedio/browsertime/workflows/Unit%20tests/badge.svg?branch=main)
+![Windows Edge](https://github.com/sitespeedio/browsertime/workflows/Windows%20Edge/badge.svg?branch=main)
+![OSX Safari](https://github.com/sitespeedio/browsertime/workflows/OSX%20Safari/badge.svg?branch=main)
+![Linux browsers](https://github.com/sitespeedio/browsertime/workflows/Linux%20browsers/badge.svg?branch=main)
 [![Downloads][downloads-image]][downloads-url]
 [![Downloads total][downloads-total-image]][downloads-url]
 [![Stars][stars-image]][stars-url]
 
-[Documentation](https://www.sitespeed.io/documentation/browsertime/) | [Changelog](https://github.com/sitespeedio/browsertime/blob/master/CHANGELOG.md)
+[Documentation](https://www.sitespeed.io/documentation/browsertime/) | [Changelog](https://github.com/sitespeedio/browsertime/blob/main/CHANGELOG.md)
 
 ![Browsertime](browsertime.png)
 
@@ -75,7 +79,7 @@ It's easiest to run [our ready made Docker container](https://hub.docker.com/r/s
 
 The default video will include a timer and showing when the metrics happens, but you can turn that off using <code>--video.addTimer false</code>.
 
-<img src="https://raw.githubusercontent.com/sitespeedio/sitespeed.io/master/docs/img/video-example.gif">
+<img src="https://raw.githubusercontent.com/sitespeedio/sitespeed.io/main/docs/img/video-example.gif">
 
 ## Test using Docker
 You can build and test changes using Docker locally.
@@ -87,72 +91,8 @@ $ docker run --rm -v "$(pwd)":/browsertime sitespeedio/browsertime -n 1 https://
 
 ## Connectivity
 
-You can throttle the connection to make the connectivity slower to make it easier to catch regressions. The best way to do that is to setup a network bridge in Docker or use our connectivity engine Throttle.
+You can throttle the connection to make the connectivity slower to make it easier to catch regressions. The best way to do that is to setup a network bridge in Docker or use our connectivity engine Throttle. Read more about how to do that in the [documentation](https://www.sitespeed.io/documentation/sitespeed.io/connectivity/).
 
-Here's an full example to setup up Docker network bridges on a server that has tc installed:
-
-~~~bash
-#!/bin/bash
-echo 'Starting Docker networks'
-docker network create --driver bridge --subnet=192.168.33.0/24 --gateway=192.168.33.10 --opt "com.docker.network.bridge.name"="docker1" 3g
-tc qdisc add dev docker1 root handle 1: htb default 12
-tc class add dev docker1 parent 1:1 classid 1:12 htb rate 1.6mbit ceil 1.6mbit
-tc qdisc add dev docker1 parent 1:12 netem delay 150ms
-
-docker network create --driver bridge --subnet=192.168.34.0/24 --gateway=192.168.34.10 --opt "com.docker.network.bridge.name"="docker2" cable
-tc qdisc add dev docker2 root handle 1: htb default 12
-tc class add dev docker2 parent 1:1 classid 1:12 htb rate 5mbit ceil 5mbit
-tc qdisc add dev docker2 parent 1:12 netem delay 14ms
-
-docker network create --driver bridge --subnet=192.168.35.0/24 --gateway=192.168.35.10 --opt "com.docker.network.bridge.name"="docker3" 3gfast
-tc qdisc add dev docker3 root handle 1: htb default 12
-tc class add dev docker3 parent 1:1 classid 1:12 htb rate 1.6mbit ceil 1.6mbit
-tc qdisc add dev docker3 parent 1:12 netem delay 75ms
-
-docker network create --driver bridge --subnet=192.168.36.0/24 --gateway=192.168.36.10 --opt "com.docker.network.bridge.name"="docker4" 3gem
-tc qdisc add dev docker4 root handle 1: htb default 12
-tc class add dev docker4 parent 1:1 classid 1:12 htb rate 0.4mbit ceil 0.4mbit
-tc qdisc add dev docker4 parent 1:12 netem delay 200ms
-~~~
-
-Then when you run your container you add the network with <code>--network cable</code>. You should also tell Browsertime that you set the connectivity external from BT. A full example running running with cable:
-
-~~~bash
-$ docker run --network=cable --rm sitespeedio/browsertime -c cable --connectivity.engine external https://www.sitespeed.io/
-~~~
-
-And using the 3g network:
-
-~~~bash
-$ docker run --network=3g --rm sitespeedio/browsertime -c 3g --connectivity.engine external https://www.sitespeed.io/
-~~~
-
-And if you want to remove the networks:
-
-~~~bash
-#!/bin/bash
-echo 'Stopping Docker networks'
-docker network rm 3g
-docker network rm 3gfast
-docker network rm 3gem
-docker network rm cable
-~~~
-
-Throttle uses *tc* on Linux and *pfctl* on Mac to change the connectivity. Throttle will need sudo rights for the user running sitespeed.io to work.
-
-To use throttle, use set the connectivity engine by *--connectivity.engine throttle*.
-
-~~~bash
-browsertime --connectivity.engine throttle -c cable https://www.sitespeed.io/
-~~~
-
-You can also use Throttle inside of Docker but then the host need to be the same OS as in Docker. In practice you can only use it on Linux. And then make sure to run *sudo modprobe ifb numifbs=1* first and give the container the right privileges *--cap-add=NET_ADMIN*.
-
-If you are running Browsertime in Kubernetes you need to use [TSProxy](https://github.com/WPO-Foundation/tsproxy).
-
-~~~bash
-browsertime --connectivity.engine tsproxy -c cable https://www.sitespeed.io/
-~~~
 
 ## Navigate in a script
 If you need a more complicated test scenario, you can define your own (Selenium)test script that will do the testing. Use your own test script when you want to test your page as a logged in user, the login page or if you want to add things to your cart.
@@ -175,7 +115,7 @@ If you are on Linux (we have tested Ubuntu 18) you can use our Docker container 
  * You need to share the USB ports *-v /dev/bus/usb:/dev/bus/usb* or share a specific port with *--device=/dev/bus/usb/001/017* (use *lsusb* to find the right mapping)
  * Add *-e START_ADB_SERVER=true* to start the adb server
 
-If you use Docker you will automatically get support for video and SpeedIndex. You can get that without Docker but then need to [install VisualMetrics dependencies](https://github.com/sitespeedio/docker-visualmetrics-deps/blob/master/Dockerfile) yourself.
+If you use Docker you will automatically get support for video and SpeedIndex. You can get that without Docker but then need to [install VisualMetrics dependencies](https://github.com/sitespeedio/docker-visualmetrics-deps/blob/main/Dockerfile) yourself.
 
 <pre>
 $ docker run --privileged -v /dev/bus/usb:/dev/bus/usb -e START_ADB_SERVER=true --rm -v "$(pwd)":/browsertime-results sitespeedio/browsertime -n 1 --android --visualMetrics --video https://en.m.wikipedia.org/wiki/Barack_Obama
@@ -185,7 +125,7 @@ $ docker run --privileged -v /dev/bus/usb:/dev/bus/usb -e START_ADB_SERVER=true 
 Run <code>$ bin/browsertime.js --help</code> and you can see the configuration options.
 
 ## Using WebPageReplay
-Our Docker container now included [WebPageReplay](https://github.com/catapult-project/catapult/blob/master/web_page_replay_go/README.md).
+Our Docker container now included [WebPageReplay](https://github.com/catapult-project/catapult/blob/main/web_page_replay_go/README.md).
 
 WebPageReplay will let you replay your page locally (getting rid of server latency etc) and makes it easier to find front end regressions.
 
@@ -202,13 +142,13 @@ You can change latency by setting a Docker environment variable. Use REPLAY to t
 Default browser is Chrome:
 
 ```
-docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:4.0.0 https://en.wikipedia.org/wiki/Barack_Obama
+docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:9.2.1 https://en.wikipedia.org/wiki/Barack_Obama
 ```
 
 Use Firefox:
 
 ```
-docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:4.0.0 -b firefox -n 11 https://en.wikipedia.org/wiki/Barack_Obama
+docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:9.2.1 -b firefox -n 11 https://en.wikipedia.org/wiki/Barack_Obama
 ```
 
 And Chrome on your Android phone. This will only work on Linux because you need to be able to mount the usb port in Docker:

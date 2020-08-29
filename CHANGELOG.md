@@ -1,5 +1,71 @@
 # Browsertime changelog
 
+## 9.4.1 - 2020-08-28
+### Fixed
+* Fix broken Android shell command. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR  [#1345](https://github.com/sitespeedio/browsertime/pull/1345).
+* Check if pathname exists before splitting. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1343](https://github.com/sitespeedio/browsertime/pull/1343).
+
+## 9.4.0 - 2020-08-26
+### Added
+* [Added Chromedriver 85](https://github.com/sitespeedio/browsertime/pull/1342).
+* Updated to Chrome 85 and Firefox 80 in the Docker container.
+
+## 9.3.1 - 2020-08-24
+### Fixed
+* Use the correct settings to set the emulation for Chrome [#1340](https://github.com/sitespeedio/browsertime/pull/1340).
+* Bump versions: dayjs, execs, speedline-core, yargs. jimp [#1339](https://github.com/sitespeedio/browsertime/pull/1339).
+* Updated to Throttle 2.0.1 [#1338](https://github.com/sitespeedio/browsertime/pull/1338).
+
+## 9.3.0 - 2020-08-17
+### Added
+* Updated to Geckodriver 0.27.0 [#1330](https://github.com/sitespeedio/browsertime/pull/1330).
+
+### Fixed
+* Updated Chrome-HAR to 0.11.11.
+* Fix to include visual metrics in the HAR, thank you [Mason Malone](https://github.com/MasonM) for the PR [#1335](https://github.com/sitespeedio/browsertime/pull/1335).
+
+##  9.2.1 - 2020-07-31
+### Fixed
+* New chrome-har and updated day-js dependency.
+* Ignore a couple of more pixels at the bottom of the browser screen to ignore Chromiums loading info bar, thank you [Pan Alexey](https://github.com/pan-alexey) for the PR [#1327](https://github.com/sitespeedio/browsertime/pull/1327).
+
+## 9.2.0 - 2020-07-28
+### Added
+* Updated to Firefox 79 in the Docker container.
+
+## 9.1.0 - 2020-07-17
+### Added
+* Updated to Chromedriver and Edgedriver 84, Chrome 84 and Firefox 78 in the Docker container [1323](https://github.com/sitespeedio/browsertime/pull/1323).
+
+## 9.0.2 - 2020-07-08
+### Fixed
+* Guard against missing FF options when running without CLI [#1319](https://github.com/sitespeedio/browsertime/pull/1319).
+* Safer check for layoutShift [#1318](https://github.com/sitespeedio/browsertime/pull/1318).
+
+## 9.0.1 - 2020-07-07
+### Fixed
+* Fix support for running setup & teardown in a script. This was working fine from the CLI but not running it programmatically as reported in [sitespeed.io #3068](https://github.com/sitespeedio/sitespeed.io/issues/3068). [#1317](https://github.com/sitespeedio/browsertime/pull/1317).
+
+## 9.0.0 - 2020-06-26
+### Changed
+* Change how screenshot are stored to support multiple screenshots for one run. Screenshots per run is an array, store screenshots per folder per run *screenshoots/1/* and name the default screenshot to afterPageCompleteCheck[#1312](https://github.com/sitespeedio/browsertime/pull/1312).
+
+### Fixed
+* Updated to latest throttle, jimp, day-js.
+
+### Added
+* Add support to run privileged JavaScript in scripts and wait for page to load [#1314](https://github.com/sitespeedio/browsertime/pull/1314).
+
+## 8.14.0 - 2020-06-03
+### Added
+* Option to configure number of browser restart tries [#1292](https://github.com/sitespeedio/browsertime/pull/1292). Use `--browserRestartTries`.
+* Use Firefox 77 in the Docker container.
+* Add support for Android power testing [#1296](https://github.com/sitespeedio/browsertime/pull/1296). Thank you [Gregory Mierzwinski](https://github.com/gmierz) for the PR! Also [#1300](https://github.com/sitespeedio/browsertime/pull/1300) adds supports for power testing on Chrome.
+
+### Fixed
+* Running wiothout the CLI caused error logs removing Firefox appconstants [#1294](https://github.com/sitespeedio/browsertime/pull/1294).
+* Fixed broken MS Edge support (since 80?) and upgraded to Edgedriver 83 [#1298](https://github.com/sitespeedio/browsertime/pull/1298)
+
 ## 8.13.1 - 2020-05-26
 ### Fixed
 * The log was putting CLS in % even though it isn't [#1288](https://github.com/sitespeedio/browsertime/pull/1288).
