@@ -1,5 +1,21 @@
 # Browsertime changelog
 
+## 10.0.0 - UNRELEASED
+
+### Tech
+* Making a better structure for each browser, so its more understandable when you can run browser specific code. The old browser delegate (now only browser name) has the newly named functions:
+* beforeBrowserStart
+* afterBrowserStart 
+* beforeStartIteration
+* beforeEachURL
+* afterPageCompleteCheck
+* afterEachURL
+* failing
+* getHARs
+* beforeBrowserStop
+
+This makes it easier to make sure when to collect metrics, stop trace logs and do whatever you need. Implemented in [#1348](https://github.com/sitespeedio/browsertime/pull/1348). There's moree refactoring to be done before 10.0.0.
+
 ## 9.4.2 - 2020-08-29
 ### Fixed
 * Make sure First Paint is collected when First Contentful Paint exists in Firefox. Thank you [Sean Feng](https://github.com/sefeng211) for the PR [#1347](https://github.com/sitespeedio/browsertime/pull/1347).
