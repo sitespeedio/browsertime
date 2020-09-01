@@ -28,6 +28,8 @@ This makes it easier to make sure when to collect metrics, stop trace logs and d
 
 * New structure for browser, trying to decrease line of code per file and making it easier to navigate the code and prepare for adding support for other browser drivers than Selenium [#1354](https://github.com/sitespeedio/browsertime/pull/1354) [#1355](https://github.com/sitespeedio/browsertime/pull/1355) [#1356](https://github.com/sitespeedio/browsertime/pull/1356).
 
+* Moved page complete scripts to a new folder to make it clean [#1361](https://github.com/sitespeedio/browsertime/pull/1361).
+
 ## Added
 * By default the video is converted to a format that works in most video players. You can skip that convertion (to save time) by using `--videoParams.convert false`. Visual Metrics will still work, but the video may not work in your player [#1360](https://github.com/sitespeedio/browsertime/pull/1360).
 
