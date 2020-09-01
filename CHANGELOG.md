@@ -9,7 +9,7 @@
 
 * Use fast preset (instead of medium) when converting the video to a format that works in all video players [#1359](https://github.com/sitespeedio/browsertime/pull/1359).
 
-## Breaking change
+## Breaking changes
 * If you collect visual metrics, we do not calculate Contentful Speed Index and Perceptual Speed Index by default any more. Turn them on by using `--visualMetricsPerceptual` and `--visualMetricsContentful`. This will make your testing faster by default [#1358](https://github.com/sitespeedio/browsertime/pull/1358).
 
 ### Tech
@@ -27,6 +27,9 @@
 This makes it easier to make sure when to collect metrics, stop trace logs and do whatever you need. Implemented in [#1348](https://github.com/sitespeedio/browsertime/pull/1348). There's more refactoring to be done before 10.0.0.
 
 * New structure for browser, trying to decrease line of code per file and making it easier to navigate the code and prepare for adding support for other browser drivers than Selenium [#1354](https://github.com/sitespeedio/browsertime/pull/1354) [#1355](https://github.com/sitespeedio/browsertime/pull/1355) [#1356](https://github.com/sitespeedio/browsertime/pull/1356).
+
+## Added
+* By default the video is converted to a format that works in most video players. You can skip that convertion (to save time) by using `--videoParams.convert false`. Visual Metrics will still work, but the video may not work in your player [#1360](https://github.com/sitespeedio/browsertime/pull/1360).
 
 ## 9.4.2 - 2020-08-29
 ### Fixed
