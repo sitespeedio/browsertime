@@ -7,6 +7,8 @@
 
 * Stop recording the video direct after the PageCompleteCheck fired. This make the original video smaller, saves time converting the video to a vieable format and makes Visual Metrics a little faster [#1357](https://github.com/sitespeedio/browsertime/pull/1357).
 
+* Use fast preset (instead of medium) when converting the video to a format that works in all video players [#1359](https://github.com/sitespeedio/browsertime/pull/1359).
+
 ## Breaking change
 * If you collect visual metrics, we do not calculate Contentful Speed Index and Perceptual Speed Index by default any more. Turn them on by using `--visualMetricsPerceptual` and `--visualMetricsContentful`. This will make your testing faster by default [#1358](https://github.com/sitespeedio/browsertime/pull/1358).
 
