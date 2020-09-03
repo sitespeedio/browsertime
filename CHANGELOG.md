@@ -24,7 +24,7 @@
 * getHARs
 * beforeBrowserStop
 
-This makes it easier to make sure when to collect metrics, stop trace logs and do whatever you need. Implemented in [#1348](https://github.com/sitespeedio/browsertime/pull/1348). There's more refactoring to be done before 10.0.0.
+This makes it easier to make sure when to collect metrics, stop trace logs and do whatever you need. Implemented in [#1348](https://github.com/sitespeedio/browsertime/pull/1348) and [#1367](https://github.com/sitespeedio/browsertime/pull/1367). There's more refactoring to be done before 10.0.0.
 
 * New structure for browser, trying to decrease line of code per file and making it easier to navigate the code and prepare for adding support for other browser drivers than Selenium [#1354](https://github.com/sitespeedio/browsertime/pull/1354) [#1355](https://github.com/sitespeedio/browsertime/pull/1355) [#1356](https://github.com/sitespeedio/browsertime/pull/1356).
 
