@@ -40,7 +40,7 @@ jobs:
     - name: Test Firefox with throttle
       run: ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle --xvfb
     - name: TestChrome with CPU throttle and preURL
-      run: ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value --chrome.CPUThrottlingRate 2 --chrome.cdp.performance --xvfb --chrome.enableChromeDriverLog https://www.sitespeed.io/documentation/
+      run: ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value --chrome.CPUThrottlingRate 2 --chrome.cdp.performance --xvfb --chrome.enableChromeDriverLog --chrome.collectConsoleLog https://www.sitespeed.io/documentation/
     - name: Test video and visual metrics
       run: ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --video --screenshot --connectivity.engine tsproxy -c cable --visualMetrics -n 1 --chrome.timeline --visualElements --cookie test=true --xvfb https://www.sitespeed.io/
     - name: Test pre/post scripts
