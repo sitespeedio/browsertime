@@ -1,6 +1,6 @@
 {
   "description": "Browsertime",
-  "version": "10.0.0-alpha.6",
+  "version": "10.0.0-alpha.7",
   "bin": "./bin/browsertime.js",
   "publishConfig": {
     "tag": "canary"
