@@ -6,7 +6,7 @@
     "tag": "canary"
   },
   "dependencies": {
-    "@sitespeed.io/throttle": "2.0.1",
+    "@sitespeed.io/throttle": "2.0.2",
     "adbkit": "2.11.1",
     "btoa": "1.2.1",
     "@sitespeed.io/chromedriver": "85.0.4183-83",
