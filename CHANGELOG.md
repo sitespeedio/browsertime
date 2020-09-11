@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## 10.0.0-alpha.8 - 2020-09-10
+## 10.0.0-alpha.9 - 2020-09-11
 
 ## Changed
 * Get CPU long tasks by default using Chrome: A couple of releases ago, Chrome started to support buffered long tasks, that means we don't need to inject any JS to make sure we catch all long tasks. The code is simpler and since (hopefully) the new buffered version doesn't give any performance penelty, we can start getting longtasks by default. [#1341](https://github.com/sitespeedio/browsertime/pull/1341).
@@ -10,6 +10,8 @@
 * Use fast preset (instead of medium) when converting the video to a format that works in all video players [#1359](https://github.com/sitespeedio/browsertime/pull/1359).
 
 * If you use scripting and use the ...AndWait methods, we now increased the extra wait time befroe we run the page complete check from 1000ms to 2000ms. With the other changes we done, this was needed for Firefox since it sometimes didn't have time to navigate before the complete check run [#1375](https://github.com/sitespeedio/browsertime/pull/1375).
+
+* Make sure the screen is turned on independently of electric source (before it was only USB) [#1378](https://github.com/sitespeedio/browsertime/pull/1378)
 
 ## Breaking changes
 * If you collect visual metrics, we do not calculate Contentful Speed Index and Perceptual Speed Index by default any more. Turn them on by using `--visualMetricsPerceptual` and `--visualMetricsContentful`. This will make your testing faster by default [#1358](https://github.com/sitespeedio/browsertime/pull/1358).
@@ -36,6 +38,8 @@ This makes it easier to make sure when to collect metrics, stop trace logs and d
 
 ## Added
 * By default the video is converted to a format that works in most video players. You can skip that convertion (to save time) by using `--videoParams.convert false`. Visual Metrics will still work, but the video may not work in your player [#1360](https://github.com/sitespeedio/browsertime/pull/1360).
+
+* Make sure the video file is removed from the Android phone when its been copied to desktop [#1377](https://github.com/sitespeedio/browsertime/pull/1377).
 
 ## 9.4.2 - 2020-08-29
 ### Fixed
