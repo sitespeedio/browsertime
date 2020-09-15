@@ -41,6 +41,8 @@ This makes it easier to make sure when to collect metrics, stop trace logs and d
 
 * Make sure the video file is removed from the Android phone when its been copied to desktop [#1377](https://github.com/sitespeedio/browsertime/pull/1377).
 
+* Making it easy to run Firefox on Android [#1379](https://github.com/sitespeedio/browsertime/pull/1379).
+
 ## 9.4.2 - 2020-08-29
 ### Fixed
 * Make sure First Paint is collected when First Contentful Paint exists in Firefox. Thank you [Sean Feng](https://github.com/sefeng211) for the PR [#1347](https://github.com/sitespeedio/browsertime/pull/1347).
