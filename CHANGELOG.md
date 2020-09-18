@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## 10.0.0-alpha.9 - 2020-09-11
+## 10.0.0-beta.1 - 2020-09-18
 
 ## Changed
 * Get CPU long tasks by default using Chrome: A couple of releases ago, Chrome started to support buffered long tasks, that means we don't need to inject any JS to make sure we catch all long tasks. The code is simpler and since (hopefully) the new buffered version doesn't give any performance penelty, we can start getting longtasks by default. [#1341](https://github.com/sitespeedio/browsertime/pull/1341).
@@ -34,7 +34,7 @@ This makes it easier to make sure when to collect metrics, stop trace logs and d
 
 * Moved page complete scripts to a new folder to make it clean [#1361](https://github.com/sitespeedio/browsertime/pull/1361).
 
-* Restructure the video code (part 1) [#1364](https://github.com/sitespeedio/browsertime/pull/1364).
+* Restructure the video code [#1364](https://github.com/sitespeedio/browsertime/pull/1364).
 
 ## Added
 * By default the video is converted to a format that works in most video players. You can skip that convertion (to save time) by using `--videoParams.convert false`. Visual Metrics will still work, but the video may not work in your player [#1360](https://github.com/sitespeedio/browsertime/pull/1360).
@@ -42,6 +42,9 @@ This makes it easier to make sure when to collect metrics, stop trace logs and d
 * Make sure the video file is removed from the Android phone when its been copied to desktop [#1377](https://github.com/sitespeedio/browsertime/pull/1377).
 
 * Making it easy to run Firefox on Android [#1379](https://github.com/sitespeedio/browsertime/pull/1379).
+
+## Fixed
+* Fixed broken CPU throttling in Chrome [#1381](https://github.com/sitespeedio/browsertime/pull/1381).
 
 ## 9.4.2 - 2020-08-29
 ### Fixed
