@@ -43,6 +43,8 @@ This makes it easier to make sure when to collect metrics, stop trace logs and d
 
 * Making it easy to run Firefox on Android [#1379](https://github.com/sitespeedio/browsertime/pull/1379).
 
+* Fix how MOZ_LOG collection works and allow custom MOZ_LOG settings [#1382](https://github.com/sitespeedio/browsertime/pull/1382). Thank you [Gregory Mierzwinski](https://github.com/gmierz).
+
 ## Fixed
 * Fixed broken CPU throttling in Chrome [#1381](https://github.com/sitespeedio/browsertime/pull/1381).
 
