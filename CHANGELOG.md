@@ -1,5 +1,14 @@
 # Browsertime changelog
 
+## 10.1.0 - 2020-09-22
+
+### Added
+* Extra love for running tests in Android: Press the home button at the start of a test, verify that the phone state is "device" before starting to test (no need to run tests on offline devices) and 
+added possibility to verify the internet connection on the device through ping (enable with `--androidVerifyNetwork`) [#1386](https://github.com/sitespeedio/browsertime/pull/1386).
+
+### Fixed
+* Reverted using buffered flag for Chrome Long Tasks (we missed Long Tasks with the new setup) [#1383](https://github.com/sitespeedio/browsertime/pull/1383).
+
 ## 10.0.0 - 2020-09-20
 
 The new 10.0 release mostly include technical changes that will make it easier for us in the future to make changes and keep Browsertime the number one performance engine :) However if yoy use Contentful and Perceptual Speed Index there are one breaking change.
@@ -34,7 +43,7 @@ This makes it easier to make sure when to collect metrics, stop trace logs and d
 
 * New structure for browser, trying to decrease line of code per file and making it easier to navigate the code and prepare for adding support for other browser drivers than Selenium [#1354](https://github.com/sitespeedio/browsertime/pull/1354) [#1355](https://github.com/sitespeedio/browsertime/pull/1355) [#1356](https://github.com/sitespeedio/browsertime/pull/1356).
 
-* Moved page complete scripts to a new folder to make it clean [#1361](https://github.com/sitespeedio/browsertime/pull/1361).
+#1383* Moved page complete scripts to a new folder to make it clean [#1361](https://github.com/sitespeedio/browsertime/pull/1361).
 
 * Restructure the video code [#1364](https://github.com/sitespeedio/browsertime/pull/1364).
 
