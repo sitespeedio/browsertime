@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 10.2.0 - 2020-09-23
+### Added
+* The Docker container now uses Firefox 81.
+
 ## 10.1.0 - 2020-09-22
 
 ### Added
