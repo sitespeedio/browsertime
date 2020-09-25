@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 10.2.1 - 2020-09-25
+### Fixed
+* Create the data dir for a URL direct after page complet fired so that collecting the MOZ log work [#1388](https://github.com/sitespeedio/browsertime/pull/1388).
+
 ## 10.2.0 - 2020-09-23
 ### Added
 * The Docker container now uses Firefox 81.
