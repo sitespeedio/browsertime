@@ -10,6 +10,8 @@ const merge = require('lodash.merge');
 const fs = require('fs');
 const path = require('path');
 const log = require('intel').getLogger('browsertime');
+const engineUtils = require('../lib/support/engineUtils');
+const AsyncFunction = Object.getPrototypeOf(async function() {}).constructor;
 
 async function parseUserScripts(scripts) {
   if (!Array.isArray(scripts)) scripts = [scripts];
@@ -49,7 +51,12 @@ async function run(urls, options) {
       let saveOperations = [];
 
       // TODO setup by name
-      const storageManager = new StorageManager(urls[0], options);
+      let firstUrl = urls[0];
+      // if the url is an array, it's of the form [filename, function]
+      if (firstUrl instanceof Array) {
+        firstUrl = firstUrl[0];
+      }
+      const storageManager = new StorageManager(firstUrl, options);
       const harName = options.har ? options.har : 'browsertime';
       const jsonName = options.output ? options.output : 'browsertime';
 
@@ -94,6 +101,44 @@ async function run(urls, options) {
 
 let cliResult = cli.parseCommandLine();
 
+/*
+  Each url can be:
+   - an url value
+   - an array of tests. In that case it's a mapping containing
+     theses values:
+     - test: an async function containing the test to run
+     - setUp: an async function for the preScript [optional]
+     - tearDown: an async function for the postScript [optional]
+*/
+const tests = [];
+
+cliResult.urls.forEach(function convert(url) {
+  // for each url, we try to load it as a script, that may contain
+  // export a single function or an object containing setUp/test/tearDown functions.
+  let testScript = engineUtils.loadScript(url);
+
+  // if the value is an url or a not a single function,  we can return the original value
+  if (typeof testScript == 'string' || testScript instanceof AsyncFunction) {
+    tests.push(url);
+    return;
+  }
+
+  if (testScript.setUp) {
+    if (!cliResult.options.preScript) {
+      cliResult.options.preScript = [];
+    }
+    cliResult.options.preScript.push(testScript.setUp);
+  }
+  if (testScript.tearDown) {
+    if (!cliResult.options.postScript) {
+      cliResult.options.postScript = [];
+    }
+    cliResult.options.postScript.push(testScript.tearDown);
+  }
+  // here, url is the filename containing the script, and test the callable.
+  tests.push([url, testScript.test]);
+});
+
 logging.configure(cliResult.options);
 
-run(cliResult.urls, cliResult.options);
+run(tests, cliResult.options);

@@ -1,0 +1,47 @@
+name: Windows Edge
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - name: Install Browsertime
+      run: npm ci
+    - name: Install dependencies
+      run: |
+        choco install ffmpeg
+        choco install imagemagick.app -PackageParameters LegacySupport=true
+        choco install python
+        choco install microsoft-edge
+        choco install googlechrome
+        python -m pip install --upgrade --user pip
+        python -m pip install --upgrade --user setuptools
+        python -m pip install --user pyssim
+        python -m pip --version
+        python -m pip show Pillow
+        python -m pip show pyssim
+    - name: Run Visual Metrics test
+      run: python ./browsertime/visualmetrics.py --check
+      shell: cmd
+    - name: Run Edge test
+      run: node bin/browsertime.js -b edge -n 1 --screenshot https://www.sitespeed.io/
+      shell: cmd
+    - name: Run Edge test with video
+      run: node bin/browsertime.js -b edge -n 1 --screenshot --video --visualMetrics --viewPort 1000x600 https://www.sitespeed.io/
+      shell: cmd
+    - name: Run Chrome test
+      run: node bin/browsertime.js -b chrome -n 1 https://www.sitespeed.io/
+      shell: cmd
+    - name: Run Firefox test
+      run: node bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io/
+      shell: cmd

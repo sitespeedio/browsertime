@@ -128,7 +128,7 @@
       width: document.documentElement.clientWidth,
       height: document.documentElement.clientHeight
     },
-    // "heroes" :D https://github.com/sitespeedio/logo/blob/master/png/heroes/Pippi-Sitespeed.io.png
+    // "heroes" :D https://github.com/sitespeedio/logo/blob/main/png/heroes/Pippi-Sitespeed.io.png
     heroes: Object.keys(elementByType).map(function(type) {
       return elementByType[type];
     })

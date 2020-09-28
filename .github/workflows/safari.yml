@@ -1,0 +1,39 @@
+name: OSX Safari
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+jobs:
+  build:
+    runs-on: macos-10.15
+    timeout-minutes: 40
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - name: Install browsertime
+      run: npm ci
+    - name: Install dependencies
+      run: |
+        sudo safaridriver --enable
+        brew update
+        brew install ffmpeg imagemagick
+        python -m pip install --upgrade --user pip
+        python -m pip install --upgrade --user setuptools
+        python -m pip install --user pyssim
+        python -m pip --version
+        python -m pip show Pillow
+        python -m pip show pyssim
+        system_profiler SPDisplaysDataType |grep Resolution
+        ffmpeg -version
+    - name: Check Visual Metrics dependencies
+      run: ./browsertime/visualmetrics.py --check
+    - name: Test Safari without video 
+      run: ./bin/browsertime.js -b safari -n 1 https://www.sitespeed.io/
+    #- name: Test Safari with video and Visual Metrics
+    #  run: ./bin/browsertime.js -b safari -n 1 --viewPort 800x600  --video --visualMetrics https://www.sitespeed.io/ --verbose

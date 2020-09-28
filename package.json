@@ -1,16 +1,16 @@
 {
   "description": "Browsertime",
-  "version": "8.1.0",
+  "version": "10.2.1",
   "bin": "./bin/browsertime.js",
   "dependencies": {
-    "@sitespeed.io/throttle": "1.0.1",
+    "@sitespeed.io/throttle": "2.0.2",
     "adbkit": "2.11.1",
     "btoa": "1.2.1",
-    "@sitespeed.io/chromedriver": "80.0.3987-16b",
-    "chrome-har": "0.11.4",
-    "chrome-remote-interface": "0.28.1",
-    "dayjs": "1.8.20",
-    "execa": "4.0.0",
+    "@sitespeed.io/chromedriver": "85.0.4183-83",
+    "chrome-har": "0.11.12",
+    "chrome-remote-interface": "0.28.2",
+    "dayjs": "1.8.34",
+    "execa": "4.0.3",
     "fast-stats": "0.0.5",
     "find-up": "4.1.0",
     "get-port": "5.1.1",
@@ -22,16 +22,16 @@
     "lodash.merge": "4.6.2",
     "lodash.pick": "4.4.0",
     "lodash.set": "4.3.2",
-    "selenium-webdriver": "4.0.0-alpha.5",
-    "@sitespeed.io/edgedriver": "80.0.361-54b",
-    "@sitespeed.io/geckodriver": "0.26.0-b",
+    "selenium-webdriver": "4.0.0-alpha.7",
+    "@sitespeed.io/edgedriver": "84.0.524-0",
+    "@sitespeed.io/geckodriver": "0.27.0",
     "@sitespeed.io/tracium": "0.3.3",
-    "speedline-core": "1.4.2",
+    "speedline-core": "1.4.3",
     "@cypress/xvfb": "1.2.4",
-    "yargs": "15.1.0"
+    "yargs": "15.4.1"
   },
   "optionalDependencies": {
-    "sharp": "0.24.0"
+    "jimp": "0.16.0"
   },
   "devDependencies": {
     "bluebird": "3.5.5",
