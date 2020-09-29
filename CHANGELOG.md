@@ -1,5 +1,12 @@
 # Browsertime changelog
 
+## 10.3.0 - UNRELEASED
+### Added
+* Add option to navigate with WebDriver instead of window.location with `--webdriverPageload`. Thank you [Andrew Creskey](https://github.com/acreskeyMoz) for the PR [#1396](https://github.com/sitespeedio/browsertime/pull/1396).
+
+### Fixed
+* Fix bufferSize to proper 100MB default size for Geckoprofiler, thank you [dpalmeiro](https://github.com/dpalmeiro) for the PR [#1394](https://github.com/sitespeedio/browsertime/pull/1394).
+
 ## 10.2.1 - 2020-09-25
 ### Fixed
 * Create the data dir for a URL direct after page complet fired so that collecting the MOZ log work [#1388](https://github.com/sitespeedio/browsertime/pull/1388).
