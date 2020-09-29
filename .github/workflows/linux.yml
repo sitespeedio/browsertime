@@ -39,7 +39,7 @@ jobs:
     # - run: VTENV_OPTS="-p python3" make test
     - name: Test Firefox with throttle
       run: ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle --xvfb --firefox.collectMozLog
-    - name: TestChrome with CPU throttle and preURL
+    - name: Test Chrome with CPU throttle and preURL
       run: ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value --chrome.CPUThrottlingRate 2 --chrome.cdp.performance --xvfb --chrome.enableChromeDriverLog --chrome.collectConsoleLog https://www.sitespeed.io/documentation/
     - name: Test video and visual metrics
       run: ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --video --screenshot --connectivity.engine tsproxy -c cable --visualMetrics -n 1 --chrome.timeline --visualElements --cookie test=true --xvfb https://www.sitespeed.io/
@@ -57,3 +57,7 @@ jobs:
       run: ./bin/browsertime.js -b firefox test/unifiedscripts/sample.js --xvfb
     - name: Test Chrome with emulated mobile
       run: ./bin/browsertime.js -b chrome --chrome.mobileEmulation.deviceName 'iPhone 6' https://www.sitespeed.io --xvfb
+    - name: Test Firefox with web driver nagivation
+      run: ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io/ --webdriverPageload --xvfb
+    - name: Test Chrome with web driver nagivation
+      run: ./bin/browsertime.js -b chrome -n 1 https://www.sitespeed.io/ --webdriverPageload --xvfb
