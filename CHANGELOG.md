@@ -3,6 +3,7 @@
 ## 10.3.0 - UNRELEASED
 ### Added
 * Add option to navigate with WebDriver instead of window.location with `--webdriverPageload`. Thank you [Andrew Creskey](https://github.com/acreskeyMoz) for the PR [#1396](https://github.com/sitespeedio/browsertime/pull/1396).
+* Add option for specifying logging format in visualmetrics.py. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for the PR [#1399](https://github.com/sitespeedio/browsertime/pull/1399).
 
 ### Fixed
 * Fix bufferSize to proper 100MB default size for Geckoprofiler, thank you [dpalmeiro](https://github.com/dpalmeiro) for the PR [#1394](https://github.com/sitespeedio/browsertime/pull/1394).
