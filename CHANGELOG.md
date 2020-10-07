@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 10.4.0 - 2020-10-07
+### Added
+* Upgraded to Chromedriver 86 and Chrome 86 in the Docker container.
+
 ## 10.3.0 - 2020-10-03
 ### Added
 * Add option to navigate with WebDriver instead of window.location with `--webdriverPageload`. Thank you [Andrew Creskey](https://github.com/acreskeyMoz) for the PR [#1396](https://github.com/sitespeedio/browsertime/pull/1396).
