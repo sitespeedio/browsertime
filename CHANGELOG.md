@@ -1,8 +1,12 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Added
+* Updated to Edgedriver 86.
+
 ## 10.4.1 - 2020-10-13
 ### Fixed
-* Fix so that `-vvv`enables trace log level for Marionette when you use Firefox [#1405](https://github.com/sitespeedio/browsertime/pull/1405).
+* Fix so that `-vvv` enables trace log level for Marionette when you use Firefox [#1405](https://github.com/sitespeedio/browsertime/pull/1405).
 
 ## 10.4.0 - 2020-10-07
 ### Added
