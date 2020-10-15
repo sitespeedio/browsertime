@@ -1,8 +1,9 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 10.5.0 - 2020-10-15
 ### Added
 * Updated to Edgedriver 86.
+* Reboot your Android phone if the battery temperature don't meet your limit after X tries. Enable with `--androidBatteryTemperatureReboot` [#1409](https://github.com/sitespeedio/browsertime/pull/1409).
 
 ## 10.4.1 - 2020-10-13
 ### Fixed
