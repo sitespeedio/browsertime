@@ -1,5 +1,12 @@
 # Browsertime changelog
 
+## 10.6.0 - 2020-10-20
+### Added
+* Firefox 82 in the Docker container.
+
+### Fixed
+* Better log messages when the browser do not start start [#1411](https://github.com/sitespeedio/browsertime/pull/1411).
+
 ## 10.5.0 - 2020-10-15
 ### Added
 * Updated to Edgedriver 86.
