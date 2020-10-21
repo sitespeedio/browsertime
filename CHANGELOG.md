@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+## 10.6.1 - 2020-10-21
+### Fixed
+* If the browser hangs and cannot be closed, make sure we timeout after 2 minutes of trying [#1415](https://github.com/sitespeedio/browsertime/pull/1415).
+* Removed special hack for bug https://bugzilla.mozilla.org/show_bug.cgi?id=1298921 that was fixed long time ago [#1415](https://github.com/sitespeedio/browsertime/pull/1414).
+
 ## 10.6.0 - 2020-10-20
 ### Added
 * Firefox 82 in the Docker container.
