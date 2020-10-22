@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 10.6.2 - UNRELEASED
+### Fixed
+* If the browser failed to navigete, the error caused the result.json to not be generated [#1417](https://github.com/sitespeedio/browsertime/pull/1417).
+
 ## 10.6.1 - 2020-10-21
 ### Fixed
 * If the browser hangs and cannot be closed, make sure we timeout after 2 minutes of trying [#1415](https://github.com/sitespeedio/browsertime/pull/1415).
