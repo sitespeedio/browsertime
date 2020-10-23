@@ -1,8 +1,8 @@
 # Browsertime changelog
 
-## 10.6.2 - UNRELEASED
+## 10.6.2 - 2020-10-23
 ### Fixed
-* If the browser failed to navigete, the error caused the result.json to not be generated [#1417](https://github.com/sitespeedio/browsertime/pull/1417).
+* If the browser failed to navigate, the error caused the result.json to not be generated [#1417](https://github.com/sitespeedio/browsertime/pull/1417).
 
 ## 10.6.1 - 2020-10-21
 ### Fixed
