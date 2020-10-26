@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+## 10.6.3 - 2020-10-26
+### Fixed
+* Fix navigating to the same URL twice in the same script (that was broken in 10.0) [#1421](https://github.com/sitespeedio/browsertime/pull/1421).
+* Make sure we log the Android phone id when the internet connection/USB connection fails on the phone [#1420](https://github.com/sitespeedio/browsertime/pull/1420).
+
 ## 10.6.2 - 2020-10-23
 ### Fixed
 * If the browser failed to navigate, the error caused the result.json to not be generated [#1417](https://github.com/sitespeedio/browsertime/pull/1417).
