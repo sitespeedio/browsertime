@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## UNRELEASED
+##  10.6.4 - 2020-10-28
 ### Fixed
 * Add the missing mobile phone id to the HAR file (with the other Android setup data) [#1424](https://github.com/sitespeedio/browsertime/pull/1424).
 * Remove Firefox preferences that disables the speculative connection pool, thank you [Andrew Creskey](https://github.com/acreskeyMoz) for the PR [#1423](https://github.com/sitespeedio/browsertime/pull/1423).
