@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+##  10.6.5 - 2020-11-11
+### Fixed
+* Upgraded to Geckodriver 0.28.0.
+* Set firefox environment variables in process.env, PR by [Kanishk](https://github.com/kanishk509)  thank you [#1426](https://github.com/sitespeedio/browsertime/pull/1426).
+
 ##  10.6.4 - 2020-10-28
 ### Fixed
 * Add the missing mobile phone id to the HAR file (with the other Android setup data) [#1424](https://github.com/sitespeedio/browsertime/pull/1424).
