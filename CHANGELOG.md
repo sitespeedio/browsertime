@@ -1,5 +1,11 @@
 # Browsertime changelog
 
+##  10.7.0 - 2020-11-16
+### Added
+* Add page generator tag to the HAR file [#1430](https://github.com/sitespeedio/browsertime/pull/1430) 
+
+### Fixed
+* Reverted to Geckodrover 0.27.0 since 0.28.0 cannot start Firefox on Android [#1431](https://github.com/sitespeedio/browsertime/pull/1431).
 ##  10.6.5 - 2020-11-11
 ### Fixed
 * Upgraded to Geckodriver 0.28.0.
