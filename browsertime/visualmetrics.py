@@ -1975,6 +1975,11 @@ def main():
     parser.add_argument(
         "--logfile", help="Write log messages to given file instead of stdout"
     )
+    parser.add_argument(
+        '--logformat',
+        help="Formatting for the log messages",
+        default="%(asctime)s.%(msecs)03d - %(message)s",
+    )
     parser.add_argument("-i", "--video", help="Input video file.")
     parser.add_argument(
         "-d",
@@ -2203,13 +2208,13 @@ def main():
         logging.basicConfig(
             filename=options.logfile,
             level=log_level,
-            format="%(asctime)s.%(msecs)03d - %(message)s",
+            format=options.logformat,
             datefmt="%H:%M:%S",
         )
     else:
         logging.basicConfig(
             level=log_level,
-            format="%(asctime)s.%(msecs)03d - %(message)s",
+            format=options.logformat,
             datefmt="%H:%M:%S",
         )
 
