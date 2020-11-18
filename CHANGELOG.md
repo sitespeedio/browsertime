@@ -1,8 +1,9 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 10.8.0 - 2020-11-18
 ### Added 
 * Updated to Firefox 83 in the Dockr container.
+* Updated Chrome and Chromedriver to 87.
 ##  10.7.0 - 2020-11-16
 ### Added
 * Add page generator tag to the HAR file [#1430](https://github.com/sitespeedio/browsertime/pull/1430) 
