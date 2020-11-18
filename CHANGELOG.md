@@ -1,8 +1,12 @@
 # Browsertime changelog
 
+## 10.9.0 - 2020-11-18
+### Added
+* It's now easier to run Firefox Nightly/Beta on your Android phone. Use `--firefox.nightly` / `--firefox.beta` [#1432](https://github.com/sitespeedio/browsertime/pull/1432).
+* Make it possible to add [flags](https://firefox-source-docs.mozilla.org/testing/geckodriver/Flags.html) to Geckodriver using `--firefox.geckodriverArgs` [#1433](https://github.com/sitespeedio/browsertime/pull/1433).
 ## 10.8.0 - 2020-11-18
 ### Added 
-* Updated to Firefox 83 in the Dockr container.
+* Updated to Firefox 83 in the Docker container.
 * Updated Chrome and Chromedriver to 87.
 ##  10.7.0 - 2020-11-16
 ### Added
