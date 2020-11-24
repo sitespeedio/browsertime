@@ -3,6 +3,9 @@
 ## UNRELEASED
 ### Changed
 * Record and keep the browser full screen (including URL bar) [#1435](https://github.com/sitespeedio/browsertime/pull/1435). All metrics should stay the same with this change but the video and the code will be easier :) When we implemented video a long time ago we wanted to cut out the URL bar but it made it harder to keep the video to look ok on different OS. 
+
+* Say goodbye to RUM Speed Index [#1439](https://github.com/sitespeedio/browsertime/pull/1439).
+
 ## 10.9.0 - 2020-11-18
 ### Added
 * It's now easier to run Firefox Nightly/Beta on your Android phone. Use `--firefox.nightly` / `--firefox.beta` [#1432](https://github.com/sitespeedio/browsertime/pull/1432).
