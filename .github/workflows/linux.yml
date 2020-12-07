@@ -65,3 +65,7 @@ jobs:
       run: ./bin/browsertime.js -b chrome test/navigationscript/sameURLTwice.js -n 1 --pageCompleteCheckInactivity --timeToSettle 1000 --xvfb
     - name: Test navigate to the same URL twice by clicking on a link
       run: ./bin/browsertime.js -b chrome test/navigationscript/sameURLTwiceWithClick.js -n 1 --pageCompleteCheckInactivity --timeToSettle 1000 --xvfb
+    - name: Test using alias for one URL
+      run: ./bin/browsertime.js -b chrome https://www.sitespeed.io/ --urlAlias my_url --xvfb
+    - name: Test using alias for multiple URLs
+      run: ./bin/browsertime.js -b chrome https://www.sitespeed.io/ https://www.sitespeed.io/documentation/ --urlAlias startPage --urlAlias documentation --xvfb  

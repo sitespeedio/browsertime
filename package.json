@@ -1,6 +1,6 @@
 {
   "description": "Browsertime",
-  "version": "10.9.0",
+  "version": "11.0.0-alpha.1",
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "@sitespeed.io/throttle": "2.0.2",
@@ -32,6 +32,9 @@
   },
   "optionalDependencies": {
     "jimp": "0.16.0"
+  },
+  "publishConfig": {
+    "tag": "canary"
   },
   "devDependencies": {
     "bluebird": "3.5.5",
