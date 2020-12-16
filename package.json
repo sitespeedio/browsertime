@@ -4,7 +4,7 @@
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "@sitespeed.io/throttle": "2.0.2",
-    "adbkit": "2.11.1",
+    "@devicefarmer/adbkit": "2.11.3",
     "btoa": "1.2.1",
     "@sitespeed.io/chromedriver": "87.0.4280-20",
     "chrome-har": "0.11.12",
