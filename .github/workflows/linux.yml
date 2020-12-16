@@ -41,8 +41,6 @@ jobs:
       run: ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle --xvfb --firefox.collectMozLog
     - name: Test Chrome with CPU throttle and preURL
       run: ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value --chrome.CPUThrottlingRate 2 --chrome.cdp.performance --xvfb --chrome.enableChromeDriverLog --chrome.collectConsoleLog https://www.sitespeed.io/documentation/
-    - name: Test video and visual metrics
-      run: ./bin/browsertime.js -b chrome -vv --viewPort=640x480 --video --screenshot --connectivity.engine tsproxy -c cable --visualMetrics -n 1 --chrome.timeline --visualElements --cookie test=true --xvfb https://www.sitespeed.io/
     - name: Test pre/post scripts
       run: ./bin/browsertime.js -b chrome test/navigationscript/measure.js -n 1 --preScript test/prepostscripts/preSample.js --postScript test/prepostscripts/postSample.js --xvfb
     - name: Test navigation and page complete check inactivity
