@@ -1,4 +1,4 @@
-FROM sitespeedio/webbrowsers:chrome-87.0-firefox-84.0
+FROM sitespeedio/webbrowsers:chrome-87.0-firefox-84.0-edge-89.0-dev
 
 ENV BROWSERTIME_XVFB true
 ENV BROWSERTIME_CONNECTIVITY__ENGINE external
@@ -25,7 +25,7 @@ WORKDIR /usr/src/app
 VOLUME /browsertime
 
 COPY package.* /usr/src/app/
-RUN npm install --production
+RUN EDGEDRIVER_VERSION=89.0.723.0 npm install --production
 COPY . /usr/src/app
 
 ## This is to avoid click the OK button
