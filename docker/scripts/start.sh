@@ -6,6 +6,7 @@ export DBUS_SESSION_BUS_ADDRESS=/dev/null
 
 google-chrome --version
 firefox --version
+microsoft-edge --version
 
 BROWSERTIME_RECORD=/usr/src/app/bin/browsertimeWebPageReplay.js
 BROWSERTIME=/usr/src/app/bin/browsertime.js

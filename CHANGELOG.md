@@ -1,5 +1,202 @@
 # Browsertime changelog
 
+## 11.0.0 - 2020-12-18
+### Changed
+* Record and keep the browser full screen (including URL bar) [#1435](https://github.com/sitespeedio/browsertime/pull/1435). All metrics should stay the same with this change but the video and the code will be easier :) When we implemented video a long time ago we wanted to cut out the URL bar but it made it harder to keep the video to look ok on different OS. 
+* Say goodbye to RUM Speed Index [#1439](https://github.com/sitespeedio/browsertime/pull/1439).
+* Domain name on disk now uses underscore instead of dots in the name [#1445](https://github.com/sitespeedio/browsertime/pull/1445).
+* Click the Android power button at the start of each test (instead of the home button [#1447](https://github.com/sitespeedio/browsertime/pull/1447).
+
+### Fixed
+* Added a two minute timeout to get Geckoprofiler data [#1440](https://github.com/sitespeedio/browsertime/pull/1440).
+* Made sure HAR stuff respect the skipHar flag [#1438](https://github.com/sitespeedio/browsertime/pull/1438)
+* Fix process ID fetch for Galaxy S5, thank you [Michael Comella](https://github.com/mcomella) for PR [#1449](https://github.com/sitespeedio/browsertime/pull/1449)
+* If a web page timed out in Chrome, we missed to report that as an error, fixed in [#1453](https://github.com/sitespeedio/browsertime/pull/1453).
+
+### Added
+* Automatically close "System not responding"-popup on Android if it exists [#1444](https://github.com/sitespeedio/browsertime/pull/1444).
+* Add support using alias from CLI and use alias as folder name on disk [#1443](https://github.com/sitespeedio/browsertime/pull/1443).
+* New option to store a more flat structure on disk converting the path part of the URL to one folder `--storeURLsAsFlatPageOnDisk`[#1450](https://github.com/sitespeedio/browsertime/pull/1450)
+* Updated to Selenium 4.0.0-alpha.8 [#1451](https://github.com/sitespeedio/browsertime/pull/1451).
+* Updated to Firefox 84 in the Docker container. 
+* Updated to Edgedriver 87
+* Added Edge in the Docker container [#1458](https://github.com/sitespeedio/browsertime/pull/1458).
+
+## 10.9.0 - 2020-11-18
+### Added
+* It's now easier to run Firefox Nightly/Beta on your Android phone. Use `--firefox.nightly` / `--firefox.beta` [#1432](https://github.com/sitespeedio/browsertime/pull/1432).
+* Make it possible to add [flags](https://firefox-source-docs.mozilla.org/testing/geckodriver/Flags.html) to Geckodriver using `--firefox.geckodriverArgs` [#1433](https://github.com/sitespeedio/browsertime/pull/1433).
+
+### Fixed
+* The browsertime.json always included Firefox appConstants and the geckoprofiler JSON missed out on Visual Metrics, fixed in [#1434](https://github.com/sitespeedio/browsertime/pull/1434).
+## 10.8.0 - 2020-11-18
+### Added 
+* Updated to Firefox 83 in the Docker container.
+* Updated Chrome and Chromedriver to 87.
+##  10.7.0 - 2020-11-16
+### Added
+* Add page generator tag to the HAR file [#1430](https://github.com/sitespeedio/browsertime/pull/1430) 
+
+### Fixed
+* Reverted to Geckodrover 0.27.0 since 0.28.0 cannot start Firefox on Android [#1431](https://github.com/sitespeedio/browsertime/pull/1431).
+##  10.6.5 - 2020-11-11
+### Fixed
+* Upgraded to Geckodriver 0.28.0.
+* Set firefox environment variables in process.env, PR by [Kanishk](https://github.com/kanishk509)  thank you [#1426](https://github.com/sitespeedio/browsertime/pull/1426).
+
+##  10.6.4 - 2020-10-28
+### Fixed
+* Add the missing mobile phone id to the HAR file (with the other Android setup data) [#1424](https://github.com/sitespeedio/browsertime/pull/1424).
+* Remove Firefox preferences that disables the speculative connection pool, thank you [Andrew Creskey](https://github.com/acreskeyMoz) for the PR [#1423](https://github.com/sitespeedio/browsertime/pull/1423).
+
+## 10.6.3 - 2020-10-26
+### Fixed
+* Fix navigating to the same URL twice in the same script (that was broken in 10.0) [#1421](https://github.com/sitespeedio/browsertime/pull/1421).
+* Make sure we log the Android phone id when the internet connection/USB connection fails on the phone [#1420](https://github.com/sitespeedio/browsertime/pull/1420).
+
+## 10.6.2 - 2020-10-23
+### Fixed
+* If the browser failed to navigate, the error caused the result.json to not be generated [#1417](https://github.com/sitespeedio/browsertime/pull/1417).
+
+## 10.6.1 - 2020-10-21
+### Fixed
+* If the browser hangs and cannot be closed, make sure we timeout after 2 minutes of trying [#1415](https://github.com/sitespeedio/browsertime/pull/1415).
+* Removed special hack for bug https://bugzilla.mozilla.org/show_bug.cgi?id=1298921 that was fixed long time ago [#1415](https://github.com/sitespeedio/browsertime/pull/1414).
+
+## 10.6.0 - 2020-10-20
+### Added
+* Firefox 82 in the Docker container.
+
+### Fixed
+* Better log messages when the browser do not start start [#1411](https://github.com/sitespeedio/browsertime/pull/1411).
+
+## 10.5.0 - 2020-10-15
+### Added
+* Updated to Edgedriver 86.
+* Reboot your Android phone if the battery temperature don't meet your limit after X tries. Enable with `--androidBatteryTemperatureReboot` [#1409](https://github.com/sitespeedio/browsertime/pull/1409).
+
+## 10.4.1 - 2020-10-13
+### Fixed
+* Fix so that `-vvv` enables trace log level for Marionette when you use Firefox [#1405](https://github.com/sitespeedio/browsertime/pull/1405).
+
+## 10.4.0 - 2020-10-07
+### Added
+* Upgraded to Chromedriver 86 and Chrome 86 in the Docker container.
+
+## 10.3.0 - 2020-10-03
+### Added
+* Add option to navigate with WebDriver instead of window.location with `--webdriverPageload`. Thank you [Andrew Creskey](https://github.com/acreskeyMoz) for the PR [#1396](https://github.com/sitespeedio/browsertime/pull/1396).
+* Add option for specifying logging format in visualmetrics.py. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for the PR throttl[#1399](https://github.com/sitespeedio/browsertime/pull/1399).
+
+### Fixed
+* Fix bufferSize to proper 100MB default size for Geckoprofiler, thank you [dpalmeiro](https://github.com/dpalmeiro) for the PR [#1394](https://github.com/sitespeedio/browsertime/pull/1394).
+
+* Max number of tries to check battery temperature on Android to make sure a test doesn't wait forever to run [#1401](https://github.com/sitespeedio/browsertime/pull/1401).
+
+## 10.2.1 - 2020-09-25
+### Fixed
+* Create the data dir for a URL direct after page complet fired so that collecting the MOZ log work [#1388](https://github.com/sitespeedio/browsertime/pull/1388).
+
+## 10.2.0 - 2020-09-23
+### Added
+* The Docker container now uses Firefox 81.
+
+## 10.1.0 - 2020-09-22
+
+### Added
+* Extra love for running tests in Android: Press the home button at the start of a test, verify that the phone state is "device" before starting to test (no need to run tests on offline devices) and 
+added possibility to verify the internet connection on the device through ping (enable with `--androidVerifyNetwork`) [#1386](https://github.com/sitespeedio/browsertime/pull/1386).
+
+### Fixed
+* Reverted using buffered flag for Chrome Long Tasks (we missed Long Tasks with the new setup) [#1383](https://github.com/sitespeedio/browsertime/pull/1383).
+
+## 10.0.0 - 2020-09-20
+
+The new 10.0 release mostly include technical changes that will make it easier for us in the future to make changes and keep Browsertime the number one performance engine :) However if yoy use Contentful and Perceptual Speed Index there are one breaking change.
+
+## Breaking changes
+* If you collect visual metrics, we do not calculate Contentful Speed Index and Perceptual Speed Index by default any more. Turn them on by using `--visualMetricsPerceptual` and `--visualMetricsContentful`. This will make your testing faster by default [#1358](https://github.com/sitespeedio/browsertime/pull/1358).
+
+## Changed
+* Get CPU long tasks by default using Chrome: A couple of releases ago, Chrome started to support buffered long tasks, that means we don't need to inject any JS to make sure we catch all long tasks. The code is simpler and since (hopefully) the new buffered version doesn't give any performance penelty, we can start getting longtasks by default. [#1341](https://github.com/sitespeedio/browsertime/pull/1341).
+
+* Stop recording the video direct after the PageCompleteCheck fired. This make the original video smaller, saves time converting the video to a vieable format and makes Visual Metrics a little faster [#1357](https://github.com/sitespeedio/browsertime/pull/1357).
+
+* Use fast preset (instead of medium) when converting the video to a format that works in all video players [#1359](https://github.com/sitespeedio/browsertime/pull/1359).
+
+* If you use scripting and use the ...AndWait methods, we now increased the extra wait time before we run the page complete check from 1000ms to 2000ms. With the other changes we done, this was needed for Firefox since it sometimes didn't have time to navigate before the complete check run [#1375](https://github.com/sitespeedio/browsertime/pull/1375).
+
+* Make sure the screen is turned on independently of electric source (before it was only USB) on Android [#1378](https://github.com/sitespeedio/browsertime/pull/1378)
+
+### Tech
+* Making a better structure for each browser, so its more understandable when you can run browser specific code. The old browser delegate (now only browser name) has the newly named functions:
+* beforeBrowserStart
+* afterBrowserStart 
+* beforeStartIteration
+* beforeEachURL
+* afterPageCompleteCheck
+* afterEachURL
+* failing
+* getHARs
+* beforeBrowserStop
+
+This makes it easier to make sure when to collect metrics, stop trace logs and do whatever you need. Implemented in [#1348](https://github.com/sitespeedio/browsertime/pull/1348) and [#1367](https://github.com/sitespeedio/browsertime/pull/1367). 
+
+* New structure for browser, trying to decrease line of code per file and making it easier to navigate the code and prepare for adding support for other browser drivers than Selenium [#1354](https://github.com/sitespeedio/browsertime/pull/1354) [#1355](https://github.com/sitespeedio/browsertime/pull/1355) [#1356](https://github.com/sitespeedio/browsertime/pull/1356).
+
+#1383* Moved page complete scripts to a new folder to make it clean [#1361](https://github.com/sitespeedio/browsertime/pull/1361).
+
+* Restructure the video code [#1364](https://github.com/sitespeedio/browsertime/pull/1364).
+
+## Added
+* By default the video is converted to a format that works in most video players. You can skip that convertion (to save time) by using `--videoParams.convert false`. Visual Metrics will still work, but the video may not work in your player [#1360](https://github.com/sitespeedio/browsertime/pull/1360).
+
+* Make sure the video file is removed from the Android phone when its been copied to desktop [#1377](https://github.com/sitespeedio/browsertime/pull/1377).
+
+* Making it easy to run Firefox on Android [#1379](https://github.com/sitespeedio/browsertime/pull/1379).
+
+* Fix how MOZ_LOG collection works and allow custom MOZ_LOG settings [#1382](https://github.com/sitespeedio/browsertime/pull/1382). Thank you [Gregory Mierzwinski](https://github.com/gmierz).
+
+## Fixed
+* Fixed broken CPU throttling in Chrome [#1381](https://github.com/sitespeedio/browsertime/pull/1381).
+
+## 9.4.2 - 2020-08-29
+### Fixed
+* Make sure First Paint is collected when First Contentful Paint exists in Firefox. Thank you [Sean Feng](https://github.com/sefeng211) for the PR [#1347](https://github.com/sitespeedio/browsertime/pull/1347).
+
+## 9.4.1 - 2020-08-28
+### Fixed
+* Fix broken Android shell command. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR  [#1345](https://github.com/sitespeedio/browsertime/pull/1345).
+* Check if pathname exists before splitting. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1343](https://github.com/sitespeedio/browsertime/pull/1343).
+
+## 9.4.0 - 2020-08-26
+### Added
+* [Added Chromedriver 85](https://github.com/sitespeedio/browsertime/pull/1342).
+* Updated to Chrome 85 and Firefox 80 in the Docker container.
+
+## 9.3.1 - 2020-08-24
+### Fixed
+* Use the correct settings to set the emulation for Chrome [#1340](https://github.com/sitespeedio/browsertime/pull/1340).
+* Bump versions: dayjs, execs, speedline-core, yargs. jimp [#1339](https://github.com/sitespeedio/browsertime/pull/1339).
+* Updated to Throttle 2.0.1 [#1338](https://github.com/sitespeedio/browsertime/pull/1338).
+
+## 9.3.0 - 2020-08-17
+### Added
+* Updated to Geckodriver 0.27.0 [#1330](https://github.com/sitespeedio/browsertime/pull/1330).
+
+### Fixed
+* Updated Chrome-HAR to 0.11.11.
+* Fix to include visual metrics in the HAR, thank you [Mason Malone](https://github.com/MasonM) for the PR [#1335](https://github.com/sitespeedio/browsertime/pull/1335).
+
+##  9.2.1 - 2020-07-31
+### Fixed
+* New chrome-har and updated day-js dependency.
+* Ignore a couple of more pixels at the bottom of the browser screen to ignore Chromiums loading info bar, thank you [Pan Alexey](https://github.com/pan-alexey) for the PR [#1327](https://github.com/sitespeedio/browsertime/pull/1327).
+
+## 9.2.0 - 2020-07-28
+### Added
+* Updated to Firefox 79 in the Docker container.
+
 ## 9.1.0 - 2020-07-17
 ### Added
 * Updated to Chromedriver and Edgedriver 84, Chrome 84 and Firefox 78 in the Docker container [1323](https://github.com/sitespeedio/browsertime/pull/1323).
