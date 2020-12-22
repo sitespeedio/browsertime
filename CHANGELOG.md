@@ -1,12 +1,34 @@
 # Browsertime changelog
 
+## 11.0.0 - 2020-12-18
+### Changed
+* Record and keep the browser full screen (including URL bar) [#1435](https://github.com/sitespeedio/browsertime/pull/1435). All metrics should stay the same with this change but the video and the code will be easier :) When we implemented video a long time ago we wanted to cut out the URL bar but it made it harder to keep the video to look ok on different OS. 
+* Say goodbye to RUM Speed Index [#1439](https://github.com/sitespeedio/browsertime/pull/1439).
+* Domain name on disk now uses underscore instead of dots in the name [#1445](https://github.com/sitespeedio/browsertime/pull/1445).
+* Click the Android power button at the start of each test (instead of the home button [#1447](https://github.com/sitespeedio/browsertime/pull/1447).
+
+### Fixed
+* Added a two minute timeout to get Geckoprofiler data [#1440](https://github.com/sitespeedio/browsertime/pull/1440).
+* Made sure HAR stuff respect the skipHar flag [#1438](https://github.com/sitespeedio/browsertime/pull/1438)
+* Fix process ID fetch for Galaxy S5, thank you [Michael Comella](https://github.com/mcomella) for PR [#1449](https://github.com/sitespeedio/browsertime/pull/1449)
+* If a web page timed out in Chrome, we missed to report that as an error, fixed in [#1453](https://github.com/sitespeedio/browsertime/pull/1453).
+
+### Added
+* Automatically close "System not responding"-popup on Android if it exists [#1444](https://github.com/sitespeedio/browsertime/pull/1444).
+* Add support using alias from CLI and use alias as folder name on disk [#1443](https://github.com/sitespeedio/browsertime/pull/1443).
+* New option to store a more flat structure on disk converting the path part of the URL to one folder `--storeURLsAsFlatPageOnDisk`[#1450](https://github.com/sitespeedio/browsertime/pull/1450)
+* Updated to Selenium 4.0.0-alpha.8 [#1451](https://github.com/sitespeedio/browsertime/pull/1451).
+* Updated to Firefox 84 in the Docker container. 
+* Updated to Edgedriver 87
+* Added Edge in the Docker container [#1458](https://github.com/sitespeedio/browsertime/pull/1458).
+
 ## 10.9.0 - 2020-11-18
 ### Added
 * It's now easier to run Firefox Nightly/Beta on your Android phone. Use `--firefox.nightly` / `--firefox.beta` [#1432](https://github.com/sitespeedio/browsertime/pull/1432).
 * Make it possible to add [flags](https://firefox-source-docs.mozilla.org/testing/geckodriver/Flags.html) to Geckodriver using `--firefox.geckodriverArgs` [#1433](https://github.com/sitespeedio/browsertime/pull/1433).
 
 ### Fixed
-* The browsertime.json always included Firfox appConstantsa and the geckoprofiler JSON missed out on Visual Metrics, fixed in [#1434](https://github.com/sitespeedio/browsertime/pull/1434).
+* The browsertime.json always included Firefox appConstants and the geckoprofiler JSON missed out on Visual Metrics, fixed in [#1434](https://github.com/sitespeedio/browsertime/pull/1434).
 ## 10.8.0 - 2020-11-18
 ### Added 
 * Updated to Firefox 83 in the Docker container.
