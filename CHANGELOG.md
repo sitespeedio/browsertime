@@ -1,5 +1,8 @@
 # Browsertime changelog
 
+## 11.0.1 - 2021-01-05
+### Fixed
+* Setting path to Edge was broken, use `--edge.binaryPath` to point out the path to your Edge binary [#1461](https://github.com/sitespeedio/browsertime/pull/1461).
 ## 11.0.0 - 2020-12-18
 ### Changed
 * Record and keep the browser full screen (including URL bar) [#1435](https://github.com/sitespeedio/browsertime/pull/1435). All metrics should stay the same with this change but the video and the code will be easier :) When we implemented video a long time ago we wanted to cut out the URL bar but it made it harder to keep the video to look ok on different OS. 
