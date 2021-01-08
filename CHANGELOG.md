@@ -1,5 +1,8 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* Make it configurable to press the power button when you start the tests with `--androidPretestPowerPress`[#1462](https://github.com/sitespeedio/browsertime/pull/1462). Thank you [Gregory Mierzwinski](https://github.com/gmierz) for the PR.
 ## 11.0.1 - 2021-01-05
 ### Fixed
 * Setting path to Edge was broken, use `--edge.binaryPath` to point out the path to your Edge binary [#1461](https://github.com/sitespeedio/browsertime/pull/1461).
