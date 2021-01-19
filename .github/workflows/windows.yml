@@ -20,7 +20,7 @@ jobs:
     - name: Install dependencies
       run: |
         choco install ffmpeg
-        choco install imagemagick.app -PackageParameters LegacySupport=true
+        choco install imagemagick.app --version=7.0.10.53 -PackageParameters LegacySupport=true 
         choco install python
         choco install microsoft-edge
         choco install googlechrome
