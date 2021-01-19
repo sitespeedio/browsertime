@@ -1,10 +1,10 @@
 # Browsertime changelog
 
-## UNRELEASED
+## ## 11.0.2 - 2021-01-19
 ### Fixed
 * Make it configurable to press the power button when you start the tests with `--androidPretestPowerPress`[#1462](https://github.com/sitespeedio/browsertime/pull/1462). Thank you [Gregory Mierzwinski](https://github.com/gmierz) for the PR.
 
-* Catch if a URL change between runs. If you use a script, set an alias to a URL and then the next run the URL changed, that caused an error and Browsertime failed [#1467](https://github.com/sitespeedio/browsertime/pull/1467)
+* Catch if a URL change between runs. If you use a script, set an alias to a URL and then the next run the URL changed, that caused an error and Browsertime failed [#1467](https://github.com/sitespeedio/browsertime/pull/1467). The alias for a URL wasn't propagated the right way, fixed in [#1468](https://github.com/sitespeedio/browsertime/pull/1468).
 
 * This patch is for storing the gecko profile paths in the browsertime results. This makes it easier to figure out which gecko profiles go with which tests. [#1466](https://github.com/sitespeedio/browsertime/pull/1466). Thank you [Gregory Mierzwinski](https://github.com/gmierz) for the PR!
 ## 11.0.1 - 2021-01-05
