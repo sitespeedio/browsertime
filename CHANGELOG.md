@@ -1,6 +1,9 @@
 # Browsertime changelog
 
-## ## 11.0.2 - 2021-01-19
+## 11.1.0 - 2021-01-20
+### Added
+* Upgraded to Chromedriver 88 and Chrome 88 in the Docker container.
+## 11.0.2 - 2021-01-19
 ### Fixed
 * Make it configurable to press the power button when you start the tests with `--androidPretestPowerPress`[#1462](https://github.com/sitespeedio/browsertime/pull/1462). Thank you [Gregory Mierzwinski](https://github.com/gmierz) for the PR.
 
