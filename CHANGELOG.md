@@ -1,4 +1,8 @@
 # Browsertime changelog
+
+## 11.1.2 - 2021-01-20
+### Fixed
+* The last release didn't fix the problem when browsertime do not collect metrics. 
 ## 11.1.1 - 2021-01-20
 ### Fixed
 * Added a guard if we do not collect any metrics [#1472](https://github.com/sitespeedio/browsertime/pull/1472).
