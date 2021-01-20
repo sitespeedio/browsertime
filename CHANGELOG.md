@@ -1,5 +1,7 @@
 # Browsertime changelog
-
+## 11.1.1 - 2021-01-20
+### Fixed
+* Added a guard if we do not collect any metrics [#1472](https://github.com/sitespeedio/browsertime/pull/1472).
 ## 11.1.0 - 2021-01-20
 ### Added
 * Upgraded to Chromedriver 88 and Chrome 88 in the Docker container.
