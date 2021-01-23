@@ -21,6 +21,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo safaridriver --enable
+        sudo rm '/usr/local/bin/2to3'
         brew update
         brew install ffmpeg imagemagick
         python -m pip install --upgrade --user pip
