@@ -1,5 +1,15 @@
 # Browsertime changelog
 
+## 11.2.0 - UNRELEASED
+### Added
+* Make it possible to listen to CDP events in scripting [#1473](https://github.com/sitespeedio/browsertime/pull/1473). There's a new command in scripting (for browsers that supports it): ```commands.cdp.on```. Here's an example to pickup all responses for a page : 
+``` const responses = [];
+    await commands.cdp.on('Network.responseReceived', params => {
+     responses.push(params);
+   });
+    await commands.measure.start('https://www.sitespeed.io/search/');
+    // Here you can check the array with all responses received
+```
 ## 11.1.2 - 2021-01-20
 ### Fixed
 * The last release didn't fix the problem when browsertime do not collect metrics. 
