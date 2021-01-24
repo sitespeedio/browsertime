@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## 11.2.0 - UNRELEASED
+## 11.2.0 - 2021-01-24
 ### Added
 * Make it possible to listen to CDP events in scripting [#1473](https://github.com/sitespeedio/browsertime/pull/1473). There's a new command in scripting (for browsers that supports it): ```commands.cdp.on```. Here's an example to pickup all responses for a page : 
 ``` 
