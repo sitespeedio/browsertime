@@ -35,10 +35,14 @@ jobs:
     - name: Check Visual Metrics dependencies
       run: ./browsertime/visualmetrics.py --check
     - name: List all simulators
-      run: xcrun instruments -s
+      run: xcrun xctrace list devices
+    - name: Boot deviuce and start simulator
+      run:  |
+      xcrun simctl boot 7E29817C-93DC-4E19-A2DA-6B46EC824160
+      open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/
     - name: Test Safari without video 
       run: ./bin/browsertime.js -b safari -n 1 https://www.sitespeed.io/
     - name: Test Safari iOS simulator 
-      run: ./bin/browsertime.js -b safari -n 1 --safari.useSimulator --video --visualMetrics https://www.sitespeed.io/
+      run: ./bin/browsertime.js -b safari -n 1 --safari.useSimulator --video --visualMetrics https://www.sitespeed.io/ --safari.deviceUDID 7E29817C-93DC-4E19-A2DA-6B46EC824160
     #- name: Test Safari with video and Visual Metrics
     #  run: ./bin/browsertime.js -b safari -n 1 --viewPort 800x600  --video --visualMetrics https://www.sitespeed.io/ --verbose
