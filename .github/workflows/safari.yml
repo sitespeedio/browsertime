@@ -34,6 +34,8 @@ jobs:
         ffmpeg -version
     - name: Check Visual Metrics dependencies
       run: ./browsertime/visualmetrics.py --check
+    - name: List all simulators
+      run: xcrun instruments -s
     - name: Test Safari without video 
       run: ./bin/browsertime.js -b safari -n 1 https://www.sitespeed.io/
     - name: Test Safari iOS simulator 
