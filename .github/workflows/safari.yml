@@ -8,7 +8,7 @@ on:
     - main
 jobs:
   build:
-    runs-on: macos-11.00
+    runs-on: macos-11.0
     timeout-minutes: 30
     steps:
     - uses: actions/checkout@v2
