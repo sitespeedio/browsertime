@@ -8,8 +8,8 @@ on:
     - main
 jobs:
   build:
-    runs-on: macos-10.15
-    timeout-minutes: 40
+    runs-on: macos-11.00
+    timeout-minutes: 30
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js
