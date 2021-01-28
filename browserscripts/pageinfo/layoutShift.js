@@ -9,6 +9,9 @@
   const list = observer.takeRecords();
   let score = 0;
   for (let entry of list) {
+    if (entry.hadRecentInput) {
+      continue;
+    } 
     score += entry.value;
   }
   return score;
