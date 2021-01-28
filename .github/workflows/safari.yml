@@ -34,7 +34,15 @@ jobs:
         ffmpeg -version
     - name: Check Visual Metrics dependencies
       run: ./browsertime/visualmetrics.py --check
+    - name: List all simulators
+      run: xcrun xctrace list devices
+    - name: Boot iPhone 12
+      run: |
+        IPHONE12=$(xcrun xctrace list devices  2>&1  | grep -m 1 "iPhone 12 Pro" | awk -F'[()]' '{print $4}')
+        xcrun simctl boot $IPHONE12
     - name: Test Safari without video 
       run: ./bin/browsertime.js -b safari -n 1 https://www.sitespeed.io/
-    #- name: Test Safari with video and Visual Metrics
-    #  run: ./bin/browsertime.js -b safari -n 1 --viewPort 800x600  --video --visualMetrics https://www.sitespeed.io/ --verbose
+    - name: Test Safari iOS simulator 
+      run: ./bin/browsertime.js -b safari -n 1 --safari.useSimulator --video --visualMetrics https://www.sitespeed.io/ 
+    - name: Test Safari with video and Visual Metrics
+      run: ./bin/browsertime.js -b safari -n 1 --viewPort 800x600  --video --visualMetrics https://www.example.org
