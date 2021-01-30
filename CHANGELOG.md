@@ -1,10 +1,10 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 11.3.0 - 2021-01-30
 ### Added
 * Add better support for using the iOS simulator [#1475](https://github.com/sitespeedio/browsertime/pull/1475) and [#1480](https://github.com/sitespeedio/browsertime/pull/1480).
 * Record a video when using the iOS simulator [#1476](https://github.com/sitespeedio/browsertime/pull/1476) and [#1481](https://github.com/sitespeedio/browsertime/pull/1481).
-* Use throttle as defzult engine when you use the iOS simulator [#1479](https://github.com/sitespeedio/browsertime/pull/1479).
+* Use throttle as default engine when you use the iOS simulator [#1479](https://github.com/sitespeedio/browsertime/pull/1479).
 
 ## 11.2.0 - 2021-01-24
 ### Added
