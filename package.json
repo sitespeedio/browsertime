@@ -8,11 +8,11 @@
     "btoa": "1.2.1",
     "@sitespeed.io/chromedriver": "88.0.4324-27",
     "chrome-har": "0.11.12",
-    "chrome-remote-interface": "0.28.2",
-    "dayjs": "1.9.7",
+    "chrome-remote-interface": "0.29.0",
+    "dayjs": "1.10.4",
     "execa": "5.0.0",
     "fast-stats": "0.0.6",
-    "find-up": "4.1.0",
+    "find-up": "5.0.0",
     "get-port": "5.1.1",
     "hasbin": "1.2.3",
     "intel": "1.2.0",
@@ -28,10 +28,10 @@
     "@sitespeed.io/tracium": "0.3.3",
     "speedline-core": "1.4.3",
     "@cypress/xvfb": "1.2.4",
-    "yargs": "15.4.1"
+    "yargs": "16.2.0"
   },
   "optionalDependencies": {
-    "jimp": "0.16.0"
+    "jimp": "0.16.1"
   },
   "devDependencies": {
     "bluebird": "3.5.5",
