@@ -1,5 +1,8 @@
 # Browsertime changelog
 
+## 11.3.1 - 2021-02-02
+### Fixed
+* Fix so we start/close the iOS simulator before the first test and close it after the last one [#1484](https://github.com/sitespeedio/browsertime/pull/1484).
 ## 11.3.0 - 2021-01-30
 ### Added
 * Add better support for using the iOS simulator [#1475](https://github.com/sitespeedio/browsertime/pull/1475) and [#1480](https://github.com/sitespeedio/browsertime/pull/1480).
