@@ -1,8 +1,9 @@
 # Browsertime changelog
 
-## 11.5.0 - UNRELEASED
+## 11.5.0 - 2021-02-16
 ### Added
 * Make it easy to run [gnirehtet](https://github.com/Genymobile/gnirehtet) when you run your tests on your Android phone to reverese tethering the traffics. Start gnirehtet with ```--gnirehtet``` (gnirehtet needs to be in your PATH). Fixed in [#1489](https://github.com/sitespeedio/browsertime/pull/1489) and [#1490](https://github.com/sitespeedio/browsertime/pull/1490).
+* Updated to Selenium 4.0.0-beta.1 [#1491](https://github.com/sitespeedio/browsertime/pull/1491).
 ### Fixed
 * Follow the same pattern as sitespeed.io when replacing characters in file names [#1488](https://github.com/sitespeedio/browsertime/pull/1488).
 
