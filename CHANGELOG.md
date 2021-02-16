@@ -1,5 +1,11 @@
 # Browsertime changelog
 
+## 11.5.0 - UNRELEASED
+### Added
+* Make it easy to run [gnirehtet](https://github.com/Genymobile/gnirehtet) when you run your tests on your Android phone to reverese tethering the traffics. Start gnirehtet with ```--gnirehtet``` (gnirehtet needs to be in your PATH). Fixed in [#1489](https://github.com/sitespeedio/browsertime/pull/1489) and [#1490](https://github.com/sitespeedio/browsertime/pull/1490).
+### Fixed
+* Follow the same pattern as sitespeed.io when replacing characters in file names [#1488](https://github.com/sitespeedio/browsertime/pull/1488).
+
 ## 11.4.0 - 2021-02-02
 ### Added
 * Added failure state in the result JSON. You get a new command: `markAsFailure(message)` where you can mark a test as a failure. If one run fails, all tests are marked as failed. The JSON from Browsertime (that is used in sitespeed.io) gets a failure status  and an array of failure messages (potentially you can mark a run as failed multiple times). If we get an uncaught error from running the browser we also mark the test as failed [#1482](https://github.com/sitespeedio/browsertime/pull/1482).s
