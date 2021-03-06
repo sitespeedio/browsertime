@@ -25,7 +25,7 @@ WORKDIR /usr/src/app
 VOLUME /browsertime
 
 COPY package.* /usr/src/app/
-RUN EDGEDRIVER_VERSION=89.0.723.0 npm install --production
+RUN npm install --production
 COPY . /usr/src/app
 
 ## This is to avoid click the OK button
