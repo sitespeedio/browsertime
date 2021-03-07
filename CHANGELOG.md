@@ -5,6 +5,7 @@
 * Make it possible to set number of threads used for FFMPEG using `--videoParams.threads`. Thank you [Leo Blöcher](https://github.com/TheJokr) for PR [#1493](https://github.com/sitespeedio/browsertime/pull/1493).
 * Updated to Chrome 89 and Firefox 86 in the Docker container and updated to Chromedriver 89 [#1499](https://github.com/sitespeedio/browsertime/pull/1499).
 * Get internal Firefox performance statistics by `--firefox.perfStats`. Thank you [dpalmeiro](https://github.com/dpalmeiro) for PR [#1495](https://github.com/sitespeedio/browsertime/pull/1495).
+* Updated to Edgedriver 89 [#1500](https://github.com/sitespeedio/browsertime/pull/1500).
 
 ### Fixed
 * Better error log if we miss out on stats when adding fully loaded [#1496](https://github.com/sitespeedio/browsertime/pull/1496).
