@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## 11.6.0 - UNRELEASED
+## 11.6.0 - 2021-03-08
 ### Added
 * Make it possible to set number of threads used for FFMPEG using `--videoParams.threads`. Thank you [Leo Blöcher](https://github.com/TheJokr) for PR [#1493](https://github.com/sitespeedio/browsertime/pull/1493).
 * Updated to Chrome 89 and Firefox 86 in the Docker container and updated to Chromedriver 89 [#1499](https://github.com/sitespeedio/browsertime/pull/1499).
