@@ -67,3 +67,5 @@ jobs:
       run: ./bin/browsertime.js -b chrome https://www.sitespeed.io/ --urlAlias my_url --xvfb
     - name: Test using alias for multiple URLs
       run: ./bin/browsertime.js -b chrome https://www.sitespeed.io/ https://www.sitespeed.io/documentation/ --urlAlias startPage --urlAlias documentation --xvfb  
+    - name: Test collecting Firefox perf statistics
+      run: ./bin/browsertime.js -b firefox --firefox.perfStats --xvfb https://www.sitespeed.io/

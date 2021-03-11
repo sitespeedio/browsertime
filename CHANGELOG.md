@@ -1,5 +1,35 @@
 # Browsertime changelog
 
+## 11.6.1 - 2021-03-11
+### Fixed
+* Added Python2 to the Docker container for (Kubernetes)users that run TSProxy and made sure python2 is used for that proxy when you run in Docker [#1503](https://github.com/sitespeedio/browsertime/pull/1503).
+
+## 11.6.0 - 2021-03-08
+### Added
+* Make it possible to set number of threads used for FFMPEG using `--videoParams.threads`. Thank you [Leo Blöcher](https://github.com/TheJokr) for PR [#1493](https://github.com/sitespeedio/browsertime/pull/1493).
+* Updated to Chrome 89 and Firefox 86 in the Docker container and updated to Chromedriver 89 [#1499](https://github.com/sitespeedio/browsertime/pull/1499).
+* Get internal Firefox performance statistics by `--firefox.perfStats`. Thank you [dpalmeiro](https://github.com/dpalmeiro) for PR [#1495](https://github.com/sitespeedio/browsertime/pull/1495).
+* Updated to Edgedriver 89 [#1500](https://github.com/sitespeedio/browsertime/pull/1500).
+
+### Fixed
+* Better error log if we miss out on stats when adding fully loaded [#1496](https://github.com/sitespeedio/browsertime/pull/1496).
+
+## 11.5.0 - 2021-02-16
+### Added
+* Make it easy to run [gnirehtet](https://github.com/Genymobile/gnirehtet) when you run your tests on your Android phone to reverese tethering the traffics. Start gnirehtet with ```--gnirehtet``` (gnirehtet needs to be in your PATH). Fixed in [#1489](https://github.com/sitespeedio/browsertime/pull/1489) and [#1490](https://github.com/sitespeedio/browsertime/pull/1490).
+* Updated to Selenium 4.0.0-beta.1 [#1491](https://github.com/sitespeedio/browsertime/pull/1491).
+### Fixed
+* Follow the same pattern as sitespeed.io when replacing characters in file names [#1488](https://github.com/sitespeedio/browsertime/pull/1488).
+
+## 11.4.0 - 2021-02-02
+### Added
+* Added failure state in the result JSON. You get a new command: `markAsFailure(message)` where you can mark a test as a failure. If one run fails, all tests are marked as failed. The JSON from Browsertime (that is used in sitespeed.io) gets a failure status  and an array of failure messages (potentially you can mark a run as failed multiple times). If we get an uncaught error from running the browser we also mark the test as failed [#1482](https://github.com/sitespeedio/browsertime/pull/1482).s
+
+### Fixed
+* Updated dependencies to  latest versions:  jimp, yargs, find-up, dayjs and chrome-remote-interface [#1485](https://github.com/sitespeedio/browsertime/pull/1485).
+## 11.3.1 - 2021-02-02
+### Fixed
+* Fix so we start/close the iOS simulator before the first test and close it after the last one [#1484](https://github.com/sitespeedio/browsertime/pull/1484).
 ## 11.3.0 - 2021-01-30
 ### Added
 * Add better support for using the iOS simulator [#1475](https://github.com/sitespeedio/browsertime/pull/1475) and [#1480](https://github.com/sitespeedio/browsertime/pull/1480).
