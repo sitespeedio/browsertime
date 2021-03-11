@@ -1,5 +1,9 @@
 # Browsertime changelog
 
+## 11.6.1 - 2021-03-11
+### Fixed
+* Added Python2 to the Docker container for (Kubernetes)users that run TSProxy and made sure python2 is used for that proxy when you run in Docker [#1503](https://github.com/sitespeedio/browsertime/pull/1503).
+
 ## 11.6.0 - 2021-03-08
 ### Added
 * Make it possible to set number of threads used for FFMPEG using `--videoParams.threads`. Thank you [Leo Blöcher](https://github.com/TheJokr) for PR [#1493](https://github.com/sitespeedio/browsertime/pull/1493).
