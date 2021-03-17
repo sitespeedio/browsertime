@@ -1,6 +1,16 @@
 # Browsertime changelog
 
-## 11.6.0 - UNRELEASED
+## 11.6.2 - 2021-03-17
+
+### Fixed
+* Fixed getting the netlog from Chrome on Android [#1508](https://github.com/sitespeedio/browsertime/pull/1508).
+* Combine the gecko perfstats from each process, thank you [Andrew Creskey](https://github.com/acreskeyMoz) for the PR [#1504](https://github.com/sitespeedio/browsertime/pull/1504).
+* Upgraded to Selenium 4.0.0-beta.2 (from beta.1) [#1509](https://github.com/sitespeedio/browsertime/pull/1509).
+## 11.6.1 - 2021-03-11
+### Fixed
+* Added Python2 to the Docker container for (Kubernetes)users that run TSProxy and made sure python2 is used for that proxy when you run in Docker [#1503](https://github.com/sitespeedio/browsertime/pull/1503).
+
+## 11.6.0 - 2021-03-08
 ### Added
 * Make it possible to set number of threads used for FFMPEG using `--videoParams.threads`. Thank you [Leo Blöcher](https://github.com/TheJokr) for PR [#1493](https://github.com/sitespeedio/browsertime/pull/1493).
 * Updated to Chrome 89 and Firefox 86 in the Docker container and updated to Chromedriver 89 [#1499](https://github.com/sitespeedio/browsertime/pull/1499).
