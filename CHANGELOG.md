@@ -1,5 +1,19 @@
 # Browsertime changelog
 
+## 12.0.0 - UNRELEASED
+
+### Changed
+* Updated Chrome start parameters on desktop [#1507](https://github.com/sitespeedio/browsertime/pull/1507)
+* Updated Chrome start parameters on Android [#1506](https://github.com/sitespeedio/browsertime/pull/1506)
+
+### Added
+* New stop watch command [#1512](https://github.com/sitespeedio/browsertime/pull/1512)
+
+### Fixed
+* Upgrade to adbkit 3.2.0 [#1510](https://github.com/sitespeedio/browsertime/pull/1510)
+* Upgraded to Geckodriver 0.29.0 [#1501](https://github.com/sitespeedio/browsertime/pull/1501)
+* Auto add sdcard if on Android and using Geckodriver [#1513](https://github.com/sitespeedio/browsertime/pull/1513)
+* Updated wpr_cert.pem to a new version for WebPageReplay [#1316](https://github.com/sitespeedio/browsertime/pull/1316)
 
 ## 11.6.3 - 2021-03-17
 
