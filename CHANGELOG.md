@@ -1,10 +1,17 @@
 # Browsertime changelog
 
+
+## 11.6.3 - 2021-03-17
+
+### Fixed
+* Last release broke getting Chromes netlog on desktop, fixed in [#1511](https://github.com/sitespeedio/browsertime/pull/1511). Also added the ability to set the log level of the netlog.
 ## 11.6.2 - 2021-03-17
 
 ### Fixed
 * Fixed getting the netlog from Chrome on Android [#1508](https://github.com/sitespeedio/browsertime/pull/1508).
 * Combine the gecko perfstats from each process, thank you [Andrew Creskey](https://github.com/acreskeyMoz) for the PR [#1504](https://github.com/sitespeedio/browsertime/pull/1504).
+* Upgraded to Selenium 4.0.0-beta.2 (from beta.1) [#1509](https://github.com/sitespeedio/browsertime/pull/1509).
+
 ## 11.6.1 - 2021-03-11
 ### Fixed
 * Added Python2 to the Docker container for (Kubernetes)users that run TSProxy and made sure python2 is used for that proxy when you run in Docker [#1503](https://github.com/sitespeedio/browsertime/pull/1503).
