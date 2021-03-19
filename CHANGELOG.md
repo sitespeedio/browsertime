@@ -15,6 +15,7 @@
      timer.stopAndAdd();
   ```
 * Instead of waiting 60 s when you reboot the Adnroid device, we now wait for the device to become availible through ADB until we continue [#1514](https://github.com/sitespeedio/browsertime/pull/1514).
+* Pre test/warm a URL with `--preTest`. Do that to make sure your server has cached everything that is needed before your test [#1515](https://github.com/sitespeedio/browsertime/pull/1515).
 
 ### Fixed
 * Upgrade to adbkit 3.2.0 [#1510](https://github.com/sitespeedio/browsertime/pull/1510).
