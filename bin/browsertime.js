@@ -31,7 +31,8 @@ async function preWarmServer(urls, options) {
   let engine = new Engine({
     browser: options.browser,
     iterations: 1,
-    xvfb: options.xvfb
+    xvfb: options.xvfb,
+    android: options.android
   });
   await engine.start();
   log.info('Start pre-testing/warming');
