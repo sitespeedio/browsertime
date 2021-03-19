@@ -27,18 +27,18 @@ async function parseUserScripts(scripts) {
   return results;
 }
 
-async function preTest(urls, options) {
+async function preWarmServer(urls, options) {
   let engine = new Engine({
     browser: options.browser,
     iterations: 1,
     xvfb: options.xvfb
   });
   await engine.start();
-  log.info('Start pre-testing');
+  log.info('Start pre-testing/warming');
   await engine.runMultiple(urls, {});
   await engine.stop();
   log.info('Pre-testing done, closed the browser.');
-  return delay(options.preTesteWaitTime || 5000);
+  return delay(options.preWarmServerWaitTime || 5000);
 }
 
 async function run(urls, options) {
@@ -61,8 +61,8 @@ async function run(urls, options) {
     }
 
     try {
-      if (options.preTest) {
-        await preTest(urls, options);
+      if (options.preWarmServer) {
+        await preWarmServer(urls, options);
       }
       await engine.start();
       const result = await engine.runMultiple(urls, scriptsByCategory);

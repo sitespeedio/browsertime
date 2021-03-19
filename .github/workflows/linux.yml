@@ -70,4 +70,4 @@ jobs:
     - name: Test collecting Firefox perf statistics
       run: ./bin/browsertime.js -b firefox --firefox.perfStats --xvfb https://www.sitespeed.io/
     - name: Run test with pre-test functionality
-      run: ./bin/browsertime.js -b chrome --preTest --xvfb https://www.sitespeed.io/
+      run: ./bin/browsertime.js -b chrome --preVarmServer --xvfb https://www.sitespeed.io/
