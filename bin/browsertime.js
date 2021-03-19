@@ -28,7 +28,11 @@ async function parseUserScripts(scripts) {
 }
 
 async function preTest(urls, options) {
-  let engine = new Engine({ browser: options.browser, iterations: 1, xvfb: options.xvfb });
+  let engine = new Engine({
+    browser: options.browser,
+    iterations: 1,
+    xvfb: options.xvfb
+  });
   await engine.start();
   log.info('Start pre-testing');
   await engine.runMultiple(urls, {});
