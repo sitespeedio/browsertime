@@ -12,6 +12,7 @@ const path = require('path');
 const log = require('intel').getLogger('browsertime');
 const engineUtils = require('../lib/support/engineUtils');
 const AsyncFunction = Object.getPrototypeOf(async function() {}).constructor;
+const delay = ms => new Promise(res => setTimeout(res, ms));
 
 async function parseUserScripts(scripts) {
   if (!Array.isArray(scripts)) scripts = [scripts];
@@ -24,6 +25,16 @@ async function parseUserScripts(scripts) {
     merge(results, code);
   }
   return results;
+}
+
+async function preTest(urls, options) {
+  let engine = new Engine({browser: options.browser, iterations: 1});
+  await engine.start();
+  log.info('Start pre-testing');
+  await engine.runMultiple(urls, {});
+  await engine.stop();
+  log.info('Pre-testing done, closed the browser.');
+  return delay(options.preTesteWaitTime || 5000);
 }
 
 async function run(urls, options) {
@@ -46,6 +57,9 @@ async function run(urls, options) {
     }
 
     try {
+      if (options.preTest) {
+        await preTest(urls, options);
+      }
       await engine.start();
       const result = await engine.runMultiple(urls, scriptsByCategory);
       let saveOperations = [];
