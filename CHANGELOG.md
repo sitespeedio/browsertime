@@ -1,5 +1,7 @@
 # Browsertime changelog
 
+## 12.0.0-alpha.2 - UNRELEASED
+* Reverted the upgrade of ADB kit 3.2.0, see [#94](https://github.com/DeviceFarmer/adbkit/issues/94).
 ## 12.0.0-alpha.1 - 2021-03-19
 
 ### Changed
