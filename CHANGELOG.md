@@ -5,8 +5,8 @@
 ## 12.0.0-alpha.1 - 2021-03-19
 
 ### Changed
-* Updated Chrome start flags on desktop following [best practices](https://github.com/GoogleChrome/chrome-launcher/blob/master/docs/chrome-flags-for-tools.md )  and renmoving old flags [#1507](https://github.com/sitespeedio/browsertime/pull/1507).
-* Updated Chrome start flags on Android following [best practices](https://github.com/GoogleChrome/chrome-launcher/blob/master/docs/chrome-flags-for-tools.md )  and renmoving old flags [#1506](https://github.com/sitespeedio/browsertime/pull/1506).
+* Updated Chrome start flags on desktop following [best practices](https://github.com/GoogleChrome/chrome-launcher/blob/master/docs/chrome-flags-for-tools.md )  and removing old flags [#1507](https://github.com/sitespeedio/browsertime/pull/1507).
+* Updated Chrome start flags on Android following [best practices](https://github.com/GoogleChrome/chrome-launcher/blob/master/docs/chrome-flags-for-tools.md )  and removing old flags [#1506](https://github.com/sitespeedio/browsertime/pull/1506).
 
 ### Added
 * New stop watch command [#1512](https://github.com/sitespeedio/browsertime/pull/1512). Measure time by: 
