@@ -1,7 +1,7 @@
 # Browsertime changelog
 
 ## 12.0.0-alpha.2 - UNRELEASED
-* Reverted the upgrade of ADB kit 3.2.0, see [#94](https://github.com/DeviceFarmer/adbkit/issues/94).
+* Reverted the upgrade of ADB kit 3.2.0, see [#94](https://github.com/DeviceFarmer/adbkit/issues/94). And reverted [#1514](https://github.com/sitespeedio/browsertime/pull/1514).
 ## 12.0.0-alpha.1 - 2021-03-19
 
 ### Changed
