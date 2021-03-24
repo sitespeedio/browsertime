@@ -1,7 +1,9 @@
 # Browsertime changelog
 
-## 12.0.0-alpha.2 - UNRELEASED
+## 12.0.0-alpha.2 - 2021-03-24
 * Reverted the upgrade of ADB kit 3.2.0, see [#94](https://github.com/DeviceFarmer/adbkit/issues/94). And reverted [#1514](https://github.com/sitespeedio/browsertime/pull/1514).
+* Also reverted the automatically add of sdcard in [#1513](https://github.com/sitespeedio/browsertime/pull/1513) and will wait on next Geckodriver before we do the stable release.
+
 ## 12.0.0-alpha.1 - 2021-03-19
 
 ### Changed
