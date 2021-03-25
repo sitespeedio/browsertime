@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+## 12.0.0-alpha.3 - UNRELEASED
+* Renamed layoutShift to the more correct cumulativeLayoutShift. This will is a breaking change if you use that metric.
+* Made it easier for people to get Google Web Vitals. We copy that data under the googleWebVitals namespace [#1521](https://github.com/sitespeedio/browsertime/pull/1521).
+* Added TTFB as a single metric to also make that easier [#1522](https://github.com/sitespeedio/browsertime/pull/1522).
+
 ## 12.0.0-alpha.2 - 2021-03-24
 * Reverted the upgrade of ADB kit 3.2.0, see [#94](https://github.com/DeviceFarmer/adbkit/issues/94). And reverted [#1514](https://github.com/sitespeedio/browsertime/pull/1514).
 * Also reverted the automatically add of sdcard in [#1513](https://github.com/sitespeedio/browsertime/pull/1513) and will wait on next Geckodriver before we do the stable release.
