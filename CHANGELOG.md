@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## 12.0.0-alpha.3 - UNRELEASED
+## 12.0.0-alpha.3 - 2021-03-26
 * Renamed layoutShift to the more correct cumulativeLayoutShift. This will is a breaking change if you use that metric.
 * Made it easier for people to get Google Web Vitals. We copy that data under the googleWebVitals namespace [#1521](https://github.com/sitespeedio/browsertime/pull/1521).
 * Added TTFB as a single metric to also make that easier [#1522](https://github.com/sitespeedio/browsertime/pull/1522).
