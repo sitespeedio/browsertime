@@ -1,5 +1,10 @@
 # Browsertime changelog
 
+
+## 12.0.0-alpha.5 - 2021-04-01
+
+### Fixed
+* Fixed broken delat for first visual change and sneaking in last visual change [#1530](https://github.com/sitespeedio/browsertime/pull/1530).
 ## 12.0.0-alpha.4 - 2021-04-01
 ### Fixed
 * Make sure gnirehtet is closed on the right device using device id [#1527](https://github.com/sitespeedio/browsertime/pull/1527)
