@@ -1,8 +1,8 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 12.0.0-alpha.4 - 2021-04-01
 ### Fixed
-* Make sure gnirehtet  is closed on the right device using device id [#1527](https://github.com/sitespeedio/browsertime/pull/1527)
+* Make sure gnirehtet is closed on the right device using device id [#1527](https://github.com/sitespeedio/browsertime/pull/1527)
 ### Added
 * New metrics: Delta between TTFB and First Contentful Paint, Largest Contentful paint and First visual change [#1528](https://github.com/sitespeedio/browsertime/pull/1528).
 
