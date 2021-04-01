@@ -1,5 +1,15 @@
 # Browsertime changelog
 
+## UNRELEASED
+### Fixed
+* Make sure gnirehtet  is closed on the right device using device id [#1527](https://github.com/sitespeedio/browsertime/pull/1527)
+### Added
+* New metrics: Delta between TTFB and First Contentful Paint, Largest Contentful paint and First visual change [#1528](https://github.com/sitespeedio/browsertime/pull/1528).
+
+### Changed
+* Display standard deviation instead of the home made median deviation in the cli output [#1529](https://github.com/sitespeedio/browsertime/pull/1529).
+
+
 ## 12.0.0-alpha.3 - 2021-03-26
 * Renamed layoutShift to the more correct cumulativeLayoutShift. This will is a breaking change if you use that metric.
 * Made it easier for people to get Google Web Vitals. We copy that data under the googleWebVitals namespace [#1521](https://github.com/sitespeedio/browsertime/pull/1521).
