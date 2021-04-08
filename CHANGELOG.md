@@ -1,40 +1,22 @@
 # Browsertime changelog
 
-## 12.0.0-alpha.6 - 2021-04-05
-
-### Fixed
-* Fix --chrome.blockDomainsExcept when you are using WebPageReplay [#1532](https://github.com/sitespeedio/browsertime/pull/1532). Thank you [Inderpartap Singh Cheema](https://github.com/inderpartap) for the original fix!
-
-## 12.0.0-alpha.5 - 2021-04-01
-
-### Fixed
-* Fixed broken delay for first visual change and sneaking in last visual change [#1530](https://github.com/sitespeedio/browsertime/pull/1530).
-## 12.0.0-alpha.4 - 2021-04-01
-### Fixed
-* Make sure gnirehtet is closed on the right device using device id [#1527](https://github.com/sitespeedio/browsertime/pull/1527)
-### Added
-* New metrics: Delta between TTFB and First Contentful Paint, Largest Contentful paint and First visual change [#1528](https://github.com/sitespeedio/browsertime/pull/1528).
+## 12.0.0-beta.1 - 2021-04-08
 
 ### Changed
 * Display standard deviation instead of the home made median deviation in the cli output [#1529](https://github.com/sitespeedio/browsertime/pull/1529).
-
-
-## 12.0.0-alpha.3 - 2021-03-26
 * Renamed layoutShift to the more correct cumulativeLayoutShift. This will is a breaking change if you use that metric.
-* Made it easier for people to get Google Web Vitals. We copy that data under the googleWebVitals namespace [#1521](https://github.com/sitespeedio/browsertime/pull/1521).
-* Added TTFB as a single metric to also make that easier [#1522](https://github.com/sitespeedio/browsertime/pull/1522).
-
-## 12.0.0-alpha.2 - 2021-03-24
-* Reverted the upgrade of ADB kit 3.2.0, see [#94](https://github.com/DeviceFarmer/adbkit/issues/94). And reverted [#1514](https://github.com/sitespeedio/browsertime/pull/1514).
-* Also reverted the automatically add of sdcard in [#1513](https://github.com/sitespeedio/browsertime/pull/1513) and will wait on next Geckodriver before we do the stable release.
-
-## 12.0.0-alpha.1 - 2021-03-19
-
-### Changed
 * Updated Chrome start flags on desktop following [best practices](https://github.com/GoogleChrome/chrome-launcher/blob/master/docs/chrome-flags-for-tools.md )  and removing old flags [#1507](https://github.com/sitespeedio/browsertime/pull/1507).
 * Updated Chrome start flags on Android following [best practices](https://github.com/GoogleChrome/chrome-launcher/blob/master/docs/chrome-flags-for-tools.md )  and removing old flags [#1506](https://github.com/sitespeedio/browsertime/pull/1506).
-
+### Fixed
+* Fix --chrome.blockDomainsExcept when you are using WebPageReplay [#1532](https://github.com/sitespeedio/browsertime/pull/1532). Thank you [Inderpartap Singh Cheema](https://github.com/inderpartap) for the original fix!
+* Make sure gnirehtet is closed on the right device using device id [#1527](https://github.com/sitespeedio/browsertime/pull/1527)
+* Upgraded to Geckodriver 0.29.0 [#1501](https://github.com/sitespeedio/browsertime/pull/1501).
+* Updated wpr_cert.pem to a new version for WebPageReplay [#1316](https://github.com/sitespeedio/browsertime/pull/1316).
+* Include Google Web Vitals in the HAR file [#1535](https://github.com/sitespeedio/browsertime/pull/1535).
 ### Added
+* New metrics: Delta between TTFB and First Contentful Paint, Largest Contentful paint and First visual change [#1528](https://github.com/sitespeedio/browsertime/pull/1528).
+* Made it easier for people to get Google Web Vitals. We copy that data under the googleWebVitals namespace [#1521](https://github.com/sitespeedio/browsertime/pull/1521).
+* Added TTFB as a single metric to also make that easier [#1522](https://github.com/sitespeedio/browsertime/pull/1522).
 * New stop watch command [#1512](https://github.com/sitespeedio/browsertime/pull/1512). Measure time by: 
   ```const timer = commands.stopWatch.get('my_timer'); 
      timer.start(); 
@@ -42,14 +24,8 @@
      // Stop the timer and add the result to the last tested URL
      timer.stopAndAdd();
   ```
-* Instead of waiting 60 s when you reboot the Adnroid device, we now wait for the device to become availible through ADB until we continue [#1514](https://github.com/sitespeedio/browsertime/pull/1514).
 * Pre test/warm a URL with `--preWarmServer`. Do that to make sure your server has cached everything that is needed before your test [#1515](https://github.com/sitespeedio/browsertime/pull/1515) and [#1516](https://github.com/sitespeedio/browsertime/pull/1516).
-
-### Fixed
-* Upgrade to adbkit 3.2.0 [#1510](https://github.com/sitespeedio/browsertime/pull/1510).
-* Upgraded to Geckodriver 0.29.0 [#1501](https://github.com/sitespeedio/browsertime/pull/1501).
-* When testing Firefox on Android we will automatically set `android-storage` to `sdcard` so it automatically works. If you send your own parameters to Geckodriver the default settings is removed so you need to set `android-storage`  yourself [#1513](https://github.com/sitespeedio/browsertime/pull/1513).
-* Updated wpr_cert.pem to a new version for WebPageReplay [#1316](https://github.com/sitespeedio/browsertime/pull/1316).
+* Collect what HTML element change in cumulative layout shifts [#1534](https://github.com/sitespeedio/browsertime/pull/1534)
 
 ## 11.6.3 - 2021-03-17
 
