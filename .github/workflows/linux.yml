@@ -15,8 +15,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    #- run: sudo apt-get update
-    #- run: sudo ACCEPT_EULA=Y apt-get upgrade google-chrome-stable -y
+    - run: sudo apt-get update
+    - run: sudo ACCEPT_EULA=Y apt-get upgrade google-chrome-stable -y
     - name: Install Browsertime
       run: npm ci
     - name: Install dependencies
@@ -69,3 +69,5 @@ jobs:
       run: ./bin/browsertime.js -b chrome https://www.sitespeed.io/ https://www.sitespeed.io/documentation/ --urlAlias startPage --urlAlias documentation --xvfb  
     - name: Test collecting Firefox perf statistics
       run: ./bin/browsertime.js -b firefox --firefox.perfStats --xvfb https://www.sitespeed.io/
+    - name: Run test with pre-test functionality
+      run: ./bin/browsertime.js -b chrome --preWarmServer --xvfb https://www.sitespeed.io/

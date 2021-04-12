@@ -1,12 +1,12 @@
 {
   "description": "Browsertime",
-  "version": "11.5.0",
+  "version": "12.0.0-beta.1",
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "@sitespeed.io/throttle": "2.0.2",
     "@devicefarmer/adbkit": "2.11.3",
     "btoa": "1.2.1",
-    "@sitespeed.io/chromedriver": "88.0.4324-27",
+    "@sitespeed.io/chromedriver": "89.0.4389-23",
     "chrome-har": "0.11.12",
     "chrome-remote-interface": "0.29.0",
     "dayjs": "1.10.4",
@@ -22,9 +22,9 @@
     "lodash.merge": "4.6.2",
     "lodash.pick": "4.4.0",
     "lodash.set": "4.3.2",
-    "selenium-webdriver": "4.0.0-beta.1",
-    "@sitespeed.io/edgedriver": "87.0.664-60",
-    "@sitespeed.io/geckodriver": "0.27.0",
+    "selenium-webdriver": "4.0.0-beta.2",
+    "@sitespeed.io/edgedriver": "89.0.774-8",
+    "@sitespeed.io/geckodriver": "0.29.1",
     "@sitespeed.io/tracium": "0.3.3",
     "speedline-core": "1.4.3",
     "@cypress/xvfb": "1.2.4",
@@ -46,6 +46,9 @@
   },
   "engines": {
     "node": ">=10.13.0"
+  },
+  "publishConfig": {
+    "tag": "canary"
   },
   "files": [
     "CHANGELOG.md",
