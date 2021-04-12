@@ -1,6 +1,6 @@
 # Browsertime changelog
 
-## 12.0.0-beta.1 - 2021-04-08
+## 12.0.0-beta.2 - UNRELEASED
 
 ### Changed
 * Display standard deviation instead of the home made median deviation in the cli output [#1529](https://github.com/sitespeedio/browsertime/pull/1529).
@@ -10,9 +10,10 @@
 ### Fixed
 * Fix --chrome.blockDomainsExcept when you are using WebPageReplay [#1532](https://github.com/sitespeedio/browsertime/pull/1532). Thank you [Inderpartap Singh Cheema](https://github.com/inderpartap) for the original fix!
 * Make sure gnirehtet is closed on the right device using device id [#1527](https://github.com/sitespeedio/browsertime/pull/1527)
-* Upgraded to Geckodriver 0.29.0 [#1501](https://github.com/sitespeedio/browsertime/pull/1501).
+* Upgraded to Geckodriver 0.29.1.
 * Updated wpr_cert.pem to a new version for WebPageReplay [#1316](https://github.com/sitespeedio/browsertime/pull/1316).
 * Include Google Web Vitals in the HAR file [#1535](https://github.com/sitespeedio/browsertime/pull/1535).
+* Added 3 seconds wait time for geckoprofiler to start see [#1538](https://github.com/sitespeedio/browsertime/issues/1538) and [#1539](https://github.com/sitespeedio/browsertime/pull/1539)
 ### Added
 * New metrics: Delta between TTFB and First Contentful Paint, Largest Contentful paint and First visual change [#1528](https://github.com/sitespeedio/browsertime/pull/1528).
 * Made it easier for people to get Google Web Vitals. We copy that data under the googleWebVitals namespace [#1521](https://github.com/sitespeedio/browsertime/pull/1521).
