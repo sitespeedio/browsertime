@@ -30,6 +30,7 @@
 * Pre test/warm a URL with `--preWarmServer`. Do that to make sure your server has cached everything that is needed before your test [#1515](https://github.com/sitespeedio/browsertime/pull/1515) and [#1516](https://github.com/sitespeedio/browsertime/pull/1516).
 * Collect what HTML element change in cumulative layout shifts [#1534](https://github.com/sitespeedio/browsertime/pull/1534)
 * Added support for recording video on Safari iOS [#1541](https://github.com/sitespeedio/browsertime/pull/1541).
+* New commands: scrolling by Pixels, Lines or Pages forward, back or refresh navigations, create new tabs or windows and switch to them and new mouse events such as context click, single click, double click, click and hold, release, and movement. Thank you [dpalmeiro](https://github.com/dpalmeiro) for PR [#1533](https://github.com/sitespeedio/browsertime/pull/1533).
 ## 11.6.3 - 2021-03-17
 
 ### Fixed
