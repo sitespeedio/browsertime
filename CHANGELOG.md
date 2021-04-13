@@ -1,8 +1,61 @@
 # Browsertime changelog
 
-## UNRELEASED
+## 12.0.0-beta.2 - UNRELEASED
+
+### Changed
+* Display standard deviation instead of the home made median deviation in the cli output [#1529](https://github.com/sitespeedio/browsertime/pull/1529).
+* Renamed layoutShift to the more correct cumulativeLayoutShift. This will is a breaking change if you use that metric.
+* Updated Chrome start flags on desktop following [best practices](https://github.com/GoogleChrome/chrome-launcher/blob/master/docs/chrome-flags-for-tools.md )  and removing old flags [#1507](https://github.com/sitespeedio/browsertime/pull/1507).
+* Updated Chrome start flags on Android following [best practices](https://github.com/GoogleChrome/chrome-launcher/blob/master/docs/chrome-flags-for-tools.md ) and removing old flags [#1506](https://github.com/sitespeedio/browsertime/pull/1506).
+* Finally the "new" connectiity settings are default. You can see the difference in https://github.com/sitespeedio/browsertime/blob/main/lib/connectivity/trafficShapeParser.js#L5-L104. Changed in  [#1540](https://github.com/sitespeedio/browsertime/pull/1540). If you wanna run with the legacy setting use `--legacyConnectivityProfiles`. '
+* The default minimum wait time for waiting if a test is finished is now 8 seconds (instead of 5) [#1542](https://github.com/sitespeedio/browsertime/pull/1542).
+### Fixed
+* Fix `--chrome.blockDomainsExcept` when you are using WebPageReplay [#1532](https://github.com/sitespeedio/browsertime/pull/1532). Thank you [Inderpartap Singh Cheema](https://github.com/inderpartap) for the original fix!
+* Make sure gnirehtet is closed on the right device using device id [#1527](https://github.com/sitespeedio/browsertime/pull/1527)
+* Upgraded to Geckodriver 0.29.1.
+* Updated wpr_cert.pem to a new version for WebPageReplay [#1316](https://github.com/sitespeedio/browsertime/pull/1316).
+* Include Google Web Vitals in the HAR file [#1535](https://github.com/sitespeedio/browsertime/pull/1535).
+* Added 3 seconds wait time for geckoprofiler to start see [#1538](https://github.com/sitespeedio/browsertime/issues/1538) and [#1539](https://github.com/sitespeedio/browsertime/pull/1539)
+### Added
+* New metrics: Delta between TTFB and First Contentful Paint, Largest Contentful paint and First visual change [#1528](https://github.com/sitespeedio/browsertime/pull/1528).
+* Made it easier for people to get Google Web Vitals. We copy that data under the googleWebVitals namespace [#1521](https://github.com/sitespeedio/browsertime/pull/1521).
+* Added TTFB as a single metric to also make that easier [#1522](https://github.com/sitespeedio/browsertime/pull/1522).
+* New stop watch command [#1512](https://github.com/sitespeedio/browsertime/pull/1512). Measure time by: 
+  ```const timer = commands.stopWatch.get('my_timer'); 
+     timer.start(); 
+     // Do something
+     // Stop the timer and add the result to the last tested URL
+     timer.stopAndAdd();
+  ```
+* Pre test/warm a URL with `--preWarmServer`. Do that to make sure your server has cached everything that is needed before your test [#1515](https://github.com/sitespeedio/browsertime/pull/1515) and [#1516](https://github.com/sitespeedio/browsertime/pull/1516).
+* Collect what HTML element change in cumulative layout shifts [#1534](https://github.com/sitespeedio/browsertime/pull/1534)
+* Added support for recording video on Safari iOS [#1541](https://github.com/sitespeedio/browsertime/pull/1541).
+* New commands: scrolling by Pixels, Lines or Pages forward, back or refresh navigations, create new tabs or windows and switch to them and new mouse events such as context click, single click, double click, click and hold, release, and movement. Thank you [dpalmeiro](https://github.com/dpalmeiro) for PR [#1533](https://github.com/sitespeedio/browsertime/pull/1533).
+## 11.6.3 - 2021-03-17
+
+### Fixed
+* Last release broke getting Chromes netlog on desktop, fixed in [#1511](https://github.com/sitespeedio/browsertime/pull/1511). Also added the ability to set the log level of the netlog.
+## 11.6.2 - 2021-03-17
+
+### Fixed
+* Fixed getting the netlog from Chrome on Android [#1508](https://github.com/sitespeedio/browsertime/pull/1508).
+* Combine the gecko perfstats from each process, thank you [Andrew Creskey](https://github.com/acreskeyMoz) for the PR [#1504](https://github.com/sitespeedio/browsertime/pull/1504).
+* Upgraded to Selenium 4.0.0-beta.2 (from beta.1) [#1509](https://github.com/sitespeedio/browsertime/pull/1509).
+
+## 11.6.1 - 2021-03-11
+### Fixed
+* Added Python2 to the Docker container for (Kubernetes)users that run TSProxy and made sure python2 is used for that proxy when you run in Docker [#1503](https://github.com/sitespeedio/browsertime/pull/1503).
+
+## 11.6.0 - 2021-03-08
 ### Added
 * Make it possible to set number of threads used for FFMPEG using `--videoParams.threads`. Thank you [Leo Blöcher](https://github.com/TheJokr) for PR [#1493](https://github.com/sitespeedio/browsertime/pull/1493).
+* Updated to Chrome 89 and Firefox 86 in the Docker container and updated to Chromedriver 89 [#1499](https://github.com/sitespeedio/browsertime/pull/1499).
+* Get internal Firefox performance statistics by `--firefox.perfStats`. Thank you [dpalmeiro](https://github.com/dpalmeiro) for PR [#1495](https://github.com/sitespeedio/browsertime/pull/1495).
+* Updated to Edgedriver 89 [#1500](https://github.com/sitespeedio/browsertime/pull/1500).
+
+### Fixed
+* Better error log if we miss out on stats when adding fully loaded [#1496](https://github.com/sitespeedio/browsertime/pull/1496).
+
 ## 11.5.0 - 2021-02-16
 ### Added
 * Make it easy to run [gnirehtet](https://github.com/Genymobile/gnirehtet) when you run your tests on your Android phone to reverese tethering the traffics. Start gnirehtet with ```--gnirehtet``` (gnirehtet needs to be in your PATH). Fixed in [#1489](https://github.com/sitespeedio/browsertime/pull/1489) and [#1490](https://github.com/sitespeedio/browsertime/pull/1490).

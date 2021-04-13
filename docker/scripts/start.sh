@@ -95,7 +95,7 @@ function runWebPageReplay() {
   wpr record $WPR_PARAMS > /tmp/wpr-record.log 2>&1 &
   record_pid=$!
   sleep $RECORD_WAIT
-  execNode $BROWSERTIME_RECORD --firefox.preference network.dns.forceResolve:127.0.0.1 --chrome.args host-resolver-rules="MAP *:$HTTP_PORT 127.0.0.1:$WPR_HTTP_PORT,MAP *:$HTTPS_PORT 127.0.0.1:$WPR_HTTPS_PORT,EXCLUDE localhost" "$@"
+  execNode $BROWSERTIME_RECORD --firefox.preference network.dns.forceResolve:127.0.0.1 --chrome.webPageReplayHostResolver --chrome.webPageReplayHTTPPort $WPR_HTTP_PORT --chrome.webPageReplayHTTPSPort $WPR_HTTPS_PORT --chrome.webPageReplayRecord true "$@"
   RESULT+=$?
 
   kill -2 $record_pid
@@ -111,7 +111,7 @@ function runWebPageReplay() {
       sleep $REPLAY_WAIT
       if [ $? -eq 0 ]
         then
-          execNode $BROWSERTIME --firefox.preference network.dns.forceResolve:127.0.0.1 --firefox.preference security.OCSP.enabled:0 --chrome.args host-resolver-rules="MAP *:$HTTP_PORT 127.0.0.1:$WPR_HTTP_PORT,MAP *:$HTTPS_PORT 127.0.0.1:$WPR_HTTPS_PORT,EXCLUDE localhost" --connectivity.engine throttle --connectivity.throttle.localhost --connectivity.profile custom --connectivity.latency $LATENCY "$@" &
+          execNode $BROWSERTIME --firefox.preference network.dns.forceResolve:127.0.0.1 --firefox.preference security.OCSP.enabled:0 --chrome.webPageReplayHostResolver --chrome.webPageReplayHTTPPort $WPR_HTTP_PORT --chrome.webPageReplayHTTPSPort $WPR_HTTPS_PORT --connectivity.engine throttle --connectivity.throttle.localhost --connectivity.profile custom --connectivity.latency $LATENCY "$@" &
 
           PID=$!
 
