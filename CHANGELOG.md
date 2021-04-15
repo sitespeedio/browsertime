@@ -39,6 +39,7 @@ A special thanks to [Inderpartap Singh Cheema](https://github.com/inderpartap), 
 * New commands: scrolling by Pixels, Lines or Pages forward, back or refresh navigations, create new tabs or windows and switch to them and new mouse events such as context click, single click, double click, click and hold, release, and movement. Thank you [Denis Palmeiro](https://github.com/dpalmeiro) for PR [#1533](https://github.com/sitespeedio/browsertime/pull/1533).
 * Improve proxy configuration support, thank you [Olaf Meeuwissen](https://github.com/paddy-hack) for PR [#1542](https://github.com/sitespeedio/browsertime/pull/1524).
 * Upgraded to Selenium 4.0.0-beta.3 [#1544](https://github.com/sitespeedio/browsertime/pull/1544).
+* Updated to Chrome 90 in the Docker container and Chromedriver 90 as default [#1543](https://github.com/sitespeedio/browsertime/pull/1543).
 ## 11.6.3 - 2021-03-17
 
 ### Fixed
