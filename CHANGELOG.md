@@ -2,7 +2,7 @@
 
 ## 12.0.0 - 2021-04-15
 
-Hi and welcome to the 12.0.0 release of Browsertime! Here's a list of what chnaged, what has been added and what has fixed. You can safely upgrade and please be aware that some metrics can change when you upgrade: We changed startup flags for Chrome and we made the "new" connectivity settings default (meaning 3g is faster than before and more realistic). Read more in each individual change.
+Hi and welcome to the 12.0.0 release of Browsertime! Here's a list of what changed, what has been added and what has fixed. You can safely upgrade and please be aware that some metrics can change when you upgrade: We changed startup flags for Chrome and we made the "new" connectivity settings default (meaning 3g is faster than before and more realistic). Read more in each individual change.
 
 A special thanks to [Inderpartap Singh Cheema](https://github.com/inderpartap), [Denis Palmeiro](https://github.com/dpalmeiro) and [Olaf Meeuwissen](https://github.com/paddy-hack) for their contributions to this release!
 
