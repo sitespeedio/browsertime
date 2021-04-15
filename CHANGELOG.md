@@ -1,13 +1,17 @@
 # Browsertime changelog
 
-## 12.0.0-beta.2 - 2021-04-13
+## 12.0.0 - UNRELEASED
+
+Hi and welcome to the 12.0.0 release of Browsertime! Here's a list of what chnaged, what has been added and what has fixed. You can safely upgrade and please be aware that some metrics can change when you upgrade: We changed startup flags for Chrome and we made the "new" connectivity settings default (meaning 3g is faster than before). Read more in each individual change.
+
+A special thanks to [Inderpartap Singh Cheema](https://github.com/inderpartap), [Denis Palmeiro](https://github.com/dpalmeiro) and [Olaf Meeuwissen](https://github.com/paddy-hack) for their contributions to this release!
 
 ### Changed
 * Display standard deviation instead of the home made median deviation in the cli output [#1529](https://github.com/sitespeedio/browsertime/pull/1529).
-* Renamed layoutShift to the more correct cumulativeLayoutShift. This will is a breaking change if you use that metric.
-* Updated Chrome start flags on desktop following [best practices](https://github.com/GoogleChrome/chrome-launcher/blob/master/docs/chrome-flags-for-tools.md )  and removing old flags [#1507](https://github.com/sitespeedio/browsertime/pull/1507).
-* Updated Chrome start flags on Android following [best practices](https://github.com/GoogleChrome/chrome-launcher/blob/master/docs/chrome-flags-for-tools.md ) and removing old flags [#1506](https://github.com/sitespeedio/browsertime/pull/1506).
-* Finally the "new" connectiity settings are default. You can see the difference in https://github.com/sitespeedio/browsertime/blob/main/lib/connectivity/trafficShapeParser.js#L5-L104. Changed in  [#1540](https://github.com/sitespeedio/browsertime/pull/1540). If you wanna run with the legacy setting use `--legacyConnectivityProfiles`. '
+* Renamed layoutShift to the more correct cumulativeLayoutShift. This will is a breaking change if you use that metric. Updates to the new and coming layout shift changes announced by Google will be implemented the coming weeks.
+* Updated Chrome start flags on desktop following [best practices](https://github.com/GoogleChrome/chrome-launcher/blob/master/docs/chrome-flags-for-tools.md) and removing old flags [#1507](https://github.com/sitespeedio/browsertime/pull/1507).
+* Updated Chrome start flags on Android following [best practices](https://github.com/GoogleChrome/chrome-launcher/blob/master/docs/chrome-flags-for-tools.md)and removing old flags [#1506](https://github.com/sitespeedio/browsertime/pull/1506).
+* Finally the "new" connectivity settings are default. You can see the difference in https://github.com/sitespeedio/browsertime/blob/main/lib/connectivity/trafficShapeParser.js#L5-L104. Changed in [#1540](https://github.com/sitespeedio/browsertime/pull/1540). If you wanna run with the legacy setting use `--legacyConnectivityProfiles`. '
 * The default minimum wait time for waiting if a test is finished is now 8 seconds (instead of 5) [#1542](https://github.com/sitespeedio/browsertime/pull/1542).
 ### Fixed
 * Fix `--chrome.blockDomainsExcept` when you are using WebPageReplay [#1532](https://github.com/sitespeedio/browsertime/pull/1532). Thank you [Inderpartap Singh Cheema](https://github.com/inderpartap) for the original fix!
@@ -17,9 +21,9 @@
 * Include Google Web Vitals in the HAR file [#1535](https://github.com/sitespeedio/browsertime/pull/1535).
 * Added 3 seconds wait time for geckoprofiler to start see [#1538](https://github.com/sitespeedio/browsertime/issues/1538) and [#1539](https://github.com/sitespeedio/browsertime/pull/1539)
 ### Added
-* New metrics: Delta between TTFB and First Contentful Paint, Largest Contentful paint and First visual change [#1528](https://github.com/sitespeedio/browsertime/pull/1528).
-* Made it easier for people to get Google Web Vitals. We copy that data under the googleWebVitals namespace [#1521](https://github.com/sitespeedio/browsertime/pull/1521).
-* Added TTFB as a single metric to also make that easier [#1522](https://github.com/sitespeedio/browsertime/pull/1522).
+* New metrics: Delta between TTFB and First Contentful Paint, Largest Contentful paint and First visual change [#1528](https://github.com/sitespeedio/browsertime/pull/1528). You can use this if you have unstable TTFB and want to alert on front end metrics. Lets see when other also implement this :)
+* Made it easier for people to get Google Web Vitals. We copy that data under the googleWebVitals namespace in the result JSON [#1521](https://github.com/sitespeedio/browsertime/pull/1521).
+* Added TTFB as a single metric [#1522](https://github.com/sitespeedio/browsertime/pull/1522).
 * New stop watch command [#1512](https://github.com/sitespeedio/browsertime/pull/1512). Measure time by: 
   ```const timer = commands.stopWatch.get('my_timer'); 
      timer.start(); 
@@ -30,7 +34,7 @@
 * Pre test/warm a URL with `--preWarmServer`. Do that to make sure your server has cached everything that is needed before your test [#1515](https://github.com/sitespeedio/browsertime/pull/1515) and [#1516](https://github.com/sitespeedio/browsertime/pull/1516).
 * Collect what HTML element change in cumulative layout shifts [#1534](https://github.com/sitespeedio/browsertime/pull/1534)
 * Added support for recording video on Safari iOS [#1541](https://github.com/sitespeedio/browsertime/pull/1541).
-* New commands: scrolling by Pixels, Lines or Pages forward, back or refresh navigations, create new tabs or windows and switch to them and new mouse events such as context click, single click, double click, click and hold, release, and movement. Thank you [dpalmeiro](https://github.com/dpalmeiro) for PR [#1533](https://github.com/sitespeedio/browsertime/pull/1533).
+* New commands: scrolling by Pixels, Lines or Pages forward, back or refresh navigations, create new tabs or windows and switch to them and new mouse events such as context click, single click, double click, click and hold, release, and movement. Thank you [Denis Palmeiro](https://github.com/dpalmeiro) for PR [#1533](https://github.com/sitespeedio/browsertime/pull/1533).
 * Improve proxy configuration support, thank you [Olaf Meeuwissen](https://github.com/paddy-hack) for PR [#1542](https://github.com/sitespeedio/browsertime/pull/1524).
 ## 11.6.3 - 2021-03-17
 
