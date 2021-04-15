@@ -1,4 +1,4 @@
-# Browsertime changelog (we follow [semantic versioning](https://semver.org))
+# Browsertime changelog (we do [semantic versioning](https://semver.org))
 
 ## 12.0.0 - 2021-04-15
 
