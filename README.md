@@ -20,7 +20,7 @@ Access the Web Performance Timeline, from your browser, in your terminal!
 
 We think of a Browsertime as having four key capabilities:
 
- - It handles everything with the browser (Firefox/Chrome/Edge/Safari).
+ - It handles everything with the browser (Firefox/Chrome/Edge/Safari and other browser that can be driven using WebDriver).
  - It executes a batch of default and configurable JavaScript when the URL has finished loading in the browser.
  - It records a video of the Browser screen used to calculate [Visual Metrics](https://github.com/WPO-Foundation/visualmetrics).
  - It lets you run your [scripting file to create and measure your users journey](https://www.sitespeed.io/documentation/sitespeed.io/scripting/).
@@ -38,19 +38,22 @@ To understand how Browsertime do these things, let's talk about how it works. He
 2. Browsertime uses the [WebDriver](https://www.w3.org/TR/webdriver/) (through [Selenium](http://seleniumhq.github.io/selenium/docs/api/javascript/index.html)) to start Firefox/Chrome/Safari/Edge.
 3. Browsertime starts FFMPEG to record a video of the browser screen
 4. The browser access the URL.
-5. When the page is finished loading (you can define yourself when that happens), Browsertime executes the default JavaScript timing metrics and collects:
+5. When the page is finished loading (you can define yourself when that happens), Browsertime collects:
    - [Navigation Timing metrics](http://kaaes.github.io/timing/info.html)
    - [User Timing metrics](http://www.html5rocks.com/en/tutorials/webperformance/usertiming/)
-   - First paint
-   - [RUM Speed Index](https://github.com/WPO-Foundation/RUM-SpeedIndex).
-6. It also collects a [HAR](http://www.softwareishard.com/blog/har-12-spec/) file that shows all requests/responses on the page.
-7. FFMpeg is stopped and the video is analysed. Browsertime collect Visual Metrics like Speed Index.
+   - [Element Timing metrics](https://wicg.github.io/element-timing/)
+   - [Paint Timings](https://w3c.github.io/paint-timing/)
+   - [Googles Web Vitals](https://web.dev/vitals/)
+   - [CPU metrics CPU Long Tasks]((https://developer.mozilla.org/en-US/docs/Web/API/Long_Tasks_API))
+6. You can also collect internal trace logs from the browser using `--firefox.geckoProfiler` for Firefox and `--chrome.timeline` for Chromium browsers.
+7. It also collects a [HAR](http://www.softwareishard.com/blog/har-12-spec/) file that shows all requests/responses on the page.
+8. FFMpeg is stopped and the video is analysed. Browsertime collect Visual Metrics like Speed Index, First Visual Change and Last Visual Change.
 
 The result of the run is a JSON file with all the JavaScript metrics collected, a HAR file, a video recording of the screen and a screenshot.
 
 ## A simple example
 
-Use our Docker image (with Chrome, Firefox, XVFB and the dependencies needed to record a video):
+Use our Docker image (with Chrome, Firefox, Edge, XVFB and the dependencies needed to record a video):
 <pre>
 $ docker run --rm -v "$(pwd)":/browsertime sitespeedio/browsertime https://www.sitespeed.io/
 </pre>
@@ -67,7 +70,7 @@ Load https://www.sitespeed.io/ in Chrome three times. Results are stored in a JS
 Checkout the [examples](docs/examples/README.md).
 
 ## Browsers
-Browsertime supports Firefox, Chrome, and Edge (Chromium version) on desktop. There are also iimited support for Safari on desktop. On Android we support Chrome and Firefox (from 8.0) and Safari on iOS.
+Browsertime supports Firefox, Chrome, and Edge (Chromium version) on desktop and Safari on Mac OS. On Android we support Chrome and Firefox (from 8.0) and Safari on iOS. You can also use the Safari simulator on Mac OS.
 
 ## How does it work
 Browsertime uses Selenium NodeJS to drive the browser. It starts the browser, load a URL, executes configurable Javascripts to collect metrics, collect a HAR file.
@@ -142,13 +145,13 @@ You can change latency by setting a Docker environment variable. Use REPLAY to t
 Default browser is Chrome:
 
 ```
-docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:9.2.1 https://en.wikipedia.org/wiki/Barack_Obama
+docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:12.0.0 https://en.wikipedia.org/wiki/Barack_Obama
 ```
 
 Use Firefox:
 
 ```
-docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:9.2.1 -b firefox -n 11 https://en.wikipedia.org/wiki/Barack_Obama
+docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:12.0.0 -b firefox -n 11 --firefox.acceptInsecureCerts https://en.wikipedia.org/wiki/Barack_Obama
 ```
 
 And Chrome on your Android phone. This will only work on Linux because you need to be able to mount the usb port in Docker:
