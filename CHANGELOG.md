@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 12.0.1 - 2021-04-16
+* With Chrome/Chromedriver 90 it seems to take longer time to close the browser than earlier versions, so when trying the next run, the previous browser is not closed [#1548](https://github.com/sitespeedio/browsertime/issues/1548) fixed in [#1549](https://github.com/sitespeedio/browsertime/pull/1549) by adding a 2 second sleep time before next try.
+
 ## 12.0.0 - 2021-04-15
 
 Hi and welcome to the 12.0.0 release of Browsertime! Here's a list of what changed, what has been added and what has fixed. You can safely upgrade and please be aware that some metrics can change when you upgrade: We changed startup flags for Chrome and we made the "new" connectivity settings default (meaning 3g is faster than before and more realistic). Read more in each individual change.
