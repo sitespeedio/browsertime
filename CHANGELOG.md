@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+## Added
+* Updated to Firefox 88 in the Docker container.
+
 ## 12.0.1 - 2021-04-16
 * With Chrome/Chromedriver 90 it seems to take longer time to close the browser than earlier versions, so when trying the next run, the previous browser is not closed [#1548](https://github.com/sitespeedio/browsertime/issues/1548) fixed in [#1549](https://github.com/sitespeedio/browsertime/pull/1549) by adding a 2 second sleep time before next try.
 
