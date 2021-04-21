@@ -125,6 +125,7 @@ describe('har_builder', function() {
       };
       totalResults = [
         {
+          googleWebVitals: {},
           visualMetrics: [
             {
               SpeedIndex: 100,
