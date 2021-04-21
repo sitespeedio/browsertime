@@ -21,6 +21,7 @@ jobs:
       run: |
         choco install ffmpeg
         choco install imagemagick.app --version=7.0.10.53 -PackageParameters LegacySupport=true 
+        choco outdated
         choco install python
         choco install microsoft-edge
         choco install googlechrome
