@@ -27,6 +27,6 @@ jobs:
     - name: Lint
       run: npm run lint
     - name: Run unit tests
-      uses: GabrielBB/xvfb-action@v1.2
+      uses: GabrielBB/xvfb-action@v1.5
       with:
         run: npm test
