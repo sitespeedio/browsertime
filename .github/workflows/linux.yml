@@ -15,8 +15,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    - run: sudo apt-get update
-    - run: sudo ACCEPT_EULA=Y apt-get upgrade google-chrome-stable -y
+    - name: Install latest Chrome
+      run: |
+        sudo apt-get update
+        sudo ACCEPT_EULA=Y apt-get upgrade google-chrome-stable -y
     - name: Install Browsertime
       run: npm ci
     - name: Install dependencies
