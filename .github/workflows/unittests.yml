@@ -19,6 +19,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
+    - run: sudo apt-get update
+    - run: sudo ACCEPT_EULA=Y apt-get upgrade google-chrome-stable -y
     - name: Lint
       run: npm run lint
     - name: Run unit tests
