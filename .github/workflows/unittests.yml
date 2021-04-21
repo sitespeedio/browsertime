@@ -24,4 +24,4 @@ jobs:
     - name: Run unit tests
       uses: GabrielBB/xvfb-action@v1.2
       with:
-        run: npm run test
+        run: npm test
