@@ -1,9 +1,14 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+##  12.1.0 - 2021-04-23
 ## Added
 * Updated to Firefox 88 in the Docker container.
+* New scroll to bottom command [#1552](https://github.com/sitespeedio/browsertime/pull/1552).
+* Fixed so scroll to page command work in all browsers and not only Firefox [#1551](https://github.com/sitespeedio/browsertime/pull/1551).
 
+### Fixed
+* Added missing --disable-dev-shm-usage cli option for Chrome, fixes [sitespeed.io #3357](https://github.com/sitespeedio/sitespeed.io/issues/3357).
+* Cleanup scrolling command [#1553](https://github.com/sitespeedio/browsertime/pull/1553).
 ## 12.0.1 - 2021-04-16
 * With Chrome/Chromedriver 90 it seems to take longer time to close the browser than earlier versions, so when trying the next run, the previous browser is not closed [#1548](https://github.com/sitespeedio/browsertime/issues/1548) fixed in [#1549](https://github.com/sitespeedio/browsertime/pull/1549) by adding a 2 second sleep time before next try.
 
