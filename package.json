@@ -1,6 +1,6 @@
 {
   "description": "Browsertime",
-  "version": "12.0.1",
+  "version": "12.1.0",
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "@sitespeed.io/throttle": "2.0.2",
@@ -65,7 +65,7 @@
   ],
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/unitTests && mocha test/browserTests && mocha test/commandTests" ,
+    "test": "mocha test/unitTests && mocha test/browserTests && mocha test/commandTests",
     "test:unit": "mocha test/unitTests",
     "test:browser": "mocha test/browserTests",
     "test:selenium": "mocha test/browserTests/seleniumRunnerTests.js",
