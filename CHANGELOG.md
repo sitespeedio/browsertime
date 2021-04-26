@@ -1,5 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Fixed
+* Fix broken "browser" category of script. Without the fix, it only worked in Firefox [#1558](https://github.com/sitespeedio/browsertime/pull/1558).
+
+### Added
+* Get Safari version [#1556](https://github.com/sitespeedio/browsertime/pull/1556).
+
 ##  12.1.0 - 2021-04-23
 ## Added
 * Updated to Firefox 88 in the Docker container.
