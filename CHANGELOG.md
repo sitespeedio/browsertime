@@ -1,11 +1,14 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 12.2.0 - 2021-04-27
 ### Fixed
-* Fix broken "browser" category of script. Without the fix, it only worked in Firefox [#1558](https://github.com/sitespeedio/browsertime/pull/1558).
+* Fix broken "browser" category of script. Without the fix, it only worked in Firefox [#1558](https://github.com/sitespeedio/browsertime/pull/1558). That meant no user agent string, and width/height of the browser window.
+* Removed getting the user agent string the pageinfo scripts, now when browser scripts work.
 
 ### Added
-* Get Safari version [#1556](https://github.com/sitespeedio/browsertime/pull/1556).
+* Get the Safari version from the browser [#1556](https://github.com/sitespeedio/browsertime/pull/1556).
+* Added simple browser cpu benchmark to run after metrics are collected [#1559](https://github.com/sitespeedio/browsertime/pull/1559).
+
 
 ##  12.1.0 - 2021-04-23
 ## Added
