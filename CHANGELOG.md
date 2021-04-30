@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 12.3.0 - 2021-04-30
+
+### Added
+* Get a extra screenshot where the Largest Contentful Paint is highlighted `--screenshotLCP` and collect all elements in the LCP API [#1561](https://github.com/sitespeedio/browsertime/pull/1561) [#1562](https://github.com/sitespeedio/browsertime/pull/1562).
 ## 12.2.0 - 2021-04-27
 ### Fixed
 * Fix broken "browser" category of script. Without the fix, it only worked in Firefox [#1558](https://github.com/sitespeedio/browsertime/pull/1558). That meant no user agent string, and width/height of the browser window.
