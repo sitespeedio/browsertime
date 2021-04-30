@@ -37,8 +37,7 @@
     const entries = observer.takeRecords();
     const candidates = [];
     for (let entry of entries) {
-        console.log(entry);
-        const html = getDomPath(entry.element);
+        const element = entry.element; 
         candidates.push(
             {
                 duration: entry.duration,
@@ -48,9 +47,9 @@
                 renderTime: Number(Math.max(entry.renderTime,entry.loadTime).toFixed(0)),
                 size: entry.size,
                 startTime: Number(entry.startTime.toFixed(0)),
-                tagName: entry.element ? entry.element.tagName : '',
-                className: entry.element ? entry.element.className : '',
-                domPath:  entry.element ? (getDomPath(entry.element)).join( ' > ') : ''
+                tagName: element ? element.tagName : '',
+                className: element ? element.className : '',
+                domPath:  element ? (getDomPath(element)).join( ' > ') : ''
               }
 
         )
