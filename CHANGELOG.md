@@ -1,5 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 12.4.0 - 2021-05-02
+### Fixed
+* Safer checks to get LCP elements [#1568](https://github.com/sitespeedio/browsertime/pull/1568)
+
+### Added
+* Choose color how the LCP element is highlighted `--screenshotLCPColor` [#1567](https://github.com/sitespeedio/browsertime/pull/1567).
+* First go at showing layout shifted elememnts in screenshot. Enable wth `--screenshotLS` [#1565](https://github.com/sitespeedio/browsertime/pull/1565).
 ## 12.3.1 - 2021-04-30
 ### Fixed
 * The script that get more info about largest contentful paint was not optimal and had bugs and log messages. Fixed in [#1563](https://github.com/sitespeedio/browsertime/pull/1563).
