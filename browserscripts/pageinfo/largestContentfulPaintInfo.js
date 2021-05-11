@@ -49,7 +49,8 @@
                 startTime: Number(entry.startTime.toFixed(0)),
                 tagName: element ? element.tagName : '',
                 className: element ? element.className : '',
-                domPath:  element ? (getDomPath(element)).join( ' > ') : ''
+                domPath:  element ? (getDomPath(element)).join( ' > ') : '',
+                tag: element ? (element.cloneNode(false)).outerHTML : ''
               }
 
         )
