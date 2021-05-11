@@ -7,6 +7,7 @@
 
 ### Fixed
 * Better reporting of layout shift [#1571](https://github.com/sitespeedio/browsertime/pull/1571). Add the domPath, the actual HTML of the shifted element and tuning of the coloring in the screenshot. Also make sure the time for the layout shift is reported.
+* Catch if iOS simulator start/stop fails [#1569](https://github.com/sitespeedio/browsertime/pull/1569).
 ## 12.4.0 - 2021-05-02
 ### Fixed
 * Safer checks to get LCP elements [#1568](https://github.com/sitespeedio/browsertime/pull/1568)
