@@ -1,5 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 12.5.0 - 2021-05-11
+### Added
+* Choose the color of the layout shift highlight in the screenshot by using `--screenshotLSColor` [#1573](https://github.com/sitespeedio/browsertime/pull/1573).
+* Report the actual HTML for the Largest Contentful paint [#1572](https://github.com/sitespeedio/browsertime/pull/1572).
+
+### Fixed
+* Better reporting of layout shift [#1571](https://github.com/sitespeedio/browsertime/pull/1571). Add the domPath, the actual HTML of the shifted element and tuning of the coloring in the screenshot. Also make sure the time for the layout shift is reported.
 ## 12.4.0 - 2021-05-02
 ### Fixed
 * Safer checks to get LCP elements [#1568](https://github.com/sitespeedio/browsertime/pull/1568)
