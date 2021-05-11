@@ -41,11 +41,15 @@
       if (entry.hadRecentInput) {
         continue;
       } 
-      const scoreAndHTML = {score: entry.value, html: [], startTime: entry.startTime};
+      const scoreAndHTML = {score: entry.value, domPath: [], startTime: entry.startTime, tags: []};
       for (let source of entry.sources) {
         try {
-          const html = getDomPath(source.node);
-          scoreAndHTML.html.push(html.join( ' > '));
+          if (source.node) {
+            const html = getDomPath(source.node);
+            scoreAndHTML.domPath.push(html.join( ' > '));
+            const tag = source.node.cloneNode(false);
+            scoreAndHTML.tags.push(tag.outerHTML);
+          }
         }
         catch(e) {}
       }
