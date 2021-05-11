@@ -41,7 +41,7 @@
       if (entry.hadRecentInput) {
         continue;
       } 
-      const scoreAndHTML = {score: entry.value, html: []};
+      const scoreAndHTML = {score: entry.value, html: [], startTime: entry.startTime};
       for (let source of entry.sources) {
         try {
           const html = getDomPath(source.node);
