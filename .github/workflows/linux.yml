@@ -73,3 +73,5 @@ jobs:
       run: ./bin/browsertime.js -b firefox --firefox.perfStats --xvfb https://www.sitespeed.io/
     - name: Run test with pre-test functionality
       run: ./bin/browsertime.js -b chrome --preWarmServer --xvfb https://www.sitespeed.io/
+    - name: Run test with screenshots
+      run: ./bin/browsertime.js -b chrome --screenshotLCP --screenshotLS --xvfb https://www.sitespeed.io/
