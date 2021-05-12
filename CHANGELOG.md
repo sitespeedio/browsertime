@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 12.6.0 - 2021-05-12
+### Added
+* Configure a value/score limit of when to paint shifting elements in the Layout Shift screenshot. Use `--screenshotLSLimit`. Defaulyt is 0.01 [#1576](https://github.com/sitespeedio/browsertime/pull/1576).
+* Include the LCP HTML tag in result [#1575](https://github.com/sitespeedio/browsertime/pull/1575).
 ## 12.5.0 - 2021-05-11
 ### Added
 * Choose the color of the layout shift highlight in the screenshot by using `--screenshotLSColor` [#1573](https://github.com/sitespeedio/browsertime/pull/1573).
