@@ -46,7 +46,8 @@
       startTime: Number(largestEntry.startTime.toFixed(0)),
       tagName: largestEntry.element ? largestEntry.element.tagName : '',
       className :largestEntry.element ? largestEntry.element.className : '',
-      domPath:  largestEntry.element ? (getDomPath(largestEntry.element)).join( ' > ') : ''
+      domPath:  largestEntry.element ? (getDomPath(largestEntry.element)).join( ' > ') : '',
+      tag: largestEntry.element ? (largestEntry.element.cloneNode(false)).outerHTML : ''
     };
   } else return;
 })();
