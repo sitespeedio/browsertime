@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 12.6.1 - 2021-05-21
+### Fixed
+* Fixed adding cookies with equals sign in value. Thank you [sebguilbaud](https://github.com/sebguilbaud) for PR [#1578](https://github.com/sitespeedio/browsertime/pull/1578).
+* Use data:text/html as orange screen for Safari as the rest of the browsers [#1579](https://github.com/sitespeedio/browsertime/pull/1579).
 ## 12.6.0 - 2021-05-12
 ### Added
 * Configure a value/score limit of when to paint shifting elements in the Layout Shift screenshot. Use `--screenshotLSLimit`. Defaulyt is 0.01 [#1576](https://github.com/sitespeedio/browsertime/pull/1576).
