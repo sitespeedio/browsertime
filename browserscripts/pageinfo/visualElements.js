@@ -70,13 +70,16 @@
         ? element.src.substring(element.src.lastIndexOf('/') + 1)
         : undefined;
       const rect = element.getBoundingClientRect();
+      const tag = element.cloneNode(false);
+
       elementByType[type] = {
         name: type,
         x: Math.round(rect.left),
         y: Math.round(rect.top),
         width: Math.round(rect.width),
         height: Math.round(rect.height),
-        filename
+        filename,
+        html: tag.outerHTML
       };
       areaByType[type] = area;
     }
