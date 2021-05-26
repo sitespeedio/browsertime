@@ -1,5 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 12.7.0 - UNRELEASED
+### Added
+* Include the HTML element when you get timings for visual elements with `--visualElements` [#1580](https://github.com/sitespeedio/browsertime/pull/1580). This makes it easier to debug.
+
+### Fixed
+* Fixed the broken CPU throttling in Chrome (when you do not run headless). See [#1380](https://github.com/sitespeedio/browsertime/issues/1380) and [#1582](https://github.com/sitespeedio/browsertime/pull/1582).
+
 ## 12.6.1 - 2021-05-21
 ### Fixed
 * Fixed adding cookies with equals sign in value. Thank you [sebguilbaud](https://github.com/sebguilbaud) for PR [#1578](https://github.com/sitespeedio/browsertime/pull/1578).
