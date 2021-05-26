@@ -1,8 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 12.7.0 - UNRELEASED
+## 12.7.0 - 2021-05-26
 ### Added
 * Include the HTML element when you get timings for visual elements with `--visualElements` [#1580](https://github.com/sitespeedio/browsertime/pull/1580). This makes it easier to debug.
+* Updated to Chrome and Chromedriver 91 [#1583](https://github.com/sitespeedio/browsertime/pull/1583).
 
 ### Fixed
 * Fixed the broken CPU throttling in Chrome (when you do not run headless). See [#1380](https://github.com/sitespeedio/browsertime/issues/1380) and [#1582](https://github.com/sitespeedio/browsertime/pull/1582).
