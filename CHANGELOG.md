@@ -7,6 +7,7 @@
 ### Fixed
 * Fixed the broken CPU throttling in Chrome (when you do not run headless). See [#1380](https://github.com/sitespeedio/browsertime/issues/1380) and [#1582](https://github.com/sitespeedio/browsertime/pull/1582).
 
+* Fix broken getViewPort for Pixel 2 in mobile emulation, thank you [Radu Micu](https://github.com/radum) for PR [#1581](https://github.com/sitespeedio/browsertime/pull/1581).
 ## 12.6.1 - 2021-05-21
 ### Fixed
 * Fixed adding cookies with equals sign in value. Thank you [sebguilbaud](https://github.com/sebguilbaud) for PR [#1578](https://github.com/sitespeedio/browsertime/pull/1578).
