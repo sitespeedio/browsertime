@@ -6,7 +6,7 @@
     "@sitespeed.io/throttle": "2.0.2",
     "@devicefarmer/adbkit": "2.11.3",
     "btoa": "1.2.1",
-    "@sitespeed.io/chromedriver": "90.0.4430-24",
+    "@sitespeed.io/chromedriver": "91.0.4472-19",
     "chrome-har": "0.11.12",
     "chrome-remote-interface": "0.29.0",
     "dayjs": "1.10.4",
