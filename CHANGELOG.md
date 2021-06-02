@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 12.8.0 - 2021-06-02
+### Added
+* Updated the Docker container to use Firefox 89 and Edge 91.
+* Updated to Edgedriver 91.
 ## 12.7.0 - 2021-05-26
 ### Added
 * Include the HTML element when you get timings for visual elements with `--visualElements` [#1580](https://github.com/sitespeedio/browsertime/pull/1580). This makes it easier to debug.
