@@ -1,11 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+##  12.9.0 - 2021-06-04
 
 ### Added
 * Use the [new definition](https://web.dev/evolving-cls/) of Cumulative Layout Shift [#1591](https://github.com/sitespeedio/browsertime/pull/1591).
 * Include LCP info in the HAR so we later on can show LCP info in a har viewer [#1590](https://github.com/sitespeedio/browsertime/pull/1590).
-* Pickup render blocking info from Chrome [#1586](https://github.com/sitespeedio/browsertime/pull/1586).
+* Pickup render blocking info from Chrome [#1586](https://github.com/sitespeedio/browsertime/pull/1586), this will be useful in Chrome 92.
 
 ### Fixed
 * Fix broken store the perf log for Chrome to disk [#1585](https://github.com/sitespeedio/browsertime/pull/1585).
