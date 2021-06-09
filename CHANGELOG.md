@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+
+##  12.9.1 - 2021-06-09
+### Fixed
+* Finally a fix for driving Safari on iOS. Start/stop the Safaridriver manually, see [#1596](https://github.com/sitespeedio/browsertime/pull/1596). Video on iOS is broken though, see if we can find a fix for that too.
+* Upgrade to use Selenium-4.0.0-beta.4 [#1592](https://github.com/sitespeedio/browsertime/pull/1592) and updated throttle, dayjs, execa and chrome-remote-interface to run latest versions [#1594](https://github.com/sitespeedio/browsertime/pull/1594). 
 ##  12.9.0 - 2021-06-04
 
 ### Added
