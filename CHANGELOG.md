@@ -3,6 +3,8 @@
 ## UNRELEASED
 ### Fixed
 * Make sure video settings in activated on the iOS device before connecting with Safaridriver [#1597](https://github.com/sitespeedio/browsertime/pull/1597).
+* Upgrade to chrome-remote-interface 0.30.1 [#1599](https://github.com/sitespeedio/browsertime/pull/1599)
+* Use yargs 17.0.1 [#1595](https://github.com/sitespeedio/browsertime/pull/1595).
 ##  12.9.1 - 2021-06-09
 ### Fixed
 * Finally a fix for driving Safari on iOS. Start/stop the Safaridriver manually, see [#1596](https://github.com/sitespeedio/browsertime/pull/1596). Video on iOS is broken though, see if we can find a fix for that too.
