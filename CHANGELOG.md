@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 12.9.2 - 2021-06-23
 ### Fixed
 * Make sure video settings in activated on the iOS device before connecting with Safaridriver [#1597](https://github.com/sitespeedio/browsertime/pull/1597).
 * Upgrade to chrome-remote-interface 0.30.1 [#1599](https://github.com/sitespeedio/browsertime/pull/1599)
