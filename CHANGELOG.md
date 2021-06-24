@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 12.9.3 - 2021-06-24
+
+### Fixed
+* Reverted to yargs 16.2.0 since 17.X do not support NodeJS 10. Lets update to yargs 17 in next major.
 ## 12.9.2 - 2021-06-23
 ### Fixed
 * Make sure video settings in activated on the iOS device before connecting with Safaridriver [#1597](https://github.com/sitespeedio/browsertime/pull/1597).
