@@ -4,6 +4,9 @@
 ## UNRELEASED
 ### Fixed
 * Update container to use NodeJS 14.7.1.
+
+### Added
+* Add Firefox memory support to Browsertime. This will measure how much memory that is used. Turn on with `--firefox.memoryReport`. Thank you [dpalmeiro](https://github.com/dpalmeiro) for PR [#1601](https://github.com/sitespeedio/browsertime/pull/1601).
 ## 12.9.3 - 2021-06-24
 
 ### Fixed
