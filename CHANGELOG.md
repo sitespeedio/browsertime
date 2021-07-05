@@ -1,13 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-
-## UNRELEASED
+##  12.10.0 - 2021-07-05
 ### Fixed
 * Update container to use NodeJS 14.7.1.
 * Fix when LCP do not exist in Chrome [#1602](https://github.com/sitespeedio/browsertime/pull/1602).
 
 ### Added
 * Add Firefox memory support to Browsertime. This will measure how much memory that is used. Turn on with `--firefox.memoryReport`. Thank you [dpalmeiro](https://github.com/dpalmeiro) for PR [#1601](https://github.com/sitespeedio/browsertime/pull/1601).
+
 ## 12.9.3 - 2021-06-24
 
 ### Fixed
