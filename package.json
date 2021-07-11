@@ -8,7 +8,7 @@
     "btoa": "1.2.1",
     "@sitespeed.io/chromedriver": "91.0.4472-19",
     "chrome-har": "0.11.12",
-    "chrome-remote-interface": "0.30.1",
+    "chrome-remote-interface": "0.31.0",
     "dayjs": "1.10.5",
     "execa": "5.1.1",
     "fast-stats": "0.0.6",
