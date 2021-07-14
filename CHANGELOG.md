@@ -1,5 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 12.11.0 - UNRELEASED
+### Fixed
+* Fixed so we support JavaScript that ends with a ; when you select an element for for clicking [#1610](https://github.com/sitespeedio/browsertime/pull/1610). See [#1606](https://github.com/sitespeedio/browsertime/issues/1606) and thank you [Vicky Ledsom](https://github.com/ledleds) for reporting.
+
+### Added
+* Added screen size for Moto G4 when you run Chrome as emulated mobile [#1608](https://github.com/sitespeedio/browsertime/pull/1608).
+* Added Firefox 90 in the Docker container [#1609](https://github.com/sitespeedio/browsertime/pull/1609).
+
 ##  12.10.0 - 2021-07-05
 ### Fixed
 * Update container to use NodeJS 14.7.1.
