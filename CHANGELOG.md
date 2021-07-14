@@ -3,7 +3,7 @@
 ## 12.11.0 - UNRELEASED
 ### Fixed
 * Fixed so we support JavaScript that ends with a ; when you select an element for for clicking [#1610](https://github.com/sitespeedio/browsertime/pull/1610). See [#1606](https://github.com/sitespeedio/browsertime/issues/1606) and thank you [Vicky Ledsom](https://github.com/ledleds) for reporting.
-
+* Fixed recording videos on new Mac M1 for emulated mobile. We used to have a hack for getting the right DPI but it seems like that didn't work on Mac M1 (depending on what screen you are using) [#1607](https://github.com/sitespeedio/browsertime/pull/1607).
 ### Added
 * Added screen size for Moto G4 when you run Chrome as emulated mobile [#1608](https://github.com/sitespeedio/browsertime/pull/1608).
 * Added Firefox 90 in the Docker container [#1609](https://github.com/sitespeedio/browsertime/pull/1609).
