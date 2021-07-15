@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 12.11.0 - UNRELEASED
+## 12.11.0 - 2021-07-15
 ### Fixed
 * Fixed so we support JavaScript that ends with a ; when you select an element for for clicking [#1610](https://github.com/sitespeedio/browsertime/pull/1610). See [#1606](https://github.com/sitespeedio/browsertime/issues/1606) and thank you [Vicky Ledsom](https://github.com/ledleds) for reporting.
 * Fixed recording videos on new Mac M1 for emulated mobile. We used to have a hack for getting the right DPI but it seems like that didn't work on Mac M1 (depending on what screen you are using) [#1607](https://github.com/sitespeedio/browsertime/pull/1607).
