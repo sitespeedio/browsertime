@@ -44,9 +44,11 @@ async function preWarmServer(urls, options) {
 
 async function run(urls, options) {
   try {
-    let dir = 'browsertime-results';
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir);
+    if (!options.resultDir) {
+      let dir = 'browsertime-results';
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+      }
     }
 
     let engine = new Engine(options);
