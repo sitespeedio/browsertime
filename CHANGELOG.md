@@ -1,5 +1,21 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 12.11.0 - 2021-07-15
+### Fixed
+* Fixed so we support JavaScript that ends with a ; when you select an element for for clicking [#1610](https://github.com/sitespeedio/browsertime/pull/1610). See [#1606](https://github.com/sitespeedio/browsertime/issues/1606) and thank you [Vicky Ledsom](https://github.com/ledleds) for reporting.
+* Fixed recording videos on new Mac M1 for emulated mobile. We used to have a hack for getting the right DPI but it seems like that didn't work on Mac M1 (depending on what screen you are using) [#1607](https://github.com/sitespeedio/browsertime/pull/1607).
+### Added
+* Added screen size for Moto G4 when you run Chrome as emulated mobile [#1608](https://github.com/sitespeedio/browsertime/pull/1608).
+* Added Firefox 90 in the Docker container [#1609](https://github.com/sitespeedio/browsertime/pull/1609).
+
+##  12.10.0 - 2021-07-05
+### Fixed
+* Update container to use NodeJS 14.7.1.
+* Fix when LCP do not exist in Chrome [#1602](https://github.com/sitespeedio/browsertime/pull/1602).
+
+### Added
+* Add Firefox memory support to Browsertime. This will measure how much memory that is used. Turn on with `--firefox.memoryReport`. Thank you [dpalmeiro](https://github.com/dpalmeiro) for PR [#1601](https://github.com/sitespeedio/browsertime/pull/1601).
+
 ## 12.9.3 - 2021-06-24
 
 ### Fixed
