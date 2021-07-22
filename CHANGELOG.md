@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 13.1.0 - 2021-07-22
+### Added
+* Chrome introduced a bug in how we measure first visual change (see [#1614](https://github.com/sitespeedio/browsertime/issues/1614)). Adding support to better configuration for notification/viewport with [#1615](https://github.com/sitespeedio/browsertime/pull/1615).
 ## 13.0.0 - 2021-07-22
 
 ### Breaking changes
