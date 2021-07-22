@@ -1,12 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 13.0.0 - 2021-07-21
+## 13.0.0 - 2021-07-22
 
 ### Breaking changes
-* With this release we drop support for NodeJs 10.
+* With this release we drop support for NodeJs 10 (EOL ended some time ago).
 ### Added
 * Updated the Docker container to use Chrome 92.
 * Updated to Chromedriver 92.
+* Upgrade to yargs 17 [#1600](https://github.com/sitespeedio/browsertime/pull/1600).
 
 ### Fixed
 * Fixed so that browsertime-result dir isn't created if you set your own result dir. Thank you [Vicky Ledsom](https://github.com/ledleds) for PR [#1611](https://github.com/sitespeedio/browsertime/pull/1611).
