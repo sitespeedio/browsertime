@@ -28,7 +28,7 @@
     "@sitespeed.io/tracium": "0.3.3",
     "speedline-core": "1.4.3",
     "@cypress/xvfb": "1.2.4",
-    "yargs": "16.2.0"
+    "yargs": "17.0.1"
   },
   "optionalDependencies": {
     "jimp": "0.16.1"
