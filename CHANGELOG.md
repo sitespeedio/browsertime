@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
+## 13.1.1 - 2021-07-23
 
+### Fixed
+* Increased the extra wait time for orange to appear in the browser winrow when we record a video on desktop. Before we waited 400 ms, now we wait 800 ms [#1616](https://github.com/sitespeedio/browsertime/pull/1616).
 ## 13.1.0 - 2021-07-22
 ### Added
 * Chrome introduced a bug in how we measure first visual change (see [#1614](https://github.com/sitespeedio/browsertime/issues/1614)). Adding support to better configuration for notification/viewport with [#1615](https://github.com/sitespeedio/browsertime/pull/1615).
