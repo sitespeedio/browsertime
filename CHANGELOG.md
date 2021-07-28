@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 13.1.3 - 2021-07-28
+* Increased the default URL bar size for visual metrics from 18 pixel to 20 pixel [#1619](https://github.com/sitespeedio/browsertime/pull/1619).
+
+
 ## 13.1.2 - 2021-07-23
 ### Fixed
 * Increased the default URL bar size for visual metrics from 10 pixel to 18 pixel [#1617](https://github.com/sitespeedio/browsertime/pull/1617).
