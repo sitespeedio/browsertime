@@ -647,7 +647,7 @@ def eliminate_duplicate_frames(directory):
                     client_viewport = None
 
             # Figure out the region of the image that we care about
-            top = 18
+            top = 20
             right_margin = 10
             bottom_margin = 10
             if height > 400 or width > 400:
