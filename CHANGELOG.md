@@ -1,6 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 13.1.5 - UNRELEASED
+
+### Fixed
+* Updated Throttle to fix when two default interfaces are defined on Linux.
 ## 13.1.4 - 2021-07-28
+### Fixed
 * Increased the default URL bar size for visual metrics from 18 pixel to 20 pixel [#1619](https://github.com/sitespeedio/browsertime/pull/1619).
 
 ## 13.1.3 - UNRELEASED
