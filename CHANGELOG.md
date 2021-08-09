@@ -1,9 +1,14 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 13.1.5 - UNRELEASED
+## 14.0.0 - UNRELEASED
 
+### Changed
+* Updated to Throttle 3.0 that do not set throttling on localhost by default on OS X.
 ### Fixed
 * Updated Throttle to fix when two default interfaces are defined on Linux.
+### Added
+* Make it possible to set Chromdriver port, thank you [Saurav Kumar](https://github.com/svkrclg) for PR [#1620](https://github.com/sitespeedio/browsertime/pull/1620).
+
 ## 13.1.4 - 2021-07-28
 ### Fixed
 * Increased the default URL bar size for visual metrics from 18 pixel to 20 pixel [#1619](https://github.com/sitespeedio/browsertime/pull/1619).
