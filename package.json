@@ -3,7 +3,7 @@
   "version": "13.1.4",
   "bin": "./bin/browsertime.js",
   "dependencies": {
-    "@sitespeed.io/throttle": "3.0.0",
+    "@sitespeed.io/throttle": "2.1.1",
     "@devicefarmer/adbkit": "2.11.3",
     "btoa": "1.2.1",
     "@sitespeed.io/chromedriver": "92.0.4515-43",
@@ -23,7 +23,7 @@
     "lodash.pick": "4.4.0",
     "lodash.set": "4.3.2",
     "selenium-webdriver": "4.0.0-beta.4",
-    "@sitespeed.io/edgedriver": "91.0.864-33",
+    "@sitespeed.io/edgedriver": "92.0.902-62",
     "@sitespeed.io/geckodriver": "0.29.1",
     "@sitespeed.io/tracium": "0.3.3",
     "speedline-core": "1.4.3",
