@@ -1,4 +1,4 @@
-FROM sitespeedio/webbrowsers:chrome-92.0-firefox-91.0-edge-92.0-dev
+FROM sitespeedio/webbrowsers:chrome-92.0-firefox-92.0b-edge-92.0-dev
 
 ENV BROWSERTIME_XVFB true
 ENV BROWSERTIME_CONNECTIVITY__ENGINE external
