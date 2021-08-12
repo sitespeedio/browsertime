@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 14.0.1 - 2021-08-12
+### Fixed
+* More tuning to exclude the top browser bar when calculating visual metrics that fixes too early first visual change when testing emulated mobile using Chrome in Linux [#1623](https://github.com/sitespeedio/browsertime/pull/1623).
 ## 14.0.0 - 2021-08-12
 
 ### Changed
