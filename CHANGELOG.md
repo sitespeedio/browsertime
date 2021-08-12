@@ -8,6 +8,7 @@
 * Updated Throttle to fix when two default interfaces are defined on Linux.
 ### Added
 * Make it possible to set Chromdriver port, thank you [Saurav Kumar](https://github.com/svkrclg) for PR [#1620](https://github.com/sitespeedio/browsertime/pull/1620).
+* Updated to Edge 92, Edgedriver 92 and Firefox 92 beta to get the fix for https://bugzilla.mozilla.org/show_bug.cgi?id=1712983
 
 ## 13.1.4 - 2021-07-28
 ### Fixed
