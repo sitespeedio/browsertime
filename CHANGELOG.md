@@ -1,14 +1,14 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 14.0.0 - UNRELEASED
+## 14.0.0 - 2021-08-12
 
 ### Changed
-* Updated to Throttle 3.0 that do not set throttling on localhost by default on OS X.
+* Updated to Throttle 3.0 that do not set throttling on localhost by default on Mac OS. If you run test against a local server or use WebPageReplay on a Mac, you should add `--connectivity.throttle.localhost` to your test and it will work as before.
 ### Fixed
-* Updated Throttle to fix when two default interfaces are defined on Linux.
+* Updated Throttle to 2.2.1 that fixes when two default interfaces are defined on Linux.
 ### Added
 * Make it possible to set Chromdriver port, thank you [Saurav Kumar](https://github.com/svkrclg) for PR [#1620](https://github.com/sitespeedio/browsertime/pull/1620).
-* Updated to Edge 92, Edgedriver 92 and Firefox 92 beta to get the fix for https://bugzilla.mozilla.org/show_bug.cgi?id=1712983
+* Updated to Edge 92, Edgedriver 92 and Firefox 92 beta to get the fix for https://bugzilla.mozilla.org/show_bug.cgi?id=1712983 in the Docker container.
 
 ## 13.1.4 - 2021-07-28
 ### Fixed
