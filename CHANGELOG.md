@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 14.0.2 - 2021-08-20
+### Fixed
+* Removed that annoying extra line break in the log output [#1626](https://github.com/sitespeedio/browsertime/pull/1626).
+* TTFB was reported as a string instead of a number in the JSON output [#1625](https://github.com/sitespeedio/browsertime/pull/1625).
 ## 14.0.1 - 2021-08-12
 ### Fixed
 * More tuning to exclude the top browser bar when calculating visual metrics that fixes too early first visual change when testing emulated mobile using Chrome in Linux [#1623](https://github.com/sitespeedio/browsertime/pull/1623).
