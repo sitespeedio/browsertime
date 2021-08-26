@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Fixed
+* Catch if Chrome is missing FCP [#1627](https://github.com/sitespeedio/browsertime/pull/1627).
+
 ## 14.0.2 - 2021-08-20
 ### Fixed
 * Removed that annoying extra line break in the log output [#1626](https://github.com/sitespeedio/browsertime/pull/1626).
