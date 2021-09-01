@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 14.1.0 - 2021-09-01
+### Added
+* Updated to Chromedriver 93 and added Chrome 93 in the Docker container [#1630](https://github.com/sitespeedio/browsertime/pull/1630).
+
 ## 14.0.3 - 2021-08-31
 ### Fixed
 * Catch if Chrome is missing FCP [#1627](https://github.com/sitespeedio/browsertime/pull/1627).
