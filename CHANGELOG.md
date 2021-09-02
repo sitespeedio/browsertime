@@ -1,8 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 14.1.0 - 2021-09-01
+
+## UNRELEASED
 ### Added
-* Updated to Chromedriver 93 and added Chrome 93 in the Docker container [#1630](https://github.com/sitespeedio/browsertime/pull/1630).
+* Updated to Selenium 4.0.0-RC1 [#1631](https://github.com/sitespeedio/browsertime/pull/1631).
 
 ## 14.0.3 - 2021-08-31
 ### Fixed
