@@ -1,7 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-
-## UNRELEASED
+## 14.1.0 - 2021-09-04
 ### Added
 * Updated to Selenium 4.0.0-RC1 [#1631](https://github.com/sitespeedio/browsertime/pull/1631).
 ### Fixed
