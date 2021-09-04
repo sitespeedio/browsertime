@@ -4,7 +4,8 @@
 ## UNRELEASED
 ### Added
 * Updated to Selenium 4.0.0-RC1 [#1631](https://github.com/sitespeedio/browsertime/pull/1631).
-
+### Fixed
+* Somehow Throttle has been degraded, with this fix we are back to using 3.0.0.
 ## 14.0.3 - 2021-08-31
 ### Fixed
 * Catch if Chrome is missing FCP [#1627](https://github.com/sitespeedio/browsertime/pull/1627).
