@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 14.2.1 - 2021-09-06
+
+### Fixed
+* Updated Geckodriver dependency that uses a newer version of the tar-package.
 ## 14.2.0 - 2021-09-04
 ### Added
 * Updated to Selenium 4.0.0-RC1 [#1631](https://github.com/sitespeedio/browsertime/pull/1631).
