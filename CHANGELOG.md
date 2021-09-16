@@ -1,5 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 14.3.0 - 2021-09-16
+### Added
+* Update to Edgedriver 93. Update to Edge 93 in the Docker container [#1641](https://github.com/sitespeedio/browsertime/pull/1641).
+* Updated to a new fresh WebPageReplay version in the Docker container [#1635](https://github.com/sitespeedio/browsertime/pull/1635)
+
+### Fixed
+* Enabling verbose logging (-vv and higher) with Chrome, broke tests. Fixed in [#1640](https://github.com/sitespeedio/browsertime/pull/1640).
+
 ## 14.2.1 - 2021-09-06
 
 ### Fixed
