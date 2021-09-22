@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 14.4.0 - 2021-09-22
+### Added
+* Updated to Chromedriver 94 and Chrome 94 in the Docker container [#1643](https://github.com/sitespeedio/browsertime/pull/1643).
 ## 14.3.0 - 2021-09-16
 ### Added
 * Update to Edgedriver 93. Update to Edge 93 in the Docker container [#1641](https://github.com/sitespeedio/browsertime/pull/1641).
