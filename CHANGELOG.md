@@ -1,5 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 14.5.0 - 2021-09-30
+### Added
+* Added CSS selector support for mouse commands [#1645](https://github.com/sitespeedio/browsertime/pull/1645) 
+
+### Fixed
+* Internal refactoring of the mouse command [#1646](https://github.com/sitespeedio/browsertime/pull/1646) and [#1647](https://github.com/sitespeedio/browsertime/pull/1647).
+
 ## 14.4.0 - 2021-09-22
 ### Added
 * Updated to Chromedriver 94 and Chrome 94 in the Docker container [#1643](https://github.com/sitespeedio/browsertime/pull/1643).
