@@ -5,9 +5,9 @@ const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
 
-describe('userTiming', function() {
-  describe('#filterWhitelisted', function() {
-    it('should filter out entries based on a whitelist', function() {
+describe('userTiming', function () {
+  describe('#filterWhitelisted', function () {
+    it('should filter out entries based on a whitelist', function () {
       const timingsFile = path.resolve(
         __dirname,
         '..',

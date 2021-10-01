@@ -10,20 +10,20 @@ if (process.env.BROWSERTIME_TEST_BROWSER) {
 } else {
   BROWSERS.push('chrome');
 }
-describe('command', function() {
+describe('command', function () {
   let engine;
 
   function getPath(file) {
     return path.resolve(__dirname, '..', 'commandscripts', file);
   }
 
-  BROWSERS.forEach(function(browser) {
-    describe('misc - ' + browser, function() {
+  BROWSERS.forEach(function (browser) {
+    describe('misc - ' + browser, function () {
       const scripts = {
         uri: 'document.documentURI'
       };
 
-      beforeEach(async function() {
+      beforeEach(async function () {
         engine = new Engine({
           browser: browser,
           iterations: 1,
@@ -35,7 +35,7 @@ describe('command', function() {
 
       afterEach(() => engine.stop());
 
-      it('should be able to to run Chrome specific commands', async function() {
+      it('should be able to to run Chrome specific commands', async function () {
         const result = await engine.runMultiple([getPath('chrome.js')], {
           scripts
         });

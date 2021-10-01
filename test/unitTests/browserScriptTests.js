@@ -11,11 +11,11 @@ const TEST_SCRIPTS_FOLDER = path.resolve(
   'testscripts'
 );
 
-describe('#parseBrowserScripts', function() {
-  it('should parse valid scripts', function() {
+describe('#parseBrowserScripts', function () {
+  it('should parse valid scripts', function () {
     return parser
       .findAndParseScripts(TEST_SCRIPTS_FOLDER, 'custom')
-      .then(scriptsByCategory => {
+      .then((scriptsByCategory) => {
         const categoryNames = Object.keys(scriptsByCategory);
 
         assert.deepEqual(categoryNames, ['testscripts']);
@@ -29,10 +29,10 @@ describe('#parseBrowserScripts', function() {
       });
   });
 
-  it('should get scripts for all categories', function() {
+  it('should get scripts for all categories', function () {
     return parser.allScriptCategories
-      .then(categories => parser.getScriptsForCategories(categories))
-      .then(scriptsByCategory => {
+      .then((categories) => parser.getScriptsForCategories(categories))
+      .then((scriptsByCategory) => {
         const categoryNames = Object.keys(scriptsByCategory);
 
         assert.deepEqual(categoryNames, ['browser', 'pageinfo', 'timings']);

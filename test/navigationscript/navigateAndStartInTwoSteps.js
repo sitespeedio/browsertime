@@ -1,4 +1,4 @@
-module.exports = async function(context, commands) {
+module.exports = async function (context, commands) {
   await commands.navigate('https://www.sitespeed.io');
   // we fetch the selenium webdriver from context
   const webdriver = context.selenium.webdriver;
