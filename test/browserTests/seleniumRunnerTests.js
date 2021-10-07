@@ -28,11 +28,11 @@ function timeout(promise, ms, errorMessage) {
   ]);
 }
 
-describe('SeleniumRunner', function() {
+describe('SeleniumRunner', function () {
   let runner;
 
-  describe('#start', function() {
-    it('should reject when passed incorrect configuration', function() {
+  describe('#start', function () {
+    it('should reject when passed incorrect configuration', function () {
       runner = new SeleniumRunner(BASE_PATH, {
         browser: 'invalid'
       });
@@ -40,7 +40,7 @@ describe('SeleniumRunner', function() {
     });
 
     if (BROWSERS.includes('chrome')) {
-      it.skip('should handle if Chrome crashes', function() {
+      it.skip('should handle if Chrome crashes', function () {
         runner = new SeleniumRunner(BASE_PATH, {
           browser: 'chrome',
           chrome: {
@@ -51,16 +51,16 @@ describe('SeleniumRunner', function() {
         });
 
         // Wait for session to actually have Chrome start up.
-        return runner.start().catch(function(e) {
+        return runner.start().catch(function (e) {
           throw e;
         }).should.be.rejected;
       });
     }
   });
 
-  BROWSERS.forEach(function(browser) {
-    describe('#loadAndWait - ' + browser, function() {
-      beforeEach(function() {
+  BROWSERS.forEach(function (browser) {
+    describe('#loadAndWait - ' + browser, function () {
+      beforeEach(function () {
         runner = new SeleniumRunner(BASE_PATH, {
           browser: browser,
           timeouts: {
@@ -77,40 +77,40 @@ describe('SeleniumRunner', function() {
         return runner.start();
       });
 
-      it('should be able to load a url', function() {
+      it('should be able to load a url', function () {
         return runner.loadAndWait(
           'https://www.sitespeed.io/testcases/info/domElements.html'
         ).should.be.fulfilled;
       });
-      it.skip('should fail if url takes too long to load, enable this when httpbin works again', function() {
+      it.skip('should fail if url takes too long to load, enable this when httpbin works again', function () {
         return runner.loadAndWait(
           'https://httpbin.org/delay/20',
           'return true'
         ).should.be.rejected;
       });
 
-      it('should fail if wait script never returns true', function() {
+      it('should fail if wait script never returns true', function () {
         return runner.loadAndWait(
           'https://www.sitespeed.io/testcases/info/domElements.html',
           'return false'
         ).should.be.rejected;
       });
 
-      it('should fail if wait script throws an exception', function() {
+      it('should fail if wait script throws an exception', function () {
         return runner.loadAndWait(
           'https://www.sitespeed.io/testcases/info/domElements.html',
           'throw new Error("foo");'
         ).should.be.rejected;
       });
 
-      it.skip('should fail if wait script hangs', function() {
+      it.skip('should fail if wait script hangs', function () {
         return runner.loadAndWait(
           'https://www.sitespeed.io/testcases/info/domElements.html',
           'while (true) {}; return true;'
         ).should.be.rejected;
       });
 
-      afterEach(function() {
+      afterEach(function () {
         return timeout(
           runner.stop(),
           10000,
@@ -119,43 +119,46 @@ describe('SeleniumRunner', function() {
       });
     });
 
-    PAGE_LOAD_STRATEGIES.forEach(function(strategy) {
-      describe('#pageLoadStrategy - ' + browser + ' - ' + strategy, function() {
-        beforeEach(function() {
-          runner = new SeleniumRunner({
-            browser: browser,
-            timeouts: {
-              browserStart: 60000,
-              scripts: 5000,
-              pageLoad: 10000,
-              pageCompleteCheck: 10000
-            },
-            pageLoadStrategy: strategy,
-            headless: true
+    PAGE_LOAD_STRATEGIES.forEach(function (strategy) {
+      describe(
+        '#pageLoadStrategy - ' + browser + ' - ' + strategy,
+        function () {
+          beforeEach(function () {
+            runner = new SeleniumRunner({
+              browser: browser,
+              timeouts: {
+                browserStart: 60000,
+                scripts: 5000,
+                pageLoad: 10000,
+                pageCompleteCheck: 10000
+              },
+              pageLoadStrategy: strategy,
+              headless: true
+            });
+            return runner.start().then(function () {
+              return runner.loadAndWait('data:text/html;charset=utf-8,');
+            });
           });
-          return runner.start().then(function() {
-            return runner.loadAndWait('data:text/html;charset=utf-8,');
+
+          it('should be able to load a url', function () {
+            return runner.loadAndWait(
+              'https://www.sitespeed.io/testcases/info/domElements.html'
+            ).should.be.fulfilled;
           });
-        });
 
-        it('should be able to load a url', function() {
-          return runner.loadAndWait(
-            'https://www.sitespeed.io/testcases/info/domElements.html'
-          ).should.be.fulfilled;
-        });
-
-        afterEach(function() {
-          return timeout(
-            runner.stop(),
-            10000,
-            'Waited for ' + browser + ' to quit for too long'
-          );
-        });
-      });
+          afterEach(function () {
+            return timeout(
+              runner.stop(),
+              10000,
+              'Waited for ' + browser + ' to quit for too long'
+            );
+          });
+        }
+      );
     });
 
-    describe('#runScript - ' + browser, function() {
-      beforeEach(function() {
+    describe('#runScript - ' + browser, function () {
+      beforeEach(function () {
         runner = new SeleniumRunner({
           browser: browser,
           timeouts: {
@@ -167,32 +170,32 @@ describe('SeleniumRunner', function() {
           pageLoadStrategy: 'normal',
           headless: true
         });
-        return runner.start().then(function() {
+        return runner.start().then(function () {
           return runner.loadAndWait('data:text/html;charset=utf-8,');
         });
       });
 
-      it('should handle a boolean return', function() {
+      it('should handle a boolean return', function () {
         return runner.runScript('return true;').should.become(true);
       });
 
-      it('should handle a number return', function() {
+      it('should handle a number return', function () {
         return runner.runScript('return 42;').should.become(42);
       });
 
-      it('should handle an object return', function() {
+      it('should handle an object return', function () {
         return runner
           .runScript('return window.performance.timing;')
           .should.eventually.contain.all.keys('fetchStart', 'domInteractive');
       });
 
-      it('should handle an array return', function() {
+      it('should handle an array return', function () {
         return runner
           .runScript('return window.performance.getEntriesByType("resource");')
           .should.eventually.be.an('array');
       });
 
-      it('should fail if script throws an exception', function() {
+      it('should fail if script throws an exception', function () {
         return runner.runScript('throw new Error("foo");').should.be.rejected;
       });
 
@@ -206,13 +209,13 @@ describe('SeleniumRunner', function() {
        at Context.<anonymous> (/Users/tobli/Development/btnext/test/seleniumRunnerTests.js:93:75)
        */
 
-      it.skip('should fail if script hangs', function() {
+      it.skip('should fail if script hangs', function () {
         return runner.runScript(
           'while (true) {}; return true;'
         ).should.be.rejected;
       });
 
-      afterEach(function() {
+      afterEach(function () {
         return timeout(
           runner.stop(),
           10000,
@@ -221,8 +224,8 @@ describe('SeleniumRunner', function() {
       });
     });
 
-    describe('#takeScreenshot - ' + browser, function() {
-      beforeEach(function() {
+    describe('#takeScreenshot - ' + browser, function () {
+      beforeEach(function () {
         runner = new SeleniumRunner(BASE_PATH, {
           browser: browser,
           timeouts: {
@@ -233,12 +236,12 @@ describe('SeleniumRunner', function() {
           },
           headless: true
         });
-        return runner.start().then(function() {
+        return runner.start().then(function () {
           return runner.loadAndWait('data:text/html;charset=utf-8,');
         });
       });
 
-      it('should take a screen shot', function() {
+      it('should take a screen shot', function () {
         return runner
           .takeScreenshot()
           .should.eventually.be.an.instanceof(Buffer);

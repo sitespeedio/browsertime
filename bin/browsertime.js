@@ -11,7 +11,7 @@ const fs = require('fs');
 const path = require('path');
 const log = require('intel').getLogger('browsertime');
 const engineUtils = require('../lib/support/engineUtils');
-const AsyncFunction = Object.getPrototypeOf(async function() {}).constructor;
+const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 async function parseUserScripts(scripts) {

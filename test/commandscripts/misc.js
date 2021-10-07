@@ -1,4 +1,4 @@
-module.exports = async function(context, commands) {
+module.exports = async function (context, commands) {
   await commands.navigate('https://www.sitespeed.io/search/');
   await commands.addText.byId('grafana', 'search-input');
   await commands.set.innerTextById('grafana2', 'search-input');

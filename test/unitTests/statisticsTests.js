@@ -3,15 +3,15 @@
 let assert = require('assert'),
   Statistics = require('../../lib/support/statistics').Statistics;
 
-describe('statistics', function() {
+describe('statistics', function () {
   let stats;
 
-  beforeEach(function() {
+  beforeEach(function () {
     stats = new Statistics();
   });
 
-  describe('#add', function() {
-    it('should be possible to add multiple keys', function() {
+  describe('#add', function () {
+    it('should be possible to add multiple keys', function () {
       for (let i = 0; i < 11; i++) {
         stats.add('foo', i + 1);
         stats.add('bar', 11 - i);
@@ -20,36 +20,36 @@ describe('statistics', function() {
       assert.deepEqual(result.foo, result.bar);
     });
 
-    it('should handle keys with dots', function() {
+    it('should handle keys with dots', function () {
       stats.add('1.2.3', 42.0);
       let result = stats.summarize();
       assert.deepEqual(result['1.2.3'].mean, 42.0);
     });
 
-    it('should require string keys', function() {
-      assert.throws(function() {
+    it('should require string keys', function () {
+      assert.throws(function () {
         stats.add(3, 3);
       }, TypeError);
     });
 
-    it('should require numeric values', function() {
-      assert.throws(function() {
+    it('should require numeric values', function () {
+      assert.throws(function () {
         stats.add('a', 'a');
       }, TypeError);
     });
 
-    it('should require finite values', function() {
-      assert.throws(function() {
+    it('should require finite values', function () {
+      assert.throws(function () {
         stats.add('a', NaN);
       }, RangeError);
-      assert.throws(function() {
+      assert.throws(function () {
         stats.add('a', Infinity);
       }, RangeError);
     });
   });
 
-  describe('#addAll', function() {
-    it('should be possible to add an object with numeric values', function() {
+  describe('#addAll', function () {
+    it('should be possible to add an object with numeric values', function () {
       stats.addAll({
         a: 1,
         b: 2,
@@ -71,7 +71,7 @@ describe('statistics', function() {
       assert.equal(result.a.mean, result.b.mean);
     });
 
-    it('should be possible to add an array of objects with numeric values', function() {
+    it('should be possible to add an array of objects with numeric values', function () {
       let samples = [
         {
           a: 1,
@@ -98,8 +98,8 @@ describe('statistics', function() {
     });
   });
 
-  describe('#addDeep', function() {
-    it('should be possible to add a deep structure', function() {
+  describe('#addDeep', function () {
+    it('should be possible to add a deep structure', function () {
       stats.addDeep({
         a: 1,
         b: {
@@ -166,8 +166,8 @@ describe('statistics', function() {
     });
   });
 
-  describe('#summarize', function() {
-    it('should summarize correctly', function() {
+  describe('#summarize', function () {
+    it('should summarize correctly', function () {
       stats.addAll({
         a: 1,
         b: 2,
@@ -193,7 +193,7 @@ describe('statistics', function() {
       assert.deepEqual(result.a, result.c);
     });
 
-    it('should summarize specified percentiles', function() {
+    it('should summarize specified percentiles', function () {
       stats.addAll({
         a: 1,
         b: 2,
