@@ -1,7 +1,8 @@
 'use strict';
 
 let parser = require('../../lib/connectivity/trafficShapeParser'),
-  expect = require('chai').expect;
+  expect = require('chai').expect,
+  assert = require('assert');
 
 describe('traffic_shape_parser', function () {
   describe('#parseTrafficShapeConfig', function () {
@@ -14,7 +15,7 @@ describe('traffic_shape_parser', function () {
         let shapeConfig = parser.parseTrafficShapeConfig({
           connectivity: { profile: name }
         });
-        shapeConfig.should.deep.equal(profile);
+        assert.deepEqual(shapeConfig, profile);
       });
     });
 
