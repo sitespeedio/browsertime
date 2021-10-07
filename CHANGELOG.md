@@ -4,6 +4,8 @@
 ### Added
 * Updated to Selenium 4 RC 2 [#1648](https://github.com/sitespeedio/browsertime/pull/1648).
 * You can skip setting Browsertime default Firefox preferences with `--firefox.noDefaultPrefs`, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1650](https://github.com/sitespeedio/browsertime/pull/1650).
+* You can skip setting Browsertime default Chrome options with `--chrome.noDefaultOptions`, fixed in [#1651](https://github.com/sitespeedio/browsertime/pull/1651).
+* Updated to Firefox 93 in the Docker container.
 ## 14.5.0 - 2021-09-30
 ### Added
 * Added CSS selector support for mouse commands [#1645](https://github.com/sitespeedio/browsertime/pull/1645) 
