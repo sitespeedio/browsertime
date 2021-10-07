@@ -1,4 +1,4 @@
-module.exports = async function(context, commands) {
+module.exports = async function (context, commands) {
   const responses = [];
   await commands.cdp.on('Network.responseReceived', params => {
     responses.push(params);

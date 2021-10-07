@@ -1,4 +1,4 @@
-module.exports = async function(context, commands) {
+module.exports = async function (context, commands) {
   await commands.measure.start('scroll');
   await commands.navigate('https://github.com/sitespeedio/browsertime');
   await commands.wait.byTime(1000);

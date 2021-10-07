@@ -3,10 +3,10 @@
 let builder = require('../../lib/support/har/'),
   expect = require('chai').expect;
 
-describe('har_builder', function() {
+describe('har_builder', function () {
   let har;
 
-  beforeEach(function() {
+  beforeEach(function () {
     har = {
       log: {
         version: '1.2',
@@ -29,22 +29,22 @@ describe('har_builder', function() {
     };
   });
 
-  describe('#addCreator', function() {
-    it('should add creator if missing', function() {
+  describe('#addCreator', function () {
+    it('should add creator if missing', function () {
       builder.addCreator(har, 'foo');
 
       expect(har).to.have.nested.property('log.creator.name', 'Browsertime');
       expect(har).to.have.nested.property('log.creator.comment', 'foo');
     });
 
-    it('should not add comment to creator unless specified', function() {
+    it('should not add comment to creator unless specified', function () {
       builder.addCreator(har);
 
       expect(har).to.have.nested.property('log.creator.name', 'Browsertime');
       expect(har).to.not.have.nested.property('log.creator.comment');
     });
 
-    it('should not add empty comment to creator', function() {
+    it('should not add empty comment to creator', function () {
       builder.addCreator(har, '');
 
       expect(har).to.have.nested.property('log.creator.name', 'Browsertime');
@@ -52,8 +52,8 @@ describe('har_builder', function() {
     });
   });
 
-  describe('#mergeHars', function() {
-    it('should merge two hars', function() {
+  describe('#mergeHars', function () {
+    it('should merge two hars', function () {
       builder.addCreator(har);
 
       let har2 = {
@@ -115,11 +115,11 @@ describe('har_builder', function() {
     });
   });
 
-  describe('#addExtraFieldsToHar', function() {
+  describe('#addExtraFieldsToHar', function () {
     let options;
     let totalResults;
 
-    beforeEach(function() {
+    beforeEach(function () {
       options = {
         iterations: 1
       };
@@ -163,11 +163,11 @@ describe('har_builder', function() {
       ];
     });
 
-    it('should gracefully handle missing data', function() {
+    it('should gracefully handle missing data', function () {
       builder.addExtraFieldsToHar();
     });
 
-    it('should add visual metrics if given', function() {
+    it('should add visual metrics if given', function () {
       har.log.pages[0].pageTimings = {};
       builder.addExtraFieldsToHar(totalResults, har, options);
 
@@ -181,9 +181,9 @@ describe('har_builder', function() {
           PerceptualSpeedIndex: 200,
           ContentfulSpeedIndex: 300,
           VisualProgress: {
-            '0': 0,
-            '10': 50,
-            '20': 100
+            0: 0,
+            10: 50,
+            20: 100
           }
         },
         pageTimings: {
@@ -198,7 +198,7 @@ describe('har_builder', function() {
       });
     });
 
-    it('should gracefully handle missing cpu and visual metrics', function() {
+    it('should gracefully handle missing cpu and visual metrics', function () {
       har.log.pages[0].pageTimings = {};
       totalResults[0].visualMetrics = [];
       totalResults[0].cpu = [{}];

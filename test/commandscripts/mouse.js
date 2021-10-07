@@ -1,4 +1,4 @@
-module.exports = async function(context, commands) {
+module.exports = async function (context, commands) {
   await commands.navigate('https://www.sitespeed.io/documentation/');
   await commands.wait.byTime(1000);
   await commands.mouse.contextClick.byXpath(

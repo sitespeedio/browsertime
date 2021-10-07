@@ -12,18 +12,18 @@ if (process.env.BROWSERTIME_TEST_BROWSER) {
   BROWSERS.push('chrome', 'firefox');
 }
 
-describe('Engine', function() {
+describe('Engine', function () {
   let engine;
 
-  BROWSERS.forEach(function(browser) {
-    describe('#run - ' + browser, function() {
+  BROWSERS.forEach(function (browser) {
+    describe('#run - ' + browser, function () {
       const scripts = {
         foo: '(function () {return "fff";})()',
         uri: 'document.documentURI',
         fourtytwo: '(function () {return 42;})()'
       };
 
-      beforeEach(function() {
+      beforeEach(function () {
         engine = new Engine({
           browser: browser,
           iterations: 2,
@@ -34,13 +34,13 @@ describe('Engine', function() {
         return engine.start();
       });
 
-      it('should be able to load a url', function() {
+      it('should be able to load a url', function () {
         // somewhat clunky way to ignore generated har data in test.
         let browserScripts = engine
           .run('https://www.sitespeed.io/testcases/info/domElements.html', {
             scripts
           })
-          .then(function(r) {
+          .then(function (r) {
             return r[0].browserScripts;
           });
         return browserScripts.should.become([
@@ -61,25 +61,25 @@ describe('Engine', function() {
         ]);
       });
 
-      it('should be able to load multiple urls', function() {
+      it('should be able to load multiple urls', function () {
         return engine
           .run('https://www.sitespeed.io/testcases/info/domElements.html', {
             scripts
           })
-          .then(function() {
+          .then(function () {
             return engine.run(
               'https://www.sitespeed.io/testcases/info/responsive.html',
               { scripts }
             );
           }).should.be.fulfilled;
       });
-      it('should be able to generate a har', function() {
+      it('should be able to generate a har', function () {
         // somewhat clunky way to ignore generated har data in test.
         return engine
           .run('https://www.sitespeed.io/testcases/info/domElements.html', {
             scripts
           })
-          .then(function(r) {
+          .then(function (r) {
             return r.har.should.have.nested.property(
               'log.entries[0].request.url'
             );
@@ -94,7 +94,7 @@ describe('Engine', function() {
       );
     });
 
-    describe('#run async - ' + browser, function() {
+    describe('#run async - ' + browser, function () {
       const syncScripts = {
           foo: '(function () {return "fff";})()',
           uri: 'document.documentURI',
@@ -104,7 +104,7 @@ describe('Engine', function() {
           promiseFourtyThree: 'Promise.resolve(43)'
         };
 
-      beforeEach(function() {
+      beforeEach(function () {
         engine = new Engine({
           browser: browser,
           iterations: 1,
@@ -113,14 +113,14 @@ describe('Engine', function() {
         return engine.start();
       });
 
-      it('should be able to run async script', function() {
+      it('should be able to run async script', function () {
         let browserScripts = engine
           .run(
             'https://www.sitespeed.io/testcases/info/domElements.html',
             { scripts: syncScripts },
             { scripts: asyncScripts }
           )
-          .then(function(r) {
+          .then(function (r) {
             return r[0].browserScripts;
           });
         return browserScripts.should.become([
@@ -135,7 +135,7 @@ describe('Engine', function() {
         ]);
       });
 
-      it('should be able to run async fetch script', function() {
+      it('should be able to run async fetch script', function () {
         let browserScripts = engine
           .run(
             'https://www.sitespeed.io/testcases/info/domElements.html',
@@ -153,7 +153,7 @@ describe('Engine', function() {
               }
             }
           )
-          .then(function(r) {
+          .then(function (r) {
             return r[0].browserScripts;
           });
         return browserScripts.should.become([
@@ -173,7 +173,7 @@ describe('Engine', function() {
       );
     });
 
-    describe('#pre/post scripts - ' + browser, function() {
+    describe('#pre/post scripts - ' + browser, function () {
       function loadTaskFile(file) {
         return require(path.resolve(__dirname, '..', 'prepostscripts', file));
       }
@@ -184,7 +184,7 @@ describe('Engine', function() {
         fourtytwo: '(function () {return 42;})()'
       };
 
-      beforeEach(function() {
+      beforeEach(function () {
         engine = new Engine({
           browser: browser,
           iterations: 1,
@@ -195,7 +195,7 @@ describe('Engine', function() {
         return engine.start();
       });
 
-      it('should run pre and post tasks', function() {
+      it('should run pre and post tasks', function () {
         return engine.run('data:text/html;charset=utf-8,', { scripts });
       });
 
@@ -207,14 +207,14 @@ describe('Engine', function() {
       );
     });
 
-    describe('#pageCompleteCheck inline - ' + browser, function() {
+    describe('#pageCompleteCheck inline - ' + browser, function () {
       const scripts = {
         foo: '(function () {return "fff";})()',
         uri: 'document.documentURI',
         fourtytwo: '(function () {return 42;})()'
       };
 
-      beforeEach(function() {
+      beforeEach(function () {
         engine = new Engine({
           browser: browser,
           iterations: 1,
@@ -225,7 +225,7 @@ describe('Engine', function() {
         return engine.start();
       });
 
-      it('should run 5-second pageCompleteCheck from inline javascript', function() {
+      it('should run 5-second pageCompleteCheck from inline javascript', function () {
         return engine.run('data:text/html;charset=utf-8,', { scripts });
       });
 
@@ -237,14 +237,14 @@ describe('Engine', function() {
       );
     });
 
-    describe('#pageCompleteScript from file - ' + browser, function() {
+    describe('#pageCompleteScript from file - ' + browser, function () {
       const scripts = {
         foo: '(function () {return "fff";})()',
         uri: 'document.documentURI',
         fourtytwo: '(function () {return 42;})()'
       };
 
-      beforeEach(function() {
+      beforeEach(function () {
         engine = new Engine({
           browser: browser,
           iterations: 1,
@@ -254,7 +254,7 @@ describe('Engine', function() {
         return engine.start();
       });
 
-      it('should run 10-second pageCompleteScript from script file', function() {
+      it('should run 10-second pageCompleteScript from script file', function () {
         return engine.run('data:text/html;charset=utf-8,', { scripts });
       });
 

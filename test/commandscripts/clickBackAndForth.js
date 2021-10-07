@@ -1,4 +1,4 @@
-module.exports = async function(context, commands) {
+module.exports = async function (context, commands) {
   await commands.navigate('https://www.sitespeed.io/');
   await commands.click.byPartialLinkTextAndWait('Blo');
   await commands.click.bySelectorAndWait(

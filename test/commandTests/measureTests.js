@@ -10,20 +10,20 @@ if (process.env.BROWSERTIME_TEST_BROWSER) {
 } else {
   BROWSERS.push('chrome', 'firefox');
 }
-describe('command', function() {
+describe('command', function () {
   let engine;
 
   function getPath(file) {
     return path.resolve(__dirname, '..', 'commandscripts', file);
   }
 
-  BROWSERS.forEach(function(browser) {
-    describe('measure - ' + browser, function() {
+  BROWSERS.forEach(function (browser) {
+    describe('measure - ' + browser, function () {
       const scripts = {
         uri: 'document.documentURI'
       };
 
-      beforeEach(async function() {
+      beforeEach(async function () {
         engine = new Engine({
           browser: browser,
           iterations: 1,
@@ -35,7 +35,7 @@ describe('command', function() {
 
       afterEach(() => engine.stop());
 
-      it('should be able to measure two urls after each other', async function() {
+      it('should be able to measure two urls after each other', async function () {
         const result = await engine.runMultiple([getPath('measure.js')], {
           scripts
         });
@@ -47,7 +47,7 @@ describe('command', function() {
         );
       });
 
-      it('should be able to give each URL an alias', async function() {
+      it('should be able to give each URL an alias', async function () {
         const result = await engine.runMultiple([getPath('measureAlias.js')], {
           scripts
         });

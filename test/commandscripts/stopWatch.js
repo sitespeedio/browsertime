@@ -1,4 +1,4 @@
-module.exports = async function(context, commands) {
+module.exports = async function (context, commands) {
   const before = commands.stopWatch.get('Before_navigating_page');
   await commands.navigate('https://www.sitespeed.io/search/');
   before.stop();

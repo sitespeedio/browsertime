@@ -11,8 +11,8 @@ const TEST_SCRIPTS_FOLDER = path.resolve(
   'testscripts'
 );
 
-describe('#parseBrowserScripts', function() {
-  it('should parse valid scripts', function() {
+describe('#parseBrowserScripts', function () {
+  it('should parse valid scripts', function () {
     return parser
       .findAndParseScripts(TEST_SCRIPTS_FOLDER, 'custom')
       .then(scriptsByCategory => {
@@ -29,7 +29,7 @@ describe('#parseBrowserScripts', function() {
       });
   });
 
-  it('should get scripts for all categories', function() {
+  it('should get scripts for all categories', function () {
     return parser.allScriptCategories
       .then(categories => parser.getScriptsForCategories(categories))
       .then(scriptsByCategory => {
