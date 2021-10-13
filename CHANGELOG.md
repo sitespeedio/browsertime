@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 14.6.0 - UNRELEASED
+## 14.6.0 - 2021-10-13
 ### Added
 * Updated to Selenium 4.0.0 [#1655](https://github.com/sitespeedio/browsertime/pull/1655).
 * You can skip setting Browsertime default Firefox preferences with `--firefox.noDefaultPrefs`, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1650](https://github.com/sitespeedio/browsertime/pull/1650).
