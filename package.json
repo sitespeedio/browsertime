@@ -22,7 +22,7 @@
     "lodash.merge": "4.6.2",
     "lodash.pick": "4.4.0",
     "lodash.set": "4.3.2",
-    "selenium-webdriver": "4.0.0-rc-2",
+    "selenium-webdriver": "4.0.0",
     "@sitespeed.io/edgedriver": "93.0.910-5",
     "@sitespeed.io/geckodriver": "0.29.1-2",
     "@sitespeed.io/tracium": "0.3.3",
