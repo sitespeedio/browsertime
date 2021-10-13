@@ -1,11 +1,15 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 14.6.0 - UNRELEASED
 ### Added
-* Updated to Selenium 4 RC 2 [#1648](https://github.com/sitespeedio/browsertime/pull/1648).
+* Updated to Selenium 4.0.0 [#1655](https://github.com/sitespeedio/browsertime/pull/1655).
 * You can skip setting Browsertime default Firefox preferences with `--firefox.noDefaultPrefs`, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1650](https://github.com/sitespeedio/browsertime/pull/1650).
 * You can skip setting Browsertime default Chrome options with `--chrome.noDefaultOptions`, fixed in [#1651](https://github.com/sitespeedio/browsertime/pull/1651).
 * Updated to Firefox 93 in the Docker container.
+
+### Fixed
+* Updated eslint and prettier dependencies [#1652](https://github.com/sitespeedio/browsertime/pull/1652).
+* Log Firefox preference and Chrome args on debug level [#1654](https://github.com/sitespeedio/browsertime/pull/1654)
 ## 14.5.0 - 2021-09-30
 ### Added
 * Added CSS selector support for mouse commands [#1645](https://github.com/sitespeedio/browsertime/pull/1645) 
