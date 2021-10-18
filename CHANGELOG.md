@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 14.6.1 - 2021-10-18
+### Fixed
+* If loading the URL fails (we get an exception, the browser crashes etc) make sure we stop the video correctly so it can be used [#1657](https://github.com/sitespeedio/browsertime/pull/1657).
+
+
 ## 14.6.0 - 2021-10-13
 ### Added
 * Updated to Selenium 4.0.0 [#1655](https://github.com/sitespeedio/browsertime/pull/1655).
