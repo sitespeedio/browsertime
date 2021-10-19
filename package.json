@@ -34,10 +34,10 @@
     "jimp": "0.16.1"
   },
   "devDependencies": {
-    "bluebird": "3.5.5",
+    "bluebird": "3.7.2",
     "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
-    "eslint": "7.32.0",
+    "eslint": "8.0.1",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "4.0.0",
     "longjohn": "0.2.12",
