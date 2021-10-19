@@ -9,10 +9,10 @@
     "@sitespeed.io/chromedriver": "94.0.4606-41",
     "chrome-har": "0.11.12",
     "chrome-remote-interface": "0.31.0",
-    "dayjs": "1.10.5",
+    "dayjs": "1.10.7",
     "execa": "5.1.1",
     "fast-stats": "0.0.6",
-    "find-up": "5.0.0",
+    "find-up": "6.2.0",
     "get-port": "5.1.1",
     "hasbin": "1.2.3",
     "intel": "1.2.0",
@@ -28,7 +28,7 @@
     "@sitespeed.io/tracium": "0.3.3",
     "speedline-core": "1.4.3",
     "@cypress/xvfb": "1.2.4",
-    "yargs": "17.0.1"
+    "yargs": "17.2.1"
   },
   "optionalDependencies": {
     "jimp": "0.16.1"
