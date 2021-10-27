@@ -1,5 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 14.8.0 - 2021-10-27
+### Added
+* New Edgedriver 95 and Edge 95 in the Docker container [#1665](https://github.com/sitespeedio/browsertime/pull/1665).
+
+### Fixed
+* Fix for storing Firefox memory report and geckoprofile on Android 10+. Thank you [Andrew Creskey](https://github.com/acreskeyMoz) for PR [#1663](https://github.com/sitespeedio/browsertime/pull/1663).
 
 ## 14.7.0 - 2021-10-20
 ### Added
