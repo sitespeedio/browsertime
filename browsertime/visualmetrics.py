@@ -167,7 +167,8 @@ def extract_frames(video, directory, full_resolution, viewport):
             crop + scale + decimate + "=0:64:640:0.001",
             os.path.join(dir_escaped, "img-%d.png"),
         ]
-        logging.debug(" ".join(command))
+        logging.info("sparky - starting run")
+        logging.info(" ".join(command))
         lines = []
         if (sys.version_info > (3, 0)):
              proc = subprocess.Popen(command, stderr=subprocess.PIPE, encoding='UTF-8')
@@ -179,6 +180,8 @@ def extract_frames(video, directory, full_resolution, viewport):
         pattern = re.compile(r"keep pts:[0-9]+ pts_time:(?P<timecode>[0-9\.]+)")
         frame_count = 0
         for line in lines:
+            logging.info("sparky - ending run")
+            logging.info("sparky line: " + line)
             match = re.search(pattern, line)
             if match:
                 frame_count += 1
@@ -190,6 +193,7 @@ def extract_frames(video, directory, full_resolution, viewport):
                 logging.debug("Renaming " + src + " to " + dest)
                 os.rename(src, dest)
                 ret = True
+        logging.info("sparky done")
     return ret
 
 
