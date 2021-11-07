@@ -1,9 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
 
-## 14.9.0 - UNRELEASED
+## 14.9.0 - 2021-11-07
 ### Added
 * Updated to new Chome HAR PR [#1666](https://github.com/sitespeedio/browsertime/pull/1666) that inlcudes chunk information.
+
+### Fixed
+* Updated to yargs 17.2.1 [#1667](https://github.com/sitespeedio/browsertime/pull/1667).
 ## 14.8.0 - 2021-10-27
 ### Added
 * New Edgedriver 95 and Edge 95 in the Docker container [#1665](https://github.com/sitespeedio/browsertime/pull/1665).
