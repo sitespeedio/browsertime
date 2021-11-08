@@ -72,6 +72,7 @@ def video_to_frames(
     multiple,
     find_viewport,
     viewport_time,
+    viewport_retries,
     full_resolution,
     timeline_file,
     trim_end,
@@ -93,7 +94,7 @@ def video_to_frames(
             if os.path.isdir(directory):
                 directory = os.path.realpath(directory)
                 viewport = find_video_viewport(
-                    video, directory, find_viewport, viewport_time
+                    video, directory, find_viewport, viewport_time, viewport_retries
                 )
                 gc.collect()
                 if extract_frames(video, directory, full_resolution, viewport):
@@ -167,8 +168,7 @@ def extract_frames(video, directory, full_resolution, viewport):
             crop + scale + decimate + "=0:64:640:0.001",
             os.path.join(dir_escaped, "img-%d.png"),
         ]
-        logging.info("sparky - starting run")
-        logging.info(" ".join(command))
+        logging.debug(" ".join(command))
         lines = []
         if (sys.version_info > (3, 0)):
              proc = subprocess.Popen(command, stderr=subprocess.PIPE, encoding='UTF-8')
@@ -180,8 +180,6 @@ def extract_frames(video, directory, full_resolution, viewport):
         pattern = re.compile(r"keep pts:[0-9]+ pts_time:(?P<timecode>[0-9\.]+)")
         frame_count = 0
         for line in lines:
-            logging.info("sparky - ending run")
-            logging.info("sparky line: " + line)
             match = re.search(pattern, line)
             if match:
                 frame_count += 1
@@ -193,7 +191,6 @@ def extract_frames(video, directory, full_resolution, viewport):
                 logging.debug("Renaming " + src + " to " + dest)
                 os.rename(src, dest)
                 ret = True
-        logging.info("sparky done")
     return ret
 
 
@@ -358,65 +355,88 @@ def find_image_viewport(file):
     return viewport
 
 
-def find_video_viewport(video, directory, find_viewport, viewport_time):
+def find_video_viewport(video, directory, find_viewport, viewport_time, viewport_retries=3):
     logging.debug("Finding Video Viewport...")
     viewport = None
     try:
         from PIL import Image
 
-        frame = os.path.join(directory, "viewport.png")
-        if os.path.isfile(frame):
-            os.remove(frame)
-        command = ["ffmpeg", "-i", video]
-        if viewport_time:
-            command.extend(["-ss", viewport_time])
-        command.extend(["-frames:v", "1", frame])
-        subprocess.check_output(command)
-        if os.path.isfile(frame):
-            with Image.open(frame) as im:
-                width, height = im.size
-                logging.debug("%s is %dx%d", frame, width, height)
-            if options.notification:
-                im = Image.open(frame)
-                pixels = im.load()
-                middle = int(math.floor(height / 2))
-                # Find the top edge (at ~40% in to deal with browsers that
-                # color the notification area)
-                x = int(width * 0.4)
-                y = 0
-                background = pixels[x, y]
-                top = None
-                while top is None and y < middle:
-                    if not colors_are_similar(background, pixels[x, y]):
-                        top = y
-                    else:
-                        y += 1
-                if top is None:
-                    top = 0
-                logging.debug("Window top edge is {0:d}".format(top))
+        retries = -1
+        while viewport is None or viewport["height"] == 0 or viewport["width"] == 0:
+            retries += 1
+            if retries >= 1:
+                # In some cases, the first frame is not an orange screen or a screen
+                # with a solid color. In this case, we need to try finding the viewport
+                # using the next frame. The `viewport_retries` dictates the maximum number
+                # of frames to check.
+                if retries >= viewport_retries:
+                    logging.exception(
+                        "Could not calculate a viewport after %s tries.", viewport_retries
+                    )
+                    break
+                logging.info("Failed to find a good viewport. Retrying...")
 
-                # Find the bottom edge
-                x = 0
-                y = height - 1
-                bottom = None
-                while bottom is None and y > middle:
-                    if not colors_are_similar(background, pixels[x, y]):
-                        bottom = y
-                    else:
-                        y -= 1
-                if bottom is None:
-                    bottom = height - 1
-                logging.debug("Window bottom edge is {0:d}".format(bottom))
+            logging.debug("Using frame " + str(retries))
 
-                viewport = {"x": 0, "y": top, "width": width, "height": (bottom - top)}
+            frame = os.path.join(directory, "viewport.png")
+            if os.path.isfile(frame):
+                os.remove(frame)
 
-            elif find_viewport:
-                viewport = find_image_viewport(frame)
-            else:
-                viewport = {"x": 0, "y": 0, "width": width, "height": height}
-            os.remove(frame)
+            command = ["ffmpeg", "-i", video]
+            if viewport_time:
+                command.extend(["-ss", viewport_time])
 
-    except Exception:
+            # Pull one frame from the video starting with the frame at
+            # the `retries` index
+            command.extend(["-vf", "select=gte(n\\,%s)" % retries])
+            command.extend(["-frames:v", "1", frame])
+            subprocess.check_output(command)
+
+            if os.path.isfile(frame):
+                with Image.open(frame) as im:
+                    width, height = im.size
+                    logging.debug("%s is %dx%d", frame, width, height)
+                if options.notification:
+                    im = Image.open(frame)
+                    pixels = im.load()
+                    middle = int(math.floor(height / 2))
+                    # Find the top edge (at ~40% in to deal with browsers that
+                    # color the notification area)
+                    x = int(width * 0.4)
+                    y = 0
+                    background = pixels[x, y]
+                    top = None
+                    while top is None and y < middle:
+                        if not colors_are_similar(background, pixels[x, y]):
+                            top = y
+                        else:
+                            y += 1
+                    if top is None:
+                        top = 0
+                    logging.debug("Window top edge is {0:d}".format(top))
+
+                    # Find the bottom edge
+                    x = 0
+                    y = height - 1
+                    bottom = None
+                    while bottom is None and y > middle:
+                        if not colors_are_similar(background, pixels[x, y]):
+                            bottom = y
+                        else:
+                            y -= 1
+                    if bottom is None:
+                        bottom = height - 1
+                    logging.debug("Window bottom edge is {0:d}".format(bottom))
+
+                    viewport = {"x": 0, "y": top, "width": width, "height": (bottom - top)}
+
+                elif find_viewport:
+                    viewport = find_image_viewport(frame)
+                else:
+                    viewport = {"x": 0, "y": 0, "width": width, "height": height}
+                os.remove(frame)
+
+    except Exception as e:
         viewport = None
 
     return viewport
@@ -2086,6 +2106,14 @@ def main():
         "(in HH:MM:SS.xx format).",
     )
     parser.add_argument(
+        "--viewportretries",
+        type=int,
+        default=5,
+        help="Number of times to attempt to obtain a viewport. Analagous to the "
+        "number of frames to try to find a viewport with. By default, up to the "
+        "first 5 frames are used.",
+    )
+    parser.add_argument(
         "-s",
         "--start",
         type=int,
@@ -2289,6 +2317,7 @@ def main():
                     options.multiple,
                     options.viewport,
                     options.viewporttime,
+                    options.viewportretries,
                     options.full,
                     options.timeline,
                     options.trimend,
