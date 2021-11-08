@@ -73,6 +73,8 @@ def video_to_frames(
     find_viewport,
     viewport_time,
     viewport_retries,
+    viewport_min_height,
+    viewport_min_width,
     full_resolution,
     timeline_file,
     trim_end,
@@ -94,7 +96,13 @@ def video_to_frames(
             if os.path.isdir(directory):
                 directory = os.path.realpath(directory)
                 viewport = find_video_viewport(
-                    video, directory, find_viewport, viewport_time, viewport_retries
+                    video,
+                    directory,
+                    find_viewport,
+                    viewport_time,
+                    viewport_retries,
+                    viewport_min_height,
+                    viewport_min_width,
                 )
                 gc.collect()
                 if extract_frames(video, directory, full_resolution, viewport):
@@ -355,14 +363,27 @@ def find_image_viewport(file):
     return viewport
 
 
-def find_video_viewport(video, directory, find_viewport, viewport_time, viewport_retries=3):
+def find_video_viewport(
+    video,
+    directory,
+    find_viewport,
+    viewport_time,
+    viewport_retries,
+    viewport_min_height,
+    viewport_min_width
+):
     logging.debug("Finding Video Viewport...")
     viewport = None
     try:
         from PIL import Image
 
         retries = -1
-        while viewport is None or viewport["height"] == 0 or viewport["width"] == 0:
+
+        while (
+            viewport is None or
+            viewport["height"] <= viewport_min_height or
+            viewport["width"] <= viewport_min_width
+        ):
             retries += 1
             if retries >= 1:
                 # In some cases, the first frame is not an orange screen or a screen
@@ -2114,6 +2135,20 @@ def main():
         "first 5 frames are used.",
     )
     parser.add_argument(
+        "--viewportminheight",
+        type=int,
+        default=0,
+        help="The minimum possible height (in pixels) for the viewport. Used when "
+        "attempting to find the viewport size. Defaults to 0.",
+    )
+    parser.add_argument(
+        "--viewportminwidth",
+        type=int,
+        default=0,
+        help="The minimum possible width (in pixels) for the viewport. Used when "
+        "attempting to find the viewport size. Defaults to 0.",
+    )
+    parser.add_argument(
         "-s",
         "--start",
         type=int,
@@ -2318,6 +2353,8 @@ def main():
                     options.viewport,
                     options.viewporttime,
                     options.viewportretries,
+                    options.viewportminheight,
+                    options.viewportminwidth,
                     options.full,
                     options.timeline,
                     options.trimend,
