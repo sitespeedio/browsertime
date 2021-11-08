@@ -44,12 +44,12 @@ import shutil
 import subprocess
 import tempfile
 
-if (sys.version_info > (3, 0)):
-    GZIP_TEXT = 'wt'
-    GZIP_READ_TEXT = 'rt'
+if sys.version_info > (3, 0):
+    GZIP_TEXT = "wt"
+    GZIP_READ_TEXT = "rt"
 else:
-    GZIP_TEXT = 'w'
-    GZIP_READ_TEXT = 'r'
+    GZIP_TEXT = "w"
+    GZIP_READ_TEXT = "r"
 
 # Globals
 options = None
@@ -178,10 +178,10 @@ def extract_frames(video, directory, full_resolution, viewport):
         ]
         logging.debug(" ".join(command))
         lines = []
-        if (sys.version_info > (3, 0)):
-             proc = subprocess.Popen(command, stderr=subprocess.PIPE, encoding='UTF-8')
+        if sys.version_info > (3, 0):
+            proc = subprocess.Popen(command, stderr=subprocess.PIPE, encoding="UTF-8")
         else:
-             proc = subprocess.Popen(command, stderr=subprocess.PIPE)
+            proc = subprocess.Popen(command, stderr=subprocess.PIPE)
         while proc.poll() is None:
             lines.extend(iter(proc.stderr.readline, ""))
 
@@ -370,7 +370,7 @@ def find_video_viewport(
     viewport_time,
     viewport_retries,
     viewport_min_height,
-    viewport_min_width
+    viewport_min_width,
 ):
     logging.debug("Finding Video Viewport...")
     viewport = None
@@ -380,9 +380,9 @@ def find_video_viewport(
         retries = -1
 
         while (
-            viewport is None or
-            viewport["height"] <= viewport_min_height or
-            viewport["width"] <= viewport_min_width
+            viewport is None
+            or viewport["height"] <= viewport_min_height
+            or viewport["width"] <= viewport_min_width
         ):
             retries += 1
             if retries >= 1:
@@ -392,7 +392,8 @@ def find_video_viewport(
                 # of frames to check.
                 if retries >= viewport_retries:
                     logging.exception(
-                        "Could not calculate a viewport after %s tries.", viewport_retries
+                        "Could not calculate a viewport after %s tries.",
+                        viewport_retries,
                     )
                     break
                 logging.info("Failed to find a good viewport. Retrying...")
@@ -449,7 +450,12 @@ def find_video_viewport(
                         bottom = height - 1
                     logging.debug("Window bottom edge is {0:d}".format(bottom))
 
-                    viewport = {"x": 0, "y": top, "width": width, "height": (bottom - top)}
+                    viewport = {
+                        "x": 0,
+                        "y": top,
+                        "width": width,
+                        "height": (bottom - top),
+                    }
 
                 elif find_viewport:
                     viewport = find_image_viewport(frame)
@@ -832,10 +838,14 @@ def crop_viewport(directory):
 def get_decimate_filter():
     decimate = None
     try:
-        if (sys.version_info > (3, 0)):
-            filters = subprocess.check_output(['ffmpeg', '-filters'], stderr=subprocess.STDOUT, encoding='UTF-8')
+        if sys.version_info > (3, 0):
+            filters = subprocess.check_output(
+                ["ffmpeg", "-filters"], stderr=subprocess.STDOUT, encoding="UTF-8"
+            )
         else:
-            filters = subprocess.check_output(['ffmpeg', '-filters'], stderr=subprocess.STDOUT)
+            filters = subprocess.check_output(
+                ["ffmpeg", "-filters"], stderr=subprocess.STDOUT
+            )
         lines = filters.split("\n")
         match = re.compile(
             r"(?P<filter>[\w]*decimate).*V->V.*Remove near-duplicate frames"
@@ -909,10 +919,14 @@ def is_color_frame(file, color_file):
                     image_magick["compare"],
                 )
 
-                if (sys.version_info > (3, 0)):
-                   compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True, encoding='UTF-8')
+                if sys.version_info > (3, 0):
+                    compare = subprocess.Popen(
+                        command, stderr=subprocess.PIPE, shell=True, encoding="UTF-8"
+                    )
                 else:
-                    compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
+                    compare = subprocess.Popen(
+                        command, stderr=subprocess.PIPE, shell=True
+                    )
                 out, err = compare.communicate()
                 if re.match("^[0-9]+$", err):
                     different_pixels = int(err)
@@ -953,9 +967,11 @@ def is_white_frame(file, white_file):
             ).format(
                 image_magick["convert"], white_file, file, crop, image_magick["compare"]
             )
-        if (sys.version_info > (3, 0)):
-            compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True, encoding='UTF-8')
-        else:    
+        if sys.version_info > (3, 0):
+            compare = subprocess.Popen(
+                command, stderr=subprocess.PIPE, shell=True, encoding="UTF-8"
+            )
+        else:
             compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
         out, err = compare.communicate()
         if re.match("^[0-9]+$", err):
@@ -1011,9 +1027,11 @@ def frames_match(image1, image2, fuzz_percent, max_differences, crop_region, mas
     )
     if platform.system() != "Windows":
         command = command.replace("(", "\\(").replace(")", "\\)")
-    if (sys.version_info > (3, 0)):
-        compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True, encoding='UTF-8')
-    else:    
+    if sys.version_info > (3, 0):
+        compare = subprocess.Popen(
+            command, stderr=subprocess.PIPE, shell=True, encoding="UTF-8"
+        )
+    else:
         compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
     out, err = compare.communicate()
     if re.match("^[0-9]+$", err):
@@ -1731,7 +1749,7 @@ def calculate_contentful_speed_index(progress, directory):
             command = "{0} {1} -canny 2x2+8%+8% -define histogram:unique-colors=true -format %c histogram:info:-".format(
                 image_magick["convert"], current_frame
             )
-            output = subprocess.check_output(command, shell=True).decode('utf-8')
+            output = subprocess.check_output(command, shell=True).decode("utf-8")
             logging.debug("Output %s" % output)
 
             # Take the last matching pixel count, which is the pixel count from the last
@@ -1932,28 +1950,28 @@ def calculate_hero_time(progress, directory, hero, viewport):
 def check_config():
     ok = True
 
-    print("ffmpeg:  ",)
+    print("ffmpeg:  ")
     if get_decimate_filter() is not None:
         print("OK")
     else:
         print("FAIL")
         ok = False
 
-    print("convert: ",)
+    print("convert: ")
     if check_process("{0} -version".format(image_magick["convert"]), "ImageMagick"):
         print("OK")
     else:
         print("FAIL")
         ok = False
 
-    print("compare: ",)
+    print("compare: ")
     if check_process("{0} -version".format(image_magick["compare"]), "ImageMagick"):
         print("OK")
     else:
         print("FAIL")
         ok = False
 
-    print("Pillow:  ",)
+    print("Pillow:  ")
     try:
         from PIL import Image, ImageDraw  # noqa
 
@@ -1962,7 +1980,7 @@ def check_config():
         print("FAIL")
         ok = False
 
-    print("SSIM:    ",)
+    print("SSIM:    ")
     try:
         from ssim import compute_ssim  # noqa
 
@@ -1977,8 +1995,10 @@ def check_config():
 def check_process(command, output):
     ok = False
     try:
-        if (sys.version_info > (3, 0)):
-            out = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=True, encoding='UTF-8')
+        if sys.version_info > (3, 0):
+            out = subprocess.check_output(
+                command, stderr=subprocess.STDOUT, shell=True, encoding="UTF-8"
+            )
         else:
             out = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=True)
         if out.find(output) > -1:
@@ -2021,7 +2041,7 @@ def main():
         "--logfile", help="Write log messages to given file instead of stdout"
     )
     parser.add_argument(
-        '--logformat',
+        "--logformat",
         help="Formatting for the log messages",
         default="%(asctime)s.%(msecs)03d - %(message)s",
     )
@@ -2280,9 +2300,7 @@ def main():
         )
     else:
         logging.basicConfig(
-            level=log_level,
-            format=options.logformat,
-            datefmt="%H:%M:%S",
+            level=log_level, format=options.logformat, datefmt="%H:%M:%S"
         )
 
     if options.multiple:
