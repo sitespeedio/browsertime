@@ -9,7 +9,7 @@
     "@sitespeed.io/chromedriver": "95.0.4638-17",
     "chrome-har": "0.12.0",
     "chrome-remote-interface": "0.31.0",
-    "dayjs": "1.10.5",
+    "dayjs": "1.10.7",
     "execa": "5.1.1",
     "fast-stats": "0.0.6",
     "find-up": "5.0.0",
