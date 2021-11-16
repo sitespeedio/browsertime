@@ -44,12 +44,12 @@ import shutil
 import subprocess
 import tempfile
 
-if (sys.version_info > (3, 0)):
-    GZIP_TEXT = 'wt'
-    GZIP_READ_TEXT = 'rt'
+if sys.version_info > (3, 0):
+    GZIP_TEXT = "wt"
+    GZIP_READ_TEXT = "rt"
 else:
-    GZIP_TEXT = 'w'
-    GZIP_READ_TEXT = 'r'
+    GZIP_TEXT = "w"
+    GZIP_READ_TEXT = "r"
 
 # Globals
 options = None
@@ -72,6 +72,9 @@ def video_to_frames(
     multiple,
     find_viewport,
     viewport_time,
+    viewport_retries,
+    viewport_min_height,
+    viewport_min_width,
     full_resolution,
     timeline_file,
     trim_end,
@@ -93,7 +96,13 @@ def video_to_frames(
             if os.path.isdir(directory):
                 directory = os.path.realpath(directory)
                 viewport = find_video_viewport(
-                    video, directory, find_viewport, viewport_time
+                    video,
+                    directory,
+                    find_viewport,
+                    viewport_time,
+                    viewport_retries,
+                    viewport_min_height,
+                    viewport_min_width,
                 )
                 gc.collect()
                 if extract_frames(video, directory, full_resolution, viewport):
@@ -169,10 +178,10 @@ def extract_frames(video, directory, full_resolution, viewport):
         ]
         logging.debug(" ".join(command))
         lines = []
-        if (sys.version_info > (3, 0)):
-             proc = subprocess.Popen(command, stderr=subprocess.PIPE, encoding='UTF-8')
+        if sys.version_info > (3, 0):
+            proc = subprocess.Popen(command, stderr=subprocess.PIPE, encoding="UTF-8")
         else:
-             proc = subprocess.Popen(command, stderr=subprocess.PIPE)
+            proc = subprocess.Popen(command, stderr=subprocess.PIPE)
         while proc.poll() is None:
             lines.extend(iter(proc.stderr.readline, ""))
 
@@ -354,65 +363,107 @@ def find_image_viewport(file):
     return viewport
 
 
-def find_video_viewport(video, directory, find_viewport, viewport_time):
+def find_video_viewport(
+    video,
+    directory,
+    find_viewport,
+    viewport_time,
+    viewport_retries,
+    viewport_min_height,
+    viewport_min_width,
+):
     logging.debug("Finding Video Viewport...")
     viewport = None
     try:
         from PIL import Image
 
-        frame = os.path.join(directory, "viewport.png")
-        if os.path.isfile(frame):
-            os.remove(frame)
-        command = ["ffmpeg", "-i", video]
-        if viewport_time:
-            command.extend(["-ss", viewport_time])
-        command.extend(["-frames:v", "1", frame])
-        subprocess.check_output(command)
-        if os.path.isfile(frame):
-            with Image.open(frame) as im:
-                width, height = im.size
-                logging.debug("%s is %dx%d", frame, width, height)
-            if options.notification:
-                im = Image.open(frame)
-                pixels = im.load()
-                middle = int(math.floor(height / 2))
-                # Find the top edge (at ~40% in to deal with browsers that
-                # color the notification area)
-                x = int(width * 0.4)
-                y = 0
-                background = pixels[x, y]
-                top = None
-                while top is None and y < middle:
-                    if not colors_are_similar(background, pixels[x, y]):
-                        top = y
-                    else:
-                        y += 1
-                if top is None:
-                    top = 0
-                logging.debug("Window top edge is {0:d}".format(top))
+        retries = -1
 
-                # Find the bottom edge
-                x = 0
-                y = height - 1
-                bottom = None
-                while bottom is None and y > middle:
-                    if not colors_are_similar(background, pixels[x, y]):
-                        bottom = y
-                    else:
-                        y -= 1
-                if bottom is None:
-                    bottom = height - 1
-                logging.debug("Window bottom edge is {0:d}".format(bottom))
+        while (
+            viewport is None
+            or viewport["height"] <= viewport_min_height
+            or viewport["width"] <= viewport_min_width
+        ):
+            retries += 1
+            if retries >= 1:
+                # In some cases, the first frame is not an orange screen or a screen
+                # with a solid color. In this case, we need to try finding the viewport
+                # using the next frame. The `viewport_retries` dictates the maximum number
+                # of frames to check.
+                if retries >= viewport_retries:
+                    logging.exception(
+                        "Could not calculate a viewport after %s tries.",
+                        viewport_retries,
+                    )
+                    break
+                logging.info("Failed to find a good viewport. Retrying...")
 
-                viewport = {"x": 0, "y": top, "width": width, "height": (bottom - top)}
+            logging.debug("Using frame " + str(retries))
 
-            elif find_viewport:
-                viewport = find_image_viewport(frame)
-            else:
-                viewport = {"x": 0, "y": 0, "width": width, "height": height}
-            os.remove(frame)
+            frame = os.path.join(directory, "viewport.png")
+            if os.path.isfile(frame):
+                os.remove(frame)
 
-    except Exception:
+            command = ["ffmpeg", "-i", video]
+            if viewport_time:
+                command.extend(["-ss", viewport_time])
+
+            # Pull one frame from the video starting with the frame at
+            # the `retries` index
+            command.extend(["-vf", "select=gte(n\\,%s)" % retries])
+            command.extend(["-frames:v", "1", frame])
+            subprocess.check_output(command)
+
+            if os.path.isfile(frame):
+                with Image.open(frame) as im:
+                    width, height = im.size
+                    logging.debug("%s is %dx%d", frame, width, height)
+                if options.notification:
+                    im = Image.open(frame)
+                    pixels = im.load()
+                    middle = int(math.floor(height / 2))
+                    # Find the top edge (at ~40% in to deal with browsers that
+                    # color the notification area)
+                    x = int(width * 0.4)
+                    y = 0
+                    background = pixels[x, y]
+                    top = None
+                    while top is None and y < middle:
+                        if not colors_are_similar(background, pixels[x, y]):
+                            top = y
+                        else:
+                            y += 1
+                    if top is None:
+                        top = 0
+                    logging.debug("Window top edge is {0:d}".format(top))
+
+                    # Find the bottom edge
+                    x = 0
+                    y = height - 1
+                    bottom = None
+                    while bottom is None and y > middle:
+                        if not colors_are_similar(background, pixels[x, y]):
+                            bottom = y
+                        else:
+                            y -= 1
+                    if bottom is None:
+                        bottom = height - 1
+                    logging.debug("Window bottom edge is {0:d}".format(bottom))
+
+                    viewport = {
+                        "x": 0,
+                        "y": top,
+                        "width": width,
+                        "height": (bottom - top),
+                    }
+
+                elif find_viewport:
+                    viewport = find_image_viewport(frame)
+                else:
+                    viewport = {"x": 0, "y": 0, "width": width, "height": height}
+                os.remove(frame)
+
+    except Exception as e:
         viewport = None
 
     return viewport
@@ -787,10 +838,14 @@ def crop_viewport(directory):
 def get_decimate_filter():
     decimate = None
     try:
-        if (sys.version_info > (3, 0)):
-            filters = subprocess.check_output(['ffmpeg', '-filters'], stderr=subprocess.STDOUT, encoding='UTF-8')
+        if sys.version_info > (3, 0):
+            filters = subprocess.check_output(
+                ["ffmpeg", "-filters"], stderr=subprocess.STDOUT, encoding="UTF-8"
+            )
         else:
-            filters = subprocess.check_output(['ffmpeg', '-filters'], stderr=subprocess.STDOUT)
+            filters = subprocess.check_output(
+                ["ffmpeg", "-filters"], stderr=subprocess.STDOUT
+            )
         lines = filters.split("\n")
         match = re.compile(
             r"(?P<filter>[\w]*decimate).*V->V.*Remove near-duplicate frames"
@@ -864,10 +919,14 @@ def is_color_frame(file, color_file):
                     image_magick["compare"],
                 )
 
-                if (sys.version_info > (3, 0)):
-                   compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True, encoding='UTF-8')
+                if sys.version_info > (3, 0):
+                    compare = subprocess.Popen(
+                        command, stderr=subprocess.PIPE, shell=True, encoding="UTF-8"
+                    )
                 else:
-                    compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
+                    compare = subprocess.Popen(
+                        command, stderr=subprocess.PIPE, shell=True
+                    )
                 out, err = compare.communicate()
                 if re.match("^[0-9]+$", err):
                     different_pixels = int(err)
@@ -908,9 +967,11 @@ def is_white_frame(file, white_file):
             ).format(
                 image_magick["convert"], white_file, file, crop, image_magick["compare"]
             )
-        if (sys.version_info > (3, 0)):
-            compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True, encoding='UTF-8')
-        else:    
+        if sys.version_info > (3, 0):
+            compare = subprocess.Popen(
+                command, stderr=subprocess.PIPE, shell=True, encoding="UTF-8"
+            )
+        else:
             compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
         out, err = compare.communicate()
         if re.match("^[0-9]+$", err):
@@ -966,9 +1027,11 @@ def frames_match(image1, image2, fuzz_percent, max_differences, crop_region, mas
     )
     if platform.system() != "Windows":
         command = command.replace("(", "\\(").replace(")", "\\)")
-    if (sys.version_info > (3, 0)):
-        compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True, encoding='UTF-8')
-    else:    
+    if sys.version_info > (3, 0):
+        compare = subprocess.Popen(
+            command, stderr=subprocess.PIPE, shell=True, encoding="UTF-8"
+        )
+    else:
         compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
     out, err = compare.communicate()
     if re.match("^[0-9]+$", err):
@@ -1686,7 +1749,7 @@ def calculate_contentful_speed_index(progress, directory):
             command = "{0} {1} -canny 2x2+8%+8% -define histogram:unique-colors=true -format %c histogram:info:-".format(
                 image_magick["convert"], current_frame
             )
-            output = subprocess.check_output(command, shell=True).decode('utf-8')
+            output = subprocess.check_output(command, shell=True).decode("utf-8")
             logging.debug("Output %s" % output)
 
             # Take the last matching pixel count, which is the pixel count from the last
@@ -1887,28 +1950,28 @@ def calculate_hero_time(progress, directory, hero, viewport):
 def check_config():
     ok = True
 
-    print("ffmpeg:  ",)
+    print("ffmpeg:  ")
     if get_decimate_filter() is not None:
         print("OK")
     else:
         print("FAIL")
         ok = False
 
-    print("convert: ",)
+    print("convert: ")
     if check_process("{0} -version".format(image_magick["convert"]), "ImageMagick"):
         print("OK")
     else:
         print("FAIL")
         ok = False
 
-    print("compare: ",)
+    print("compare: ")
     if check_process("{0} -version".format(image_magick["compare"]), "ImageMagick"):
         print("OK")
     else:
         print("FAIL")
         ok = False
 
-    print("Pillow:  ",)
+    print("Pillow:  ")
     try:
         from PIL import Image, ImageDraw  # noqa
 
@@ -1917,7 +1980,7 @@ def check_config():
         print("FAIL")
         ok = False
 
-    print("SSIM:    ",)
+    print("SSIM:    ")
     try:
         from ssim import compute_ssim  # noqa
 
@@ -1932,8 +1995,10 @@ def check_config():
 def check_process(command, output):
     ok = False
     try:
-        if (sys.version_info > (3, 0)):
-            out = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=True, encoding='UTF-8')
+        if sys.version_info > (3, 0):
+            out = subprocess.check_output(
+                command, stderr=subprocess.STDOUT, shell=True, encoding="UTF-8"
+            )
         else:
             out = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=True)
         if out.find(output) > -1:
@@ -1976,7 +2041,7 @@ def main():
         "--logfile", help="Write log messages to given file instead of stdout"
     )
     parser.add_argument(
-        '--logformat',
+        "--logformat",
         help="Formatting for the log messages",
         default="%(asctime)s.%(msecs)03d - %(message)s",
     )
@@ -2080,6 +2145,28 @@ def main():
         "--viewporttime",
         help="Time of the video frame to use for identifying the viewport "
         "(in HH:MM:SS.xx format).",
+    )
+    parser.add_argument(
+        "--viewportretries",
+        type=int,
+        default=5,
+        help="Number of times to attempt to obtain a viewport. Analagous to the "
+        "number of frames to try to find a viewport with. By default, up to the "
+        "first 5 frames are used.",
+    )
+    parser.add_argument(
+        "--viewportminheight",
+        type=int,
+        default=0,
+        help="The minimum possible height (in pixels) for the viewport. Used when "
+        "attempting to find the viewport size. Defaults to 0.",
+    )
+    parser.add_argument(
+        "--viewportminwidth",
+        type=int,
+        default=0,
+        help="The minimum possible width (in pixels) for the viewport. Used when "
+        "attempting to find the viewport size. Defaults to 0.",
     )
     parser.add_argument(
         "-s",
@@ -2213,9 +2300,7 @@ def main():
         )
     else:
         logging.basicConfig(
-            level=log_level,
-            format=options.logformat,
-            datefmt="%H:%M:%S",
+            level=log_level, format=options.logformat, datefmt="%H:%M:%S"
         )
 
     if options.multiple:
@@ -2285,6 +2370,9 @@ def main():
                     options.multiple,
                     options.viewport,
                     options.viewporttime,
+                    options.viewportretries,
+                    options.viewportminheight,
+                    options.viewportminwidth,
                     options.full,
                     options.timeline,
                     options.trimend,
