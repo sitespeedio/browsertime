@@ -4,6 +4,10 @@
 ### Added
 * Updated to Chromedriver 96 and Chrome 96 in the Docker container [#1670](https://github.com/sitespeedio/browsertime/pull/1670).
 
+### Fixed
+* Added checks for Firefox HAR that it actually has a page.
+* Updated day js.
+
 ## 14.9.0 - 2021-11-07
 ### Added
 * Updated to new Chome HAR PR [#1666](https://github.com/sitespeedio/browsertime/pull/1666) that inlcudes chunk information.
