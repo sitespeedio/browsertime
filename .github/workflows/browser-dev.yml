@@ -39,9 +39,9 @@ jobs:
         sudo modprobe ifb numifbs=1
     - name: Browser versions
       run: |
-        google-chrome --version
+        chrome --version
         firefox --version
+    - name: Test Chrome dev
+      run: ./bin/browsertime.js -b chrome -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle --xvfb --chrome.binaryPath $(which chrome)
     - name: Test Firefox dev
       run: ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle --xvfb 
-    - name: Test Chrome dev
-      run: ./bin/browsertime.js -b chrome -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle --xvfb 
