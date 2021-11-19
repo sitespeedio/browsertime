@@ -3,6 +3,7 @@
 ## 14.10.1 - 2021-11-19
 ### Fixed
 * Disabled the automatic Chrome/Chromedriver version check in Chromedriver [#1676](https://github.com/sitespeedio/browsertime/pull/1676).
+* Loop until we find a frame with a good viewport or until we run out of retries for Visual Metrics. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1668](https://github.com/sitespeedio/browsertime/pull/1668). 
 
 ## 14.10.0 - 2021-11-16
 ### Added
