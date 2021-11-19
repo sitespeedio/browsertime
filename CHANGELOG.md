@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Fixed
+* Disabled the automatic Chrome/Chromedriver version check in Chromedriver [#1676](https://github.com/sitespeedio/browsertime/pull/1676).
+
 ## 14.10.0 - 2021-11-16
 ### Added
 * Updated to Chromedriver 96 and Chrome 96 in the Docker container [#1670](https://github.com/sitespeedio/browsertime/pull/1670).
