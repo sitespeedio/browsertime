@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+
+## 14.10.2 - 2021-11-20
+### Fixed
+* Disabled the version check for Edge/Edgedriver in Edgedriver [#1678](https://github.com/sitespeedio/browsertime/pull/1678).
+
 ## 14.10.1 - 2021-11-19
 ### Fixed
 * Disabled the automatic Chrome/Chromedriver version check in Chromedriver [#1676](https://github.com/sitespeedio/browsertime/pull/1676).
