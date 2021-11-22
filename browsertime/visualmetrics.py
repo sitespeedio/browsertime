@@ -466,7 +466,6 @@ def find_video_viewport(
                     viewport = find_image_viewport(frame)
                 else:
                     viewport = {"x": 0, "y": 0, "width": width, "height": height}
-                    cropped = False
 
                 os.remove(frame)
 
