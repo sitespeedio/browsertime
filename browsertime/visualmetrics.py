@@ -752,6 +752,7 @@ def eliminate_duplicate_frames(directory, cropped):
                 height = im_height - bottom_margin
 
             crop = "{0:d}x{1:d}+{2:d}+{3:d}".format(width, height, left, top)
+            logging.debug("Viewport cropping set to " + crop)
 
             # Do a pass looking for the first non-blank frame with an allowance
             # for up to a 10% per-pixel difference for noise in the white
