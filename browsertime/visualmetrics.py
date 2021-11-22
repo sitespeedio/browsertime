@@ -95,7 +95,7 @@ def video_to_frames(
                 os.mkdir(directory, 0o755)
             if os.path.isdir(directory):
                 directory = os.path.realpath(directory)
-                viewport = find_video_viewport(
+                viewport, cropped = find_video_viewport(
                     video,
                     directory,
                     find_viewport,
@@ -104,7 +104,6 @@ def video_to_frames(
                     viewport_min_height,
                     viewport_min_width,
                 )
-                cropped = viewport is not None
                 gc.collect()
                 if extract_frames(video, directory, full_resolution, viewport):
                     client_viewport = None
@@ -375,6 +374,11 @@ def find_video_viewport(
 ):
     logging.debug("Finding Video Viewport...")
     viewport = None
+
+    # cropped will be True if the viewport setting changes
+    # the original frame
+    cropped = False
+
     try:
         from PIL import Image
 
@@ -462,12 +466,22 @@ def find_video_viewport(
                     viewport = find_image_viewport(frame)
                 else:
                     viewport = {"x": 0, "y": 0, "width": width, "height": height}
+                    cropped = False
+
                 os.remove(frame)
+
+        if viewport is not None and viewport != {
+            "x": 0,
+            "y": 0,
+            "width": width,
+            "height": height,
+        }:
+            cropped = True
 
     except Exception as e:
         viewport = None
 
-    return viewport
+    return viewport, cropped
 
 
 def trim_video_end(directory, trim_time):
@@ -666,6 +680,8 @@ def find_render_start(directory, orange_file, gray_file, cropped):
                     left += client_viewport["x"]
                     top += client_viewport["y"]
                 elif cropped:
+                    # The image was already cropped, so only cutout the bottom
+                    # to get rid of the network request/etc. information
                     top = 0
                     left = 0
                     width = im_width
@@ -699,7 +715,6 @@ def eliminate_duplicate_frames(directory, cropped):
             from PIL import Image
 
             blank = files[0]
-            im = None
             with Image.open(blank) as im:
                 width, height = im.size
             if options.viewport and options.notification:
@@ -730,16 +745,15 @@ def eliminate_duplicate_frames(directory, cropped):
                 left += client_viewport["x"]
                 top += client_viewport["y"]
             elif cropped:
+                # The image was already cropped, so only cutout the bottom
+                # to get rid of the network request/etc. information
                 top = 0
                 left = 0
                 width = im_width
                 height = im_height - bottom_margin
 
-
             crop = "{0:d}x{1:d}+{2:d}+{3:d}".format(width, height, left, top)
-            logging.info("Viewport cropping set to " + crop)
-            # 390x255+0+1
-            # 390x216+0+40
+
             # Do a pass looking for the first non-blank frame with an allowance
             # for up to a 10% per-pixel difference for noise in the white
             # field.
