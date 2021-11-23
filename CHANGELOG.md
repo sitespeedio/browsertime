@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 14.11.0 - 2021-11-23
+### Fixed
+* Use the viewport to determine if more cropping is needed in visual metrics. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1680](https://github.com/sitespeedio/browsertime/pull/1680).
+### Added
+* Updated to Selenium 4.1.0 [#1679](https://github.com/sitespeedio/browsertime/pull/1679) 
 
 ## 14.10.2 - 2021-11-20
 ### Fixed
