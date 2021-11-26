@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Fixed
+* Adding error log message for Chrome/Edge when document request fails (faulty domain etc) [#1682](https://github.com/sitespeedio/browsertime/pull/1682).
+
 ## 14.11.0 - 2021-11-23
 ### Fixed
 * Use the viewport to determine if more cropping is needed in visual metrics. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1680](https://github.com/sitespeedio/browsertime/pull/1680).
