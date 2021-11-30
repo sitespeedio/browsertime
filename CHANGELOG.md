@@ -1,9 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 14.12.0 - 2021-11-30
 ### Fixed
 * Adding error log message for Chrome/Edge when document request fails (faulty domain etc) [#1682](https://github.com/sitespeedio/browsertime/pull/1682).
+* Added `'devtools.netmonitor.persistlog': true` preference for Firefox to fix the HAR issue introduced in Firefox 94 [#1684](https://github.com/sitespeedio/browsertime/pull/1684).
 
+### Added
+* Updated to Firefox 94 in the Docker image.
 ## 14.11.0 - 2021-11-23
 ### Fixed
 * Use the viewport to determine if more cropping is needed in visual metrics. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1680](https://github.com/sitespeedio/browsertime/pull/1680).
