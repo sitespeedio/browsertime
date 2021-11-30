@@ -95,7 +95,7 @@ def video_to_frames(
                 os.mkdir(directory, 0o755)
             if os.path.isdir(directory):
                 directory = os.path.realpath(directory)
-                viewport = find_video_viewport(
+                viewport, cropped = find_video_viewport(
                     video,
                     directory,
                     find_viewport,
@@ -122,12 +122,12 @@ def video_to_frames(
                             remove_orange_frames(dir, orange_file)
                         find_first_frame(dir, white_file)
                         blank_first_frame(dir)
-                        find_render_start(dir, orange_file, gray_file)
+                        find_render_start(dir, orange_file, gray_file, cropped)
                         find_last_frame(dir, white_file)
                         adjust_frame_times(dir)
                         if timeline_file is not None and not multiple:
                             synchronize_to_timeline(dir, timeline_file)
-                        eliminate_duplicate_frames(dir)
+                        eliminate_duplicate_frames(dir, cropped)
                         eliminate_similar_frames(dir)
                         # See if we are limiting the number of frames to keep
                         # (before processing them to save processing time)
@@ -374,6 +374,11 @@ def find_video_viewport(
 ):
     logging.debug("Finding Video Viewport...")
     viewport = None
+
+    # cropped will be True if the viewport setting changes
+    # the original frame
+    cropped = False
+
     try:
         from PIL import Image
 
@@ -461,12 +466,21 @@ def find_video_viewport(
                     viewport = find_image_viewport(frame)
                 else:
                     viewport = {"x": 0, "y": 0, "width": width, "height": height}
+
                 os.remove(frame)
+
+        if viewport is not None and viewport != {
+            "x": 0,
+            "y": 0,
+            "width": width,
+            "height": height,
+        }:
+            cropped = True
 
     except Exception as e:
         viewport = None
 
-    return viewport
+    return viewport, cropped
 
 
 def trim_video_end(directory, trim_time):
@@ -615,7 +629,7 @@ def find_last_frame(directory, white_file):
         logging.exception("Error finding last frame")
 
 
-def find_render_start(directory, orange_file, gray_file):
+def find_render_start(directory, orange_file, gray_file, cropped):
     logging.debug("Finding Render Start...")
     try:
         if (
@@ -641,6 +655,10 @@ def find_render_start(directory, orange_file, gray_file):
                     mask["y"] = int(math.floor(height / 2 - mask["height"] / 2))
                 else:
                     mask = None
+
+                im_width = width
+                im_height = height
+
                 top = 10
                 right_margin = 10
                 bottom_margin = 24
@@ -660,6 +678,14 @@ def find_render_start(directory, orange_file, gray_file):
                     width = max(client_viewport["width"] - right_margin, 1)
                     left += client_viewport["x"]
                     top += client_viewport["y"]
+                elif cropped:
+                    # The image was already cropped, so only cutout the bottom
+                    # to get rid of the network request/etc. information
+                    top = 0
+                    left = 0
+                    width = im_width
+                    height = im_height - bottom_margin
+
                 crop = "{0:d}x{1:d}+{2:d}+{3:d}".format(width, height, left, top)
                 for i in range(1, count):
                     if frames_match(first, files[i], 10, 0, crop, mask):
@@ -679,7 +705,7 @@ def find_render_start(directory, orange_file, gray_file):
         logging.exception("Error getting render start")
 
 
-def eliminate_duplicate_frames(directory):
+def eliminate_duplicate_frames(directory, cropped):
     logging.debug("Eliminating Duplicate Frames...")
     global client_viewport
     try:
@@ -696,6 +722,9 @@ def eliminate_duplicate_frames(directory):
                     and client_viewport["height"] == height
                 ):
                     client_viewport = None
+
+            im_width = width
+            im_height = height
 
             # Figure out the region of the image that we care about
             top = 40
@@ -714,6 +743,13 @@ def eliminate_duplicate_frames(directory):
                 width = max(client_viewport["width"] - right_margin, 1)
                 left += client_viewport["x"]
                 top += client_viewport["y"]
+            elif cropped:
+                # The image was already cropped, so only cutout the bottom
+                # to get rid of the network request/etc. information
+                top = 0
+                left = 0
+                width = im_width
+                height = im_height - bottom_margin
 
             crop = "{0:d}x{1:d}+{2:d}+{3:d}".format(width, height, left, top)
             logging.debug("Viewport cropping set to " + crop)

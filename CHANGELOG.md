@@ -2,7 +2,22 @@
 
 ## UNRELEASED
 ### Fixed
+* Adding error log message for Chrome/Edge when document request fails (faulty domain etc) [#1682](https://github.com/sitespeedio/browsertime/pull/1682).
+
+## 14.11.0 - 2021-11-23
+### Fixed
+* Use the viewport to determine if more cropping is needed in visual metrics. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1680](https://github.com/sitespeedio/browsertime/pull/1680).
+### Added
+* Updated to Selenium 4.1.0 [#1679](https://github.com/sitespeedio/browsertime/pull/1679) 
+
+## 14.10.2 - 2021-11-20
+### Fixed
+* Disabled the version check for Edge/Edgedriver in Edgedriver [#1678](https://github.com/sitespeedio/browsertime/pull/1678).
+
+## 14.10.1 - 2021-11-19
+### Fixed
 * Disabled the automatic Chrome/Chromedriver version check in Chromedriver [#1676](https://github.com/sitespeedio/browsertime/pull/1676).
+* Loop until we find a frame with a good viewport or until we run out of retries for Visual Metrics. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1668](https://github.com/sitespeedio/browsertime/pull/1668). 
 
 ## 14.10.0 - 2021-11-16
 ### Added
