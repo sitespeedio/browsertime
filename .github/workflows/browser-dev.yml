@@ -1,0 +1,47 @@
+name: Test Firefox/Chrome dev
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+    - name: Install Firefox latest dev edition
+      uses: browser-actions/setup-firefox@latest
+      with:
+        firefox-version: 'latest-devedition'
+    - name: Install Chrome dev
+      uses: browser-actions/setup-chrome@latest
+      with:
+        chrome-version: dev
+    - name: Install Browsertime
+      run: npm ci
+    - name: Install dependencies
+      run: |
+        sudo apt-get install net-tools -y
+        sudo snap install ffmpeg
+        python -m pip install --upgrade --user pip
+        python -m pip install --upgrade --user setuptools
+        python -m pip install --user pyssim
+        python -m pip --version
+        python -m pip show Pillow
+        python -m pip show pyssim
+        python -m pip install virtualenv
+        sudo modprobe ifb numifbs=1
+    - name: Browser versions
+      run: |
+        chrome --version
+        firefox --version
+    - name: Test Chrome dev
+      run: ./bin/browsertime.js -b chrome -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle --xvfb --chrome.binaryPath $(which chrome)
+    - name: Test Firefox dev
+      run: ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle --xvfb 
