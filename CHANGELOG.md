@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 14.12.1 - 2021-12-01
+### Fixed
+* Changed log level to debug for Chrome/Edge when document request fails. It turns out that IRL that happens a lot and spam the log. Lets iterate over that functionality.
 ## 14.12.0 - 2021-11-30
 ### Fixed
 * Adding error log message for Chrome/Edge when document request fails (faulty domain etc) [#1682](https://github.com/sitespeedio/browsertime/pull/1682).
