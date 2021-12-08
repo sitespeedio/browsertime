@@ -185,6 +185,11 @@ def extract_frames(video, directory, full_resolution, viewport):
         while proc.poll() is None:
             lines.extend(iter(proc.stderr.readline, ""))
 
+        # from matplotlib import pyplot as plt
+        # import numpy as np
+        # import matplotlib.image as mpimg
+        # import cv2
+
         pattern = re.compile(r"keep pts:[0-9]+ pts_time:(?P<timecode>[0-9\.]+)")
         frame_count = 0
         for line in lines:
@@ -198,6 +203,32 @@ def extract_frames(video, directory, full_resolution, viewport):
                 dest = os.path.join(directory, "video-{0:06d}.png".format(frame_time))
                 logging.debug("Renaming " + src + " to " + dest)
                 os.rename(src, dest)
+
+                # Check if there's a loading bar left at the top after cropping, if
+                # there is, modify the existing crop.
+                # img = mpimg.imread(dest)
+                # img = cv2.imread(dest)
+                # gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+                # plt.figure()
+                # for i in range(10):
+                #     line = gray_img[i,:] # Top-down line
+                #     plt.plot(line)
+
+
+                # plt.figure()
+                # plt.hist(gray_img[0,:])
+
+                # plt.figure()
+                # plt.imshow(img)
+
+                # # plt.figure()
+                # # plt.subplot(1,2,1)
+                # # plt.imshow(img)
+                # # plt.subplot(1,2,2)
+                # # plt.imshow(img[top:height, left:width])
+                # plt.show()
+
                 ret = True
     return ret
 
@@ -631,6 +662,8 @@ def find_last_frame(directory, white_file):
 
 def find_render_start(directory, orange_file, gray_file, cropped):
     logging.debug("Finding Render Start...")
+    logging.info("heeee")
+    logging.info(cropped)
     try:
         if (
             client_viewport is not None
@@ -640,8 +673,10 @@ def find_render_start(directory, orange_file, gray_file, cropped):
             files = sorted(glob.glob(os.path.join(directory, "video-*.png")))
             count = len(files)
             if count > 1:
+
                 from PIL import Image
 
+                im = None
                 first = files[0]
                 with Image.open(first) as im:
                     width, height = im.size
@@ -678,6 +713,7 @@ def find_render_start(directory, orange_file, gray_file, cropped):
                     width = max(client_viewport["width"] - right_margin, 1)
                     left += client_viewport["x"]
                     top += client_viewport["y"]
+                    print('hereee')
                 elif cropped:
                     # The image was already cropped, so only cutout the bottom
                     # to get rid of the network request/etc. information
@@ -686,7 +722,37 @@ def find_render_start(directory, orange_file, gray_file, cropped):
                     width = im_width
                     height = im_height - bottom_margin
 
+                # for file in files:   
+                #     from matplotlib import pyplot as plt
+                #     import numpy as np
+
+                #     import matplotlib.image as mpimg
+                #     img = mpimg.imread(file)
+
+                #     plt.figure()
+                #     plt.subplot(1,2,1)
+                #     plt.imshow(img)
+                #     plt.subplot(1,2,2)
+                #     plt.imshow(img[top:height, left:width])
+                #     plt.show()
+
                 crop = "{0:d}x{1:d}+{2:d}+{3:d}".format(width, height, left, top)
+                logging.info("crop")
+                logging.info(crop)
+
+                # from matplotlib import pyplot as plt
+                # import numpy as np
+
+                # import matplotlib.image as mpimg
+                # img = mpimg.imread(first)
+
+                # plt.figure()
+                # plt.subplot(1,2,1)
+                # plt.imshow(img)
+                # plt.subplot(1,2,2)
+                # plt.imshow(img[top:height, left:width])
+                # plt.show()
+
                 for i in range(1, count):
                     if frames_match(first, files[i], 10, 0, crop, mask):
                         logging.debug("Removing pre-render frame %s", files[i])
@@ -749,7 +815,11 @@ def eliminate_duplicate_frames(directory, cropped):
                 top = 0
                 left = 0
                 width = im_width
-                height = im_height - bottom_margin
+
+                if options.mobile:
+                    height = im_height
+                else:
+                    height = im_height - bottom_margin
 
             crop = "{0:d}x{1:d}+{2:d}+{3:d}".format(width, height, left, top)
             logging.debug("Viewport cropping set to " + crop)
@@ -2283,6 +2353,12 @@ def main():
         action="store_true",
         default=False,
         help="Set output format to JSON",
+    )
+    parser.add_argument(
+        "--mobile",
+        action="store_true",
+        default=False,
+        help="Set to true if the videos are from a mobile device.",
     )
     parser.add_argument("--progress", help="Visual progress output file.")
     parser.add_argument("--herodata", help="Hero elements data file.")
