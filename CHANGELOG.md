@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 14.12.2 - 2021-12-09
+### Fixed
+* Added more info log to get a better feeling for what's going on [#1686](https://github.com/sitespeedio/browsertime/pull/1686).
+* Fixed CPU throttling that was broken in Chrome 96 [#1685](https://github.com/sitespeedio/browsertime/pull/1685)
 ## 14.12.1 - 2021-12-01
 ### Fixed
 * Changed log level to debug for Chrome/Edge when document request fails. It turns out that IRL that happens a lot and spam the log. Lets iterate over that functionality.
