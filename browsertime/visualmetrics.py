@@ -677,10 +677,8 @@ def find_render_start(directory, orange_file, gray_file, cropped, is_mobile):
             files = sorted(glob.glob(os.path.join(directory, "video-*.png")))
             count = len(files)
             if count > 1:
-
                 from PIL import Image
 
-                im = None
                 first = files[0]
                 with Image.open(first) as im:
                     width, height = im.size
