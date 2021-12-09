@@ -201,32 +201,6 @@ def extract_frames(video, directory, full_resolution, viewport):
                 dest = os.path.join(directory, "video-{0:06d}.png".format(frame_time))
                 logging.debug("Renaming " + src + " to " + dest)
                 os.rename(src, dest)
-
-                # Check if there's a loading bar left at the top after cropping, if
-                # there is, modify the existing crop.
-                # img = mpimg.imread(dest)
-                # img = cv2.imread(dest)
-                # gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-                # plt.figure()
-                # for i in range(10):
-                #     line = gray_img[i,:] # Top-down line
-                #     plt.plot(line)
-
-
-                # plt.figure()
-                # plt.hist(gray_img[0,:])
-
-                # plt.figure()
-                # plt.imshow(img)
-
-                # # plt.figure()
-                # # plt.subplot(1,2,1)
-                # # plt.imshow(img)
-                # # plt.subplot(1,2,2)
-                # # plt.imshow(img[top:height, left:width])
-                # plt.show()
-
                 ret = True
     return ret
 
@@ -414,9 +388,8 @@ def find_image_viewport(file, is_mobile):
         }
 
         if is_mobile:
-            # On mobile we need to ignore
-            # the top 6 pixels because there is
-            # a visible progress bar there on some browsers.
+            # On mobile we need to ignore the top ~10 pixels because
+            # there is a visible progress bar there on some browsers.
             viewport["y"] += 10
             viewport["height"] -= 10
 
@@ -695,8 +668,6 @@ def find_last_frame(directory, white_file):
 
 def find_render_start(directory, orange_file, gray_file, cropped, is_mobile):
     logging.debug("Finding Render Start...")
-    logging.info("heeee")
-    logging.info(cropped)
     try:
         if (
             client_viewport is not None
@@ -746,7 +717,6 @@ def find_render_start(directory, orange_file, gray_file, cropped, is_mobile):
                     width = max(client_viewport["width"] - right_margin, 1)
                     left += client_viewport["x"]
                     top += client_viewport["y"]
-                    print('hereee')
                 elif cropped:
                     # The image was already cropped, so only cutout the bottom
                     # to get rid of the network request/etc. information for
@@ -761,8 +731,6 @@ def find_render_start(directory, orange_file, gray_file, cropped, is_mobile):
                         height = im_height - bottom_margin
 
                 crop = "{0:d}x{1:d}+{2:d}+{3:d}".format(width, height, left, top)
-                logging.info("crop")
-                logging.info(crop)
 
                 for i in range(1, count):
                     if frames_match(first, files[i], 10, 0, crop, mask):
@@ -822,7 +790,8 @@ def eliminate_duplicate_frames(directory, cropped, is_mobile):
                 top += client_viewport["y"]
             elif cropped:
                 # The image was already cropped, so only cutout the bottom
-                # to get rid of the network request/etc. information
+                # to get rid of the network request/etc. information for
+                # desktop videos, and nothing extra on mobile.
                 top = 0
                 left = 0
                 width = im_width
