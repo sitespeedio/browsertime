@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 14.13.0 - UNRELEASED
+## 14.13.0 - 2021-12-30
 ### Added
 * Append text to Chrome/Edge user agent using `--chrome.appendToUserAgent` [#1688](https://github.com/sitespeedio/browsertime/pull/1688).
 
