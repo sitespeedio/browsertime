@@ -1,5 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 14.13.0 - UNRELEASED
+### Added
+* Append text to Chrome/Edge user agent using `--chrome.appendToUserAgent` [#1688](https://github.com/sitespeedio/browsertime/pull/1688).
+
+### Fixed
+* When you use Chrome and use a "emulated device" that will use the user agent that you provide using `--userAgent`[#1689](https://github.com/sitespeedio/browsertime/pull/1689).
 ## 14.12.2 - 2021-12-09
 ### Fixed
 * Added more info log to get a better feeling for what's going on [#1686](https://github.com/sitespeedio/browsertime/pull/1686).
