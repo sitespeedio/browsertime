@@ -1,8 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 14.14.0 - UNRELEASED
+## 14.14.0 - 2022-01-10
 ### Added
 * Add support for [Humble](https://calendar.perfplanet.com/2021/introducing-humble-the-raspberry-pi-wifi-network-link-conditioner/) as connectivity engine for mobile phone testing. Make sure to setup Humble on a Raspberry Pi 4 and the choose engine with `--connectivity.engine humble` and set the URL to your instance `--connectivity.humble.url http://raspberrypi.local:3000`. Added in [#1691](https://github.com/sitespeedio/browsertime/pull/1691).
+* Upgraded to Chrome 97, Edge 97 and Firefox 95 in the Docker container.
+* Upgraded to Chromedriver 97.
 
 ## 14.13.1 - 2022-01-01
 ### Fixed
