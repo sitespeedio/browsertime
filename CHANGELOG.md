@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 14.14.1 - 2022-01-12
+### Fixed
+* Updated Chromedriver library that pickup already installed driver on Raspberry Pis. This makes it easier to run tests on an Android device from a Raspberry Pi.
 ## 14.14.0 - 2022-01-10
 ### Added
 * Add support for [Humble](https://calendar.perfplanet.com/2021/introducing-humble-the-raspberry-pi-wifi-network-link-conditioner/) as connectivity engine for mobile phone testing. Make sure to setup Humble on a Raspberry Pi 4 and the choose engine with `--connectivity.engine humble` and set the URL to your instance `--connectivity.humble.url http://raspberrypi.local:3000`. Added in [#1691](https://github.com/sitespeedio/browsertime/pull/1691).
