@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 14.15.0 - 2022-01-12
+### Added
+* Added so you can append a String to Firefox User Agent [#1694](https://github.com/sitespeedio/browsertime/pull/1694), thank you [Henrik Skupin](https://github.com/whimboo) for pointing me in the right direction. With [#1695](https://github.com/sitespeedio/browsertime/pull/1695) we now have `--appendToUserAgent` that works in Chrome/Edge and Firefox.
 ## 14.14.1 - 2022-01-12
 ### Fixed
 * Updated Chromedriver library that pickup already installed driver on Raspberry Pis. This makes it easier to run tests on an Android device from a Raspberry Pi.
