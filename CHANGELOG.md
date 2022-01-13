@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Added 
+* Upgraded Geckodriver downloader that downloads a pre-built Geckodriver on Raspberry Pis.
+
 ## 14.15.0 - 2022-01-12
 ### Added
 * Added so you can append a String to Firefox User Agent [#1694](https://github.com/sitespeedio/browsertime/pull/1694), thank you [Henrik Skupin](https://github.com/whimboo) for pointing me in the right direction. With [#1695](https://github.com/sitespeedio/browsertime/pull/1695) we now have `--appendToUserAgent` that works in Chrome/Edge and Firefox.
