@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+##  14.16.0 - 2022-01-14
 ### Added 
 * Upgraded Geckodriver downloader that downloads a pre-built Geckodriver on Raspberry Pis.
 
