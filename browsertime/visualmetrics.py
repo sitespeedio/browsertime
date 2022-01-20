@@ -89,6 +89,7 @@ def video_to_frames(
         if os.path.isfile(video):
             video = os.path.realpath(video)
             logging.info("Processing frames from video " + video + " to " + directory)
+            is_mobile = find_recording_platform(video)
             if os.path.isdir(directory):
                 shutil.rmtree(directory, True)
             if not os.path.isdir(directory):
@@ -103,13 +104,15 @@ def video_to_frames(
                     viewport_retries,
                     viewport_min_height,
                     viewport_min_width,
+                    is_mobile,
                 )
                 gc.collect()
                 if extract_frames(video, directory, full_resolution, viewport):
                     client_viewport = None
                     if find_viewport and options.notification:
                         client_viewport = find_image_viewport(
-                            os.path.join(directory, "video-000000.png")
+                            os.path.join(directory, "video-000000.png"),
+                            is_mobile
                         )
                     if multiple and orange_file is not None:
                         directories = split_videos(directory, orange_file)
@@ -122,12 +125,12 @@ def video_to_frames(
                             remove_orange_frames(dir, orange_file)
                         find_first_frame(dir, white_file)
                         blank_first_frame(dir)
-                        find_render_start(dir, orange_file, gray_file, cropped)
+                        find_render_start(dir, orange_file, gray_file, cropped, is_mobile)
                         find_last_frame(dir, white_file)
                         adjust_frame_times(dir)
                         if timeline_file is not None and not multiple:
                             synchronize_to_timeline(dir, timeline_file)
-                        eliminate_duplicate_frames(dir, cropped)
+                        eliminate_duplicate_frames(dir, cropped, is_mobile)
                         eliminate_similar_frames(dir)
                         # See if we are limiting the number of frames to keep
                         # (before processing them to save processing time)
@@ -200,6 +203,33 @@ def extract_frames(video, directory, full_resolution, viewport):
                 os.rename(src, dest)
                 ret = True
     return ret
+
+
+def find_recording_platform(video):
+    """Find the platform that this video was recorded on.
+
+    We can make use of a field called `com.android.version` to
+    determine if we've recorded on mobile or not.
+    """
+    command = ["ffprobe", video]
+    logging.debug(command)
+
+    lines = []
+    if sys.version_info > (3, 0):
+        proc = subprocess.Popen(command, stderr=subprocess.PIPE, encoding="UTF-8")
+    else:
+        proc = subprocess.Popen(command, stderr=subprocess.PIPE)
+
+    while proc.poll() is None:
+        lines.extend(iter(proc.stderr.readline, ""))
+
+    is_mobile = False
+    matcher = re.compile(".*com\.android\.version.*")
+    for line in lines:
+        if matcher.search(line):
+            is_mobile = True
+
+    return is_mobile
 
 
 def split_videos(directory, orange_file):
@@ -291,7 +321,7 @@ def remove_orange_frames(directory, orange_file):
                 break
 
 
-def find_image_viewport(file):
+def find_image_viewport(file, is_mobile):
     logging.debug("Finding the viewport for %s", file)
     try:
         from PIL import Image
@@ -357,6 +387,12 @@ def find_image_viewport(file):
             "height": (bottom - top),
         }
 
+        if is_mobile:
+            # On mobile we need to ignore the top ~10 pixels because
+            # there is a visible progress bar there on some browsers.
+            viewport["y"] += 10
+            viewport["height"] -= 10
+
     except Exception:
         viewport = None
 
@@ -371,6 +407,7 @@ def find_video_viewport(
     viewport_retries,
     viewport_min_height,
     viewport_min_width,
+    is_mobile,
 ):
     logging.debug("Finding Video Viewport...")
     viewport = None
@@ -463,7 +500,7 @@ def find_video_viewport(
                     }
 
                 elif find_viewport:
-                    viewport = find_image_viewport(frame)
+                    viewport = find_image_viewport(frame, is_mobile)
                 else:
                     viewport = {"x": 0, "y": 0, "width": width, "height": height}
 
@@ -629,7 +666,7 @@ def find_last_frame(directory, white_file):
         logging.exception("Error finding last frame")
 
 
-def find_render_start(directory, orange_file, gray_file, cropped):
+def find_render_start(directory, orange_file, gray_file, cropped, is_mobile):
     logging.debug("Finding Render Start...")
     try:
         if (
@@ -680,13 +717,19 @@ def find_render_start(directory, orange_file, gray_file, cropped):
                     top += client_viewport["y"]
                 elif cropped:
                     # The image was already cropped, so only cutout the bottom
-                    # to get rid of the network request/etc. information
+                    # to get rid of the network request/etc. information for
+                    # desktop videos, and nothing extra on mobile.
                     top = 0
                     left = 0
                     width = im_width
-                    height = im_height - bottom_margin
+
+                    if is_mobile:
+                        height = im_height
+                    else:
+                        height = im_height - bottom_margin
 
                 crop = "{0:d}x{1:d}+{2:d}+{3:d}".format(width, height, left, top)
+
                 for i in range(1, count):
                     if frames_match(first, files[i], 10, 0, crop, mask):
                         logging.debug("Removing pre-render frame %s", files[i])
@@ -705,7 +748,7 @@ def find_render_start(directory, orange_file, gray_file, cropped):
         logging.exception("Error getting render start")
 
 
-def eliminate_duplicate_frames(directory, cropped):
+def eliminate_duplicate_frames(directory, cropped, is_mobile):
     logging.debug("Eliminating Duplicate Frames...")
     global client_viewport
     try:
@@ -745,11 +788,16 @@ def eliminate_duplicate_frames(directory, cropped):
                 top += client_viewport["y"]
             elif cropped:
                 # The image was already cropped, so only cutout the bottom
-                # to get rid of the network request/etc. information
+                # to get rid of the network request/etc. information for
+                # desktop videos, and nothing extra on mobile.
                 top = 0
                 left = 0
                 width = im_width
-                height = im_height - bottom_margin
+
+                if is_mobile:
+                    height = im_height
+                else:
+                    height = im_height - bottom_margin
 
             crop = "{0:d}x{1:d}+{2:d}+{3:d}".format(width, height, left, top)
             logging.debug("Viewport cropping set to " + crop)
