@@ -1,5 +1,19 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 14.17.0 - 2022-01-23
+### Added
+* New Select command [#1696](https://github.com/sitespeedio/browsertime/pull/1696):
+  * `select.selectByIdValue(selectId, value)`
+  * `select.selectByNameAndValue(selectName, value)`
+  * `select.selectByIdAndIndex(selectId, index)`
+  * `select.selectByNameAndIndex(selectName, index)`
+  * `select.deselectById(selectId)`
+  * `select.getValuesById(selectId)`
+  * `select.getSelectedValueById(selectId)`
+
+* New click by name command `click.byName(name)` [#1697](https://github.com/sitespeedio/browsertime/pull/1697).
+
+
 ##  14.16.0 - 2022-01-14
 ### Added 
 * Upgraded Geckodriver downloader that downloads a pre-built Geckodriver on Raspberry Pis.
