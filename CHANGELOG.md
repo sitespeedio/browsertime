@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+
+### Added
+* Updated to Edge stable in the Docker container.
 ## 14.17.0 - 2022-01-23
 ### Added
 * New Select command [#1696](https://github.com/sitespeedio/browsertime/pull/1696):
@@ -13,6 +17,8 @@
 
 * New click by name command `click.byName(name)` [#1697](https://github.com/sitespeedio/browsertime/pull/1697).
 
+### Fixed
+* Remove the top 10 rows of the image to handle progress bars on some mobile browser recordings. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1687](https://github.com/sitespeedio/browsertime/pull/1687). 
 
 ##  14.16.0 - 2022-01-14
 ### Added 
