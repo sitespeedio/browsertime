@@ -1,9 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
-
+## 14.18.0 - 2022-01-24
 ### Added
 * Updated to Edge stable in the Docker container.
+
+### Fixed
+* A more safe way to get dockumentURI for Firefox. See PR [#1699](https://github.com/sitespeedio/browsertime/pull/1699) and bug [#1698](https://github.com/sitespeedio/browsertime/issues/1698).
+
 ## 14.17.0 - 2022-01-23
 ### Added
 * New Select command [#1696](https://github.com/sitespeedio/browsertime/pull/1696):
