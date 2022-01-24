@@ -1,8 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 14.18.1 - 2022-01-24
 ### Fixed
-* If loading a URL failed and we retry, we logget that as an info message, but you as a user only need to know if it fails after x retries. The log message now logs at debug level [#1701](https://github.com/sitespeedio/browsertime/pull/1701).
+* If loading a URL failed and we retry and we logged that as an info message, but you as a user only need to know if it fails after X retries. The log message now logs at debug level [#1701](https://github.com/sitespeedio/browsertime/pull/1701).
 * The summary log message `[2022-01-24 16:12:38] INFO: https://www.sitespeed.io 27 requests, TTFB: 962ms (σ917.00ms), firstPaint: 2.92s (σ3.07s), firstVisualChange: 2.94s (σ3.07s), FCP: 2.92s (σ3.07s), DOMContentLoaded: 3.22s (σ2.98s), LCP: 2.92s (σ3.07s), CLS: 0.0389 (σ0.03), TBT: 769ms (σ53.00ms), Load: 3.77s (σ3.12s), speedIndex: 2.96s (σ3.07s), visualComplete85: 2.95s (σ3.06s), lastVisualChange: 4.54s (σ3.30s) (21 runs)` that summaries all the runs used mean instead of median metric. That sucks when you do many runs and want to compare them. That is now fixed to show median number instead [#1700](https://github.com/sitespeedio/browsertime/pull/1700).
 
 ## 14.18.0 - 2022-01-24
