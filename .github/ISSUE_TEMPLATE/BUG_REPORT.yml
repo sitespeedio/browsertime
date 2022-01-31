@@ -44,6 +44,7 @@ body:
         - Safari iOS
         - Chrome Android
         - Firefox Android
+        - Other
     validations:
       required: true
   - type: textarea
