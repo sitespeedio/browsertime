@@ -4,7 +4,7 @@ labels: [bug]
 body:
   - type: markdown
     attributes:
-      value: Thanks for reporting issues back to sitespeed.io!
+      value: Thanks for reporting issues back to Browsertime!
   - type: checkboxes
     id: Reproducable
     attributes:
@@ -19,22 +19,31 @@ body:
     id: url
     attributes:
       label: URL
-      description: What URL did you run sitespeed.io on? If you can't share your URL please make a minimial repro to a public location (e.g. https://glitch.com/, http://jsbin.com/, etc)
+      description: What URL did you run Browsertime on? If you can't share your URL please make a minimial repro to a public location (e.g. https://glitch.com/, http://jsbin.com/, etc)
       placeholder: https://example.com
     validations:
       required: true
   - type: textarea
-    id: whaw
+    id: what
     attributes:
       label: What are you trying to accomplish
       description: A brief description of what you tried to do and what went wrong.
     validations:
       required: true
-  - type: input
-    id: versions
+  - type: dropdown
+    id: browser
     attributes:
-      label: Versions
-      description: What version of sitespeed.io did you use, which browser version and what's your OS.
+      label: What browser did you use? 
+      description: Extra bonus if you try the issue in multiple browsers
+      multiple: true
+      options:
+        - Chrome
+        - Firefox
+        - Edge
+        - Safari Mac OS
+        - Safari iOS
+        - Chrome Android
+        - Firefox Android
     validations:
       required: true
   - type: textarea
