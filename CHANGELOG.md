@@ -1,5 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 14.19.0 - 2022-02-02
+
+### Added 
+* Chrome and Chromedriver 98 [#1704](https://github.com/sitespeedio/browsertime/pull/1704).
+
+### Fixed
+* Fix so we get the Firefox version on Android [#1704](https://github.com/sitespeedio/browsertime/pull/1704).
+
 ## 14.18.1 - 2022-01-24
 ### Fixed
 * If loading a URL failed and we retry and we logged that as an info message, but you as a user only need to know if it fails after X retries. The log message now logs at debug level [#1701](https://github.com/sitespeedio/browsertime/pull/1701).
