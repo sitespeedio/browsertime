@@ -29,6 +29,7 @@ jobs:
       run: |
         sudo apt-get install net-tools -y
         sudo snap install ffmpeg
+        sudo snap alias ffmpeg.ffprobe ffprobe
         python -m pip install --upgrade --user pip
         python -m pip install --upgrade --user setuptools
         python -m pip install --user pyssim
