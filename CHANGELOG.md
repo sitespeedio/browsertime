@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Fixed
+* Upgraded to Geckodriver 0.30.0 [#1710](https://github.com/sitespeedio/browsertime/pull/1710).
 
 ## 14.19.1 - 2022-02-03
 ### Fixed
