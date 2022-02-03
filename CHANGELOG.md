@@ -1,5 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+
+## 14.19.1 - 2022-02-03
+### Fixed
+* Remove the old fix for setting CPUThrottling, that works now in Chrome without that fix [#1708](https://github.com/sitespeedio/browsertime/pull/1708).
+* Do not set binary for Firefox when run on Android [#1706](https://github.com/sitespeedio/browsertime/pull/1706).
+
 ## 14.19.0 - 2022-02-02
 
 ### Added 
