@@ -3,7 +3,7 @@
 ## UNRELEASED
 ### Fixed
 * Upgraded to Geckodriver 0.30.0 [#1710](https://github.com/sitespeedio/browsertime/pull/1710).
-
+* Upgraded to Chromedriver that always looks for Chromedriver in PATH for arm64.
 ## 14.19.1 - 2022-02-03
 ### Fixed
 * Remove the old fix for setting CPUThrottling, that works now in Chrome without that fix [#1708](https://github.com/sitespeedio/browsertime/pull/1708).
