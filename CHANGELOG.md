@@ -1,9 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 14.19.2 - 2022-02-05
 ### Fixed
 * Upgraded to Geckodriver 0.30.0 [#1710](https://github.com/sitespeedio/browsertime/pull/1710).
 * Upgraded to Chromedriver that always looks for Chromedriver in PATH for arm64.
+* Fixed getting Geckoprofile on Android when you do not specify Android package [#1712](https://github.com/sitespeedio/browsertime/pull/1712).
 ## 14.19.1 - 2022-02-03
 ### Fixed
 * Remove the old fix for setting CPUThrottling, that works now in Chrome without that fix [#1708](https://github.com/sitespeedio/browsertime/pull/1708).
