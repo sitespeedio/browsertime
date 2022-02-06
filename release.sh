@@ -16,9 +16,6 @@ np $* --no-yarn
 
 PACKAGE_VERSION=$(node -e 'console.log(require("./package").version)')
 
-docker build --no-cache -t sitespeedio/browsertime:${PACKAGE_VERSION} -t sitespeedio/browsertime:latest .
-
-docker push sitespeedio/browsertime:${PACKAGE_VERSION}
-docker push sitespeedio/browsertime:latest
+docker buildx build --push --platform linux/arm64,linux/amd64  --no-cache -t sitespeedio/browsertime:${PACKAGE_VERSION} -t sitespeedio/browsertime:latest .
 
 bin/browsertime.js --version | tr -d '\n' > ../sitespeed.io/docs/_includes/version/browsertime.txt
