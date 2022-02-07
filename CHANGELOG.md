@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 14.20.1 - 2022-02-07
+### Fixed
+* There's a new setup how we build Docker releases and this release uses the new pipeline.
 ## 14.20.0 - 2022-02-07
 ### Added
 * Docker container for both amd64 and arm64.
