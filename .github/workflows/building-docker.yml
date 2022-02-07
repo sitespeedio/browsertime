@@ -1,4 +1,4 @@
-name: Build Docker contaioner on new tag
+name: Build Docker container on new tag
 on:
   push:
     tags:
@@ -32,6 +32,3 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: sitespeedio/browsertime:${{steps.tag.outputs.tag}},sitespeedio/browsertime:latest
-
- 
-        
