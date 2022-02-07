@@ -4,9 +4,20 @@ set -e
 # See https://github.com/SeleniumHQ/docker-selenium/issues/87
 export DBUS_SESSION_BUS_ADDRESS=/dev/null
 
-google-chrome --version
-firefox --version
-microsoft-edge --version
+# All browsers do not exist in all architectures.
+if [[ `which google-chrome` ]]; then
+   google-chrome --version
+elif [[ `which chromium-browser` ]]; then
+   chromium-browser --version
+fi
+
+if [[ `which firefox` ]]; then
+   firefox --version
+fi
+
+if [[ `which microsoft-edge` ]]; then
+   microsoft-edge --version
+fi
 
 BROWSERTIME_RECORD=/usr/src/app/bin/browsertimeWebPageReplay.js
 BROWSERTIME=/usr/src/app/bin/browsertime.js
