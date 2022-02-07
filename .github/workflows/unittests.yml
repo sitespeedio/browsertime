@@ -3,6 +3,8 @@ on:
   push:
     branches:
     - main
+    tags-ignore:
+    - '**'
   pull_request:
     branches:
     - main
@@ -11,7 +13,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [14.x, 16.x]
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
