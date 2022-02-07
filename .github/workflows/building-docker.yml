@@ -21,6 +21,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Get the tag
+        id: tag
         uses: dawidd6/action-get-tag@v1
         with:
           strip_v: true
