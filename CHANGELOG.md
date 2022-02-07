@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 14.20.0 - 2022-02-07
+### Added
+* Docker container for both amd64 and arm64.
+
 ## 14.19.2 - 2022-02-05
 ### Fixed
 * Upgraded to Geckodriver 0.30.0 [#1710](https://github.com/sitespeedio/browsertime/pull/1710).
