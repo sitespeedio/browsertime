@@ -3,8 +3,6 @@ on:
   push:
     branches:
     - main
-    tags-ignore:
-    - '**'
   pull_request:
     branches:
     - main
@@ -17,7 +15,7 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: '14.x'
+        node-version: '16.x'
     - name: Install browsertime
       run: npm ci
     - name: Install dependencies
