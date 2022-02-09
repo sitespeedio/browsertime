@@ -136,7 +136,7 @@ describe('SeleniumRunner', function () {
               headless: true
             });
             return runner.start().then(function () {
-              return runner.loadAndWait('data:text/html;charset=utf-8,');
+              return runner.loadAndWait('https://www.sitespeed.io/');
             });
           });
 
@@ -171,7 +171,7 @@ describe('SeleniumRunner', function () {
           headless: true
         });
         return runner.start().then(function () {
-          return runner.loadAndWait('data:text/html;charset=utf-8,');
+          return runner.loadAndWait('https://www.sitespeed.io/');
         });
       });
 
@@ -237,7 +237,7 @@ describe('SeleniumRunner', function () {
           headless: true
         });
         return runner.start().then(function () {
-          return runner.loadAndWait('data:text/html;charset=utf-8,');
+          return runner.loadAndWait('https://www.sitespeed.io/');
         });
       });
 
