@@ -17,8 +17,6 @@ jobs:
         node-version: '16.x'
     - name: Install Browsertime
       run: npm ci
-    - name: Install Firefox
-      uses: browser-actions/setup-firefox@latest
     - name: Install dependencies
       run: |
         choco install ffmpeg
@@ -27,6 +25,7 @@ jobs:
         choco install python
         choco install microsoft-edge
         choco install googlechrome
+        choco install firefox
         python -m pip install --upgrade --user pip
         python -m pip install --upgrade --user setuptools
         python -m pip install --user pyssim
