@@ -1,7 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 14.21.0 - 2022-02-08
+
+## 14.21.1 - 2022-02-09
 ### Fixed
+* Always disable the new ChromeWhatsNewUI splash screen in Chrome [#1717](https://github.com/sitespeedio/browsertime/pull/1717).
+* Remove the Firefox persist log configuration that was needed for FF 94+ [#1716](https://github.com/sitespeedio/browsertime/pull/1716).
+## 14.21.0 - 2022-02-08
+### Added
 * Upgraded to Egdedriver 98
 * Upgraded to Edge 98 and Firefox 97 in the Docker container
 ## 14.20.3 - 2022-02-07
