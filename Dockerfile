@@ -12,7 +12,7 @@ COPY docker/webpagereplay/wpr_key.pem /webpagereplay/certs/
 COPY docker/webpagereplay/deterministic.js /webpagereplay/scripts/deterministic.js
 COPY docker/webpagereplay/LICENSE /webpagereplay/
 
-RUN sudo apt-get update && DEBIAN_FRONTEND=noninteractive sudo apt-get install libnss3-tools python2 \
+RUN sudo apt-get update && DEBIAN_FRONTEND=noninteractive sudo apt-get install libnss3-tools \
   net-tools tcpdump -y && \
   mkdir -p $HOME/.pki/nssdb && \
   certutil -d $HOME/.pki/nssdb -N
