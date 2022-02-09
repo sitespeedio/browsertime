@@ -196,7 +196,7 @@ describe('Engine', function () {
       });
 
       it('should run pre and post tasks', function () {
-        return engine.run('data:text/html;charset=utf-8,', { scripts });
+        return engine.run('https://www.sitespeed.io/', { scripts });
       });
 
       afterEach(() =>
@@ -226,7 +226,7 @@ describe('Engine', function () {
       });
 
       it('should run 5-second pageCompleteCheck from inline javascript', function () {
-        return engine.run('data:text/html;charset=utf-8,', { scripts });
+        return engine.run('https://www.sitespeed.io/', { scripts });
       });
 
       afterEach(() =>
@@ -255,7 +255,7 @@ describe('Engine', function () {
       });
 
       it('should run 10-second pageCompleteScript from script file', function () {
-        return engine.run('data:text/html;charset=utf-8,', { scripts });
+        return engine.run('https://www.sitespeed.io/', { scripts });
       });
 
       afterEach(() =>
