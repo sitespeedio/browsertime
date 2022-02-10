@@ -26,7 +26,7 @@ describe('Engine', function () {
       beforeEach(function () {
         engine = new Engine({
           browser: browser,
-          iterations: 2,
+          iterations: 1,
           delay: 17,
           headless: true,
           retries: 0
