@@ -1,4 +1,4 @@
-name: Unit tests Browser
+name: Unit tests commands
 on:
   push:
     branches:
