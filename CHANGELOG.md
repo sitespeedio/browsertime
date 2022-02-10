@@ -1,9 +1,14 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 15.0.0 - UNRELEASED
+### Changed
+* Removed the built in support for TSProxy [#1718](https://github.com/sitespeedio/browsertime/pull/1718). TSProxy only worked with Python 2.7 and we want to remove that dependency.
 
+### Fixed
+* Code cleanup: [#1720](https://github.com/sitespeedio/browsertime/pull/1720)
 ## 14.21.1 - 2022-02-09
 ### Fixed
-* Always disable the new ChromeWhatsNewUI splash screen in Chrome [#1717](https://github.com/sitespeedio/browsertime/pull/1717).
+* Always disable the new ChromeWhaxyNewUI splash screen in Chrome [#1717](https://github.com/sitespeedio/browsertime/pull/1717).
 * Remove the Firefox persist log configuration that was needed for FF 94+ [#1716](https://github.com/sitespeedio/browsertime/pull/1716).
 ## 14.21.0 - 2022-02-08
 ### Added
