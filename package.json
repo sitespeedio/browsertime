@@ -76,7 +76,6 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "eslint-check": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
-    "travis": "npm run eslint-check && npm run lint && npm run test"
   },
   "name": "browsertime",
   "author": "Tobias Lidskog",
