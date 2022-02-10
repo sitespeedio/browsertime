@@ -6,6 +6,8 @@ const Engine = require('../../lib/core/engine');
 
 const BROWSERS = [];
 
+const TEST_SERVER_URL = 'http://127.0.0.1:8080/';
+
 if (process.env.BROWSERTIME_TEST_BROWSER) {
   BROWSERS.push(...process.env.BROWSERTIME_TEST_BROWSER.split(' '));
 } else {
@@ -37,7 +39,7 @@ describe('Engine', function () {
       it('should be able to load a url', function () {
         // somewhat clunky way to ignore generated har data in test.
         let browserScripts = engine
-          .run('https://www.sitespeed.io/testcases/info/domElements.html', {
+          .run(TEST_SERVER_URL, {
             scripts
           })
           .then(function (r) {
@@ -47,14 +49,14 @@ describe('Engine', function () {
           {
             scripts: {
               foo: 'fff',
-              uri: 'https://www.sitespeed.io/testcases/info/domElements.html',
+              uri: TEST_SERVER_URL,
               fourtytwo: 42
             }
           },
           {
             scripts: {
               foo: 'fff',
-              uri: 'https://www.sitespeed.io/testcases/info/domElements.html',
+              uri: TEST_SERVER_URL,
               fourtytwo: 42
             }
           }
@@ -63,20 +65,17 @@ describe('Engine', function () {
 
       it('should be able to load multiple urls', function () {
         return engine
-          .run('https://www.sitespeed.io/testcases/info/domElements.html', {
+          .run(TEST_SERVER_URL, {
             scripts
           })
           .then(function () {
-            return engine.run(
-              'https://www.sitespeed.io/testcases/info/responsive.html',
-              { scripts }
-            );
+            return engine.run(TEST_SERVER_URL, { scripts });
           }).should.be.fulfilled;
       });
       it('should be able to generate a har', function () {
         // somewhat clunky way to ignore generated har data in test.
         return engine
-          .run('https://www.sitespeed.io/testcases/info/domElements.html', {
+          .run(TEST_SERVER_URL, {
             scripts
           })
           .then(function (r) {
@@ -116,7 +115,7 @@ describe('Engine', function () {
       it('should be able to run async script', function () {
         let browserScripts = engine
           .run(
-            'https://www.sitespeed.io/testcases/info/domElements.html',
+            TEST_SERVER_URL,
             { scripts: syncScripts },
             { scripts: asyncScripts }
           )
@@ -127,7 +126,7 @@ describe('Engine', function () {
           {
             scripts: {
               foo: 'fff',
-              uri: 'https://www.sitespeed.io/testcases/info/domElements.html',
+              uri: TEST_SERVER_URL,
               fourtytwo: 42,
               promiseFourtyThree: 43
             }
@@ -137,12 +136,9 @@ describe('Engine', function () {
 
       it('should be able to run async fetch script', function () {
         let browserScripts = engine
-          .run(
-            'https://www.sitespeed.io/testcases/info/domElements.html',
-            null,
-            {
-              scripts: {
-                fetched: `(function() {
+          .run(TEST_SERVER_URL, null, {
+            scripts: {
+              fetched: `(function() {
             var request = new Request(document.URL, {
               redirect: 'follow',
               destination: 'document'
@@ -150,9 +146,8 @@ describe('Engine', function () {
 
             return fetch(request).then(response => response.ok);
           })()`
-              }
             }
-          )
+          })
           .then(function (r) {
             return r[0].browserScripts;
           });
@@ -196,7 +191,7 @@ describe('Engine', function () {
       });
 
       it('should run pre and post tasks', function () {
-        return engine.run('https://www.sitespeed.io/', { scripts });
+        return engine.run(TEST_SERVER_URL, { scripts });
       });
 
       afterEach(() =>
@@ -226,7 +221,7 @@ describe('Engine', function () {
       });
 
       it('should run 5-second pageCompleteCheck from inline javascript', function () {
-        return engine.run('https://www.sitespeed.io/', { scripts });
+        return engine.run(TEST_SERVER_URL, { scripts });
       });
 
       afterEach(() =>
@@ -255,7 +250,7 @@ describe('Engine', function () {
       });
 
       it('should run 10-second pageCompleteScript from script file', function () {
-        return engine.run('https://www.sitespeed.io/', { scripts });
+        return engine.run(TEST_SERVER_URL, { scripts });
       });
 
       afterEach(() =>

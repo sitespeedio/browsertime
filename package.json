@@ -40,6 +40,7 @@
     "eslint": "8.0.1",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "4.0.0",
+    "http-server": "14.1.0",
     "longjohn": "0.2.12",
     "mocha": "6.2.0",
     "prettier": "2.4.1"
@@ -65,11 +66,13 @@
   ],
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/unitTests && mocha test/browserTests && mocha test/commandTests",
+    "test": "npm run test:startserver && mocha test/unitTests && mocha test/browserTests && mocha test/commandTests && pnpm run test:stopserver",
     "test:unit": "mocha test/unitTests",
     "test:browser": "mocha test/browserTests",
     "test:selenium": "mocha test/browserTests/seleniumRunnerTests.js",
     "test:commands": "mocha test/commandTests",
+    "test:startserver": "http-server test/testData/html -s &",
+    "test:stopserver": "pkill http-server",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "eslint-check": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",

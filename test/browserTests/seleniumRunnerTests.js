@@ -5,6 +5,8 @@ const SeleniumRunner = require('../../lib/core/seleniumRunner');
 const BROWSERS = [];
 const BASE_PATH = '/tmp/';
 
+const TEST_SERVER_URL = 'http://127.0.0.1:8080/';
+
 if (process.env.BROWSERTIME_TEST_BROWSER) {
   BROWSERS.push(process.env.BROWSERTIME_TEST_BROWSER);
 } else {
@@ -78,9 +80,7 @@ describe('SeleniumRunner', function () {
       });
 
       it('should be able to load a url', function () {
-        return runner.loadAndWait(
-          'https://www.sitespeed.io/testcases/info/domElements.html'
-        ).should.be.fulfilled;
+        return runner.loadAndWait(TEST_SERVER_URL).should.be.fulfilled;
       });
       it.skip('should fail if url takes too long to load, enable this when httpbin works again', function () {
         return runner.loadAndWait(
@@ -91,21 +91,21 @@ describe('SeleniumRunner', function () {
 
       it('should fail if wait script never returns true', function () {
         return runner.loadAndWait(
-          'https://www.sitespeed.io/testcases/info/domElements.html',
+          TEST_SERVER_URL,
           'return false'
         ).should.be.rejected;
       });
 
       it('should fail if wait script throws an exception', function () {
         return runner.loadAndWait(
-          'https://www.sitespeed.io/testcases/info/domElements.html',
+          TEST_SERVER_URL,
           'throw new Error("foo");'
         ).should.be.rejected;
       });
 
       it.skip('should fail if wait script hangs', function () {
         return runner.loadAndWait(
-          'https://www.sitespeed.io/testcases/info/domElements.html',
+          TEST_SERVER_URL,
           'while (true) {}; return true;'
         ).should.be.rejected;
       });
@@ -136,14 +136,12 @@ describe('SeleniumRunner', function () {
               headless: true
             });
             return runner.start().then(function () {
-              return runner.loadAndWait('https://www.sitespeed.io/');
+              return runner.loadAndWait(TEST_SERVER_URL);
             });
           });
 
           it('should be able to load a url', function () {
-            return runner.loadAndWait(
-              'https://www.sitespeed.io/testcases/info/domElements.html'
-            ).should.be.fulfilled;
+            return runner.loadAndWait(TEST_SERVER_URL).should.be.fulfilled;
           });
 
           afterEach(function () {
@@ -171,7 +169,7 @@ describe('SeleniumRunner', function () {
           headless: true
         });
         return runner.start().then(function () {
-          return runner.loadAndWait('https://www.sitespeed.io/');
+          return runner.loadAndWait(TEST_SERVER_URL);
         });
       });
 
@@ -237,7 +235,7 @@ describe('SeleniumRunner', function () {
           headless: true
         });
         return runner.start().then(function () {
-          return runner.loadAndWait('https://www.sitespeed.io/');
+          return runner.loadAndWait(TEST_SERVER_URL);
         });
       });
 
