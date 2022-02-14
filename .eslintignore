@@ -2,5 +2,6 @@ browserscripts/*
 tools/*
 test/browserscripts/*
 test/prepostscripts/*
+test/html/*
 docker/webpagereplay/*
 vendor/*

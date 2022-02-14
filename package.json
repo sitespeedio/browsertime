@@ -3,10 +3,14 @@
   "version": "14.21.1",
   "bin": "./bin/browsertime.js",
   "dependencies": {
-    "@sitespeed.io/throttle": "3.0.0",
+    "@cypress/xvfb": "1.2.4",
     "@devicefarmer/adbkit": "2.11.3",
-    "btoa": "1.2.1",
     "@sitespeed.io/chromedriver": "98.0.4758-48b",
+    "@sitespeed.io/edgedriver": "98.0.1108-43",
+    "@sitespeed.io/geckodriver": "0.30.0",
+    "@sitespeed.io/throttle": "3.0.0",
+    "@sitespeed.io/tracium": "0.3.3",
+    "btoa": "1.2.1",
     "chrome-har": "0.12.0",
     "chrome-remote-interface": "0.31.0",
     "dayjs": "1.10.7",
@@ -23,26 +27,19 @@
     "lodash.pick": "4.4.0",
     "lodash.set": "4.3.2",
     "selenium-webdriver": "4.1.1",
-    "@sitespeed.io/edgedriver": "98.0.1108-43",
-    "@sitespeed.io/geckodriver": "0.30.0",
-    "@sitespeed.io/tracium": "0.3.3",
     "speedline-core": "1.4.3",
-    "@cypress/xvfb": "1.2.4",
     "yargs": "17.2.1"
   },
   "optionalDependencies": {
     "jimp": "0.16.1"
   },
   "devDependencies": {
-    "bluebird": "3.7.2",
-    "chai": "4.3.4",
-    "chai-as-promised": "7.1.1",
+    "ava": "4.0.1",
     "eslint": "8.0.1",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "4.0.0",
-    "longjohn": "0.2.12",
-    "mocha": "6.2.0",
-    "prettier": "2.4.1"
+    "prettier": "2.4.1",
+    "serve-handler": "6.1.3"
   },
   "engines": {
     "node": ">=10.13.0"
@@ -65,15 +62,14 @@
   ],
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/unitTests && mocha test/browserTests && mocha test/commandTests",
+    "test": "ava",
     "test:unit": "mocha test/unitTests",
     "test:browser": "mocha test/browserTests",
     "test:selenium": "mocha test/browserTests/seleniumRunnerTests.js",
     "test:commands": "mocha test/commandTests",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "eslint-check": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
-    "travis": "npm run eslint-check && npm run lint && npm run test"
+    "eslint-check": "eslint --print-config .eslintrc.json | eslint-config-prettier-check"
   },
   "name": "browsertime",
   "author": "Tobias Lidskog",
@@ -90,5 +86,20 @@
     "url": "https://github.com/sitespeedio/browsertime.git"
   },
   "homepage": "https://www.sitespeed.io/documentation/browsertime/",
-  "license": "MIT"
+  "license": "MIT",
+  "ava": {
+		"files": [
+			"test/**/*",
+			"!test/util",
+      "!test/data"
+		],
+		"concurrency": 1,
+		"failFast": false,
+		"require": [
+			"./test/util/setup.js"
+		],
+		"nodeArguments": [
+			"--trace-deprecation"
+		]
+	}
 }

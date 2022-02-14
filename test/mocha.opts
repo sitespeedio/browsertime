@@ -1,5 +1,0 @@
---require ./test/helpers/first
---reporter spec
---retries 1
---timeout 120s
---check-leaks
