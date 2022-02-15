@@ -20,7 +20,9 @@ jobs:
       with:
         python-version: '3.x' #
         cache: 'pip' 
-        run: pip install --user pyssim
+    - run: |
+          pip install --user setuptools
+          pip install --user pyssim
     - name: Cache brew deps
       uses: actions/cache@v2
       with:
@@ -34,7 +36,7 @@ jobs:
           /usr/local/Frameworks
           /usr/local/bin
           /usr/local/opt
-        key: macos-build-cache-${{ hashFiles('./github/workflows/safari.yml') }}
+        key: macos-build-cache-${{ hashFiles('./github/') }}
     - name: Install browsertime
       run: npm ci
     - name: Install dependencies
