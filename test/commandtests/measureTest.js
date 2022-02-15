@@ -25,7 +25,7 @@ test.serial.beforeEach('Start the browser', async t => {
   return engine.start();
 });
 
-test.serial('should be able to measure two urls after each other', async t => {
+test.serial('Measure two urls after each other', async t => {
   const result = await engine.runMultiple([getPath('measure.js')], {
     scripts: { uri: 'document.documentURI' }
   });
@@ -39,7 +39,7 @@ test.serial('should be able to measure two urls after each other', async t => {
   );
 });
 
-test.serial('should be able to give each URL an alias', async t => {
+test.serial('Give each URL an alias', async t => {
   const result = await engine.runMultiple([getPath('measureAlias.js')], {
     scripts: { uri: 'document.documentURI' }
   });

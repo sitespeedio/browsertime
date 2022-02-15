@@ -16,16 +16,12 @@ test(`parseTrafficShapeConfig`, async t => {
   let shapeConfig = parser.parseTrafficShapeConfig({
     connectivity: { profile: 'native' }
   });
-  t.is(
-    shapeConfig,
-    null,
-    'should return null for "native" traffic shape config'
-  );
+  t.is(shapeConfig, null, 'Return null for "native" traffic shape config');
 
   shapeConfig = parser.parseTrafficShapeConfig({});
   t.is(
     shapeConfig,
     null,
-    'should return undefined if traffic shape config is missing'
+    'Return undefined if traffic shape config is missing'
   );
 });

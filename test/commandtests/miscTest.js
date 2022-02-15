@@ -25,7 +25,7 @@ test.serial.beforeEach('Start the browser', async t => {
   return engine.start();
 });
 
-test.serial('should be able to to run misc commands', async t => {
+test.serial('Run misc commands', async t => {
   const result = await engine.runMultiple([getPath('misc.js')], {
     scripts: { uri: 'document.documentURI' }
   });

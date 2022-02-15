@@ -10,7 +10,7 @@ const TEST_SCRIPTS_FOLDER = path.resolve(
   'testscripts'
 );
 
-test(`Should parse valid scripts`, async t => {
+test(`Parse valid scripts`, async t => {
   const scriptsByCategory = await parser.findAndParseScripts(
     TEST_SCRIPTS_FOLDER,
     'custom'
@@ -28,7 +28,7 @@ test(`Should parse valid scripts`, async t => {
   t.notDeepEqual(testscriptsCategory.script, '');
 });
 
-test(`Should get scripts for all categories`, async t => {
+test(`Get scripts for all categories`, async t => {
   const categories = await parser.allScriptCategories;
   const scriptsByCategory = await parser.getScriptsForCategories(categories);
 

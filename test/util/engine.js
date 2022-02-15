@@ -3,7 +3,6 @@ const merge = require('lodash.merge');
 
 module.exports = {
   getEngine(options) {
-    console.log('Browser:' + process.env.BROWSER || 'chrome');
     const defaultOptions = {
       browser: process.env.BROWSER || 'chrome',
       timeouts: {

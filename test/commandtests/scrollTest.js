@@ -25,14 +25,14 @@ test.serial.beforeEach('Start the browser', async t => {
   return engine.start();
 });
 
-test.serial('should be able to to run scroll by pixel command', async t => {
+test.serial('Scroll by pixel command', async t => {
   await engine.runMultiple([getPath('scrollByPixel.js')], {
     scripts: { uri: 'document.documentURI' }
   });
   t.pass();
 });
 
-test.serial('should be able to to run scroll to bottom command', async t => {
+test.serial('Scroll to bottom command', async t => {
   await engine.runMultiple([getPath('scrollToBottom.js')], {
     scripts: { uri: 'document.documentURI' }
   });

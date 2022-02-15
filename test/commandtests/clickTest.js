@@ -25,7 +25,7 @@ test.serial.beforeEach('Start the browser', async t => {
   return engine.start();
 });
 
-test.serial('should be able to measure the urls after a click', async t => {
+test.serial('Measure the urls after a click', async t => {
   const result = await engine.runMultiple([getPath('clickAndMeasure.js')], {
     scripts: { uri: 'document.documentURI' }
   });
@@ -41,7 +41,7 @@ test.serial('should be able to measure the urls after a click', async t => {
   );
 });
 
-test.serial('should be able to give an URL after a click an alias', async t => {
+test.serial('Measure URL after a click that got an alias', async t => {
   const result = await engine.runMultiple([getPath('clickAndMeasure.js')], {
     scripts: { uri: 'document.documentURI' }
   });
@@ -54,37 +54,31 @@ test.serial('should be able to give an URL after a click an alias', async t => {
   );
 });
 
-test.serial(
-  'should be able to get the alias after multiple clicks',
-  async t => {
-    const result = await engine.runMultiple([getPath('clickBackAndForth.js')], {
-      scripts: { uri: 'document.documentURI' }
-    });
-    t.deepEqual(result[0].info.alias, 'simple');
+test.serial('Get the alias after multiple clicks', async t => {
+  const result = await engine.runMultiple([getPath('clickBackAndForth.js')], {
+    scripts: { uri: 'document.documentURI' }
+  });
+  t.deepEqual(result[0].info.alias, 'simple');
 
-    t.is(
-      result.har.log.entries[0].request.url,
-      'http://127.0.0.1:3000/search/',
-      'Could not verify we got a HAR from the browser'
-    );
-  }
-);
+  t.is(
+    result.har.log.entries[0].request.url,
+    'http://127.0.0.1:3000/search/',
+    'Could not verify we got a HAR from the browser'
+  );
+});
 
-test.serial(
-  'should be able to measure the urls after multiple clicks',
-  async t => {
-    const result = await engine.runMultiple([getPath('clickBackAndForth.js')], {
-      scripts: { uri: 'document.documentURI' }
-    });
-    t.deepEqual(
-      result[0].browserScripts[0].scripts.uri,
-      'http://127.0.0.1:3000/search/'
-    );
+test.serial('Measure urls after multiple clicks', async t => {
+  const result = await engine.runMultiple([getPath('clickBackAndForth.js')], {
+    scripts: { uri: 'document.documentURI' }
+  });
+  t.deepEqual(
+    result[0].browserScripts[0].scripts.uri,
+    'http://127.0.0.1:3000/search/'
+  );
 
-    t.is(
-      result.har.log.entries[0].request.url,
-      'http://127.0.0.1:3000/search/',
-      'Could not verify we got a HAR from the browser'
-    );
-  }
-);
+  t.is(
+    result.har.log.entries[0].request.url,
+    'http://127.0.0.1:3000/search/',
+    'Could not verify we got a HAR from the browser'
+  );
+});

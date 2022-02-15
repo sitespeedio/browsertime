@@ -65,19 +65,19 @@ test.serial.beforeEach('Setup the HAR', () => {
   };
 });
 
-test('should add creator if missing', t => {
+test('Add creator if missing', t => {
   builder.addCreator(har, 'foo');
   t.is(har.log.creator.name, 'Browsertime');
   t.is(har.log.creator.comment, 'foo');
 });
 
-test('should not add comment to creator unless specified', t => {
+test('Not add comment to creator unless specified', t => {
   builder.addCreator(har);
   t.is(har.log.creator.name, 'Browsertime');
   t.is(har.log.creator.comment, undefined);
 });
 
-test('should merge two hars', t => {
+test('Merge two hars', t => {
   builder.addCreator(har);
 
   let har2 = {
@@ -137,12 +137,12 @@ test('should merge two hars', t => {
   t.is(combinedHar.log.creator.name, 'Browsertime');
 });
 
-test('should gracefully handle missing data', t => {
+test('Gracefully handle missing data', t => {
   builder.addExtraFieldsToHar();
   t.pass();
 });
 
-test('should add visual metrics if given', t => {
+test('Add visual metrics if given', t => {
   const options = {
     iterations: 1
   };
@@ -176,7 +176,7 @@ test('should add visual metrics if given', t => {
   });
 });
 
-test('should gracefully handle missing cpu and visual metrics', t => {
+test('Gracefully handle missing cpu and visual metrics', t => {
   const totalResults = totalResultsBase;
   const options = {
     iterations: 1

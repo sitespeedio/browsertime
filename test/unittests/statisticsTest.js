@@ -3,7 +3,7 @@ const Statistics = require('../../lib/support/statistics').Statistics;
 
 let stats;
 
-test.serial('should be possible to add multiple keys', t => {
+test.serial('Add multiple keys', t => {
   stats = new Statistics();
   for (let i = 0; i < 11; i++) {
     stats.add('foo', i + 1);
@@ -13,14 +13,14 @@ test.serial('should be possible to add multiple keys', t => {
   t.deepEqual(result.foo, result.bar);
 });
 
-test('should handle keys with dots', t => {
+test('Handle keys with dots', t => {
   stats = new Statistics();
   stats.add('1.2.3', 42.0);
   let result = stats.summarize();
   t.deepEqual(result['1.2.3'].mean, 42.0);
 });
 
-test('should require string keys', t => {
+test('Require string keys', t => {
   stats = new Statistics();
   t.throws(
     () => {
@@ -30,7 +30,7 @@ test('should require string keys', t => {
   );
 });
 
-test('should require numeric values', t => {
+test('Require numeric values', t => {
   stats = new Statistics();
   t.throws(
     () => {
@@ -40,7 +40,7 @@ test('should require numeric values', t => {
   );
 });
 
-test('should require finite values', t => {
+test('Require finite values', t => {
   stats = new Statistics();
   t.throws(
     () => {

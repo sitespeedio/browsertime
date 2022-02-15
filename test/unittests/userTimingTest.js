@@ -5,7 +5,7 @@ const fs = require('fs');
 
 const timingsFile = path.resolve(__dirname, '..', 'data', 'timings.json');
 
-test(`Filter white listed`, async t => {
+test(`Filter white listed user timings`, async t => {
   const userTimings = JSON.parse(fs.readFileSync(timingsFile, 'utf-8')).timings
     .userTimings;
   userTiming.filterWhitelisted(userTimings, 'foo_');
