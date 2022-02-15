@@ -11,13 +11,13 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        browser: ['chrome', 'firefox']
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: '16.x'
     - name: Install latest Chrome
       run: |
         wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
@@ -29,9 +29,8 @@ jobs:
       uses: browser-actions/setup-firefox@latest
     - name: Install Browsertime
       run: npm ci
-    - name: Lint
-      run: npm run lint
     - name: Run unit tests
-      uses: GabrielBB/xvfb-action@v1.6
-      with:
-        run: npm test
+      run: BROWSER=${{ matrix.browser }} npm test 
+      #uses: GabrielBB/xvfb-action@v1.6 
+      #with:
+      #  run: BROWSER=${{ matrix.browser }} npm test 
