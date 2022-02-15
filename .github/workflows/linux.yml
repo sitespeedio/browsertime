@@ -62,7 +62,7 @@ jobs:
     - name: Test Firefox Geckoprofiler
       run: ./bin/browsertime.js -b firefox --firefox.geckoProfiler -n 1 https://www.sitespeed.io/ --spa --xvfb
     - name: Test Firefox with scripting
-      run: ./bin/browsertime.js -b firefox test/data/unifiedscripts/sample.js --xvfb
+      run: ./bin/browsertime.js -b firefox test/data/commandscripts/unified.js --xvfb
     - name: Test Chrome with emulated mobile
       run: ./bin/browsertime.js -b chrome --chrome.mobileEmulation.deviceName 'iPhone 6' https://www.sitespeed.io --xvfb
     - name: Test Firefox with web driver nagivation
