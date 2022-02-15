@@ -1,9 +1,9 @@
 # Browsertime - Your browser, your page, your scripts!
-![Run Docker](https://github.com/sitespeedio/browsertime/workflows/Run%20Docker/badge.svg?branch=main)
-![Unit tests](https://github.com/sitespeedio/browsertime/workflows/Unit%20tests/badge.svg?branch=main)
-![Windows Edge](https://github.com/sitespeedio/browsertime/workflows/Windows%20Edge/badge.svg?branch=main)
-![OSX Safari](https://github.com/sitespeedio/browsertime/workflows/OSX%20Safari/badge.svg?branch=main)
-![Linux browsers](https://github.com/sitespeedio/browsertime/workflows/Linux%20browsers/badge.svg?branch=main)
+![Run Docker](https://github.com/sitespeedio/browsertime/actions/workflows/Run%20Docker/badge.svg?branch=main)
+![Unit tests](https://github.com/sitespeedio/browsertime/actions/workflows/Unit%20tests/badge.svg?branch=main)
+![Windows Edge](https://github.com/sitespeedio/browsertime/actions/workflows/Windows%20Edge/badge.svg?branch=main)
+![OSX Safari](https://github.com/sitespeedio/browsertime/actions/workflows/OSX%20Safari/badge.svg?branch=main)
+[![Linux browsers](https://github.com/sitespeedio/browsertime/actions/workflows/linux.yml/badge.svg?branch=main)
 [![Downloads][downloads-image]][downloads-url]
 [![Downloads total][downloads-total-image]][downloads-url]
 [![Stars][stars-image]][stars-url]
