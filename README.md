@@ -1,7 +1,7 @@
 # Browsertime - Your browser, your page, your scripts!
 ![Run Docker](https://github.com/sitespeedio/browsertime/actions/workflows/docker.yml/badge.svg?branch=main)
 ![Unit tests](https://github.com/sitespeedio/browsertime/actions/workflows/unittests.yml/badge.svg?branch=main)
-![Windows Edge]https://github.com/sitespeedio/browsertime/actions/workflows/windows.yml/badge.svg?branch=main)
+![Windows Edge](https://github.com/sitespeedio/browsertime/actions/workflows/windows.yml/badge.svg?branch=main)
 ![OSX Safari](https://github.com/sitespeedio/browsertime/actions/workflows/safari.yml/badge.svg?branch=main)
 [![Linux browsers](https://github.com/sitespeedio/browsertime/actions/workflows/linux.yml/badge.svg?branch=main)
 [![Downloads][downloads-image]][downloads-url]
