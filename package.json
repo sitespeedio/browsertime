@@ -67,14 +67,13 @@
     "start-server": "serve test/data/html/",
     "stop-server": "sudo pkill serve",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "eslint-check": "eslint --print-config .eslintrc.json | eslint-config-prettier-check"
+    "lint:fix": "eslint . --fix"
   },
   "name": "browsertime",
-  "author": "Tobias Lidskog",
+  "author": "Peter Hedenskog",
   "contributors": [
     {
-      "name": "Peter Hedenskog"
+      "name": "Tobias Lidskog"
     },
     {
       "name": "Jonathan Lee"
