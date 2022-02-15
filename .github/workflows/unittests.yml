@@ -30,6 +30,7 @@ jobs:
     - name: Install Browsertime
       run: npm ci
     - name: Run unit tests
-      uses: GabrielBB/xvfb-action@v1.6 
-      with:
-        run: export BROWSER=${{ matrix.browser }} && npm test
+      run: BROWSER=${{ matrix.browser }} npm test 
+      #uses: GabrielBB/xvfb-action@v1.6 
+      #with:
+      #  run: BROWSER=${{ matrix.browser }} npm test 

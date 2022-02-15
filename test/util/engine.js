@@ -13,7 +13,8 @@ module.exports = {
       },
       iterations: 1,
       pageLoadStrategy: 'normal',
-      pageCompleteWaitTime: 10
+      pageCompleteWaitTime: 10,
+      headless: true
     };
     const o = merge({}, defaultOptions, options);
     return new Engine(o);
