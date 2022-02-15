@@ -27,7 +27,6 @@
     "lodash.pick": "4.4.0",
     "lodash.set": "4.3.2",
     "selenium-webdriver": "4.1.1",
-    "speedline-core": "1.4.3",
     "yargs": "17.2.1"
   },
   "optionalDependencies": {
