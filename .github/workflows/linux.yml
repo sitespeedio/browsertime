@@ -52,7 +52,7 @@ jobs:
     - name: Test Chrome with CPU throttle and preURL
       run: ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL https://www.sitespeed.io/ -r header:value --chrome.CPUThrottlingRate 2 --chrome.cdp.performance --xvfb --chrome.enableChromeDriverLog --chrome.collectConsoleLog https://www.sitespeed.io/documentation/
     - name: Test pre/post scripts
-      run: ./bin/browsertime.js -b chrome test/data/navigationscript/measure.js -n 1 --preScript test/prepostscripts/preSample.js --postScript test/prepostscripts/postSample.js --xvfb
+      run: ./bin/browsertime.js -b chrome test/data/navigationscript/measure.js -n 1 --preScript test/data/prepostscripts/preSample.js --postScript test/data/prepostscripts/postSample.js --xvfb
     - name: Test navigation and page complete check inactivity
       run: ./bin/browsertime.js -b chrome test/data/navigationscript/navigateAndStartInTwoSteps.js -n 1 --pageCompleteCheckInactivity --timeToSettle 1000 --xvfb
     - name: Test multi pages
