@@ -46,6 +46,8 @@ jobs:
       run: |
         google-chrome --version
         firefox --version
+    - name: Start local HTTP server
+      run: (npm run start-server&)
     # - run: VTENV_OPTS="-p python3" make test
     - name: Test Firefox with throttle
       run: ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle --xvfb --firefox.collectMozLog
@@ -83,3 +85,5 @@ jobs:
       run: ./bin/browsertime.js -b chrome --preWarmServer --xvfb https://www.sitespeed.io/
     - name: Run test with screenshots
       run: ./bin/browsertime.js -b chrome --screenshotLCP --screenshotLS --xvfb https://www.sitespeed.io/
+    - name: Stop local HTTP server
+      run: npm run stop-server
