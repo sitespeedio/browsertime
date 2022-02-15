@@ -10,7 +10,7 @@ module.exports = async function (context, commands) {
   // Start measurning
   await commands.measure.start();
   // Click on the link for /simple/ and wait on navigation to happen
-  await commands.click.byLinkText('simple');
+  await commands.click.byLinkText('Simple');
 
   return commands.measure.stop();
 };
