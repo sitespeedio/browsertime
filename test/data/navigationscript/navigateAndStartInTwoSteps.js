@@ -1,5 +1,5 @@
 module.exports = async function (context, commands) {
-  await commands.navigate('https://www.sitespeed.io');
+  await commands.navigate('http://127.0.0.1:3000/simple/');
   // we fetch the selenium webdriver from context
   const webdriver = context.selenium.webdriver;
   const driver = context.selenium.driver;
@@ -7,11 +7,11 @@ module.exports = async function (context, commands) {
   const until = webdriver.until;
   const By = webdriver.By;
 
-  const docLink = driver.findElement(By.linkText('Documentation'));
+  const docLink = driver.findElement(By.linkText('dimple'));
   // before you start, make your username and password
   await commands.measure.start();
   // Before we click on the link, start the measurement
   docLink.click();
-  await driver.wait(until.elementLocated(By.linkText('Chrome-HAR')), 6000);
+  await driver.wait(until.elementLocated(By.linkText('simple')), 6000);
   return commands.measure.stop();
 };

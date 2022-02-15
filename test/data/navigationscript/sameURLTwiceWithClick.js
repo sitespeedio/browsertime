@@ -1,6 +1,6 @@
 module.exports = async function (context, commands) {
-  await commands.measure.start('https://www.sitespeed.io/documentation/');
-  await commands.measure.start('https://www.sitespeed.io');
+  await commands.measure.start('http://127.0.0.1:3000/simple/');
+  await commands.measure.start('http://127.0.0.1:3000/dimple/');
   // Hide everything
   // We do not hide the body since the body needs to be visible when we do the magic to find the staret of the
   // navigation by adding a layer of orange on top of the page
@@ -9,9 +9,8 @@ module.exports = async function (context, commands) {
   );
   // Start measurning
   await commands.measure.start();
-  // Click on the link for /documentation/ and wait on navigation to happen
-  await commands.click.bySelectorAndWait(
-    'body > nav > div > div > div > ul > li:nth-child(2) > a'
-  );
+  // Click on the link for /simple/ and wait on navigation to happen
+  await commands.click.byLinkText('simple');
+
   return commands.measure.stop();
 };
