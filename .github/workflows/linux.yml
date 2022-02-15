@@ -85,5 +85,3 @@ jobs:
       run: ./bin/browsertime.js -b chrome --preWarmServer --xvfb http://127.0.0.1:3000/simple/
     - name: Run test with screenshots
       run: ./bin/browsertime.js -b chrome --screenshotLCP --screenshotLS --xvfb http://127.0.0.1:3000/simple/
-    - name: Stop local HTTP server
-      run: npm run stop-server
