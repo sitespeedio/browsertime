@@ -6,6 +6,8 @@
 
 ### Fixed
 * Code cleanup: [#1720](https://github.com/sitespeedio/browsertime/pull/1720)
+* Moved test to [Ava](https://avajs.dev) instead of mocha and moved most testing against a local HTTP server instead of internet [#1725](https://github.com/sitespeedio/browsertime/pull/1725).
+
 ## 14.21.1 - 2022-02-09
 ### Fixed
 * Always disable the new ChromeWhaxyNewUI splash screen in Chrome [#1717](https://github.com/sitespeedio/browsertime/pull/1717).
