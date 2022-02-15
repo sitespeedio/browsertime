@@ -3,11 +3,14 @@
 ## 15.0.0 - UNRELEASED
 ### Changed
 * Removed the built in support for TSProxy [#1718](https://github.com/sitespeedio/browsertime/pull/1718). TSProxy only worked with Python 2.7 and we want to remove that dependency.
+* Removed support for using speedline and the CLI arg `--chrome.visualMetricsUsingTrace` [#1727](https://github.com/sitespeedio/browsertime/pull/1727).
 
 ### Fixed
 * Code cleanup: [#1720](https://github.com/sitespeedio/browsertime/pull/1720)
 * Moved test to [Ava](https://avajs.dev) instead of mocha and moved most testing against a local HTTP server instead of internet [#1725](https://github.com/sitespeedio/browsertime/pull/1725).
 
+### Added
+* New alias for getting the Chrome trace log: `--chrome.trace` [#1728](https://github.com/sitespeedio/browsertime/pull/1728).
 ## 14.21.1 - 2022-02-09
 ### Fixed
 * Always disable the new ChromeWhaxyNewUI splash screen in Chrome [#1717](https://github.com/sitespeedio/browsertime/pull/1717).
