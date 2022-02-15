@@ -20,9 +20,7 @@ jobs:
       with:
         python-version: '3.x' #
         cache: 'pip' 
-        run: |
-          pip install --user setuptools
-          pip install --user pyssim
+        run: pip install --user pyssim
     - name: Cache brew deps
       uses: actions/cache@v2
       with:
