@@ -16,6 +16,27 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '16.x'
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.x' #
+        cache: 'pip' 
+        run: |
+          pip install --user setuptools
+          pip install --user pyssim
+    - name: Cache brew deps
+      uses: actions/cache@v2
+      with:
+        # Paths to cache:
+        # /usr/local/Homebrew - installation folder of Homebrew
+        # /usr/local/Cellar - installation folder of Homebrew formulae
+        # /usr/local/Frameworks, /usr/local/bin, /usr/local/opt - contain (links to) binaries installed by Homebrew formulae
+        path: |
+          /usr/local/Homebrew
+          /usr/local/Cellar
+          /usr/local/Frameworks
+          /usr/local/bin
+          /usr/local/opt
+        key: macos-build-cache-${{ hashFiles('./github/workflows/safari.yml') }}
     - name: Install browsertime
       run: npm ci
     - name: Install dependencies
@@ -24,9 +45,6 @@ jobs:
         sudo rm '/usr/local/bin/2to3'
         brew update
         brew install ffmpeg imagemagick
-        python -m pip install --upgrade --user pip
-        python -m pip install --upgrade --user setuptools
-        python -m pip install --user pyssim
         python -m pip --version
         python -m pip show Pillow
         python -m pip show pyssim
