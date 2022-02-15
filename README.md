@@ -3,7 +3,7 @@
 ![Unit tests](https://github.com/sitespeedio/browsertime/actions/workflows/unittests.yml/badge.svg?branch=main)
 ![Windows Edge](https://github.com/sitespeedio/browsertime/actions/workflows/windows.yml/badge.svg?branch=main)
 ![OSX Safari](https://github.com/sitespeedio/browsertime/actions/workflows/safari.yml/badge.svg?branch=main)
-[![Linux browsers](https://github.com/sitespeedio/browsertime/actions/workflows/linux.yml/badge.svg?branch=main)
+![Linux browsers](https://github.com/sitespeedio/browsertime/actions/workflows/linux.yml/badge.svg?branch=main)
 [![Downloads][downloads-image]][downloads-url]
 [![Downloads total][downloads-total-image]][downloads-url]
 [![Stars][stars-image]][stars-url]
