@@ -11,6 +11,7 @@
 
 ### Added
 * New alias for getting the Chrome trace log: `--chrome.trace` [#1728](https://github.com/sitespeedio/browsertime/pull/1728).
+* On OS X and Linux the DNS will be flushed between runs. You can disable that with `--disableDNSFlush true` [#1732](https://github.com/sitespeedio/browsertime/pull/1732).
 ## 14.21.1 - 2022-02-09
 ### Fixed
 * Always disable the new ChromeWhaxyNewUI splash screen in Chrome [#1717](https://github.com/sitespeedio/browsertime/pull/1717).
