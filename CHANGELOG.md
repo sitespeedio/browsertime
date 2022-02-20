@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 15.0.0 - UNRELEASED
+## 15.0.0 - 2022-02-20
 ### Changed
 * Removed the built in support for TSProxy [#1718](https://github.com/sitespeedio/browsertime/pull/1718). TSProxy only worked with Python 2.7 and we want to remove that dependency.
 * Removed support for using speedline and the CLI arg `--chrome.visualMetricsUsingTrace` [#1727](https://github.com/sitespeedio/browsertime/pull/1727).
