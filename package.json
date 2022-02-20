@@ -1,6 +1,6 @@
 {
   "description": "Browsertime",
-  "version": "14.21.1",
+  "version": "15.0.0",
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "@cypress/xvfb": "1.2.4",
@@ -85,18 +85,18 @@
   "homepage": "https://www.sitespeed.io/documentation/browsertime/",
   "license": "MIT",
   "ava": {
-		"files": [
-			"test/**/*",
-			"!test/util",
+    "files": [
+      "test/**/*",
+      "!test/util",
       "!test/data"
-		],
-		"concurrency": 1,
-		"failFast": true,
-		"require": [
-			"./test/util/setup.js"
-		],
-		"nodeArguments": [
-			"--trace-deprecation"
-		]
-	}
+    ],
+    "concurrency": 1,
+    "failFast": true,
+    "require": [
+      "./test/util/setup.js"
+    ],
+    "nodeArguments": [
+      "--trace-deprecation"
+    ]
+  }
 }
