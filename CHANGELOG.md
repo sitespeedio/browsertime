@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 15.0.1 - 2022-02-21
+### Fixed
+* Make sure connectivity is only set before the test begins [#1733](https://github.com/sitespeedio/browsertime/pull/1733).
 ## 15.0.0 - 2022-02-20
 ### Changed
 * Removed the built in support for TSProxy [#1718](https://github.com/sitespeedio/browsertime/pull/1718). TSProxy only worked with Python 2.7 and we want to remove that dependency.
