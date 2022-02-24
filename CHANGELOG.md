@@ -1,5 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 15.1.0 - 2022-02-24
+### Added
+* Collect timings from main document. The result includes a field named mainDocumentTimings and contains blocked, dns, connect, send, wait, receive, ssl as long as you get a HAR file from the browser [#1735](https://github.com/sitespeedio/browsertime/pull/1735).
+
+### Tech
+* Cleaned the DNS flush code [#1734](https://github.com/sitespeedio/browsertime/pull/1734).
 ## 15.0.1 - 2022-02-21
 ### Fixed
 * Make sure connectivity is only set before the test begins [#1733](https://github.com/sitespeedio/browsertime/pull/1733).
