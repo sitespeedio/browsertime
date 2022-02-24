@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 15.1.1 - UNRELEASED
+## 15.1.1 - 2022-02-24
 ### Fixed
 * Updated Chromedriver dependency that fixes installation on M1 and [some send keys issues](https://chromedriver.storage.googleapis.com/98.0.4758.102/notes.txt). 
 ## 15.1.0 - 2022-02-24
