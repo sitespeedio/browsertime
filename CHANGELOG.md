@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 15.1.1 - UNRELEASED
+### Fixed
+* Updated Chromedriver dependency that fixes installation on M1 and [some send keys issues](https://chromedriver.storage.googleapis.com/98.0.4758.102/notes.txt). 
 ## 15.1.0 - 2022-02-24
 ### Added
 * Collect timings from main document. The result includes a field named mainDocumentTimings and contains blocked, dns, connect, send, wait, receive, ssl as long as you get a HAR file from the browser [#1735](https://github.com/sitespeedio/browsertime/pull/1735).
