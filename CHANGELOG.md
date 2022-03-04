@@ -1,5 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 15.2.0 - 2022-03-04
+### Added
+* Updated to Chromedriver and Edgedriver 99.
+* Updated Docker container to use Chrome and Edge 99 [#1738](https://github.com/sitespeedio/browsertime/pull/1738).
+
+### Fixed
+* Added more view ports for emulated mobile in Chrome [#1736](https://github.com/sitespeedio/browsertime/pull/1736).
 ## 15.1.1 - 2022-02-24
 ### Fixed
 * Updated Chromedriver dependency that fixes installation on M1 and [some send keys issues](https://chromedriver.storage.googleapis.com/98.0.4758.102/notes.txt). 
