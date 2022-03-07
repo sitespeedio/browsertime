@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 15.3.0 - 2022-03-07
+### Added
+* Chrome: If you set --user-data-dir you can clean the directory between each iteration using `--chrome.cleanUserDataDir` [#1739](https://github.com/sitespeedio/browsertime/pull/1739)
+
+
 ## 15.2.0 - 2022-03-04
 ### Added
 * Updated to Chromedriver and Edgedriver 99.
