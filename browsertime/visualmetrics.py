@@ -68,17 +68,19 @@ frame_cache = {}
 
 def compare(img1, img2, fuzz=0.10):
     """Calculate the Absolute Error count between given images."""
+    img1_data = np.array(img1)
+    img2_data = np.array(img2)
+
     inds = np.argwhere(
-        np.logical_not(
-            np.isclose(img1[:,:,0], img2[:,:,0], atol=fuzz) &
-            np.isclose(img1[:,:,1], img2[:,:,1], atol=fuzz) &
-            np.isclose(img1[:,:,2], img2[:,:,2], atol=fuzz)
-        )
+        np.isclose(img1_data[:,:,0], img2_data[:,:,0], atol=fuzz*255) &
+        np.isclose(img1_data[:,:,1], img2_data[:,:,1], atol=fuzz*255) &
+        np.isclose(img1_data[:,:,2], img2_data[:,:,2], atol=fuzz*255)
     )
-    return len(inds)
+
+    return (img1_data.shape[0] * img1_data.shape[1]) - len(inds)
 
 
-def crop(img, crop_x, crop_y, crop_x_offset, crop_y_offset, gravity=None):
+def crop_im(img, crop_x, crop_y, crop_x_offset, crop_y_offset, gravity=None):
     img = np.array(img)
 
     base_x = 0
@@ -99,7 +101,7 @@ def crop(img, crop_x, crop_y, crop_x_offset, crop_y_offset, gravity=None):
 
 
 def resize(img, width, height):
-    return img.resize((width, height))
+    return img.resize((width, height), resample=Image.LANCZOS)
 
 
 def mask(img, x_mask, y_mask, x_offset, y_offset, color=(255, 255, 255)):
@@ -122,13 +124,9 @@ def contentful_value(img):
     blurred_img = cv2.GaussianBlur(gs_img, (3, 3), 2) # https://stackoverflow.com/a/52349082/4700298
 
     # Calculate the threshold values for double-thresholding
-    # threshs = np.percentile(blurred_img[:], [10, 90])
     min_g = np.min(blurred_img[:])
     max_g = np.max(blurred_img[:])
     edge_img = cv2.Canny(blurred_img, 0.10*(max_g-min_g)+min_g, 0.30*(max_g-min_g)+min_g)
-    # edge_img = cv2.Canny(blurred_img, threshs[0], threshs[1])
-
-    # edge_img = feature.canny(gs_img, sigma=1.8, low_threshold=0.08, high_threshold=0.08, use_quantiles=True)
 
     white_pixels = np.where(edge_img != 0)
     return len(white_pixels[0])
@@ -939,7 +937,7 @@ def eliminate_duplicate_frames(directory, cropped, is_mobile):
                 baseline = files[0]
                 previous_frame = baseline
                 for i in range(1, count):
-                    if frames_match(baseline, files[i], 15, 0, crop, None, crop_region2=crop_region2):
+                    if frames_match(baseline, files[i], 15, 5, crop, None, crop_region2=crop_region2):
                         if previous_frame is baseline:
                             duplicates.append(previous_frame)
                         else:
@@ -1036,7 +1034,7 @@ def crop_viewport(directory):
                     # subprocess.call(command, shell=True)
                     # (img, crop_x, crop_y, crop_x_offset, crop_y_offset, gravity=None):
                     with Image.open(files[i]) as im:
-                        new_img = crop(
+                        new_img = crop_im(
                             im,
                             client_viewport["width"],
                             client_viewport["height"],
@@ -1149,7 +1147,7 @@ def is_color_frame(file, color_file):
                 #     image_magick["convert"],
                 #     color_file,
                 #     file,
-                #     crop,
+                #     "{0:d}x{1:d}+{2:d}+{3:d}".format(crop[0], crop[1], crop[2], crop[3]),
                 #     image_magick["compare"],
                 # )
 
@@ -1167,8 +1165,8 @@ def is_color_frame(file, color_file):
                 # if re.match("^[0-9]+$", err):
 
                 with Image.open(file) as im:
-                    crop_im = crop(im, crop[0], crop[1], crop[2], crop[3])
-                    resized_im = resize(im, 200, 200)
+                    crop_i = crop_im(im, crop[0], crop[1], crop[2], crop[3])
+                    resized_im = resize(crop_i, 200, 200)
 
                     with Image.open(color_file) as color_im:
                         different_pixels = compare(resized_im, color_im, fuzz=0.15)
@@ -1176,7 +1174,8 @@ def is_color_frame(file, color_file):
                 if different_pixels < 10000:
                     match = True
                     break
-        except Exception:
+        except Exception as e:
+            logging.debug(e)
             pass
     if file not in frame_cache:
         frame_cache[file] = {}
@@ -1205,7 +1204,7 @@ def is_white_frame(file, white_file):
             # ).format(image_magick["convert"], white_file, file, image_magick["compare"])
             with Image.open(file) as im:
                 width, height, _ = im.shape
-                fmt_img = crop(im, 0.5*width, 0.33*height, 0, 0, gravity="center")
+                fmt_img = crop_im(im, 0.5*width, 0.33*height, 0, 0, gravity="center")
                 fmt_img = resize(fmt_img, 200, 200)
 
         if client_viewport is not None:
@@ -1224,7 +1223,7 @@ def is_white_frame(file, white_file):
 
             with Image.open(file) as im:
                 width, height, _ = im.shape
-                fmt_img = crop(
+                fmt_img = crop_im(
                     im,
                     client_viewport["width"],
                     client_viewport["height"],
@@ -1282,7 +1281,7 @@ def frames_match(image1, image2, fuzz_percent, max_differences, crop_region, mas
                 mask_rect["y"],
             )
             i2 = mask(
-                i1,
+                i2,
                 mask_rect["width"],
                 mask_rect["height"],
                 mask_rect["x"],
@@ -1290,14 +1289,14 @@ def frames_match(image1, image2, fuzz_percent, max_differences, crop_region, mas
             )
 
         if crop_region2:
-            i1 = crop(
+            i1 = crop_im(
                 i1,
                 crop_region2[0],
                 crop_region2[1],
                 crop_region2[2],
                 crop_region2[3]
             )
-            i2 = crop(
+            i2 = crop_im(
                 i2,
                 crop_region2[0],
                 crop_region2[1],
@@ -1328,7 +1327,7 @@ def frames_match(image1, image2, fuzz_percent, max_differences, crop_region, mas
     #         mask_rect["y"],
     #     )
     # command = "{0} {1} {2} {3}miff:- | {4} -metric AE - {5}null:".format(
-    #     image_magick["convert"], img1, img2, crop, image_magick["compare"], fuzz
+    #     image_mframes_matchagick["convert"], img1, img2, crop, image_magick["compare"], fuzz
     # )
     # if platform.system() != "Windows":
     #     command = command.replace("(", "\\(").replace(")", "\\)")
