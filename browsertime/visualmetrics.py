@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Copyright (c) 2014, Google Inc.
 All rights reserved.
@@ -121,12 +121,12 @@ def contentful_value(img):
     # Count white pixels
 
     gs_img = np.array(ImageOps.grayscale(img))
-    blurred_img = cv2.GaussianBlur(gs_img, (3, 3), 2) # https://stackoverflow.com/a/52349082/4700298
+    blurred_img = cv2.GaussianBlur(gs_img, (1, 1), 2) # https://stackoverflow.com/a/52349082/4700298
 
     # Calculate the threshold values for double-thresholding
     min_g = np.min(blurred_img[:])
     max_g = np.max(blurred_img[:])
-    edge_img = cv2.Canny(blurred_img, 0.10*(max_g-min_g)+min_g, 0.30*(max_g-min_g)+min_g)
+    edge_img = cv2.Canny(blurred_img, 0.08*(max_g-min_g)+min_g, 0.08*(max_g-min_g)+min_g)
 
     white_pixels = np.where(edge_img != 0)
     return len(white_pixels[0])
@@ -839,7 +839,7 @@ def find_render_start(directory, orange_file, gray_file, cropped, is_mobile):
                 crop_region2 = (width, height, left, top)
 
                 for i in range(1, count):
-                    if frames_match(first, files[i], 10, 0, crop, mask, crop_region2=crop_region2):
+                    if frames_match(first, files[i], 10, 0, crop, mask, crop_region2=crop_region2, debug=True):
                         logging.debug("Removing pre-render frame %s", files[i])
                         os.remove(files[i])
                     elif orange_file is not None and is_color_frame(
@@ -1262,7 +1262,7 @@ def colors_are_similar(a, b, threshold=15):
     return similar
 
 
-def frames_match(image1, image2, fuzz_percent, max_differences, crop_region, mask_rect, crop_region2=None):
+def frames_match(image1, image2, fuzz_percent, max_differences, crop_region, mask_rect, crop_region2=None, debug=False):
     match = False
     fuzz = ""
     if fuzz_percent > 0:
