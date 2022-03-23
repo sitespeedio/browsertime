@@ -118,12 +118,12 @@ def blank_frame(file):
 
 def contentful_value(img):
     gs_img = np.array(ImageOps.grayscale(img))
-    blurred_img = cv2.GaussianBlur(gs_img, (1, 1), 2)
+    blurred_img = cv2.GaussianBlur(gs_img, (3, 3), 2)
 
     # Calculate the threshold values for double-thresholding
     min_g = np.min(blurred_img[:])
     max_g = np.max(blurred_img[:])
-    edge_img = cv2.Canny(blurred_img, 0.08*(max_g-min_g)+min_g, 0.08*(max_g-min_g)+min_g)
+    edge_img = cv2.Canny(blurred_img, 0.10*(max_g-min_g)+min_g, 0.30*(max_g-min_g)+min_g)
 
     white_pixels = np.where(edge_img != 0)
     return len(white_pixels[0])
