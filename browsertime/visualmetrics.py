@@ -101,6 +101,10 @@ def crop_im(img, crop_x, crop_y, crop_x_offset, crop_y_offset, gravity=None):
 
 
 def resize(img, width, height):
+    try:
+        img = Image.fromarray(img)
+    except:
+        pass
     return img.resize((width, height), resample=Image.LANCZOS)
 
 
@@ -116,18 +120,82 @@ def blank_frame(file):
     return Image.new('RGB', (width, height), color="white")
 
 
-def contentful_value(img):
+def edges_im(img):
     gs_img = np.array(ImageOps.grayscale(img))
-    blurred_img = cv2.GaussianBlur(gs_img, (13, 13), 1.5)
+    blurred_img = cv2.GaussianBlur(gs_img, (13, 13), 1)
 
     # Calculate the threshold values for double-thresholding
     min_g = np.min(blurred_img[:])
     max_g = np.max(blurred_img[:])
     edge_img = cv2.Canny(blurred_img, 0.10*(max_g-min_g)+min_g, 0.30*(max_g-min_g)+min_g)
 
+    return Image.fromarray(edge_img)
+
+
+def contentful_value(img):
+    edge_img = np.array(edges_im(img))
     white_pixels = np.where(edge_img != 0)
     return len(white_pixels[0])
 
+
+def build_edge_video(video_path, viewport):
+    output_dir, video_name = os.path.split(video_path)
+    video_name, video_ext = os.path.splitext(video_name)
+
+    # Get the edges of all frames
+    edge_video = []
+    resized_video = []
+    video = cv2.VideoCapture(video_path)
+    frame_count = video.get(cv2.CAP_PROP_FPS)
+    while video.isOpened():
+        ret, frame = video.read()
+        if ret:
+            cropped_im = frame
+            if viewport:
+                cropped_im = crop_im(
+                    frame,
+                    viewport["width"],
+                    viewport["height"],
+                    viewport["x"],
+                    viewport["y"]
+                )
+            resized_video.append(resize(
+                cropped_im,
+                400,
+                400
+            ))
+            edge_video.append(np.array(edges_im(resized_video[-1])))
+        else:
+            video.release()
+            break
+
+    out_edges = cv2.VideoWriter(
+        os.path.join(output_dir, video_name + "-edges.mp4"),
+        cv2.VideoWriter_fourcc(*'MP4V'),
+        frame_count,
+        (400, 400),
+        1,
+    )
+    out_edges_overlay = cv2.VideoWriter(
+        os.path.join(output_dir, video_name + "-edges-overlay.mp4"),
+        cv2.VideoWriter_fourcc(*'MP4V'),
+        frame_count,
+        (400, 400),
+        1,
+    )
+    for i, frame in enumerate(edge_video):
+        cframe = np.zeros((400, 400, 3))
+        overlayframe = np.array(resized_video[i])
+        for y in range(cframe.shape[0]):
+            for x in range(cframe.shape[1]):
+                if frame[x,y] != 0:
+                    cframe[x,y,:] = (0, 0, 255)
+                    overlayframe[x,y,:] = (0, 0, 255)
+        out_edges.write(np.uint8(cframe))
+        out_edges_overlay.write(np.uint8(overlayframe))
+
+    out_edges.release()
+    out_edges_overlay.release()
 
 
 """
@@ -208,6 +276,11 @@ def video_to_frames(
                     viewport_min_width,
                     is_mobile,
                 )
+
+                if options.contentful:
+                    # Create some videos with the edges
+                    build_edge_video(video, viewport)
+
                 gc.collect()
                 if extract_frames(video, directory, full_resolution, viewport):
                     client_viewport = None
