@@ -108,6 +108,12 @@ def resize(img, width, height):
     return img.resize((width, height), resample=Image.LANCZOS)
 
 
+def scale(img, maxsize):
+    width, height = img.size
+    ratio = min(maxsize/width, maxsize/height)
+    return resize(img, int(width*ratio), int(height*ratio))
+
+
 def mask(img, x_mask, y_mask, x_offset, y_offset, color=(255, 255, 255)):
     img_data = np.array(img)
     img_data[y_offset:y_offset+y_mask, x_offset:x_offset+x_mask, :] = color
@@ -159,35 +165,35 @@ def build_edge_video(video_path, viewport):
                     viewport["x"],
                     viewport["y"]
                 )
-            resized_video.append(resize(
+            resized_video.append(scale(
                 cropped_im,
-                400,
-                400
+                options.thumbsize,
             ))
             edge_video.append(np.array(edges_im(resized_video[-1])))
         else:
             video.release()
             break
 
+    out_size = edge_video[-1].shape
     out_edges = cv2.VideoWriter(
         os.path.join(output_dir, video_name + "-edges.mp4"),
         cv2.VideoWriter_fourcc(*'MP4V'),
         frame_count,
-        (400, 400),
+        (out_size[1], out_size[0]),
         1,
     )
     out_edges_overlay = cv2.VideoWriter(
         os.path.join(output_dir, video_name + "-edges-overlay.mp4"),
         cv2.VideoWriter_fourcc(*'MP4V'),
         frame_count,
-        (400, 400),
+        (out_size[1], out_size[0]),
         1,
     )
     for i, frame in enumerate(edge_video):
-        cframe = np.zeros((400, 400, 3))
+        cframe = np.zeros((out_size[0], out_size[1], 3))
         overlayframe = np.array(resized_video[i])
-        for y in range(cframe.shape[0]):
-            for x in range(cframe.shape[1]):
+        for x in range(cframe.shape[0]):
+            for y in range(cframe.shape[1]):
                 if frame[x,y] != 0:
                     cframe[x,y,:] = (0, 0, 255)
                     overlayframe[x,y,:] = (0, 0, 255)
