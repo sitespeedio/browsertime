@@ -46,7 +46,7 @@ import subprocess
 import tempfile
 
 import numpy as np
-from PIL import Image, ImageDraw, ImageOps
+from PIL import Image, ImageCms, ImageDraw, ImageOps
 
 if sys.version_info > (3, 0):
     GZIP_TEXT = "wt"
@@ -114,16 +114,20 @@ def scale(img, maxsize):
     return resize(img, int(width*ratio), int(height*ratio))
 
 
-def mask(img, x_mask, y_mask, x_offset, y_offset, color=(255, 255, 255)):
+def mask(img, x_mask, y_mask, x_offset, y_offset, color=(255, 255, 255), insert_img=None):
     img_data = np.array(img)
-    img_data[y_offset:y_offset+y_mask, x_offset:x_offset+x_mask, :] = color
+    if insert_img is not None:
+        insert_img_data = np.array(insert_img)
+        img_data[y_offset:y_offset+y_mask, x_offset:x_offset+x_mask, :] = insert_img
+    else:
+        img_data[y_offset:y_offset+y_mask, x_offset:x_offset+x_mask, :] = color
     return Image.fromarray(img_data)
 
 
-def blank_frame(file):
+def blank_frame(file, color="white"):
     with Image.open(file) as im:
         width, height = im.size
-    return Image.new('RGB', (width, height), color="white")
+    return Image.new('RGB', (width, height), color=color)
 
 
 def edges_im(img):
@@ -202,6 +206,23 @@ def build_edge_video(video_path, viewport):
 
     out_edges.release()
     out_edges_overlay.release()
+
+
+def convert_to_srgb(img):
+    """Convert PIL image to sRGB color space (if possible)"""
+    icc = img.info.get('icc_profile', '')
+    if icc:
+        io_handle = io.BytesIO(icc)     # virtual file
+        src_profile = ImageCms.ImageCmsProfile(io_handle)
+        dst_profile = ImageCms.createProfile('sRGB')
+        img = ImageCms.profileToProfile(img, src_profile, dst_profile)
+    return img
+
+
+def convert_img_to_jpeg(src, dest, quality=30):
+    with Image.open(src) as img:
+        img = convert_to_srgb(img)
+        img.save(dest, quality=quality)
 
 
 """
@@ -1702,12 +1723,7 @@ def save_screenshot(directory, dest, quality):
     if files is not None and len(files) >= 1:
         src = files[-1]
         if dest[-4:] == ".jpg":
-            # command = '{0} "{1}" -set colorspace sRGB -quality {2:d} "{3}"'.format(
-            #     image_magick["convert"], src, quality, dest
-            # )
-            # subprocess.call(command, shell=True)
-            with Image.open(src) as img:
-                img.save(dest)
+            convert_img_to_jpeg(src, dest, quality=quality)
         else:
             shutil.copy(src, dest)
 
@@ -1721,20 +1737,15 @@ def convert_to_jpeg(directory, quality):
     logging.debug("Converting video frames to JPEG")
     directory = os.path.realpath(directory)
     pattern = os.path.join(directory, "ms_*.png")
-    command = '{0} -format jpg -set colorspace sRGB -quality {1:d} "{2}"'.format(
-        image_magick["mogrify"], quality, pattern
-    )
-    logging.debug(command)
-    subprocess.call(command, shell=True)
+
     files = sorted(glob.glob(pattern))
-    match = re.compile(r"(?P<base>ms_[0-9]+\.)")
     for file in files:
-        m = re.search(match, file)
-        if m is not None:
-            dest = os.path.join(directory, m.groupdict().get("base") + "jpg")
-            if os.path.isfile(dest):
-                os.remove(file)
-    logging.debug("Done Converting video frames to JPEG")
+        _, filename = os.path.split(file)
+        filen, ext = os.path.splitext(filename)
+        convert_img_to_jpeg(file, os.path.join(directory, filen + ".jpg"), quality=quality)
+        os.remove(file)
+
+    logging.debug("Done converting video frames to JPEG")
 
 
 ##########################################################################
@@ -2254,34 +2265,29 @@ def calculate_hero_time(progress, directory, hero, viewport):
 
             # Create a rectangular mask of the hero element position
             hero_mask = os.path.join(dir, "hero_{0}_mask.png".format(hero["name"]))
-            command = '{0} -size {1}x{2} xc:black -fill white -draw "rectangle {3},{4} {5},{6}" PNG24:"{7}"'.format(
-                image_magick["convert"],
-                width,
-                height,
-                hero_x,
-                hero_y,
-                hero_x + hero_width,
-                hero_y + hero_height,
-                hero_mask,
-            )
-            subprocess.call(command, shell=True)
 
             # Apply the mask to the target frame to create the reference frame
-            target_mask = os.path.join(
+            target_mask_path = os.path.join(
                 dir,
                 "hero_{0}_ms_{1:06d}.png".format(hero["name"], progress[n - 1]["time"]),
             )
-            command = (
-                "{0} {1} {2} -alpha Off -compose CopyOpacity -composite {3}".format(
-                    image_magick["convert"], target_frame, hero_mask, target_mask
-                )
-            )
-            subprocess.call(command, shell=True)
+            def apply_hero_mask(cur_frame):
+                cropped_frame = None
+                with Image.open(cur_frame) as im:
+                    cropped_frame = crop_im(im, hero_width, hero_height, hero_x, hero_y)
+
+                blank = blank_frame(cur_frame, color="black")
+                masked_tgt_frame = mask(blank, hero_width, hero_height, hero_x, hero_y, insert_img=cropped_frame)
+                return masked_tgt_frame
+
+            target_mask = apply_hero_mask(target_frame)
+            target_mask.save(target_mask_path)
 
             def cleanup():
-                os.remove(hero_mask)
-                if os.path.isfile(target_mask):
-                    os.remove(target_mask)
+                if os.path.isfile(hero_mask):
+                    os.remove(hero_mask)
+                if os.path.isfile(target_mask_path):
+                    os.remove(target_mask_path)
 
             # Allow for small differences like scrollbars and overlaid UI elements
             # by applying a 10% fuzz and allowing for up to 2% of the pixels to be
@@ -2297,23 +2303,19 @@ def calculate_hero_time(progress, directory, hero, viewport):
                 elif os.path.isfile(current_frame + ".jpg"):
                     extension = ".jpg"
                 if extension is not None:
-                    current_mask = os.path.join(
+                    current_mask_path = os.path.join(
                         dir, "hero_{0}_ms_{1:06d}.png".format(hero["name"], p["time"])
                     )
-                    # Apply the mask to the current frame
-                    command = "{0} {1} {2} -alpha Off -compose CopyOpacity -composite {3}".format(
-                        image_magick["convert"],
-                        current_frame + extension,
-                        hero_mask,
-                        current_mask,
-                    )
-                    logging.debug(command)
-                    subprocess.call(command, shell=True)
+
+                    current_mask = apply_hero_mask(current_frame + extension)
+                    current_mask.save(current_mask_path)
+
                     match = frames_match(
-                        target_mask, current_mask, fuzz, max_pixel_diff, None, None
+                        target_mask_path, current_mask_path, fuzz, max_pixel_diff, None, None
                     )
+
                     # Remove each mask after using it
-                    os.remove(current_mask)
+                    os.remove(current_mask_path)
 
                     if match:
                         # Clean up masks as soon as a match is found
