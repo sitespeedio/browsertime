@@ -30,7 +30,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."""
 # The original script from Google was heavily modified for the Browsertime
 # project.
 #
-import cv2
 import gc
 import glob
 import gzip
@@ -45,9 +44,6 @@ import shutil
 import subprocess
 import tempfile
 
-import numpy as np
-from PIL import Image, ImageCms, ImageDraw, ImageOps
-
 if sys.version_info > (3, 0):
     GZIP_TEXT = "wt"
     GZIP_READ_TEXT = "rt"
@@ -58,206 +54,299 @@ else:
 # Globals
 options = None
 client_viewport = None
-image_magick = {"convert": "convert", "compare": "compare", "mogrify": "mogrify"}
 frame_cache = {}
 
-# #################################################################################################
-# Frame Extraction and de-duplication
-# #################################################################################################
 
+# #################################################################################################
+# Replacement methods for ImageMagick to Python conversion
+# #################################################################################################
 
 def compare(img1, img2, fuzz=0.10):
     """Calculate the Absolute Error count between given images."""
-    img1_data = np.array(img1)
-    img2_data = np.array(img2)
+    try:
+        import numpy as np
 
-    inds = np.argwhere(
-        np.isclose(img1_data[:,:,0], img2_data[:,:,0], atol=fuzz*255) &
-        np.isclose(img1_data[:,:,1], img2_data[:,:,1], atol=fuzz*255) &
-        np.isclose(img1_data[:,:,2], img2_data[:,:,2], atol=fuzz*255)
-    )
+        img1_data = np.array(img1)
+        img2_data = np.array(img2)
 
-    return (img1_data.shape[0] * img1_data.shape[1]) - len(inds)
+        inds = np.argwhere(
+            np.isclose(img1_data[:,:,0], img2_data[:,:,0], atol=fuzz*255) &
+            np.isclose(img1_data[:,:,1], img2_data[:,:,1], atol=fuzz*255) &
+            np.isclose(img1_data[:,:,2], img2_data[:,:,2], atol=fuzz*255)
+        )
+
+        return (img1_data.shape[0] * img1_data.shape[1]) - len(inds)
+    except BaseException as e:
+        logging.exception(e)
+        return None
 
 
 def crop_im(img, crop_x, crop_y, crop_x_offset, crop_y_offset, gravity=None):
-    img = np.array(img)
+    """Crop an image.
 
-    base_x = 0
-    base_y = 0
+    If gravity is equal to "center", the crop region will
+    first be centered before applying the crop.
+    """
+    try:
+        import numpy as np
+        from PIL import Image
 
-    height, width, _ = img.shape
-    if gravity == "center":
-        base_x = width // 2
-        base_y = height // 2
+        img = np.array(img)
 
-        base_x -= crop_x // 2
-        base_y -= crop_y // 2
+        base_x = 0
+        base_y = 0
 
-    base_x += crop_x_offset
-    base_y += crop_y_offset
+        height, width, _ = img.shape
+        if gravity == "center":
+            base_x = width // 2
+            base_y = height // 2
 
-    return Image.fromarray(img[base_y:base_y+crop_y, base_x:base_x+crop_x, :])
+            base_x -= crop_x // 2
+            base_y -= crop_y // 2
+
+        base_x += crop_x_offset
+        base_y += crop_y_offset
+
+        return Image.fromarray(img[base_y:base_y+crop_y, base_x:base_x+crop_x, :])
+    except BaseException as e:
+        logging.exception(e)
+        return None
 
 
 def resize(img, width, height):
+    """Resize an image to the given width, and height."""
+
     try:
-        img = Image.fromarray(img)
-    except:
-        pass
-    return img.resize((width, height), resample=Image.LANCZOS)
+        from PIL import Image
+
+        try:
+            # If it's a numpy array, convert it first
+            img = Image.fromarray(img)
+        except:
+            pass
+
+        return img.resize((width, height), resample=Image.LANCZOS)
+    except BaseException as e:
+        logging.exception(e)
+        return None
 
 
 def scale(img, maxsize):
+    """Scale an image to the given max size."""
     width, height = img.size
     ratio = min(maxsize/width, maxsize/height)
     return resize(img, int(width*ratio), int(height*ratio))
 
 
 def mask(img, x_mask, y_mask, x_offset, y_offset, color=(255, 255, 255), insert_img=None):
-    img_data = np.array(img)
-    if insert_img is not None:
-        insert_img_data = np.array(insert_img)
-        img_data[y_offset:y_offset+y_mask, x_offset:x_offset+x_mask, :] = insert_img
-    else:
-        img_data[y_offset:y_offset+y_mask, x_offset:x_offset+x_mask, :] = color
-    return Image.fromarray(img_data)
+    """Mask an image.
+
+    If insert_img is provided, the image given will mask the region
+    specified. Otherwise, by default, the region specified will be covered
+    in white - change color to change the mask color.
+    """
+    try:
+        import numpy as np
+        from PIL import Image
+
+        img_data = np.array(img)
+        if insert_img is not None:
+            insert_img_data = np.array(insert_img)
+            img_data[y_offset:y_offset+y_mask, x_offset:x_offset+x_mask, :] = insert_img
+        else:
+            img_data[y_offset:y_offset+y_mask, x_offset:x_offset+x_mask, :] = color
+
+        return Image.fromarray(img_data)
+    except BaseException as e:
+        logging.exception(e)
+        return None
 
 
 def blank_frame(file, color="white"):
-    with Image.open(file) as im:
-        width, height = im.size
-    return Image.new('RGB', (width, height), color=color)
+    """Return a new blank frame that has the same dimensions as file."""
+    try:
+        from PIL import Image
+        with Image.open(file) as im:
+            width, height = im.size
+        return Image.new('RGB', (width, height), color=color)
+    except BaseException as e:
+        logging.exception(e)
+        return None
 
 
 def edges_im(img):
-    gs_img = np.array(ImageOps.grayscale(img))
-    blurred_img = cv2.GaussianBlur(gs_img, (13, 13), 1)
+    """Find the edges of the given image.
 
-    # Calculate the threshold values for double-thresholding
-    min_g = np.min(blurred_img[:])
-    max_g = np.max(blurred_img[:])
-    edge_img = cv2.Canny(blurred_img, 0.10*(max_g-min_g)+min_g, 0.30*(max_g-min_g)+min_g)
+    First, we apply a gaussian filter using a kernal of radius=13,
+    and sigma=1 to a grayscale version of the image. Then we apply
+    CED to find the edges.
 
-    return Image.fromarray(edge_img)
+    We calculate the hysterisis thresholds for the CED using the min and max
+    vaues of the blurred image. We use 10% as the lower threshold,
+    and 30% as the upper threshold.
+    """
+    try:
+        import cv2
+        import numpy as np
+        from PIL import Image, ImageOps
+
+        gs_img = np.array(ImageOps.grayscale(img))
+        blurred_img = cv2.GaussianBlur(gs_img, (13, 13), 1)
+
+        # Calculate the threshold values for double-thresholding
+        min_g = np.min(blurred_img[:])
+        max_g = np.max(blurred_img[:])
+        edge_img = cv2.Canny(blurred_img, 0.10*(max_g-min_g)+min_g, 0.30*(max_g-min_g)+min_g)
+
+        return Image.fromarray(edge_img)
+    except BaseException as e:
+        logging.exception(e)
+        return None
 
 
 def contentful_value(img):
-    edge_img = np.array(edges_im(img))
-    white_pixels = np.where(edge_img != 0)
-    return len(white_pixels[0])
+    """
+    Get the contentful value by counting the number of
+    defined pixels in the image of the edges.
+    """
+    try:
+        import numpy as np
+
+        edge_img = np.array(edges_im(img))
+        white_pixels = np.where(edge_img != 0)
+
+        return len(white_pixels[0])
+    except BaseException as e:
+        logging.exception(e)
+        return None
 
 
 def build_edge_video(video_path, viewport):
+    """Compute, and highlight the edges of a given video.
+
+    Makes use of the same technique as the contentful value
+    calculation. However, it crops, and scales the image using
+    our own method rather than FFMPEG. This creates two videos
+    suffixed with `-edges` and `-edges-overlay` that contain
+    the raw edges, and a video with the edges overlaid. They will
+    be found in the same location as the original video.
+
+    These videos will only be produced when --contentful is
+    used.
+    """
+    logging.debug("Creating edge video for {0}".format(video_path))
+
     output_dir, video_name = os.path.split(video_path)
-    video_name, video_ext = os.path.splitext(video_name)
+    video_name, _ = os.path.splitext(video_name)
 
-    # Get the edges of all frames
-    edge_video = []
-    resized_video = []
-    video = cv2.VideoCapture(video_path)
-    frame_count = video.get(cv2.CAP_PROP_FPS)
-    while video.isOpened():
-        ret, frame = video.read()
-        if ret:
-            cropped_im = frame
-            if viewport:
-                cropped_im = crop_im(
-                    frame,
-                    viewport["width"],
-                    viewport["height"],
-                    viewport["x"],
-                    viewport["y"]
-                )
-            resized_video.append(scale(
-                cropped_im,
-                options.thumbsize,
-            ))
-            edge_video.append(np.array(edges_im(resized_video[-1])))
-        else:
-            video.release()
-            break
+    try:
+        import cv2
+        import numpy as np
+        from PIL import Image, ImageOps
 
-    out_size = edge_video[-1].shape
-    out_edges = cv2.VideoWriter(
-        os.path.join(output_dir, video_name + "-edges.mp4"),
-        cv2.VideoWriter_fourcc(*'MP4V'),
-        frame_count,
-        (out_size[1], out_size[0]),
-        1,
-    )
-    out_edges_overlay = cv2.VideoWriter(
-        os.path.join(output_dir, video_name + "-edges-overlay.mp4"),
-        cv2.VideoWriter_fourcc(*'MP4V'),
-        frame_count,
-        (out_size[1], out_size[0]),
-        1,
-    )
-    for i, frame in enumerate(edge_video):
-        cframe = np.zeros((out_size[0], out_size[1], 3))
-        overlayframe = np.array(resized_video[i])
-        for x in range(cframe.shape[0]):
-            for y in range(cframe.shape[1]):
-                if frame[x,y] != 0:
-                    cframe[x,y,:] = (0, 0, 255)
-                    overlayframe[x,y,:] = (0, 0, 255)
-        out_edges.write(np.uint8(cframe))
-        out_edges_overlay.write(np.uint8(overlayframe))
+        # Get the edges of all frames
+        edge_video = []
+        resized_video = []
+        video = cv2.VideoCapture(video_path)
+        frame_count = video.get(cv2.CAP_PROP_FPS)
+        while video.isOpened():
+            ret, frame = video.read()
+            if ret:
+                cropped_im = frame
+                if viewport:
+                    cropped_im = crop_im(
+                        frame,
+                        viewport["width"],
+                        viewport["height"],
+                        viewport["x"],
+                        viewport["y"]
+                    )
+                resized_video.append(scale(
+                    cropped_im,
+                    options.thumbsize,
+                ))
+                edge_video.append(np.array(edges_im(resized_video[-1])))
+            else:
+                video.release()
+                break
 
-    out_edges.release()
-    out_edges_overlay.release()
+        out_size = edge_video[-1].shape
+        out_edges = cv2.VideoWriter(
+            os.path.join(output_dir, video_name + "-edges.mp4"),
+            cv2.VideoWriter_fourcc(*'MP4V'),
+            frame_count,
+            (out_size[1], out_size[0]),
+            1,
+        )
+        out_edges_overlay = cv2.VideoWriter(
+            os.path.join(output_dir, video_name + "-edges-overlay.mp4"),
+            cv2.VideoWriter_fourcc(*'MP4V'),
+            frame_count,
+            (out_size[1], out_size[0]),
+            1,
+        )
+        for i, frame in enumerate(edge_video):
+            cframe = np.zeros((out_size[0], out_size[1], 3))
+            overlayframe = np.array(resized_video[i])
+            for x in range(cframe.shape[0]):
+                for y in range(cframe.shape[1]):
+                    if frame[x,y] != 0:
+                        cframe[x,y,:] = (0, 0, 255)
+                        overlayframe[x,y,:] = (0, 0, 255)
+            out_edges.write(np.uint8(cframe))
+            out_edges_overlay.write(np.uint8(overlayframe))
+
+        out_edges.release()
+        out_edges_overlay.release()
+
+        logging.debug("Finished creating edge videos for {0}".format(video_path))
+    except BaseException as e:
+        logging.exception(e)
+        return
 
 
 def convert_to_srgb(img):
     """Convert PIL image to sRGB color space (if possible)"""
-    icc = img.info.get('icc_profile', '')
-    if icc:
-        io_handle = io.BytesIO(icc)     # virtual file
-        src_profile = ImageCms.ImageCmsProfile(io_handle)
-        dst_profile = ImageCms.createProfile('sRGB')
-        img = ImageCms.profileToProfile(img, src_profile, dst_profile)
-    return img
+    try:
+        import io
+        from PIL import Image, ImageCms
+
+        icc = img.info.get('icc_profile', '')
+
+        if icc:
+            return ImageCms.profileToProfile(
+                img,
+                ImageCms.ImageCmsProfile(io.BytesIO(icc)),
+                ImageCms.createProfile('sRGB')
+            )
+
+        logging.debug(
+            "Unable to convert image to sRGB as there is no color "
+            "profile to transform from."
+        )
+        return img
+    except BaseException as e:
+        logging.exception(e)
+        return None
 
 
 def convert_img_to_jpeg(src, dest, quality=30):
-    with Image.open(src) as img:
-        img = convert_to_srgb(img)
-        img.save(dest, quality=quality)
+    """Convert an image to a JPEG with the given quality."""
+    try:
+        from PIL import Image
+
+        with Image.open(src) as img:
+            img = convert_to_srgb(img)
+            img.save(dest, quality=quality)
+    except BaseException as e:
+        logging.exception(e)
+        return
 
 
-"""
-Compare usages:
-    -metric AE : https://imagemagick.org/script/command-line-options.php#metric
-    -fuzz XX%  : Include a range of pixel values around each pixel value by +-XX%
+# #################################################################################################
+# Frame Extraction and de-duplication
+# #################################################################################################
 
-    Replacable with some Python algorithms to find the absolute error count where
-    we check if a value is within +-XX% of another value (fuzz).
-
-Convert usages:
-    # `miff:-` pipes a MIFF image into the next command (in this case its usually compare)
-
-    # convert takes the two files, applies algorithms to the `file`, then
-    # passes both of these files as MIFF images to compare.
-    convert white_file (file -gravity center -crop 50%x33%+0+0 -resize 200x200!) miff:-
-    convert white_file (file -resize 200x200!) miff:- 
-    convert white_file (file -crop AAAxBBB+X+Y -resize 200x200!) miff:- 
-
-    convert (img1 -size MaskAxMaskB xc:white -geometry +MaskAStart+MaskBStart -compose over -composite) (~//~ same as img1) -crop AAAxBBB+X+Y miff:-
-
-    # A screenshot
-    convert src -set colorspace sRGB -quality XXX dest
-
-    # Contentfullness calculation
-    # Run canny edge detection with radius,sigma=2 with +-8% bound. Then, get the
-    # histogram of this image, and use the last number from the histogram:info:- information to
-    # determine the "edgyness" of the image (it's the count of white pixels (edges) in the image).
-    convert img -canny 2x2+8%+8% -define histogram:unique-colors=true -format %c histogram:info:-
-
-    # Blank a frame
-    convert -size AxB xc:white PNG24:filename
-
-    convert file -crop AAAxBBB+X+Y file
-"""
 
 def video_to_frames(
     video,
@@ -1098,14 +1187,6 @@ def blank_first_frame(directory):
             files = sorted(glob.glob(os.path.join(directory, "video-*.png")))
             count = len(files)
             if count > 1:
-                from PIL import Image
-
-                with Image.open(files[0]) as im:
-                    width, height = im.size
-                # command = '{0} -size {1}x{2} xc:white PNG24:"{3}"'.format(
-                #     image_magick["convert"], width, height, files[0]
-                # )
-                # subprocess.call(command, shell=True)
                 blank = blank_frame(files[0])
                 blank.save(files[0])
     except BaseException:
@@ -1115,21 +1196,12 @@ def blank_first_frame(directory):
 def crop_viewport(directory):
     if client_viewport is not None:
         try:
+            from PIL import Image
+
             files = sorted(glob.glob(os.path.join(directory, "ms_*.png")))
             count = len(files)
             if count > 0:
-                crop = "{0:d}x{1:d}+{2:d}+{3:d}".format(
-                    client_viewport["width"],
-                    client_viewport["height"],
-                    client_viewport["x"],
-                    client_viewport["y"],
-                )
                 for i in range(count):
-                    # command = '{0} "{1}" -crop {2} "{1}"'.format(
-                    #     image_magick["convert"], files[i], crop
-                    # )
-                    # subprocess.call(command, shell=True)
-                    # (img, crop_x, crop_y, crop_x_offset, crop_y_offset, gravity=None):
                     with Image.open(files[i]) as im:
                         new_img = crop_im(
                             im,
@@ -1195,27 +1267,8 @@ def is_color_frame(file, color_file):
             with Image.open(file) as img:
                 width, height = img.size
             crops = []
+
             # Middle
-            # crops.append(
-            #     "{0:d}x{1:d}+{2:d}+{3:d}".format(
-            #         int(width / 2), int(height / 3), int(width / 4), int(height / 3)
-            #     )
-            # )
-            # # Top
-            # crops.append(
-            #     "{0:d}x{1:d}+{2:d}+{3:d}".format(
-            #         int(width / 2), int(height / 5), int(width / 4), 50
-            #     )
-            # )
-            # # Bottom
-            # crops.append(
-            #     "{0:d}x{1:d}+{2:d}+{3:d}".format(
-            #         int(width / 2),
-            #         int(height / 5),
-            #         int(width / 4),
-            #         height - int(height / 5),
-            #     )
-            # )
             crops.append(
                 (
                     int(width / 2), int(height / 3), int(width / 4), int(height / 3)
@@ -1236,31 +1289,8 @@ def is_color_frame(file, color_file):
                     height - int(height / 5),
                 )
             )
+
             for crop in crops:
-                # command = (
-                #     '{0} "{1}" "(" "{2}" -crop {3} -resize 200x200! ")"'
-                #     " miff:- | {4} -metric AE - -fuzz 15% null:"
-                # ).format(
-                #     image_magick["convert"],
-                #     color_file,
-                #     file,
-                #     "{0:d}x{1:d}+{2:d}+{3:d}".format(crop[0], crop[1], crop[2], crop[3]),
-                #     image_magick["compare"],
-                # )
-
-                # if sys.version_info > (3, 0):
-                #     compare = subprocess.Popen(
-                #         command, stderr=subprocess.PIPE, shell=True, encoding="UTF-8"
-                #     )
-                # else:
-                #     compare = subprocess.Popen(
-                #         command, stderr=subprocess.PIPE, shell=True
-                #     )
-                # out, err = compare.communicate()
-
-
-                # if re.match("^[0-9]+$", err):
-
                 with Image.open(file) as im:
                     crop_i = crop_im(im, crop[0], crop[1], crop[2], crop[3])
                     resized_im = resize(crop_i, 200, 200)
@@ -1283,60 +1313,36 @@ def is_color_frame(file, color_file):
 def is_white_frame(file, white_file):
     white = False
     if os.path.isfile(white_file):
-        fmt_img = None
-        white_img = Image.open(white_file)
+        try:
+            from PIL import Image
 
-        if options.viewport:
-            # command = (
-            #     '{0} "{1}" "(" "{2}" -resize 200x200! ")" miff:- | '
-            #     "{3} -metric AE - -fuzz 10% null:"
-            # ).format(image_magick["convert"], white_file, file, image_magick["compare"])
-            with Image.open(file) as im:
-                fmt_img = resize(im, 200, 200)
+            fmt_img = None
+            white_img = Image.open(white_file)
 
-        else:
-            # command = (
-            #     '{0} "{1}" "(" "{2}" -gravity Center -crop 50%x33%+0+0 -resize 200x200! ")" miff:- | '
-            #     "{3} -metric AE - -fuzz 10% null:"
-            # ).format(image_magick["convert"], white_file, file, image_magick["compare"])
-            with Image.open(file) as im:
-                width, height, _ = im.shape
-                fmt_img = crop_im(im, 0.5*width, 0.33*height, 0, 0, gravity="center")
-                fmt_img = resize(fmt_img, 200, 200)
+            if options.viewport:
+                with Image.open(file) as im:
+                    fmt_img = resize(im, 200, 200)
 
-        if client_viewport is not None:
-            # crop = "{0:d}x{1:d}+{2:d}+{3:d}".format(
-            #     client_viewport["width"],
-            #     client_viewport["height"],
-            #     client_viewport["x"],
-            #     client_viewport["y"],
-            # )
-            # command = (
-            #     '{0} "{1}" "(" "{2}" -crop {3} -resize 200x200! ")" miff:- | '
-            #     "{4} -metric AE - -fuzz 10% null:"
-            # ).format(
-            #     image_magick["convert"], white_file, file, crop, image_magick["compare"]
-            # )
+            else:
+                with Image.open(file) as im:
+                    width, height, _ = im.shape
+                    fmt_img = crop_im(im, 0.5*width, 0.33*height, 0, 0, gravity="center")
+                    fmt_img = resize(fmt_img, 200, 200)
 
-            with Image.open(file) as im:
-                width, height, _ = im.shape
-                fmt_img = crop_im(
-                    im,
-                    client_viewport["width"],
-                    client_viewport["height"],
-                    client_viewport["x"],
-                    client_viewport["y"],
-                )
-                fmt_img = resize(fmt_img, 200, 200)
-
-        # if sys.version_info > (3, 0):
-        #     compare = subprocess.Popen(
-        #         command, stderr=subprocess.PIPE, shell=True, encoding="UTF-8"
-        #     )
-        # else:
-        #     compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
-        # out, err = compare.communicate()
-        # if re.match("^[0-9]+$", err):
+            if client_viewport is not None:
+                with Image.open(file) as im:
+                    width, height, _ = im.shape
+                    fmt_img = crop_im(
+                        im,
+                        client_viewport["width"],
+                        client_viewport["height"],
+                        client_viewport["x"],
+                        client_viewport["y"],
+                    )
+                    fmt_img = resize(fmt_img, 200, 200)
+        except BaseException as e:
+            logging.exception(e)
+            return None
 
         different_pixels = compare(white_img, fmt_img, fuzz=0.1)
         if different_pixels < 500:
@@ -1368,81 +1374,48 @@ def frames_match(image1, image2, fuzz_percent, max_differences, crop_region, mas
     if crop_region is not None:
         crop = "-crop {0} ".format(crop_region)
     
-    with Image.open(image1) as i1, Image.open(image2) as i2:
-        if mask_rect:
-            i1 = mask(
-                i1,
-                mask_rect["width"],
-                mask_rect["height"],
-                mask_rect["x"],
-                mask_rect["y"],
-            )
-            i2 = mask(
-                i2,
-                mask_rect["width"],
-                mask_rect["height"],
-                mask_rect["x"],
-                mask_rect["y"],
-            )
+    try:
+        from PIL import Image
 
-        if crop_region2:
-            i1 = crop_im(
-                i1,
-                crop_region2[0],
-                crop_region2[1],
-                crop_region2[2],
-                crop_region2[3]
-            )
-            i2 = crop_im(
-                i2,
-                crop_region2[0],
-                crop_region2[1],
-                crop_region2[2],
-                crop_region2[3]
-            )
+        with Image.open(image1) as i1, Image.open(image2) as i2:
+            if mask_rect:
+                i1 = mask(
+                    i1,
+                    mask_rect["width"],
+                    mask_rect["height"],
+                    mask_rect["x"],
+                    mask_rect["y"],
+                )
+                i2 = mask(
+                    i2,
+                    mask_rect["width"],
+                    mask_rect["height"],
+                    mask_rect["x"],
+                    mask_rect["y"],
+                )
 
-        different_pixels = compare(i1, i2, fuzz=fuzz_percent/100)
-        if different_pixels <= max_differences:
-            match = True
+            if crop_region2:
+                i1 = crop_im(
+                    i1,
+                    crop_region2[0],
+                    crop_region2[1],
+                    crop_region2[2],
+                    crop_region2[3]
+                )
+                i2 = crop_im(
+                    i2,
+                    crop_region2[0],
+                    crop_region2[1],
+                    crop_region2[2],
+                    crop_region2[3]
+                )
 
-    # if mask_rect is None:
-    #     img1 = '"{0}"'.format(image1)
-    #     img2 = '"{0}"'.format(image2)
-    # else:
-    #     img1 = '( "{0}" -size {1}x{2} xc:white -geometry +{3}+{4} -compose over -composite )'.format(
-    #         image1,
-    #         mask_rect["width"],
-    #         mask_rect["height"],
-    #         mask_rect["x"],
-    #         mask_rect["y"],
-    #     )
-    #     img2 = '( "{0}" -size {1}x{2} xc:white -geometry +{3}+{4} -compose over -composite )'.format(
-    #         image2,
-    #         mask_rect["width"],
-    #         mask_rect["height"],
-    #         mask_rect["x"],
-    #         mask_rect["y"],
-    #     )
-    # command = "{0} {1} {2} {3}miff:- | {4} -metric AE - {5}null:".format(
-    #     image_mframes_matchagick["convert"], img1, img2, crop, image_magick["compare"], fuzz
-    # )
-    # if platform.system() != "Windows":
-    #     command = command.replace("(", "\\(").replace(")", "\\)")
-    # if sys.version_info > (3, 0):
-    #     compare = subprocess.Popen(
-    #         command, stderr=subprocess.PIPE, shell=True, encoding="UTF-8"
-    #     )
-    # else:
-    #     compare = subprocess.Popen(command, stderr=subprocess.PIPE, shell=True)
-    # out, err = compare.communicate()
-    # if re.match("^[0-9]+$", err):
-    #     different_pixels = int(err)
-    #     if different_pixels <= max_differences:
-    #         match = True
-    # else:
-    #     logging.debug(
-    #         'Unexpected compare result: out: "{0}", err: "{1}"'.format(out, err)
-    #     )
+            different_pixels = compare(i1, i2, fuzz=fuzz_percent/100)
+            if different_pixels <= max_differences:
+                match = True
+    except BaseException as e:
+        logging.exception(e)
+        return None
 
     return match
 
@@ -2130,60 +2103,49 @@ def calculate_contentful_speed_index(progress, directory):
     # This is CLI dependant and very fragile
     matcher = re.compile(r"(\d+?):")
 
-    # try:
-    dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
-    content = []
-    maxContent = 0
-    for p in progress[1:]:
-        # Full Path of the Current Frame
-        current_frame = os.path.join(dir, "ms_{0:06d}.png".format(p["time"]))
-        # logging.debug("contentfulSpeedIndex: Current Image is %s" % current_frame)
-        # # Takes full path of PNG frames to compute contentfulness value
-        # command = "{0} {1} -canny 2x2+8%+8% -define histogram:unique-colors=true -format %c histogram:info:-".format(
-        #     image_magick["convert"], current_frame
-        # )
-        # output = subprocess.check_output(command, shell=True).decode("utf-8")
-        # logging.debug("Output %s" % output)
+    try:
+        dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
+        content = []
+        maxContent = 0
+        for p in progress[1:]:
+            # Full Path of the Current Frame
+            current_frame = os.path.join(dir, "ms_{0:06d}.png".format(p["time"]))
+            logging.debug("contentfulSpeedIndex: Current frame is %s" % current_frame)
 
-        # # Take the last matching pixel count, which is the pixel count from the last
-        # # line
-        # pixel_count = matcher.findall(output)[-1]
-        # if not pixel_count:
-        #     logging.debug("Could not find the contentfulness value")
-        #     return None, None
+            value = 0
+            with Image.open(current_frame) as current_frame_img:
+                value = contentful_value(current_frame_img)
 
-        value = 0
-        with Image.open(current_frame) as current_frame_img:
-            value = contentful_value(current_frame_img)
+            logging.debug("contentfulSpeedIndex: Contentful value {0}".format(value))
 
-        if value > maxContent:
-            maxContent = value
-        content.append(value)
+            if value > maxContent:
+                maxContent = value
+            content.append(value)
 
-    for i, value in enumerate(content):
-        content[i] = (
-            maxContent == 0 and 0.0 or float(content[i]) / float(maxContent)
-        )
+        for i, value in enumerate(content):
+            content[i] = (
+                maxContent == 0 and 0.0 or float(content[i]) / float(maxContent)
+            )
 
-    # Assume 0 content for first frame
-    cont_si = 1 * (progress[1]["time"] - progress[0]["time"])
-    completeness_value = [(progress[1]["time"], int(cont_si))]
-    for i in range(1, len(progress) - 1):
-        elapsed = progress[i + 1]["time"] - progress[i]["time"]
-        # print i,' time =',p['time'],'elapsed =',elapsed,'content = ',content[i]
-        cont_si += elapsed * (1.0 - content[i])
-        completeness_value.append((progress[i + 1]["time"], int(cont_si)))
+        # Assume 0 content for first frame
+        cont_si = 1 * (progress[1]["time"] - progress[0]["time"])
+        completeness_value = [(progress[1]["time"], int(cont_si))]
+        for i in range(1, len(progress) - 1):
+            elapsed = progress[i + 1]["time"] - progress[i]["time"]
+            # print i,' time =',p['time'],'elapsed =',elapsed,'content = ',content[i]
+            cont_si += elapsed * (1.0 - content[i])
+            completeness_value.append((progress[i + 1]["time"], int(cont_si)))
 
-    cont_si = int(cont_si)
-    raw_progress_value = ["0=0"]
-    for timestamp, percent in completeness_value:
-        p = int(100 * float(percent) / float(cont_si))
-        raw_progress_value.append("%d=%d" % (timestamp, p))
+        cont_si = int(cont_si)
+        raw_progress_value = ["0=0"]
+        for timestamp, percent in completeness_value:
+            p = int(100 * float(percent) / float(cont_si))
+            raw_progress_value.append("%d=%d" % (timestamp, p))
 
-    return cont_si, ", ".join(raw_progress_value)
-    # except Exception as e:
-    #     logging.exception(e)
-    #     return None, None
+        return cont_si, ", ".join(raw_progress_value)
+    except Exception as e:
+        logging.exception(e)
+        return None, None
 
 
 def calculate_perceptual_speed_index(progress, directory):
@@ -2263,29 +2225,22 @@ def calculate_hero_time(progress, directory, hero, viewport):
                 % (hero["name"], hero["x"], hero["y"], hero["width"], hero["height"])
             )
 
-            # Create a rectangular mask of the hero element position
-            hero_mask = os.path.join(dir, "hero_{0}_mask.png".format(hero["name"]))
-
             # Apply the mask to the target frame to create the reference frame
             target_mask_path = os.path.join(
                 dir,
                 "hero_{0}_ms_{1:06d}.png".format(hero["name"], progress[n - 1]["time"]),
             )
-            def apply_hero_mask(cur_frame):
+            def __apply_hero_mask(cur_frame):
+                """Helper method for re-applying the same mask."""
                 cropped_frame = None
                 with Image.open(cur_frame) as im:
                     cropped_frame = crop_im(im, hero_width, hero_height, hero_x, hero_y)
+                return cropped_frame
 
-                blank = blank_frame(cur_frame, color="black")
-                masked_tgt_frame = mask(blank, hero_width, hero_height, hero_x, hero_y, insert_img=cropped_frame)
-                return masked_tgt_frame
-
-            target_mask = apply_hero_mask(target_frame)
+            target_mask = __apply_hero_mask(target_frame)
             target_mask.save(target_mask_path)
 
             def cleanup():
-                if os.path.isfile(hero_mask):
-                    os.remove(hero_mask)
                 if os.path.isfile(target_mask_path):
                     os.remove(target_mask_path)
 
@@ -2307,7 +2262,7 @@ def calculate_hero_time(progress, directory, hero, viewport):
                         dir, "hero_{0}_ms_{1:06d}.png".format(hero["name"], p["time"])
                     )
 
-                    current_mask = apply_hero_mask(current_frame + extension)
+                    current_mask = __apply_hero_mask(current_frame + extension)
                     current_mask.save(current_mask_path)
 
                     match = frames_match(
@@ -2346,23 +2301,27 @@ def check_config():
         print("FAIL")
         ok = False
 
-    # print("convert: ")
-    # if check_process("{0} -version".format(image_magick["convert"]), "ImageMagick"):
-    #     print("OK")
-    # else:
-    #     print("FAIL")
-    #     ok = False
+    print("Numpy:  ")
+    try:
+        import numpy as np
 
-    # print("compare: ")
-    # if check_process("{0} -version".format(image_magick["compare"]), "ImageMagick"):
-    #     print("OK")
-    # else:
-    #     print("FAIL")
-    #     ok = False
+        print("OK")
+    except BaseException:
+        print("FAIL")
+        ok = False
+
+    print("OpenCV-Python:  ")
+    try:
+        import cv2
+
+        print("OK")
+    except BaseException:
+        print("FAIL")
+        ok = False
 
     print("Pillow:  ")
     try:
-        from PIL import Image, ImageDraw, ImageOps  # noqa
+        from PIL import Image, ImageCms, ImageDraw, ImageOps # noqa
 
         print("OK")
     except BaseException:
@@ -2406,7 +2365,6 @@ def main():
     import argparse
 
     global options
-    global image_magick
 
     parser = argparse.ArgumentParser(
         description="Calculate visual performance metrics from a video.",
@@ -2418,7 +2376,7 @@ def main():
         "--check",
         action="store_true",
         default=False,
-        help="Check dependencies (ffmpeg, imagemagick, PIL, SSIM).",
+        help="Check dependencies (ffmpeg, Numpy, OpenCV-Python, PIL, SSIM).",
     )
     parser.add_argument(
         "-v",
@@ -2694,32 +2652,6 @@ def main():
 
     if options.multiple:
         options.orange = True
-
-    if platform.system() == "Windows":
-        paths = [os.getenv("ProgramFiles"), os.getenv("ProgramFiles(x86)")]
-        for path in paths:
-            if path is not None and os.path.isdir(path):
-                dirs = sorted(os.listdir(path), reverse=True)
-                for subdir in dirs:
-                    if subdir.lower().startswith("imagemagick"):
-                        convert = os.path.join(path, subdir, "convert.exe")
-                        compare = os.path.join(path, subdir, "compare.exe")
-                        mogrify = os.path.join(path, subdir, "mogrify.exe")
-                        if (
-                            os.path.isfile(convert)
-                            and os.path.isfile(compare)
-                            and os.path.isfile(mogrify)
-                        ):
-                            if convert.find(" ") >= 0:
-                                convert = '"{0}"'.format(convert)
-                            if compare.find(" ") >= 0:
-                                compare = '"{0}"'.format(compare)
-                            if mogrify.find(" ") >= 0:
-                                mogrify = '"{0}"'.format(mogrify)
-                            image_magick["convert"] = convert
-                            image_magick["compare"] = compare
-                            image_magick["mogrify"] = mogrify
-                            break
 
     ok = False
     try:
