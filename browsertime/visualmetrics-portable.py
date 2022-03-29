@@ -61,6 +61,7 @@ frame_cache = {}
 # Replacement methods for ImageMagick to Python conversion
 # #################################################################################################
 
+
 def compare(img1, img2, fuzz=0.10):
     """Calculate the Absolute Error count between given images."""
     try:
@@ -70,9 +71,9 @@ def compare(img1, img2, fuzz=0.10):
         img2_data = np.array(img2)
 
         inds = np.argwhere(
-            np.isclose(img1_data[:,:,0], img2_data[:,:,0], atol=fuzz*255) &
-            np.isclose(img1_data[:,:,1], img2_data[:,:,1], atol=fuzz*255) &
-            np.isclose(img1_data[:,:,2], img2_data[:,:,2], atol=fuzz*255)
+            np.isclose(img1_data[:, :, 0], img2_data[:, :, 0], atol=fuzz * 255)
+            & np.isclose(img1_data[:, :, 1], img2_data[:, :, 1], atol=fuzz * 255)
+            & np.isclose(img1_data[:, :, 2], img2_data[:, :, 2], atol=fuzz * 255)
         )
 
         return (img1_data.shape[0] * img1_data.shape[1]) - len(inds)
@@ -107,7 +108,9 @@ def crop_im(img, crop_x, crop_y, crop_x_offset, crop_y_offset, gravity=None):
         base_x += crop_x_offset
         base_y += crop_y_offset
 
-        return Image.fromarray(img[base_y:base_y+crop_y, base_x:base_x+crop_x, :])
+        return Image.fromarray(
+            img[base_y : base_y + crop_y, base_x : base_x + crop_x, :]
+        )
     except BaseException as e:
         logging.exception(e)
         return None
@@ -134,11 +137,13 @@ def resize(img, width, height):
 def scale(img, maxsize):
     """Scale an image to the given max size."""
     width, height = img.size
-    ratio = min(maxsize/width, maxsize/height)
-    return resize(img, int(width*ratio), int(height*ratio))
+    ratio = min(maxsize / width, maxsize / height)
+    return resize(img, int(width * ratio), int(height * ratio))
 
 
-def mask(img, x_mask, y_mask, x_offset, y_offset, color=(255, 255, 255), insert_img=None):
+def mask(
+    img, x_mask, y_mask, x_offset, y_offset, color=(255, 255, 255), insert_img=None
+):
     """Mask an image.
 
     If insert_img is provided, the image given will mask the region
@@ -152,9 +157,13 @@ def mask(img, x_mask, y_mask, x_offset, y_offset, color=(255, 255, 255), insert_
         img_data = np.array(img)
         if insert_img is not None:
             insert_img_data = np.array(insert_img)
-            img_data[y_offset:y_offset+y_mask, x_offset:x_offset+x_mask, :] = insert_img
+            img_data[
+                y_offset : y_offset + y_mask, x_offset : x_offset + x_mask, :
+            ] = insert_img
         else:
-            img_data[y_offset:y_offset+y_mask, x_offset:x_offset+x_mask, :] = color
+            img_data[
+                y_offset : y_offset + y_mask, x_offset : x_offset + x_mask, :
+            ] = color
 
         return Image.fromarray(img_data)
     except BaseException as e:
@@ -166,9 +175,10 @@ def blank_frame(file, color="white"):
     """Return a new blank frame that has the same dimensions as file."""
     try:
         from PIL import Image
+
         with Image.open(file) as im:
             width, height = im.size
-        return Image.new('RGB', (width, height), color=color)
+        return Image.new("RGB", (width, height), color=color)
     except BaseException as e:
         logging.exception(e)
         return None
@@ -196,7 +206,9 @@ def edges_im(img):
         # Calculate the threshold values for double-thresholding
         min_g = np.min(blurred_img[:])
         max_g = np.max(blurred_img[:])
-        edge_img = cv2.Canny(blurred_img, 0.10*(max_g-min_g)+min_g, 0.30*(max_g-min_g)+min_g)
+        edge_img = cv2.Canny(
+            blurred_img, 0.10 * (max_g - min_g) + min_g, 0.30 * (max_g - min_g) + min_g
+        )
 
         return Image.fromarray(edge_img)
     except BaseException as e:
@@ -259,12 +271,9 @@ def build_edge_video(video_path, viewport):
                         viewport["width"],
                         viewport["height"],
                         viewport["x"],
-                        viewport["y"]
+                        viewport["y"],
                     )
-                resized_video.append(scale(
-                    cropped_im,
-                    options.thumbsize,
-                ))
+                resized_video.append(scale(cropped_im, options.thumbsize))
                 edge_video.append(np.array(edges_im(resized_video[-1])))
             else:
                 video.release()
@@ -273,14 +282,14 @@ def build_edge_video(video_path, viewport):
         out_size = edge_video[-1].shape
         out_edges = cv2.VideoWriter(
             os.path.join(output_dir, video_name + "-edges.mp4"),
-            cv2.VideoWriter_fourcc(*'MP4V'),
+            cv2.VideoWriter_fourcc(*"MP4V"),
             frame_count,
             (out_size[1], out_size[0]),
             1,
         )
         out_edges_overlay = cv2.VideoWriter(
             os.path.join(output_dir, video_name + "-edges-overlay.mp4"),
-            cv2.VideoWriter_fourcc(*'MP4V'),
+            cv2.VideoWriter_fourcc(*"MP4V"),
             frame_count,
             (out_size[1], out_size[0]),
             1,
@@ -290,9 +299,9 @@ def build_edge_video(video_path, viewport):
             overlayframe = np.array(resized_video[i])
             for x in range(cframe.shape[0]):
                 for y in range(cframe.shape[1]):
-                    if frame[x,y] != 0:
-                        cframe[x,y,:] = (0, 0, 255)
-                        overlayframe[x,y,:] = (0, 0, 255)
+                    if frame[x, y] != 0:
+                        cframe[x, y, :] = (0, 0, 255)
+                        overlayframe[x, y, :] = (0, 0, 255)
             out_edges.write(np.uint8(cframe))
             out_edges_overlay.write(np.uint8(overlayframe))
 
@@ -311,13 +320,13 @@ def convert_to_srgb(img):
         import io
         from PIL import Image, ImageCms
 
-        icc = img.info.get('icc_profile', '')
+        icc = img.info.get("icc_profile", "")
 
         if icc:
             return ImageCms.profileToProfile(
                 img,
                 ImageCms.ImageCmsProfile(io.BytesIO(icc)),
-                ImageCms.createProfile('sRGB')
+                ImageCms.createProfile("sRGB"),
             )
 
         logging.debug(
@@ -1198,7 +1207,7 @@ def crop_viewport(directory):
                             client_viewport["width"],
                             client_viewport["height"],
                             client_viewport["x"],
-                            client_viewport["y"]
+                            client_viewport["y"],
                         )
                         new_img.save(files[i])
 
@@ -1260,16 +1269,10 @@ def is_color_frame(file, color_file):
 
             # Middle
             crops.append(
-                (
-                    int(width / 2), int(height / 3), int(width / 4), int(height / 3)
-                )
+                (int(width / 2), int(height / 3), int(width / 4), int(height / 3))
             )
             # Top
-            crops.append(
-                (
-                    int(width / 2), int(height / 5), int(width / 4), 50
-                )
-            )
+            crops.append((int(width / 2), int(height / 5), int(width / 4), 50))
             # Bottom
             crops.append(
                 (
@@ -1316,7 +1319,9 @@ def is_white_frame(file, white_file):
             else:
                 with Image.open(file) as im:
                     width, height, _ = im.shape
-                    fmt_img = crop_im(im, 0.5*width, 0.33*height, 0, 0, gravity="center")
+                    fmt_img = crop_im(
+                        im, 0.5 * width, 0.33 * height, 0, 0, gravity="center"
+                    )
                     fmt_img = resize(fmt_img, 200, 200)
 
             if client_viewport is not None:
@@ -1357,7 +1362,7 @@ def colors_are_similar(a, b, threshold=15):
 
 def frames_match(image1, image2, fuzz_percent, max_differences, crop_region, mask_rect):
     match = False
-    
+
     try:
         from PIL import Image
 
@@ -1380,21 +1385,13 @@ def frames_match(image1, image2, fuzz_percent, max_differences, crop_region, mas
 
             if crop_region:
                 i1 = crop_im(
-                    i1,
-                    crop_region[0],
-                    crop_region[1],
-                    crop_region[2],
-                    crop_region[3]
+                    i1, crop_region[0], crop_region[1], crop_region[2], crop_region[3]
                 )
                 i2 = crop_im(
-                    i2,
-                    crop_region[0],
-                    crop_region[1],
-                    crop_region[2],
-                    crop_region[3]
+                    i2, crop_region[0], crop_region[1], crop_region[2], crop_region[3]
                 )
 
-            different_pixels = compare(i1, i2, fuzz=fuzz_percent/100)
+            different_pixels = compare(i1, i2, fuzz=fuzz_percent / 100)
             if different_pixels <= max_differences:
                 match = True
 
@@ -1700,7 +1697,9 @@ def convert_to_jpeg(directory, quality):
     for file in files:
         _, filename = os.path.split(file)
         filen, ext = os.path.splitext(filename)
-        convert_img_to_jpeg(file, os.path.join(directory, filen + ".jpg"), quality=quality)
+        convert_img_to_jpeg(
+            file, os.path.join(directory, filen + ".jpg"), quality=quality
+        )
         os.remove(file)
 
     logging.debug("Done converting video frames to JPEG")
@@ -2217,6 +2216,7 @@ def calculate_hero_time(progress, directory, hero, viewport):
                 dir,
                 "hero_{0}_ms_{1:06d}.png".format(hero["name"], progress[n - 1]["time"]),
             )
+
             def __apply_hero_mask(cur_frame):
                 """Helper method for re-applying the same mask."""
                 cropped_frame = None
@@ -2253,7 +2253,12 @@ def calculate_hero_time(progress, directory, hero, viewport):
                     current_mask.save(current_mask_path)
 
                     match = frames_match(
-                        target_mask_path, current_mask_path, fuzz, max_pixel_diff, None, None
+                        target_mask_path,
+                        current_mask_path,
+                        fuzz,
+                        max_pixel_diff,
+                        None,
+                        None,
                     )
 
                     # Remove each mask after using it
@@ -2308,7 +2313,7 @@ def check_config():
 
     print("Pillow:  ")
     try:
-        from PIL import Image, ImageCms, ImageDraw, ImageOps # noqa
+        from PIL import Image, ImageCms, ImageDraw, ImageOps  # noqa
 
         print("OK")
     except BaseException:
