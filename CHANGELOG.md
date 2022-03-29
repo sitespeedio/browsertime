@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Added
+* There's a new version of the visual metrics script contributed by [Gregory Mierzwinski](https://github.com/gmierz) that removed the dependency of ImageMagick and instead needs the Python dependencies *OpenCV-Python* and *Numpy*. The long term goal is to use this as default but for now you can test it with `--visualMetricsPortable`.
+
 ## 15.3.0 - 2022-03-07
 ### Added
 * Chrome: If you set --user-data-dir you can clean the directory between each iteration using `--chrome.cleanUserDataDir` [#1739](https://github.com/sitespeedio/browsertime/pull/1739)
