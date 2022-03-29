@@ -231,7 +231,7 @@ def build_edge_video(video_path, viewport):
     the raw edges, and a video with the edges overlaid. They will
     be found in the same location as the original video.
 
-    These videos will only be produced when --contentful is
+    These videos will only be produced when --contentful-video is
     used.
     """
     logging.debug("Creating edge video for {0}".format(video_path))
@@ -393,7 +393,7 @@ def video_to_frames(
                     is_mobile,
                 )
 
-                if options.contentful:
+                if options.contentful_video:
                     # Create some videos with the edges
                     build_edge_video(video, viewport)
 
@@ -2104,6 +2104,8 @@ def calculate_contentful_speed_index(progress, directory):
     matcher = re.compile(r"(\d+?):")
 
     try:
+        from PIL import Image
+
         dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
         content = []
         maxContent = 0
@@ -2587,6 +2589,14 @@ def main():
         action="store_true",
         default=False,
         help="Calculate contentful Speed Index",
+    )
+    parser.add_argument(
+        "--contentful-video",
+        action="store_true",
+        default=False,
+        help="Produce a video of the edges used in the ContentfulSpeedIndex "
+        "calculation. The resulting videos are suffixed with -edge and "
+        "-edge-overlay.",
     )
     parser.add_argument(
         "-j",
