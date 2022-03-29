@@ -35,7 +35,7 @@ jobs:
         sudo snap alias ffmpeg.ffprobe ffprobe
         python -m pip install --upgrade --user pip
         python -m pip install --upgrade --user setuptools
-        python -m pip install --user pyssim
+        python -m pip install --user pyssim OpenCV-Python Numpy
         python -m pip --version
         python -m pip show Pillow
         python -m pip show pyssim
@@ -85,3 +85,5 @@ jobs:
       run: ./bin/browsertime.js -b chrome --preWarmServer --xvfb http://127.0.0.1:3000/simple/
     - name: Run test with screenshots
       run: ./bin/browsertime.js -b chrome --screenshotLCP --screenshotLS --xvfb http://127.0.0.1:3000/simple/
+    - name: Run test with visualMetricsPortable
+      run: ./bin/browsertime.js -b chrome --visualMetricsPortable --xvfb http://127.0.0.1:3000/simple
