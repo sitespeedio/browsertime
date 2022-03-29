@@ -887,8 +887,7 @@ def find_first_frame(directory, white_file):
                 with Image.open(blank) as im:
                     width, height = im.size
                 match_height = int(math.ceil(height * options.findstart / 100.0))
-                crop = "{0:d}x{1:d}+{2:d}+{3:d}".format(width, match_height, 0, 0)
-                crop_region2 = (width, match_height, 0, 0)
+                crop = (width, match_height, 0, 0)
                 found_first_change = False
                 found_white_frame = False
                 found_non_white_frame = False
@@ -898,7 +897,7 @@ def find_first_frame(directory, white_file):
                 for i in range(count):
                     if not found_first_change:
                         different = not frames_match(
-                            files[i], files[i + 1], 5, 100, crop, None, crop_region2=crop_region2
+                            files[i], files[i + 1], 5, 100, crop, None
                         )
                         logging.debug(
                             "Removing early frame %s from the beginning", files[i]
@@ -1021,11 +1020,10 @@ def find_render_start(directory, orange_file, gray_file, cropped, is_mobile):
                     else:
                         height = im_height - bottom_margin
 
-                crop = "{0:d}x{1:d}+{2:d}+{3:d}".format(width, height, left, top)
-                crop_region2 = (width, height, left, top)
+                crop = (width, height, left, top)
 
                 for i in range(1, count):
-                    if frames_match(first, files[i], 10, 0, crop, mask, crop_region2=crop_region2, debug=True):
+                    if frames_match(first, files[i], 10, 0, crop, mask):
                         logging.debug("Removing pre-render frame %s", files[i])
                         os.remove(files[i])
                     elif orange_file is not None and is_color_frame(
@@ -1093,16 +1091,15 @@ def eliminate_duplicate_frames(directory, cropped, is_mobile):
                 else:
                     height = im_height - bottom_margin
 
-            crop = "{0:d}x{1:d}+{2:d}+{3:d}".format(width, height, left, top)
-            crop_region2 = (width, height, left, top)
-            logging.debug("Viewport cropping set to " + crop)
+            crop = (width, height, left, top)
+            logging.debug("Viewport cropping set to (W, H, L, T): " + str(crop))
 
             # Do a pass looking for the first non-blank frame with an allowance
             # for up to a 10% per-pixel difference for noise in the white
             # field.
             count = len(files)
             for i in range(1, count):
-                if frames_match(blank, files[i], 10, 0, crop, None, crop_region2=crop_region2):
+                if frames_match(blank, files[i], 10, 0, crop, None):
                     logging.debug(
                         "Removing duplicate frame {0} from the beginning".format(
                             files[i]
@@ -1123,7 +1120,7 @@ def eliminate_duplicate_frames(directory, cropped, is_mobile):
                 baseline = files[0]
                 previous_frame = baseline
                 for i in range(1, count):
-                    if frames_match(baseline, files[i], 15, 5, crop, None, crop_region2=crop_region2):
+                    if frames_match(baseline, files[i], 15, 5, crop, None):
                         if previous_frame is baseline:
                             duplicates.append(previous_frame)
                         else:
@@ -1156,15 +1153,8 @@ def eliminate_similar_frames(directory):
             count = len(files)
             if count > 3:
                 crop = None
-                crop_region2 = None
                 if client_viewport is not None:
-                    crop = "{0:d}x{1:d}+{2:d}+{3:d}".format(
-                        client_viewport["width"],
-                        client_viewport["height"],
-                        client_viewport["x"],
-                        client_viewport["y"],
-                    )
-                    crop_region2 = (
+                    crop = (
                         client_viewport["width"],
                         client_viewport["height"],
                         client_viewport["x"],
@@ -1172,7 +1162,7 @@ def eliminate_similar_frames(directory):
                     )
                 baseline = files[1]
                 for i in range(2, count - 1):
-                    if frames_match(baseline, files[i], 1, 0, crop, None, crop_region2=crop_region2):
+                    if frames_match(baseline, files[i], 1, 0, crop, None):
                         logging.debug("Removing similar frame {0}".format(files[i]))
                         os.remove(files[i])
                     else:
@@ -1365,14 +1355,8 @@ def colors_are_similar(a, b, threshold=15):
     return similar
 
 
-def frames_match(image1, image2, fuzz_percent, max_differences, crop_region, mask_rect, crop_region2=None, debug=False):
+def frames_match(image1, image2, fuzz_percent, max_differences, crop_region, mask_rect):
     match = False
-    fuzz = ""
-    if fuzz_percent > 0:
-        fuzz = "-fuzz {0:d}% ".format(fuzz_percent)
-    crop = ""
-    if crop_region is not None:
-        crop = "-crop {0} ".format(crop_region)
     
     try:
         from PIL import Image
@@ -1394,25 +1378,26 @@ def frames_match(image1, image2, fuzz_percent, max_differences, crop_region, mas
                     mask_rect["y"],
                 )
 
-            if crop_region2:
+            if crop_region:
                 i1 = crop_im(
                     i1,
-                    crop_region2[0],
-                    crop_region2[1],
-                    crop_region2[2],
-                    crop_region2[3]
+                    crop_region[0],
+                    crop_region[1],
+                    crop_region[2],
+                    crop_region[3]
                 )
                 i2 = crop_im(
                     i2,
-                    crop_region2[0],
-                    crop_region2[1],
-                    crop_region2[2],
-                    crop_region2[3]
+                    crop_region[0],
+                    crop_region[1],
+                    crop_region[2],
+                    crop_region[3]
                 )
 
             different_pixels = compare(i1, i2, fuzz=fuzz_percent/100)
             if different_pixels <= max_differences:
                 match = True
+
     except BaseException as e:
         logging.exception(e)
         return None
