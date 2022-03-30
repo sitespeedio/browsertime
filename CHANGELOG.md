@@ -1,7 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 15.4.0 - 2022-03-30
 ### Added
+* Updated to Chrome and Chromedriver 100 [#1743](https://github.com/sitespeedio/browsertime/pull/1743).
 * There's a new version of the visual metrics script contributed by [Gregory Mierzwinski](https://github.com/gmierz) that removed the dependency of ImageMagick and instead needs the Python dependencies *OpenCV-Python* and *Numpy*. The long term goal is to use this as default but for now you can test it with `--visualMetricsPortable`.
 
 ## 15.3.0 - 2022-03-07
