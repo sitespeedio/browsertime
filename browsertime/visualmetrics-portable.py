@@ -137,7 +137,7 @@ def resize(img, width, height):
 def scale(img, maxsize):
     """Scale an image to the given max size."""
     width, height = img.size
-    ratio = min(maxsize / width, maxsize / height)
+    ratio = min(float(maxsize) / width, float(maxsize) / height)
     return resize(img, int(width * ratio), int(height * ratio))
 
 
