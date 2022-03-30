@@ -2293,6 +2293,13 @@ def check_config():
         print("FAIL")
         ok = False
 
+    print("Python 3.6+:  ")
+    if sys.version_info >= (3, 6):
+        print("OK")
+    else:
+        print("FAIL")
+        ok = False
+
     print("Numpy:  ")
     try:
         import numpy as np
