@@ -2663,6 +2663,13 @@ def main():
     ok = False
     try:
         if not options.check:
+            # Run a quick check to make sure all requirements exist,
+            # otherwise failures might be silent due to how this code is
+            # structured.
+            ok = check_config()
+            if not ok:
+                raise Exception("Please install requirements before running.")
+
             if options.video:
                 orange_file = None
                 if options.orange:
