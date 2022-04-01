@@ -37,19 +37,15 @@ import json
 import logging
 import math
 import os
-import platform
 import re
 import sys
 import shutil
 import subprocess
 import tempfile
 
-if sys.version_info > (3, 0):
-    GZIP_TEXT = "wt"
-    GZIP_READ_TEXT = "rt"
-else:
-    GZIP_TEXT = "w"
-    GZIP_READ_TEXT = "r"
+
+GZIP_TEXT = "wt"
+GZIP_READ_TEXT = "rt"
 
 # Globals
 options = None
