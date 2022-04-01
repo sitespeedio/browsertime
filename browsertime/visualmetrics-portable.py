@@ -368,8 +368,7 @@ def video_to_frames(
     viewport_retries,
     viewport_min_height,
     viewport_min_width,
-    full_resolution,
-    trim_end,
+    full_resolution
 ):
     """Extract the video frames"""
     global client_viewport
@@ -412,7 +411,6 @@ def video_to_frames(
                         )
                     directories = [directory]
                     for dir in directories:
-                        trim_video_end(dir, trim_end)
                         if orange_file is not None:
                             remove_frames_before_orange(dir, orange_file)
                             remove_orange_frames(dir, orange_file)
@@ -765,32 +763,6 @@ def find_video_viewport(
         viewport = None
 
     return viewport, cropped
-
-
-def trim_video_end(directory, trim_time):
-    if trim_time > 0:
-        logging.debug(
-            "Trimming "
-            + str(trim_time)
-            + "ms from the end of the video in "
-            + directory
-        )
-        frames = sorted(glob.glob(os.path.join(directory, "video-*.png")))
-        if len(frames):
-            match = re.compile(r"video-(?P<ms>[0-9]+)\.png")
-            m = re.search(match, frames[-1])
-            if m is not None:
-                frame_time = int(m.groupdict().get("ms"))
-                end_time = frame_time - trim_time
-                logging.debug("Trimming frames before " + str(end_time) + "ms")
-                for frame in frames:
-                    m = re.search(match, frame)
-                    if m is not None:
-                        frame_time = int(m.groupdict().get("ms"))
-                        if frame_time > end_time:
-                            logging.debug("Trimming frame " + frame)
-                            os.remove(frame)
-
 
 def adjust_frame_times(directory):
     offset = None
@@ -2265,12 +2237,6 @@ def main():
         help="Force the first frame to be blank white.",
     )
     parser.add_argument(
-        "--trimend",
-        type=int,
-        default=0,
-        help="Time to trim from the end of the video (in milliseconds).",
-    )
-    parser.add_argument(
         "--maxframes",
         type=int,
         default=0,
@@ -2399,7 +2365,6 @@ def main():
                     options.viewportminheight,
                     options.viewportminwidth,
                     options.full,
-                    options.trimend,
                 )
             
             if options.render is not None:
