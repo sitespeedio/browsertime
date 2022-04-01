@@ -405,9 +405,7 @@ def video_to_frames(
                     directories = [directory]
                     for dir in directories:
                         if orange_file is not None:
-                            remove_frames_before_orange(dir, orange_file)
                             remove_orange_frames(dir, orange_file)
-                        blank_first_frame(dir)
                         find_render_start(
                             dir, orange_file, cropped, is_mobile
                         )
@@ -512,32 +510,6 @@ def find_recording_platform(video):
             is_mobile = True
 
     return is_mobile
-
-def remove_frames_before_orange(directory, orange_file):
-    """Remove stray frames from the start of the video"""
-    frames = sorted(glob.glob(os.path.join(directory, "video-*.png")))
-    if len(frames):
-        # go through the first 20 frames and remove any that come before the first orange frame.
-        # iOS video capture starts with a blank white frame and then flips to
-        # orange before starting.
-        logging.debug("Scanning for non-orange frames...")
-        found_orange = False
-        remove_frames = []
-        frame_count = 0
-        for frame in frames:
-            frame_count += 1
-            if is_color_frame(frame, orange_file):
-                found_orange = True
-                break
-            if frame_count > 20:
-                break
-            remove_frames.append(frame)
-
-        if found_orange and len(remove_frames):
-            for frame in remove_frames:
-                logging.debug("Removing pre-orange frame %s", frame)
-                os.remove(frame)
-
 
 def remove_orange_frames(directory, orange_file):
     """Remove orange frames from the beginning of the video"""
