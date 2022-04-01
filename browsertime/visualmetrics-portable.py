@@ -457,10 +457,8 @@ def extract_frames(video, directory, full_resolution, viewport):
         ]
         logging.debug(" ".join(command))
         lines = []
-        if sys.version_info > (3, 0):
-            proc = subprocess.Popen(command, stderr=subprocess.PIPE, encoding="UTF-8")
-        else:
-            proc = subprocess.Popen(command, stderr=subprocess.PIPE)
+
+        proc = subprocess.Popen(command, stderr=subprocess.PIPE, encoding="UTF-8")
         while proc.poll() is None:
             lines.extend(iter(proc.stderr.readline, ""))
 
@@ -491,10 +489,7 @@ def find_recording_platform(video):
     logging.debug(command)
 
     lines = []
-    if sys.version_info > (3, 0):
-        proc = subprocess.Popen(command, stderr=subprocess.PIPE, encoding="UTF-8")
-    else:
-        proc = subprocess.Popen(command, stderr=subprocess.PIPE)
+    proc = subprocess.Popen(command, stderr=subprocess.PIPE, encoding="UTF-8")
 
     while proc.poll() is None:
         lines.extend(iter(proc.stderr.readline, ""))
@@ -977,14 +972,7 @@ def crop_viewport(directory):
 def get_decimate_filter():
     decimate = None
     try:
-        if sys.version_info > (3, 0):
-            filters = subprocess.check_output(
-                ["ffmpeg", "-filters"], stderr=subprocess.STDOUT, encoding="UTF-8"
-            )
-        else:
-            filters = subprocess.check_output(
-                ["ffmpeg", "-filters"], stderr=subprocess.STDOUT
-            )
+        filters = subprocess.check_output(["ffmpeg", "-filters"], stderr=subprocess.STDOUT, encoding="UTF-8")
         lines = filters.split("\n")
         match = re.compile(
             r"(?P<filter>[\w]*decimate).*V->V.*Remove near-duplicate frames"
@@ -1791,13 +1779,8 @@ def check_config():
 
 def check_process(command, output):
     ok = False
-    try:
-        if sys.version_info > (3, 0):
-            out = subprocess.check_output(
-                command, stderr=subprocess.STDOUT, shell=True, encoding="UTF-8"
-            )
-        else:
-            out = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=True)
+    try:   
+        out = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=True, encoding="UTF-8")
         if out.find(output) > -1:
             ok = True
     except BaseException:
