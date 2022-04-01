@@ -362,7 +362,6 @@ def video_to_frames(
     directory,
     force,
     orange_file,
-    white_file,
     find_viewport,
     viewport_retries,
     viewport_min_height,
@@ -1111,50 +1110,6 @@ def is_color_frame(file, color_file):
     frame_cache[file][color_file] = bool(match)
     return match
 
-
-def is_white_frame(file, white_file):
-    white = False
-    if os.path.isfile(white_file):
-        try:
-            from PIL import Image
-
-            fmt_img = None
-            white_img = Image.open(white_file)
-
-            if options.viewport:
-                with Image.open(file) as im:
-                    fmt_img = resize(im, 200, 200)
-
-            else:
-                with Image.open(file) as im:
-                    width, height, _ = im.shape
-                    fmt_img = crop_im(
-                        im, 0.5 * width, 0.33 * height, 0, 0, gravity="center"
-                    )
-                    fmt_img = resize(fmt_img, 200, 200)
-
-            if client_viewport is not None:
-                with Image.open(file) as im:
-                    width, height, _ = im.shape
-                    fmt_img = crop_im(
-                        im,
-                        client_viewport["width"],
-                        client_viewport["height"],
-                        client_viewport["x"],
-                        client_viewport["y"],
-                    )
-                    fmt_img = resize(fmt_img, 200, 200)
-        except BaseException as e:
-            logging.exception(e)
-            return None
-
-        different_pixels = compare(white_img, fmt_img, fuzz=0.1)
-        if different_pixels < 500:
-            white = True
-
-    return white
-
-
 def colors_are_similar(a, b, threshold=15):
     similar = True
     sum = 0
@@ -1222,19 +1177,6 @@ def generate_orange_png(orange_file):
         im.save(orange_file, "PNG")
     except BaseException:
         logging.exception("Error generating orange png " + orange_file)
-
-def generate_white_png(white_file):
-    try:
-        from PIL import Image, ImageDraw
-
-        im = Image.new("RGB", (200, 200))
-        draw = ImageDraw.Draw(im)
-        draw.rectangle([0, 0, 200, 200], fill=(255, 255, 255))
-        del draw
-        im.save(white_file, "PNG")
-    except BaseException:
-        logging.exception("Error generating white png " + white_file)
-
 
 ##########################################################################
 #   Histogram calculations
@@ -2089,14 +2031,6 @@ def main():
         help="Remove orange-colored frames from the beginning of the video.",
     )
     parser.add_argument(
-        "-w",
-        "--white",
-        action="store_true",
-        default=False,
-        help="Wait for a full white frame after a non-white frame "
-        "at the beginning of the video.",
-    )
-    parser.add_argument(
         "-n",
         "--notification",
         action="store_true",
@@ -2268,20 +2202,11 @@ def main():
                     if not os.path.isfile(orange_file):
                         orange_file = os.path.join(colors_temp_dir, "orange.png")
                         generate_orange_png(orange_file)
-                white_file = None
-                if options.white:
-                    white_file = os.path.join(
-                        os.path.dirname(os.path.realpath(__file__)), "white.png"
-                    )
-                    if not os.path.isfile(white_file):
-                        white_file = os.path.join(colors_temp_dir, "white.png")
-                        generate_white_png(white_file)
                 video_to_frames(
                     options.video,
                     directory,
                     options.force,
                     orange_file,
-                    white_file,
                     options.viewport,
                     options.viewportretries,
                     options.viewportminheight,
