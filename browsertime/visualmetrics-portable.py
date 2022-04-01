@@ -363,7 +363,6 @@ def video_to_frames(
     force,
     orange_file,
     white_file,
-    gray_file,
     multiple,
     find_viewport,
     viewport_time,
@@ -425,7 +424,7 @@ def video_to_frames(
                         find_first_frame(dir, white_file)
                         blank_first_frame(dir)
                         find_render_start(
-                            dir, orange_file, gray_file, cropped, is_mobile
+                            dir, orange_file, cropped, is_mobile
                         )
                         find_last_frame(dir, white_file)
                         adjust_frame_times(dir)
@@ -967,7 +966,7 @@ def find_last_frame(directory, white_file):
         logging.exception("Error finding last frame")
 
 
-def find_render_start(directory, orange_file, gray_file, cropped, is_mobile):
+def find_render_start(directory, orange_file, cropped, is_mobile):
     logging.debug("Finding Render Start...")
     try:
         if (
@@ -1039,9 +1038,6 @@ def find_render_start(directory, orange_file, gray_file, cropped, is_mobile):
                         files[i], orange_file
                     ):
                         logging.debug("Removing orange frame %s", files[i])
-                        os.remove(files[i])
-                    elif gray_file is not None and is_color_frame(files[i], gray_file):
-                        logging.debug("Removing gray frame %s", files[i])
                         os.remove(files[i])
                     else:
                         break
@@ -1413,20 +1409,6 @@ def generate_orange_png(orange_file):
         im.save(orange_file, "PNG")
     except BaseException:
         logging.exception("Error generating orange png " + orange_file)
-
-
-def generate_gray_png(gray_file):
-    try:
-        from PIL import Image, ImageDraw
-
-        im = Image.new("RGB", (200, 200))
-        draw = ImageDraw.Draw(im)
-        draw.rectangle([0, 0, 200, 200], fill=(128, 128, 128))
-        del draw
-        im.save(gray_file, "PNG")
-    except BaseException:
-        logging.exception("Error generating gray png " + gray_file)
-
 
 def generate_white_png(white_file):
     try:
@@ -2447,12 +2429,6 @@ def main():
         help="Remove orange-colored frames from the beginning of the video.",
     )
     parser.add_argument(
-        "--gray",
-        action="store_true",
-        default=False,
-        help="Remove gray-colored frames from the beginning of the video.",
-    )
-    parser.add_argument(
         "-w",
         "--white",
         action="store_true",
@@ -2685,21 +2661,12 @@ def main():
                     if not os.path.isfile(white_file):
                         white_file = os.path.join(colors_temp_dir, "white.png")
                         generate_white_png(white_file)
-                gray_file = None
-                if options.gray:
-                    gray_file = os.path.join(
-                        os.path.dirname(os.path.realpath(__file__)), "gray.png"
-                    )
-                    if not os.path.isfile(gray_file):
-                        gray_file = os.path.join(colors_temp_dir, "gray.png")
-                        generate_gray_png(gray_file)
                 video_to_frames(
                     options.video,
                     directory,
                     options.force,
                     orange_file,
                     white_file,
-                    gray_file,
                     options.multiple,
                     options.viewport,
                     options.viewporttime,
