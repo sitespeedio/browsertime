@@ -421,7 +421,6 @@ def video_to_frames(
                         find_render_start(
                             dir, orange_file, cropped, is_mobile
                         )
-                        find_last_frame(dir, white_file)
                         adjust_frame_times(dir)
                         eliminate_duplicate_frames(dir, cropped, is_mobile)
                         eliminate_similar_frames(dir)
@@ -887,32 +886,6 @@ def find_first_frame(directory, white_file):
                         break
     except BaseException:
         logging.exception("Error finding first frame")
-
-
-def find_last_frame(directory, white_file):
-    logging.debug("Finding Last Frame...")
-    try:
-        if options.endwhite:
-            files = sorted(glob.glob(os.path.join(directory, "video-*.png")))
-            count = len(files)
-            if count > 2:
-                found_end = False
-
-                for i in range(2, count):
-                    if found_end:
-                        logging.debug(
-                            "Removing frame {0} from the end".format(files[i])
-                        )
-                        os.remove(files[i])
-                    if is_white_frame(files[i], white_file):
-                        found_end = True
-                        logging.debug(
-                            "Removing ending white frame {0}".format(files[i])
-                        )
-                        os.remove(files[i])
-    except BaseException:
-        logging.exception("Error finding last frame")
-
 
 def find_render_start(directory, orange_file, cropped, is_mobile):
     logging.debug("Finding Render Start...")
@@ -2308,13 +2281,6 @@ def main():
         help="Find the first fully white frame as the start of the video.",
     )
     parser.add_argument(
-        "--endwhite",
-        action="store_true",
-        default=False,
-        help="Find the first fully white frame after render start as the "
-        "end of the video.",
-    )
-    parser.add_argument(
         "--forceblank",
         action="store_true",
         default=False,
@@ -2436,7 +2402,7 @@ def main():
                         orange_file = os.path.join(colors_temp_dir, "orange.png")
                         generate_orange_png(orange_file)
                 white_file = None
-                if options.white or options.startwhite or options.endwhite:
+                if options.white or options.startwhite:
                     white_file = os.path.join(
                         os.path.dirname(os.path.realpath(__file__)), "white.png"
                     )
