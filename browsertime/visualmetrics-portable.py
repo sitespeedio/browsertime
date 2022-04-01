@@ -987,19 +987,6 @@ def eliminate_similar_frames(directory):
     except BaseException:
         logging.exception("Error removing similar frames")
 
-
-def blank_first_frame(directory):
-    try:
-        if options.forceblank:
-            files = sorted(glob.glob(os.path.join(directory, "video-*.png")))
-            count = len(files)
-            if count > 1:
-                blank = blank_frame(files[0])
-                blank.save(files[0])
-    except BaseException:
-        logging.exception("Error blanking first frame")
-
-
 def crop_viewport(directory):
     if client_viewport is not None:
         try:
@@ -2086,12 +2073,6 @@ def main():
         default=0,
         help="Ignore the center X%% of the frame when looking for "
         "the first rendered frame (useful for Opera mini).",
-    )
-    parser.add_argument(
-        "--forceblank",
-        action="store_true",
-        default=False,
-        help="Force the first frame to be blank white.",
     )
     parser.add_argument(
         "--maxframes",
