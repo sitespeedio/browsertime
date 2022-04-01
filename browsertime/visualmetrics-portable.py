@@ -816,23 +816,7 @@ def adjust_frame_times(directory):
 def find_first_frame(directory, white_file):
     logging.debug("Finding First Frame...")
     try:
-        if options.startwhite:
-            files = sorted(glob.glob(os.path.join(directory, "video-*.png")))
-            count = len(files)
-            if count > 1:
-                from PIL import Image
-
-                for i in range(count):
-                    if is_white_frame(files[i], white_file):
-                        break
-                    else:
-                        logging.debug(
-                            "Removing non-white frame {0} from the beginning".format(
-                                files[i]
-                            )
-                        )
-                        os.remove(files[i])
-        elif options.findstart > 0 and options.findstart <= 100:
+        if options.findstart > 0 and options.findstart <= 100:
             files = sorted(glob.glob(os.path.join(directory, "video-*.png")))
             count = len(files)
             if count > 1:
@@ -2275,12 +2259,6 @@ def main():
         "the first rendered frame (useful for Opera mini).",
     )
     parser.add_argument(
-        "--startwhite",
-        action="store_true",
-        default=False,
-        help="Find the first fully white frame as the start of the video.",
-    )
-    parser.add_argument(
         "--forceblank",
         action="store_true",
         default=False,
@@ -2402,7 +2380,7 @@ def main():
                         orange_file = os.path.join(colors_temp_dir, "orange.png")
                         generate_orange_png(orange_file)
                 white_file = None
-                if options.white or options.startwhite:
+                if options.white:
                     white_file = os.path.join(
                         os.path.dirname(os.path.realpath(__file__)), "white.png"
                     )
