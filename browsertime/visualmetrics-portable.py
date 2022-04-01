@@ -414,7 +414,6 @@ def video_to_frames(
                         if orange_file is not None:
                             remove_frames_before_orange(dir, orange_file)
                             remove_orange_frames(dir, orange_file)
-                        find_first_frame(dir, white_file)
                         blank_first_frame(dir)
                         find_render_start(
                             dir, orange_file, cropped, is_mobile
@@ -783,65 +782,6 @@ def adjust_frame_times(directory):
                 new_time = frame_time - offset
                 dest = os.path.join(directory, "ms_{0:06d}.png".format(new_time))
                 os.rename(frame, dest)
-
-
-def find_first_frame(directory, white_file):
-    logging.debug("Finding First Frame...")
-    try:
-        if options.findstart > 0 and options.findstart <= 100:
-            files = sorted(glob.glob(os.path.join(directory, "video-*.png")))
-            count = len(files)
-            if count > 1:
-                from PIL import Image
-
-                blank = files[0]
-                with Image.open(blank) as im:
-                    width, height = im.size
-                match_height = int(math.ceil(height * options.findstart / 100.0))
-                crop = (width, match_height, 0, 0)
-                found_first_change = False
-                found_white_frame = False
-                found_non_white_frame = False
-                first_frame = None
-                if white_file is None:
-                    found_white_frame = True
-                for i in range(count):
-                    if not found_first_change:
-                        different = not frames_match(
-                            files[i], files[i + 1], 5, 100, crop, None
-                        )
-                        logging.debug(
-                            "Removing early frame %s from the beginning", files[i]
-                        )
-                        os.remove(files[i])
-                        if different:
-                            first_frame = files[i + 1]
-                            found_first_change = True
-                    elif not found_white_frame:
-                        if files[i] != first_frame:
-                            if found_non_white_frame:
-                                found_white_frame = is_white_frame(files[i], white_file)
-                                if not found_white_frame:
-                                    logging.debug(
-                                        "Removing early non-white frame {0} from the beginning".format(
-                                            files[i]
-                                        )
-                                    )
-                                    os.remove(files[i])
-                            else:
-                                found_non_white_frame = not is_white_frame(
-                                    files[i], white_file
-                                )
-                                logging.debug(
-                                    "Removing early pre-non-white frame {0} from the beginning".format(
-                                        files[i]
-                                    )
-                                )
-                                os.remove(files[i])
-                    if found_first_change and found_white_frame:
-                        break
-    except BaseException:
-        logging.exception("Error finding first frame")
 
 def find_render_start(directory, orange_file, cropped, is_mobile):
     logging.debug("Finding Render Start...")
@@ -2215,13 +2155,6 @@ def main():
         type=int,
         default=0,
         help="End time (in milliseconds) for calculating visual metrics.",
-    )
-    parser.add_argument(
-        "--findstart",
-        type=int,
-        default=0,
-        help="Find the start of activity by looking at the top X%% "
-        "of the video (like a browser address bar).",
     )
     parser.add_argument(
         "--renderignore",
