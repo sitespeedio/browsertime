@@ -1978,12 +1978,6 @@ def main():
         help="Save the last frame of video as an image to the path provided.",
     )
     parser.add_argument(
-        "-g",
-        "--histogram",
-        help="Histogram file (as input if exists or as output if "
-        "histograms need to be calculated).",
-    )
-    parser.add_argument(
         "-q",
         "--quality",
         type=int,
@@ -2114,7 +2108,6 @@ def main():
         not options.check
         and not options.dir
         and not options.video
-        and not options.histogram
     ):
         parser.error(
             "A video, Directory of images or histograms file needs to be provided.\n\n"
@@ -2133,10 +2126,7 @@ def main():
     directory = temp_dir
     if options.dir is not None:
         directory = options.dir
-    if options.histogram is not None:
-        histogram_file = options.histogram
-    else:
-        histogram_file = os.path.join(temp_dir, "histograms.json.gz")
+    histogram_file = os.path.join(temp_dir, "histograms.json.gz")
 
     # Set up logging
     log_level = logging.CRITICAL
