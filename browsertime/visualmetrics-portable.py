@@ -363,7 +363,6 @@ def video_to_frames(
     force,
     orange_file,
     white_file,
-    multiple,
     find_viewport,
     viewport_time,
     viewport_retries,
@@ -411,10 +410,7 @@ def video_to_frames(
                         client_viewport = find_image_viewport(
                             os.path.join(directory, "video-000000.png"), is_mobile
                         )
-                    if multiple and orange_file is not None:
-                        directories = split_videos(directory, orange_file)
-                    else:
-                        directories = [directory]
+                    directories = [directory]
                     for dir in directories:
                         trim_video_end(dir, trim_end)
                         if orange_file is not None:
@@ -527,51 +523,6 @@ def find_recording_platform(video):
             is_mobile = True
 
     return is_mobile
-
-
-def split_videos(directory, orange_file):
-    """Split multiple videos on orange frame separators"""
-    logging.debug("Splitting video on orange frames (this may take a while)...")
-    directories = []
-    current = 0
-    found_orange = False
-    video_dir = None
-    frames = sorted(glob.glob(os.path.join(directory, "video-*.png")))
-    if len(frames):
-        for frame in frames:
-            if is_color_frame(frame, orange_file):
-                if not found_orange:
-                    found_orange = True
-                    # Make a copy of the orange frame for the end of the
-                    # current video
-                    if video_dir is not None:
-                        dest = os.path.join(video_dir, os.path.basename(frame))
-                        shutil.copyfile(frame, dest)
-                    current += 1
-                    video_dir = os.path.join(directory, str(current))
-                    logging.debug(
-                        "Orange frame found: %s, starting video directory %s",
-                        frame,
-                        video_dir,
-                    )
-                    if not os.path.isdir(video_dir):
-                        os.mkdir(video_dir, 0o755)
-                    if os.path.isdir(video_dir):
-                        video_dir = os.path.realpath(video_dir)
-                        clean_directory(video_dir)
-                        directories.append(video_dir)
-                    else:
-                        video_dir = None
-            else:
-                found_orange = False
-            if video_dir is not None:
-                dest = os.path.join(video_dir, os.path.basename(frame))
-                os.rename(frame, dest)
-            else:
-                logging.debug("Removing spurious frame %s at the beginning", frame)
-                os.remove(frame)
-    return directories
-
 
 def remove_frames_before_orange(directory, orange_file):
     """Remove stray frames from the start of the video"""
@@ -2281,16 +2232,6 @@ def main():
         "at the beginning of the video.",
     )
     parser.add_argument(
-        "--multiple",
-        action="store_true",
-        default=False,
-        help="Multiple videos are combined, separated by orange frames."
-        "In this mode only the extraction is done and analysis "
-        "needs to be run separetely on each directory. Numbered "
-        "directories will be created for each video under the output "
-        "directory.",
-    )
-    parser.add_argument(
         "-n",
         "--notification",
         action="store_true",
@@ -2475,9 +2416,6 @@ def main():
             level=log_level, format=options.logformat, datefmt="%H:%M:%S"
         )
 
-    if options.multiple:
-        options.orange = True
-
     ok = False
     try:
         if not options.check:
@@ -2511,7 +2449,6 @@ def main():
                     options.force,
                     orange_file,
                     white_file,
-                    options.multiple,
                     options.viewport,
                     options.viewporttime,
                     options.viewportretries,
@@ -2520,44 +2457,44 @@ def main():
                     options.full,
                     options.trimend,
                 )
-            if not options.multiple:
-                if options.render is not None:
-                    render_video(directory, options.render)
+            
+            if options.render is not None:
+                render_video(directory, options.render)
 
-                # Calculate the histograms and visual metrics
-                calculate_histograms(directory, histogram_file, options.force)
-                metrics = calculate_visual_metrics(
-                    histogram_file,
-                    options.start,
-                    options.end,
-                    options.perceptual,
-                    options.contentful,
-                    directory,
-                    options.progress,
-                    options.herodata,
-                )
+            # Calculate the histograms and visual metrics
+            calculate_histograms(directory, histogram_file, options.force)
+            metrics = calculate_visual_metrics(
+                histogram_file,
+                options.start,
+                options.end,
+                options.perceptual,
+                options.contentful,
+                directory,
+                options.progress,
+                options.herodata,
+            )
 
-                if options.screenshot is not None:
-                    quality = 30
-                    if options.quality is not None:
-                        quality = options.quality
-                    save_screenshot(directory, options.screenshot, quality)
-                # JPEG conversion
-                if options.dir is not None and options.quality is not None:
-                    convert_to_jpeg(directory, options.quality)
+            if options.screenshot is not None:
+                quality = 30
+                if options.quality is not None:
+                    quality = options.quality
+                save_screenshot(directory, options.screenshot, quality)
+            # JPEG conversion
+            if options.dir is not None and options.quality is not None:
+                convert_to_jpeg(directory, options.quality)
 
-                if metrics is not None:
-                    ok = True
-                    if options.json:
-                        data = dict()
-                        for metric in metrics:
-                            data[metric["name"].replace(" ", "")] = metric["value"]
-                        if "videoRecordingStart" in globals():
-                            data["videoRecordingStart"] = videoRecordingStart
-                        print(json.dumps(data))
-                    else:
-                        for metric in metrics:
-                            print("{0}: {1}".format(metric["name"], metric["value"]))
+            if metrics is not None:
+                ok = True
+                if options.json:
+                    data = dict()
+                    for metric in metrics:
+                        data[metric["name"].replace(" ", "")] = metric["value"]
+                    if "videoRecordingStart" in globals():
+                        data["videoRecordingStart"] = videoRecordingStart
+                    print(json.dumps(data))
+                else:
+                    for metric in metrics:
+                        print("{0}: {1}".format(metric["name"], metric["value"]))
         else:
             ok = check_config()
     except Exception as e:
