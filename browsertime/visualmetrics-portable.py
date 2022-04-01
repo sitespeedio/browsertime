@@ -2286,54 +2286,52 @@ def calculate_hero_time(progress, directory, hero, viewport):
 def check_config():
     ok = True
 
-    print("ffmpeg:  ")
+    
     if get_decimate_filter() is not None:
-        print("OK")
+        logging.debug('FFMPEG found')
     else:
-        print("FAIL")
+        print("ffmpeg: FAIL")
         ok = False
 
-    print("Python 3.6+:  ")
+    
     if sys.version_info >= (3, 6):
-        print("OK")
+        logging.debug('Python 3.6+ found')
     else:
-        print("FAIL")
+        print("Python 3.6+: FAIL")
         ok = False
 
-    print("Numpy:  ")
     try:
         import numpy as np
 
-        print("OK")
+        logging.debug('Numpy found')
     except BaseException:
-        print("FAIL")
+        print("Numpy: FAIL")
         ok = False
 
-    print("OpenCV-Python:  ")
+    
     try:
         import cv2
-
-        print("OK")
+        
+        logging.debug('OpenCV-Python found')
     except BaseException:
-        print("FAIL")
+        print("OpenCV-Python: FAIL")
         ok = False
 
-    print("Pillow:  ")
+    
     try:
         from PIL import Image, ImageCms, ImageDraw, ImageOps  # noqa
 
-        print("OK")
+        logging.debug('Pillow found')
     except BaseException:
-        print("FAIL")
+        print("Pillow: FAIL")
         ok = False
 
-    print("SSIM:    ")
+    
     try:
         from ssim import compute_ssim  # noqa
-
-        print("OK")
+        logging.debug('SSIM found')
     except BaseException:
-        print("FAIL")
+        print("SSIM: FAIL")
         ok = False
 
     return ok
