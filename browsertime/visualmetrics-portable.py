@@ -370,7 +370,6 @@ def video_to_frames(
     viewport_min_height,
     viewport_min_width,
     full_resolution,
-    timeline_file,
     trim_end,
 ):
     """Extract the video frames"""
@@ -428,8 +427,6 @@ def video_to_frames(
                         )
                         find_last_frame(dir, white_file)
                         adjust_frame_times(dir)
-                        if timeline_file is not None and not multiple:
-                            synchronize_to_timeline(dir, timeline_file)
                         eliminate_duplicate_frames(dir, cropped, is_mobile)
                         eliminate_similar_frames(dir)
                         # See if we are limiting the number of frames to keep
@@ -1423,152 +1420,6 @@ def generate_white_png(white_file):
         logging.exception("Error generating white png " + white_file)
 
 
-def synchronize_to_timeline(directory, timeline_file):
-    offset = get_timeline_offset(timeline_file)
-    if offset > 0:
-        frames = sorted(glob.glob(os.path.join(directory, "ms_*.png")))
-        match = re.compile(r"ms_(?P<ms>[0-9]+)\.png")
-        for frame in frames:
-            m = re.search(match, frame)
-            if m is not None:
-                frame_time = int(m.groupdict().get("ms"))
-                new_time = max(frame_time - offset, 0)
-                dest = os.path.join(directory, "ms_{0:06d}.png".format(new_time))
-                if frame != dest:
-                    if os.path.isfile(dest):
-                        os.remove(dest)
-                    os.rename(frame, dest)
-
-
-def get_timeline_offset(timeline_file):
-    offset = 0
-    try:
-        file_name, ext = os.path.splitext(timeline_file)
-        if ext.lower() == ".gz":
-            f = gzip.open(timeline_file, GZIP_READ_TEXT)
-        else:
-            f = open(timeline_file, "r")
-        timeline = json.load(f)
-        f.close()
-        last_paint = None
-        first_navigate = None
-
-        # In the case of a trace instead of a timeline we want the list of
-        # events
-        if "traceEvents" in timeline:
-            timeline = timeline["traceEvents"]
-
-        for timeline_event in timeline:
-            paint_time = get_timeline_event_paint_time(timeline_event)
-            if paint_time is not None:
-                last_paint = paint_time
-            first_navigate = get_timeline_event_navigate_time(timeline_event)
-            if first_navigate is not None:
-                break
-
-        if (
-            last_paint is not None
-            and first_navigate is not None
-            and first_navigate > last_paint
-        ):
-            offset = int(round(first_navigate - last_paint))
-            logging.info(
-                "Trimming {0:d}ms from the start of the video based on timeline synchronization".format(
-                    offset
-                )
-            )
-    except BaseException:
-        logging.critical("Error processing timeline file " + timeline_file)
-
-    return offset
-
-
-def get_timeline_event_paint_time(timeline_event):
-    paint_time = None
-    if "cat" in timeline_event:
-        if (
-            timeline_event["cat"].find("devtools.timeline") >= 0
-            and "ts" in timeline_event
-            and "name" in timeline_event
-            and (
-                timeline_event["name"].find("Paint") >= 0
-                or timeline_event["name"].find("CompositeLayers") >= 0
-            )
-        ):
-            paint_time = float(timeline_event["ts"]) / 1000.0
-            if "dur" in timeline_event:
-                paint_time += float(timeline_event["dur"]) / 1000.0
-    elif "method" in timeline_event:
-        if (
-            timeline_event["method"] == "Timeline.eventRecorded"
-            and "params" in timeline_event
-            and "record" in timeline_event["params"]
-        ):
-            paint_time = get_timeline_event_paint_time(
-                timeline_event["params"]["record"]
-            )
-    else:
-        if "type" in timeline_event and (
-            timeline_event["type"] == "Rasterize"
-            or timeline_event["type"] == "CompositeLayers"
-            or timeline_event["type"] == "Paint"
-        ):
-            if "endTime" in timeline_event:
-                paint_time = timeline_event["endTime"]
-            elif "startTime" in timeline_event:
-                paint_time = timeline_event["startTime"]
-
-        # Check for any child paint events
-        if "children" in timeline_event:
-            for child in timeline_event["children"]:
-                child_paint_time = get_timeline_event_paint_time(child)
-                if child_paint_time is not None and (
-                    paint_time is None or child_paint_time > paint_time
-                ):
-                    paint_time = child_paint_time
-
-    return paint_time
-
-
-def get_timeline_event_navigate_time(timeline_event):
-    navigate_time = None
-    if "cat" in timeline_event:
-        if (
-            timeline_event["cat"].find("devtools.timeline") >= 0
-            and "ts" in timeline_event
-            and "name" in timeline_event
-            and timeline_event["name"] == "ResourceSendRequest"
-        ):
-            navigate_time = float(timeline_event["ts"]) / 1000.0
-    elif "method" in timeline_event:
-        if (
-            timeline_event["method"] == "Timeline.eventRecorded"
-            and "params" in timeline_event
-            and "record" in timeline_event["params"]
-        ):
-            navigate_time = get_timeline_event_navigate_time(
-                timeline_event["params"]["record"]
-            )
-    else:
-        if (
-            "type" in timeline_event
-            and timeline_event["type"] == "ResourceSendRequest"
-            and "startTime" in timeline_event
-        ):
-            navigate_time = timeline_event["startTime"]
-
-        # Check for any child paint events
-        if "children" in timeline_event:
-            for child in timeline_event["children"]:
-                child_navigate_time = get_timeline_event_navigate_time(child)
-                if child_navigate_time is not None and (
-                    navigate_time is None or child_navigate_time < navigate_time
-                ):
-                    navigate_time = child_navigate_time
-
-    return navigate_time
-
-
 ##########################################################################
 #   Histogram calculations
 ##########################################################################
@@ -2392,13 +2243,6 @@ def main():
         "histograms need to be calculated).",
     )
     parser.add_argument(
-        "-m",
-        "--timeline",
-        help="Timeline capture from Chrome dev tools. Used to synchronize the video"
-        " start time and only applies when orange frames are removed "
-        "(see --orange). The timeline file can be gzipped if it ends in .gz",
-    )
-    parser.add_argument(
         "-q",
         "--quality",
         type=int,
@@ -2674,7 +2518,6 @@ def main():
                     options.viewportminheight,
                     options.viewportminwidth,
                     options.full,
-                    options.timeline,
                     options.trimend,
                 )
             if not options.multiple:
