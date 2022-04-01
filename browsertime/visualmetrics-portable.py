@@ -364,7 +364,6 @@ def video_to_frames(
     orange_file,
     white_file,
     find_viewport,
-    viewport_time,
     viewport_retries,
     viewport_min_height,
     viewport_min_width,
@@ -391,7 +390,6 @@ def video_to_frames(
                     video,
                     directory,
                     find_viewport,
-                    viewport_time,
                     viewport_retries,
                     viewport_min_height,
                     viewport_min_width,
@@ -647,7 +645,7 @@ def find_video_viewport(
     video,
     directory,
     find_viewport,
-    viewport_time,
+
     viewport_retries,
     viewport_min_height,
     viewport_min_width,
@@ -691,8 +689,6 @@ def find_video_viewport(
                 os.remove(frame)
 
             command = ["ffmpeg", "-i", video]
-            if viewport_time:
-                command.extend(["-ss", viewport_time])
 
             # Pull one frame from the video starting with the frame at
             # the `retries` index
@@ -2115,12 +2111,6 @@ def main():
         help="Locate and use the viewport from the first video frame.",
     )
     parser.add_argument(
-        "-t",
-        "--viewporttime",
-        help="Time of the video frame to use for identifying the viewport "
-        "(in HH:MM:SS.xx format).",
-    )
-    parser.add_argument(
         "--viewportretries",
         type=int,
         default=5,
@@ -2293,7 +2283,6 @@ def main():
                     orange_file,
                     white_file,
                     options.viewport,
-                    options.viewporttime,
                     options.viewportretries,
                     options.viewportminheight,
                     options.viewportminwidth,
