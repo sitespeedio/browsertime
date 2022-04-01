@@ -1234,82 +1234,6 @@ def convert_to_jpeg(directory, quality):
 
     logging.debug("Done converting video frames to JPEG")
 
-
-##########################################################################
-#   Video rendering
-##########################################################################
-
-
-def render_video(directory, video_file):
-    """Render the frames to the given mp4 file"""
-    directory = os.path.realpath(directory)
-    files = sorted(glob.glob(os.path.join(directory, "ms_*.png")))
-    if len(files) > 1:
-        current_image = None
-        with open(os.path.join(directory, files[0]), "rb") as f_in:
-            current_image = f_in.read()
-        if current_image is not None:
-            command = [
-                "ffmpeg",
-                "-f",
-                "image2pipe",
-                "-vcodec",
-                "png",
-                "-r",
-                "30",
-                "-i",
-                "-",
-                "-vcodec",
-                "libx264",
-                "-r",
-                "30",
-                "-crf",
-                "24",
-                "-g",
-                "15",
-                "-preset",
-                "superfast",
-                "-y",
-                video_file,
-            ]
-            try:
-                proc = subprocess.Popen(command, stdin=subprocess.PIPE)
-                if proc:
-                    match = re.compile(r"ms_([0-9]+)\.")
-                    m = re.search(match, files[1])
-                    file_index = 0
-                    last_index = len(files) - 1
-                    if m is not None:
-                        next_image_time = int(m.group(1))
-                    done = False
-                    current_frame = 0
-                    while not done:
-                        current_frame_time = int(
-                            round(float(current_frame) * 1000.0 / 30.0)
-                        )
-                        if current_frame_time >= next_image_time:
-                            file_index += 1
-                            with open(
-                                os.path.join(directory, files[file_index]), "rb"
-                            ) as f_in:
-                                current_image = f_in.read()
-                            if file_index < last_index:
-                                m = re.search(match, files[file_index + 1])
-                                if m:
-                                    next_image_time = int(m.group(1))
-                            else:
-                                done = True
-                        proc.stdin.write(current_image)
-                        current_frame += 1
-                    # hold the end frame for one second so it's actually
-                    # visible
-                    for i in range(30):
-                        proc.stdin.write(current_image)
-                    proc.stdin.close()
-                    proc.communicate()
-            except Exception:
-                pass
-
 ##########################################################################
 #   Visual Metrics
 ##########################################################################
@@ -2035,9 +1959,6 @@ def main():
                     options.full,
                 )
             
-            if options.render is not None:
-                render_video(directory, options.render)
-
             # Calculate the histograms and visual metrics
             calculate_histograms(directory, histogram_file, options.force)
             metrics = calculate_visual_metrics(
