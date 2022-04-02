@@ -398,10 +398,6 @@ def video_to_frames(
                 gc.collect()
                 if extract_frames(video, directory, full_resolution, viewport):
                     client_viewport = None
-                    if find_viewport and options.notification:
-                        client_viewport = find_image_viewport(
-                            os.path.join(directory, "video-000000.png"), is_mobile
-                        )
                     directories = [directory]
                     for dir in directories:
                         if orange_file is not None:
@@ -411,7 +407,6 @@ def video_to_frames(
                         )
                         adjust_frame_times(dir)
                         eliminate_duplicate_frames(dir, cropped, is_mobile)
-                        eliminate_similar_frames(dir)
                         crop_viewport(dir)
                         gc.collect()
                 else:
@@ -658,46 +653,7 @@ def find_video_viewport(
                 with Image.open(frame) as im:
                     width, height = im.size
                     logging.debug("%s is %dx%d", frame, width, height)
-                if options.notification:
-                    im = Image.open(frame)
-                    pixels = im.load()
-                    middle = int(math.floor(height / 2))
-                    # Find the top edge (at ~40% in to deal with browsers that
-                    # color the notification area)
-                    x = int(width * 0.4)
-                    y = 0
-                    background = pixels[x, y]
-                    top = None
-                    while top is None and y < middle:
-                        if not colors_are_similar(background, pixels[x, y]):
-                            top = y
-                        else:
-                            y += 1
-                    if top is None:
-                        top = 0
-                    logging.debug("Window top edge is {0:d}".format(top))
-
-                    # Find the bottom edge
-                    x = 0
-                    y = height - 1
-                    bottom = None
-                    while bottom is None and y > middle:
-                        if not colors_are_similar(background, pixels[x, y]):
-                            bottom = y
-                        else:
-                            y -= 1
-                    if bottom is None:
-                        bottom = height - 1
-                    logging.debug("Window bottom edge is {0:d}".format(bottom))
-
-                    viewport = {
-                        "x": 0,
-                        "y": top,
-                        "width": width,
-                        "height": (bottom - top),
-                    }
-
-                elif find_viewport:
+                if find_viewport:
                     viewport = find_image_viewport(frame, is_mobile)
                 else:
                     viewport = {"x": 0, "y": 0, "width": width, "height": height}
@@ -827,13 +783,6 @@ def eliminate_duplicate_frames(directory, cropped, is_mobile):
             blank = files[0]
             with Image.open(blank) as im:
                 width, height = im.size
-            if options.viewport and options.notification:
-                if (
-                    client_viewport["width"] == width
-                    and client_viewport["height"] == height
-                ):
-                    client_viewport = None
-
             im_width = width
             im_height = height
 
@@ -917,34 +866,6 @@ def eliminate_duplicate_frames(directory, cropped, is_mobile):
 
     except BaseException:
         logging.exception("Error processing frames for duplicates")
-
-
-def eliminate_similar_frames(directory):
-    logging.debug("Removing Similar Frames...")
-    try:
-        # only do this when decimate couldn't be used to eliminate similar
-        # frames
-        if options.notification:
-            files = sorted(glob.glob(os.path.join(directory, "ms_*.png")))
-            count = len(files)
-            if count > 3:
-                crop = None
-                if client_viewport is not None:
-                    crop = (
-                        client_viewport["width"],
-                        client_viewport["height"],
-                        client_viewport["x"],
-                        client_viewport["y"],
-                    )
-                baseline = files[1]
-                for i in range(2, count - 1):
-                    if frames_match(baseline, files[i], 1, 0, crop, None):
-                        logging.debug("Removing similar frame {0}".format(files[i]))
-                        os.remove(files[i])
-                    else:
-                        baseline = files[i]
-    except BaseException:
-        logging.exception("Error removing similar frames")
 
 def crop_viewport(directory):
     if client_viewport is not None:
@@ -1791,13 +1712,6 @@ def main():
         action="store_true",
         default=False,
         help="Remove orange-colored frames from the beginning of the video.",
-    )
-    parser.add_argument(
-        "-n",
-        "--notification",
-        action="store_true",
-        default=False,
-        help="Trim the notification and home bars from the window.",
     )
     parser.add_argument(
         "-p",
