@@ -6,7 +6,7 @@
     "@cypress/xvfb": "1.2.4",
     "@devicefarmer/adbkit": "2.11.3",
     "@sitespeed.io/chromedriver": "100.0.4896-20",
-    "@sitespeed.io/edgedriver": "99.0.1150-25",
+    "@sitespeed.io/edgedriver": "100.0.1185-29",
     "@sitespeed.io/geckodriver": "0.30.0",
     "@sitespeed.io/throttle": "3.0.0",
     "@sitespeed.io/tracium": "0.3.3",
