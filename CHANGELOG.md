@@ -1,8 +1,15 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 16.0.0 - 2022-04-04
+## 16.0.0 - 2022-04-05
 ### Changed
-* `--disableDNSFlush` become `--flushDNS`
+* When I introduced flushing of the DNS per run I missed that it makes you need to run sudo to do it (Mac/Linux). That sucks so instead of being able to disable the flushing `--disableDNSFlush` you now enables it with `--flushDNS` [#1752](https://github.com/sitespeedio/browsertime/pull/1752).
+
+### Added 
+* Firefox 99 in the Docker container
+* Edge and Edgedriver 100
+
+### Fixed
+* Automatically save the original video if visual metrics fails [#1755](https://github.com/sitespeedio/browsertime/pull/1755).
 
 ## 15.4.0 - 2022-03-30
 ### Added
