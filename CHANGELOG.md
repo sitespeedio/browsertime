@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 16.0.0 - 2022-04-04
+### Changed
+* `--disableDNSFlush` become `--flushDNS`
+
 ## 15.4.0 - 2022-03-30
 ### Added
 * Updated to Chrome and Chromedriver 100 [#1743](https://github.com/sitespeedio/browsertime/pull/1743).
