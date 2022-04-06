@@ -1,6 +1,6 @@
 {
   "description": "Browsertime",
-  "version": "16.0.0",
+  "version": "16.0.1",
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "@cypress/xvfb": "1.2.4",
