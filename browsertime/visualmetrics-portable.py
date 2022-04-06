@@ -2109,9 +2109,10 @@ def calculate_contentful_speed_index(progress, directory):
             content.append(value)
 
         for i, value in enumerate(content):
-            content[i] = (
-                maxContent == 0 and 0.0 or float(content[i]) / float(maxContent)
-            )
+            if maxContent > 0:
+                content[i] = float(content[i]) / float(maxContent)
+            else:
+                content[i] = 0.0
 
         # Assume 0 content for first frame
         cont_si = 1 * (progress[1]["time"] - progress[0]["time"])
