@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+
+## 16.0.1 - 2022-04-06
+### Fixed
+* If visual metrics fails and you also use --visualElements, make sure that file is also stored so we can reporduce the issue [#1757](https://github.com/sitespeedio/browsertime/pull/1757).
 ## 16.0.0 - 2022-04-05
 ### Changed
 * When I introduced flushing of the DNS per run I missed that it makes you need to run sudo to do it (Mac/Linux). That sucks so instead of being able to disable the flushing `--disableDNSFlush` you now enables it with `--flushDNS` [#1752](https://github.com/sitespeedio/browsertime/pull/1752).
