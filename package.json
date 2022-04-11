@@ -42,7 +42,7 @@
     "serve": "13.0.2"
   },
   "engines": {
-    "node": ">=10.13.0"
+    "node": ">=14.19.1"
   },
   "files": [
     "CHANGELOG.md",
