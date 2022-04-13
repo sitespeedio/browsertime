@@ -47,3 +47,6 @@ jobs:
     - name: Run Firefox test
       run: node bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io/ --skipHar
       shell: cmd
+    - name: Run Firefox test with MOZ log
+      run: node bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io/ --skipHar --firefox.collectMozLog
+      shell: cmd
