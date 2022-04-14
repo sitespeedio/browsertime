@@ -8,7 +8,7 @@
     "@sitespeed.io/chromedriver": "100.0.4896-20",
     "@sitespeed.io/edgedriver": "100.0.1185-29",
     "@sitespeed.io/geckodriver": "0.30.0",
-    "@sitespeed.io/throttle": "3.0.0",
+    "@sitespeed.io/throttle": "4.0.0",
     "@sitespeed.io/tracium": "0.3.3",
     "btoa": "1.2.1",
     "chrome-har": "0.12.0",
@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "ava": "4.0.1",
-    "eslint": "8.0.1",
+    "eslint": "8.13.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "4.0.0",
     "prettier": "2.4.1",
