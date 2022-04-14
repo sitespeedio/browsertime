@@ -1,6 +1,6 @@
 {
   "description": "Browsertime",
-  "version": "15.4.0",
+  "version": "16.0.1",
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "@cypress/xvfb": "1.2.4",
@@ -42,7 +42,7 @@
     "serve": "13.0.2"
   },
   "engines": {
-    "node": ">=10.13.0"
+    "node": ">=14.19.1"
   },
   "files": [
     "CHANGELOG.md",
