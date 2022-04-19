@@ -108,6 +108,11 @@ def crop_im(img, crop_x, crop_y, crop_x_offset, crop_y_offset, gravity=None):
         base_x += crop_x_offset
         base_y += crop_y_offset
 
+        # Take the maximum in case the offset was negative, and
+        # smaller than the base position
+        base_x = max(base_x, 0)
+        base_y = max(base_y, 0)
+
         return Image.fromarray(
             img[base_y : base_y + crop_y, base_x : base_x + crop_x, :]
         )
