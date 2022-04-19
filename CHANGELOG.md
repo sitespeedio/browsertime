@@ -1,6 +1,14 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
 
+## UNRELEASED
+### Fixed
+* Handle negative x/y offsets when cropping images in the new portable visual metrocs script, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1770](https://github.com/sitespeedio/browsertime/pull/1770).
+* Bumped Throttle dependency [#1769](https://github.com/sitespeedio/browsertime/pull/1769).
+
+### Added
+* Added blocking of Chrome and Edge phone home domains [#1763](https://github.com/sitespeedio/browsertime/pull/1763).
+
 ## 16.0.1 - 2022-04-06
 ### Fixed
 * If visual metrics fails and you also use --visualElements, make sure that file is also stored so we can reporduce the issue [#1757](https://github.com/sitespeedio/browsertime/pull/1757).
