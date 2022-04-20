@@ -1,11 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
 
-## UNRELEASED
+## 16.1.0 - 2022-04-20
 ### Fixed
 * Handle negative x/y offsets when cropping images in the new portable visual metrocs script, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1770](https://github.com/sitespeedio/browsertime/pull/1770).
 * Bumped Throttle dependency [#1769](https://github.com/sitespeedio/browsertime/pull/1769).
-
+* Bumped chrome-har, chrome-remote-interface, dayjs and yargs dependencies [#1771](https://github.com/sitespeedio/browsertime/pull/1771).
 ### Added
 * Added blocking of Chrome and Edge phone home domains [#1763](https://github.com/sitespeedio/browsertime/pull/1763).
 
