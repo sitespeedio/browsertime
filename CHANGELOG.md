@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Added
+* Updated to Chrome and Chromedriver 101 [#1773](https://github.com/sitespeedio/browsertime/pull/1773).
 
 ## 16.1.0 - 2022-04-20
 ### Fixed
