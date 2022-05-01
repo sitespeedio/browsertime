@@ -1,12 +1,14 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 16.2.0 - UNRELEASED
+## 16.2.0 - 2022-05-01
 ### Added
 * Updated to Chrome and Chromedriver 101 [#1773](https://github.com/sitespeedio/browsertime/pull/1773).
 * Updated to Edge and Edgedriver 101 [#1778](https://github.com/sitespeedio/browsertime/pull/1778).
 * Use Geckodriver 0.31.0 [#1775](https://github.com/sitespeedio/browsertime/pull/1775).
 * Added new alias for warm cache load. You can now use either `--preURL` or `--warmLoad` [#1774](https://github.com/sitespeedio/browsertime/pull/1774).
 
+### Fixed
+* Updated to Selenium 4.1.2 [#1779](https://github.com/sitespeedio/browsertime/pull/1779).
 ### Tech
 * Updated dev dependencies [#1776](https://github.com/sitespeedio/browsertime/pull/1776).
 ## 16.1.0 - 2022-04-20
