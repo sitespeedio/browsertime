@@ -1129,7 +1129,7 @@ def eliminate_duplicate_frames(directory, cropped, is_mobile):
                 baseline = files[0]
                 previous_frame = baseline
                 for i in range(1, count):
-                    if frames_match(baseline, files[i], 15, 0, crop, None):
+                    if frames_match(baseline, files[i], 15, 5, crop, None):
                         if previous_frame is baseline:
                             duplicates.append(previous_frame)
                         else:
