@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+
+## UNRELEASED
+
+### Fixed
+* Add an acceptable error of 5 pixels to last frame matches for the visual metric portable script, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1780](https://github.com/sitespeedio/browsertime/pull/1780).
 ## 16.2.0 - 2022-05-01
 ### Added
 * Updated to Chrome and Chromedriver 101 [#1773](https://github.com/sitespeedio/browsertime/pull/1773).
