@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 16.2.2 - 2022-05-06
+### Fixed
+* The Docker container uses Ubuntu 20 again (instead of 22) since there's been multiple problems (running on ARM and on some cloud services).
 
 ## 16.2.1 - 2022-05-04
 
