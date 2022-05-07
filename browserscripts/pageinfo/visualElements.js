@@ -134,7 +134,7 @@
     if (entries.length > 0) {
       const largestEntry = entries[entries.length - 1];
       if (isElementPartlyInViewportAndVisible(largestEntry.element)) { 
-        keepLargestElementByType('largestContentfulPaint', largestEntry.element);
+        keepLargestElementByType('LargestContentfulPaint', largestEntry.element);
       }
     }
   }
