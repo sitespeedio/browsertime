@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 16.3.0 - UNRELEASED
+### Added
+* If you use `--visualElements` and the browser supports the Largest Contentful API, we also record 
+the LCP from the video. This will help the Chrome team and other browser teams to get it right (see [https://bugs.chromium.org/p/chromium/issues/detail?id=1291502](https://bugs.chromium.org/p/chromium/issues/detail?id=1291502)) [#1782](https://github.com/sitespeedio/browsertime/pull/1782).
+
 ## 16.2.2 - 2022-05-06
 ### Fixed
 * The Docker container uses Ubuntu 20 again (instead of 22) since there's been multiple problems (running on ARM and on some cloud services).
