@@ -125,6 +125,21 @@
     }
   });
 
+  // If the browser support largest contentful paint, get that element as well
+  const supported = PerformanceObserver.supportedEntryTypes;
+  if (supported && supported.indexOf('largest-contentful-paint') > -1) {
+    const observer = new PerformanceObserver(list => {});
+    observer.observe({ type: 'largest-contentful-paint', buffered: true });
+    const entries = observer.takeRecords();
+    if (entries.length > 0) {
+      const largestEntry = entries[entries.length - 1];
+      if (isElementPartlyInViewportAndVisible(largestEntry.element)) { 
+        keepLargestElementByType('largestContentfulPaint', largestEntry.element);
+      }
+    }
+  }
+
+
   // We need to follow the standard for VisualMetrics
   return {
     viewport: {
