@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 16.3.0 - UNRELEASED
+## 16.3.0 - 2022-05-07
 ### Added
 * If you use `--visualElements` and the browser supports the Largest Contentful API, we also record 
 the LCP from the video. This will help the Chrome team and other browser teams to get it right (see [https://bugs.chromium.org/p/chromium/issues/detail?id=1291502](https://bugs.chromium.org/p/chromium/issues/detail?id=1291502)) [#1782](https://github.com/sitespeedio/browsertime/pull/1782).
