@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Added
+* If we have the Largest Contentful Paont for the video, add that to the video text instead od DOMContentLoaded [#1783](https://github.com/sitespeedio/browsertime/pull/1783).
 ## 16.3.0 - 2022-05-07
 ### Added
 * If you use `--visualElements` and the browser supports the Largest Contentful API, we also record 
