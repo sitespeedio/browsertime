@@ -133,7 +133,8 @@
     const entries = observer.takeRecords();
     if (entries.length > 0) {
       const largestEntry = entries[entries.length - 1];
-      if (isElementPartlyInViewportAndVisible(largestEntry.element)) { 
+      // It seems that the API do not alwayas have a elememt
+      if (largestEntry.element && isElementPartlyInViewportAndVisible(largestEntry.element)) {
         keepLargestElementByType('LargestContentfulPaint', largestEntry.element);
       }
     }
