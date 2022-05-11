@@ -105,17 +105,15 @@ def crop_im(img, crop_x, crop_y, crop_x_offset, crop_y_offset, gravity=None):
             base_x -= crop_x // 2
             base_y -= crop_y // 2
 
-        base_x += crop_x_offset
-        base_y += crop_y_offset
-
         # Take the maximum in case the offset was negative, and
         # smaller than the base position
-        base_x = max(base_x, 0)
-        base_y = max(base_y, 0)
+        start_x = min(width - 1, max(base_x + crop_x_offset, 0))
+        start_y = min(height - 1, max(base_y + crop_y_offset, 0))
 
-        return Image.fromarray(
-            img[base_y : base_y + crop_y, base_x : base_x + crop_x, :]
-        )
+        end_x = min(width - 1, max(start_x + crop_x, 0))
+        end_y = min(height - 1, max(start_y + crop_y, 0))
+
+        return Image.fromarray(img[start_y:end_y, start_x:end_x, :])
     except BaseException as e:
         logging.exception(e)
         return None
@@ -2214,7 +2212,7 @@ def calculate_hero_time(progress, directory, hero, viewport):
 
             logging.debug(
                 'Calculating render time for hero element "%s" at position [%d, %d, %d, %d]'
-                % (hero["name"], hero["x"], hero["y"], hero["width"], hero["height"])
+                % (hero["name"], hero_x, hero_y, hero_width, hero_height)
             )
 
             # Apply the mask to the target frame to create the reference frame
@@ -2231,6 +2229,10 @@ def calculate_hero_time(progress, directory, hero, viewport):
                 return cropped_frame
 
             target_mask = __apply_hero_mask(target_frame)
+
+            if target_mask is None:
+                return None
+
             target_mask.save(target_mask_path)
 
             def cleanup():
