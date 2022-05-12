@@ -113,6 +113,12 @@ def crop_im(img, crop_x, crop_y, crop_x_offset, crop_y_offset, gravity=None):
         end_x = min(width - 1, max(start_x + crop_x, 0))
         end_y = min(height - 1, max(start_y + crop_y, 0))
 
+        if len(img[start_y:end_y, start_x:end_x, :]) == 0:
+            raise Exception(
+                f"Cropped image is empty. Image dimensions: {img.shape}, "
+                f"Crop Region: {crop_x}, {crop_y}, {crop_x_offset}, {crop_y_offset}"
+            )
+
         return Image.fromarray(img[start_y:end_y, start_x:end_x, :])
     except BaseException as e:
         logging.exception(e)
@@ -2229,10 +2235,6 @@ def calculate_hero_time(progress, directory, hero, viewport):
                 return cropped_frame
 
             target_mask = __apply_hero_mask(target_frame)
-
-            if target_mask is None:
-                return None
-
             target_mask.save(target_mask_path)
 
             def cleanup():
