@@ -105,8 +105,9 @@ def crop_im(img, crop_x, crop_y, crop_x_offset, crop_y_offset, gravity=None):
             base_x -= crop_x // 2
             base_y -= crop_y // 2
 
-        # Take the maximum in case the offset was negative, and
-        # smaller than the base position
+        # Handle the boundaries of the crop using max to prevent
+        # negatives, and min to prevent going over the othersde of
+        # the image
         start_x = min(width - 1, max(base_x + crop_x_offset, 0))
         start_y = min(height - 1, max(base_y + crop_y_offset, 0))
 
