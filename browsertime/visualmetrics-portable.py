@@ -101,17 +101,22 @@ def crop_im(img, crop_x, crop_y, crop_x_offset, crop_y_offset, gravity=None):
             base_x -= crop_x // 2
             base_y -= crop_y // 2
 
-        base_x += crop_x_offset
-        base_y += crop_y_offset
+        # Handle the boundaries of the crop using max to prevent
+        # negatives, and min to prevent going over the othersde of
+        # the image
+        start_x = min(width - 1, max(base_x + crop_x_offset, 0))
+        start_y = min(height - 1, max(base_y + crop_y_offset, 0))
 
-        # Take the maximum in case the offset was negative, and
-        # smaller than the base position
-        base_x = max(base_x, 0)
-        base_y = max(base_y, 0)
+        end_x = min(width - 1, max(start_x + crop_x, 0))
+        end_y = min(height - 1, max(start_y + crop_y, 0))
 
-        return Image.fromarray(
-            img[base_y : base_y + crop_y, base_x : base_x + crop_x, :]
-        )
+        if len(img[start_y:end_y, start_x:end_x, :]) == 0:
+            raise Exception(
+                f"Cropped image is empty. Image dimensions: {img.shape}, "
+                f"Crop Region: {crop_x}, {crop_y}, {crop_x_offset}, {crop_y_offset}"
+            )
+
+        return Image.fromarray(img[start_y:end_y, start_x:end_x, :])
     except BaseException as e:
         logging.exception(e)
         return None
@@ -1525,7 +1530,7 @@ def calculate_hero_time(progress, directory, hero, viewport):
 
             logging.debug(
                 'Calculating render time for hero element "%s" at position [%d, %d, %d, %d]'
-                % (hero["name"], hero["x"], hero["y"], hero["width"], hero["height"])
+                % (hero["name"], hero_x, hero_y, hero_width, hero_height)
             )
 
             # Apply the mask to the target frame to create the reference frame
