@@ -1,8 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 16.4.0 - 2022-05-11
 ### Added
-* If we have the Largest Contentful Paont for the video, add that to the video text instead od DOMContentLoaded [#1783](https://github.com/sitespeedio/browsertime/pull/1783).
+* If we have the Largest Contentful Paint for the video, add that to the video text instead of DOMContentLoaded [#1783](https://github.com/sitespeedio/browsertime/pull/1783).
+
+### Fixed
+* Only get LCP in Visual Metrics if the LCP API gives us a element [#1786](https://github.com/sitespeedio/browsertime/pull/1786).
 ## 16.3.0 - 2022-05-07
 ### Added
 * If you use `--visualElements` and the browser supports the Largest Contentful API, we also record 
