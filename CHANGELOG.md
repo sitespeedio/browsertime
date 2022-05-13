@@ -3,6 +3,9 @@
 ## UNRELEASED
 ### Added
 * Make it possible to configure the max size in pixels for the filmstrip screenshots using `--videoParams.thumbsize` [#1787](https://github.com/sitespeedio/browsertime/pull/1787).
+
+### Fixed
+* Handle all boundaries when cropping image in portable script, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1788](https://github.com/sitespeedio/browsertime/pull/1788).
 ## 16.4.0 - 2022-05-11
 ### Added
 * If we have the Largest Contentful Paint for the video, add that to the video text instead of DOMContentLoaded [#1783](https://github.com/sitespeedio/browsertime/pull/1783).
