@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Added
+* Make it possible to configure the max size in pixels for the filmstrip screenshots using `--videoParams.thumbsize` [#1787](https://github.com/sitespeedio/browsertime/pull/1787).
 ## 16.4.0 - 2022-05-11
 ### Added
 * If we have the Largest Contentful Paint for the video, add that to the video text instead of DOMContentLoaded [#1783](https://github.com/sitespeedio/browsertime/pull/1783).
