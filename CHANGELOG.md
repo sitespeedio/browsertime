@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+##  16.5.0 - 2022-05-11
 ### Added
 * Make it possible to configure the max size in pixels for the filmstrip screenshots using `--videoParams.thumbsize` [#1787](https://github.com/sitespeedio/browsertime/pull/1787).
 
