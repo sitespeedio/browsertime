@@ -1,6 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-##  16.5.0 - 2022-05-11
+## 16.6.0 - 2022-05-20
+### Added
+* Implemented experimental Interaction to next paint that's useful if you test user journeys [#1791](https://github.com/sitespeedio/browsertime/pull/1791).
+* Track when the last CPU long task happen as explained by Andy Davies of the webperf Slack channel [#1789](https://github.com/sitespeedio/browsertime/pull/1789).
+
+## 16.5.0 - 2022-05-11
 ### Added
 * Make it possible to configure the max size in pixels for the filmstrip screenshots using `--videoParams.thumbsize` [#1787](https://github.com/sitespeedio/browsertime/pull/1787).
 
