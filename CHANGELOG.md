@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 16.7.0 - 2022-05-20
+### Added
+* Inlcude last CPU long task in the HAR file so we can show when it happens [#1793](https://github.com/sitespeedio/browsertime/pull/1793).
+* Inlclude TTFB and INP in the Google Web Vital namespace [#1792](https://github.com/sitespeedio/browsertime/pull/1792).
 ## 16.6.0 - 2022-05-20
 ### Added
 * Implemented experimental Interaction to next paint that's useful if you test user journeys [#1791](https://github.com/sitespeedio/browsertime/pull/1791).
