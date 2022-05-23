@@ -1,5 +1,26 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 16.7.0 - 2022-05-20
+### Added
+* Include last CPU long task in the HAR file so we can show when it happens [#1793](https://github.com/sitespeedio/browsertime/pull/1793).
+* Inlclude TTFB and INP in the Google Web Vital namespace [#1792](https://github.com/sitespeedio/browsertime/pull/1792).
+## 16.6.0 - 2022-05-20
+### Added
+* Implemented experimental Interaction to next paint that's useful if you test user journeys [#1791](https://github.com/sitespeedio/browsertime/pull/1791).
+* Track when the last CPU long task happen as explained by Andy Davies of the webperf Slack channel [#1789](https://github.com/sitespeedio/browsertime/pull/1789).
+
+## 16.5.0 - 2022-05-11
+### Added
+* Make it possible to configure the max size in pixels for the filmstrip screenshots using `--videoParams.thumbsize` [#1787](https://github.com/sitespeedio/browsertime/pull/1787).
+
+### Fixed
+* Handle all boundaries when cropping image in portable script, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1788](https://github.com/sitespeedio/browsertime/pull/1788).
+## 16.4.0 - 2022-05-11
+### Added
+* If we have the Largest Contentful Paint for the video, add that to the video text instead of DOMContentLoaded [#1783](https://github.com/sitespeedio/browsertime/pull/1783).
+
+### Fixed
+* Only get LCP in Visual Metrics if the LCP API gives us a element [#1786](https://github.com/sitespeedio/browsertime/pull/1786).
 ## 16.3.0 - 2022-05-07
 ### Added
 * If you use `--visualElements` and the browser supports the Largest Contentful API, we also record 
