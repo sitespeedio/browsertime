@@ -5,7 +5,7 @@
   "dependencies": {
     "@cypress/xvfb": "1.2.4",
     "@devicefarmer/adbkit": "2.11.3",
-    "@sitespeed.io/chromedriver": "101.0.4951-15",
+    "@sitespeed.io/chromedriver": "102.0.5005-27",
     "@sitespeed.io/edgedriver": "101.0.1210-32",
     "@sitespeed.io/geckodriver": "0.31.0",
     "@sitespeed.io/throttle": "3.1.1",
@@ -26,7 +26,7 @@
     "lodash.merge": "4.6.2",
     "lodash.pick": "4.4.0",
     "lodash.set": "4.3.2",
-    "selenium-webdriver": "4.1.2",
+    "selenium-webdriver": "4.2.0",
     "yargs": "17.4.1"
   },
   "optionalDependencies": {
