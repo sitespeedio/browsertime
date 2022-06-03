@@ -6,6 +6,8 @@
 * Use Selenium WebDriver 4.2.0 [#1801](https://github.com/sitespeedio/browsertime/pull/1801).
 * Updated to Firefox 101 in the Docker container.
 
+### Tech
+* Added tests using NodeJS 18 [#1772](https://github.com/sitespeedio/browsertime/pull/1772).
 ## 16.7.0 - 2022-05-20
 ### Added
 * Include last CPU long task in the HAR file so we can show when it happens [#1793](https://github.com/sitespeedio/browsertime/pull/1793).
