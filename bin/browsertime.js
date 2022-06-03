@@ -43,6 +43,9 @@ async function preWarmServer(urls, options) {
 }
 
 async function run(urls, options) {
+  if (options.debug) {
+    log.info('Running Browsertime in debug mode.');
+  }
   try {
     if (!options.resultDir) {
       let dir = 'browsertime-results';
