@@ -1,5 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+##  16.8.0 - UNRELEASED
+### Added
+* Add `--debug` mode. Debug mode will run your tests and open devtools in Chrome/Edge/Firefox on desktop and will stop after each iteration so you can inspect the page. You can add your own breakpoint in your script with the `breakpoint(name)` command. To continue after your breakpoint, add the following code in the developer console in your browser: `window.browsertime.pause=false;`  [#1798](https://github.com/sitespeedio/browsertime/pull/1798).
+* Use Selenium WebDriver 4.2.0 [#1801](https://github.com/sitespeedio/browsertime/pull/1801).
+* Updated to Firefox 101 in the Docker container.
+
 ## 16.7.0 - 2022-05-20
 ### Added
 * Include last CPU long task in the HAR file so we can show when it happens [#1793](https://github.com/sitespeedio/browsertime/pull/1793).
