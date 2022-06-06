@@ -4,7 +4,7 @@
 ### Added
 * Add `--debug` mode. Debug mode will run your tests and open devtools in Chrome/Edge/Firefox on desktop and will stop after each iteration so you can inspect the page. You can add your own breakpoint in your script with the `breakpoint(name)` command. To continue after your breakpoint, add the following code in the developer console in your browser: `window.browsertime.pause=false;`  [#1798](https://github.com/sitespeedio/browsertime/pull/1798).
 * Use Selenium WebDriver 4.2.0 [#1801](https://github.com/sitespeedio/browsertime/pull/1801).
-* Updated to Firefox 101, Edge 102 in the Docker container.
+* Updated to Firefox 101, Edge 102, Chrome 102 in the Docker container.
 
 ### Tech
 * Added tests using NodeJS 18 [#1772](https://github.com/sitespeedio/browsertime/pull/1772).
