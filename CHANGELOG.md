@@ -1,6 +1,23 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+##  16.8.0 - 2022-06-06
+### Added
+* Add `--debug` mode. Debug mode will run your tests and open devtools in Chrome/Edge/Firefox on desktop and will stop after each iteration so you can inspect the page. You can add your own breakpoint in your script with the `breakpoint(name)` command. To continue after your breakpoint, add the following code in the developer console in your browser: `window.browsertime.pause=false;`  [#1798](https://github.com/sitespeedio/browsertime/pull/1798).
+* Use Selenium WebDriver 4.2.0 [#1801](https://github.com/sitespeedio/browsertime/pull/1801).
+* Updated to Firefox 101, Edge 102, Chrome 102 in the Docker container.
+
+### Tech
+* Added tests using NodeJS 18 [#1772](https://github.com/sitespeedio/browsertime/pull/1772).
+## 16.7.0 - 2022-05-20
+### Added
+* Include last CPU long task in the HAR file so we can show when it happens [#1793](https://github.com/sitespeedio/browsertime/pull/1793).
+* Inlclude TTFB and INP in the Google Web Vital namespace [#1792](https://github.com/sitespeedio/browsertime/pull/1792).
+## 16.6.0 - 2022-05-20
+### Added
+* Implemented experimental Interaction to next paint that's useful if you test user journeys [#1791](https://github.com/sitespeedio/browsertime/pull/1791).
+* Track when the last CPU long task happen as explained by Andy Davies of the webperf Slack channel [#1789](https://github.com/sitespeedio/browsertime/pull/1789).
+
+## 16.5.0 - 2022-05-11
 ### Added
 * Make it possible to configure the max size in pixels for the filmstrip screenshots using `--videoParams.thumbsize` [#1787](https://github.com/sitespeedio/browsertime/pull/1787).
 
