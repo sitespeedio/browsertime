@@ -634,7 +634,6 @@ def find_video_viewport(
     video,
     directory,
     find_viewport,
-
     viewport_retries,
     viewport_min_height,
     viewport_min_width,
