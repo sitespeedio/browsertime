@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+##  16.8.1 - 2022-06-09
+### Fixed
+* Fix for getting the MOZ log, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1802](https://github.com/sitespeedio/browsertime/pull/1802).
+* [Removed unused functionality of the Visual metrics portable script](https://github.com/sitespeedio/browsertime/pull/1751).
 ##  16.8.0 - 2022-06-06
 ### Added
 * Add `--debug` mode. Debug mode will run your tests and open devtools in Chrome/Edge/Firefox on desktop and will stop after each iteration so you can inspect the page. You can add your own breakpoint in your script with the `breakpoint(name)` command. To continue after your breakpoint, add the following code in the developer console in your browser: `window.browsertime.pause=false;`  [#1798](https://github.com/sitespeedio/browsertime/pull/1798).
