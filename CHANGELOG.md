@@ -1,9 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 16.8.2 - UNRELEASED
+## 16.8.2 - 2022-06-15
 ### Added
 * New `wait.byCondition` command. Thank you [Icecold777](https://github.com/Icecold777) for PR [#1803](https://github.com/sitespeedio/browsertime/pull/1803).
 * Collect number of CPU longtasks before largest contentful paint [#1806](https://github.com/sitespeedio/browsertime/pull/1806).
+
+### Fixed
+* Instead of throwing errors and exit the tests if the page hasn't finished loading after 5 minutes, we now gracefully ends the test after 2 minutes (you can change that time with `--maxLoadTime`). That makes more sense than just throwing errors [#1810](https://github.com/sitespeedio/browsertime/pull/1810). 
 ##  16.8.1 - 2022-06-09
 ### Fixed
 * Fix for getting the MOZ log, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1802](https://github.com/sitespeedio/browsertime/pull/1802).
