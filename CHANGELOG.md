@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 16.8.2 - 2022-06-15
+## 16.9.0 - 2022-06-15
 ### Added
 * New `wait.byCondition` command. Thank you [Icecold777](https://github.com/Icecold777) for PR [#1803](https://github.com/sitespeedio/browsertime/pull/1803).
 * Collect number of CPU longtasks before largest contentful paint [#1806](https://github.com/sitespeedio/browsertime/pull/1806).
