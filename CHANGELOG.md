@@ -1,5 +1,76 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 16.9.0 - 2022-06-15
+### Added
+* New `wait.byCondition` command. Thank you [Icecold777](https://github.com/Icecold777) for PR [#1803](https://github.com/sitespeedio/browsertime/pull/1803).
+* Collect number of CPU longtasks before largest contentful paint [#1806](https://github.com/sitespeedio/browsertime/pull/1806).
+
+### Fixed
+* Instead of throwing errors and exit the tests if the page hasn't finished loading after 5 minutes, we now gracefully ends the test after 2 minutes (you can change that time with `--maxLoadTime`). That makes more sense than just throwing errors [#1810](https://github.com/sitespeedio/browsertime/pull/1810). 
+##  16.8.1 - 2022-06-09
+### Fixed
+* Fix for getting the MOZ log, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1802](https://github.com/sitespeedio/browsertime/pull/1802).
+* [Removed unused functionality of the Visual metrics portable script](https://github.com/sitespeedio/browsertime/pull/1751).
+##  16.8.0 - 2022-06-06
+### Added
+* Add `--debug` mode. Debug mode will run your tests and open devtools in Chrome/Edge/Firefox on desktop and will stop after each iteration so you can inspect the page. You can add your own breakpoint in your script with the `breakpoint(name)` command. To continue after your breakpoint, add the following code in the developer console in your browser: `window.browsertime.pause=false;`  [#1798](https://github.com/sitespeedio/browsertime/pull/1798).
+* Use Selenium WebDriver 4.2.0 [#1801](https://github.com/sitespeedio/browsertime/pull/1801).
+* Updated to Firefox 101, Edge 102, Chrome 102 in the Docker container.
+
+### Tech
+* Added tests using NodeJS 18 [#1772](https://github.com/sitespeedio/browsertime/pull/1772).
+## 16.7.0 - 2022-05-20
+### Added
+* Include last CPU long task in the HAR file so we can show when it happens [#1793](https://github.com/sitespeedio/browsertime/pull/1793).
+* Inlclude TTFB and INP in the Google Web Vital namespace [#1792](https://github.com/sitespeedio/browsertime/pull/1792).
+## 16.6.0 - 2022-05-20
+### Added
+* Implemented experimental Interaction to next paint that's useful if you test user journeys [#1791](https://github.com/sitespeedio/browsertime/pull/1791).
+* Track when the last CPU long task happen as explained by Andy Davies of the webperf Slack channel [#1789](https://github.com/sitespeedio/browsertime/pull/1789).
+
+## 16.5.0 - 2022-05-11
+### Added
+* Make it possible to configure the max size in pixels for the filmstrip screenshots using `--videoParams.thumbsize` [#1787](https://github.com/sitespeedio/browsertime/pull/1787).
+
+### Fixed
+* Handle all boundaries when cropping image in portable script, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1788](https://github.com/sitespeedio/browsertime/pull/1788).
+## 16.4.0 - 2022-05-11
+### Added
+* If we have the Largest Contentful Paint for the video, add that to the video text instead of DOMContentLoaded [#1783](https://github.com/sitespeedio/browsertime/pull/1783).
+
+### Fixed
+* Only get LCP in Visual Metrics if the LCP API gives us a element [#1786](https://github.com/sitespeedio/browsertime/pull/1786).
+## 16.3.0 - 2022-05-07
+### Added
+* If you use `--visualElements` and the browser supports the Largest Contentful API, we also record 
+the LCP from the video. This will help the Chrome team and other browser teams to get it right (see [https://bugs.chromium.org/p/chromium/issues/detail?id=1291502](https://bugs.chromium.org/p/chromium/issues/detail?id=1291502)) [#1782](https://github.com/sitespeedio/browsertime/pull/1782).
+
+## 16.2.2 - 2022-05-06
+### Fixed
+* The Docker container uses Ubuntu 20 again (instead of 22) since there's been multiple problems (running on ARM and on some cloud services).
+
+## 16.2.1 - 2022-05-04
+
+### Fixed
+* Add an acceptable error of 5 pixels to last frame matches for the visual metric portable script, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1780](https://github.com/sitespeedio/browsertime/pull/1780).
+## 16.2.0 - 2022-05-01
+### Added
+* Updated to Chrome and Chromedriver 101 [#1773](https://github.com/sitespeedio/browsertime/pull/1773).
+* Updated to Edge and Edgedriver 101 [#1778](https://github.com/sitespeedio/browsertime/pull/1778).
+* Use Geckodriver 0.31.0 [#1775](https://github.com/sitespeedio/browsertime/pull/1775).
+* Added new alias for warm cache load. You can now use either `--preURL` or `--warmLoad` [#1774](https://github.com/sitespeedio/browsertime/pull/1774).
+
+### Fixed
+* Updated to Selenium 4.1.2 [#1779](https://github.com/sitespeedio/browsertime/pull/1779).
+### Tech
+* Updated dev dependencies [#1776](https://github.com/sitespeedio/browsertime/pull/1776).
+## 16.1.0 - 2022-04-20
+### Fixed
+* Handle negative x/y offsets when cropping images in the new portable visual metrocs script, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1770](https://github.com/sitespeedio/browsertime/pull/1770).
+* Bumped Throttle dependency [#1769](https://github.com/sitespeedio/browsertime/pull/1769).
+* Bumped chrome-har, chrome-remote-interface, dayjs and yargs dependencies [#1771](https://github.com/sitespeedio/browsertime/pull/1771).
+### Added
+* Added blocking of Chrome and Edge phone home domains [#1763](https://github.com/sitespeedio/browsertime/pull/1763).
 
 ## 16.0.1 - 2022-04-06
 ### Fixed

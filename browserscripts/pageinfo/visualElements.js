@@ -125,6 +125,22 @@
     }
   });
 
+  // If the browser support largest contentful paint, get that element as well
+  const supported = PerformanceObserver.supportedEntryTypes;
+  if (supported && supported.indexOf('largest-contentful-paint') > -1) {
+    const observer = new PerformanceObserver(list => {});
+    observer.observe({ type: 'largest-contentful-paint', buffered: true });
+    const entries = observer.takeRecords();
+    if (entries.length > 0) {
+      const largestEntry = entries[entries.length - 1];
+      // It seems that the API do not alwayas have a elememt
+      if (largestEntry.element && isElementPartlyInViewportAndVisible(largestEntry.element)) {
+        keepLargestElementByType('LargestContentfulPaint', largestEntry.element);
+      }
+    }
+  }
+
+
   // We need to follow the standard for VisualMetrics
   return {
     viewport: {

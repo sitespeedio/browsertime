@@ -10,9 +10,9 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Use Node.js
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
         node-version: '16.x'
     - name: Install Browsertime
@@ -46,4 +46,7 @@ jobs:
       shell: cmd
     - name: Run Firefox test
       run: node bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io/ --skipHar
+      shell: cmd
+    - name: Run Firefox test with MOZ log
+      run: node bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io/ --skipHar --firefox.collectMozLog
       shell: cmd
