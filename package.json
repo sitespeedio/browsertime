@@ -8,7 +8,7 @@
     "@sitespeed.io/chromedriver": "102.0.5005-27",
     "@sitespeed.io/edgedriver": "101.0.1210-32",
     "@sitespeed.io/geckodriver": "0.31.0",
-    "@sitespeed.io/throttle": "4.0.0",
+    "@sitespeed.io/throttle": "4.0.1",
     "@sitespeed.io/tracium": "0.3.3",
     "btoa": "1.2.1",
     "chrome-har": "0.13.0",
