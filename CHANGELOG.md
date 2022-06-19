@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+
+## 16.9.1 - 2022-06-19
+
+### Fixed
+* Upgraded to Throttle 4 that internally uses `ip route` instead of `route` (one less dependency) [#1767](https://github.com/sitespeedio/browsertime/pull/1767).
 ## 16.9.0 - 2022-06-15
 ### Added
 * New `wait.byCondition` command. Thank you [Icecold777](https://github.com/Icecold777) for PR [#1803](https://github.com/sitespeedio/browsertime/pull/1803).
