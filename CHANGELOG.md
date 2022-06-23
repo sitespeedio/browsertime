@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 16.10.0 - 2022-06-23
+### Added
+* Upgraded the Docker container to use Chrome 103.
+* Upgraded to Chromedriver 103.
 
 ## 16.9.1 - 2022-06-19
 
