@@ -1,5 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+
+## 16.10.1 - 2022-06-26
+
+### Fixed
+* Verify that the CDP port is free before using it [1811](https://github.com/sitespeedio/browsertime/pull/1811).
+
 ## 16.10.0 - 2022-06-23
 ### Added
 * Upgraded the Docker container to use Chrome 103.
