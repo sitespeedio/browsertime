@@ -68,6 +68,7 @@ test.serial(`Load one URL with none page load strategy`, async t => {
   };
 
   engine = getEngine({ pageLoadStrategy: 'none' });
+  await engine.start();
 
   let result = await engine.run(
     'http://127.0.0.1:3000/simple/',
@@ -144,7 +145,7 @@ test.serial(`Use pre/post scripts`, async t => {
     preTask: loadTaskFile('preSample.js'),
     postTask: [loadTaskFile('postSample.js')]
   });
-
+  await engine.start();
   await engine.run('http://127.0.0.1:3000/simple/', {});
   t.pass();
 });
@@ -160,7 +161,7 @@ test.serial(`Run inline pageCompleteChecks`, async t => {
       pageCompleteCheck: 15000
     }
   });
-
+  await engine.start();
   await engine.run('http://127.0.0.1:3000/simple/', {});
   t.pass();
 });
@@ -175,7 +176,7 @@ test.serial('Run pageCompleteCheck from file', async t => {
       pageCompleteCheck: 15000
     }
   });
-
+  await engine.start();
   await engine.run('http://127.0.0.1:3000/simple/', {});
   t.pass();
 });
