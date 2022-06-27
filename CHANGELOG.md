@@ -1,6 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-
+## UNRELEASED
+### Fixed
+* Upgraded to Selenium 4.3.0 [#1813](https://github.com/sitespeedio/browsertime/pull/1813).
+* Use Edgedriver 103 [#1812](https://github.com/sitespeedio/browsertime/pull/1812).
 ## 16.10.1 - 2022-06-26
 
 ### Fixed
