@@ -26,7 +26,7 @@ jobs:
     - name: Test WebPageReplay
       run: docker run --cap-add=NET_ADMIN --rm  -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime https://www.sitespeed.io -n 1 -b chrome 
     - name: Test Chrome with multi pages
-      run: docker run --rm -v "$(pwd)":/browsertime sitespeedio/browsertime test/data/navigationscript/multi.js -n 1 -b chrome
+      run: docker run --rm -v "$(pwd)":/browsertime sitespeedio/browsertime test/data/navigationscript/simple.js -n 1 -b chrome
        
 
  
