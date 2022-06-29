@@ -17,6 +17,8 @@ jobs:
         docker buildx build --load --platform linux/amd64 -t sitespeedio/browsertime .
     - name: Test Chrome
       run: docker run --rm sitespeedio/browsertime https://www.sitespeed.io -n 1 -b chrome
+    - name: Test Chrome with preWarmServer
+      run: docker run --rm sitespeedio/browsertime https://www.sitespeed.io -n 1 -b chrome --preWarmServer
     - name: Test Firefox
       run: docker run --rm sitespeedio/browsertime https://www.sitespeed.io -n 1 -b firefox
     - name: Test Edge
