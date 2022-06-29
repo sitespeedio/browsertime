@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 16.11.1 - 2022-06-29
+### Fixed
+* Fixed `--preWarmServer` so it works with `--headless`, Docker and specific Android or iOS device [#1815](https://github.com/sitespeedio/browsertime/pull/1815).
 ## 16.11.0 - 2022-06-28
 
 ### Added 
