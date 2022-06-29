@@ -49,3 +49,6 @@ jobs:
     #   ./bin/browsertime.js -b safari -n 1 --safari.useSimulator --video --visualMetrics --safari.deviceUDID $IPHONE12 https://www.sitespeed.io/
     - name: Test Safari with video and Visual Metrics
       run: ./bin/browsertime.js -b safari -n 1 --viewPort 800x600  --video --visualMetrics https://www.example.org
+    - name: Test Safari with video and Visual Metrics for multi pages
+      run: ./bin/browsertime.js -b safari -n 1 --viewPort 800x600  --video --visualMetrics test/data/navigationscript/multi.js
+      
