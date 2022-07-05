@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 16.11.2 - 2022-07-05
+### Fixed
+* Updated Geckodriver install, it will autoamtically pickup Geckodriver in the path for Raspberry Pis.
 ## 16.11.1 - 2022-06-29
 ### Fixed
 * Fixed `--preWarmServer` so it works with `--headless`, Docker and specific Android or iOS device [#1815](https://github.com/sitespeedio/browsertime/pull/1815).
