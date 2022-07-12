@@ -1266,14 +1266,16 @@ def calculate_visual_metrics(
                     viewport = hero_data["viewport"]
                     hero_timings = []
                     for hero in hero_data["heroes"]:
-                        hero_timings.append(
-                            {
-                                "name": hero["name"],
-                                "value": calculate_hero_time(
+                        hero_time = calculate_hero_time(
                                     progress, dirs, hero, viewport
-                                ),
-                            }
-                        )
+                                )
+                        if hero_time is not None:
+                            hero_timings.append(
+                                {
+                                    "name": hero["name"],
+                                    "value": hero_time,
+                                }
+                            )
                     hero_timings_sorted = sorted(
                         hero_timings, key=lambda timing: timing["value"]
                     )
