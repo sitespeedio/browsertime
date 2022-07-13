@@ -1,5 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+
+### Fixed
+* If one of the visual elements failed, all failed. Fixed in [#1818](https://github.com/sitespeedio/browsertime/pull/1818).
+* Use buffered long tasks instead of injecting the measuremnt in the page [#1817](https://github.com/sitespeedio/browsertime/pull/1817).
+
 ## 16.11.2 - 2022-07-05
 ### Fixed
 * Updated Geckodriver install, it will autoamtically pickup Geckodriver in the path for Raspberry Pis.
