@@ -1,10 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 16.11.3 - 2022-07-14
 
 ### Fixed
 * If one of the visual elements failed, all failed. Fixed in [#1818](https://github.com/sitespeedio/browsertime/pull/1818).
 * Use buffered long tasks instead of injecting the measuremnt in the page [#1817](https://github.com/sitespeedio/browsertime/pull/1817).
+* Fixed broken CHromedriver and Geckodriver install on Windows.
 
 ## 16.11.2 - 2022-07-05
 ### Fixed
