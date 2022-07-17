@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 16.11.4 - 2022-07-17
+### Fixed
+* Automatically add white nbackground between --preURL and the URL that you wanna test. This makes visual metrics usable when using preURL. [#1819](https://github.com/sitespeedio/browsertime/pull/1819)
+
 ## 16.11.3 - 2022-07-14
 
 ### Fixed
