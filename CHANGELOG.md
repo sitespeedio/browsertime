@@ -1,5 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 16.12.0 - 2022-08-06
+### Added
+* Upgraded to Chrome 104, Edge 104, Firefox 103 in the Docker container.
+* Upgraded to Chromedriver 104.
+
+### Fixed
+* Remove old Firefox on Android workaround for orange frame [#1821](https://github.com/sitespeedio/browsertime/pull/1821), thank you [Sean Feng](https://github.com/sefeng211) for the PR.
+
 ## 16.11.4 - 2022-07-17
 ### Fixed
 * Automatically add white background between --preURL and the URL that you wanna test. This makes visual metrics usable when using preURL. [#1819](https://github.com/sitespeedio/browsertime/pull/1819)
