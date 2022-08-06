@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Added
+* Upgraded to Edgedriver 104.
 ## 16.12.0 - 2022-08-06
 ### Added
 * Upgraded to Chrome 104, Edge 104, Firefox 103 in the Docker container.
