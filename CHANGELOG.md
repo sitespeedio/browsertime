@@ -1,11 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 16.13.0 - 2022-08-08
 ### Added
 * Upgraded to Edgedriver 104.
 
 ### Fixed
 * Upgraded to Selenium 4.3.1 [#1824](https://github.com/sitespeedio/browsertime/pull/1824).
+* Upgraded Chrome reomte interface to 0.31.3 [#1825](https://github.com/sitespeedio/browsertime/pull/1825)
 ## 16.12.0 - 2022-08-06
 ### Added
 * Upgraded to Chrome 104, Edge 104, Firefox 103 in the Docker container.
