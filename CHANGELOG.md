@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 16.13.1 - 2022-08-10
+### Fixed
+* Make sure that Android id is always picked up from the phone if tests run on Android [#1826](https://github.com/sitespeedio/browsertime/pull/1826).
+
 ## 16.13.0 - 2022-08-08
 ### Added
 * Upgraded to Edgedriver 104.
