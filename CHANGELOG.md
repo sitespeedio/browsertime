@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+
+## UNRELEASED
+### Fixed
+* Disable adding lastCPULongTask to the HAR data since it breaks waterfall view on slow mobile phones with late CPU long tasks [#1828](https://github.com/sitespeedio/browsertime/pull/1828).
+
 ## 16.13.1 - 2022-08-10
 ### Fixed
 * Make sure that Android id is always picked up from the phone if tests run on Android [#1826](https://github.com/sitespeedio/browsertime/pull/1826).
