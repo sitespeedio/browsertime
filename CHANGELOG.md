@@ -1,6 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
 
+## 16.13.3 - 2022-08-17
+
+### Fixed
+* Make sure set cookies work when navigating in script for Chrome/Edge [#1830](https://github.com/sitespeedio/browsertime/pull/1830).
+
 ## 16.13.2 - 2022-08-14
 ### Fixed
 * Disable adding lastCPULongTask to the HAR data since it breaks waterfall view on slow mobile phones with late CPU long tasks [#1828](https://github.com/sitespeedio/browsertime/pull/1828).
