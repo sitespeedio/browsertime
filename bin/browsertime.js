@@ -7,6 +7,8 @@ const logging = require('../').logging;
 const cli = require('../lib/support/cli');
 const StorageManager = require('../lib/support/storageManager');
 const merge = require('lodash.merge');
+const get = require('lodash.get');
+const set = require('lodash.set');
 const fs = require('fs');
 const path = require('path');
 const log = require('intel').getLogger('browsertime');
@@ -28,12 +30,37 @@ async function parseUserScripts(scripts) {
 }
 
 async function preWarmServer(urls, options) {
-  let engine = new Engine({
+  const preWarmOptions = {
     browser: options.browser,
     iterations: 1,
     xvfb: options.xvfb,
-    android: options.android
-  });
+    android: options.android,
+    docker: options.docker,
+    headless: options.headless
+  };
+  const chromeDevice = get(options, 'chrome.android.deviceSerial');
+  const firefoxDevice = get(options, 'firefox.android.deviceSerial');
+  const safariIos = get(options, 'safari.ios');
+  const safariDeviceName = get(options, 'safari.deviceName');
+  const safariDeviceUDID = get(options, 'safari.deviceUDID ');
+
+  if (chromeDevice) {
+    set(options, 'chrome.android.deviceSerial', chromeDevice);
+  } else if (firefoxDevice) {
+    set(options, 'firefox.android.deviceSerial', firefoxDevice);
+  }
+
+  if (safariIos) {
+    set(options, 'safari.ios', true);
+    if (safariDeviceName) {
+      set(options, 'safari.deviceName', safariDeviceName);
+    }
+    if (safariDeviceUDID) {
+      set(options, 'safari.deviceUDID', safariDeviceUDID);
+    }
+  }
+
+  let engine = new Engine(preWarmOptions);
   await engine.start();
   log.info('Start pre-testing/warming');
   await engine.runMultiple(urls, {});

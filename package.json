@@ -1,18 +1,18 @@
 {
   "description": "Browsertime",
-  "version": "16.8.1",
+  "version": "16.13.3",
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "@cypress/xvfb": "1.2.4",
     "@devicefarmer/adbkit": "2.11.3",
-    "@sitespeed.io/chromedriver": "102.0.5005-27",
-    "@sitespeed.io/edgedriver": "101.0.1210-32",
-    "@sitespeed.io/geckodriver": "0.31.0",
-    "@sitespeed.io/throttle": "3.1.1",
+    "@sitespeed.io/chromedriver": "104.0.5112-29",
+    "@sitespeed.io/edgedriver": "104.0.1293-47",
+    "@sitespeed.io/geckodriver": "0.31.0-c",
+    "@sitespeed.io/throttle": "5.0.0",
     "@sitespeed.io/tracium": "0.3.3",
     "btoa": "1.2.1",
     "chrome-har": "0.13.0",
-    "chrome-remote-interface": "0.31.2",
+    "chrome-remote-interface": "0.31.3",
     "dayjs": "1.11.1",
     "execa": "5.1.1",
     "fast-stats": "0.0.6",
@@ -26,7 +26,7 @@
     "lodash.merge": "4.6.2",
     "lodash.pick": "4.4.0",
     "lodash.set": "4.3.2",
-    "selenium-webdriver": "4.2.0",
+    "selenium-webdriver": "4.4.0",
     "yargs": "17.4.1"
   },
   "optionalDependencies": {

@@ -1,8 +1,80 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 16.8.2 - UNRELEASED
+
+## 16.13.3 - 2022-08-17
+
+### Fixed
+* Make sure set cookies work when navigating in script for Chrome/Edge [#1830](https://github.com/sitespeedio/browsertime/pull/1830).
+
+## 16.13.2 - 2022-08-14
+### Fixed
+* Disable adding lastCPULongTask to the HAR data since it breaks waterfall view on slow mobile phones with late CPU long tasks [#1828](https://github.com/sitespeedio/browsertime/pull/1828).
+
+## 16.13.1 - 2022-08-10
+### Fixed
+* Make sure that Android id is always picked up from the phone if tests run on Android [#1826](https://github.com/sitespeedio/browsertime/pull/1826).
+
+## 16.13.0 - 2022-08-08
+### Added
+* Upgraded to Edgedriver 104.
+
+### Fixed
+* Upgraded to Selenium 4.3.1 [#1824](https://github.com/sitespeedio/browsertime/pull/1824).
+* Upgraded Chrome reomte interface to 0.31.3 [#1825](https://github.com/sitespeedio/browsertime/pull/1825)
+## 16.12.0 - 2022-08-06
+### Added
+* Upgraded to Chrome 104, Edge 104, Firefox 103 in the Docker container.
+* Upgraded to Chromedriver 104.
+
+### Fixed
+* Remove old Firefox on Android workaround for orange frame [#1821](https://github.com/sitespeedio/browsertime/pull/1821), thank you [Sean Feng](https://github.com/sefeng211) for the PR.
+
+## 16.11.4 - 2022-07-17
+### Fixed
+* Automatically add white background between --preURL and the URL that you wanna test. This makes visual metrics usable when using preURL. [#1819](https://github.com/sitespeedio/browsertime/pull/1819)
+
+## 16.11.3 - 2022-07-14
+
+### Fixed
+* If one of the visual elements failed, all failed. Fixed in [#1818](https://github.com/sitespeedio/browsertime/pull/1818).
+* Use buffered long tasks instead of injecting the measuremnt in the page [#1817](https://github.com/sitespeedio/browsertime/pull/1817).
+* Fixed broken CHromedriver and Geckodriver install on Windows.
+
+## 16.11.2 - 2022-07-05
+### Fixed
+* Updated Geckodriver install, it will autoamtically pickup Geckodriver in the path for Raspberry Pis.
+## 16.11.1 - 2022-06-29
+### Fixed
+* Fixed `--preWarmServer` so it works with `--headless`, Docker and specific Android or iOS device [#1815](https://github.com/sitespeedio/browsertime/pull/1815).
+## 16.11.0 - 2022-06-28
+
+### Added 
+* Firefox 102 and Edge 103 in the Docker container.
+* Use Edgedriver 103 [#1812](https://github.com/sitespeedio/browsertime/pull/1812)
+### Fixed
+* Upgraded to Selenium 4.3.0 [#1813](https://github.com/sitespeedio/browsertime/pull/1813).
+
+## 16.10.1 - 2022-06-26
+
+### Fixed
+* Verify that the CDP port is free before using it [1811](https://github.com/sitespeedio/browsertime/pull/1811).
+
+## 16.10.0 - 2022-06-23
+### Added
+* Upgraded the Docker container to use Chrome 103.
+* Upgraded to Chromedriver 103.
+
+## 16.9.1 - 2022-06-19
+
+### Fixed
+* Upgraded to Throttle 4 that internally uses `ip route` instead of `route` (one less dependency) [#1767](https://github.com/sitespeedio/browsertime/pull/1767).
+## 16.9.0 - 2022-06-15
 ### Added
 * New `wait.byCondition` command. Thank you [Icecold777](https://github.com/Icecold777) for PR [#1803](https://github.com/sitespeedio/browsertime/pull/1803).
+* Collect number of CPU longtasks before largest contentful paint [#1806](https://github.com/sitespeedio/browsertime/pull/1806).
+
+### Fixed
+* Instead of throwing errors and exit the tests if the page hasn't finished loading after 5 minutes, we now gracefully ends the test after 2 minutes (you can change that time with `--maxLoadTime`). That makes more sense than just throwing errors [#1810](https://github.com/sitespeedio/browsertime/pull/1810). 
 ##  16.8.1 - 2022-06-09
 ### Fixed
 * Fix for getting the MOZ log, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1802](https://github.com/sitespeedio/browsertime/pull/1802).

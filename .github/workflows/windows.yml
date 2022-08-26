@@ -35,6 +35,8 @@ jobs:
     - name: Run Visual Metrics test
       run: python ./browsertime/visualmetrics.py --check
       shell: cmd
+    - name: Start local HTTP server
+      run: (npm run start-server&)
     - name: Run Edge test
       run: node bin/browsertime.js -b edge -n 1 --screenshot https://www.sitespeed.io/
       shell: cmd
@@ -43,6 +45,9 @@ jobs:
       shell: cmd
     - name: Run Chrome test
       run: node bin/browsertime.js -b chrome -n 1 https://www.sitespeed.io/
+      shell: cmd
+    - name: Run Chrome test for multi pages
+      run: node bin/browsertime.js -b chrome -n 1 test/data/navigationscript/simple.js
       shell: cmd
     - name: Run Firefox test
       run: node bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io/ --skipHar
