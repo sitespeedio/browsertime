@@ -3,7 +3,7 @@
 ## 16.14.0 - 2022-08-26
 ### Added
 * Collect relative standard deviation and output that in the cli output [#1834](https://github.com/sitespeedio/browsertime/pull/1834). Before we only showed the actual standard deviation, with this fix we also show it in percentage, that makes it easier if you run tests on different hardware/networks and want to compare them.
-
+* Collect number of processes that runs on the server that do the testing, before a test starts [#1833](https://github.com/sitespeedio/browsertime/pull/1833).
 ## 16.13.3 - 2022-08-17
 
 ### Fixed
