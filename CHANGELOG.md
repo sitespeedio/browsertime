@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 16.14.1 - 2022-08-26
+### Fixed
+* Guard relative standard deviation agains 0 standard deviation [#1835](https://github.com/sitespeedio/browsertime/pull/1835).
 ## 16.14.0 - 2022-08-26
 ### Added
 * Collect relative standard deviation and output that in the cli output [#1834](https://github.com/sitespeedio/browsertime/pull/1834). Before we only showed the actual standard deviation, with this fix we also show it in percentage, that makes it easier if you run tests on different hardware/networks and want to compare them.
