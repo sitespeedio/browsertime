@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+
+## 16.14.2 - 2022-08-26
+### Fixed
+* Using `--preWarmServer` didn't work on Android/iOS [#1837](https://github.com/sitespeedio/browsertime/pull/1837).
 ## 16.14.1 - 2022-08-26
 ### Fixed
 * Guard relative standard deviation agains 0 standard deviation [#1835](https://github.com/sitespeedio/browsertime/pull/1835).
