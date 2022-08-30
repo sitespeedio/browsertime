@@ -33,7 +33,7 @@
     "jimp": "0.16.1"
   },
   "devDependencies": {
-    "ava": "4.2.0",
+    "ava": "4.3.3",
     "eslint": "8.14.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-prettier": "4.0.0",
