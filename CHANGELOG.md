@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 16.15.1 - 2022-08-30
+### Fixed
+* Make sure long tasks are collected direct after a test ends. On a slow device it sometimes happened that long tasks was browsertime running scripts to collect metrics [#1841](https://github.com/sitespeedio/browsertime/pull/1841).
 ## 16.15.0 - 2022-08-30
 ### Added
 * Always get the wifi name that your Android phone is using and add it to the result [#1839](https://github.com/sitespeedio/browsertime/pull/1839).
