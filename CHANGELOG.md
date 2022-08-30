@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 16.15.0 - 2022-08-30
+### Added
+* Always get the wifi name that your Android phone is using and add it to the result [#1839](https://github.com/sitespeedio/browsertime/pull/1839).
 
 ## 16.14.2 - 2022-08-26
 ### Fixed
