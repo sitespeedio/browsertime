@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 16.16.0 - 2022-09-20
+### Added
+* Chrome 105, Firefox 104 and Chromedriver 105 [#1843](https://github.com/sitespeedio/browsertime/pull/1843).
+* Before you start a test on Android you can push the home button using `--androidPretestPressHomeButton` [#1844](https://github.com/sitespeedio/browsertime/pull/1844).
+
 ## 16.15.1 - 2022-08-30
 ### Fixed
 * Make sure long tasks are collected direct after a test ends. On a slow device it sometimes happened that long tasks was browsertime running scripts to collect metrics [#1841](https://github.com/sitespeedio/browsertime/pull/1841).
