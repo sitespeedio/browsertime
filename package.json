@@ -4,7 +4,7 @@
   "bin": "./bin/browsertime.js",
   "dependencies": {
     "@cypress/xvfb": "1.2.4",
-    "@devicefarmer/adbkit": "2.11.3",
+    "@devicefarmer/adbkit": "3.2.3",
     "@sitespeed.io/chromedriver": "105.0.5195-19",
     "@sitespeed.io/edgedriver": "104.0.1293-47",
     "@sitespeed.io/geckodriver": "0.31.0-c",
