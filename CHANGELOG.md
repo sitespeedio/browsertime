@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Added
+* Add ability to ignore shutdown failures on android, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1850](https://github.com/sitespeedio/browsertime/pull/1850).
+
 ## 16.16.0 - 2022-09-20
 ### Added
 * Chrome 105, Firefox 104 and Chromedriver 105 [#1843](https://github.com/sitespeedio/browsertime/pull/1843).
