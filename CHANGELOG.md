@@ -3,6 +3,7 @@
 ## UNRELEASED
 ### Added
 * Add ability to ignore shutdown failures on android, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1850](https://github.com/sitespeedio/browsertime/pull/1850).
+* Updated to Firefox 105 and Edge 105 in the Docker container.
 
 ## 16.16.0 - 2022-09-20
 ### Added
