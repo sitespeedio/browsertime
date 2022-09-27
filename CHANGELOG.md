@@ -1,9 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 16.17.0 - 2022-09-27
 ### Added
 * Add ability to ignore shutdown failures on android, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1850](https://github.com/sitespeedio/browsertime/pull/1850).
 * Updated to Firefox 105 and Edge 105 in the Docker container.
+
+### Fixed
+* Fix so we collect battery temperature statistics on Android (again) [#1851](https://github.com/sitespeedio/browsertime/pull/1851).
 
 ## 16.16.0 - 2022-09-20
 ### Added
