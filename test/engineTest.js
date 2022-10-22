@@ -148,8 +148,8 @@ function loadTaskFile(file) {
 
 serial(`Use pre/post scripts`, async t => {
   engine = getEngine({
-    preTask: loadTaskFile('preSample.js'),
-    postTask: [loadTaskFile('postSample.js')]
+    preTask: loadTaskFile('preSample.cjs'),
+    postTask: [loadTaskFile('postSample.cjs')]
   });
   await engine.start();
   await engine.run('http://127.0.0.1:3000/simple/', {});
