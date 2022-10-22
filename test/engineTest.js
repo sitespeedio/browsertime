@@ -148,8 +148,8 @@ function loadTaskFile(file) {
 
 serial(`Use pre/post scripts`, async t => {
   engine = getEngine({
-    preTask: loadTaskFile('preSample.cjs'),
-    postTask: [loadTaskFile('postSample.cjs')]
+    preTask: loadTaskFile('preSample.js'),
+    postTask: [loadTaskFile('postSample.js')]
   });
   await engine.start();
   await engine.run('http://127.0.0.1:3000/simple/', {});
@@ -174,7 +174,7 @@ serial(`Run inline pageCompleteChecks`, async t => {
 
 serial('Run pageCompleteCheck from file', async t => {
   engine = getEngine({
-    pageCompleteCheck: 'test/data/pagecompletescripts/pageComplete10sec.cjs',
+    pageCompleteCheck: 'test/data/pagecompletescripts/pageComplete10sec.js',
     timeouts: {
       browserStart: 60_000,
       scripts: 5000,
