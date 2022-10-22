@@ -1,27 +1,30 @@
-const test = require('ava');
+import test from 'ava';
 
-let parser = require('../../lib/connectivity/trafficShapeParser');
+import {
+  getProfiles,
+  parseTrafficShapeConfig
+} from '../../lib/connectivity/trafficShapeParser.js';
 
 test(`parseTrafficShapeConfig`, async t => {
-  let profiles = parser.getProfiles();
+  let profiles = getProfiles();
 
-  Object.keys(profiles).forEach(function (name) {
+  for (const name of Object.keys(profiles)) {
     const profile = profiles[name];
-    const shapeConfig = parser.parseTrafficShapeConfig({
+    const shapeConfig = parseTrafficShapeConfig({
       connectivity: { profile: name }
     });
     t.deepEqual(shapeConfig, profile, 'should return profile for ' + name);
-  });
+  }
 
-  let shapeConfig = parser.parseTrafficShapeConfig({
+  let shapeConfig = parseTrafficShapeConfig({
     connectivity: { profile: 'native' }
   });
-  t.is(shapeConfig, null, 'Return null for "native" traffic shape config');
+  t.is(shapeConfig, undefined, 'Return null for "native" traffic shape config');
 
-  shapeConfig = parser.parseTrafficShapeConfig({});
+  shapeConfig = parseTrafficShapeConfig({});
   t.is(
     shapeConfig,
-    null,
+    undefined,
     'Return undefined if traffic shape config is missing'
   );
 });

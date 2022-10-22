@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = `
 return (function() {
   try {

@@ -1,5 +1,10 @@
-const test = require('ava');
-const builder = require('../../lib/support/har');
+import test from 'ava';
+const { serial } = test;
+import {
+  addCreator,
+  mergeHars,
+  addExtraFieldsToHar
+} from '../../lib/support/har/index.js';
 
 let har;
 
@@ -42,7 +47,7 @@ const totalResultsBase = [
   }
 ];
 
-test.serial.beforeEach('Setup the HAR', () => {
+serial.beforeEach('Setup the HAR', () => {
   har = {
     log: {
       version: '1.2',
@@ -66,19 +71,19 @@ test.serial.beforeEach('Setup the HAR', () => {
 });
 
 test('Add creator if missing', t => {
-  builder.addCreator(har, 'foo');
+  addCreator(har, 'foo');
   t.is(har.log.creator.name, 'Browsertime');
   t.is(har.log.creator.comment, 'foo');
 });
 
 test('Not add comment to creator unless specified', t => {
-  builder.addCreator(har);
+  addCreator(har);
   t.is(har.log.creator.name, 'Browsertime');
   t.is(har.log.creator.comment, undefined);
 });
 
 test('Merge two hars', t => {
-  builder.addCreator(har);
+  addCreator(har);
 
   let har2 = {
     log: {
@@ -107,7 +112,7 @@ test('Merge two hars', t => {
     }
   };
 
-  let combinedHar = builder.mergeHars([har, har2]);
+  let combinedHar = mergeHars([har, har2]);
 
   t.deepEqual(combinedHar.log.pages, [
     {
@@ -138,7 +143,7 @@ test('Merge two hars', t => {
 });
 
 test('Gracefully handle missing data', t => {
-  builder.addExtraFieldsToHar();
+  addExtraFieldsToHar();
   t.pass();
 });
 
@@ -148,7 +153,7 @@ test('Add visual metrics if given', t => {
   };
   const totalResults = totalResultsBase;
   har.log.pages[0].pageTimings = {};
-  builder.addExtraFieldsToHar(totalResults, har, options);
+  addExtraFieldsToHar(totalResults, har, options);
   t.deepEqual(har.log.pages[0], {
     id: 'page_0',
     _meta: {
@@ -185,7 +190,7 @@ test('Gracefully handle missing cpu and visual metrics', t => {
 
   totalResults[0].visualMetrics = [];
   totalResults[0].cpu = [{}];
-  builder.addExtraFieldsToHar(totalResults, har, options);
+  addExtraFieldsToHar(totalResults, har, options);
   t.deepEqual(har.log.pages[0], {
     id: 'page_0',
     _meta: {

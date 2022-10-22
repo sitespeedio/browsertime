@@ -1,38 +1,42 @@
-const test = require('ava');
-const path = require('path');
-const { getEngine } = require('../util/engine');
-const { startServer, stopServer } = require('../util/httpserver');
+import test from 'ava';
+const { before, after, serial } = test;
+import { resolve } from 'node:path';
+import { getEngine } from '../util/engine.js';
+import { startServer, stopServer } from '../util/httpserver.js';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const timeout = 20000;
+const timeout = 20_000;
 
 let engine;
 
 function getPath(file) {
-  return path.resolve(__dirname, '..', 'data', 'commandscripts', file);
+  return resolve(__dirname, '..', 'data', 'commandscripts', file);
 }
 
-test.before('Setup the HTTP server', () => {
+before('Setup the HTTP server', () => {
   return startServer();
 });
 
-test.after.always('Stop the HTTP server', () => {
+after.always('Stop the HTTP server', () => {
   return stopServer();
 });
 
-test.serial.beforeEach('Start the browser', async t => {
+serial.beforeEach('Start the browser', async t => {
   t.timeout(timeout);
   engine = getEngine();
   return engine.start();
 });
 
-test.serial('Scroll by pixel command', async t => {
+serial('Scroll by pixel command', async t => {
   await engine.runMultiple([getPath('scrollByPixel.js')], {
     scripts: { uri: 'document.documentURI' }
   });
   t.pass();
 });
 
-test.serial('Scroll to bottom command', async t => {
+serial('Scroll to bottom command', async t => {
   await engine.runMultiple([getPath('scrollToBottom.js')], {
     scripts: { uri: 'document.documentURI' }
   });

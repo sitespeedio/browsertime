@@ -1,19 +1,16 @@
-const handler = require('serve-handler');
-const http = require('http');
+import handler from 'serve-handler';
+import { createServer } from 'node:http';
 
 let server;
 const port = 3000;
 
-module.exports = {
-  async startServer() {
-    server = http.createServer((request, response) => {
-      return handler(request, response, { public: './test/data/html/' });
-    });
+export async function startServer() {
+  server = createServer((request, response) => {
+    return handler(request, response, { public: './test/data/html/' });
+  });
 
-    return server.listen(port, () => {});
-  },
-
-  async stopServer() {
-    return server.close();
-  }
-};
+  return server.listen(port, () => {});
+}
+export async function stopServer() {
+  return server.close();
+}
