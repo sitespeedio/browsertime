@@ -12,5 +12,5 @@ export const browserScripts = {
   findAndParseScripts
 };
 
-export { Engine } from './lib/core/engine/index.js';
-export { logging as configureLogging } from './lib/support/logging.js';
+export { default as Engine } from './lib/core/engine/index.js';
+export { default as configureLogging } from './lib/support/logging.js';
