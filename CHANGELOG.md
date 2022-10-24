@@ -1,10 +1,14 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 17.0.0 - UNRELEASED
+
+### Breaking changes
+* Move to ES modules [#1859](https://github.com/sitespeedio/browsertime/pull/1859)
 
 ### Added
 * Chrome and Chromedriver 106 [#1853](https://github.com/sitespeedio/browsertime/pull/1853).
 * Selenium 4.5 [#1852](https://github.com/sitespeedio/browsertime/pull/1852).
+
 ## 16.17.0 - 2022-09-27
 ### Added
 * Add ability to ignore shutdown failures on android, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1850](https://github.com/sitespeedio/browsertime/pull/1850).
