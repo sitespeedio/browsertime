@@ -3,11 +3,14 @@
 ## 17.0.0 - UNRELEASED
 
 ### Breaking changes
-* Move to ES modules [#1859](https://github.com/sitespeedio/browsertime/pull/1859)
+* Move to ES modules [#1859](https://github.com/sitespeedio/browsertime/pull/1859). If you are a command line user everything will work as before. If you import Browsertime in NodeJS 
+you need to do the following changes:
+``TBD``
 
 ### Added
 * Chrome and Chromedriver 106 [#1853](https://github.com/sitespeedio/browsertime/pull/1853).
 * Selenium 4.5 [#1852](https://github.com/sitespeedio/browsertime/pull/1852).
+* Updated dependencies:  edgedriver, execa, days, find-up, get-ports, jimp, yargs [#1860](https://github.com/sitespeedio/browsertime/pull/1860)
 
 ## 16.17.0 - 2022-09-27
 ### Added
