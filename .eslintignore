@@ -3,4 +3,3 @@ tools/*
 test/data/*
 docker/webpagereplay/*
 vendor/*
-lib/connectivity/index.js

@@ -1,30 +1,36 @@
-const test = require('ava');
-const path = require('path');
-const timeout = 20000;
-const { startServer, stopServer } = require('./util/httpserver');
-const { getEngine } = require('./util/engine');
+import test from 'ava';
+const { before, after, serial, afterEach } = test;
+import { resolve } from 'node:path';
+const timeout = 20_000;
+import { startServer, stopServer } from './util/httpserver.js';
+import { getEngine } from './util/engine.js';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
 
 let engine;
 
-test.before('Setup the HTTP server', () => {
+before('Setup the HTTP server', () => {
   return startServer();
 });
 
-test.after.always('Stop the HTTP server', () => {
+after.always('Stop the HTTP server', () => {
   return stopServer();
 });
 
-test.serial.beforeEach('Start the browser', async t => {
+serial.beforeEach('Start the browser', async t => {
   t.timeout(timeout);
   engine = getEngine();
   return engine.start();
 });
 
-test.afterEach.always('Stopping the engine', async () => {
+afterEach.always('Stopping the engine', async () => {
   return engine.stop();
 });
 
-test.serial(`Load one URL with normal page load strategy`, async t => {
+serial(`Load one URL with normal page load strategy`, async t => {
   const scripts = {
     foo: '(function () {return "fff";})()',
     uri: 'document.documentURI',
@@ -60,7 +66,7 @@ test.serial(`Load one URL with normal page load strategy`, async t => {
   );
 });
 
-test.serial(`Load one URL with none page load strategy`, async t => {
+serial(`Load one URL with none page load strategy`, async t => {
   const scripts = {
     foo: '(function () {return "fff";})()',
     uri: 'document.documentURI',
@@ -99,7 +105,7 @@ test.serial(`Load one URL with none page load strategy`, async t => {
   );
 });
 
-test.serial(`Load multiple URLs`, async t => {
+serial(`Load multiple URLs`, async t => {
   const scripts = {
     foo: '(function () {return "fff";})()',
     uri: 'document.documentURI',
@@ -136,29 +142,29 @@ test.serial(`Load multiple URLs`, async t => {
   });
 });
 
-test.serial(`Use pre/post scripts`, async t => {
-  function loadTaskFile(file) {
-    return require(path.resolve(__dirname, 'data', 'prepostscripts', file));
-  }
+function loadTaskFile(file) {
+  return require(resolve(__dirname, 'data', 'prepostscripts', file));
+}
 
+serial(`Use pre/post scripts`, async t => {
   engine = getEngine({
-    preTask: loadTaskFile('preSample.js'),
-    postTask: [loadTaskFile('postSample.js')]
+    preTask: loadTaskFile('preSample.cjs'),
+    postTask: [loadTaskFile('postSample.cjs')]
   });
   await engine.start();
   await engine.run('http://127.0.0.1:3000/simple/', {});
   t.pass();
 });
 
-test.serial(`Run inline pageCompleteChecks`, async t => {
+serial(`Run inline pageCompleteChecks`, async t => {
   engine = getEngine({
     pageCompleteCheck:
       'return (function() { try { var end = window.performance.timing.loadEventEnd; return (end > 0) && (Date.now() > end + 5000); } catch(e) { return true; }})();',
     timeouts: {
-      browserStart: 60000,
+      browserStart: 60_000,
       scripts: 5000,
-      pageLoad: 10000,
-      pageCompleteCheck: 15000
+      pageLoad: 10_000,
+      pageCompleteCheck: 15_000
     }
   });
   await engine.start();
@@ -166,14 +172,14 @@ test.serial(`Run inline pageCompleteChecks`, async t => {
   t.pass();
 });
 
-test.serial('Run pageCompleteCheck from file', async t => {
+serial('Run pageCompleteCheck from file', async t => {
   engine = getEngine({
     pageCompleteCheck: 'test/data/pagecompletescripts/pageComplete10sec.js',
     timeouts: {
-      browserStart: 60000,
+      browserStart: 60_000,
       scripts: 5000,
-      pageLoad: 10000,
-      pageCompleteCheck: 15000
+      pageLoad: 10_000,
+      pageCompleteCheck: 15_000
     }
   });
   await engine.start();

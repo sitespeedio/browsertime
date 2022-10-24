@@ -1,8 +1,15 @@
-const test = require('ava');
-const path = require('path');
-const parser = require('../../lib/support/browserScript');
+import test from 'ava';
+import { resolve } from 'node:path';
+import {
+  findAndParseScripts,
+  allScriptCategories,
+  getScriptsForCategories
+} from '../../lib/support/browserScript.js';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const TEST_SCRIPTS_FOLDER = path.resolve(
+const TEST_SCRIPTS_FOLDER = resolve(
   __dirname,
   '..',
   'data',
@@ -11,7 +18,7 @@ const TEST_SCRIPTS_FOLDER = path.resolve(
 );
 
 test(`Parse valid scripts`, async t => {
-  const scriptsByCategory = await parser.findAndParseScripts(
+  const scriptsByCategory = await findAndParseScripts(
     TEST_SCRIPTS_FOLDER,
     'custom'
   );
@@ -29,8 +36,8 @@ test(`Parse valid scripts`, async t => {
 });
 
 test(`Get scripts for all categories`, async t => {
-  const categories = await parser.allScriptCategories;
-  const scriptsByCategory = await parser.getScriptsForCategories(categories);
+  const categories = await allScriptCategories();
+  const scriptsByCategory = await getScriptsForCategories(categories);
 
   const categoryNames = Object.keys(scriptsByCategory);
   t.deepEqual(categoryNames, ['browser', 'pageinfo', 'timings']);

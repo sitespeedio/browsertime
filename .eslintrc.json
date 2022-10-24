@@ -2,13 +2,14 @@
   "root": true,
   "env": {
     "node": true,
-    "es6": true
+    "es2022": true
   },
   "parserOptions": {
-    "ecmaVersion": 2018
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   },
-  "plugins": ["prettier"],
-  "extends": "eslint:recommended",
+  "plugins": ["prettier", "unicorn"],
+  "extends": ["eslint:recommended", "plugin:unicorn/recommended"],
   "rules": {
     "prettier/prettier": [
       "error",
@@ -23,6 +24,8 @@
     "no-mixed-spaces-and-tabs": "off",
     "no-unexpected-multiline": "off",
     "no-return-await": "error",
-    "require-atomic-updates": "off"
+    "require-atomic-updates": "off",
+    "unicorn/filename-case": "off",
+    "unicorn/prevent-abbreviations": "off"
   }
 }

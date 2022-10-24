@@ -1,13 +1,14 @@
 #!/usr/bin/env node
+import merge from 'lodash.merge';
+import yargs from 'yargs';
+import { hideBin } from 'yargs/helpers';
 
-'use strict';
-
-const yargs = require('yargs');
-const browsertime = require('../');
-const merge = require('lodash.merge');
+import Engine from '../lib/core/engine/index.js';
+import logging from '../lib/support/logging.js';
 
 async function runBrowsertime() {
-  let parsed = yargs
+  let yargsInstance = yargs(hideBin(process.argv));
+  let parsed = yargsInstance
     .env('BROWSERTIME')
     .require(1, 'url')
     .option('browser', {
@@ -45,9 +46,9 @@ async function runBrowsertime() {
   };
 
   const btOptions = merge({}, parsed.argv, defaultConfig);
-  browsertime.logging.configure(parsed.argv);
+  logging(parsed.argv);
 
-  const engine = new browsertime.Engine(btOptions);
+  const engine = new Engine(btOptions);
   try {
     await engine.start();
     const result = await engine.runMultiple(parsed.argv._);
@@ -62,4 +63,4 @@ async function runBrowsertime() {
   }
 }
 
-runBrowsertime();
+await runBrowsertime();
