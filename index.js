@@ -1,15 +1,16 @@
-'use strict';
+import {
+  defaultScriptCategories,
+  allScriptCategories,
+  getScriptsForCategories,
+  findAndParseScripts
+} from './lib/support/browserScript.js';
 
-const Engine = require('./lib/core/engine/'),
-  SeleniumRunner = require('./lib/core/seleniumRunner'),
-  errors = require('./lib/support/errors'),
-  browserScripts = require('./lib/support/browserScript'),
-  logging = require('./lib/support/logging');
-
-module.exports = {
-  Engine,
-  SeleniumRunner,
-  errors,
-  logging,
-  browserScripts
+export const browserScripts = {
+  defaultScriptCategories,
+  allScriptCategories,
+  getScriptsForCategories,
+  findAndParseScripts
 };
+
+export { default as BrowsertimeEngine } from './lib/core/engine/index.js';
+export { default as configureLogging } from './lib/support/logging.js';

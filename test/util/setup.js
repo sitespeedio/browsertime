@@ -1,6 +1,6 @@
-const intel = require('intel');
-
-intel.basicConfig({
-  level: intel.ERROR,
+import intel from 'intel';
+const { basicConfig, ERROR } = intel;
+basicConfig({
+  level: ERROR,
   format: '[%(date)s][%(levelname)s] %(message)s'
 });

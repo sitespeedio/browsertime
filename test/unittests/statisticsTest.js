@@ -1,13 +1,14 @@
-const test = require('ava');
-const Statistics = require('../../lib/support/statistics').Statistics;
+import test from 'ava';
+const { serial } = test;
+import { Statistics } from '../../lib/support/statistics.js';
 
 let stats;
 
-test.serial('Add multiple keys', t => {
+serial('Add multiple keys', t => {
   stats = new Statistics();
-  for (let i = 0; i < 11; i++) {
-    stats.add('foo', i + 1);
-    stats.add('bar', 11 - i);
+  for (let index = 0; index < 11; index++) {
+    stats.add('foo', index + 1);
+    stats.add('bar', 11 - index);
   }
   let result = stats.summarize();
   t.deepEqual(result.foo, result.bar);
@@ -15,9 +16,9 @@ test.serial('Add multiple keys', t => {
 
 test('Handle keys with dots', t => {
   stats = new Statistics();
-  stats.add('1.2.3', 42.0);
+  stats.add('1.2.3', 42);
   let result = stats.summarize();
-  t.deepEqual(result['1.2.3'].mean, 42.0);
+  t.deepEqual(result['1.2.3'].mean, 42);
 });
 
 test('Require string keys', t => {
@@ -44,14 +45,14 @@ test('Require finite values', t => {
   stats = new Statistics();
   t.throws(
     () => {
-      stats.add('a', NaN);
+      stats.add('a', Number.NaN);
     },
     { instanceOf: RangeError }
   );
 
   t.throws(
     () => {
-      stats.add('a', Infinity);
+      stats.add('a', Number.POSITIVE_INFINITY);
     },
     { instanceOf: RangeError }
   );
@@ -107,6 +108,8 @@ test('should be possible to add an array of objects with numeric values', t => {
   t.is(result.a.mean, result.b.mean);
 });
 
+const equals = (a1, a2) => JSON.stringify(a1) === JSON.stringify(a2);
+
 test('should be possible to add a deep structure', t => {
   stats = new Statistics();
   stats.addDeep({
@@ -137,13 +140,14 @@ test('should be possible to add a deep structure', t => {
       }
     },
     (keyPath, value) => {
-      const equals = (a1, a2) => JSON.stringify(a1) === JSON.stringify(a2);
       if (equals(keyPath, ['userTimings', 'marks'])) {
+        // eslint-disable-next-line unicorn/no-array-reduce
         return value.reduce((result, mark) => {
           result[mark.name] = mark.startTime;
           return result;
         }, {});
       } else if (equals(keyPath, ['userTimings', 'measures'])) {
+        // eslint-disable-next-line unicorn/no-array-reduce
         return value.reduce((result, mark) => {
           result[mark.name] = mark.duration;
           return result;

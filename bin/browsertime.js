@@ -1,29 +1,30 @@
 #!/usr/bin/env node
-'use strict';
+import merge from 'lodash.merge';
+import get from 'lodash.get';
+import set from 'lodash.set';
+import intel from 'intel';
+import { existsSync, mkdirSync } from 'node:fs';
+import { resolve, relative } from 'node:path';
+import Engine from '../lib/core/engine/index.js';
+import {
+  findAndParseScripts,
+  allScriptCategories,
+  getScriptsForCategories
+} from '../lib/support/browserScript.js';
+import logging from '../lib/support/logging.js';
+import { parseCommandLine } from '../lib/support/cli.js';
+import StorageManager from '../lib/support/storageManager.js';
+import { loadScript } from '../lib/support/engineUtils.js';
 
-const Engine = require('../').Engine;
-const browserScripts = require('../lib/support/browserScript');
-const logging = require('../').logging;
-const cli = require('../lib/support/cli');
-const StorageManager = require('../lib/support/storageManager');
-const merge = require('lodash.merge');
-const get = require('lodash.get');
-const set = require('lodash.set');
-const fs = require('fs');
-const path = require('path');
-const log = require('intel').getLogger('browsertime');
-const engineUtils = require('../lib/support/engineUtils');
+const log = intel.getLogger('browsertime');
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
-const delay = ms => new Promise(res => setTimeout(res, ms));
+const delay = ms => new Promise(response => setTimeout(response, ms));
 
 async function parseUserScripts(scripts) {
   if (!Array.isArray(scripts)) scripts = [scripts];
   const results = {};
   for (const script of scripts) {
-    const code = await browserScripts.findAndParseScripts(
-      path.resolve(script),
-      'custom'
-    );
+    const code = await findAndParseScripts(resolve(script), 'custom');
     merge(results, code);
   }
   return results;
@@ -79,17 +80,15 @@ async function run(urls, options) {
   try {
     if (!options.resultDir) {
       let dir = 'browsertime-results';
-      if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir);
+      if (!existsSync(dir)) {
+        mkdirSync(dir);
       }
     }
 
     let engine = new Engine(options);
 
-    const scriptCategories = await browserScripts.allScriptCategories;
-    let scriptsByCategory = await browserScripts.getScriptsForCategories(
-      scriptCategories
-    );
+    const scriptCategories = await allScriptCategories();
+    let scriptsByCategory = await getScriptsForCategories(scriptCategories);
 
     if (options.script) {
       const userScripts = await parseUserScripts(options.script);
@@ -107,12 +106,12 @@ async function run(urls, options) {
       // TODO setup by name
       let firstUrl = urls[0];
       // if the url is an array, it's of the form [filename, function]
-      if (firstUrl instanceof Array) {
+      if (Array.isArray(firstUrl)) {
         firstUrl = firstUrl[0];
       }
       const storageManager = new StorageManager(firstUrl, options);
-      const harName = options.har ? options.har : 'browsertime';
-      const jsonName = options.output ? options.output : 'browsertime';
+      const harName = options.har ?? 'browsertime';
+      const jsonName = options.output ?? 'browsertime';
 
       saveOperations.push(storageManager.writeJson(jsonName + '.json', result));
 
@@ -124,7 +123,7 @@ async function run(urls, options) {
       }
       await Promise.all(saveOperations);
 
-      const resultDir = path.relative(process.cwd(), storageManager.directory);
+      const resultDirectory = relative(process.cwd(), storageManager.directory);
 
       // check for errors
       for (let eachResult of result) {
@@ -134,26 +133,26 @@ async function run(urls, options) {
           }
         }
       }
-      log.info(`Wrote data to ${resultDir}`);
+      log.info(`Wrote data to ${resultDirectory}`);
     } finally {
       log.debug('Stopping Browsertime');
       try {
         await engine.stop();
         log.debug('Stopped Browsertime');
-      } catch (e) {
-        log.error('Error stopping Browsertime!', e);
+      } catch (error) {
+        log.error('Error stopping Browsertime!', error);
         process.exitCode = 1;
       }
     }
-  } catch (e) {
-    log.error('Error running browsertime', e);
+  } catch (error) {
+    log.error('Error running browsertime', error);
     process.exitCode = 1;
   } finally {
     process.exit();
   }
 }
 
-let cliResult = cli.parseCommandLine();
+let cliResult = parseCommandLine();
 
 /*
   Each url can be:
@@ -166,15 +165,15 @@ let cliResult = cli.parseCommandLine();
 */
 const tests = [];
 
-cliResult.urls.forEach(function convert(url) {
+for (const url of cliResult.urls) {
   // for each url, we try to load it as a script, that may contain
   // export a single function or an object containing setUp/test/tearDown functions.
-  let testScript = engineUtils.loadScript(url);
+  let testScript = await loadScript(url);
 
   // if the value is an url or a not a single function,  we can return the original value
   if (typeof testScript == 'string' || testScript instanceof AsyncFunction) {
     tests.push(url);
-    return;
+    continue;
   }
 
   if (testScript.setUp) {
@@ -191,8 +190,8 @@ cliResult.urls.forEach(function convert(url) {
   }
   // here, url is the filename containing the script, and test the callable.
   tests.push([url, testScript.test]);
-});
+}
 
-logging.configure(cliResult.options);
+logging(cliResult.options);
 
-run(tests, cliResult.options);
+await run(tests, cliResult.options);
