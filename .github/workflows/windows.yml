@@ -19,8 +19,7 @@ jobs:
       run: npm ci
     - name: Install dependencies
       run: |
-        choco install ffmpeg
-        choco install imagemagick.app --allow-downgrade --version=7.0.10.53 -PackageParameters LegacySupport=true 
+        choco install ffmpeg 
         choco outdated
         choco install python
         choco install microsoft-edge
@@ -28,12 +27,10 @@ jobs:
         choco install firefox
         python -m pip install --upgrade --user pip
         python -m pip install --upgrade --user setuptools
-        python -m pip install --user pyssim
+        python -m pip install --user pyssim OpenCV-Python Numpy
         python -m pip --version
         python -m pip show Pillow
         python -m pip show pyssim
-    - name: Run Visual Metrics test
-      run: python ./browsertime/visualmetrics.py --check
       shell: cmd
     - name: Start local HTTP server
       run: (npm run start-server&)
