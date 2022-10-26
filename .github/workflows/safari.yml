@@ -23,10 +23,10 @@ jobs:
         sudo safaridriver --enable
         sudo rm '/usr/local/bin/2to3'
         brew update
-        brew install ffmpeg imagemagick
+        brew install ffmpeg
         python -m pip install --upgrade --user pip
-        python -m pip install --upgrade --user setuptools
-        python -m pip install --user pyssim
+        python -m pip install --upgrade --user setuptools 
+        python -m pip install --user pyssim OpenCV-Python Numpy
         python -m pip --version
         python -m pip show Pillow
         python -m pip show pyssim
