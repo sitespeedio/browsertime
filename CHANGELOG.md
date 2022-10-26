@@ -18,7 +18,15 @@ const { BrowsertimeEngine } = await import ('browsertime');
 const engine = new BrowsertimEngine(options);
 ```
 
-* We moved to use a new [Visual Metrics script](https://github.com/sitespeedio/browsertime/blob/main/browsertime/visualmetrics-portable.py) as default contributed by [Gregory Mierzwinski](https://github.com/gmierz) that do not use ImageMagick. If you run Browsertime direct using NodeJs (and not using Docker) you need to install the Python dependencies OpenCV-Python Numpy. This is pretty cool because it makes dependencies easier to install on all platforms + the script has also been cleaned up so its easier to maintain. 
+* We moved to use a new [Visual Metrics script](https://github.com/sitespeedio/browsertime/blob/main/browsertime/visualmetrics-portable.py) as default contributed by [Gregory Mierzwinski](https://github.com/gmierz) that do not use ImageMagick. 
+
+If you run Browsertime direct using NodeJs (and not using Docker) you need to install the Python dependencies OpenCV-Python Numpy.
+
+```
+python -m pip install --user OpenCV-Python Numpy
+```
+
+This is pretty cool because it makes dependencies easier to install on all platforms + the script has also been cleaned up so its easier for us to maintain. 
 
 ### Added
 * Chrome and Chromedriver 106 [#1853](https://github.com/sitespeedio/browsertime/pull/1853).
