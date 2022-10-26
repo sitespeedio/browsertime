@@ -31,8 +31,6 @@ jobs:
         python -m pip --version
         python -m pip show Pillow
         python -m pip show pyssim
-    - name: Run Visual Metrics test
-      run: python ./browsertime/visualmetrics.py --check
       shell: cmd
     - name: Start local HTTP server
       run: (npm run start-server&)
