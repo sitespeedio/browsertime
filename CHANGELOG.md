@@ -4,13 +4,31 @@
 
 ### Breaking changes
 * Move to ES modules [#1859](https://github.com/sitespeedio/browsertime/pull/1859). If you are a command line user everything will work as before. If you import Browsertime in NodeJS 
-you need to do the following changes:
-``TBD``
+we changed how you should import.
+
+If you use ES modules you can import Browsertime like this:
+```
+import { BrowsertimeEngine } from 'browsertime';
+const engine = new BrowsertimEngine(options);
+```
+
+If you are still on CommonJS:
+```
+const { BrowsertimeEngine } = await import ('browsertime');
+const engine = new BrowsertimEngine(options);
+```
+
+* We moved to use a new [Visual Metrics script](https://github.com/sitespeedio/browsertime/blob/main/browsertime/visualmetrics-portable.py) as default contributed by [Gregory Mierzwinski](https://github.com/gmierz) that do not use ImageMagick. If you run Browsertime direct using NodeJs (and not using Docker) you need to install the Python dependencies OpenCV-Python Numpy. This is pretty cool because it makes dependencies easier to install on all platforms + the script has also been cleaned up so its easier to maintain. 
 
 ### Added
 * Chrome and Chromedriver 106 [#1853](https://github.com/sitespeedio/browsertime/pull/1853).
 * Selenium 4.5 [#1852](https://github.com/sitespeedio/browsertime/pull/1852).
 * Updated dependencies:  edgedriver, execa, days, find-up, get-ports, jimp, yargs [#1860](https://github.com/sitespeedio/browsertime/pull/1860)
+* Updated to Chrome 107 in the Docker container.
+* Updated to NodeJS 18 in the Docker container.
+
+### Fixed
+* Pause the gecko profiler before starting to collect the profile data, thank you [Nazım Can Altınova](https://github.com/canova) for PR [#1856](https://github.com/sitespeedio/browsertime/pull/1856)
 
 ## 16.17.0 - 2022-09-27
 ### Added
