@@ -46,7 +46,7 @@ async function preWarmServer(urls, options) {
   const safariDeviceName = get(options, 'safari.deviceName');
   const safariDeviceUDID = get(options, 'safari.deviceUDID ');
 
-  if (options.android && options.browser === 'chrome') {
+  if (isAndroidConfigured(options) && options.browser === 'chrome') {
     set(preWarmOptions, 'chrome.android.package', 'com.android.chrome');
   }
   if (chromeDevice) {
