@@ -36,7 +36,9 @@ This is pretty cool because it makes dependencies easier to install on all platf
 * Updated to NodeJS 18 in the Docker container.
 
 ### Fixed
-* Pause the gecko profiler before starting to collect the profile data, thank you [Nazım Can Altınova](https://github.com/canova) for PR [#1856](https://github.com/sitespeedio/browsertime/pull/1856)
+* Pause the gecko profiler before starting to collect the profile data, thank you [Nazım Can Altınova](https://github.com/canova) for PR [#1856](https://github.com/sitespeedio/browsertime/pull/1856).
+
+* All Android configurations has been moved to an Android group. That makes it easier when you run --help and can see all Android configuration grouped together. For example `--androidBatteryTemperature` is now `--android.batteryTemperatureLimit`. Old names will still work. [#1865](https://github.com/sitespeedio/browsertime/pull/1865) 
 
 ## 16.17.0 - 2022-09-27
 ### Added
