@@ -15,6 +15,7 @@ import logging from '../lib/support/logging.js';
 import { parseCommandLine } from '../lib/support/cli.js';
 import StorageManager from '../lib/support/storageManager.js';
 import { loadScript } from '../lib/support/engineUtils.js';
+import { isAndroidConfigured } from '../lib/android/index.js';
 
 const log = intel.getLogger('browsertime');
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
@@ -35,7 +36,7 @@ async function preWarmServer(urls, options) {
     browser: options.browser,
     iterations: 1,
     xvfb: options.xvfb,
-    android: options.android,
+    android: isAndroidConfigured(options),
     docker: options.docker,
     headless: options.headless
   };
