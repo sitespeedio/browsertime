@@ -3,8 +3,10 @@
 ## 17.0.0 - UNRELEASED
 
 ### Breaking changes
-* Move to ES modules [#1859](https://github.com/sitespeedio/browsertime/pull/1859). If you are a command line user everything will work as before. If you import Browsertime in NodeJS 
-we changed how you should import.
+* We moved the project to be a [pure ESM package](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) [#1859](https://github.com/sitespeedio/browsertime/pull/1859). That helps us keep up to date with dependencies that already did the move.
+
+If you are a command line user, everything will work as before. If you import Browsertime in NodeJS 
+we changed how you do your import.
 
 If you use ES modules you can import Browsertime like this:
 ```
@@ -18,9 +20,11 @@ const { BrowsertimeEngine } = await import ('browsertime');
 const engine = new BrowsertimEngine(options);
 ```
 
-* We moved to use a new [Visual Metrics script](https://github.com/sitespeedio/browsertime/blob/main/browsertime/visualmetrics-portable.py) as default contributed by [Gregory Mierzwinski](https://github.com/gmierz) that do not use ImageMagick. 
+Read [Sindre Sorhus Pure ESM package guide](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) on how you can move your project.
 
-If you run Browsertime direct using NodeJs (and not using Docker) you need to install the Python dependencies OpenCV-Python Numpy.
+* We moved to use a new [Visual Metrics script](https://github.com/sitespeedio/browsertime/blob/main/browsertime/visualmetrics-portable.py) as default contributed by [Gregory Mierzwinski](https://github.com/gmierz) that do _not_ use ImageMagick. Mozilla has used this script for many months and we have internally used it in our test infrastructure since it was first released.
+
+If you run Browsertime direct using NodeJs (and not using Docker) you need to install two new Python dependencies OpenCV-Python Numpy.
 
 ```
 python -m pip install --user OpenCV-Python Numpy
