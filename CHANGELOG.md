@@ -9,13 +9,13 @@ If you are a command line user, everything will work as before. If you import Br
 we changed how you do your import.
 
 If you use ES modules you can import Browsertime like this:
-```
+```JavaScript
 import { BrowsertimeEngine } from 'browsertime';
 const engine = new BrowsertimEngine(options);
 ```
 
 If you are still on CommonJS:
-```
+```JavaScript
 const { BrowsertimeEngine } = await import ('browsertime');
 const engine = new BrowsertimEngine(options);
 ```
