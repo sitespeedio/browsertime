@@ -30,14 +30,14 @@ serial.beforeEach('Start the browser', async t => {
 });
 
 serial('Scroll by pixel command', async t => {
-  await engine.runMultiple([getPath('scrollByPixel.js')], {
+  await engine.runMultiple([getPath('scrollByPixel.cjs')], {
     scripts: { uri: 'document.documentURI' }
   });
   t.pass();
 });
 
 serial('Scroll to bottom command', async t => {
-  await engine.runMultiple([getPath('scrollToBottom.js')], {
+  await engine.runMultiple([getPath('scrollToBottom.cjs')], {
     scripts: { uri: 'document.documentURI' }
   });
   t.pass();

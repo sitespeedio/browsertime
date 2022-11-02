@@ -30,7 +30,7 @@ serial.beforeEach('Start the browser', async t => {
 });
 
 serial('Measure two urls after each other', async t => {
-  const result = await engine.runMultiple([getPath('measure.js')], {
+  const result = await engine.runMultiple([getPath('measure.cjs')], {
     scripts: { uri: 'document.documentURI' }
   });
   t.deepEqual(
@@ -44,7 +44,7 @@ serial('Measure two urls after each other', async t => {
 });
 
 serial('Give each URL an alias', async t => {
-  const result = await engine.runMultiple([getPath('measureAlias.js')], {
+  const result = await engine.runMultiple([getPath('measureAlias.cjs')], {
     scripts: { uri: 'document.documentURI' }
   });
   t.deepEqual(result[0].info.alias, 'url1');

@@ -56,4 +56,4 @@ jobs:
     - name: Test Safari with video and Visual Metrics
       run: ./bin/browsertime.js -b safari -n 1 --viewPort 800x600  --video --visualMetrics http://127.0.0.1:3000/simple/
     - name: Test Safari with video and Visual Metrics for multi pages
-      run: ./bin/browsertime.js -b safari -n 1 --viewPort 800x600  --video --visualMetrics test/data/navigationscript/multi.js
+      run: ./bin/browsertime.js -b safari -n 1 --viewPort 800x600  --video --visualMetrics test/data/navigationscript/multi.cjs

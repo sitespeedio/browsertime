@@ -54,17 +54,17 @@ jobs:
     - name: Test Chrome with CPU throttle and preURL
       run: ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL http://127.0.0.1:3000/simple/ -r header:value --chrome.CPUThrottlingRate 2 --chrome.cdp.performance --xvfb --chrome.enableChromeDriverLog --chrome.collectConsoleLog http://127.0.0.1:3000/dimple/
     - name: Test pre/post scripts
-      run: ./bin/browsertime.js -b chrome test/data/navigationscript/measure.js -n 1 --preScript test/data/prepostscripts/preSample.js --postScript test/data/prepostscripts/postSample.js --xvfb
+      run: ./bin/browsertime.js -b chrome test/data/navigationscript/measure.cjs -n 1 --preScript test/data/prepostscripts/preSample.cjs --postScript test/data/prepostscripts/postSample.cjs --xvfb
     - name: Test navigation and page complete check inactivity
-      run: ./bin/browsertime.js -b chrome test/data/navigationscript/navigateAndStartInTwoSteps.js -n 1 --pageCompleteCheckInactivity --timeToSettle 1000 --xvfb
+      run: ./bin/browsertime.js -b chrome test/data/navigationscript/navigateAndStartInTwoSteps.cjs -n 1 --pageCompleteCheckInactivity --timeToSettle 1000 --xvfb
     - name: Test multi pages
-      run: ./bin/browsertime.js -b firefox test/data/navigationscript/multi.js http://127.0.0.1:3000/search/ -n 1 --xvfb
+      run: ./bin/browsertime.js -b firefox test/data/navigationscript/multi.cjs http://127.0.0.1:3000/search/ -n 1 --xvfb
     - name: Test multi pages with video and visual metrics
-      run: ./bin/browsertime.js -b chrome test/data/navigationscript/multi.js -n 3 --chrome.timeline --video --visualMetrics --visualElements --viewPort 1000x600 --xvfb
+      run: ./bin/browsertime.js -b chrome test/data/navigationscript/multi.cjs -n 3 --chrome.timeline --video --visualMetrics --visualElements --viewPort 1000x600 --xvfb
     - name: Test Firefox Geckoprofiler
       run: ./bin/browsertime.js -b firefox --firefox.geckoProfiler -n 1 http://127.0.0.1:3000/simple/ --xvfb
     - name: Test Firefox with scripting
-      run: ./bin/browsertime.js -b firefox test/data/commandscripts/unified.js --xvfb
+      run: ./bin/browsertime.js -b firefox test/data/commandscripts/unified.cjs --xvfb
     - name: Test Chrome with emulated mobile
       run: ./bin/browsertime.js -b chrome --chrome.mobileEmulation.deviceName 'iPhone 6' http://127.0.0.1:3000/simple/ --xvfb
     - name: Test Firefox with web driver nagivation
@@ -72,9 +72,9 @@ jobs:
     - name: Test Chrome with web driver nagivation
       run: ./bin/browsertime.js -b chrome -n 1 http://127.0.0.1:3000/simple/ --webdriverPageload --xvfb
     - name: Test navigate to the same URL twice
-      run: ./bin/browsertime.js -b chrome test/data/navigationscript/sameURLTwice.js -n 1 --pageCompleteCheckInactivity --timeToSettle 1000 --xvfb
+      run: ./bin/browsertime.js -b chrome test/data/navigationscript/sameURLTwice.cjs -n 1 --pageCompleteCheckInactivity --timeToSettle 1000 --xvfb
     - name: Test navigate to the same URL twice by clicking on a link
-      run: ./bin/browsertime.js -b chrome test/data/navigationscript/sameURLTwiceWithClick.js -n 1 --pageCompleteCheckInactivity --timeToSettle 1000 --xvfb
+      run: ./bin/browsertime.js -b chrome test/data/navigationscript/sameURLTwiceWithClick.cjs -n 1 --pageCompleteCheckInactivity --timeToSettle 1000 --xvfb
     - name: Test using alias for one URL
       run: ./bin/browsertime.js -b chrome http://127.0.0.1:3000/simple/ --urlAlias my_url --xvfb
     - name: Test using alias for multiple URLs
