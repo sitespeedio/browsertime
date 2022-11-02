@@ -30,7 +30,7 @@ serial.beforeEach('Start the browser', async t => {
 });
 
 serial('Measure the urls after a click', async t => {
-  const result = await engine.runMultiple([getPath('clickAndMeasure.js')], {
+  const result = await engine.runMultiple([getPath('clickAndMeasure.cjs')], {
     scripts: { uri: 'document.documentURI' }
   });
   t.deepEqual(
@@ -46,7 +46,7 @@ serial('Measure the urls after a click', async t => {
 });
 
 serial('Measure URL after a click that got an alias', async t => {
-  const result = await engine.runMultiple([getPath('clickAndMeasure.js')], {
+  const result = await engine.runMultiple([getPath('clickAndMeasure.cjs')], {
     scripts: { uri: 'document.documentURI' }
   });
   t.deepEqual(result[0].info.alias, 'dimple');
@@ -59,7 +59,7 @@ serial('Measure URL after a click that got an alias', async t => {
 });
 
 serial('Get the alias after multiple clicks', async t => {
-  const result = await engine.runMultiple([getPath('clickBackAndForth.js')], {
+  const result = await engine.runMultiple([getPath('clickBackAndForth.cjs')], {
     scripts: { uri: 'document.documentURI' }
   });
   t.deepEqual(result[0].info.alias, 'simple');
@@ -72,7 +72,7 @@ serial('Get the alias after multiple clicks', async t => {
 });
 
 serial('Measure urls after multiple clicks', async t => {
-  const result = await engine.runMultiple([getPath('clickBackAndForth.js')], {
+  const result = await engine.runMultiple([getPath('clickBackAndForth.cjs')], {
     scripts: { uri: 'document.documentURI' }
   });
   t.deepEqual(

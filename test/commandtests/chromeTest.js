@@ -30,7 +30,7 @@ serial.beforeEach('Start the browser', async t => {
 });
 
 serial('Run Chrome specific commands', async t => {
-  const result = await engine.runMultiple([getPath('chrome.js')], {
+  const result = await engine.runMultiple([getPath('chrome.cjs')], {
     scripts: {
       uri: 'document.documentURI'
     }

@@ -169,7 +169,7 @@ const tests = [];
 for (const url of cliResult.urls) {
   // for each url, we try to load it as a script, that may contain
   // export a single function or an object containing setUp/test/tearDown functions.
-  let testScript = await loadScript(url);
+  let testScript = loadScript(url);
 
   // if the value is an url or a not a single function,  we can return the original value
   if (typeof testScript == 'string' || testScript instanceof AsyncFunction) {

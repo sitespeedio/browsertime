@@ -30,7 +30,7 @@ serial.beforeEach('Start the browser', async t => {
 });
 
 serial('Run unified scripts', async t => {
-  const result = await engine.runMultiple([getPath('unified.js')], {
+  const result = await engine.runMultiple([getPath('unified.cjs')], {
     scripts: { uri: 'document.documentURI' }
   });
   t.deepEqual(

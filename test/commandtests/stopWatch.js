@@ -30,7 +30,7 @@ serial.beforeEach('Start the browser', async t => {
 });
 
 serial('Run stop watch commands', async t => {
-  const result = await engine.runMultiple([getPath('stopWatch.js')], {
+  const result = await engine.runMultiple([getPath('stopWatch.cjs')], {
     scripts: { uri: 'document.documentURI' }
   });
   t.true(result[0].extras[0].Measured_page > 0);
