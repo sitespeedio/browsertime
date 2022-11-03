@@ -3,10 +3,29 @@
 ## 17.0.0 - UNRELEASED
 
 ### Breaking changes
-* We moved the project to be a [pure ESM package](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) [#1859](https://github.com/sitespeedio/browsertime/pull/1859). That helps us keep up to date with dependencies that already did the move.
+* We moved the project to be a [pure ESM package](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) [#1859](https://github.com/sitespeedio/browsertime/pull/1859). That helps us keep up to date with dependencies that already did the move and make sure we can always use the latest version of our dependencies.
 
-If you are a command line user, everything will work as before. If you import Browsertime in NodeJS 
-we changed how you do your import.
+If you are a command line user and use scripting, you will need to do a change to your scripts. The browsertime version treat all JavaScript files that ends with *.js* as ESM modules, that means your old script files will not work out of the box. There's one quick fix and one long term fix.
+
+**Quick fix**: Rename your *.js* to *.cjs* that way NodeJS will treat your file as a common JS file and everthing will just work. For example if you have a file names `login.js` you can rename that to `login.cjs` and make sure you load that new file.
+
+**Long term fix**: Change how you do your exports. The old way looked like this:
+
+```
+module.exports = async function(context, commands) {
+...
+}
+```
+
+change that to:
+```
+export default async function (context, commands) {
+...
+}
+```
+
+
+If you import Browsertime in NodeJS we changed how you do your import.
 
 If you use ES modules you can import Browsertime like this:
 ```JavaScript
