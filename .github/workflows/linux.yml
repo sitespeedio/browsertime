@@ -87,3 +87,9 @@ jobs:
       run: ./bin/browsertime.js -b chrome --screenshotLCP --screenshotLS --xvfb http://127.0.0.1:3000/simple/
     - name: Run test with visualMetricsPortable
       run: ./bin/browsertime.js -b chrome --visualMetricsPortable --xvfb http://127.0.0.1:3000/simple
+    - name: Run test with scripting.cjs
+      run: ./bin/browsertime.js -b chrome -n 1 test/data/scripting/common.cjs
+    - name: Run test with scripting.js
+      run: ./bin/browsertime.js -b chrome -n 1 test/data/scripting/module.js
+    - name: Run test with scripting.mjs
+      run: ./bin/browsertime.js -b chrome -n 1 test/data/scripting/module.mjs
