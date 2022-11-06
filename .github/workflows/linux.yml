@@ -90,4 +90,6 @@ jobs:
     - name: Run test with scripting.cjs
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/scripting/common.cjs
     - name: Run test with scripting.js
+      run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/scripting/common.js --cjs
+    - name: Run test with scripting.js
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/scripting/module.js
