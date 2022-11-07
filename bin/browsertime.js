@@ -154,6 +154,7 @@ async function run(urls, options) {
 }
 
 let cliResult = parseCommandLine();
+logging(cliResult.options);
 
 /*
   Each url can be:
@@ -169,7 +170,7 @@ const tests = [];
 for (const url of cliResult.urls) {
   // for each url, we try to load it as a script, that may contain
   // export a single function or an object containing setUp/test/tearDown functions.
-  let testScript = await loadScript(url);
+  let testScript = await loadScript(url, cliResult.options);
   // if the value is an url or a not a single function,  we can return the original value
   if (typeof testScript == 'string' || testScript instanceof AsyncFunction) {
     tests.push(url);
@@ -191,7 +192,4 @@ for (const url of cliResult.urls) {
   // here, url is the filename containing the script, and test the callable.
   tests.push([url, testScript.test]);
 }
-
-logging(cliResult.options);
-
 await run(tests, cliResult.options);

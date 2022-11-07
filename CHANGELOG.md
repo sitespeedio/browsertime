@@ -5,11 +5,12 @@
 ### Breaking changes
 * We moved the project to be a [pure ESM package](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) [#1859](https://github.com/sitespeedio/browsertime/pull/1859). That helps us keep up to date with dependencies that already did the move and make sure we can always use the latest version of our dependencies.
 
-If you are a command line user and use scripting, you will need to do a change to your scripts. The browsertime version treat all JavaScript files that ends with *.js* as ESM modules, that means your old script files will not work out of the box. There's one quick fix and one long term fix.
+#### CLI users
+If you are a command line user and use scripting, you will need to do a change to your scripts or add a extra configuration. 
+The new browsertime version treat all JavaScript files that ends with *.js* as ESM modules, that means your old script files will not work out of the box. There's a couple of fixes for that:
 
-**Quick fix**: Rename your *.js* to *.cjs* that way NodeJS will treat your file as a common JS file and everthing will just work. For example if you have a file names `login.js` you can rename that to `login.cjs` and make sure you load that new file.
-
-**Long term fix**: Change how you do your exports. The old way looked like this:
+**The best fix**:
+Change your code so your scripts also follows ESM package. If you have simple scripts you probably just need to change your exports. The old way looked like this:
 
 ```
 module.exports = async function(context, commands) {
@@ -24,7 +25,13 @@ export default async function (context, commands) {
 }
 ```
 
+If you have more complicated scripts, follow the [ESM package guide](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
 
+**The quick fix**: Rename your *.js* to *.cjs* that way NodeJS will treat your file as a common JS file and everthing will just work. For example if you have a file names `login.js` you can rename that to `login.cjs` and make sure you load that new file.
+
+**Another quick fix alternative**: Add `--cjs` as a parameter to your test. That way the scripting file will be treated as a commonjs file. This is a hack, so to make sure it works, the user that runs Browsertime need to have write privileges to the folder where you have your scripting files.
+
+#### Non cli users 
 If you import Browsertime in NodeJS we changed how you do your import.
 
 If you use ES modules you can import Browsertime like this:
