@@ -64,6 +64,8 @@ This is pretty cool because it makes dependencies easier to install on all platf
 * Updated dependencies:  edgedriver, execa, days, find-up, get-ports, jimp, yargs [#1860](https://github.com/sitespeedio/browsertime/pull/1860)
 * Updated to Chrome 107 in the Docker container.
 * Updated to NodeJS 18 in the Docker container.
+* Get CPU metrics using Glean on Firefox, thank you [afinder-mozilla](https://github.com/afinder-mozilla) for PR [#1875](https://github.com/sitespeedio/browsertime/pull/1875)
+* Provide active tab id to gecko profiler StartProfiler API in Firefox, thank you [Nazım Can Altınova](https://github.com/canova) for PR [#1874](https://github.com/sitespeedio/browsertime/pull/1874).
 
 ### Fixed
 * Pause the gecko profiler before starting to collect the profile data, thank you [Nazım Can Altınova](https://github.com/canova) for PR [#1856](https://github.com/sitespeedio/browsertime/pull/1856).
