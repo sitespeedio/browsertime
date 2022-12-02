@@ -4,7 +4,7 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
 import { Engine } from '../lib/core/engine/index.js';
-import { logging } from '../lib/support/logging.js';
+import { configure as logging } from '../lib/support/logging.js';
 
 async function runBrowsertime() {
   let yargsInstance = yargs(hideBin(process.argv));
