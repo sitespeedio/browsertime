@@ -1,4 +1,4 @@
-import Engine from '../../lib/core/engine/index.js';
+import { Engine } from '../../lib/core/engine/index.js';
 import merge from 'lodash.merge';
 
 export function getEngine(options) {
