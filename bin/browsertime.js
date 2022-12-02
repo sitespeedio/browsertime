@@ -5,15 +5,15 @@ import set from 'lodash.set';
 import intel from 'intel';
 import { existsSync, mkdirSync } from 'node:fs';
 import { resolve, relative } from 'node:path';
-import Engine from '../lib/core/engine/index.js';
+import { Engine } from '../lib/core/engine/index.js';
 import {
   findAndParseScripts,
   allScriptCategories,
   getScriptsForCategories
 } from '../lib/support/browserScript.js';
-import logging from '../lib/support/logging.js';
+import { configure } from '../lib/support/logging.js';
 import { parseCommandLine } from '../lib/support/cli.js';
-import StorageManager from '../lib/support/storageManager.js';
+import { StorageManager } from '../lib/support/storageManager.js';
 import { loadScript } from '../lib/support/engineUtils.js';
 import { isAndroidConfigured } from '../lib/android/index.js';
 
@@ -154,7 +154,7 @@ async function run(urls, options) {
 }
 
 let cliResult = parseCommandLine();
-logging(cliResult.options);
+configure(cliResult.options);
 
 /*
   Each url can be:
