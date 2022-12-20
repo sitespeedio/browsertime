@@ -8,7 +8,7 @@
     "@devicefarmer/adbkit": "2.11.3",
     "@sitespeed.io/chromedriver": "106.0.5249-61",
     "@sitespeed.io/edgedriver": "106.0.1370-34",
-    "@sitespeed.io/geckodriver": "0.31.0-c",
+    "@sitespeed.io/geckodriver": "0.32.0",
     "@sitespeed.io/throttle": "5.0.0",
     "@sitespeed.io/tracium": "0.3.3",
     "btoa": "1.2.1",
