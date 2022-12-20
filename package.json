@@ -8,7 +8,7 @@
     "@devicefarmer/adbkit": "2.11.3",
     "@sitespeed.io/chromedriver": "108.0.5359-71",
     "@sitespeed.io/edgedriver": "108.0.1462-38",
-    "@sitespeed.io/geckodriver": "0.31.0-c",
+    "@sitespeed.io/geckodriver": "0.32.0",
     "@sitespeed.io/throttle": "5.0.0",
     "@sitespeed.io/tracium": "0.3.3",
     "btoa": "1.2.1",
@@ -27,7 +27,7 @@
     "lodash.merge": "4.6.2",
     "lodash.pick": "4.4.0",
     "lodash.set": "4.3.2",
-    "selenium-webdriver": "4.6.1",
+    "selenium-webdriver": "4.7.1",
     "yargs": "17.6.0"
   },
   "optionalDependencies": {
