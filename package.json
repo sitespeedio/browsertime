@@ -6,7 +6,7 @@
   "dependencies": {
     "@cypress/xvfb": "1.2.4",
     "@devicefarmer/adbkit": "2.11.3",
-    "@sitespeed.io/chromedriver": "109.0.5414-74",
+    "@sitespeed.io/chromedriver": "110.0.5481-30",
     "@sitespeed.io/edgedriver": "109.0.1518-70",
     "@sitespeed.io/geckodriver": "0.32.0",
     "@sitespeed.io/throttle": "5.0.0",
