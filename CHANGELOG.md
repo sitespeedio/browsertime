@@ -7,6 +7,7 @@
 
 #### CLI users
 If you are a command line user and use scripting, you will need to do a change to your scripts or add a extra configuration. 
+
 The new browsertime version treat all JavaScript files that ends with *.js* as ESM modules, that means your old script files will not work out of the box. There's a couple of fixes for that:
 
 **The best fix**:
@@ -50,7 +51,7 @@ Read [Sindre Sorhus Pure ESM package guide](https://gist.github.com/sindresorhus
 
 * We moved to use a new [Visual Metrics script](https://github.com/sitespeedio/browsertime/blob/main/browsertime/visualmetrics-portable.py) as default contributed by [Gregory Mierzwinski](https://github.com/gmierz) that do _not_ use ImageMagick. Mozilla has used this script for many months and we have internally used it in our test infrastructure since it was first released.
 
-If you run Browsertime direct using NodeJs (and not using Docker) you need to install two new Python dependencies OpenCV-Python Numpy.
+If you run Browsertime direct using NodeJs (and not using Docker) you need to install two new Python dependencies `OpenCV-Python Numpy`.
 
 ```
 python -m pip install --user OpenCV-Python Numpy
@@ -59,18 +60,21 @@ python -m pip install --user OpenCV-Python Numpy
 This is pretty cool because it makes dependencies easier to install on all platforms + the script has also been cleaned up so its easier for us to maintain. 
 
 ### Added
-* Selenium 4.5 [#1852](https://github.com/sitespeedio/browsertime/pull/1852).
+* Selenium 4.8.
 * Updated dependencies:  edgedriver, execa, days, find-up, get-ports, jimp, yargs [#1860](https://github.com/sitespeedio/browsertime/pull/1860)
-* Updated to Chrome, Firefox and Edge 108 in the Docker container. Also updated all drivers.
+* Updated to Chrome, Firefox and Edge 109 in the Docker container. Also updated all drivers.
 * Updated to NodeJS 18 and Ubuntu 22.04 in the Docker container.
 * Get CPU metrics using Glean on Firefox, thank you [afinder-mozilla](https://github.com/afinder-mozilla) for PR [#1875](https://github.com/sitespeedio/browsertime/pull/1875)
 * Provide active tab id to gecko profiler StartProfiler API in Firefox, thank you [Nazım Can Altınova](https://github.com/canova) for PR [#1874](https://github.com/sitespeedio/browsertime/pull/1874).
 * There's two new methods to switch to frame: `switch.toFrameByXpath(xpath)` and `switch.toFrameBySelector(selector)` [#1880](https://github.com/sitespeedio/browsertime/pull/1880).
-
+* Add a timeout to gecko profiler gzipping phase, thank you [Nazım Can Altınova](https://github.com/canova) for PR [#1896](https://github.com/sitespeedio/browsertime/pull/1896)
+* Pin CPU freq to fastest for Samsung A51 (if you have a rooted device) [#1895](https://github.com/sitespeedio/browsertime/pull/1895).
 ### Fixed
 * Pause the gecko profiler before starting to collect the profile data, thank you [Nazım Can Altınova](https://github.com/canova) for PR [#1856](https://github.com/sitespeedio/browsertime/pull/1856).
 
 * All Android configurations has been moved to an Android group. That makes it easier when you run --help and can see all Android configuration grouped together. For example `--androidBatteryTemperature` is now `--android.batteryTemperatureLimit`. Old names will still work. [#1865](https://github.com/sitespeedio/browsertime/pull/1865) 
+
+* Updated Chromedriver 110 to work with Android 13 [#1894](https://github.com/sitespeedio/browsertime/pull/1894)
 
 ## 16.17.0 - 2022-09-27
 ### Added
