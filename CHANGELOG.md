@@ -26,11 +26,13 @@ export default async function (context, commands) {
 }
 ```
 
-If you have more complicated scripts, follow the [ESM package guide](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
+If you have more complicated scripts, follow the [ESM package guide](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c). 
 
-**The quick fix**: Rename your *.js* to *.cjs* that way NodeJS will treat your file as a common JS file and everthing will just work. For example if you have a file names `login.js` you can rename that to `login.cjs` and make sure you load that new file.
+This is the best fix and will woirk 100% of the time.
 
-**Another quick fix alternative**: Add `--cjs` as a parameter to your test. That way the scripting file will be treated as a commonjs file. This is a hack, so to make sure it works, the user that runs Browsertime need to have write privileges to the folder where you have your scripting files.
+**The quick fix**: Rename your *.js* to *.cjs* that way NodeJS will treat your file as a common JS file and everything will just work. For example if you have a file names `login.js` you can rename that to `login.cjs` and make sure you load that new file.
+
+**Another quick fix alternative**: As a last alternative add `--cjs` as a parameter to your test. That way the scripting file will be treated as a commonjs file. This is a hack, so to make sure it works, the user that runs Browsertime need to have write privileges to the folder where you have your scripting files. Browsertime will create a package.json file on the same levels as yoru script file. If you already have a package.json there, it will be overwritten.
 
 #### Non cli users 
 If you import Browsertime in NodeJS we changed how you do your import.
@@ -61,7 +63,7 @@ This is pretty cool because it makes dependencies easier to install on all platf
 
 ### Added
 * Selenium 4.8.
-* Updated dependencies:  edgedriver, execa, days, find-up, get-ports, jimp, yargs [#1860](https://github.com/sitespeedio/browsertime/pull/1860)
+* Updated dependencies: execa, days, find-up, get-ports, jimp, yargs [#1860](https://github.com/sitespeedio/browsertime/pull/1860)
 * Updated to Chrome, Firefox and Edge 109 in the Docker container. Also updated all drivers.
 * Updated to NodeJS 18 and Ubuntu 22.04 in the Docker container.
 * Get CPU metrics using Glean on Firefox, thank you [afinder-mozilla](https://github.com/afinder-mozilla) for PR [#1875](https://github.com/sitespeedio/browsertime/pull/1875)
@@ -72,9 +74,9 @@ This is pretty cool because it makes dependencies easier to install on all platf
 ### Fixed
 * Pause the gecko profiler before starting to collect the profile data, thank you [Nazım Can Altınova](https://github.com/canova) for PR [#1856](https://github.com/sitespeedio/browsertime/pull/1856).
 
-* All Android configurations has been moved to an Android group. That makes it easier when you run --help and can see all Android configuration grouped together. For example `--androidBatteryTemperature` is now `--android.batteryTemperatureLimit`. Old names will still work. [#1865](https://github.com/sitespeedio/browsertime/pull/1865) 
+* All Android configurations has been moved to an Android group. That makes it easier when you run --help and can see all Android configuration grouped together. For example `--androidBatteryTemperature` is now `--android.batteryTemperatureLimit`. Old names will still work but are deprecated [#1865](https://github.com/sitespeedio/browsertime/pull/1865).
 
-* Updated Chromedriver 110 to work with Android 13 [#1894](https://github.com/sitespeedio/browsertime/pull/1894)
+* Updated to Chromedriver 110 to work with Android 13 [#1894](https://github.com/sitespeedio/browsertime/pull/1894).
 
 ## 16.17.0 - 2022-09-27
 ### Added
