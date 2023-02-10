@@ -93,7 +93,7 @@
       "!test/data"
     ],
     "concurrency": 1,
-    "failFast": false,
+    "failFast": true,
     "require": [
       "./test/util/setup.js"
     ],
