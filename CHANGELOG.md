@@ -1,9 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 17.0.0 - UNRELEASED
+## 17.0.0 - 2022-02-10
 
 ### Breaking changes
-* We moved the project to be a [pure ESM package](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) [#1859](https://github.com/sitespeedio/browsertime/pull/1859). That helps us keep up to date with dependencies that already did the move and make sure we can always use the latest version of our dependencies.
+The project was transitioned to a [pure ESM package](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) [#1859](https://github.com/sitespeedio/browsertime/pull/1859), allowing us to stay current with dependencies that have made the same transition and ensuring the ability to always utilize the latest versions of our dependencies. This is important for us and will make the project easier to maintain.
+
 
 #### CLI users
 If you are a command line user and use scripting, you will need to do a change to your scripts or add a extra configuration. 
