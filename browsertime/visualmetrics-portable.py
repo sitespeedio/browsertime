@@ -1120,7 +1120,7 @@ def calculate_histograms(directory, histograms_file, force):
         logging.debug("Histograms file {0} already exists".format(histograms_file))
     logging.debug("Done calculating histograms")
 
-
+# from matplotlib import pyplot
 def calculate_image_histogram(file):
     logging.debug("Calculating histogram for " + file)
     try:
@@ -1134,6 +1134,7 @@ def calculate_image_histogram(file):
             "g": [0 for i in range(256)],
             "b": [0 for i in range(256)],
         }
+        im.show()
         for entry in colors:
             try:
                 count = entry[0]
@@ -1146,6 +1147,7 @@ def calculate_image_histogram(file):
                     histogram["b"][pixel[2]] += count
             except Exception:
                 pass
+        print(histogram)
         colors = None
     except Exception:
         histogram = None
@@ -1352,30 +1354,34 @@ def calculate_visual_progress(histograms):
 
 
 def calculate_frame_progress(histogram, start, final):
+    """Calculate the progress percentage of a given frame histogram.
+
+    This method finds the visually-complete progress by taking a sum of
+    all the differences in the histogram between the current frame, and the
+    final frame. The initial/first frame is used to remove values that are
+    consitent between the first, and final frame (i.e. it's a baseline).
+
+    Note that this method should not be using a slop/fuzz because we aren't
+    looking at individual pixel intensities which is where the fuzz can be
+    found. Within individual channels, we hit an issue where we cannot tell
+    if a value in the red channel is purely from a red colour in the image, or
+    if it's mixed with other colours such as grey (e.g. red with rbg(240,0,0),
+    and light grey with rgb(245,245,245)).
+    """
     total = 0
     matched = 0
-    slop = 5  # allow for matching slight color variations
-    channels = ["r", "g", "b"]
-    for channel in channels:
-        channel_total = 0
-        channel_matched = 0
-        buckets = 256
-        available = [0 for i in range(buckets)]
-        for i in range(buckets):
-            available[i] = abs(histogram[channel][i] - start[channel][i])
-        for i in range(buckets):
-            target = abs(final[channel][i] - start[channel][i])
-            if target:
-                channel_total += target
-                low = max(0, i - slop)
-                high = min(buckets, i + slop)
-                for j in range(low, high):
-                    this_match = min(target, available[j])
-                    available[j] -= this_match
-                    channel_matched += this_match
-                    target -= this_match
-        total += channel_total
-        matched += channel_matched
+    for channel in ("r", "g", "b"):
+        for pixel_ind in range(256):
+            curr = histogram[channel][pixel_ind]
+            init = start[channel][pixel_ind]
+            target = final[channel][pixel_ind]
+
+            curr_diff = abs(curr - init)
+            target_diff = abs(target - init)
+
+            matched += min(curr_diff, target_diff)
+            total += target_diff
+
     progress = (float(matched) / float(total)) if total else 1
     return math.floor(progress * 100)
 
