@@ -1128,7 +1128,6 @@ def calculate_histograms(directory, histograms_file, force):
     logging.debug("Done calculating histograms")
 
 
-# from matplotlib import pyplot
 def calculate_image_histogram(file):
     logging.debug("Calculating histogram for " + file)
     try:
@@ -1142,7 +1141,6 @@ def calculate_image_histogram(file):
             "g": [0 for i in range(256)],
             "b": [0 for i in range(256)],
         }
-        im.show()
         for entry in colors:
             try:
                 count = entry[0]
@@ -1155,7 +1153,6 @@ def calculate_image_histogram(file):
                     histogram["b"][pixel[2]] += count
             except Exception:
                 pass
-        print(histogram)
         colors = None
     except Exception:
         histogram = None
