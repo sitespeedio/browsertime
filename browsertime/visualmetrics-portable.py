@@ -372,7 +372,7 @@ def video_to_frames(
     viewport_retries,
     viewport_min_height,
     viewport_min_width,
-    full_resolution
+    full_resolution,
 ):
     """Extract the video frames"""
     global client_viewport
@@ -413,9 +413,7 @@ def video_to_frames(
                         if orange_file is not None:
                             remove_frames_before_orange(dir, orange_file)
                             remove_orange_frames(dir, orange_file)
-                        find_render_start(
-                            dir, orange_file, cropped, is_mobile
-                        )
+                        find_render_start(dir, orange_file, cropped, is_mobile)
                         adjust_frame_times(dir)
                         eliminate_duplicate_frames(dir, cropped, is_mobile)
                         crop_viewport(dir)
@@ -508,6 +506,7 @@ def find_recording_platform(video):
 
     return is_mobile
 
+
 def remove_frames_before_orange(directory, orange_file):
     """Remove stray frames from the start of the video"""
     frames = sorted(glob.glob(os.path.join(directory, "video-*.png")))
@@ -532,6 +531,7 @@ def remove_frames_before_orange(directory, orange_file):
             for frame in remove_frames:
                 logging.debug("Removing pre-orange frame %s", frame)
                 os.remove(frame)
+
 
 def remove_orange_frames(directory, orange_file):
     """Remove orange frames from the beginning of the video"""
@@ -708,6 +708,7 @@ def find_video_viewport(
 
     return viewport, cropped
 
+
 def adjust_frame_times(directory):
     offset = None
     frames = sorted(glob.glob(os.path.join(directory, "video-*.png")))
@@ -727,6 +728,7 @@ def adjust_frame_times(directory):
                 new_time = frame_time - offset
                 dest = os.path.join(directory, "ms_{0:06d}.png".format(new_time))
                 os.rename(frame, dest)
+
 
 def find_render_start(directory, orange_file, cropped, is_mobile):
     logging.debug("Finding Render Start...")
@@ -902,6 +904,7 @@ def eliminate_duplicate_frames(directory, cropped, is_mobile):
     except BaseException:
         logging.exception("Error processing frames for duplicates")
 
+
 def crop_viewport(directory):
     if client_viewport is not None:
         try:
@@ -928,7 +931,9 @@ def crop_viewport(directory):
 def get_decimate_filter():
     decimate = None
     try:
-        filters = subprocess.check_output(["ffmpeg", "-filters"], stderr=subprocess.STDOUT, encoding="UTF-8")
+        filters = subprocess.check_output(
+            ["ffmpeg", "-filters"], stderr=subprocess.STDOUT, encoding="UTF-8"
+        )
         lines = filters.split("\n")
         match = re.compile(
             r"(?P<filter>[\w]*decimate).*V->V.*Remove near-duplicate frames"
@@ -1005,6 +1010,7 @@ def is_color_frame(file, color_file):
     frame_cache[file][color_file] = bool(match)
     return match
 
+
 def colors_are_similar(a, b, threshold=15):
     similar = True
     sum = 0
@@ -1073,6 +1079,7 @@ def generate_orange_png(orange_file):
     except BaseException:
         logging.exception("Error generating orange png " + orange_file)
 
+
 ##########################################################################
 #   Histogram calculations
 ##########################################################################
@@ -1119,6 +1126,7 @@ def calculate_histograms(directory, histograms_file, force):
     else:
         logging.debug("Histograms file {0} already exists".format(histograms_file))
     logging.debug("Done calculating histograms")
+
 
 # from matplotlib import pyplot
 def calculate_image_histogram(file):
@@ -1191,6 +1199,7 @@ def convert_to_jpeg(directory, quality):
         os.remove(file)
 
     logging.debug("Done converting video frames to JPEG")
+
 
 ##########################################################################
 #   Visual Metrics
@@ -1268,9 +1277,7 @@ def calculate_visual_metrics(
                     viewport = hero_data["viewport"]
                     hero_timings = []
                     for hero in hero_data["heroes"]:
-                        hero_time = calculate_hero_time(
-                                    progress, dirs, hero, viewport
-                                )
+                        hero_time = calculate_hero_time(progress, dirs, hero, viewport)
                         if hero_time is not None:
                             hero_timings.append(
                                 {
@@ -1615,16 +1622,14 @@ def calculate_hero_time(progress, directory, hero, viewport):
 def check_config():
     ok = True
 
-    
     if get_decimate_filter() is not None:
-        logging.debug('FFMPEG found')
+        logging.debug("FFMPEG found")
     else:
         print("ffmpeg: FAIL")
         ok = False
 
-    
     if sys.version_info >= (3, 6):
-        logging.debug('Python 3.6+ found')
+        logging.debug("Python 3.6+ found")
     else:
         print("Python 3.6+: FAIL")
         ok = False
@@ -1632,33 +1637,31 @@ def check_config():
     try:
         import numpy as np
 
-        logging.debug('Numpy found')
+        logging.debug("Numpy found")
     except BaseException:
         print("Numpy: FAIL")
         ok = False
 
-    
     try:
         import cv2
-        
-        logging.debug('OpenCV-Python found')
+
+        logging.debug("OpenCV-Python found")
     except BaseException:
         print("OpenCV-Python: FAIL")
         ok = False
 
-    
     try:
         from PIL import Image, ImageCms, ImageDraw, ImageOps  # noqa
 
-        logging.debug('Pillow found')
+        logging.debug("Pillow found")
     except BaseException:
         print("Pillow: FAIL")
         ok = False
 
-    
     try:
         from ssim import compute_ssim  # noqa
-        logging.debug('SSIM found')
+
+        logging.debug("SSIM found")
     except BaseException:
         print("SSIM: FAIL")
         ok = False
@@ -1668,8 +1671,10 @@ def check_config():
 
 def check_process(command, output):
     ok = False
-    try:   
-        out = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=True, encoding="UTF-8")
+    try:
+        out = subprocess.check_output(
+            command, stderr=subprocess.STDOUT, shell=True, encoding="UTF-8"
+        )
         if out.find(output) > -1:
             ok = True
     except BaseException:
@@ -1840,11 +1845,7 @@ def main():
 
     options = parser.parse_args()
 
-    if (
-        not options.check
-        and not options.dir
-        and not options.video
-    ):
+    if not options.check and not options.dir and not options.video:
         parser.error(
             "A video, Directory of images or histograms file needs to be provided.\n\n"
             "Use -h to see available options"
@@ -1916,7 +1917,7 @@ def main():
                     options.viewportminwidth,
                     options.full,
                 )
-            
+
             # Calculate the histograms and visual metrics
             calculate_histograms(directory, histogram_file, options.force)
             metrics = calculate_visual_metrics(
