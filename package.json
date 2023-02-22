@@ -12,7 +12,7 @@
     "@sitespeed.io/throttle": "5.0.0",
     "@sitespeed.io/tracium": "0.3.3",
     "btoa": "1.2.1",
-    "chrome-har": "0.13.0",
+    "chrome-har": "0.13.1",
     "chrome-remote-interface": "0.32.0",
     "dayjs": "1.11.7",
     "execa": "6.1.0",
