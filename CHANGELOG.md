@@ -3,9 +3,9 @@
 ## 17.1.0 - 2022-02-24
 
 ### Added
-* Fix visual-complete progress calculations to not use fuzz/slop, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1902](https://github.com/sitespeedio/browsertime/pull/1902).
 * Expose chrome-remote-interface client to scripting. This makes it so much easier to run whatever CDP command. Get the raw version `commands.cdp.getRawClient();`. See PR [#1905](https://github.com/sitespeedio/browsertime/pull/1905) for a concrete example until we update the documentation.
 ### Fixed
+* Fix visual-complete progress calculations to not use fuzz/slop, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1902](https://github.com/sitespeedio/browsertime/pull/1902).
 * Update to new Chrome HAR [#1906](https://github.com/sitespeedio/browsertime/pull/1906).
 * Fix flushing DNS on Ubuntu 22.04 [#1907](https://github.com/sitespeedio/browsertime/pull/1907).
 ## 17.0.0 - 2022-02-10
