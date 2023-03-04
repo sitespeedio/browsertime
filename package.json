@@ -1,5 +1,6 @@
 {
-  "description": "Browsertime",
+  "name": "browsertime",
+  "description": "Get performance metrics from your web page using Browsertime.",
   "version": "17.1.0",
   "bin": "./bin/browsertime.js",
   "type": "module",
@@ -70,9 +71,11 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
-  "name": "browsertime",
   "author": "Peter Hedenskog",
   "contributors": [
+    {
+      "name": "Gregory Mierzwinski"
+    },
     {
       "name": "Tobias Lidskog"
     },
