@@ -14,9 +14,9 @@
     "@sitespeed.io/tracium": "0.3.3",
     "btoa": "1.2.1",
     "chrome-har": "0.13.1",
-    "chrome-remote-interface": "0.32.0",
+    "chrome-remote-interface": "0.32.1",
     "dayjs": "1.11.7",
-    "execa": "6.1.0",
+    "execa": "7.0.0",
     "fast-stats": "0.0.6",
     "find-up": "6.3.0",
     "get-port": "6.1.2",
@@ -28,11 +28,11 @@
     "lodash.merge": "4.6.2",
     "lodash.pick": "4.4.0",
     "lodash.set": "4.3.2",
-    "selenium-webdriver": "4.8.0",
-    "yargs": "17.6.2"
+    "selenium-webdriver": "4.8.1",
+    "yargs": "17.7.1"
   },
   "optionalDependencies": {
-    "jimp": "0.22.1"
+    "jimp": "0.22.7"
   },
   "devDependencies": {
     "ava": "5.1.0",
