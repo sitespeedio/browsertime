@@ -1,5 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+
+## 17.1.1 - 2022-03-04
+### Fixed
+* Updated  jimp, yargs, webdriver, execa and chrome-remote-interface dependencies [#1909](https://github.com/sitespeedio/browsertime/pull/1909).
+* Added extra log message when using the package.json hack.
+
 ## 17.1.0 - 2022-02-24
 
 ### Added
