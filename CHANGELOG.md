@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Fixed
+* Bumped Geckodriver to 0.32.2 and Edgedriver to 111.
 
 ## 17.2.0 - 2022-03-14
 ### Added 
