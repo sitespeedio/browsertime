@@ -1,6 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
 
+## 17.2.0 - 2022-03-14
+### Added 
+* Updated Chrome, Chromedriver, Edge and Firefox to 111.
+
 ## 17.1.1 - 2022-03-04
 ### Fixed
 * Updated  jimp, yargs, webdriver, execa and chrome-remote-interface dependencies [#1909](https://github.com/sitespeedio/browsertime/pull/1909).
