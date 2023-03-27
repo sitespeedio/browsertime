@@ -1,22 +1,23 @@
 {
-  "description": "Browsertime",
-  "version": "17.0.0",
+  "name": "browsertime",
+  "description": "Get performance metrics from your web page using Browsertime.",
+  "version": "17.3.0",
   "bin": "./bin/browsertime.js",
   "type": "module",
   "dependencies": {
     "@cypress/xvfb": "1.2.4",
     "@devicefarmer/adbkit": "2.11.3",
-    "@sitespeed.io/chromedriver": "110.0.5481-77",
-    "@sitespeed.io/edgedriver": "109.0.1518-70",
-    "@sitespeed.io/geckodriver": "0.32.0",
+    "@sitespeed.io/chromedriver": "111.0.5563-64",
+    "@sitespeed.io/edgedriver": "111.0.1661-41",
+    "@sitespeed.io/geckodriver": "0.32.2",
     "@sitespeed.io/throttle": "5.0.0",
     "@sitespeed.io/tracium": "0.3.3",
     "bidi-har-export": "firefox-devtools/bidi-har-export#b92585f39b6640ec93e57b0395b4dc22c2bde666",
     "btoa": "1.2.1",
-    "chrome-har": "0.13.0",
-    "chrome-remote-interface": "0.32.0",
+    "chrome-har": "0.13.1",
+    "chrome-remote-interface": "0.32.1",
     "dayjs": "1.11.7",
-    "execa": "6.1.0",
+    "execa": "7.0.0",
     "fast-stats": "0.0.6",
     "find-up": "6.3.0",
     "get-port": "6.1.2",
@@ -28,11 +29,11 @@
     "lodash.merge": "4.6.2",
     "lodash.pick": "4.4.0",
     "lodash.set": "4.3.2",
-    "selenium-webdriver": "4.8.0",
-    "yargs": "17.6.2"
+    "selenium-webdriver": "4.8.2",
+    "yargs": "17.7.1"
   },
   "optionalDependencies": {
-    "jimp": "0.22.1"
+    "jimp": "0.22.7"
   },
   "devDependencies": {
     "ava": "5.1.0",
@@ -71,9 +72,11 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
-  "name": "browsertime",
   "author": "Peter Hedenskog",
   "contributors": [
+    {
+      "name": "Gregory Mierzwinski"
+    },
     {
       "name": "Tobias Lidskog"
     },

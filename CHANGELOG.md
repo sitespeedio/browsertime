@@ -1,5 +1,35 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 17.3.0 - 2022-03-26
+
+### Fixed
+* Bumped Selenium-webdriver to 4.8.2 [#1916](https://github.com/sitespeedio/browsertime/pull/1916).
+
+### Added
+* On Linux you can use taskset to assing FFMPEG to specific CPUs using `--videoParams.taskset "0,5,7,9-11" `. It will start FFMPEG with `taskset -c <CPUS>` to pin FFMPG to specific CPU(s). Specify a numerical list of processors. The list may contain multiple items, separated by comma, and ranges. For example, "0,5,7,9-11". Use it together with isolcpus. Added in [#1917](https://github.com/sitespeedio/browsertime/pull/1917).
+
+* If you use a rooted Samsung A51 you can now choose the CPU speed (min/middle/max) using `--android.pinCPUSpeed min|middle|max` [#1915](https://github.com/sitespeedio/browsertime/pull/1915).
+## 17.2.1 - 2022-03-16
+### Fixed
+* Bumped Geckodriver to 0.32.2 and Edgedriver to 111.
+
+## 17.2.0 - 2022-03-14
+### Added 
+* Updated Chrome, Chromedriver, Edge and Firefox to 111.
+
+## 17.1.1 - 2022-03-04
+### Fixed
+* Updated  jimp, yargs, webdriver, execa and chrome-remote-interface dependencies [#1909](https://github.com/sitespeedio/browsertime/pull/1909).
+* Added extra log message when using the package.json hack.
+
+## 17.1.0 - 2022-02-24
+
+### Added
+* Expose chrome-remote-interface client to scripting. This makes it so much easier to run whatever CDP command. Get the raw version `commands.cdp.getRawClient();`. See PR [#1905](https://github.com/sitespeedio/browsertime/pull/1905) for a concrete example until we update the documentation.
+### Fixed
+* Fix visual-complete progress calculations to not use fuzz/slop, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1902](https://github.com/sitespeedio/browsertime/pull/1902).
+* Update to new Chrome HAR [#1906](https://github.com/sitespeedio/browsertime/pull/1906).
+* Fix flushing DNS on Ubuntu 22.04 [#1907](https://github.com/sitespeedio/browsertime/pull/1907).
 ## 17.0.0 - 2022-02-10
 
 ### Breaking changes
