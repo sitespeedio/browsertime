@@ -12,7 +12,7 @@
     "@sitespeed.io/geckodriver": "0.32.2",
     "@sitespeed.io/throttle": "5.0.0",
     "@sitespeed.io/tracium": "0.3.3",
-    "bidi-har-export": "firefox-devtools/bidi-har-export#b92585f39b6640ec93e57b0395b4dc22c2bde666",
+    "bidi-har-export": "firefox-devtools/bidi-har-export#55179f52bb77ea103569bb19ededef4c78d84048",
     "btoa": "1.2.1",
     "chrome-har": "0.13.1",
     "chrome-remote-interface": "0.32.1",
