@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 17.4.0 - 2022-03-29
+### Added
+* Log the CPU benchmark metric to the console. This is useful (at least for me) when debugging instances with a lot of instability. [#1920](https://github.com/sitespeedio/browsertime/pull/1920).
+* In Chrome 111 some metrics become more instable when running on host with limited CPU. This change also exists in 112 beta. However we where missing out on a couple of command line magic to disable features in Chrome, this fixes that [#1921](https://github.com/sitespeedio/browsertime/pull/1921).
+
 ## 17.3.0 - 2022-03-26
 
 ### Fixed
