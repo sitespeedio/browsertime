@@ -3,7 +3,7 @@
 ## 17.5.0 - UNRELEASED
 
 ### Added
-* There's a new better way to get the HAR from Firefox using Bidi. Thank you [Julian Descottes](https://github.com/juliandescottes) and others at Mozilla that made this happen! With the new version we hope to see less overhead getting the HAR +  it works on Firefox on Android [#1918](https://github.com/sitespeedio/browsertime/pull/1918).
+* There's a new better way to get the HAR from [Firefox using WebDriver BiDi network events](https://github.com/firefox-devtools/bidi-har-export). Thank you [Julian Descottes](https://github.com/juliandescottes) and others at Mozilla that made this happen! With the new version we hope to see less overhead getting the HAR +  it works on Firefox on Android [#1918](https://github.com/sitespeedio/browsertime/pull/1918).
 ### Fixed
 * Fixed the interaction to next paint error message that started to appear in latest Chrome [#1924](https://github.com/sitespeedio/browsertime/pull/1924).
 
