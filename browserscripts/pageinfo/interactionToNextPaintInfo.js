@@ -95,7 +95,7 @@
           const interaction = {
             id: entry.interactionId,
             latency: entry.duration,
-            entries: [entry]
+            name: entry.name
           };
           longestInteractionMap[interaction.id] = interaction;
           longestInteractionList.push(interaction);
