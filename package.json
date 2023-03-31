@@ -1,7 +1,7 @@
 {
   "name": "browsertime",
   "description": "Get performance metrics from your web page using Browsertime.",
-  "version": "17.5.0-beta3",
+  "version": "17.5.0-beta4",
   "bin": "./bin/browsertime.js",
   "type": "module",
   "dependencies": {
