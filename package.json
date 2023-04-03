@@ -9,7 +9,7 @@
     "@devicefarmer/adbkit": "2.11.3",
     "@sitespeed.io/chromedriver": "111.0.5563-64",
     "@sitespeed.io/edgedriver": "111.0.1661-41",
-    "@sitespeed.io/geckodriver": "0.32.2",
+    "@sitespeed.io/geckodriver": "0.33.0",
     "@sitespeed.io/throttle": "5.0.0",
     "@sitespeed.io/tracium": "0.3.3",
     "ff-test-bidi-har-export": "0.0.6",
