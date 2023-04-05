@@ -1,4 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
+## 17.6.0 - 2022-04-05
+### Fixed
+* Increased the default wait time from 2 to 5 seconds when a element a clicked and the page complete check runs [#1931](https://github.com/sitespeedio/browsertime/pull/1931)
+
+### Added
+* Upgraded to Chrome/Chromedriver 112 in the Docker container [#1932](https://github.com/sitespeedio/browsertime/pull/1932).
+* If you use `--headless` Chrome will use the new headless switch [#1933](https://github.com/sitespeedio/browsertime/pull/1933).
 
 ## 17.5.0 - 2022-04-04
 
