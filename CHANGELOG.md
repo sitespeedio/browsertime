@@ -1,4 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
+
+## 17.7.0 - 2022-04-07
+### Added
+* Added Edge/Edgedriver 112.
+
 ## 17.6.0 - 2022-04-05
 ### Fixed
 * Increased the default wait time from 2 to 5 seconds when a element a clicked and the page complete check runs [#1931](https://github.com/sitespeedio/browsertime/pull/1931)
