@@ -1,8 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 17.7.0 - 2022-04-11
 ### Fixed
-* Upgraded to Firefox HAR 0.0.8 [#1937](https://github.com/sitespeedio/browsertime/pull/1937). This can go live when Firefox 112 is out (2023-04-11). Lets do another tests and then switch to default when I've verified all the tests again.
+* Upgraded to Firefox HAR 0.0.8 [#1937](https://github.com/sitespeedio/browsertime/pull/1937). 
+
+### Added
+* Upgraded to Firefox 112 in the Docker container.
 ## 17.7.0 - 2022-04-07
 ### Added
 * Added Edge/Edgedriver 112.
