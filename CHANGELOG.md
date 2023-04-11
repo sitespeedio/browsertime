@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 17.7.0 - 2022-04-11
+## 17.8.0 - 2022-04-11
 ### Fixed
 * Upgraded to Firefox HAR 0.0.8 [#1937](https://github.com/sitespeedio/browsertime/pull/1937). 
 
