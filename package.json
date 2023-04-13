@@ -1,17 +1,18 @@
 {
   "name": "browsertime",
   "description": "Get performance metrics from your web page using Browsertime.",
-  "version": "17.2.1",
+  "version": "17.8.1",
   "bin": "./bin/browsertime.js",
   "type": "module",
   "dependencies": {
     "@cypress/xvfb": "1.2.4",
     "@devicefarmer/adbkit": "2.11.3",
-    "@sitespeed.io/chromedriver": "111.0.5563-64",
-    "@sitespeed.io/edgedriver": "111.0.1661-41",
-    "@sitespeed.io/geckodriver": "0.32.2",
+    "@sitespeed.io/chromedriver": "112.0.5615-28",
+    "@sitespeed.io/edgedriver": "112.0.1722-34",
+    "@sitespeed.io/geckodriver": "0.33.0",
     "@sitespeed.io/throttle": "5.0.0",
     "@sitespeed.io/tracium": "0.3.3",
+    "ff-test-bidi-har-export": "0.0.10",
     "btoa": "1.2.1",
     "chrome-har": "0.13.1",
     "chrome-remote-interface": "0.32.1",
@@ -28,7 +29,7 @@
     "lodash.merge": "4.6.2",
     "lodash.pick": "4.4.0",
     "lodash.set": "4.3.2",
-    "selenium-webdriver": "4.8.1",
+    "selenium-webdriver": "4.8.2",
     "yargs": "17.7.1"
   },
   "optionalDependencies": {

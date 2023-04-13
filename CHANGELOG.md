@@ -1,5 +1,50 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 17.8.1 - 2022-04-12
+### Fixed
+* Upgraded to Firefox HAR 0.0.10 [#1939](https://github.com/sitespeedio/browsertime/pull/1939). 
+## 17.8.0 - 2022-04-11
+### Fixed
+* Upgraded to Firefox HAR 0.0.8 [#1937](https://github.com/sitespeedio/browsertime/pull/1937). 
+
+### Added
+* Upgraded to Firefox 112 in the Docker container.
+## 17.7.0 - 2022-04-07
+### Added
+* Added Edge/Edgedriver 112.
+
+## 17.6.0 - 2022-04-05
+### Fixed
+* Increased the default wait time from 2 to 5 seconds when a element a clicked and the page complete check runs [#1931](https://github.com/sitespeedio/browsertime/pull/1931)
+
+### Added
+* Upgraded to Chrome/Chromedriver 112 in the Docker container [#1932](https://github.com/sitespeedio/browsertime/pull/1932).
+* If you use `--headless` Chrome will use the new headless switch [#1933](https://github.com/sitespeedio/browsertime/pull/1933).
+
+## 17.5.0 - 2022-04-04
+
+### Added
+* There's a new better way to get the HAR from [Firefox using WebDriver BiDi network events](https://github.com/firefox-devtools/bidi-har-export). Thank you [Julian Descottes](https://github.com/juliandescottes) and others at Mozilla that made this happen! With the new version we hope to see less overhead getting the HAR +  it works on Firefox on Android [#1918](https://github.com/sitespeedio/browsertime/pull/1918). You can turn it on with `--firefox.bidihar`.
+* Updated to Geckodriver 0.33 [#1928](https://github.com/sitespeedio/browsertime/pull/1928).
+
+### Fixed
+* Fixed the interaction to next paint error message that started to appear in latest Chrome [#1924](https://github.com/sitespeedio/browsertime/pull/1924).
+* Safer check for getting last meaningful paint  [#1927](https://github.com/sitespeedio/browsertime/pull/1927)
+
+## 17.4.0 - 2022-03-29
+### Added
+* Log the CPU benchmark metric to the console. This is useful (at least for me) when debugging instances with a lot of instability. [#1920](https://github.com/sitespeedio/browsertime/pull/1920).
+* In Chrome 111 some metrics become more instable when running on host with limited CPU. This change also exists in 112 beta. However we where missing out on a couple of command line magic to disable features in Chrome, this fixes that [#1921](https://github.com/sitespeedio/browsertime/pull/1921).
+
+## 17.3.0 - 2022-03-26
+
+### Fixed
+* Bumped Selenium-webdriver to 4.8.2 [#1916](https://github.com/sitespeedio/browsertime/pull/1916).
+
+### Added
+* On Linux you can use taskset to assing FFMPEG to specific CPUs using `--videoParams.taskset "0,5,7,9-11" `. It will start FFMPEG with `taskset -c <CPUS>` to pin FFMPG to specific CPU(s). Specify a numerical list of processors. The list may contain multiple items, separated by comma, and ranges. For example, "0,5,7,9-11". Use it together with isolcpus. Added in [#1917](https://github.com/sitespeedio/browsertime/pull/1917).
+
+* If you use a rooted Samsung A51 you can now choose the CPU speed (min/middle/max) using `--android.pinCPUSpeed min|middle|max` [#1915](https://github.com/sitespeedio/browsertime/pull/1915).
 ## 17.2.1 - 2022-03-16
 ### Fixed
 * Bumped Geckodriver to 0.32.2 and Edgedriver to 111.

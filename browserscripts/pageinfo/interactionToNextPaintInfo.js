@@ -86,7 +86,11 @@
       ) {
         // If the interaction already exists, update it. Otherwise create one.
         if (existingInteraction) {
-          existingInteraction.entries.push(entry);
+          existingInteraction.entries.push(
+            { id: entry.interactionId,
+              latency: entry.duration,
+              name: entry.name 
+            });
           existingInteraction.latency = Math.max(
             existingInteraction.latency,
             entry.duration
@@ -95,7 +99,13 @@
           const interaction = {
             id: entry.interactionId,
             latency: entry.duration,
-            entries: [entry]
+            entries: [
+                      { 
+                        id: entry.interactionId,
+                        latency: entry.duration,
+                        name: entry.name 
+                      }
+                      ]
           };
           longestInteractionMap[interaction.id] = interaction;
           longestInteractionList.push(interaction);
