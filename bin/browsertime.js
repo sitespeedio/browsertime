@@ -123,7 +123,7 @@ async function run(urls, options) {
         );
       }
 
-      if (options.extraTrace) {
+      if (options.enableProfileRun) {
         log.info('Make one extra run to collect trace information');
         options.iterations = 1;
         if (options.browser === 'firefox') {
