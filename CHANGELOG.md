@@ -1,8 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 17.9.0 - UNRELEASED
+## 17.9.0 - 2022-04-19
 ### Added
 * New command to start geckoprofiling when scripting using Firefox. Thank you [KS](https://github.com/92kns) for PR [#1934](https://github.com/sitespeedio/browsertime/pull/1934). This is probably only something you need if you work at Mozilla. There's also a follow PR [#1940](https://github.com/sitespeedio/browsertime/pull/1940) that fixes some of the issues I've been wanted to fix with the Geckoprofiler code.
+
+* Use `--enableProfileRun` to make one extra run where metrics aren't collected but Geckoprofiler or Chromes timeline log is turned on. This useful if you are worrying about the trace causing overhead, but you still wan trace from the test/journey. It's a little rough at the moment so it will a follow up in the future [#1943](https://github.com/sitespeedio/browsertime/pull/1943).
 
 ## 17.8.1 - 2022-04-12
 ### Fixed
