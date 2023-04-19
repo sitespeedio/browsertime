@@ -122,6 +122,28 @@ async function run(urls, options) {
           storageManager.writeJson(harName + '.har', result.har, useGzip)
         );
       }
+
+      if (options.enableProfileRun) {
+        log.info('Make one extra run to collect trace information');
+        options.iterations = 1;
+        if (options.browser === 'firefox') {
+          options.firefox.geckoProfiler = true;
+        } else if (options.browser === 'chrome') {
+          options.chrome.timeline = true;
+          options.cpu = true;
+          options.chrome.enableTraceScreenshots = true;
+          options.chrome.traceCategory = [
+            'disabled-by-default-v8.cpu_profiler'
+          ];
+        }
+        options.video = false;
+        options.visualMetrics = false;
+        const traceEngine = new Engine(options);
+        await traceEngine.start();
+        await traceEngine.runMultiple(urls, scriptsByCategory);
+        await traceEngine.stop();
+      }
+
       await Promise.all(saveOperations);
 
       const resultDirectory = relative(process.cwd(), storageManager.directory);
