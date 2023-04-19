@@ -6,6 +6,9 @@
 
 * Use `--enableProfileRun` to make one extra run where metrics aren't collected but Geckoprofiler or Chromes timeline log is turned on. This useful if you are worrying about the trace causing overhead, but you still wan trace from the test/journey. It's a little rough at the moment so it will a follow up in the future [#1943](https://github.com/sitespeedio/browsertime/pull/1943).
 
+### Fixed
+* Bump Chrome remote interface and execa [#1941](https://github.com/sitespeedio/browsertime/pull/1941).
+
 ## 17.8.1 - 2022-04-12
 ### Fixed
 * Upgraded to Firefox HAR 0.0.10 [#1939](https://github.com/sitespeedio/browsertime/pull/1939). 
