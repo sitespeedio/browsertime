@@ -36,8 +36,6 @@ jobs:
         python -m pip show pyssim
         system_profiler SPDisplaysDataType |grep Resolution
         ffmpeg -version
-    - name: Check Visual Metrics dependencies
-      run: ./browsertime/visualmetrics.py --check
     - name: List all simulators
       run: xcrun xctrace list devices
     - name: Boot iPhone 12
