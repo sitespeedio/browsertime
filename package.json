@@ -8,7 +8,7 @@
     "@cypress/xvfb": "1.2.4",
     "@devicefarmer/adbkit": "2.11.3",
     "@sitespeed.io/chromedriver": "113.0.5672-63",
-    "@sitespeed.io/edgedriver": "112.0.1722-34",
+    "@sitespeed.io/edgedriver": "113.0.1774-9",
     "@sitespeed.io/geckodriver": "0.33.0",
     "@sitespeed.io/throttle": "5.0.0",
     "@sitespeed.io/tracium": "0.3.3",
@@ -29,11 +29,11 @@
     "lodash.merge": "4.6.2",
     "lodash.pick": "4.4.0",
     "lodash.set": "4.3.2",
-    "selenium-webdriver": "4.8.2",
-    "yargs": "17.7.1"
+    "selenium-webdriver": "4.9.2",
+    "yargs": "17.7.2"
   },
   "optionalDependencies": {
-    "jimp": "0.22.7"
+    "jimp": "0.22.8"
   },
   "devDependencies": {
     "ava": "5.1.0",
