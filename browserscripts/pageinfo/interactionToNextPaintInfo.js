@@ -1,51 +1,32 @@
 (function () {
+
   // This is an updated version of
   // https://github.com/GoogleChrome/web-vitals/blob/next/src/onINP.ts
+  // It was redworked the 19/5-2023
 
   const supported = PerformanceObserver.supportedEntryTypes;
-  if (!supported || supported.indexOf('event') === -1) {
+  if (!supported || supported.indexOf('event') === -1 ||  supported.indexOf('first-input') === -1) {
     return;
   }
-
-  const observer = new PerformanceObserver(list => {});
-  // Event Timing entries have their durations rounded to the nearest 8ms,
-  // so a duration of 40ms would be any event that spans 2.5 or more frames
-  // at 60Hz. This threshold is chosen to strike a balance between usefulness
-  // and performance. Running this callback for any interaction that spans
-  // just one or two frames is likely not worth the insight that could be
-  // gained.
-  observer.observe({type: 'event', buffered: true, durationThreshold: 40});
-  const entries = observer.takeRecords();
-
-  // To prevent unnecessary memory usage on pages with lots of interactions,
-  // store at most 10 of the longest interactions to consider as INP candidates.
-  const MAX_INTERACTIONS_TO_CONSIDER = 10;
-
-  // A list of longest interactions on the page (by latency) sorted so the
-  // longest one is first. The list is as most MAX_INTERACTIONS_TO_CONSIDER long.
-  let longestInteractionList = [];
-
-  // A mapping of longest interactions by their interaction ID.
-  // This is used for faster lookup.
-  const longestInteractionMap = {};
-
-  const getInteractionCountForNavigation = () => {
-    // I guess the interactionCount is coming in Chrome later on
-    if (performance.interactionCount) {
-      return performance.interactionCount;
-    } else {
-      const observerForAll = new PerformanceObserver(list => {});
-      observerForAll.observe({
-        type: 'event',
-        buffered: true,
-        durationThreshold: 0
-      });
-      const allEntries = observerForAll.takeRecords();
-      let interactionCountEstimate = 0;
-      let minKnownInteractionId = Infinity;
-      let maxKnownInteractionId = 0;
-
-      for (let e of allEntries) {
+    var observe = function observe(type, callback, opts) {
+      try {
+        if (PerformanceObserver.supportedEntryTypes.includes(type)) {
+          var po = new PerformanceObserver(function (list) {
+            Promise.resolve().then(function () {
+              callback(list.getEntries());
+            });
+          });
+          po.observe(Object.assign({type: type, buffered: true}, opts || {}));
+          return po;
+        }
+      } catch (e) {}
+      return;
+    };
+    var interactionCountEstimate = 0;
+    var minKnownInteractionId = Infinity;
+    var maxKnownInteractionId = 0;
+    var updateEstimate = function updateEstimate(entries) {
+      entries.forEach(function (e) {
         if (e.interactionId) {
           minKnownInteractionId = Math.min(
             minKnownInteractionId,
@@ -55,73 +36,117 @@
             maxKnownInteractionId,
             e.interactionId
           );
-
           interactionCountEstimate = maxKnownInteractionId
             ? (maxKnownInteractionId - minKnownInteractionId) / 7 + 1
             : 0;
         }
-      }
-      return interactionCountEstimate;
-    }
-  };
-
-  const estimateP98LongestInteraction = () => {
-    const candidateInteractionIndex = Math.min(
-      longestInteractionList.length - 1,
-      Math.floor(getInteractionCountForNavigation() / 50)
-    );
-
-    return longestInteractionList[candidateInteractionIndex];
-  };
-
-  if (entries.length > 0) {
-    for (let entry of entries) {
-      const minLongestInteraction =
+      });
+    };
+    var po;
+    var getInteractionCount = function getInteractionCount() {
+      return po ? interactionCountEstimate : performance.interactionCount || 0;
+    };
+    var initInteractionCountPolyfill = function initInteractionCountPolyfill() {
+      if ('interactionCount' in performance || po) return;
+      po = observe('event', updateEstimate, {
+        type: 'event',
+        buffered: true,
+        durationThreshold: 0,
+      });
+    };
+    var prevInteractionCount = 0;
+    var getInteractionCountForNavigation =
+      function getInteractionCountForNavigation() {
+        return getInteractionCount() - prevInteractionCount;
+      };
+    var MAX_INTERACTIONS_TO_CONSIDER = 10;
+    var longestInteractionList = [];
+    var longestInteractionMap = {};
+    var processEntry = function processEntry(entry) {
+      var minLongestInteraction =
         longestInteractionList[longestInteractionList.length - 1];
-      const existingInteraction = longestInteractionMap[entry.interactionId];
+      var existingInteraction = longestInteractionMap[entry.interactionId];
       if (
         existingInteraction ||
         longestInteractionList.length < MAX_INTERACTIONS_TO_CONSIDER ||
         entry.duration > minLongestInteraction.latency
       ) {
-        // If the interaction already exists, update it. Otherwise create one.
         if (existingInteraction) {
-          existingInteraction.entries.push(
-            { id: entry.interactionId,
-              latency: entry.duration,
-              name: entry.name 
-            });
+          existingInteraction.entries.push(entry);
           existingInteraction.latency = Math.max(
             existingInteraction.latency,
             entry.duration
           );
         } else {
-          const interaction = {
+          var interaction = {
             id: entry.interactionId,
             latency: entry.duration,
-            entries: [
-                      { 
-                        id: entry.interactionId,
-                        latency: entry.duration,
-                        name: entry.name 
-                      }
-                      ]
+            entries: [entry],
           };
           longestInteractionMap[interaction.id] = interaction;
           longestInteractionList.push(interaction);
         }
-
-        // Sort the entries by latency (descending) and keep only the top ten.
-        longestInteractionList.sort((a, b) => b.latency - a.latency);
+        longestInteractionList.sort(function (a, b) {
+          return b.latency - a.latency;
+        });
         longestInteractionList
           .splice(MAX_INTERACTIONS_TO_CONSIDER)
-          .forEach(i => {
+          .forEach(function (i) {
             delete longestInteractionMap[i.id];
           });
       }
+    };
+    var estimateP98LongestInteraction = function estimateP98LongestInteraction() {
+      var candidateInteractionIndex = Math.min(
+        longestInteractionList.length - 1,
+        Math.floor(getInteractionCountForNavigation() / 50)
+      );
+      return longestInteractionList[candidateInteractionIndex];
+    };
+  
+    var opts = {};
+    var metric = {};
+    initInteractionCountPolyfill();
+    var handleEntries = function handleEntries(entries) {
+      entries.forEach(function (entry) {
+        if (entry.interactionId) {
+          processEntry(entry);
+        }
+        if (entry.entryType === 'first-input') {
+          var noMatchingEntry = !longestInteractionList.some(function (
+            interaction
+          ) {
+            return interaction.entries.some(function (prevEntry) {
+              return (
+                entry.duration === prevEntry.duration &&
+                entry.startTime === prevEntry.startTime
+              );
+            });
+          });
+          if (noMatchingEntry) {
+            processEntry(entry);
+          }
+        }
+      });
+      var inp = estimateP98LongestInteraction();
+      if (inp && inp.latency !== metric.value) {
+        var cleanedEntries = [];
+        for (var entry of inp.entries) {
+          console.log(entry);
+          cleanedEntries.push({ 
+            id: entry.interactionId,
+            latency: entry.duration,
+            name: entry.name
+          });
+        }
+        return {latency: inp.latency, entries: cleanedEntries};
+      }
+    };
+    var po = observe('event', handleEntries, {
+      durationThreshold: opts.durationThreshold || 40,
+    });
+    if (po) {
+      po.observe({type: 'first-input', buffered: true});
     }
-    return estimateP98LongestInteraction();
-  } else {
-    // nothing to report
-  }
-})();
+  })({});
+  
