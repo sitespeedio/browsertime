@@ -1,8 +1,8 @@
 (function () {
 
   // This is an updated version of
-  // https://github.com/GoogleChrome/web-vitals/blob/next/src/onINP.ts
-  // It was redworked the 19/5-2023
+  // https://github.com/GoogleChrome/web-vitals/blob/64f133590fcac72c1bc042bf7b4ab729d7e03316/src/onINP.ts
+  // It was reworked the 19/5-2023
 
   const supported = PerformanceObserver.supportedEntryTypes;
   if (!supported || supported.indexOf('event') === -1 ||  supported.indexOf('first-input') === -1) {
