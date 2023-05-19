@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 17.10.1 - 2022-05-19
+### Fixed
+* Updated code to collect Interaction To Next Paint [#1952](https://github.com/sitespeedio/browsertime/pull/1952). This new version follow updated version(s) of Google Web Vitals.
+
 ## 17.10.0 - 2022-05-19
 
 ### Added
