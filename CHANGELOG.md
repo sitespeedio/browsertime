@@ -1,5 +1,18 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 17.10.1 - 2022-05-19
+### Fixed
+* Updated code to collect Interaction To Next Paint [#1952](https://github.com/sitespeedio/browsertime/pull/1952). This new version follow updated version(s) of Google Web Vitals.
+
+## 17.10.0 - 2022-05-19
+
+### Added
+* Chrome, Edge and Firefox 113 [#1946](https://github.com/sitespeedio/browsertime/pull/1946), Chromedriver 113 [#1947](https://github.com/sitespeedio/browsertime/pull/1947) and Edgedriver 113 [#1949](https://github.com/sitespeedio/browsertime/pull/1949).
+
+### Fixed
+* Bugfix for running iPhone Siumlator (and run tests on latest Mac OS) [#1945](https://github.com/sitespeedio/browsertime/pull/1945).
+* Bumped dependencies for Selenium, yargs and jimp [#1950](https://github.com/sitespeedio/browsertime/pull/1950).
+
 ## 17.9.0 - 2022-04-19
 ### Added
 * New command to start geckoprofiling when scripting using Firefox. Thank you [KS](https://github.com/92kns) for PR [#1934](https://github.com/sitespeedio/browsertime/pull/1934). This is probably only something you need if you work at Mozilla. There's also a follow PR [#1940](https://github.com/sitespeedio/browsertime/pull/1940) that fixes some of the issues I've been wanted to fix with the Geckoprofiler code.
