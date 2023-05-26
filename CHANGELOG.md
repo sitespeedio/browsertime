@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 17.10.2 - 2022-05-26
+### Fixed
+* Fix for--host-resolver-rules, thank you [Mikhail](https://github.com/atuchin-m) for PR [#1953](https://github.com/sitespeedio/browsertime/pull/1953).
+
 ## 17.10.1 - 2022-05-19
 ### Fixed
 * Updated code to collect Interaction To Next Paint [#1952](https://github.com/sitespeedio/browsertime/pull/1952). This new version follow updated version(s) of Google Web Vitals.
