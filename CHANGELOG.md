@@ -1,8 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Fixed
+* Fixed broken Docker auto build that skipped adding Docker manifest file.
+
 ## 17.10.2 - 2022-05-26
 ### Fixed
-* Fix for--host-resolver-rules, thank you [Mikhail](https://github.com/atuchin-m) for PR [#1953](https://github.com/sitespeedio/browsertime/pull/1953).
+* Fix for --host-resolver-rules, thank you [Mikhail](https://github.com/atuchin-m) for PR [#1953](https://github.com/sitespeedio/browsertime/pull/1953).
 
 ## 17.10.1 - 2022-05-19
 ### Fixed
