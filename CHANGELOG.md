@@ -1,8 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 17.11.2 - 2022-06-01
 ### Fixed
 * Fixed broken Docker auto build that skipped adding Docker manifest file.
+
+### Added
+* Use Chrome ane Chromedriver 114.
 
 ## 17.10.2 - 2022-05-26
 ### Fixed
