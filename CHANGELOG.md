@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 17.11.2 - 2022-06-01
+## 17.11.0 - 2022-06-01
 ### Fixed
 * Fixed broken Docker auto build that skipped adding Docker manifest file.
 
