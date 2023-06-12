@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 17.11.0 - 2022-06-12
+### Fixed
+* If Chrome do not collect largest contentful paint, log that instead of just log null [#1957](https://github.com/sitespeedio/browsertime/pull/1957).
+
 ## 17.11.0 - 2022-06-01
 ### Fixed
 * Fixed broken Docker auto build that skipped adding Docker manifest file.
