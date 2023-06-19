@@ -85,6 +85,10 @@ jobs:
       run: ./bin/browsertime.js -b chrome --preWarmServer --xvfb http://127.0.0.1:3000/simple/
     - name: Run test with screenshots
       run: ./bin/browsertime.js -b chrome --screenshotLCP --screenshotLS --xvfb http://127.0.0.1:3000/simple/
+    - name: Run test with check network idle in Chrome
+      run: ./bin/browsertime.js -b chrome --pageCompleteCheckNetworkIdle--xvfb http://127.0.0.1:3000/simple/
+    - name: Run test with check network idle in Firefox
+      run: ./bin/browsertime.js -b firefox --pageCompleteCheckNetworkIdle--xvfb http://127.0.0.1:3000/simple/
     - name: Run test with scripting.mjs
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/scripting/module.mjs
     - name: Run test with scripting.cjs
