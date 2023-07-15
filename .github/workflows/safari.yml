@@ -42,10 +42,10 @@ jobs:
       run: |
         IPHONE14=$(xcrun xctrace list devices  2>&1  | grep -m 1 "iPhone 14 Simulator" | awk -F'[()]' '{print $4}')
         xcrun simctl boot $IPHONE14
-    - name: Start local HTTP server
-      run: (npm run start-server&)
+    #- name: Start local HTTP server
+    # run: (npm run start-server&)
     - name: Test Safari without video 
-      run: ./bin/browsertime.js -b safari -n 1 http://127.0.0.1:3000/simple/
+      run: ./bin/browsertime.js -b safari -n 1 https://www.sitespeed.io/
     - name: Test Safari iOS simulator 
       run: |
         IPHONE14=$(xcrun xctrace list devices  2>&1  | grep -m 1 "iPhone 14 Simulator" | awk -F'[()]' '{print $4}')
