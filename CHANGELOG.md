@@ -1,5 +1,25 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 17.11.2 - 2022-06-19
+### Fixed
+* Fix --debug mode. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1959](https://github.com/sitespeedio/browsertime/pull/1959).
+* Update ff-test-bidi-har-export to 0.0.11 that fixes some error logs [#1961](https://github.com/sitespeedio/browsertime/pull/1961).
+
+## 17.11.1 - 2022-06-12
+### Fixed
+* If Chrome do not collect largest contentful paint, log that instead of just log null [#1957](https://github.com/sitespeedio/browsertime/pull/1957).
+
+## 17.11.0 - 2022-06-01
+### Fixed
+* Fixed broken Docker auto build that skipped adding Docker manifest file.
+
+### Added
+* Use Chrome ane Chromedriver 114.
+
+## 17.10.2 - 2022-05-26
+### Fixed
+* Fix for --host-resolver-rules, thank you [Mikhail](https://github.com/atuchin-m) for PR [#1953](https://github.com/sitespeedio/browsertime/pull/1953).
+
 ## 17.10.1 - 2022-05-19
 ### Fixed
 * Updated code to collect Interaction To Next Paint [#1952](https://github.com/sitespeedio/browsertime/pull/1952). This new version follow updated version(s) of Google Web Vitals.
