@@ -33,7 +33,7 @@
     "yargs": "17.7.2"
   },
   "optionalDependencies": {
-    "jimp": "0.22.8"
+    "jimp": "0.32.3"
   },
   "devDependencies": {
     "ava": "5.1.0",
