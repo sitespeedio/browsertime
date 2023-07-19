@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 17.12.1 - 2022-07-19
+### Fixed
+* Hmm, Chromedriver 115 doesn't seems to work on Mac so reverted to 114.
+
 ## 17.12.0 - 2022-07-19
 ### Added
 * Chrome and Chromedriver 115. The Chrome team has changed the hosting of Chromedriver, so the logic for downloading Chromedriver has changed [#1967](https://github.com/sitespeedio/browsertime/pull/1967).
