@@ -1,5 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 17.12.0 - 2022-07-19
+### Added
+* Chrome and Chromedriver 115. The Chrome team has changed the hosting of Chromedriver, so the logic for downloading Chromedriver has changed [#1967](https://github.com/sitespeedio/browsertime/pull/1967).
+
+* If you collect the Chrome devtools trace using `--cpu` we will now also collect the number of elements that needs recalculate styles before FCP/LCP.[#1964](https://github.com/sitespeedio/browsertime/pull/1964).
+
 ## 17.11.2 - 2022-06-19
 ### Fixed
 * Fix --debug mode. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1959](https://github.com/sitespeedio/browsertime/pull/1959).
