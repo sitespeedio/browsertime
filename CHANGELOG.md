@@ -1,7 +1,7 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
 
-## 17.13.0 - UNRELEASED
+## 17.13.0 - 2022-07-21
 ### Fixed
 * Fix for Chromedriver 115 so that it works on Mac again [#1971](https://github.com/sitespeedio/browsertime/pull/1971).
 
