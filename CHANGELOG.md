@@ -1,5 +1,16 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+
+## 17.13.0 - UNRELEASED
+### Fixed
+* Fix for Chromedriver 115 so that it works on Mac again [#1971](https://github.com/sitespeedio/browsertime/pull/1971).
+
+### Added
+* Edgedriver 114 [#1969](https://github.com/sitespeedio/browsertime/pull/1969)
+
+### Tech
+* Run tests on Chrome/Firefox/Edge on Mac OS on our GitHub Actions to catch the next time Chromedriver is broken on Mac [#1970](https://github.com/sitespeedio/browsertime/pull/1970)
+
 ## 17.12.1 - 2022-07-19
 ### Fixed
 * Hmm, Chromedriver 115 doesn't seems to work on Mac so reverted to 114.
