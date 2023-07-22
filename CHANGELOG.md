@@ -1,5 +1,31 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 17.13.1 - 2022-07-22
+
+### Tech
+* Internal fix how the render blocking result is added [#1972](https://github.com/sitespeedio/browsertime/pull/1972).
+
+
+## 17.13.0 - 2022-07-21
+### Fixed
+* Fix for Chromedriver 115 so that it works on Mac again [#1971](https://github.com/sitespeedio/browsertime/pull/1971).
+
+### Added
+* Edgedriver 114 [#1969](https://github.com/sitespeedio/browsertime/pull/1969)
+
+### Tech
+* Run tests on Chrome/Firefox/Edge on Mac OS on our GitHub Actions to catch the next time Chromedriver is broken on Mac [#1970](https://github.com/sitespeedio/browsertime/pull/1970)
+
+## 17.12.1 - 2022-07-19
+### Fixed
+* Hmm, Chromedriver 115 doesn't seems to work on Mac so reverted to 114.
+
+## 17.12.0 - 2022-07-19
+### Added
+* Chrome and Chromedriver 115. The Chrome team has changed the hosting of Chromedriver, so the logic for downloading Chromedriver has changed [#1967](https://github.com/sitespeedio/browsertime/pull/1967).
+
+* If you collect the Chrome devtools trace using `--cpu` we will now also collect the number of elements that needs recalculate styles before FCP/LCP.[#1964](https://github.com/sitespeedio/browsertime/pull/1964).
+
 ## 17.11.2 - 2022-06-19
 ### Fixed
 * Fix --debug mode. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1959](https://github.com/sitespeedio/browsertime/pull/1959).
