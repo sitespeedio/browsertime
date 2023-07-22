@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 17.13.1 - 2022-07-22
+
+### Tech
+* Internal fix how the render blocking result is added [#1972](https://github.com/sitespeedio/browsertime/pull/1972).
+
 
 ## 17.13.0 - 2022-07-21
 ### Fixed
