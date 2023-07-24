@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 17.14.0 -  UNRELEASED
+## 17.14.0 - 2022-07-24
 
 ### Added
 * Edge and Edgedriver 115 [#1973](https://github.com/sitespeedio/browsertime/pull/1973).
