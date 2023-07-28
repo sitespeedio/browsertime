@@ -1,4 +1,4 @@
-name: Windows Edge
+#name: Windows Edge
 on:
   push:
     branches:
@@ -42,6 +42,9 @@ jobs:
       shell: cmd
     - name: Run Chrome test
       run: node bin/browsertime.js -b chrome -n 1 https://www.sitespeed.io/
+      shell: cmd
+    - name: Run Chrome with config file
+      run: node bin/browsertime.js -b chrome https://www.sitespeed.io/ --config test/data/exampleConfig.json 
       shell: cmd
     - name: Run Chrome test for multi pages
       run: node bin/browsertime.js -b chrome -n 1 test/data/navigationscript/simple.cjs
