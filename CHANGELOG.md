@@ -5,6 +5,8 @@
 ### Fixed
 * Default jimp resize didn't handle large values (2000) when running in Docker AMD on a ARM machine so changing to another algorithm (HERMITE) [#1977](https://github.com/sitespeedio/browsertime/pull/1977).
 
+* Update: chrome-har, dayjs, execa, chrome-remote-interface and jimp [#1976](https://github.com/sitespeedio/browsertime/pull/1976).
+
 ## 17.14.0 - 2022-07-24
 
 ### Added
