@@ -1,5 +1,47 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 17.14.2 - 2022-07-31
+### Fixed
+* The auto build of release Docker container was broken so no tagged containers was pushed.
+
+## 17.14.1 - 2022-07-31
+
+### Fixed
+* Default jimp resize didn't handle large values (2000) when running in Docker AMD on a ARM machine so changing to another algorithm (HERMITE) [#1977](https://github.com/sitespeedio/browsertime/pull/1977).
+
+* Update: chrome-har, dayjs, execa, chrome-remote-interface and jimp [#1976](https://github.com/sitespeedio/browsertime/pull/1976).
+
+## 17.14.0 - 2022-07-24
+
+### Added
+* Edge and Edgedriver 115 [#1973](https://github.com/sitespeedio/browsertime/pull/1973).
+
+## 17.13.1 - 2022-07-22
+
+### Tech
+* Internal fix how the render blocking result is added [#1972](https://github.com/sitespeedio/browsertime/pull/1972).
+
+
+## 17.13.0 - 2022-07-21
+### Fixed
+* Fix for Chromedriver 115 so that it works on Mac again [#1971](https://github.com/sitespeedio/browsertime/pull/1971).
+
+### Added
+* Edgedriver 114 [#1969](https://github.com/sitespeedio/browsertime/pull/1969)
+
+### Tech
+* Run tests on Chrome/Firefox/Edge on Mac OS on our GitHub Actions to catch the next time Chromedriver is broken on Mac [#1970](https://github.com/sitespeedio/browsertime/pull/1970)
+
+## 17.12.1 - 2022-07-19
+### Fixed
+* Hmm, Chromedriver 115 doesn't seems to work on Mac so reverted to 114.
+
+## 17.12.0 - 2022-07-19
+### Added
+* Chrome and Chromedriver 115. The Chrome team has changed the hosting of Chromedriver, so the logic for downloading Chromedriver has changed [#1967](https://github.com/sitespeedio/browsertime/pull/1967).
+
+* If you collect the Chrome devtools trace using `--cpu` we will now also collect the number of elements that needs recalculate styles before FCP/LCP.[#1964](https://github.com/sitespeedio/browsertime/pull/1964).
+
 ## 17.11.2 - 2022-06-19
 ### Fixed
 * Fix --debug mode. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1959](https://github.com/sitespeedio/browsertime/pull/1959).
