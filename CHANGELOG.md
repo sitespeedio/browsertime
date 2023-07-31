@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 17.14.2 - 2022-07-31
+### Fixed
+* The auto build of release Docker container was broken so no tagged containers was pushed.
+
 ## 17.14.1 - 2022-07-31
 
 ### Fixed
