@@ -1,5 +1,26 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+
+### Fixed
+* Updated to Selenium 4.11.1 [#1978](https://github.com/sitespeedio/browsertime/pull/1978).
+
+## 17.14.2 - 2022-07-31
+### Fixed
+* The auto build of release Docker container was broken so no tagged containers was pushed.
+
+## 17.14.1 - 2022-07-31
+
+### Fixed
+* Default jimp resize didn't handle large values (2000) when running in Docker AMD on a ARM machine so changing to another algorithm (HERMITE) [#1977](https://github.com/sitespeedio/browsertime/pull/1977).
+
+* Update: chrome-har, dayjs, execa, chrome-remote-interface and jimp [#1976](https://github.com/sitespeedio/browsertime/pull/1976).
+
+## 17.14.0 - 2022-07-24
+
+### Added
+* Edge and Edgedriver 115 [#1973](https://github.com/sitespeedio/browsertime/pull/1973).
+
 ## 17.13.1 - 2022-07-22
 
 ### Tech
