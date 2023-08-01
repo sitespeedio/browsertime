@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+
+### Fixed
+* Updated to Selenium 4.11.1 [#1978](https://github.com/sitespeedio/browsertime/pull/1978).
+
 ## 17.14.2 - 2022-07-31
 ### Fixed
 * The auto build of release Docker container was broken so no tagged containers was pushed.
