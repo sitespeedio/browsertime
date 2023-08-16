@@ -1,9 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 17.14.3 - 2022-08-16
 
 ### Fixed
 * Updated to Selenium 4.11.1 [#1978](https://github.com/sitespeedio/browsertime/pull/1978).
+* Updated Chrome and Chromedriver to minor versions.
 
 ## 17.14.2 - 2022-07-31
 ### Fixed
