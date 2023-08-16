@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 17.15.0 - 2022-08-16
+### Added
+* Updated Chrome and Chromedriver to 116.
+
 ## 17.14.3 - 2022-08-16
 
 ### Fixed
