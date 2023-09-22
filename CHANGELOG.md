@@ -1,9 +1,21 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 17.16.0 - 2022-09-04
+### Added
+* Firefox 117 and Edge 116 in the Docker container.
+
+### Fixed 
+* Updated the BiDi HAR exporter for Firefox to version 0.0.12. This version will not work with Firefox 116 so if you use the BiDi HAR exporter you need to upgrade to Firefox 117.
+
+## 17.15.0 - 2022-08-16
+### Added
+* Updated Chrome and Chromedriver to 116.
+
+## 17.14.3 - 2022-08-16
 
 ### Fixed
 * Updated to Selenium 4.11.1 [#1978](https://github.com/sitespeedio/browsertime/pull/1978).
+* Updated Chrome and Chromedriver to minor versions.
 
 ## 17.14.2 - 2022-07-31
 ### Fixed
