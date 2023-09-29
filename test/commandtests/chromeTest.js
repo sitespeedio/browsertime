@@ -25,7 +25,12 @@ after.always('Stop the HTTP server', () => {
 
 serial.beforeEach('Start the browser', async t => {
   t.timeout(timeout);
-  engine = getEngine({ browser: 'chrome' });
+  engine = getEngine({
+    browser: 'chrome',
+    chrome: {
+      timelineRecordingType: 'custom'
+    }
+  });
   return engine.start();
 });
 
