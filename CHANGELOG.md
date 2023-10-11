@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 17.17.0 - 2022-10-11
+### Added
+* Firefox 118, Edge 117 and Chrome/Chromedriver 118 in the Docker container [#1996](https://github.com/sitespeedio/browsertime/pull/1996).
+* Expose trace start/stop for Chrome in scripting (the same way as for Firefox). Thank you [KS](https://github.com/92kns) for [#1988](https://github.com/sitespeedio/browsertime/pull/1988). Documentation is coming when the functionality is rolled out in sitespeed.io.
+
 ## 17.16.0 - 2022-09-04
 ### Added
 * Firefox 117 and Edge 116 in the Docker container.
