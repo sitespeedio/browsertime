@@ -5,6 +5,9 @@
 * Firefox 118, Edge 117 and Chrome/Chromedriver 118 in the Docker container [#1996](https://github.com/sitespeedio/browsertime/pull/1996).
 * Expose trace start/stop for Chrome in scripting (the same way as for Firefox). Thank you [KS](https://github.com/92kns) for [#1988](https://github.com/sitespeedio/browsertime/pull/1988). Documentation is coming when the functionality is rolled out in sitespeed.io.
 
+### Updated
+* Updated to Selenium 4.12
+
 ## 17.16.0 - 2022-09-04
 ### Added
 * Firefox 117 and Edge 116 in the Docker container.
