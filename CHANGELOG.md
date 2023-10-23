@@ -1,5 +1,15 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+
+## 17.18.0 - 2022-10-23
+### Added
+* Updated to Chromedriver 119 [#2003](https://github.com/sitespeedio/browsertime/pull/2003). 119 works with both Chrome 118 and 119 so it fixes [#1197](https://github.com/sitespeedio/browsertime/issues/1997).
+
+* Add support for network idle method to know when to end a test that uses network logs. Uses Bidi for Firefox and CDP for Chrome to listen on network events to know when to end a test. By default 5 seconds idle network time ends a tests (you could have network responses that hasn't arrived yet) [#1960](https://github.com/sitespeedio/browsertime/pull/1960). Potentially this can help SPA users or users where the page uses iframes. You can try it out by adding `--pageCompleteCheckNetworkIdle` yo your command line. This is still some work in progress but feel free to try ut out.
+
+### Fixed
+* Make sure timer always is cleared. There was case of where we do a rase beteween a promise and a timeout where the timeout timer wasn't cleared/removed [#2005](https://github.com/sitespeedio/browsertime/pull/2005).
+
 ## 17.17.0 - 2022-10-11
 ### Added
 * Firefox 118, Edge 117 and Chrome/Chromedriver 118 in the Docker container [#1996](https://github.com/sitespeedio/browsertime/pull/1996).
