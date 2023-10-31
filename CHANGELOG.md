@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 17.18.1 - 2022-10-31
+### Fixed
+* WebDriver 4.14.0
+* Chromedriver 119.0.6045-59
 
 ## 17.18.0 - 2022-10-23
 ### Added
