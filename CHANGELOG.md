@@ -1,5 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 17.19.0 - 2022-11-03
+### Added 
+* Updated to Chrome, Firefox and Edge 119 in the Docker container [#2010](https://github.com/sitespeedio/browsertime/pull/2010).
+* Updated to Edgedriver 119.
+
+### Fixed
+* Updated to Selenium 4.15.0 [#2011](https://github.com/sitespeedio/browsertime/pull/2011).
+
 ## 17.18.1 - 2022-10-31
 ### Fixed
 * WebDriver 4.14.0
