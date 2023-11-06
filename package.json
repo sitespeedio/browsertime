@@ -36,14 +36,14 @@
     "jimp": "0.22.10"
   },
   "devDependencies": {
-    "ava": "5.1.0",
-    "eslint": "8.31.0",
-    "eslint-config-prettier": "8.6.0",
-    "eslint-plugin-prettier": "4.2.1",
-    "eslint-plugin-unicorn": "45.0.2",
-    "prettier": "2.8.2",
+    "ava": "5.3.1",
+    "eslint": "8.53.0",
+    "eslint-config-prettier": "9.0.0",
+    "eslint-plugin-prettier": "5.0.1",
+    "eslint-plugin-unicorn": "49.0.0",
+    "prettier": "3.0.3",
     "serve-handler": "6.1.5",
-    "serve": "14.1.2"
+    "serve": "14.2.1"
   },
   "engines": {
     "node": ">=14.19.1"
