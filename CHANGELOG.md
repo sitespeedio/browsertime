@@ -1,5 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+
+### Fixed
+* Updated all dev-dependencies to latest versions [#2013](https://github.com/sitespeedio/browsertime/pull/2013).
+* Updated  GitHub Actions to use latest versions of actions and Ubuntu 22.04 [#2012](https://github.com/sitespeedio/browsertime/pull/2012), [#2014](https://github.com/sitespeedio/browsertime/pull/2014) and [#2016](https://github.com/sitespeedio/browsertime/pull/2016)
+* Updated all dependencies to latest versions: ADB kit 3.2.5 [#2017](https://github.com/sitespeedio/browsertime/pull/2017), execa, dayjs, get-port and Chromedriver [#2015](https://github.com/sitespeedio/browsertime/pull/2015).
+
 ## 17.19.0 - 2022-11-03
 ### Added 
 * Updated to Chrome, Firefox and Edge 119 in the Docker container [#2010](https://github.com/sitespeedio/browsertime/pull/2010).
