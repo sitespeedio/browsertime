@@ -1,5 +1,14 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+
+## 19.0.0 - 2023-11-15
+### Breaking
+* This only affects you if you run your tests on a rooted Moto G5: With PR[#2021](https://github.com/sitespeedio/browsertime/pull/2021) we add the ability to set the CPU speed for the phone at min/middle/max (the same way as possible on Samsung A51). Before the speed always was set to max. Default now is that the CPU speed will be set to min (the same way as the A51).
+
+### Fixed
+* Largest contentful paint and First contentful paint in Firefox now also fills the "googleWebitals" fields in the results. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#2018](https://github.com/sitespeedio/browsertime/pull/2018) and my PR [#2020](https://github.com/sitespeedio/browsertime/pull/2020).
+* Make sure `--android.pinCPUSpeed` works [#2019](https://github.com/sitespeedio/browsertime/pull/2019)
+
 ## 18.0.0 - 2023-11-07
 
 ### Breaking
