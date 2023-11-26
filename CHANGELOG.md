@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Fixed
+* New Geckodriver installer that on Mac ARM uses ARM version of Geckodriver.
 
 ## 19.0.0 - 2023-11-15
 ### Breaking
