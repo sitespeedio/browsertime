@@ -1,5 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 19.1.0 - 2023-11-27
+
+### Added
+* Firefox 120 in the Docker container.
+
+### Fixed
+* New Geckodriver installer that on Mac ARM uses ARM version of Geckodriver.
 
 ## 19.0.0 - 2023-11-15
 ### Breaking
