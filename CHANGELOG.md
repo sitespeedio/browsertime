@@ -1,9 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 19.2.0 - 2023-12-11
+### Added
+* Updated to Chrome and Edge 120 in the Docker container [#2031](https://github.com/sitespeedio/browsertime/pull/2031).
+
 ### Fixed
 * Updated to Selenium 4.16.0 [#2026](https://github.com/sitespeedio/browsertime/pull/2026).
 * Updated dev dependencies and find-up [#2029](https://github.com/sitespeedio/browsertime/pull/2029).
+* Recommend NodeJS 18 or later in the package.json [#2030](https://github.com/sitespeedio/browsertime/pull/2030). Browsertime 16.0.0 removed support for NodeJS 16.
 
 ## 19.1.0 - 2023-11-27
 
