@@ -3,6 +3,7 @@
 ## UNRELEASED
 ### Fixed
 * Updated to Selenium 4.16.0 [#2026](https://github.com/sitespeedio/browsertime/pull/2026).
+* Updated dev dependencies and find-up [#2029](https://github.com/sitespeedio/browsertime/pull/2029).
 
 ## 19.1.0 - 2023-11-27
 
