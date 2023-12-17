@@ -12,8 +12,6 @@
 
 ![Browsertime](browsertime.png)
 
-## Table of Contents
-
 # Browsertime: Measure and Optimize Web Performance
 
 Browsertime is a powerful, open-source Node.js tool designed for engineers who are building their own performance measurement tools. It serves as the core engine of projects like sitespeed.io and is a trusted tool used by Mozilla to measure the performance of Firefox.
