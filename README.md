@@ -1,4 +1,4 @@
-# Browsertime - Your browser, your page, your scripts!
+# Browsertime
 ![Run Docker](https://github.com/sitespeedio/browsertime/actions/workflows/docker.yml/badge.svg?branch=main)
 ![Unit tests](https://github.com/sitespeedio/browsertime/actions/workflows/unittests.yml/badge.svg?branch=main)
 ![Windows Edge](https://github.com/sitespeedio/browsertime/actions/workflows/windows.yml/badge.svg?branch=main)
@@ -12,65 +12,48 @@
 
 ![Browsertime](browsertime.png)
 
-Access the Web Performance Timeline, from your browser, in your terminal!
+## Table of Contents
 
-## Introduction
+# Browsertime: Measure and Optimize Web Performance
 
-**Browsertime lets you *automate running JavaScript in your browser* primary used to collect performance metrics. What exactly does that mean?**
+Browsertime is a powerful, open-source Node.js tool designed for engineers who are building their own performance measurement tools. It serves as the core engine of projects like sitespeed.io and is a trusted tool used by Mozilla to measure the performance of Firefox.
 
-We think of a Browsertime as having four key capabilities:
+## Key Features
 
- - It handles everything with the browser (Firefox/Chrome/Edge/Safari and other browser that can be driven using WebDriver).
- - It executes a batch of default and configurable JavaScript when the URL has finished loading in the browser.
- - It records a video of the Browser screen used to calculate [Visual Metrics](https://github.com/WPO-Foundation/visualmetrics).
- - It lets you run your [scripting file to create and measure your users journey](https://www.sitespeed.io/documentation/sitespeed.io/scripting/).
+- **Robust Performance Testing:** Browsertime allows you to perform comprehensive performance tests on your web pages, including page load times, resource loading, and user interactions.
 
-**What is Browsertime good for?**
+- **Deep Metrics:** Gain access to a wide range of performance metrics, such as page load times, visual metrics (when things are painted on the screen), largest contentful paint (LCP), and more, helping you pinpoint areas for improvement.
 
-It is usually used for two different things:
+- **Scripting Capabilities:** Customize your tests and user interactions with JavaScript scripting, enabling advanced scenarios and detailed analysis.
 
- - You run it as a standalone tool to collect performance timing metrics of your web site.
- - You integrate it in your tool as a JavaScript runner that collects whatever JavaScript metrics/information you want.
+- **Docker Support:** Easily integrate Browsertime into your CI/CD pipelines and containerized environments with Docker support.
 
-To understand how Browsertime do these things, let's talk about how it works. Here's an example of what happens when you give Browsertime a URL to test:
 
-1. You give your configuration to Browsertime.
-2. Browsertime uses the [WebDriver](https://www.w3.org/TR/webdriver/) (through [Selenium](http://seleniumhq.github.io/selenium/docs/api/javascript/index.html)) to start Firefox/Chrome/Safari/Edge.
-3. Browsertime starts FFMPEG to record a video of the browser screen
-4. The browser access the URL.
-5. When the page is finished loading (you can define yourself when that happens), Browsertime collects:
-   - [Navigation Timing metrics](http://kaaes.github.io/timing/info.html)
-   - [User Timing metrics](http://www.html5rocks.com/en/tutorials/webperformance/usertiming/)
-   - [Element Timing metrics](https://wicg.github.io/element-timing/)
-   - [Paint Timings](https://w3c.github.io/paint-timing/)
-   - [Googles Web Vitals](https://web.dev/vitals/)
-   - [CPU metrics CPU Long Tasks]((https://developer.mozilla.org/en-US/docs/Web/API/Long_Tasks_API))
-6. You can also collect internal trace logs from the browser using `--firefox.geckoProfiler` for Firefox and `--chrome.timeline` for Chromium browsers.
-7. It also collects a [HAR](http://www.softwareishard.com/blog/har-12-spec/) file that shows all requests/responses on the page.
-8. FFMpeg is stopped and the video is analysed. Browsertime collect Visual Metrics like Speed Index, First Visual Change and Last Visual Change.
+## For Performance Monitoring Systems
 
-The result of the run is a JSON file with all the JavaScript metrics collected, a HAR file, a video recording of the screen and a screenshot.
+If you're looking for a comprehensive performance monitoring system, we recommend exploring the larger project, [sitespeed.io](https://github.com/sitespeedio/sitespeed.io). Sitespeed.io builds upon Browsertime and provides a complete solution for continuous performance monitoring and optimization of your web applications.
 
-## A simple example
+## Get Started with Browsertime
 
-Use our Docker image (with Chrome, Firefox, Edge, XVFB and the dependencies needed to record a video):
-<pre>
-$ docker run --rm -v "$(pwd)":/browsertime sitespeedio/browsertime https://www.sitespeed.io/
-</pre>
+If you're an engineer working on performance measurement tools or simply want to harness the power of Browsertime for your web performance needs, follow the installation and usage instructions below.
 
-Or using node:
-<pre>
-$ npm install browsertime -g
-$ browsertime https://www.sitespeed.io/
-</pre>
 
-Load https://www.sitespeed.io/ in Chrome three times. Results are stored in a JSON file (browsertime.json) with the timing data, and a HAR file (browsertime.har) in browsertime-results/www.sitespeed.io/$date/
+### Running NodeJS version
+```
+npm install -g browsertime
+browsertime https://example.com
+```
+
+### Using Docker
+```
+docker run --rm -v "$(pwd)":/browsertime sitespeedio/browsertime https://www.sitespeed.io/
+```
 
 ## I want more examples
 Checkout the [examples](docs/examples/README.md).
 
 ## Browsers
-Browsertime supports Firefox, Chrome, and Edge (Chromium version) on desktop and Safari on Mac OS. On Android we support Chrome and Firefox (from 8.0) and Safari on iOS. You can also use the Safari simulator on Mac OS.
+Browsertime supports Firefox, Chrome, and Edge (Chromium version) on desktop and Safari on Mac OS. On Android we support Chrome and Firefox. Safari on iOS has limited support: there's no HAR file and no visual metrics. You can also use the Safari simulator on Mac OS.
 
 ## How does it work
 Browsertime uses Selenium NodeJS to drive the browser. It starts the browser, load a URL, executes configurable Javascripts to collect metrics, collect a HAR file.
@@ -107,30 +90,19 @@ Browsertime supports Chrome and Firefox on Android: Collecting SpeedIndex, HAR a
 
 You need to [install adb](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#desktop) and [prepare your phone](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#on-your-phone) before you start.
 
-If you want to set connectivity you need to use something like [gnirehtet](https://github.com/Genymobile/gnirehtet) or [TSProxy](https://github.com/WPO-Foundation/tsproxy). Read more information [here](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#connectivity).
+If you want to set connectivity you need to use something like [gnirehtet](https://github.com/Genymobile/gnirehtet). Read more information [here](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#connectivity).
 
 <pre>
 $ browsertime --chrome.android.package com.android.chrome https://www.sitespeed.io --video --visualMetrics
-</pre>
-
-If you are on Linux (we have tested Ubuntu 18) you can use our Docker container to drive your Android phone. A couple of things to remember:
- * You need to run in privileged mode *--privileged* if you share the full usb bus
- * You need to share the USB ports *-v /dev/bus/usb:/dev/bus/usb* or share a specific port with *--device=/dev/bus/usb/001/017* (use *lsusb* to find the right mapping)
- * Add *-e START_ADB_SERVER=true* to start the adb server
-
-If you use Docker you will automatically get support for video and SpeedIndex. You can get that without Docker but then need to [install VisualMetrics dependencies](https://github.com/sitespeedio/docker-visualmetrics-deps/blob/main/Dockerfile) yourself.
-
-<pre>
-$ docker run --privileged -v /dev/bus/usb:/dev/bus/usb -e START_ADB_SERVER=true --rm -v "$(pwd)":/browsertime-results sitespeedio/browsertime -n 1 --android --visualMetrics --video https://en.m.wikipedia.org/wiki/Barack_Obama
 </pre>
 
 ## Configuration
 Run <code>$ bin/browsertime.js --help</code> and you can see the configuration options.
 
 ## Using WebPageReplay
-Our Docker container now included [WebPageReplay](https://github.com/catapult-project/catapult/blob/main/web_page_replay_go/README.md).
+Our Docker container now includes [WebPageReplay](https://github.com/catapult-project/catapult/blob/main/web_page_replay_go/README.md).
 
-WebPageReplay will let you replay your page locally (getting rid of server latency etc) and makes it easier to find front end regressions.
+WebPageReplay will let you replay your page locally (getting rid of server latency) and makes it easier to find front end regressions.
 
 It works like this:
 1. The start script starts WebPageReplay in record mode
