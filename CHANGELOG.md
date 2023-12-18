@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 19.3.1 - 2023-12-18
+### Fixed 
+* Ensure that visual metrics python script is included in the release.
+
 ## 19.3.0 - 2023-12-18
 
 ### Added
