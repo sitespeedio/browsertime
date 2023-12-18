@@ -56,7 +56,7 @@
     "bin",
     "browserscripts",
     "browsersupport",
-    "browsertime",
+    "visualmetrics",
     "browsertime.png",
     "docs",
     "index.js",
