@@ -1,14 +1,14 @@
 {
   "name": "browsertime",
   "description": "Get performance metrics from your web page using Browsertime.",
-  "version": "19.1.0",
+  "version": "19.3.1",
   "bin": "./bin/browsertime.js",
   "type": "module",
   "dependencies": {
     "@cypress/xvfb": "1.2.4",
     "@devicefarmer/adbkit": "3.2.5",
-    "@sitespeed.io/chromedriver": "119.0.6045-105",
-    "@sitespeed.io/edgedriver": "119.0.2151-42",
+    "@sitespeed.io/chromedriver": "120.0.6099-71",
+    "@sitespeed.io/edgedriver": "120.0.2210-77",
     "@sitespeed.io/geckodriver": "0.33.0-c",
     "@sitespeed.io/throttle": "5.0.0",
     "@sitespeed.io/tracium": "0.3.3",
@@ -19,7 +19,7 @@
     "dayjs": "1.11.10",
     "execa": "8.0.1",
     "fast-stats": "0.0.6",
-    "find-up": "6.3.0",
+    "find-up": "7.0.0",
     "get-port": "7.0.0",
     "hasbin": "1.2.3",
     "intel": "1.2.0",
@@ -36,17 +36,17 @@
     "jimp": "0.22.10"
   },
   "devDependencies": {
-    "ava": "5.3.1",
-    "eslint": "8.53.0",
-    "eslint-config-prettier": "9.0.0",
+    "ava": "6.0.1",
+    "eslint": "8.55.0",
+    "eslint-config-prettier": "9.1.0",
     "eslint-plugin-prettier": "5.0.1",
     "eslint-plugin-unicorn": "49.0.0",
-    "prettier": "3.0.3",
+    "prettier": "3.1.1",
     "serve-handler": "6.1.5",
     "serve": "14.2.1"
   },
   "engines": {
-    "node": ">=14.19.1"
+    "node": ">=18.0.0"
   },
   "files": [
     "CHANGELOG.md",
@@ -56,7 +56,7 @@
     "bin",
     "browserscripts",
     "browsersupport",
-    "browsertime",
+    "visualmetrics",
     "browsertime.png",
     "docs",
     "index.js",

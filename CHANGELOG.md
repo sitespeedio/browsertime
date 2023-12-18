@@ -1,5 +1,26 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 19.3.1 - 2023-12-18
+### Fixed 
+* Ensure that visual metrics python script is included in the release.
+
+## 19.3.0 - 2023-12-18
+
+### Added
+* Updated Chromedriver and Edgedriver to 120 [#2033](https://github.com/sitespeedio/browsertime/pull/2033).
+
+### Tech
+* Moved the visual metrics python scripts to a new home [#2032](https://github.com/sitespeedio/browsertime/pull/2032).
+
+## 19.2.0 - 2023-12-11
+### Added
+* Updated to Chrome and Edge 120 in the Docker container [#2031](https://github.com/sitespeedio/browsertime/pull/2031).
+
+### Fixed
+* Updated to Selenium 4.16.0 [#2026](https://github.com/sitespeedio/browsertime/pull/2026).
+* Updated dev dependencies and find-up [#2029](https://github.com/sitespeedio/browsertime/pull/2029).
+* Recommend NodeJS 18 or later in the package.json [#2030](https://github.com/sitespeedio/browsertime/pull/2030). Browsertime 16.0.0 removed support for NodeJS 16.
+
 ## 19.1.0 - 2023-11-27
 
 ### Added
