@@ -1,5 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 19.3.0 - 2023-12-18
+
+### Added
+* Updated Chromedriver and Edgedriver to 120 [#2033](https://github.com/sitespeedio/browsertime/pull/2033).
+
+### Tech
+* Moved the visual metrics python scripts to a new home [#2032](https://github.com/sitespeedio/browsertime/pull/2032).
+
 ## 19.2.0 - 2023-12-11
 ### Added
 * Updated to Chrome and Edge 120 in the Docker container [#2031](https://github.com/sitespeedio/browsertime/pull/2031).
