@@ -174,7 +174,7 @@ serial(`Run inline pageCompleteChecks`, async t => {
 
 serial('Run pageCompleteCheck from file', async t => {
   engine = getEngine({
-    pageCompleteCheck: 'test/data/pagecompletescripts/pageComplete10sec.cjs',
+    pageCompleteCheck: 'test/data/pagecompletescripts/pageComplete10sec.js',
     timeouts: {
       browserStart: 60_000,
       scripts: 5000,
