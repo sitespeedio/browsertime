@@ -1,4 +1,3 @@
-module.exports = `
 return (function() {
   try {
     var end = window.performance.timing.loadEventEnd;
@@ -7,4 +6,3 @@ return (function() {
 	return true;
   }
 })();
-`;
