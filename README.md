@@ -16,6 +16,26 @@
 
 Browsertime is a powerful, open-source Node.js tool designed for engineers who are building their own performance measurement tools. It serves as the core engine of projects like sitespeed.io and is a trusted tool used by Mozilla to measure the performance of Firefox.
 
+# Table of Contents
+1. [Introduction](#browsertime-measure-and-optimize-web-performance)
+2. [Key Features](#key-features)
+3. [Installation](#installation)
+    - [NodeJS](#nodejs)
+    - [Docker](#docker)
+4. [Usage](#usage)
+    - [Basic Usage](#basic-usage)
+    - [Advanced Options](#advanced-options)
+    - [Connectivity](#connectivity)
+    - [Navigate in a script](#navigate-in-a-script)
+    - [Test on your mobile device](#test-on-your-mobile-device)
+    - [Using WebPageReplay](#using-webpagereplay)
+    - [Speed Index and video](#speed-index-and-video)
+5. [Browser Support](#browser-support)
+6. [How does it work](#how-does-it-work)
+7. [Contributing](#contributing)
+9. [Community and Support](#community-and-support)
+9. [License](#license)
+
 ## Key Features
 
 - **Robust Performance Testing:** Browsertime allows you to perform comprehensive performance tests on your web pages, including page load times, resource loading, and user interactions.
@@ -25,65 +45,66 @@ Browsertime is a powerful, open-source Node.js tool designed for engineers who a
 - **Scripting Capabilities:** Customize your tests and user interactions with JavaScript scripting, enabling advanced scenarios and detailed analysis.
 
 - **Docker Support:** Easily integrate Browsertime into your CI/CD pipelines and containerized environments with Docker support.
+##
 
-
-## For Performance Monitoring Systems
-
-If you're looking for a comprehensive performance monitoring system, we recommend exploring the larger project, [sitespeed.io](https://github.com/sitespeedio/sitespeed.io). Sitespeed.io builds upon Browsertime and provides a complete solution for continuous performance monitoring and optimization of your web applications.
-
-## Get Started with Browsertime
+## Installation
 
 If you're an engineer working on performance measurement tools or simply want to harness the power of Browsertime for your web performance needs, follow the installation and usage instructions below.
 
-
-### Running NodeJS version
-```
+### NodeJS
+```shell
 npm install -g browsertime
 browsertime https://example.com
 ```
 
-### Using Docker
-```
+### Docker
+```shell
 docker run --rm -v "$(pwd)":/browsertime sitespeedio/browsertime https://www.sitespeed.io/
 ```
 
-## I want more examples
-Checkout the [examples](docs/examples/README.md).
+## Usage
+Browsertime is designed to be straightforward to use, regardless of your experience level. Here's a quick guide on how to get started.
 
-## Browsers
-Browsertime supports Firefox, Chrome, and Edge (Chromium version) on desktop and Safari on Mac OS. On Android we support Chrome and Firefox. Safari on iOS has limited support: there's no HAR file and no visual metrics. You can also use the Safari simulator on Mac OS.
+### Basic Usage
 
-## How does it work
-Browsertime uses Selenium NodeJS to drive the browser. It starts the browser, load a URL, executes configurable Javascripts to collect metrics, collect a HAR file.
+```shell
+browsertime https://www.example.com --browser chrome
+```
 
-To get the HAR from Firefox we use the [HAR Export Trigger](https://github.com/firebug/har-export-trigger) and Chrome we use [Chrome-HAR](https://github.com/sitespeedio/chrome-har) to parse the timeline log and generate the HAR file.
+This command will test https://www.example.com using Chrome.
 
-# Speed Index and video
-It's easiest to run [our ready made Docker container](https://hub.docker.com/r/sitespeedio/browsertime/) to be able to record a video and calculate SpeedIndex because then you get all dependencies needed for free to run [VisualMetrics](https://github.com/WPO-Foundation/visualmetrics).
+### Advanced Options
 
-The default video will include a timer and showing when the metrics happens, but you can turn that off using <code>--video.addTimer false</code>.
+Browsertime offers various advanced options for more detailed analysis, such as specifying the number of runs, choosing a browser, or setting custom metrics. Here are some examples:
 
-<img src="https://raw.githubusercontent.com/sitespeedio/sitespeed.io/main/docs/img/video-example.gif">
+#### Run the test multiple times
 
-## Test using Docker
-You can build and test changes using Docker locally.
+```shell
+browsertime -n 5 https://www.example.com
+```
 
-<pre>
-$ docker build -t sitespeedio/browsertime .
-$ docker run --rm -v "$(pwd)":/browsertime sitespeedio/browsertime -n 1 https://www.sitespeed.io/
-</pre>
+#### Specify a different browser
+```shell
+browsertime --browser firefox https://www.example.com
+```
 
-## Connectivity
+#### Custom metrics
+```shell
+browsertime --script "return {'myMetric': window.myApp.customMetric}" https://www.example.com
+```
+
+For a full list of options, run <code>$ browsertime --help</code> and you can see the configuration options.
+
+#### Connectivity
 
 You can throttle the connection to make the connectivity slower to make it easier to catch regressions. The best way to do that is to setup a network bridge in Docker or use our connectivity engine Throttle. Read more about how to do that in the [documentation](https://www.sitespeed.io/documentation/sitespeed.io/connectivity/).
 
-
-## Navigate in a script
+#### Navigate in a script
 If you need a more complicated test scenario, you can define your own (Selenium)test script that will do the testing. Use your own test script when you want to test your page as a logged in user, the login page or if you want to add things to your cart.
 
 We have a full section in the documentation about [scripting](https://www.sitespeed.io/documentation/sitespeed.io/scripting/).
 
-## Test on your mobile device
+#### Test on your mobile device
 Browsertime supports Chrome and Firefox on Android: Collecting SpeedIndex, HAR and video! 
 
 You need to [install adb](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#desktop) and [prepare your phone](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#on-your-phone) before you start.
@@ -94,10 +115,7 @@ If you want to set connectivity you need to use something like [gnirehtet](https
 $ browsertime --chrome.android.package com.android.chrome https://www.sitespeed.io --video --visualMetrics
 </pre>
 
-## Configuration
-Run <code>$ bin/browsertime.js --help</code> and you can see the configuration options.
-
-## Using WebPageReplay
+#### Using WebPageReplay
 Our Docker container now includes [WebPageReplay](https://github.com/catapult-project/catapult/blob/main/web_page_replay_go/README.md).
 
 WebPageReplay will let you replay your page locally (getting rid of server latency) and makes it easier to find front end regressions.
@@ -120,23 +138,59 @@ docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e L
 
 Use Firefox:
 
-```
+```shell
 docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:12.0.0 -b firefox -n 11 --firefox.acceptInsecureCerts https://en.wikipedia.org/wiki/Barack_Obama
 ```
 
 And Chrome on your Android phone. This will only work on Linux because you need to be able to mount the usb port in Docker:
 
-```
+```shell
 docker run --privileged -v /dev/bus/usb:/dev/bus/usb -e START_ADB_SERVER=true --cap-add=NET_ADMIN --rm -v “$(pwd)“:/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime https://en.m.wikipedia.org/wiki/Barack_Obama --android --chrome.args ignore-certificate-errors-spki-list=PhrPvGIaAMmd29hj8BCZOq096yj7uMpRNHpn5PDxI6I= -n 11 --chrome.args user-data-dir=/data/tmp/chrome
 ```
 
-## Send metrics to Graphite
-The easiest way to send metrics is to install [jq](https://stedolan.github.io/jq/) and use it to pick the values you wanna track.
+#### Speed Index and video
+It's easiest to run [our ready made Docker container](https://hub.docker.com/r/sitespeedio/browsertime/) to be able to record a video and calculate SpeedIndex because then you get all dependencies needed for free to run [VisualMetrics](https://github.com/WPO-Foundation/visualmetrics).
 
-Here's an example on how you can pickup the median SpeedIndex from Browsertime and send it to your Graphite instance.
-<pre>
-echo "browsertime.your.key.SpeedIndex.median" $(cat /tmp/browsertime/browsertime.json | jq .[0].statistics.visualMetrics.SpeedIndex.median) "`date +%s`" | nc -q0 my.graphite.com 2003
-</pre>
+The default video will include a timer and showing when the metrics happens, but you can turn that off using <code>--video.addTimer false</code>.
+
+<img src="https://raw.githubusercontent.com/sitespeedio/sitespeed.io/main/docs/img/video-example.gif">
+
+
+## Browser Support
+Browsertime supports Firefox, Chrome, and Edge (Chromium version) on desktop and Safari on Mac OS. On Android we support Chrome and Firefox. Safari on iOS has limited support: there's no HAR file and no visual metrics. You can also use the Safari simulator on Mac OS.
+
+## How does it work
+Browsertime uses Selenium NodeJS to drive the browser. It starts the browser, load a URL, executes configurable Javascripts to collect metrics, collect a HAR file.
+
+To get the HAR from Firefox we use the [HAR Export Trigger](https://github.com/firebug/har-export-trigger) and Chrome we use [Chrome-HAR](https://github.com/sitespeedio/chrome-har) to parse the timeline log and generate the HAR file.
+
+## Contributing
+
+We welcome contributions from the community! Whether you're fixing a bug, adding a feature, or improving documentation, your help is valuable. Here’s how you can contribute:
+
+1. **Fork and Clone**: Fork the repository and clone it locally.
+2. **Create a Branch**: Create a new branch for your feature or bug fix.
+3. **Develop**: Make your changes. Ensure you adhere to the coding standards and write tests if applicable.
+4. **Test**: Run tests to ensure everything works as expected.
+5. **Submit a Pull Request**: Push your changes to your fork and submit a pull request to the main repository.
+
+Before contributing, please read our [CONTRIBUTING.md](CONTRIBUTING.md) for more detailed information on how to contribute.
+
+### Reporting Issues
+Found a bug or have a feature request? Please use the [GitHub Issues](https://github.com/sitespeedio/browsertime/issues) to report them. Be sure to check existing issues to avoid duplicates.
+
+## Community and Support
+
+Join our community! Whether you need help, want to share your experience, or discuss potential improvements, there are several ways to get involved:
+
+- **Slack**: Connect with fellow users and the development team on [Slack](https://join.slack.com/t/sitespeedio/shared_invite/zt-296jzr7qs-d6DId2KpEnMPJSQ8_R~WFw).
+- **GitHub Issues**: For technical questions, feature requests, and bug reports, use our [GitHub issues](https://github.com/sitespeedio/browsertime/issues).
+
+We're excited to have you in our community and look forward to your contributions and interactions!
+
+
+## License
+[Apache License version 2.0](LICENSE).
 
 [travis-image]: https://img.shields.io/travis/sitespeedio/browsertime.svg?style=flat-square
 [travis-url]: https://travis-ci.org/sitespeedio/browsertime
