@@ -1,4 +1,4 @@
-#name: Windows Edge
+name: Windows tests
 on:
   push:
     branches:
