@@ -1,5 +1,14 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 20.0.0 - UNRELEASED
+
+### Breaking
+* Changed `--userTimingWhitelist` to `--userTimingAllowList` in [#2023](https://github.com/sitespeedio/browsertime/pull/2023).
+* Reading pageCompleetCheck JavaScript now works as intended. It should be a plan JavaScript file named .js [#2034](https://github.com/sitespeedio/browsertime/pull/2034) see [#912](https://github.com/sitespeedio/browsertime/issues/912)
+
+### Fixed
+* Group page load parameters as PageLoad to make them easier to find using `--help` [#2035](https://github.com/sitespeedio/browsertime/pull/2035).
+
 ## 19.3.1 - 2023-12-18
 ### Fixed 
 * Ensure that visual metrics python script is included in the release.
