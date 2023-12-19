@@ -1,2 +1,0 @@
-[run]
-omit = browsertime/__init__.py,browsertime/test*
