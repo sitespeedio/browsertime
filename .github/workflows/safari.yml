@@ -51,6 +51,6 @@ jobs:
     #    IPHONE14=$(xcrun xctrace list devices  2>&1  | grep -m 1 "iPhone 14 Simulator" | awk -F'[()]' '{print $4}')
     #    ./bin/browsertime.js -b safari -n 1 --safari.useSimulator --video --visualMetrics --safari.deviceUDID $IPHONE14 https://www.sitespeed.io/
     - name: Test Safari with video and Visual Metrics
-      run: ./bin/browsertime.js -b safari -n 1 --video --visualMetrics https://www.sitespeed.io/
+      run: ./bin/browsertime.js -b safari -n 1 --video --visualMetrics https://www.sitespeed.io/ -vvv
     - name: Test Safari with video and Visual Metrics for multi pages
       run: ./bin/browsertime.js -b safari -n 1 --video --visualMetrics test/data/navigationscript/multiMac.cjs
