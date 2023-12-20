@@ -1,4 +1,4 @@
-name: OSX Chrome, Firefox and Edge
+name: Test start Firefox 121
 on:
   push:
     branches:
