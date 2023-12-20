@@ -1,0 +1,27 @@
+name: OSX Chrome, Firefox and Edge
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+jobs:
+  build:
+    runs-on: macos-13
+    timeout-minutes: 30
+    steps:
+    - name: Install dependencies
+      run: |
+        brew update
+        brew install --cask firefox
+        brew install geckodriver
+    - name: Show versions
+      run: |
+        firefox --version
+        geckodriver --version
+    - name: Test 
+      run: |
+        geckodriver &
+        curl -H 'Content-Type: application/json' -d '{"capabilities": {"alwaysMatch": {"acceptInsecureCerts": true}}}' http://localhost:4444/session
+  
