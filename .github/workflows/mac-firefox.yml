@@ -22,6 +22,6 @@ jobs:
         geckodriver --version
     - name: Test 
       run: |
-        geckodriver &
+        geckodriver --log trace &
         curl -H 'Content-Type: application/json' -d '{"capabilities": {"alwaysMatch": {"acceptInsecureCerts": true}}}' http://localhost:4444/session
   
