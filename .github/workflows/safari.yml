@@ -23,7 +23,7 @@ jobs:
       with:
         python-version: '3.11' 
     - name: Install ffmpeg
-      uses: FedericoCarboni/setup-ffmpeg@v6
+      uses: FedericoCarboni/setup-ffmpeg@v2
     - name: Install dependencies
       run: |
         sudo safaridriver --enable
