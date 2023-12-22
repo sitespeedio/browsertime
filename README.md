@@ -168,13 +168,14 @@ To get the HAR from Firefox we use the [HAR Export Trigger](https://github.com/f
 
 We welcome contributions from the community! Whether you're fixing a bug, adding a feature, or improving documentation, your help is valuable. Here’s how you can contribute:
 
-1. **Fork and Clone**: Fork the repository and clone it locally.
-2. **Create a Branch**: Create a new branch for your feature or bug fix.
-3. **Develop**: Make your changes. Ensure you adhere to the coding standards and write tests if applicable.
-4. **Test**: Run tests to ensure everything works as expected.
-5. **Submit a Pull Request**: Push your changes to your fork and submit a pull request to the main repository.
+1. **Create an Issue**: Create an issue and discuss with us how to implement the issue.
+2. **Fork and Clone**: Fork the repository and clone it locally.
+3. **Create a Branch**: Create a new branch for your feature or bug fix.
+4. **Develop**: Make your changes. Ensure you adhere to the coding standards and write tests if applicable.
+5. **Test**: Run tests to ensure everything works as expected.
+6. **Submit a Pull Request**: Push your changes to your fork and submit a pull request to the main repository.
 
-Before contributing, please read our [CONTRIBUTING.md](CONTRIBUTING.md) for more detailed information on how to contribute.
+Before contributing, please read our [CONTRIBUTING.md](.github/CONTRIBUTING.md) for more detailed information on how to contribute.
 
 ### Reporting Issues
 Found a bug or have a feature request? Please use the [GitHub Issues](https://github.com/sitespeedio/browsertime/issues) to report them. Be sure to check existing issues to avoid duplicates.
