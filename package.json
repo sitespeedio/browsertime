@@ -12,13 +12,13 @@
     "@sitespeed.io/geckodriver": "0.33.0-c",
     "@sitespeed.io/throttle": "5.0.0",
     "@sitespeed.io/tracium": "0.3.3",
-    "ff-test-bidi-har-export": "0.0.12",
     "btoa": "1.2.1",
     "chrome-har": "0.13.2",
     "chrome-remote-interface": "0.33.0",
     "dayjs": "1.11.10",
     "execa": "8.0.1",
     "fast-stats": "0.0.6",
+    "ff-test-bidi-har-export": "0.0.12",
     "find-up": "7.0.0",
     "get-port": "7.0.0",
     "hasbin": "1.2.3",
@@ -36,14 +36,15 @@
     "jimp": "0.22.10"
   },
   "devDependencies": {
+    "@types/selenium-webdriver": "^4.1.21",
     "ava": "6.0.1",
     "eslint": "8.55.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-prettier": "5.0.1",
     "eslint-plugin-unicorn": "49.0.0",
     "prettier": "3.1.1",
-    "serve-handler": "6.1.5",
-    "serve": "14.2.1"
+    "serve": "14.2.1",
+    "serve-handler": "6.1.5"
   },
   "engines": {
     "node": ">=18.0.0"
