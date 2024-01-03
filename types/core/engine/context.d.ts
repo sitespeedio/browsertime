@@ -1,38 +1,44 @@
 /**
+ * @typedef {Object} Logger
+ * @property {function(string): void} trace - Function to log trace messages.
+ * @property {function(string): void} verbose - Function to log verbose messages.
+ * @property {function(string): void} info - Function to log info messages.
+ * @property {function(string): void} warn - Function to log warning messages.
+ * @property {function(string): void} error - Function to log error messages.
+ * @property {function(string): void} critical - Function to log critical messages.
+ */
+/**
+ * @typedef {typeof import('selenium-webdriver')} WebDriverClass
+ * @typedef {import('selenium-webdriver').WebDriver} WebDriverInstance
+ */
+/**
  * Class representing the context of a Browsertime run.
  *
  * @class
  */
 export class Context {
+    constructor(options: any, result: any, log: any, storageManager: any, index: any, webdriver: any, instantiatedDriver: any);
     /**
-     * Creates an instance of Context.
-     *
-     * @param {Object} options - Configuration options for the Browsertime run.
-     * @param {Object} result - Object to store the results of the Browsertime run.
-     * @param {intel.Logger} log - Logger for recording events or errors.
-     * @param {import('../../support/storageManager.js').StorageManager} storageManager - Manages storage for the Browsertime run.
-     * @param {number} index - Index representing the current iteration or run.
-     * @param {import('selenium-webdriver').WebDriver} webdriver - WebDriver instance from Selenium for browser automation.
-     * @param {import('selenium-webdriver').WebDriver} instantiatedDriver - WebDriver instance returned by Selenium's `builder.build()`.
-     */
-    constructor(options: any, result: any, log: intel.Logger, storageManager: import('../../support/storageManager.js').StorageManager, index: number, webdriver: import('selenium-webdriver').WebDriver, instantiatedDriver: import('selenium-webdriver').WebDriver);
-    /**
+     * This is the yargs object you get from the cli. If you add --my.id you can get that using options.my.id.
      * @type {Object}
      */
     options: any;
     /**
+     * Here the result from each run is stored.
      * @type {Object}
      */
     result: any;
     /**
-     * @type {intel.Logger}
+     * @type {Logger}
      */
-    log: intel.Logger;
+    log: Logger;
     /**
+     * The index of the iteration.
      * @type {number}
      */
     index: number;
     /**
+     * Storage manager to save things to disk.
      * @type {import('../../support/storageManager.js').StorageManager}
      */
     storageManager: import('../../support/storageManager.js').StorageManager;
@@ -41,11 +47,40 @@ export class Context {
      */
     taskData: any;
     /**
-     * @type {{webdriver: import('selenium-webdriver').WebDriver, driver: import('selenium-webdriver').WebDriver}}
+     * Get raw Selenium functionality.
+     * @type {{webdriver: WebDriverClass, driver: WebDriverInstance}}
      */
     selenium: {
-        webdriver: import('selenium-webdriver').WebDriver;
-        driver: import('selenium-webdriver').WebDriver;
+        webdriver: typeof import("selenium-webdriver");
+        driver: import("selenium-webdriver").WebDriver;
     };
 }
+export type Logger = {
+    /**
+     * - Function to log trace messages.
+     */
+    trace: (arg0: string) => void;
+    /**
+     * - Function to log verbose messages.
+     */
+    verbose: (arg0: string) => void;
+    /**
+     * - Function to log info messages.
+     */
+    info: (arg0: string) => void;
+    /**
+     * - Function to log warning messages.
+     */
+    warn: (arg0: string) => void;
+    /**
+     * - Function to log error messages.
+     */
+    error: (arg0: string) => void;
+    /**
+     * - Function to log critical messages.
+     */
+    critical: (arg0: string) => void;
+};
+export type WebDriverClass = typeof import('selenium-webdriver');
+export type WebDriverInstance = import('selenium-webdriver').WebDriver;
 //# sourceMappingURL=context.d.ts.map

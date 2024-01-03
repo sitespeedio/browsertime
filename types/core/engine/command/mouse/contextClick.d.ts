@@ -1,26 +1,43 @@
+/**
+ * Provides functionality to perform a context click (right-click) on elements in a web page.
+ *
+ * @class
+ */
 export class ContextClick {
     constructor(browser: any);
-    driver: any;
-    actions: any;
     /**
-     * Perform ContextClick on an element that matches a XPath selector.
-     * @param {string} xpath
-     * @returns {Promise} Promise object represents when context click occurs.
-     * @throws Will throw an error if the element is not found
+     * @private
      */
-    byXpath(xpath: string): Promise<any>;
+    private driver;
     /**
-     * Perform ContextClick on an element that matches a CSS selector.
-     * @param {string} css selector
-     * @returns {Promise} Promise object represents when context click occurs.
-     * @throws Will throw an error if the element is not found
+     * @private
      */
-    bySelector(selector: any): Promise<any>;
+    private actions;
     /**
-     * Perform ContextClick at the cursor's position.
-     * @returns {Promise} Promise object represents when context click occurs.
-     * @throws Will throw an error if context click cannot be performed.
+     * Performs a context click (right-click) on an element that matches a given XPath selector.
+     *
+     * @async
+     * @param {string} xpath - The XPath selector of the element to context click.
+     * @returns {Promise<void>} A promise that resolves when the context click action is performed.
+     * @throws {Error} Throws an error if the element is not found.
      */
-    atCursor(): Promise<any>;
+    byXpath(xpath: string): Promise<void>;
+    /**
+     * Performs a context click (right-click) on an element that matches a given CSS selector.
+     *
+     * @async
+     * @param {string} selector - The CSS selector of the element to context click.
+     * @returns {Promise<void>} A promise that resolves when the context click action is performed.
+     * @throws {Error} Throws an error if the element is not found.
+     */
+    bySelector(selector: string): Promise<void>;
+    /**
+     * Performs a context click (right-click) at the current cursor position.
+     *
+     * @async
+     * @returns {Promise<void>} A promise that resolves when the context click action is performed.
+     * @throws {Error} Throws an error if the context click action cannot be performed.
+     */
+    atCursor(): Promise<void>;
 }
 //# sourceMappingURL=contextClick.d.ts.map
