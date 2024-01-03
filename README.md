@@ -139,7 +139,7 @@ docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e L
 Use Firefox:
 
 ```shell
-docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:20.0.0 -b firefox -n 11 --firefox.acceptInsecureCerts https://en.wikipedia.org/wiki/Barack_Obama
+docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:20.0.0 -b firefox -n 11 --firefox.acceptInsecureCerts true https://en.wikipedia.org/wiki/Barack_Obama
 ```
 
 And Chrome on your Android phone. This will only work on Linux because you need to be able to mount the usb port in Docker:
