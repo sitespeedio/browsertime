@@ -1,0 +1,15 @@
+{
+  "include": [
+    "lib/core/engine/command/**/*",
+    "lib/core/engine/context.js",
+    "lib/core/engine/commands.js"
+  ],
+  "compilerOptions": {
+    "allowJs": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "types",
+    "declarationMap": true,
+    "esModuleInterop": true
+  }
+}
