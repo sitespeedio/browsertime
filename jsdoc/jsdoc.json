@@ -1,0 +1,27 @@
+{
+  "source": {
+    "include": [
+      "./lib/core/engine/commands.js",
+      "./lib/core/engine/command/",
+      "./lib/core/engine/command/mouse/",
+      "./jsdoc/README.md"
+    ],
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "opts": {
+    "destination": "../sitespeed.io/docs/documentation/sitespeed.io/scripting/jsdocs",
+    "template": "node_modules/clean-jsdoc-theme",
+    "theme_opts": {
+      "homepageTitle": "Scripting in Browsertime/sitespeed.io",
+      "title": "Scripting in Browsertime/sitespeed.io",
+      "default_theme": "light",
+      "base_url": "https://www.sitespeed.io/documentation/sitespeed.io/scripting/jsdoc/",
+      "footer": "This is footer"
+    },
+    "markdown": {
+      "hardwrap": false,
+      "idInHeadings": true
+    }
+  }
+}
