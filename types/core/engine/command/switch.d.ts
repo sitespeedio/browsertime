@@ -1,39 +1,76 @@
+/**
+ * Provides functionality to switch between frames, windows, and tabs in the browser.
+ *
+ * @class
+ */
 export class Switch {
     constructor(browser: any, pageCompleteCheck: any, navigate: any);
-    browser: any;
-    pageCompleteCheck: any;
-    navigate: any;
     /**
-     * Switch to frame by id
-     * @param {*} id
+     * @private
      */
-    toFrame(id: any): Promise<void>;
+    private browser;
     /**
-     * Switch to frame by xpath
-     * @param {*} xpath
+     * @private
      */
-    toFrameByXpath(xpath: any): Promise<void>;
+    private pageCompleteCheck;
     /**
-     * Switch to frame by xpath
-     * @param {*} xpath
+     * @private
      */
-    toFrameBySelector(selector: any): Promise<void>;
+    private navigate;
     /**
-     * Switch to a window by name
-     * @param {*} name
+     * Switches to a frame identified by its ID.
+     *
+     * @async
+     * @param {string|number} id - The ID of the frame.
+     * @throws {Error} Throws an error if switching to the frame fails.
      */
-    toWindow(name: any): Promise<void>;
+    toFrame(id: string | number): Promise<void>;
     /**
-     * Switch to parent frame
+     * Switches to a frame identified by an XPath.
+     *
+     * @async
+     * @param {string} xpath - The XPath of the frame element.
+     * @throws {Error} Throws an error if the frame is not found or switching fails.
+     */
+    toFrameByXpath(xpath: string): Promise<void>;
+    /**
+     * Switches to a frame identified by a CSS selector.
+     *
+     * @async
+     * @param {string} selector - The CSS selector of the frame element.
+     * @throws {Error} Throws an error if the frame is not found or switching fails.
+     */
+    toFrameBySelector(selector: string): Promise<void>;
+    /**
+     * Switches to a window identified by its name.
+     *
+     * @async
+     * @param {string} name - The name of the window.
+     * @throws {Error} Throws an error if switching to the window fails.
+     */
+    toWindow(name: string): Promise<void>;
+    /**
+     * Switches to the parent frame of the current frame.
+     *
+     * @async
+     * @throws {Error} Throws an error if switching to the parent frame fails.
      */
     toParentFrame(): Promise<void>;
     /**
-     * Create a new tab and switch to it. Optionally, navigate to a given url.
+     * Opens a new tab and optionally navigates to a URL.
+     *
+     * @async
+     * @param {string} [url] - Optional URL to navigate to in the new tab.
+     * @throws {Error} Throws an error if opening a new tab fails.
      */
-    toNewTab(url: any): Promise<void>;
+    toNewTab(url?: string): Promise<void>;
     /**
-     * Create a new window and switch to it. Optionally, navigate to a given url.
+     * Opens a new window and optionally navigates to a URL.
+     *
+     * @async
+     * @param {string} [url] - Optional URL to navigate to in the new window.
+     * @throws {Error} Throws an error if opening a new window fails.
      */
-    toNewWindow(url: any): Promise<void>;
+    toNewWindow(url?: string): Promise<void>;
 }
 //# sourceMappingURL=switch.d.ts.map

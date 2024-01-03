@@ -1,9 +1,9 @@
 # Scripting
-Here are the documenation for using scriping commands.
+Here are the JSDoc for using scripting commands that you use to measure user journeys in Browsertime/sitespeed.io. You can find the full documentation [here](https://www.sitespeed.io/documentation/sitespeed.io/scripting/).
 
-To get code completion/intellisense in Visual Studio code, add Browsertime as a developer dependency `npm install browsertime --save-dev`
+To get code completion/IntelliSense in Visual Studio code, add Browsertime as a developer dependency `npm install browsertime --save-dev` to your project.
 
-And then create your script files and pointing out the cotrrect context/commands object.
+And then create your script files and pointing out the correct context/commands object.
 
 ```
 /**

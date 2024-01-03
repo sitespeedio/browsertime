@@ -1,62 +1,80 @@
+/**
+ * Provides functionality to interact with `<select>` elements on a web page.
+ *
+ * @class
+ */
 export class Select {
     constructor(browser: any);
-    browser: any;
     /**
-     * Select value of a select by the selects id
-     * @param {string} selectId The id of the select
-     * @param {string} value The value of the option you want to set
-     * @returns {Promise} Promise object represents when the option has been
-     * set to the element
-     * @throws Will throw an error if the select is not found
+     * @private
      */
-    selectByIdAndValue(selectId: string, value: string): Promise<any>;
+    private browser;
     /**
-     * Select value of a select by the selects name
-     * @param {string} selectName The name of the select
-     * @param {string} value The value of the option you want to set
-     * @returns {Promise} Promise object represents when the option has been
-     * set to the element
-     * @throws Will throw an error if the select is not found
+     * Selects an option in a `<select>` element by its ID and the value of the option.
+     *
+     * @async
+     * @param {string} selectId - The ID of the `<select>` element.
+     * @param {string} value - The value of the option to select.
+     * @returns {Promise<void>} A promise that resolves when the option is selected.
+     * @throws {Error} Throws an error if the `<select>` element is not found.
      */
-    selectByNameAndValue(selectName: string, value: string): Promise<any>;
+    selectByIdAndValue(selectId: string, value: string): Promise<void>;
     /**
-     * Select value of a select index and  by the selects id
-     * @param {string} selectId The id of the select
-     * @param {number} index the index of the option you want to set
-     * @returns {Promise} Promise object represents when the option has been
-     * set to the element
-     * @throws Will throw an error if the select is not found
+     * Selects an option in a `<select>` element by its name and the value of the option.
+     *
+     * @async
+     * @param {string} selectName - The name of the `<select>` element.
+     * @param {string} value - The value of the option to select.
+     * @returns {Promise<void>} A promise that resolves when the option is selected.
+     * @throws {Error} Throws an error if the `<select>` element is not found.
      */
-    selectByIdAndIndex(selectId: string, index: number): Promise<any>;
+    selectByNameAndValue(selectName: string, value: string): Promise<void>;
     /**
-     * Select value of a select index and by the selects name
-     * @param {string} selectName - the name of the select
-     * @param {number} index - the index of the option you want to set
-     * @returns {Promise} Promise object represents when the option has been
-     * set to the element
-     * @throws Will throw an error if the select is not found
+     * Selects an option in a `<select>` element by its ID and the index of the option.
+     *
+     * @async
+     * @param {string} selectId - The ID of the `<select>` element.
+     * @param {number} index - The index of the option to select.
+     * @returns {Promise<void>} A promise that resolves when the option is selected.
+     * @throws {Error} Throws an error if the `<select>` element is not found.
      */
-    selectByNameAndIndex(selectName: string, index: number): Promise<any>;
+    selectByIdAndIndex(selectId: string, index: number): Promise<void>;
     /**
-     * Deselect all options in a select.
-     * @param {string} selectId
-     * @returns {Promise} Promise object represents when options been deselected
-     * @throws Will throw an error if the select is not found
+     * Selects an option in a `<select>` element by its name and the index of the option.
+     *
+     * @async
+     * @param {string} selectName - The name of the `<select>` element.
+     * @param {number} index - The index of the option to select.
+     * @returns {Promise<void>} A promise that resolves when the option is selected.
+     * @throws {Error} Throws an error if the `<select>` element is not found.
      */
-    deselectById(selectId: string): Promise<any>;
+    selectByNameAndIndex(selectName: string, index: number): Promise<void>;
     /**
-     * Get all option values in a select.
-     * @param {string} selectId - the id of the select.
-     * @returns {Promise} Promise object tha will return an array with the values of the select
-     * @throws Will throw an error if the select is not found
+     * Deselects all options in a `<select>` element by its ID.
+     *
+     * @async
+     * @param {string} selectId - The ID of the `<select>` element.
+     * @returns {Promise<void>} A promise that resolves when all options are deselected.
+     * @throws {Error} Throws an error if the `<select>` element is not found.
      */
-    getValuesById(selectId: string): Promise<any>;
+    deselectById(selectId: string): Promise<void>;
     /**
-     * Get the selected option value in a select.
-     * @param {select} selectId the id of the select.
-     * @returns {Promise} Promise object tha will return the value of the selected option.
-     * @throws Will throw an error if the select is not found.
+     * Retrieves all option values in a `<select>` element by its ID.
+     *
+     * @async
+     * @param {string} selectId - The ID of the `<select>` element.
+     * @returns {Promise<string[]>} A promise that resolves with an array of the values of the options.
+     * @throws {Error} Throws an error if the `<select>` element is not found.
      */
-    getSelectedValueById(selectId: select): Promise<any>;
+    getValuesById(selectId: string): Promise<string[]>;
+    /**
+     * Retrieves the value of the selected option in a `<select>` element by its ID.
+     *
+     * @async
+     * @param {string} selectId - The ID of the `<select>` element.
+     * @returns {Promise<string>} A promise that resolves with the value of the selected option.
+     * @throws {Error} Throws an error if the `<select>` element is not found.
+     */
+    getSelectedValueById(selectId: string): Promise<string>;
 }
 //# sourceMappingURL=select.d.ts.map

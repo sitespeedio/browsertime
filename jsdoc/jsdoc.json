@@ -10,6 +10,7 @@
     "excludePattern": "(^|\\/|\\\\)_"
   },
   "opts": {
+    "tutorials": "./jsdoc/tutorials/",
     "destination": "../sitespeed.io/docs/documentation/sitespeed.io/scripting/jsdocs",
     "template": "node_modules/clean-jsdoc-theme",
     "theme_opts": {
@@ -17,7 +18,8 @@
       "title": "Scripting in Browsertime/sitespeed.io",
       "default_theme": "light",
       "base_url": "https://www.sitespeed.io/documentation/sitespeed.io/scripting/jsdoc/",
-      "footer": "This is footer"
+      "footer": "© Sitespeed.io 2024",
+      "sections": ["Tutorials", "Classes"]
     },
     "markdown": {
       "hardwrap": false,
