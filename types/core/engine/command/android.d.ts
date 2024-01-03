@@ -1,13 +1,24 @@
+/**
+ * Provides functionality to interact with an Android device through shell commands.
+ *
+ * @class
+ */
 export class AndroidCommand {
     constructor(options: any);
-    options: any;
     /**
-     * Run a shell command on your Android phone.
-     * @param {string} command The shell command to run on your phone.
-     * @returns {Promise} Promise object represents the outcome of the command or when the command has finished
-     * @throws Will throw an error Android isn't configured or something goes wrong
+     * @private
      */
-    shell(command: string): Promise<any>;
+    private options;
+    /**
+     * Runs a shell command on the connected Android device.
+     * This method requires the Android device to be properly configured.
+     *
+     * @async
+     * @param {string} command - The shell command to run on the Android device.
+     * @returns {Promise<string>} A promise that resolves with the result of the command or rejects if there's an error.
+     * @throws {Error} Throws an error if Android is not configured or if the command fails.
+     */
+    shell(command: string): Promise<string>;
     a: Android;
 }
 import { Android } from '../../../android/index.js';

@@ -1,49 +1,72 @@
+/**
+ * Provides functionality to wait for different conditions in the browser.
+ *
+ * @class
+ */
 export class Wait {
     constructor(browser: any, pageCompleteCheck: any);
-    browser: any;
-    pageCompleteCheck: any;
     /**
-     * Wait for an element with id to appear for maxTime.
-     * @param {string} id The id to wait for
-     * @param {number} maxTime Max time to wait in ms
-     * @returns {Promise} Promise object represents when the element is found or the time times out
-     * @throws Will throw an error if the element is not found
+     * @private
      */
-    byId(id: string, maxTime: number): Promise<any>;
+    private browser;
     /**
-     * Wait for an element with xpath to appear for maxTime.
-     * @param {string} xpath The xpath to wait for
-     * @param {number} maxTime Max time to wait in ms
-     * @returns {Promise} Promise object represents when the element is found or the time times out
-     * @throws Will throw an error if the element is not found
+     * @private
      */
-    byXpath(xpath: string, maxTime: number): Promise<any>;
+    private pageCompleteCheck;
     /**
-     * Wait for an element that you find by a selector to appear for maxTime.
-     * @param {string} selector The selector to find the element to wait for
-     * @param {number} maxTime Max time to wait in ms
-     * @returns {Promise} Promise object represents when the element is found or the time times out
-     * @throws Will throw an error if the element is not found
+     * Waits for an element with a specific ID to appear within a maximum time.
+     *
+     * @async
+     * @param {string} id - The ID of the element to wait for.
+     * @param {number} maxTime - Maximum time to wait in milliseconds.
+     * @returns {Promise<void>} A promise that resolves when the element is found or the time times out.
+     * @throws {Error} Throws an error if the element is not found within the specified time.
      */
-    bySelector(selector: string, maxTime: number): Promise<any>;
+    byId(id: string, maxTime: number): Promise<void>;
     /**
-     * Wait for x ms.
-     * @param {number} ms The tine in ms to wait.
-     * @returns {Promise} Promise object represents when the time has timed out.
+     * Waits for an element located by XPath to appear within a maximum time.
+     *
+     * @async
+     * @param {string} xpath - The XPath of the element to wait for.
+     * @param {number} maxTime - Maximum time to wait in milliseconds.
+     * @returns {Promise<void>} A promise that resolves when the element is found or the time times out.
+     * @throws {Error} Throws an error if the element is not found within the specified time.
      */
-    byTime(ms: number): Promise<any>;
+    byXpath(xpath: string, maxTime: number): Promise<void>;
     /**
-     * Wait for the page to finish loading.
-     * @returns {Promise} Promise object represents when the pageCompleteCheck has finished.
+     * Waits for an element located by a CSS selector to appear within a maximum time.
+     *
+     * @async
+     * @param {string} selector - The CSS selector of the element to wait for.
+     * @param {number} maxTime - Maximum time to wait in milliseconds.
+     * @returns {Promise<void>} A promise that resolves when the element is found or the time times out.
+     * @throws {Error} Throws an error if the element is not found within the specified time.
      */
-    byPageToComplete(): Promise<any>;
+    bySelector(selector: string, maxTime: number): Promise<void>;
     /**
-     * Wait for an condition that will eventually return a truthy-value for maxTime.
-     * @param {string} jsExpression The js code condition to wait for
-     * @param {number} maxTime Max time to wait in ms
-     * @returns {Promise} Promise object represents when the expression becomes truthy or the time times out
-     * @throws Will throw an error if the condition returned false
+     * Waits for a specified amount of time.
+     *
+     * @async
+     * @param {number} ms - The time in milliseconds to wait.
+     * @returns {Promise<void>} A promise that resolves when the specified time has elapsed.
      */
-    byCondition(jsExpression: string, maxTime: number): Promise<any>;
+    byTime(ms: number): Promise<void>;
+    /**
+     * Waits for the page to finish loading.
+     *
+     * @async
+     * @returns {Promise<void>} A promise that resolves when the page complete check has finished.
+     */
+    byPageToComplete(): Promise<void>;
+    /**
+     * Waits for a JavaScript condition to return a truthy value within a maximum time.
+     *
+     * @async
+     * @param {string} jsExpression - The JavaScript expression to evaluate.
+     * @param {number} maxTime - Maximum time to wait in milliseconds.
+     * @returns {Promise<void>} A promise that resolves when the condition becomes truthy or the time times out.
+     * @throws {Error} Throws an error if the condition is not met within the specified time.
+     */
+    byCondition(jsExpression: string, maxTime: number): Promise<void>;
 }
 //# sourceMappingURL=wait.d.ts.map
