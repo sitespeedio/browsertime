@@ -1,50 +1,63 @@
+/**
+ * Provides functionality to add text to elements on a web page using various selectors.
+ *
+ * @class
+ */
 export class AddText {
     constructor(browser: any);
-    browser: any;
     /**
-     * Add text to an element with Selenium sendKeys.
-     * @param {string} text The text string that you want to add
-     * @param {string} id The id of the element
-     * @returns {Promise} Promise object represents when the text has been
-     * added to the field
-     * @throws Will throw an error if the element is not found
+     * @private
      */
-    byId(text: string, id: string): Promise<any>;
+    private browser;
     /**
-     * Add text to an element with Selenium sendKeys.
-     * @param {string} text The text string that you want to add
-     * @param {string} xpath The xpath to the element
-     * @returns {Promise} Promise object represents when the text has been
-     * added to the field
-     * @throws Will throw an error if the element is not found
+     * Adds text to an element identified by its ID.
+     *
+     * @async
+     * @param {string} text - The text string to add.
+     * @param {string} id - The ID of the element.
+     * @returns {Promise<void>} A promise that resolves when the text has been added.
+     * @throws {Error} Throws an error if the element is not found.
      */
-    byXpath(text: string, xpath: string): Promise<any>;
+    byId(text: string, id: string): Promise<void>;
     /**
-     * Add text to an element with Selenium sendKeys.
-     * @param {string} text The text string that you want to add
-     * @param {string} selector The CSS selector to the element
-     * @returns {Promise} Promise object represents when the text has been
-     * added to the field
-     * @throws Will throw an error if the element is not found
+     * Adds text to an element identified by its XPath.
+     *
+     * @async
+     * @param {string} text - The text string to add.
+     * @param {string} xpath - The XPath of the element.
+     * @returns {Promise<void>} A promise that resolves when the text has been added.
+     * @throws {Error} Throws an error if the element is not found.
      */
-    bySelector(text: string, selector: string): Promise<any>;
+    byXpath(text: string, xpath: string): Promise<void>;
     /**
-     * Add text to an element with Selenium sendKeys.
-     * @param {string} text The text string that you want to add
-     * @param {string} className A specific class name
-     * @returns {Promise} Promise object represents when the text has been
-     * added to the field
-     * @throws Will throw an error if the element is not found
+     * Adds text to an element identified by its CSS selector.
+     *
+     * @async
+     * @param {string} text - The text string to add.
+     * @param {string} selector - The CSS selector of the element.
+     * @returns {Promise<void>} A promise that resolves when the text has been added.
+     * @throws {Error} Throws an error if the element is not found.
      */
-    byClassName(text: string, className: string): Promise<any>;
+    bySelector(text: string, selector: string): Promise<void>;
     /**
-     * Add text to an element with Selenium sendKeys.
-     * @param {string} text The text string that you want to add
-     * @param {string} name Element whose name attribute has the given value.
-     * @returns {Promise} Promise object represents when the text has been
-     * added to the field
-     * @throws Will throw an error if the element is not found
+     * Adds text to an element identified by its class name.
+     *
+     * @async
+     * @param {string} text - The text string to add.
+     * @param {string} className - The class name of the element.
+     * @returns {Promise<void>} A promise that resolves when the text has been added.
+     * @throws {Error} Throws an error if the element is not found.
      */
-    byName(text: string, name: string): Promise<any>;
+    byClassName(text: string, className: string): Promise<void>;
+    /**
+     * Adds text to an element identified by its name attribute.
+     *
+     * @async
+     * @param {string} text - The text string to add.
+     * @param {string} name - The name attribute of the element.
+     * @returns {Promise<void>} A promise that resolves when the text has been added.
+     * @throws {Error} Throws an error if the element is not found.
+     */
+    byName(text: string, name: string): Promise<void>;
 }
 //# sourceMappingURL=addText.d.ts.map

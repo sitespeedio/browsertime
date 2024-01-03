@@ -1,3 +1,9 @@
+/**
+ * Manage the browser cache.
+ * This class provides methods to clear the cache and cookies in different browsers.
+ *
+ * @class
+ */
 export class Cache {
     constructor(browser: any, browserName: any, extensionServer: any, cdp: any);
     /**

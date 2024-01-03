@@ -1,18 +1,44 @@
+/**
+ * Provides functionality to control browser navigation such as back, forward, and refresh actions.
+ *
+ * @class
+ */
 export class Navigation {
     constructor(browser: any, pageCompleteCheck: any);
-    browser: any;
-    pageCompleteCheck: any;
     /**
-     * Navigate backward in history
+     * @private
      */
-    back(options: any): Promise<any>;
+    private browser;
     /**
-     * Navigate forward in history
+     * @private
      */
-    forward(options: any): Promise<any>;
+    private pageCompleteCheck;
     /**
-     * Refresh page
+     * Navigates backward in the browser's history.
+     *
+     * @async
+     * @param {Object} [options] - Additional options for navigation. Set {wait:true} to wait for the page complete check to run.
+     * @returns {Promise<void>} A promise that resolves when the navigation action is completed.
+     * @throws {Error} Throws an error if navigation fails.
      */
-    refresh(options: any): Promise<any>;
+    back(options?: any): Promise<void>;
+    /**
+     * Navigates forward in the browser's history.
+     *
+     * @async
+     * @param {Object} [options] - Additional options for navigation. Set {wait:true} to wait for the page complete check to run.
+     * @returns {Promise<void>} A promise that resolves when the navigation action is completed.
+     * @throws {Error} Throws an error if navigation fails.
+     */
+    forward(options?: any): Promise<void>;
+    /**
+     * Refreshes the current page.
+     *
+     * @async
+     * @param {Object} [options] - Additional options for refresh action. Set {wait:true} to wait for the page complete check to run.
+     * @returns {Promise<void>} A promise that resolves when the page has been refreshed.
+     * @throws {Error} Throws an error if refreshing the page fails.
+     */
+    refresh(options?: any): Promise<void>;
 }
 //# sourceMappingURL=navigation.d.ts.map

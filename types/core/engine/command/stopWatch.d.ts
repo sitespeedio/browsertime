@@ -1,32 +1,48 @@
+/**
+ * A stopwatch utility for measuring time intervals.
+ *
+ * @class
+ */
 export class StopWatch {
     constructor(name: any, measure: any);
-    name: any;
-    measure: any;
     /**
-     * Start the the stop watch
+     * @private
+     */
+    private name;
+    /**
+     * @private
+     */
+    private measure;
+    /**
+     * Starts the stopwatch.
      */
     start(): void;
     /**
-     * Stop the watch and automatically add the time to the
-     * last measured page. If no page has been measured you will get
-     * an error in your log.
-     * @returns the measured time
+     * Stops the stopwatch and automatically adds the measured time to the
+     * last measured page. Logs an error if no page has been measured.
+     * @returns {number} The measured time in milliseconds.
      */
     stopAndAdd(): number;
     /**
-     * Stop the watch
-     * @returns the measured time
+     * Stops the stopwatch.
+     * @returns {number} The measured time in milliseconds.
      */
     stop(): number;
     /**
-     * Get the name of the watch.
-     * @returns The name of the watch
+     * Gets the name of the stopwatch.
+     * @returns {string} The name of the stopwatch.
      */
-    getName(): any;
+    getName(): string;
 }
+/**
+ * @private
+ */
 export class Watch {
     constructor(measure: any);
     measure: any;
-    get(name: any): StopWatch;
+    /**
+     * @private
+     */
+    private get;
 }
 //# sourceMappingURL=stopWatch.d.ts.map
