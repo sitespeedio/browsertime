@@ -1,5 +1,18 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Added
+* Upgraded to Geckodriver 0.34.0 [#2049](https://github.com/sitespeedio/browsertime/pull/2049).
+* Collect CPU consumption for Firefox. Turn that on with `--firefox.powerConsumption true` and including `power` as a geckoProfilerParams.features [#2046](https://github.com/sitespeedio/browsertime/pull/2046).
+
+### Fixed
+* Make sure the visual metrics files are inlcuded in the Docker file [#2053](https://github.com/sitespeedio/browsertime/pull/2053).
+* Removing QVH from the npm package (used for iPhone video recording but not working) [#2051](https://github.com/sitespeedio/browsertime/pull/2051)
+* Removing visual metrics test images from the npm package [#2050](https://github.com/sitespeedio/browsertime/pull/2050).
+* Removed the Chromedriver fix that was needed when Chrome for testing broke testing on Chrome :D [#2045](https://github.com/sitespeedio/browsertime/pull/2045).
+* Refactor of commands/context object to prepare for supporting JSDoc and a little TypeScript to add code completion/IntelliSense in editors [#2047](https://github.com/sitespeedio/browsertime/pull/2047).
+* Updated documentation for scripting with better JSDoc [#204](https://github.com/sitespeedio/browsertime/pull/2048).
+
 ## 20.0.0 - 2023-12-22
 
 ### Breaking
