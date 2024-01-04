@@ -1,7 +1,7 @@
 In sitespeed.io, measurements can be conducted using a meassure command for page navigation performance, gathering various metrics during page load. Alternatively, the StopWatch command is used for measuring arbitrary durations, such as the time taken for certain actions to complete. When you create your script you need to know what you want to measure.
 
 
-### The `measure` Command
+## The `measure` Command
 
 In web performance, *"navigation"* means switching from one webpage to another. This switch triggers several steps in your browser, like closing the current page, loading new content, and showing the new page fully loaded. In sitespeed.io, the commands.measure function is used to analyze this process. It tracks various performance details from the moment you start moving to a new page until it's completely loaded. This includes how long the page takes to load, how fast resources (like images and scripts) are loaded, and more, giving you a full picture of the navigation's performance.
 
@@ -38,7 +38,7 @@ export default async function (context, commands) {
 }
 ```
 
-### The `stopWatch` Command
+## The `stopWatch` Command
 
 The `Stop Watch` command in sitespeed.io is used for measuring the time of activities other than web page navigation, like specific processes or user actions. You manually start and stop this watch to track the duration of these actions. When you use the Stop Watch, its timing data gets automatically linked to the web page you were analyzing right before you started the watch. This way, the time recorded by the Stop Watch becomes part of the performance data for that particular page.
 
@@ -61,7 +61,7 @@ export default async function (context, commands) {
 
 ```
 
-### Using user timings and element timings API
+## Using user timings and element timings API
 
 When testing a webpage you manage, it's a good idea to use the [User Timing](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/User_timing) and [Element Timing](https://wicg.github.io/element-timing/) APIs built into browsers. Most browsers support the User Timing API, and Chrome-based browsers support the Element Timing API. Browsertime and sitespeed.io automatically collect metrics from these APIs when you execute the measure command. If you need these metrics after navigating to a different page, you can also retrieve them using the JavaScript command within your script. This approach is helpful for gathering detailed timing information related to specific elements or user-defined timings on your page.
 
@@ -96,7 +96,7 @@ export default async function (context, commands) {
 }
 ```
 
-### Measure a single page application (SPA)
+## Measure a single page application (SPA)
 
 Single Page Applications (SPAs) are web applications that load a single HTML page and dynamically update that page as the user interacts with the app. Unlike traditional web applications that reload the entire page or load new pages to display different content, SPAs rewrite the current page in response to user actions (a soft navigation), in best cases it
 s leading to a more fluid user experience.

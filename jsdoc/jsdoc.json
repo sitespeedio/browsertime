@@ -11,16 +11,23 @@
   },
   "opts": {
     "tutorials": "./jsdoc/tutorials/",
-    "destination": "../sitespeed.io/docs/documentation/sitespeed.io/scripting/jsdocs",
+    "destination": "../sitespeed.io/docs/documentation/sitespeed.io/scripting/tutorials",
     "template": "node_modules/clean-jsdoc-theme",
     "theme_opts": {
       "homepageTitle": "Scripting in Browsertime/sitespeed.io",
       "title": "Scripting in Browsertime/sitespeed.io",
       "default_theme": "light",
-      "base_url": "https://www.sitespeed.io/documentation/sitespeed.io/scripting/jsdoc/",
+      "base_url": "https://www.sitespeed.io/documentation/sitespeed.io/scripting/tutorials/",
       "footer": "© Sitespeed.io 2024",
       "sections": ["Tutorials", "Classes"],
-      "favicon": "https://www.sitespeed.io/img/ico/sitespeed.io-144.png"
+      "favicon": "https://www.sitespeed.io/img/ico/sitespeed.io-144.png",
+      "menu": [
+        {
+          "title": "Documentation",
+          "link": "https://www.sitespeed.io/documentation/sitespeed.io/",
+          "target": "_blank"
+        }
+      ]
     }
   },
   "markdown": {
