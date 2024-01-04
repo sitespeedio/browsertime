@@ -19,11 +19,12 @@
       "default_theme": "light",
       "base_url": "https://www.sitespeed.io/documentation/sitespeed.io/scripting/jsdoc/",
       "footer": "© Sitespeed.io 2024",
-      "sections": ["Tutorials", "Classes"]
-    },
-    "markdown": {
-      "hardwrap": false,
-      "idInHeadings": true
+      "sections": ["Tutorials", "Classes"],
+      "favicon": "https://www.sitespeed.io/img/ico/sitespeed.io-144.png"
     }
+  },
+  "markdown": {
+    "hardwrap": false,
+    "idInHeadings": true
   }
 }

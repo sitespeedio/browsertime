@@ -1,0 +1,29 @@
+{
+    "01-Introduction": {
+        "title": "Introduction"
+    },
+    "02-Basic-Script-Structure": {
+        "title": "Basic Script Structure"
+    },
+    "03-Script-Components": {
+        "title": "Understanding Context and Commands"
+    },
+    "04-Asynchronous-Operations": {
+        "title": "Asynchronous Operations and Promises"
+    },
+    "Running-Scripts": {
+        "title": "Running and Managing Scripts"
+    },
+    "Measurement-Commands": {
+        "title": "Measurement Commands"
+    },
+    "Debugging-Scripts": {
+        "title": "Debugging Scripts"
+    },
+    "Finding-Elements": {
+        "title": "Finding Elements in Web Pages"
+    },
+    "Setting-Up-IntelliSense": {
+        "title": "Setting Up IntelliSense in Visual Studio Code"
+    }
+}
