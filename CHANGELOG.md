@@ -2,7 +2,7 @@
 
 ## UNRELEASED
 ### Added
-* Upgraded to Geckodriver 0.34.0 [#2049](https://github.com/sitespeedio/browsertime/pull/2049).
+* Upgraded to [Geckodriver 0.34.0](https://github.com/mozilla/geckodriver/releases/tag/v0.34.0) [#2049](https://github.com/sitespeedio/browsertime/pull/2049).
 * Collect CPU consumption for Firefox. Turn that on with `--firefox.powerConsumption true` and including `power` as a geckoProfilerParams.features [#2046](https://github.com/sitespeedio/browsertime/pull/2046).
 
 ### Fixed
