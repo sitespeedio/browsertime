@@ -24,13 +24,16 @@
     "08-Setting-Up-IntelliSense": {
         "title": "Code completion and IntelliSense"
     },
-    "09-Selenium": {
+    "09-Examples": {
+        "title": "Examples"
+    },
+    "10-Selenium": {
         "title": "Running Selenium code"
     },
-    "10-Chrome-Devtools-Protocol": {
+    "11-Chrome-Devtools-Protocol": {
         "title": "Chrome Devtools Protocol (CDP)"
     },
-    "11-Android": {
+    "12-Android": {
         "title": "Android devices"
     }
 }
