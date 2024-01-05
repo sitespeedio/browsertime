@@ -38,6 +38,8 @@ export default async function (context, commands) {
 }
 ```
 
+The [measure command](Measure.html).
+
 ## The `stopWatch` Command
 
 The `Stop Watch` command in sitespeed.io is used for measuring the time of activities other than web page navigation, like specific processes or user actions. You manually start and stop this watch to track the duration of these actions. When you use the Stop Watch, its timing data gets automatically linked to the web page you were analyzing right before you started the watch. This way, the time recorded by the Stop Watch becomes part of the performance data for that particular page.
@@ -60,6 +62,8 @@ export default async function (context, commands) {
 }
 
 ```
+
+The [stop watch command](StopWatch.html).
 
 ## Using user timings and element timings API
 

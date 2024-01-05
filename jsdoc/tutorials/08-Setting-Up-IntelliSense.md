@@ -14,7 +14,7 @@ After these changes, reload Visual Studio Code to ensure that the settings are a
 ### Write Your Script
 Now, when you write your Browsertime script, IntelliSense should automatically suggest relevant Browsertime methods and properties when you add the param comments as in this example.
 
-```
+```JavaScript
 /**
  * @param {import('browsertime').BrowsertimeContext} context
  * @param {import('browsertime').BrowsertimeCommands} commands

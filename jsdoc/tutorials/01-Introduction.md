@@ -15,12 +15,12 @@ export default async function (context, commands) {
 
 To run this script, use the command `sitespeed.io -n 1 --multi measure.mjs`. This script measures the performance of https://www.sitespeed.io.
 
-You can see that you get two objects to the function. The browsertime context and browsertimecommands.  The context holds information on and commands are commands that helps you interact with the web page.
+You can see that you get two helper objects in that function. The browsertime context and browsertime commands. Lets talk about those helper objects.
 
-## Helper objects
+## Helpers
 Lets start with the command object.
 
-### Commands Object
+### The Commands Object
 
 Commands are helpers for interacting with webpages. Key commands include:
 
@@ -30,7 +30,7 @@ Commands are helpers for interacting with webpages. Key commands include:
 
 You can see all commands in the Classes part of the documentation. 
 
-### Context Object
+### The Context Object
 
 The `context` object in your script gives you access to:
 

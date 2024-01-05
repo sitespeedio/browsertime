@@ -9,6 +9,6 @@ For multiple scripts, list them all in the command. This approach helps manage c
 
 ## JavaScript
 
-## Cache
+
 
 ## Meta

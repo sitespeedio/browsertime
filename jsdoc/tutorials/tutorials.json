@@ -3,19 +3,34 @@
     "01-Introduction": {
         "title": "Introduction"
     },
-    "Running-Scripts": {
-        "title": "Running and Managing Scripts"
+    "02-Running-Scripts": {
+        "title": "Running and managing scripts"
     },
-    "Measurement-Commands": {
-        "title": "Measurement Commands"
+    "03-Measurement-Commands": {
+        "title": "Measure"
     },
-    "Debugging-Scripts": {
-        "title": "Debugging Scripts"
+    "04-Interact-with-the-page": {
+        "title": "Interact with the page"
     },
-    "Finding-Elements": {
-        "title": "Finding Elements in Web Pages"
+    "05-Interact-Browser": {
+        "title": "Interact with the browser"
     },
-    "Setting-Up-IntelliSense": {
-        "title": "Setting Up IntelliSense in Visual Studio Code"
+    "06-Error-handling": {
+        "title": "Error handling"
+    },
+    "07-Debugging-Scripts": {
+        "title": "Debugging scripts"
+    },
+    "08-Setting-Up-IntelliSense": {
+        "title": "Code completion and IntelliSense"
+    },
+    "09-Selenium": {
+        "title": "Running Selenium code"
+    },
+    "10-Chrome-Devtools-Protocol": {
+        "title": "Chrome Devtools Protocol (CDP)"
+    },
+    "11-Android": {
+        "title": "Android devices"
     }
 }

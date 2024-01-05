@@ -9,6 +9,11 @@
     "includePattern": ".+\\.js(doc|x)?$",
     "excludePattern": "(^|\\/|\\\\)_"
   },
+  "templates":{
+    "default": {
+      "outputSourceFiles": false
+    }
+  },
   "opts": {
     "tutorials": "./jsdoc/tutorials/",
     "destination": "../sitespeed.io/docs/documentation/sitespeed.io/scripting/tutorials",
@@ -19,7 +24,8 @@
       "default_theme": "light",
       "base_url": "https://www.sitespeed.io/documentation/sitespeed.io/scripting/tutorials/",
       "footer": "© Sitespeed.io 2024",
-      "sections": ["Tutorials", "Classes"],
+      "create_style": "article ul { list-style: disc }",
+      "sections": ["Tutorials", "Namespaces", "Classes"],
       "favicon": "https://www.sitespeed.io/img/ico/sitespeed.io-144.png",
       "menu": [
         {
