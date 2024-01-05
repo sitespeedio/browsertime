@@ -18,7 +18,7 @@ export default async function (context, commands) {
 
 ### Measure multiple pages and start white
 
-If you test multiple pages you will see that the layout is kept in the browser until the first paint of the new page. You can hack that by removing the current body and set the background color to white. Then every video will start white.
+Sometimes recording a video and measuring multiple pages you will see that the layout is kept in the browser until the first paint of the new page. You can hack that by removing the current body and set the background color to white. Then every video will start white.
 
 ```JavaScript
 /**
@@ -34,8 +34,7 @@ export default async function (context, commands) {
 };
 ```
 
-
-### Measure the login step
+### Measure a login step
 
 ```JavaScript
 /**
@@ -161,7 +160,7 @@ Then access the page that you want to test:
 sitespeed.io --preScript login.mjs https://en.wikipedia.org/wiki/Barack_Obama
 ```
 
-#### More complicated login example
+#### A more complicated login example
 
 ```JavaScript
 /**
@@ -211,9 +210,9 @@ export default async function (context, commands) {
 ```
 
 
-### Scroll the page to measure Cumulative Layout Shift
+### Scroll the page
 
-To get the Cumulative Layout Shift metric for Chrome closer to what real users get you can scroll the page and measure that. Depending on how your page work, you may want to tune the delay between the scrolling.
+You can scroll the page to trigger metrics. To get the Cumulative Layout Shift metric for Chrome closer to what real users get you can scroll the page and measure that. Depending on how your page work, you may want to tune the delay between the scrolling.
 
 
 ```JavaScript
@@ -282,7 +281,7 @@ export default async function (context, commands) {
 };
 ```
 
-### Measure shopping/checkout process
+### Measure a checkout process
 One of the really cool things with scripting is that you can measure all the pages in a checkout process. This is an example shop where you put one item in your cart and checkout as a guest.
 
 ```JavaScript
@@ -330,7 +329,7 @@ export default async function (context, commands) {
 ```
 
 
-### Measuring First Input Delay - FID
+### Measuring Interaction to next paint - INP
 One of the new metrics Google is pushing is [First Input Delay](https://developers.google.com/web/updates/2018/05/first-input-delay). You can use it when you collect RUM but it can be hard to know what the user is doing. The recommended way is to use the Long Task API but the truth is that the attribution from the API is ... well can be better. When you have a long task, it is really hard to know why by looking at the attribution.
 
 How do we measure FID with sitespeed.io? You can measure clicks and button using the [Selenium Action API](https://selenium.dev/selenium/docs/api/javascript/module/selenium-webdriver/lib/input_exports_Actions.html) and then sitespeed.io uses the `first-input` performance observer to get it. What's really cool is that you can really measure it, instead of doing guestimates.
