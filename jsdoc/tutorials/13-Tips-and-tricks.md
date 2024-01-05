@@ -49,6 +49,34 @@ export default async function (context, commands) {
 };
 ```
 
+### Pass your own options to your script
+You can add your own parameters to the options object (by adding a parameter) and then pick them up in the script. The scripts runs in the context of browsertime, so you need to pass it in via that context.
+
+For example: you wanna pass on a password to your script, you can do that by adding <code>--browsertime.my.password MY_PASSWORD</code> and then in your code get a hold of that with:
+
+```JavaScript
+/**
+ * @param {import('browsertime').BrowsertimeContext} context
+ * @param {import('browsertime').BrowsertimeCommands} commands
+ */
+export default async function (context, commands) {
+  // We are in browsertime context so you can skip that from your options object
+  context.log.info(context.options.my.password);
+};
+```
+
+If you use a configuration file you can pass on options like this:
+
+```json
+{
+    "browsertime": {
+        "my": {
+            "password": "paAssW0rd"
+        }
+    }
+}
+```
+
 ### Getting values from your page
 In some scenarios you want to do different things dependent on what shows on your page. For example: You are testing a shop checkout and you need to verify that the item is in stock. You can run JavaScript and get the value back to your script.
 
@@ -125,5 +153,33 @@ export default async function (context, commands) {
     // ...
 
     return commands.navigate('https://www.sitespeed.io/?dummy', 'BackToHomepage');
+};
+```
+
+### Using setUp and tearDown in the same script
+
+This is a feature used by Mozilla and was created years ago. Nowadays you can probably just do everything in one script. 
+
+Scripts can also directly define the ```--preScript``` and ```--postScript``` options by implementing a *setUp* and/or a *tearDown* function. These functions will get the same arguments than the test itself. When using this form, the three functions are declared in *module.exports* under the *setUp*, *tearDown* and *test* keys. This works for commons JS files.
+
+Here's a minimal example:
+
+```JavaScript
+async function setUp(context, commands) {
+  // do some useful set up
+};
+
+async function perfTest(context, commands) {
+  // add your own code here
+};
+
+async function tearDown(context, commands) {
+  // do some cleanup here
+};
+
+module.exports = {
+  setUp: setUp,
+  tearDown: tearDown,
+  test: perfTest
 };
 ```

@@ -1,6 +1,6 @@
 /**
  * Represents the set of commands available in a Browsertime script.
- *
+ * @hideconstructor
  */
 export class Commands {
     constructor(browser: any, engineDelegate: any, index: any, result: any, storageManager: any, pageCompleteCheck: any, extensionServer: any, context: any, videos: any, screenshotManager: any, scriptsByCategory: any, asyncScriptsByCategory: any, postURLScripts: any, options: any);
@@ -37,8 +37,9 @@ export class Commands {
     measure: Measure;
     /**
      * Navigates to a specified URL and handles additional setup for a page visit.
-     * @type {Function}
      * @async
+     * @example await commands.navigate('https://www.example.org');
+     * @type {Function}
      * @param {string} url - The URL to navigate to.
      * @throws {Error} Throws an error if navigation or setup fails.
      * @returns {Promise<void>} A promise that resolves when the navigation and setup are
@@ -51,13 +52,15 @@ export class Commands {
     navigation: Navigation;
     /**
      * Add a text that will be an error attached to the current page.
+     * @example await commands.error('My error message');
      * @param {string} message - The error message.
      * @type {Function}
      */
     error: Function;
     /**
      * Mark this run as an failure. Add a message that explains the failure.
-     * @param {string} message - The message attached as a failure.
+     * @example await commands.markAsFailure('My failure message');
+     * @param {string} message - The message attached as a failure
      * @type {Function}
      */
     markAsFailure: Function;

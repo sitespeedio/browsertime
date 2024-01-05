@@ -2,6 +2,7 @@
  * Provides functionality to control page scrolling in the browser.
  *
  * @class
+ * @hideconstructor
  */
 export class Scroll {
     constructor(browser: any, options: any);

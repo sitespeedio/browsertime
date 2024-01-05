@@ -1,6 +1,41 @@
 Here are some examples on how you can use the scripting capabilities.
 
-### Measure the actual login step
+### Measure multiple pages
+
+Test multiple pages in a script:
+
+```JavaScript
+/**
+ * @param {import('browsertime').BrowsertimeContext} context
+ * @param {import('browsertime').BrowsertimeCommands} commands
+ */
+export default async function (context, commands) {
+  await commands.measure.start('https://www.sitespeed.io');
+  await commands.measure.start('https://www.sitespeed.io/examples/');
+  return commands.measure.start('https://www.sitespeed.io/documentation/');
+};
+```
+
+### Measure multiple pages and start white
+
+If you test multiple pages you will see that the layout is kept in the browser until the first paint of the new page. You can hack that by removing the current body and set the background color to white. Then every video will start white.
+
+```JavaScript
+/**
+ * @param {import('browsertime').BrowsertimeContext} context
+ * @param {import('browsertime').BrowsertimeCommands} commands
+ */
+export default async function (context, commands) {
+    await commands.measure.start('https://www.sitespeed.io');
+    await commands.js.run('document.body.innerHTML = ""; document.body.style.backgroundColor = "white";');
+    await commands.measure.start('https://www.sitespeed.io/examples/');
+    await commands.js.run('document.body.innerHTML = ""; document.body.style.backgroundColor = "white";');
+    return commands.measure.start('https://www.sitespeed.io/documentation/');
+};
+```
+
+
+### Measure the login step
 
 ```JavaScript
 /**
@@ -39,7 +74,7 @@ export default async function (context, commands) {
 };
 ```
 
-### Measure the login step and more pages
+### Measure the login step and more
 
 ```JavaScript
 /**
@@ -175,39 +210,6 @@ export default async function (context, commands) {
 };
 ```
 
-### Measure multiple pages
-
-Test multiple pages in a script:
-
-```JavaScript
-/**
- * @param {import('browsertime').BrowsertimeContext} context
- * @param {import('browsertime').BrowsertimeCommands} commands
- */
-export default async function (context, commands) {
-  await commands.measure.start('https://www.sitespeed.io');
-  await commands.measure.start('https://www.sitespeed.io/examples/');
-  return commands.measure.start('https://www.sitespeed.io/documentation/');
-};
-```
-
-### Measure multiple pages and start white
-
-If you test multiple pages you will see that the layout is kept in the browser until the first paint of the new page. You can hack that by removing the current body and set the background color to white. Then every video will start white.
-
-```JavaScript
-/**
- * @param {import('browsertime').BrowsertimeContext} context
- * @param {import('browsertime').BrowsertimeCommands} commands
- */
-export default async function (context, commands) {
-    await commands.measure.start('https://www.sitespeed.io');
-    await commands.js.run('document.body.innerHTML = ""; document.body.style.backgroundColor = "white";');
-    await commands.measure.start('https://www.sitespeed.io/examples/');
-    await commands.js.run('document.body.innerHTML = ""; document.body.style.backgroundColor = "white";');
-    return commands.measure.start('https://www.sitespeed.io/documentation/');
-};
-```
 
 ### Scroll the page to measure Cumulative Layout Shift
 
@@ -327,33 +329,6 @@ export default async function (context, commands) {
 };
 ```
 
-### Pass your own options to your script
-You can add your own parameters to the options object (by adding a parameter) and then pick them up in the script. The scripts runs in the context of browsertime, so you need to pass it in via that context.
-
-For example: you wanna pass on a password to your script, you can do that by adding <code>--browsertime.my.password MY_PASSWORD</code> and then in your code get a hold of that with:
-
-```JavaScript
-/**
- * @param {import('browsertime').BrowsertimeContext} context
- * @param {import('browsertime').BrowsertimeCommands} commands
- */
-export default async function (context, commands) {
-  // We are in browsertime context so you can skip that from your options object
-  context.log.info(context.options.my.password);
-};
-```
-
-If you use a configuration file you can pass on options like this:
-
-```json
-{
-    "browsertime": {
-        "my": {
-            "password": "paAssW0rd"
-        }
-    }
-}
-```
 
 ### Measuring First Input Delay - FID
 One of the new metrics Google is pushing is [First Input Delay](https://developers.google.com/web/updates/2018/05/first-input-delay). You can use it when you collect RUM but it can be hard to know what the user is doing. The recommended way is to use the Long Task API but the truth is that the attribution from the API is ... well can be better. When you have a long task, it is really hard to know why by looking at the attribution.

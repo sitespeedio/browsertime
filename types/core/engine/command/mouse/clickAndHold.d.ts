@@ -2,6 +2,7 @@
  * Provides functionality to click and hold elements on a web page using different strategies.
  *
  * @class
+ * @hideconstructor
  */
 export class ClickAndHold {
     constructor(browser: any);

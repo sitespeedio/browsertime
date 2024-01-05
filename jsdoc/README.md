@@ -1,16 +1,12 @@
 # Scripting
-Here are the tutorials for using scripting commands that you use to measure user journeys in Browsertime/sitespeed.io. You can find the full documentation [here](https://www.sitespeed.io/documentation/sitespeed.io/scripting/).
+Welcome to the powerful world of scripting with sitespeed.io! This feature unlocks the potential to simulate real user journeys, measure performance, and gather detailed metrics by interacting with web pages through custom scripts. Whether you're looking to analyze simple page loads or complex user interactions, our scripting functionality offers the tools you need.
 
-To get code completion/IntelliSense in Visual Studio code, add Browsertime as a developer dependency `npm install browsertime --save-dev` to your project.
+## Key Features
 
-And then create your script files and pointing out the correct context/commands object.
+* **User Journey Simulation**: Script entire user flows, from navigation to clicks and form submissions, to capture a realistic user experience.
+* **Performance Metrics Collection**: Gather crucial data like load times, resource timings, and more, for each step of your user journey.
+* **Flexible Scripting Language**: Write scripts in NodeJS, using familiar JavaScript syntax and robust libraries.
 
-```
-/**
- * @param {import('browsertime').BrowsertimeContext} context
- * @param {import('browsertime').BrowsertimeCommands} commands
- */
-export default async function (context, commands) { 
+## Getting Started
 
-};
-```
+Dive into scripting with our detailed [tutorials](Tutorial-01-Introduction.html), [examples](tutorial-09-Examples.html), and [comprehensive documentation](Commands.html). 

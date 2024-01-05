@@ -1,7 +1,7 @@
 
 ## Navigate
 
-You can navigate to a URL without measuring it. You do it with the navigate command. Navigation will use the same logic as measuring, it will wait for the page complete check to finish.
+You can navigate to a URL without measuring it. You do it with the [navigate function](Commands.html#navigate). Navigation will use the same logic as measuring, it will wait for the page complete check to finish.
 
 ```javascript
 /**
@@ -12,6 +12,8 @@ export default async function (context, commands) {
   await commands.navigate('https://www.sitespeed.io');
 }
 ```
+
+
 
 ## Cache
 You can clear the browser cache from your script. The command works in Chrome, Edge and Firefox. Use it when you want to clear the browser cache between different URLs.

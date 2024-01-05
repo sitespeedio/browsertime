@@ -3,6 +3,7 @@
  * of metric collection including navigation, video recording, and data collection.
  *
  * @class
+ * @hideconstructor
  */
 export class Measure {
     constructor(browser: any, index: any, pageCompleteCheck: any, result: any, engineDelegate: any, extensionServer: any, storageManager: any, videos: any, scriptsByCategory: any, asyncScriptsByCategory: any, postURLScripts: any, context: any, screenshotManager: any, options: any);
@@ -133,14 +134,6 @@ export class Measure {
      * @returns {Promise<void>} A promise that resolves when the navigation and setup are complete.
      */
     private _navigate;
-    /**
-     *  Start collecting metrics for a URL. If you supply a URL to this method, the browser will navigate to that URL.
-     *  If you do not use an URL (start()) everything is prepared for a new page to measure except the browser do not
-     *  navigate to a new URL. You can also add an alias for the URL.
-     * @param {string} urlOrAlias
-     * @param {string} optionalAlias
-     * @returns {Promise} Promise object represents when the URL has been navigated and finished loading according to the pageCompleteCheck or when everything is setup for measuring a new URL (if no URL is supplied).
-     */
     /**
      * Starts the measurement process for a given URL or an alias.
      *
