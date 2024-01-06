@@ -3,6 +3,7 @@
  * This class provides methods to clear the cache and cookies in different browsers.
  *
  * @class
+ * @hideconstructor
  */
 export class Cache {
     constructor(browser: any, browserName: any, extensionServer: any, cdp: any);
@@ -30,6 +31,7 @@ export class Cache {
      * If the browser is not supported, logs an error message.
      *
      * @async
+     * @example await commands.cache.clear();
      * @throws Will throw an error if the browser is not supported.
      * @returns {Promise<void>} A promise that resolves when the cache and cookies are cleared.
      */
@@ -42,6 +44,7 @@ export class Cache {
      * If the browser is not supported, logs an error message.
      *
      * @async
+     * @example await commands.cache.clearKeepCookies();
      * @throws Will throw an error if the browser is not supported.
      * @returns {Promise<void>} A promise that resolves when the cache is cleared but cookies are kept.
      */

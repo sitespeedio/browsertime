@@ -2,6 +2,7 @@
  * Provides functionality to execute JavaScript code in the context of the current page.
  *
  * @class
+ * @hideconstructor
  */
 export class JavaScript {
     constructor(browser: any, pageCompleteCheck: any);

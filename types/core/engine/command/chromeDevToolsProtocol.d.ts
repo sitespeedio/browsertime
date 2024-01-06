@@ -1,9 +1,10 @@
 /**
  * Manages interactions with the Chrome DevTools Protocol for Chrome and Edge browsers.
  * Allows sending commands and setting up event listeners via the protocol.
- * See https://chromedevtools.github.io/devtools-protocol/
  *
  * @class
+ * @hideconstructor
+ * @see https://chromedevtools.github.io/devtools-protocol/
  */
 export class ChromeDevelopmentToolsProtocol {
     constructor(engineDelegate: any, browserName: any);
@@ -28,6 +29,8 @@ export class ChromeDevelopmentToolsProtocol {
      * Sends a command to the DevTools Protocol and returns the result.
      *
      * @async
+     * @example const domCounters = await commands.cdp.sendAndGet('Memory.getDOMCounters');
+     * @see https://chromedevtools.github.io/devtools-protocol/
      * @param {string} command - The DevTools Protocol command to send.
      * @param {Object} arguments_ - The arguments for the command.
      * @throws {Error} Throws an error if the browser is not supported or if the command fails.
@@ -36,15 +39,18 @@ export class ChromeDevelopmentToolsProtocol {
     sendAndGet(command: string, arguments_: any): Promise<any>;
     /**
      * Retrieves the raw client for the DevTools Protocol.
-     *
+     * @example const cdpClient = commands.cdp.getRawClient();
      * @returns {Object} The raw DevTools Protocol client.
      * @throws {Error} Throws an error if the browser is not supported.
+     * @see https://github.com/cyrus-and/chrome-remote-interface
      */
     getRawClient(): any;
     /**
      * Sends a command to the DevTools Protocol.
      *
      * @async
+     * @example await commands.cdp.send('');
+     * @see https://chromedevtools.github.io/devtools-protocol/
      * @param {string} command - The DevTools Protocol command to send.
      * @param {Object} arguments_ - The arguments for the command.
      * @throws {Error} Throws an error if the browser is not supported or if the command fails.

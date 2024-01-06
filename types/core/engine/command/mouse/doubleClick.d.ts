@@ -2,6 +2,7 @@
  * Provides functionality to perform a double-click action on elements in a web page.
  *
  * @class
+ * @hideconstructor
  */
 export class DoubleClick {
     constructor(browser: any, pageCompleteCheck: any);

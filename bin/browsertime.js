@@ -149,10 +149,16 @@ async function run(urls, options) {
       const resultDirectory = relative(process.cwd(), storageManager.directory);
 
       // check for errors
-      for (let eachResult of result) {
-        for (let errors of eachResult.errors) {
-          if (errors.length > 0) {
+      // If we have set the exit code in scripts, respect that
+      if (process.exitCode === undefined) {
+        for (let eachResult of result) {
+          if (eachResult.markedAsFailure === 1) {
             process.exitCode = 1;
+          }
+          for (let errors of eachResult.errors) {
+            if (errors.length > 0) {
+              process.exitCode = 1;
+            }
           }
         }
       }

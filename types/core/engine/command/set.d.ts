@@ -2,6 +2,7 @@
  * Provides functionality to set properties like innerHTML, innerText, and value on elements in a web page.
  *
  * @class
+ * @hideconstructor
  */
 export class Set {
     constructor(browser: any);
