@@ -30,7 +30,7 @@ serial.beforeEach('Start the browser', async t => {
 });
 
 serial('Run through the action API', async t => {
-  const result = await engine.runMultiple([getPath('action.cjs')], {
+  const result = await engine.runMultiple([getPath('actions.cjs')], {
     scripts: { uri: 'document.documentURI' }
   });
   t.deepEqual(
