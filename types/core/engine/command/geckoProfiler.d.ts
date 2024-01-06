@@ -2,6 +2,7 @@
  * Manages the Gecko Profiler for profiling Firefox performance.
  *
  * @class
+ * @hideconstructor
  */
 export class GeckoProfiler {
     constructor(GeckoProfiler: any, browser: any, index: any, options: any, result: any);

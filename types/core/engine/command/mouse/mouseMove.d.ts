@@ -2,6 +2,7 @@
  * Provides functionality to move the mouse cursor to elements or specific positions on a web page.
  *
  * @class
+ * @hideconstructor
  */
 export class MouseMove {
     constructor(browser: any);

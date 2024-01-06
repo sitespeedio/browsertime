@@ -2,6 +2,7 @@
  * Provides functionality to wait for different conditions in the browser.
  *
  * @class
+ * @hideconstructor
  */
 export class Wait {
     constructor(browser: any, pageCompleteCheck: any);
@@ -47,14 +48,15 @@ export class Wait {
      * Waits for a specified amount of time.
      *
      * @async
+     * @example async commands.wait.byTime(1000);
      * @param {number} ms - The time in milliseconds to wait.
      * @returns {Promise<void>} A promise that resolves when the specified time has elapsed.
      */
     byTime(ms: number): Promise<void>;
     /**
      * Waits for the page to finish loading.
-     *
      * @async
+     * @example async commands.wait.byPageToComplete();
      * @returns {Promise<void>} A promise that resolves when the page complete check has finished.
      */
     byPageToComplete(): Promise<void>;

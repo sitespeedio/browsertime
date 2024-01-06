@@ -13,7 +13,7 @@
  */
 /**
  * Class representing the context of a Browsertime run.
- *
+ * @hideconstructor
  * @class
  */
 export class Context {
@@ -48,6 +48,7 @@ export class Context {
     taskData: any;
     /**
      * Get raw Selenium functionality.
+     * @see https://www.selenium.dev/selenium/docs/api/javascript/module/selenium-webdriver/index.html
      * @type {{webdriver: WebDriverClass, driver: WebDriverInstance}}
      */
     selenium: {

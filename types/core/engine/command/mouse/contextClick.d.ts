@@ -2,6 +2,7 @@
  * Provides functionality to perform a context click (right-click) on elements in a web page.
  *
  * @class
+ * @hideconstructor
  */
 export class ContextClick {
     constructor(browser: any);

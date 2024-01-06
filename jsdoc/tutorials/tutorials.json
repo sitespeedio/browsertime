@@ -1,0 +1,42 @@
+{
+
+    "01-Introduction": {
+        "title": "Introduction"
+    },
+    "02-Running-Scripts": {
+        "title": "Running and managing scripts"
+    },
+    "03-Measurement-Commands": {
+        "title": "Measure"
+    },
+    "04-Interact-with-the-page": {
+        "title": "Interact with the page"
+    },
+    "05-Interact-Browser": {
+        "title": "Interact with the browser"
+    },
+    "06-Error-handling": {
+        "title": "Error handling"
+    },
+    "07-Debugging-Scripts": {
+        "title": "Debugging scripts"
+    },
+    "08-Setting-Up-IntelliSense": {
+        "title": "Code completion and IntelliSense"
+    },
+    "09-Examples": {
+        "title": "Examples"
+    },
+    "10-Selenium": {
+        "title": "Running Selenium code"
+    },
+    "11-Chrome-Devtools-Protocol": {
+        "title": "Chrome Devtools Protocol (CDP)"
+    },
+    "12-Android": {
+        "title": "Android devices"
+    },
+    "13-Tips-and-tricks": {
+        "title": "Tips and tricks"
+    }
+}

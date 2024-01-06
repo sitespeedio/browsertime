@@ -2,6 +2,7 @@
  * Provides functionality to interact with `<select>` elements on a web page.
  *
  * @class
+ * @hideconstructor
  */
 export class Select {
     constructor(browser: any);

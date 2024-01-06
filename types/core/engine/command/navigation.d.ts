@@ -2,6 +2,7 @@
  * Provides functionality to control browser navigation such as back, forward, and refresh actions.
  *
  * @class
+ * @hideconstructor
  */
 export class Navigation {
     constructor(browser: any, pageCompleteCheck: any);
