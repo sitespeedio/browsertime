@@ -35,6 +35,6 @@ serial('Run through the action API', async t => {
   });
   t.deepEqual(
     result[0].browserScripts[0].scripts.uri,
-    'https://selenium.dev/selenium/web/mouse_interaction.html'
+    'http://127.0.0.1:3000/simple/'
   );
 });
