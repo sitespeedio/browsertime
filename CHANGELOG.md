@@ -7,6 +7,8 @@
 * Added more commands for mouse click on text [#2054](https://github.com/sitespeedio/browsertime/pull/2054).
 * Updated AndroidCommand so you can run shell on your Android device as root [#2055](https://github.com/sitespeedio/browsertime/pull/2055).
 * If you mark a test as failure, the exit code from Browsertime will be 1. If the exitCode is set in scripting, we use that and will not change that [#2057](https://github.com/sitespeedio/browsertime/pull/2057).
+* Generate documentation for scripting using JSDoc [#2059](https://github.com/sitespeedio/browsertime/pull/2059).
+
 
 ### Fixed
 * Make sure the visual metrics files are inlcuded in the Docker file [#2053](https://github.com/sitespeedio/browsertime/pull/2053).
@@ -15,6 +17,7 @@
 * Removed the Chromedriver fix that was needed when Chrome for testing broke testing on Chrome :D [#2045](https://github.com/sitespeedio/browsertime/pull/2045).
 * Refactor of commands/context object to prepare for supporting JSDoc and a little TypeScript to add code completion/IntelliSense in editors [#2047](https://github.com/sitespeedio/browsertime/pull/2047).
 * Updated documentation for scripting with better JSDoc [#204](https://github.com/sitespeedio/browsertime/pull/2048).
+* The code for getting Interaction to next paint was broken. This PR fixes it, make the code cleaner and gives more attribution [#2060](https://github.com/sitespeedio/browsertime/pull/2060).
 
 ## 20.0.0 - 2023-12-22
 
