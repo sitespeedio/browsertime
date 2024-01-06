@@ -2,6 +2,7 @@
  * A stopwatch utility for measuring time intervals.
  *
  * @class
+ * @hideconstructor
  */
 export class StopWatch {
     constructor(name: any, measure: any);

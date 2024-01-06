@@ -3,6 +3,7 @@
  * It allows setting breakpoints to pause script execution and inspect the current state.
  *
  * @class
+ * @hideconstructor
  */
 export class Debug {
     constructor(browser: any, options: any);

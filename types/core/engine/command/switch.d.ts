@@ -2,6 +2,7 @@
  * Provides functionality to switch between frames, windows, and tabs in the browser.
  *
  * @class
+ * @hideconstructor
  */
 export class Switch {
     constructor(browser: any, pageCompleteCheck: any, navigate: any);

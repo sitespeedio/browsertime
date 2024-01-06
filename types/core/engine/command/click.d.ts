@@ -2,6 +2,7 @@
  * Provides functionality to perform click actions on elements in a web page using various selectors.
  *
  * @class
+ * @hideconstructor
  */
 export class Click {
     constructor(browser: any, pageCompleteCheck: any);
