@@ -142,6 +142,13 @@ export class Measure {
      * If an alias is provided, or no URL is available, it sets up the environment for a user-driven navigation.
      *
      * @async
+     * @example
+     * await commands.measure.start('https://www.example.org');
+     * // Or start the measurement and click on a link
+     * await commands.measure.start();
+     * await commands.click.byLinkTextAndWait('Documentation');
+     * // Remember to stop the measurements if you do not provide a URL
+     * await commands.measure.stop();
      * @param {string} urlOrAlias - The URL to navigate to, or an alias representing the test.
      * @param {string} [optionalAlias] - An optional alias that can be used if the first parameter is a URL.
      * @throws {Error} Throws an error if navigation fails or if there are issues in the setup process.

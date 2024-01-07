@@ -34,6 +34,40 @@ export default async function (context, commands) {
 };
 ```
 
+### Measuring Interaction to next paint - INP
+One of the new metrics Google is pushing is [Interaction to next paint](https://web.dev/articles/inp). You can use it when you collect RUM and using sitespeed.io. To measure it you need to interact with a web page. The best way to do that is using the Action API.
+
+
+```JavaScript
+/**
+ * @param {import('browsertime').BrowsertimeContext} context
+ * @param {import('browsertime').BrowsertimeCommands} commands
+ */
+export default async function (context, commands) {
+  // Start to measure
+  await commands.measure.start();
+  // Go to a page ...
+  await commands.navigate('https://en.m.wikipedia.org/wiki/Barack_Obama');
+
+  // When the page has finished loading you can find the navigation and click on it
+  const element = await commands.element.getByXpath(
+    '//*[@id="mw-mf-main-menu-button"]'
+  );
+  await commands.action.getActions().click(element).perform();
+  
+  // If you want to do multiple actions, remember to clear() the Action API manually
+
+  // Add some wait for the menu to show up
+  await commands.wait.byTime(2000);
+
+  // Measure everything, that means you will run the JavaScript that collects the interaction to next paint
+  return commands.measure.stop();
+}
+```
+
+You will see the metric in the page summary and in the metrics section.
+
+
 ### Measure a login step
 
 ```JavaScript
@@ -327,47 +361,6 @@ export default async function (context, commands) {
   // postScript you can do what's needed with that id.
 };
 ```
-
-
-### Measuring Interaction to next paint - INP
-One of the new metrics Google is pushing is [First Input Delay](https://developers.google.com/web/updates/2018/05/first-input-delay). You can use it when you collect RUM but it can be hard to know what the user is doing. The recommended way is to use the Long Task API but the truth is that the attribution from the API is ... well can be better. When you have a long task, it is really hard to know why by looking at the attribution.
-
-How do we measure FID with sitespeed.io? You can measure clicks and button using the [Selenium Action API](https://selenium.dev/selenium/docs/api/javascript/module/selenium-webdriver/lib/input_exports_Actions.html) and then sitespeed.io uses the `first-input` performance observer to get it. What's really cool is that you can really measure it, instead of doing guestimates.
-
-Here's an example on measuring open the navigation on Wikipedia on mobile. I run my tests on a Alacatel One phone.
-
-```JavaScript
-/**
- * @param {import('browsertime').BrowsertimeContext} context
- * @param {import('browsertime').BrowsertimeCommands} commands
- */
-export default async function (context, commands) {
-  // We have some Selenium context
-  const webdriver = context.selenium.webdriver;
-  const driver = context.selenium.driver;
-
-  // Start to measure
-  await commands.measure.start();
-  // Go to a page ...
-  await commands.navigate('https://en.m.wikipedia.org/wiki/Barack_Obama');
-
-  // When the page has finished loading you can find the navigation and click on it
-  const actions = driver.actions();
-  const nav = await driver.findElement(
-    webdriver.By.xpath('//*[@id="mw-mf-main-menu-button"]')
-  );
-  await actions.click(nav).perform();
-
-  // Measure everything, that means you will run the JavaScript that collects the first input delay
-  return commands.measure.stop();
-};
-```
-
-You will see the metric in the page summary and in the metrics section.
-
-![First input delay](https://www.sitespeed.io/img/first-input-delay.png)
-
-You can do mouse click, key press but there's no good way to do swiping as we know using the [Selenium Action API](https://selenium.dev/selenium/docs/api/javascript/module/selenium-webdriver/lib/input_exports_Actions.html). Your action will run after the page has loaded. If you wanna know what kind potential input delay you can have on load, you can use the *maxPotentialFid* metric that you will get by enabling `--cpu`.
 
 ### Test multiple URLs
 
