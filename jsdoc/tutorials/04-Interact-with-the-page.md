@@ -14,9 +14,46 @@ One of the key things in your script is to be able to find the right element to 
 ### Using Chrome to find the CSS Selector to the element
 ![Using Chrome to find the selector](https://www.sitespeed.io/img/selector-chrome.png)
 
+## Using Actions
+Since Browsertime 21.0.0 we support easier access to the [Selenium Action API](https://www.selenium.dev/documentation/webdriver/actions_api/). That makes easier to interact with the page and you can also chain commands. You can checkout the [Selenium NodeJS Action API](https://www.selenium.dev/selenium/docs/api/javascript/module/selenium-webdriver/lib/input_exports_Actions.html) to see more what you can do.
+
+Here's an example doing search on Wikipedia:
+```javascript
+/**
+ * @param {import('browsertime').BrowsertimeContext} context
+ * @param {import('browsertime').BrowsertimeCommands} commands
+ */
+export default async function (context, commands) {
+  await commands.measure.start('https://www.wikipedia.org');
+  const searchBox = await commands.element.getById('searchInput');
+  const submitButton = await commands.element.getByClassName(
+    'pure-button pure-button-primary-progressive'
+  );
+
+  await commands.measure.start('Search');
+  await commands.action
+    .getActions()
+    .move({ origin: searchBox })
+    .pause(1000)
+    .press()
+    .sendKeys('Hepp')
+    .pause(200)
+    .click(submitButton)
+    .perform();
+
+  // If you would do more actions after calling .perform()
+  // you manually need to clear the action API
+  //await commands.action.clear();
+
+  await commands.wait.byPageToComplete();
+  return commands.measure.stop();
+}
+```
+
+
 ## JavaScript
 
-You can run your own JavaScript in the browser from your script. This is powerful becasue that makes it possible to do whatever you want :)
+You can run your own JavaScript in the browser from your script. This is powerful because that makes it possible to do whatever you want :)
 
 ### Run
 Run JavaScript. Will throw an error if the JavaScript fails.

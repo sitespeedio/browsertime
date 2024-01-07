@@ -125,6 +125,17 @@ export class Commands {
      * @type {Select}
      */
     select: Select;
+    /**
+     * Selenium's action sequence functionality.
+     * @type {Actions}
+     * @see https://www.selenium.dev/documentation/webdriver/actions_api/
+     */
+    action: Actions;
+    /**
+     * Get Selenium's WebElements.
+     * @type {Element}
+     */
+    element: Element;
 }
 import { GeckoProfiler as GeckoProfilerCommand } from './command/geckoProfiler.js';
 import { ChromeTrace } from './command/chromeTrace.js';
@@ -145,4 +156,6 @@ import { ChromeDevelopmentToolsProtocol } from './command/chromeDevToolsProtocol
 import { AndroidCommand } from './command/android.js';
 import { Debug } from './command/debug.js';
 import { Select } from './command/select.js';
+import { Actions } from './command/actions.js';
+import { Element } from './command/element.js';
 //# sourceMappingURL=commands.d.ts.map
