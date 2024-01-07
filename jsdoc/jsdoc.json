@@ -22,7 +22,7 @@
       "homepageTitle": "Tutorials and documentation for scripting in Browsertime and sitespeed.io",
       "title": "sitespeed.io scripting",
       "default_theme": "light",
-      "base_url": "https://www.sitespeed.io/documentation/sitespeed.io/scripting/tutorials/",
+      "base_url": "https://www.sitespeed.io/documentation/sitespeed.io/scripting/",
       "footer": "© <a href='https://www.sitespeed.io'>sitespeed.io</a> 2024",
       "create_style": "article ul { list-style: disc }",
       "sections": ["Tutorials", "Classes"],
