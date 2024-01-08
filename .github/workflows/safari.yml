@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: macos-13
-    timeout-minutes: 30
+    timeout-minutes: 20
     steps:
     - uses: actions/checkout@v4
     - name: Use Node.js
@@ -18,14 +18,9 @@ jobs:
         node-version: '20.x'
     - name: Install browsertime
       run: npm ci
-    - name: Install python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11' 
     - name: Install dependencies
       run: |
         sudo safaridriver --enable
-        sudo rm '/usr/local/bin/2to3'
         brew update
         brew install ffmpeg
         python -m pip install --upgrade --user pip
@@ -38,19 +33,18 @@ jobs:
         ffmpeg -version
     - name: List all simulators
       run: xcrun xctrace list devices
-    - name: Boot iPhone 14
-      run: |
-        IPHONE14=$(xcrun xctrace list devices  2>&1  | grep -m 1 "iPhone 14 Simulator" | awk -F'[()]' '{print $4}')
-        xcrun simctl boot $IPHONE14
     #- name: Start local HTTP server
     # run: (npm run start-server&)
     - name: Test Safari without video 
       run: ./bin/browsertime.js -b safari -n 1 https://www.sitespeed.io/
-    - name: Test Safari iOS simulator 
-      run: |
-        IPHONE14=$(xcrun xctrace list devices  2>&1  | grep -m 1 "iPhone 14 Simulator" | awk -F'[()]' '{print $4}')
-        ./bin/browsertime.js -b safari -n 1 --safari.useSimulator --video --visualMetrics --safari.deviceUDID $IPHONE14 https://www.sitespeed.io/
     #- name: Test Safari with video and Visual Metrics
     #  run: ./bin/browsertime.js -b safari -n 1 --viewPort 800x600  --video --visualMetrics https://www.sitespeed.io/
+    #- name: Test Safari iOS simulator 
+    #  run: |
+    #    IPHONE14=$(xcrun xctrace list devices  2>&1  | grep -m 1 "iPhone 14 Simulator" | awk -F'[()]' '{print $4}')
+    #    xcrun simctl boot $IPHONE14
+    #    echo "Booted $IPHONE14"
+    #    ./bin/browsertime.js -b safari -n 1 --safari.useSimulator --video --visualMetrics --safari.deviceUDID $IPHONE14 https://www.sitespeed.io/
+ 
     #- name: Test Safari with video and Visual Metrics for multi pages
     #  run: ./bin/browsertime.js -b safari -n 1 --viewPort 800x600  --video --visualMetrics test/data/navigationscript/multiMac.cjs
