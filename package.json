@@ -1,24 +1,25 @@
 {
   "name": "browsertime",
   "description": "Get performance metrics from your web page using Browsertime.",
-  "version": "20.0.0",
+  "version": "21.0.0",
   "bin": "./bin/browsertime.js",
   "type": "module",
+  "types": "./types/scripting.d.ts",
   "dependencies": {
     "@cypress/xvfb": "1.2.4",
     "@devicefarmer/adbkit": "3.2.5",
     "@sitespeed.io/chromedriver": "120.0.6099-71",
     "@sitespeed.io/edgedriver": "120.0.2210-77",
-    "@sitespeed.io/geckodriver": "0.33.0-c",
+    "@sitespeed.io/geckodriver": "0.34.0",
     "@sitespeed.io/throttle": "5.0.0",
     "@sitespeed.io/tracium": "0.3.3",
-    "ff-test-bidi-har-export": "0.0.12",
     "btoa": "1.2.1",
     "chrome-har": "0.13.2",
     "chrome-remote-interface": "0.33.0",
     "dayjs": "1.11.10",
     "execa": "8.0.1",
     "fast-stats": "0.0.6",
+    "ff-test-bidi-har-export": "0.0.12",
     "find-up": "7.0.0",
     "get-port": "7.0.0",
     "hasbin": "1.2.3",
@@ -36,14 +37,18 @@
     "jimp": "0.22.10"
   },
   "devDependencies": {
+    "@types/selenium-webdriver": "4.1.21",
     "ava": "6.0.1",
+    "clean-jsdoc-theme": "4.2.17",
     "eslint": "8.55.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-prettier": "5.0.1",
     "eslint-plugin-unicorn": "49.0.0",
+    "jsdoc": "4.0.2",
     "prettier": "3.1.1",
+    "serve": "14.2.1",
     "serve-handler": "6.1.5",
-    "serve": "14.2.1"
+    "typescript": "5.3.3"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -56,12 +61,14 @@
     "bin",
     "browserscripts",
     "browsersupport",
-    "visualmetrics",
+    "visualmetrics/visualmetrics-portable.py",
+    "visualmetrics/visualmetrics.py",
     "browsertime.png",
     "index.js",
     "lib",
     "package.json",
-    "vendor"
+    "vendor",
+    "types"
   ],
   "exports": "./index.js",
   "scripts": {
@@ -69,7 +76,10 @@
     "start-server": "serve test/data/html/",
     "stop-server": "sudo pkill serve",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "tsc": "tsc",
+    "jsdoc": "jsdoc --configure jsdoc/jsdoc.json",
+    "prepublishOnly": "npm run lint && npm run tsc"
   },
   "author": "Peter Hedenskog",
   "contributors": [

@@ -1,0 +1,2 @@
+export function addTextToVideo(inputFile: any, outputFile: any, videoMetrics: any, timingMetrics: any, options: any): Promise<import("execa").ExecaReturnValue<string>>;
+//# sourceMappingURL=addTextToVideo.d.ts.map

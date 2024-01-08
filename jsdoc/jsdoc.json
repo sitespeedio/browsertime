@@ -1,0 +1,60 @@
+{
+  "source": {
+    "include": [
+      "./lib/core/engine/commands.js",
+      "./lib/core/engine/command/",
+      "./lib/core/engine/command/mouse/",
+      "./jsdoc/README.md"
+    ],
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "templates":{
+    "default": {
+      "outputSourceFiles": false
+    }
+  },
+  "opts": {
+    "tutorials": "./jsdoc/tutorials/",
+    "destination": "../sitespeed.io/docs/documentation/sitespeed.io/scripting/",
+    "template": "node_modules/clean-jsdoc-theme",
+    "theme_opts": {
+      "homepageTitle": "Tutorials and documentation for scripting in Browsertime and sitespeed.io",
+      "title": "sitespeed.io scripting",
+      "default_theme": "light",
+      "base_url": "https://www.sitespeed.io/documentation/sitespeed.io/scripting/",
+      "footer": "© <a href='https://www.sitespeed.io'>sitespeed.io</a> 2024",
+      "create_style": "article ul { list-style: disc }",
+      "sections": ["Tutorials", "Classes"],
+      "favicon": "https://www.sitespeed.io/img/ico/sitespeed.io-144.png",
+      "menu": [
+        {
+          "title": "Start",
+          "link": "."
+        },
+        {
+          "title": "Back to documentation",
+          "link": "https://www.sitespeed.io/documentation/sitespeed.io/"
+        }
+      ],
+      "meta": [
+        {
+          "name": "author",
+          "content": "Peter Hedenskog"
+        },
+        {
+          "name": "description",
+          "content": "Tutorials and documentation for scripting in Browsertime and sitespeed.io"
+        },
+        {
+          "name": "keywords",
+          "content":"scripting, tutorial, sitespeed.io, browsertime, web performance"
+        }
+      ]
+    }
+  },
+  "markdown": {
+    "hardwrap": false,
+    "idInHeadings": true
+  }
+}
