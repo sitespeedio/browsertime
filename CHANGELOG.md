@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Fixed
+* Set correct viewports for the following emulated mobiles for Chrome: iPad Mini iPad Air, iPhone 14 Pro, Pixel 7 and Samsung Galaxy A51/71 [#2065](https://github.com/sitespeedio/browsertime/pull/2065).
+
 ## 21.0.0 - 2024-01-07
 
 The new version uses JSDoc to generate documentation for scripting and make it possible to use code completion/Intellisense! Documentation for that is coming soon.
