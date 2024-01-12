@@ -6,7 +6,7 @@
 
 ## 21.0.0 - 2024-01-07
 
-The new version uses JSDoc to generate documentation for scripting and make it possible to use code completion/Intellisense! Documentation for that is coming soon.
+The new version uses JSDoc to generate documentation for scripting and make it possible to use code completion/Intellisense! You can read the [new documentation here](https://www.sitespeed.io/documentation/sitespeed.io/scripting/tutorial-08-Setting-Up-IntelliSense.html).
 
 ### Added
 * Upgraded to [Geckodriver 0.34.0](https://github.com/mozilla/geckodriver/releases/tag/v0.34.0) [#2049](https://github.com/sitespeedio/browsertime/pull/2049).
