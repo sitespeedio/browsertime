@@ -1,6 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 21.1.0 - 2024-01-24
+### Added
+* Firefox 122, Chrome 121 and Chromedriver 121 [#2067](https://github.com/sitespeedio/browsertime/pull/2067).
+
 ### Fixed
 * Set correct viewports for the following emulated mobiles for Chrome: iPad Mini iPad Air, iPhone 14 Pro, Pixel 7 and Samsung Galaxy A51/71 [#2065](https://github.com/sitespeedio/browsertime/pull/2065).
 
