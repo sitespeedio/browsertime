@@ -1,5 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Added
+
+### Fixed
+*  Set correct viewports for the following emulated mobiles for Chrome: iPhone 14 Pro Max [#2070](https://github.com/sitespeedio/browsertime/pull/2070).
+* Update adbkit to 3.2.6 [#2069](https://github.com/sitespeedio/browsertime/pull/2069).
+* Seelnium 4.17.0 [#2068](https://github.com/sitespeedio/browsertime/pull/2068).
+
 ## 21.1.0 - 2024-01-24
 ### Added
 * Firefox 122, Chrome 121 and Chromedriver 121 [#2067](https://github.com/sitespeedio/browsertime/pull/2067).
