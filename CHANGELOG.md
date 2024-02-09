@@ -2,11 +2,14 @@
 
 ## UNRELEASED
 ### Added
+* Edge 121 in the Docker container [#2071](https://github.com/sitespeedio/browsertime/pull/2071).
 
 ### Fixed
 *  Set correct viewports for the following emulated mobiles for Chrome: iPhone 14 Pro Max [#2070](https://github.com/sitespeedio/browsertime/pull/2070).
 * Update adbkit to 3.2.6 [#2069](https://github.com/sitespeedio/browsertime/pull/2069).
-* Seelnium 4.17.0 [#2068](https://github.com/sitespeedio/browsertime/pull/2068).
+* Selenium 4.17.0 [#2068](https://github.com/sitespeedio/browsertime/pull/2068).
+* There was a missing await when getting the tcpdump [#2075](https://github.com/sitespeedio/browsertime/pull/2075) 
+* Remove all trace level logs (and do debug instead) since trace added unnecessary stacktraces to the log [#2074](https://github.com/sitespeedio/browsertime/pull/2074).
 
 ## 21.1.0 - 2024-01-24
 ### Added
