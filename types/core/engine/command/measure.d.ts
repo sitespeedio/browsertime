@@ -160,12 +160,12 @@ export class Measure {
      * know something has failed.
      *
      * @async
-     * @param {string} failureMessage - The message about the failure. This will end up on the HTML report for sitespeed.io so give it a good message so you know what's gone wrong.
+     * @param {string} errorMessage - The message about the error. This will end up on the HTML report for sitespeed.io so give it a good message so you know what's gone wrong.
      *  @param {string} optionalURL - The URL of the page that you wanted to test. If you don't know the URL (you clicked on a link etc) skip it.
      * @returns {Promise} A promise that resolves when the stop process has completed.
      * @since 21.2.0
      */
-    stopAsFailure(failureMessage: string, optionalURL: string): Promise<any>;
+    stopAsError(errorMessage: string, optionalURL: string): Promise<any>;
     /**
      * Stops the measurement process, collects metrics, and handles any post-measurement tasks.
      * It finalizes the URL being tested, manages any URL-specific metadata, stops any ongoing video recordings,
