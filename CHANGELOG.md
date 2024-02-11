@@ -3,6 +3,7 @@
 ## 21.2.0 - 2024-02-11
 ### Added
 * Edge 121 in the Docker container [#2071](https://github.com/sitespeedio/browsertime/pull/2071).
+* You can stop a measurement as a failure and make sure no metrics is collected. This is useful if you catch an error in try/catch when trying to measure a page. `measure.stopAsError(failureMessage, optionalURL)`. Add your message and if you know the URL, add it. [2076](https://github.com/sitespeedio/browsertime/pull/2076).
 
 ### Fixed
 *  Set correct viewports for the following emulated mobiles for Chrome: iPhone 14 Pro Max [#2070](https://github.com/sitespeedio/browsertime/pull/2070).

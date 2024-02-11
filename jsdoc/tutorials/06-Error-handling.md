@@ -20,7 +20,7 @@ export default async function (context, commands) {
     
   } catch (e) {
     // Oops that link do not exist and will throw an exception
-    await commands.measure.stopAsFailure('Could not click on the link');
+    await commands.measure.stopAsError('Could not click on the link');
   }
 
 };
