@@ -1,8 +1,9 @@
 You can try/catch failing commands that throw errors. If an error is not caught in your script, it will be caught in sitespeed.io and the error will be logged and reported in the HTML and to your data storage (Graphite/InfluxDb) under the key *browsertime.statistics.errors*.
 
-If you do catch the error, you should make sure you report it yourself with the [error function](Commands.html#error), so you can see that in the HTML. This is needed for all errors except navigating/measuring a URL. They will automatically be reported (since they are always important).
+If you do catch the error, you should make sure you report it yourself with the [error function](Commands.html#error), so you can see that in the HTML report. This is needed for all errors except navigating/measuring a URL. They will automatically be reported (since they are always important).
 
-Here's an example of catching a URL that don't work and still continue to test another one. Remember since a navigation fails, this will be reported automatically and you don't need to do anything.
+If you measuring a page in a user journey and it fails, you can stop your measurements as a failure and not collect any metrics.
+anything.
 
 ```JavaScript
 /**
@@ -11,10 +12,17 @@ Here's an example of catching a URL that don't work and still continue to test a
  */
 export default async function (context, commands) {
   await commands.measure.start('https://www.sitespeed.io');
+
   try {
-    await commands.measure.start('https://nonworking.url/');
-  } catch (e) {}
-  return commands.measure.start('https://www.sitespeed.io/documentation/');
+    await commands.measure.start('Documentation_page');
+    await commands.click.byLinkTextAndWait('Documentationsssss');
+    return commands.measure.stop();
+    
+  } catch (e) {
+    // Oops that link do not exist and will throw an exception
+    await commands.measure.stopAsFailure('Could not click on the link');
+  }
+
 };
 ```
 
