@@ -2,8 +2,7 @@ You can try/catch failing commands that throw errors. If an error is not caught 
 
 If you do catch the error, you should make sure you report it yourself with the [error function](Commands.html#error), so you can see that in the HTML report. This is needed for all errors except navigating/measuring a URL. They will automatically be reported (since they are always important).
 
-If you measuring a page in a user journey and it fails, you can stop your measurements as a failure and not collect any metrics.
-anything.
+If you measuring a page in a user journey and it fails, you can stop your measurements as a error and not collect any metrics. This works from Browsertime 21.2.0 and sitespeed.io 33.0.0.
 
 ```JavaScript
 /**
@@ -20,7 +19,7 @@ export default async function (context, commands) {
     
   } catch (e) {
     // Oops that link do not exist and will throw an exception
-    await commands.measure.stopAsError('Could not click on the link');
+    return commands.measure.stopAsError('Could not click on the link');
   }
 
 };
