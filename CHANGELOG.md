@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 21.2.1 - 2024-02-11
+### Fixed
+* Fix correct JavaScript signaure for stopAsError in types.
+
 ## 21.2.0 - 2024-02-11
 ### Added
 * Edge 121 in the Docker container [#2071](https://github.com/sitespeedio/browsertime/pull/2071).
