@@ -159,3 +159,10 @@ Using the [set commands](Set.html) you can set values to HTML elements.
 
 ## Select
 You can use the [select command](Select.html) for selecting an option in a drop-down field.
+
+## Alert boxes
+If you need to click on an alert box, the best way is to use Selenium directly. Here's an example on how to accept an alert box.
+
+```javascript
+await context.selenium.driver.switchTo().alert().accept();
+```
