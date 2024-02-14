@@ -58,3 +58,25 @@ export default async function (context, commands) {
   }
  }
 ```
+
+If you measure a navigation by clicking on an element and the element do 
+not exists or somnething goes wrong, you can stop the measuerement and make sure 
+no metrics is collected.
+
+```javascript
+/**
+ * @param {import('browsertime').BrowsertimeContext} context
+ * @param {import('browsertime').BrowsertimeCommands} commands
+ */
+export default async function (context, commands) {
+  
+  await commands.measure.start('my_trip');
+  try {
+    // do something that can break
+    await commands.mouse.singleClick.byLinkTextAndWait('Next page');
+    await commands.measure.stop();
+  } catch(error) {
+    await commands.measure.stopAsError('Could not click the next page link');
+  }
+ }
+```
