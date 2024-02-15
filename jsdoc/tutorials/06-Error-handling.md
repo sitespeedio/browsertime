@@ -55,7 +55,7 @@ await commands.markAsFailure('My test failed');
 process.exitCode = 1;
 ```
 
-Then yoy 
+Then when you run your tests it looks like this: 
 
 ```bash
 $ sitespeed.io --multi myJourney.mjs
