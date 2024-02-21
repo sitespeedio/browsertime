@@ -1,5 +1,14 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 21.3.0 - 2024-02-21
+### Added
+* Edgedriver 121 [#2078](https://github.com/sitespeedio/browsertime/pull/2078).
+* Chromdriver 122 [#2080](https://github.com/sitespeedio/browsertime/pull/2080).
+* Chrome 122 and Firefox 123 in the Docker container [#2081](https://github.com/sitespeedio/browsertime/pull/2081).
+
+### Fixed
+* Log that Throttle is used inside Docker [#2077](https://github.com/sitespeedio/browsertime/pull/2077).
+
 ## 21.2.1 - 2024-02-11
 ### Fixed
 * Fix correct JavaScript signaure for stopAsError in types.
