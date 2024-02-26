@@ -46,4 +46,4 @@ export default async function (context, commands) {
 }
 ```
 
-If you need help with Selenium, checkout [the official Selenium documentation](https://www.seleniumhq.org/docs/).
+If you need help with Selenium, checkout [the official Selenium documentation](https://www.selenium.dev/documentation/).
