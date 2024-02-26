@@ -3,6 +3,7 @@
 ## 21.3.1 - 2024-02-26
 ### Fixed
 * Updated Chromedriver install with new version that fixes the Windows install [#2084](https://github.com/sitespeedio/browsertime/pull/2084).
+* Updated to Selenium 4.18.1 [#2082](https://github.com/sitespeedio/browsertime/pull/2082).
 
 ## 21.3.0 - 2024-02-21
 ### Added
