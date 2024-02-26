@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 21.3.1 - 2024-02-26
+### Fixed
+* Updated Chromedriver install with new version that fixes the Windows install [#2084](https://github.com/sitespeedio/browsertime/pull/2084).
+
 ## 21.3.0 - 2024-02-21
 ### Added
 * Edgedriver 121 [#2078](https://github.com/sitespeedio/browsertime/pull/2078).
