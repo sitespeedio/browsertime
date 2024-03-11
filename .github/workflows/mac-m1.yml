@@ -1,4 +1,4 @@
-name: OSX Safari
+name: OSX Safari Mac M1
 on:
   push:
     branches:
@@ -8,7 +8,7 @@ on:
     - main
 jobs:
   build:
-    runs-on: macos-13
+    runs-on: macos-14
     timeout-minutes: 20
     steps:
     - uses: actions/checkout@v4
@@ -20,10 +20,6 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: '3.12' 
-    - name: Install FFMPEG
-      uses: FedericoCarboni/setup-ffmpeg@v3
-      id: setup-ffmpeg
-      ffmpeg-version: 5.1.4
     - name: Install browsertime
       run: npm ci
     - name: Install Python dependencies
@@ -34,19 +30,16 @@ jobs:
         python -m pip --version
         python -m pip show Pillow
         python -m pip show pyssim
-    - name: Checks
-      run: |
-        sudo safaridriver --enable      
-        system_profiler SPDisplaysDataType |grep Resolution
-        ffmpeg -version
-    - name: List all simulators
-      run: xcrun xctrace list devices
+    #- name: Check resolution
+    #  run: system_profiler SPDisplaysDataType |grep Resolution
+    - name: Enable Safaridriver
+      run: sudo safaridriver --enable
     #- name: Start local HTTP server
     # run: (npm run start-server&)
     - name: Test Safari without video 
       run: ./bin/browsertime.js -b safari -n 1 https://www.sitespeed.io/
-    - name: Test Safari with video and Visual Metrics
-      run: ./bin/browsertime.js -b safari -n 1 --viewPort 800x600  --video --visualMetrics https://www.sitespeed.io/
+    #- name: Test Safari with video and Visual Metrics
+    #  run: ./bin/browsertime.js -b safari -n 1 --viewPort 800x600  --video --visualMetrics https://www.sitespeed.io/
     #- name: Test Safari iOS simulator 
     #  run: |
     #    IPHONE14=$(xcrun xctrace list devices  2>&1  | grep -m 1 "iPhone 14 Simulator" | awk -F'[()]' '{print $4}')
