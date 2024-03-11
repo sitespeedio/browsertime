@@ -34,10 +34,6 @@ jobs:
     #  run: system_profiler SPDisplaysDataType |grep Resolution
     - name: Enable Safaridriver
       run: sudo safaridriver --enable
-    - name: FFmpeg version
-      run: ffmpeg -version
-    - name: List all simulators
-      run: xcrun xctrace list devices
     #- name: Start local HTTP server
     # run: (npm run start-server&)
     - name: Test Safari without video 

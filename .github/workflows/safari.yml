@@ -16,19 +16,26 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '20.x'
+    - name: Use Pyhton
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12' 
+    - name: Install FFMPEG
+      uses: FedericoCarboni/setup-ffmpeg@v3
+      id: setup-ffmpeg
     - name: Install browsertime
       run: npm ci
-    - name: Install dependencies
+    - name: Install Pythom dependencies
       run: |
-        sudo safaridriver --enable
-        brew update
-        brew install ffmpeg
         python -m pip install --upgrade --user pip
         python -m pip install --upgrade --user setuptools 
         python -m pip install --user pyssim OpenCV-Python Numpy
         python -m pip --version
         python -m pip show Pillow
         python -m pip show pyssim
+    - name: Checks
+      run: |
+        sudo safaridriver --enable      
         system_profiler SPDisplaysDataType |grep Resolution
         ffmpeg -version
     - name: List all simulators
