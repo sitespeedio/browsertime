@@ -21,8 +21,6 @@ jobs:
     - name: Install dependencies
       run: |
         sudo safaridriver --enable
-        brew update
-        brew install ffmpeg
         python -m pip install --upgrade --user pip
         python -m pip install --upgrade --user setuptools 
         python -m pip install --user pyssim OpenCV-Python Numpy
