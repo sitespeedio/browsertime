@@ -1,6 +1,15 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 21.5.0 - 2024-03-12
+### Added
+* Firefox: 
+  * Move injectJS functionality to Bidi [#2088](https://github.com/sitespeedio/browsertime/pull/2088). This makes it possible to inject JS in Firefox on mobile.
+    * Expose Bidi in commands [#2091](https://github.com/sitespeedio/browsertime/pull/2091). You can now use webdriver bidi direct in your commands.
+### Fixed
+* Fixed command action.clear() that actually didn't clear the command [#2095](https://github.com/sitespeedio/browsertime/pull/2095).
+
 ## 21.4.0 - 2024-03-08
+### Added
 * Added the following trace categories for Chrome that now is used by default when you turn on the timeline: 'disabled-by-default-devtools.timeline.frame', 'disabled-by-default-devtools.timeline.invalidationTracking','loading', 'latencyInfo' - done in [#2086](https://github.com/sitespeedio/browsertime/pull/2086).
 * Added a simple Loaf-script to get the 10 largest loaf. Lets iterate over the script and see how we can get the most useful information from it [#2087](https://github.com/sitespeedio/browsertime/pull/2087).
 
