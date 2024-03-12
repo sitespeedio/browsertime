@@ -21,6 +21,11 @@
       info.duration = entry.duration;
       info.styleAndLayoutStart = entry.styleAndLayoutStart;
       info.renderStart = entry.renderStart;
+      info.workDuration = entry.renderStart ? entry.renderStart - entry.startTime : entry.duration;
+      info.renderDuration = entry.renderStart ? (entry.startTime + entry.duration) - entry.renderStart: 0;
+      info.preLayoutDuration =  entry.styleAndLayoutStart ? entry.styleAndLayoutStart - entry.renderStart : 0;
+      info.styleAndLayoutDuration = entry.styleAndLayoutStart ? (entry.startTime + entry.duration) - entry.styleAndLayoutStart : 0
+      
       info.scripts = [];
       for (let script of entry.scripts) {
         const s = {};
@@ -29,6 +34,8 @@
         s.invokerType = script.invokerType;
         s.sourceFunctionName = script.sourceFunctionName;
         s.sourceURL = script.sourceURL;
+        s.sourceCharPosition = script.sourceCharPosition;
+        s.windowAttribution = script.windowAttribution;
         info.scripts.push(s);
       }
       relevantLoadEntries.push(info);
