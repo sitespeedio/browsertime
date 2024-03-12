@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 21.5.2 - 2024-03-12
+### Fixed
+* Another bug fix: Getting Long Animation Frame (loaf) was broken [#2099](https://github.com/sitespeedio/browsertime/pull/2099).
+
 ## 21.5.1 - 2024-03-12
 ### Fixed
 * There was a bug in how we collect CPU power from Firefox and add it to the statistics. Fixed in [#2098](https://github.com/sitespeedio/browsertime/pull/2098).
