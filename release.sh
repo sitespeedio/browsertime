@@ -16,6 +16,3 @@ np $* --no-yarn
 bin/browsertime.js --help > ../sitespeed.io/docs/documentation/browsertime/configuration/config.md
 
 bin/browsertime.js --version | tr -d '\n' > ../sitespeed.io/docs/_includes/version/browsertime.txt
-
-# Generate documentation
-npm run jsdoc
