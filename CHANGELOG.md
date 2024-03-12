@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 21.5.1 - 2024-03-12
+### Fixed
+* There was a bug in how we collect CPU power from Firefox and add it to the statistics. Fixed in [#2098](https://github.com/sitespeedio/browsertime/pull/2098).
+
 ## 21.5.0 - 2024-03-12
 ### Added
 * Firefox: 
