@@ -23,7 +23,7 @@ export default async function (context, commands) {
 }
 ```
 
-### Subscribe and usubscribe to events
+### Subscribe and unsubscribe to events
 
 You need to subscribe to the event types that you are interested in with `commands.bidi.subscribe('messageType');` and unsubscribe when you are done. 
 
