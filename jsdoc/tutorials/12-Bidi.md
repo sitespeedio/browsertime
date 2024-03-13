@@ -37,18 +37,14 @@ When you subscribe on an event you want to do something when the events happen.
  * @param {import('browsertime').BrowsertimeCommands} commands
  */
 export default async function (context, commands) {
- 
   // We want to to do something on all the requests that are sent
-  await commands.bidi.subscribe(
-      'network.beforeRequestSent'
-    );
+  await commands.bidi.subscribe('network.beforeRequestSent');
 
   await commands.bidi.onMessage(function (event) {
-    console.log('Got event!');
-    console.log(event);
+    const myEvent = JSON.parse(Buffer.from(event.toString()));
+    console.log(myEvent);
   });
-  
+
   await commands.navigate('https://www.sitespeed.io');
-  
 }
 ```
