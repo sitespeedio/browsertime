@@ -18,14 +18,17 @@ export class Bidi {
     /**
      * Add a fanction that will get the events that you subscribes.
      * @async
+     * @example await commands.bidi.onMessage(function(event) {
+     *  const myEvent = JSON.parse(Buffer.from(event.toString()));
+     *  console.log(myEvent);
+     * });
      * @param {Function} f - The callback function to handle incoming messages. The function will get an event passed on to it. Remember to subscribe to the event.
      * @throws {Error} Throws an error if the method is called in a browser other than Firefox.
      */
     onMessage(f: Function): Promise<void>;
     /**
      * Retrieves the raw client for Bidi.
-     * @async
-     * @example const bidi = await commands.bidi.getRawClient();
+     * @example const bidi = commands.bidi.getRawClient();
      * @returns {Promise<Object>} A promise that resolves to the Bidi client.
      * @throws {Error} Throws an error if the browser is not supported.
      */
@@ -33,6 +36,8 @@ export class Bidi {
     /**
      * Subscribe to a event.
      * @async
+     * @example // Subscribe to requests before they are sent
+     * await commands.bidi.subscribe('network.beforeRequestSent');
      * @param {string} messageType The type of message to subscribe to.
      * @returns {Promise<Object>} A promise that resolves you have subscribed.
      * @throws {Error} Throws an error if the method is called in a browser other than Firefox.
@@ -41,6 +46,8 @@ export class Bidi {
     /**
      * Unsubscribe to an event.
      * @async
+     *  @example // Unsubscribe to requests before they are sent
+     * await commands.bidi.unsubscribe('network.beforeRequestSent');
      * @param {string} messageType  The type of message to unsubscribe to.
      * @returns  {Promise<Object>} A promise that resolves you have unsubscribed.
      * @throws {Error} Throws an error if the method is called in a browser other than Firefox.
@@ -50,7 +57,14 @@ export class Bidi {
      * Sends a command using Bidi.
      *
      * @async
-     * @example await commands.bidi.send({});
+     * @example
+     *  const params = {
+     *   method: 'script.addPreloadScript',
+     *   params: {
+     *     functionDeclaration: "function() {alert('hello')}"
+     *    }
+     *  };
+     * await commands.bidi.send(params);
      * @param {Object} parameters - The paramaters for the command.
      * @throws {Error} Throws an error if the browser is not supported or if the command fails.
      * @returns {Promise<Object>} A promise that resolves when the command has been sent.
