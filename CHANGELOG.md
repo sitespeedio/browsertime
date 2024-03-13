@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 21.5.3 - 2024-03-12
+### Fixed
+* Fixed `commands.bidi.*` that stopped working [#2101](https://github.com/sitespeedio/browsertime/pull/2101).
+* Fixed missing Loaf data [#2100](https://github.com/sitespeedio/browsertime/pull/2100).
+
 ## 21.5.2 - 2024-03-12
 ### Fixed
 * Another bug fix: Getting Long Animation Frame (loaf) was broken [#2099](https://github.com/sitespeedio/browsertime/pull/2099).
