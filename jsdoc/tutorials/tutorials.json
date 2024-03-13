@@ -33,10 +33,13 @@
     "11-Chrome-Devtools-Protocol": {
         "title": "Chrome Devtools Protocol (CDP)"
     },
-    "12-Android": {
+    "12-Bidi": {
+        "title": "Using Bidi"
+    },
+    "13-Android": {
         "title": "Android devices"
     },
-    "13-Tips-and-tricks": {
+    "18-Tips-and-tricks": {
         "title": "Tips and tricks"
     }
 }

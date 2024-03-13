@@ -105,6 +105,12 @@ export class Commands {
      */
     cdp: ChromeDevelopmentToolsProtocol;
     /**
+     *
+     * Use WebDriver Bidi. Availible in Firefox and in the future more browsers.
+     * @type {Bidi}
+     */
+    bidi: Bidi;
+    /**
      * Provides commands for interacting with an Android device.
      * @type {AndroidCommand}
      */
@@ -153,6 +159,7 @@ import { Cache } from './command/cache.js';
 import { Meta } from './command/meta.js';
 import { Screenshot } from './command/screenshot.js';
 import { ChromeDevelopmentToolsProtocol } from './command/chromeDevToolsProtocol.js';
+import { Bidi } from './command/bidi.js';
 import { AndroidCommand } from './command/android.js';
 import { Debug } from './command/debug.js';
 import { Select } from './command/select.js';

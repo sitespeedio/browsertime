@@ -1,6 +1,28 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 21.5.3 - 2024-03-12
+### Fixed
+* Fixed `commands.bidi.*` that stopped working [#2101](https://github.com/sitespeedio/browsertime/pull/2101).
+* Fixed missing Loaf data [#2100](https://github.com/sitespeedio/browsertime/pull/2100).
+
+## 21.5.2 - 2024-03-12
+### Fixed
+* Another bug fix: Getting Long Animation Frame (loaf) was broken [#2099](https://github.com/sitespeedio/browsertime/pull/2099).
+
+## 21.5.1 - 2024-03-12
+### Fixed
+* There was a bug in how we collect CPU power from Firefox and add it to the statistics. Fixed in [#2098](https://github.com/sitespeedio/browsertime/pull/2098).
+
+## 21.5.0 - 2024-03-12
+### Added
+* Firefox: 
+  * Move injectJS functionality to Bidi [#2088](https://github.com/sitespeedio/browsertime/pull/2088). This makes it possible to inject JS in Firefox on mobile.
+  * Expose Bidi in commands [#2091](https://github.com/sitespeedio/browsertime/pull/2091). You can now use webdriver bidi direct in your commands.
+### Fixed
+* Fixed command action.clear() that actually didn't clear the command [#2095](https://github.com/sitespeedio/browsertime/pull/2095).
+
 ## 21.4.0 - 2024-03-08
+### Added
 * Added the following trace categories for Chrome that now is used by default when you turn on the timeline: 'disabled-by-default-devtools.timeline.frame', 'disabled-by-default-devtools.timeline.invalidationTracking','loading', 'latencyInfo' - done in [#2086](https://github.com/sitespeedio/browsertime/pull/2086).
 * Added a simple Loaf-script to get the 10 largest loaf. Lets iterate over the script and see how we can get the most useful information from it [#2087](https://github.com/sitespeedio/browsertime/pull/2087).
 
