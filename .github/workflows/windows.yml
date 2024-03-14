@@ -42,7 +42,7 @@ jobs:
       run: node bin/browsertime.js -b edge -n 1 --screenshot https://www.sitespeed.io/
       shell: cmd
     - name: Run Edge test with video
-      run: node bin/browsertime.js -b edge -n 1 --screenshot --video --visualMetrics --viewPort 1000x600 https://www.sitespeed.io/
+      run: node bin/browsertime.js -b edge -n 1 --screenshot --video --visualMetrics --viewPort 1000x600 https://www.webstaurantstore.com/vigor-2-piece-non-stick-stainless-steel-aluminum-clad-with-excalibur-coating-fry-pan-set-with-8-and-9-1-2-pan/473SSFRYKT3.html
       shell: cmd
     - name: Run Chrome test
       run: node bin/browsertime.js -b chrome -n 1 https://www.sitespeed.io/
