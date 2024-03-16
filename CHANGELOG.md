@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 21.5.4 - 2024-03-13
+### Fixed
+* Fix for `--injectJs` for Firefox [#2103](https://github.com/sitespeedio/browsertime/pull/2103).
+
 ## 21.5.3 - 2024-03-12
 ### Fixed
 * Fixed `commands.bidi.*` that stopped working [#2101](https://github.com/sitespeedio/browsertime/pull/2101).
