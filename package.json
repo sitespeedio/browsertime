@@ -34,7 +34,7 @@
     "yargs": "17.7.2"
   },
   "optionalDependencies": {
-    "jimp": "0.22.10"
+    "jimp": "0.22.12"
   },
   "devDependencies": {
     "@types/selenium-webdriver": "4.1.22",
