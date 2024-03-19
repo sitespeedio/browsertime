@@ -155,11 +155,6 @@ async function run(urls, options) {
           if (eachResult.markedAsFailure === 1) {
             process.exitCode = 1;
           }
-          for (let errors of eachResult.errors) {
-            if (errors.length > 0) {
-              process.exitCode = 1;
-            }
-          }
         }
       }
       log.info(`Wrote data to ${resultDirectory}`);
