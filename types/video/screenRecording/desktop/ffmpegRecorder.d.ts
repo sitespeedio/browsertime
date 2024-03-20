@@ -11,7 +11,7 @@ export function start({ display, origin, size, filePath, offset, framerate, crf,
     taskset: any;
 }): Promise<{
     filePath: any;
-    ffmpegProcess: any;
+    ffmpegProcess: import("execa").ExecaChildProcess<string>;
 }>;
 export function stop(recording: any): Promise<any>;
 //# sourceMappingURL=ffmpegRecorder.d.ts.map
