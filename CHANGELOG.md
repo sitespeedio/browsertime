@@ -1,5 +1,15 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 21.6.0 - UNRELEASED
+### Added
+* Chrome 123, Firefox 124 and Edge 122 in the Docker container [#2110](https://github.com/sitespeedio/browsertime/pull/2110).
+* Chromedriver 123 and Edgedriver 122 [#2111](https://github.com/sitespeedio/browsertime/pull/2111).
+
+### Fixed
+* Fix a bug in stopAsError so that you can continue to measure other pages after the stop. Also follow the documentation and mark the run as a failure [#2107](https://github.com/sitespeedio/browsertime/pull/2107).
+* Use bidi for Firefox when using --basicAuth [#2093](https://github.com/sitespeedio/browsertime/pull/2093) (needs Firefox 124).
+* Use bidi for Firefox when using --cookie [#2090](https://github.com/sitespeedio/browsertime/pull/2090) (needs Firefox 124).
+
 ## 21.5.4 - 2024-03-13
 ### Fixed
 * Fix for `--injectJs` for Firefox [#2103](https://github.com/sitespeedio/browsertime/pull/2103).
@@ -46,7 +56,7 @@
 
 ## 21.2.1 - 2024-02-11
 ### Fixed
-* Fix correct JavaScript signaure for stopAsError in types.
+* Fix correct JavaScript signature for stopAsError in types.
 
 ## 21.2.0 - 2024-02-11
 ### Added
