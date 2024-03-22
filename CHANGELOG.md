@@ -2,7 +2,7 @@
 
 ## 21.6.1 - 2024-03-22
 ### Fixed
-* Fix runnimg Safari TP. Thank you [KS](https://github.com/92kns) for PR [#2115](https://github.com/sitespeedio/browsertime/pull/2115).
+* Fix running Safari TP. Thank you [KS](https://github.com/92kns) for PR [#2115](https://github.com/sitespeedio/browsertime/pull/2115).
 
 ## 21.6.0 - 2024-03-20
 ### Added
