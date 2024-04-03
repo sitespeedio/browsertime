@@ -1,5 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 21.7.0 - 2024-04-03
+### Added
+* Edge and Edgedriver 123 [#2116](https://github.com/sitespeedio/browsertime/pull/2116).
+
+### Fixed
+*  Updated to Selenium 4.19.0 [#2117](https://github.com/sitespeedio/browsertime/pull/2117).
+* Block domains using Bidi instead of the extension server for Firefox [#2118](https://github.com/sitespeedio/browsertime/pull/2118).
+
 ## 21.6.1 - 2024-03-22
 ### Fixed
 * Fix running Safari TP. Thank you [KS](https://github.com/92kns) for PR [#2115](https://github.com/sitespeedio/browsertime/pull/2115).
