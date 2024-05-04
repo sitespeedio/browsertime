@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Fixed
+* Bug fix: If you test a URL that failed, we got an error that didn't produce the browsertime.json [#2120](https://github.com/sitespeedio/browsertime/pull/2120).
+
 ## 21.7.0 - 2024-04-03
 ### Added
 * Edge and Edgedriver 123 [#2116](https://github.com/sitespeedio/browsertime/pull/2116).
