@@ -1,8 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 21.7.1 - 2024-04-03
 ### Fixed
 * Bug fix: If you test a URL that failed, we got an error that didn't produce the browsertime.json [#2120](https://github.com/sitespeedio/browsertime/pull/2120).
+* Updated to Seleniuym webdriver 4.20.0 [#2121](https://github.com/sitespeedio/browsertime/pull/2121).
 
 ## 21.7.0 - 2024-04-03
 ### Added
