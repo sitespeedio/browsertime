@@ -19,7 +19,7 @@
     "dayjs": "1.11.10",
     "execa": "8.0.1",
     "fast-stats": "0.0.6",
-    "ff-test-bidi-har-export": "0.0.12",
+    "ff-test-bidi-har-export": "0.0.13",
     "find-up": "7.0.0",
     "get-port": "7.0.0",
     "hasbin": "1.2.3",
