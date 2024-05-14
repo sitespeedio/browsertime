@@ -16,7 +16,7 @@ export default async function (context, commands) {
 
 
 ## Cache
-You can clear the browser cache from your script. The command works in Chrome, Edge and Firefox. Use it when you want to clear the browser cache between different URLs.
+You can clear the browser cache from your script. The command works in Chrome and Edge. Use it when you want to clear the browser cache between different URLs.
 
 ### Clear cache and cookies
 
