@@ -16,12 +16,12 @@ export class DesktopRecorder {
     options: any;
     start(file: any): Promise<{
         filePath: any;
-        ffmpegProcess: any;
+        ffmpegProcess: import("execa").ExecaChildProcess<string>;
     }>;
     filePath: any;
     recording: Promise<{
         filePath: any;
-        ffmpegProcess: any;
+        ffmpegProcess: import("execa").ExecaChildProcess<string>;
     }>;
     stop(destination: any): Promise<void>;
 }

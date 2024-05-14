@@ -14,3 +14,5 @@ Welcome to the powerful world of scripting with sitespeed.io! This feature unloc
 ## Getting Started
 
 Dive into scripting with our [tutorials](Tutorial-01-Introduction.html), [examples](tutorial-09-Examples.html), and [documentation for all commands](Commands.html). 
+
+If you are new to NodeJS and want to understand async/await you should read [this post about async/await](https://blog.postman.com/understanding-async-await-in-node-js/).

@@ -1,5 +1,32 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 21.7.1 - 2024-04-03
+### Fixed
+* Bug fix: If you test a URL that failed, we got an error that didn't produce the browsertime.json [#2120](https://github.com/sitespeedio/browsertime/pull/2120).
+* Updated to Seleniuym webdriver 4.20.0 [#2121](https://github.com/sitespeedio/browsertime/pull/2121).
+
+## 21.7.0 - 2024-04-03
+### Added
+* Edge and Edgedriver 123 [#2116](https://github.com/sitespeedio/browsertime/pull/2116).
+
+### Fixed
+*  Updated to Selenium 4.19.0 [#2117](https://github.com/sitespeedio/browsertime/pull/2117).
+* Block domains using Bidi instead of the extension server for Firefox [#2118](https://github.com/sitespeedio/browsertime/pull/2118).
+
+## 21.6.1 - 2024-03-22
+### Fixed
+* Fix running Safari TP. Thank you [KS](https://github.com/92kns) for PR [#2115](https://github.com/sitespeedio/browsertime/pull/2115).
+
+## 21.6.0 - 2024-03-20
+### Added
+* Chrome 123, Firefox 124 and Edge 122 in the Docker container [#2110](https://github.com/sitespeedio/browsertime/pull/2110).
+* Chromedriver 123 and Edgedriver 122 [#2111](https://github.com/sitespeedio/browsertime/pull/2111).
+
+### Fixed
+* Fix a bug in stopAsError so that you can continue to measure other pages after the stop. Also follow the documentation and mark the run as a failure [#2107](https://github.com/sitespeedio/browsertime/pull/2107).
+* Use bidi for Firefox when using `--basicAuth` [#2093](https://github.com/sitespeedio/browsertime/pull/2093) (needs Firefox 124).
+* Use bidi for Firefox when using `--cookie` [#2090](https://github.com/sitespeedio/browsertime/pull/2090) (needs Firefox 124).
+
 ## 21.5.4 - 2024-03-13
 ### Fixed
 * Fix for `--injectJs` for Firefox [#2103](https://github.com/sitespeedio/browsertime/pull/2103).
@@ -46,7 +73,7 @@
 
 ## 21.2.1 - 2024-02-11
 ### Fixed
-* Fix correct JavaScript signaure for stopAsError in types.
+* Fix correct JavaScript signature for stopAsError in types.
 
 ## 21.2.0 - 2024-02-11
 ### Added

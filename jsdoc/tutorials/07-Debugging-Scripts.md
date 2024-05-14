@@ -29,7 +29,7 @@ In debug mode, the browser will pause after each iteration.
  */
 export default async function (context, commands) {
   await commands.measure.start('https://www.sitespeed.io');
-  await commands.breakpoint('');
+  await commands.debug.breakpoint('');
   return commands.measure.start('https://www.sitespeed.io/documentation/');
 };
 ```
