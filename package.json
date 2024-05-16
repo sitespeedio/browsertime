@@ -8,8 +8,8 @@
   "dependencies": {
     "@cypress/xvfb": "1.2.4",
     "@devicefarmer/adbkit": "3.2.6",
-    "@sitespeed.io/chromedriver": "123.0.6312-58",
-    "@sitespeed.io/edgedriver": "123.0.2420-53",
+    "@sitespeed.io/chromedriver": "125.0.6422-60",
+    "@sitespeed.io/edgedriver": "124.0.2478-105",
     "@sitespeed.io/geckodriver": "0.34.0",
     "@sitespeed.io/throttle": "5.0.0",
     "@sitespeed.io/tracium": "0.3.3",
