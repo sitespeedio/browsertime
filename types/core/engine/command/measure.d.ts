@@ -6,7 +6,7 @@
  * @hideconstructor
  */
 export class Measure {
-    constructor(browser: any, index: any, pageCompleteCheck: any, result: any, engineDelegate: any, extensionServer: any, storageManager: any, videos: any, scriptsByCategory: any, asyncScriptsByCategory: any, postURLScripts: any, context: any, screenshotManager: any, options: any);
+    constructor(browser: any, index: any, pageCompleteCheck: any, result: any, engineDelegate: any, storageManager: any, videos: any, scriptsByCategory: any, asyncScriptsByCategory: any, postURLScripts: any, context: any, screenshotManager: any, options: any);
     /**
      * @private
      */
@@ -43,10 +43,6 @@ export class Measure {
      * @private
      */
     private recordVideo;
-    /**
-     * @private
-     */
-    private extensionServer;
     /**
      * @private
      */
