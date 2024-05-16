@@ -3,12 +3,15 @@
 ## 28.0.0 - 2024-05-16
 
 ### Breaking
-* Remove the Browsertime extension. In the old days the extension helped Chrome and Firefox to add cookies, requestheaders, clear caches and more. However all that functionality has been implemented in CDP fro Chrome and most functionality using Bidi webdriver for Firefox. At the moment we drop two things for Firefox: Add request header and clear the cache inside of scripting. We hope both soon is supported in Bidi. [#2124](https://github.com/sitespeedio/browsertime/pull/2124)
+
+There's a breaking change for Firefox if you add your own request header or if you use scripting and want to clear the browser in your script:
+
+* Removed the [Browsertime extension](https://github.com/sitespeedio/browsertime-extension). In the old days the extension helped Chrome and Firefox to add cookies, requestheaders, clear caches and more. However all that functionality has been implemented in CDP for Chrome and most functionality using Bidi webdriver for Firefox. At the moment we drop two things for Firefox: Add request header and clear the cache inside of scripting. We hope both soon is supported in Bidi [#2124](https://github.com/sitespeedio/browsertime/pull/2124).
 
 * The ff-test-bidi-har-export is now the default (and only) way to get a HAR file from Firefox. It's faster than the old HAR exporter and works on both desktop and mobile. It's also is implemented using Bidi so when other browsers also support bidi they can also export a HAR [#2123](https://github.com/sitespeedio/browsertime/pull/2123).
 
 ### Added
-* Updated the Docker container to use Chrome 125 amnd Firefox 126 and Edge 124 [#2125](https://github.com/sitespeedio/browsertime/pull/2125) and [#2128](https://github.com/sitespeedio/browsertime/pull/2128).
+* Updated the Docker container to use Chrome 125 and Firefox 126 and Edge 124 [#2125](https://github.com/sitespeedio/browsertime/pull/2125) and [#2128](https://github.com/sitespeedio/browsertime/pull/2128).
 
 ## 21.7.1 - 2024-04-03
 ### Fixed
