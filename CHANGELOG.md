@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 28.0.0 - 2024-05-16
+## 22.0.0 - 2024-05-16
 
 ### Breaking
 
