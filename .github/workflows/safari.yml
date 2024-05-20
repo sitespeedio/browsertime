@@ -19,7 +19,9 @@ jobs:
     - name: Use Pyhton
       uses: actions/setup-python@v5
       with:
-        python-version: '3.12'
+        python-version: '3.12' 
+    - name: Install FFMPEG
+      run: brew install ffmpeg
     - name: Install browsertime
       run: npm ci
     - name: Install Python dependencies
