@@ -1,5 +1,14 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 22.1.0 - 2024-05-20
+### Added
+* Updated to Edge and Edgedriver 125 [#2132](https://github.com/sitespeedio/browsertime/pull/2132).
+
+### Fixed
+* Updated to Selenium Webdriver 4.21.0 [#2131](https://github.com/sitespeedio/browsertime/pull/2131).
+* Trying to remove new Chrome popup [#2130](https://github.com/sitespeedio/browsertime/pull/2130).
+
+
 ## 22.0.0 - 2024-05-16
 
 ### Breaking
