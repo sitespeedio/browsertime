@@ -19,12 +19,7 @@ jobs:
     - name: Use Pyhton
       uses: actions/setup-python@v5
       with:
-        python-version: '3.12' 
-    - name: Install FFMPEG
-      uses: FedericoCarboni/setup-ffmpeg@v3
-      id: setup-ffmpeg
-      with:
-        ffmpeg-version: 5.1.4
+        python-version: '3.12'
     - name: Install browsertime
       run: npm ci
     - name: Install Python dependencies
