@@ -23,7 +23,8 @@ jobs:
     - name: Install FFMPEG
       uses: FedericoCarboni/setup-ffmpeg@v3
       id: setup-ffmpeg
-      ffmpeg-version: 5.1.4
+      with:
+        ffmpeg-version: 5.1.4
     - name: Install browsertime
       run: npm ci
     - name: Install Python dependencies
