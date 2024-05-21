@@ -3,7 +3,7 @@
  * @hideconstructor
  */
 export class Commands {
-    constructor(browser: any, engineDelegate: any, index: any, result: any, storageManager: any, pageCompleteCheck: any, extensionServer: any, context: any, videos: any, screenshotManager: any, scriptsByCategory: any, asyncScriptsByCategory: any, postURLScripts: any, options: any);
+    constructor(browser: any, engineDelegate: any, index: any, result: any, storageManager: any, pageCompleteCheck: any, context: any, videos: any, screenshotManager: any, scriptsByCategory: any, asyncScriptsByCategory: any, postURLScripts: any, options: any);
     profiler: GeckoProfilerCommand;
     /**
      * Manages Chrome trace functionality, enabling custom profiling and trace collection in Chrome.
