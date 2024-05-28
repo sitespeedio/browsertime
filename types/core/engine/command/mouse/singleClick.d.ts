@@ -103,7 +103,7 @@ export class SingleClick {
     byPartialLinkText(text: string): Promise<void>;
     /**
      * Clicks on a link whose visible text contains the given substring and waits on the
-     * page complete checl.
+     * page complete check.
      *
      * @async
      * @param {string} text - The substring of the visible text of the link to click.
@@ -111,5 +111,23 @@ export class SingleClick {
      * @throws {Error} Throws an error if the link is not found.
      */
     byPartialLinkTextAndWait(text: string): Promise<void>;
+    /**
+     * Clicks on a element with a specific id.
+     *
+     * @async
+     * @param {string} id - The id of the link to click.
+     * @returns {Promise<void>} A promise that resolves when the click action is performed.
+     * @throws {Error} Throws an error if the id is not found.
+     */
+    byId(id: string): Promise<void>;
+    /**
+     * Clicks on a element with a specific id and wait on the page complete check
+     *
+     * @async
+     * @param {string} id - The id of the link to click.
+     * @returns {Promise<void>} A promise that resolves when the page has completed.
+     * @throws {Error} Throws an error if the id is not found.
+     */
+    byIdAndWait(id: string): Promise<void>;
 }
 //# sourceMappingURL=singleClick.d.ts.map
