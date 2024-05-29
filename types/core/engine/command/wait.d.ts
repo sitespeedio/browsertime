@@ -15,7 +15,7 @@ export class Wait {
      */
     private pageCompleteCheck;
     /**
-     * Waits for an element with a specific ID to appear within a maximum time.
+     * Waits for an element with a specific ID to be located within a maximum time.
      *
      * @async
      * @param {string} id - The ID of the element to wait for.
@@ -24,6 +24,16 @@ export class Wait {
      * @throws {Error} Throws an error if the element is not found within the specified time.
      */
     byId(id: string, maxTime: number): Promise<void>;
+    /**
+     * Waits for an element with a specific ID to be located and visible within a maximum time.
+     *
+     * @async
+     * @param {string} id - The ID of the element to wait for.
+     * @param {number} maxTime - Maximum time to wait in milliseconds.
+     * @returns {Promise<void>} A promise that resolves when the element is found or the time times out.
+     * @throws {Error} Throws an error if the element is not found within the specified time.
+     */
+    byIdAndVisible(id: string, maxTime: number): Promise<void>;
     /**
      * Waits for an element located by XPath to appear within a maximum time.
      *

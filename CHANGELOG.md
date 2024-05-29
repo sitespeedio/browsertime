@@ -1,9 +1,39 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 22.2.0 - 2024-05-24
+### Added
+* New command: Mouse single click on a element with a specific id `commands.mouse.singleClick.byId(id)` and `commands.mouse.singleClick.byIdAndWait(id)` [#2135](https://github.com/sitespeedio/browsertime/pull/2135).
+* New command: `commands.wait.byIdAndVisible(id, maxTime)` - wait for an element with id to become visible [#2137](https://github.com/sitespeedio/browsertime/pull/2137).
+
+### Fixed
+* Make sure errors are correctly logged if you cannot add text to element [#2136](https://github.com/sitespeedio/browsertime/pull/2136).
+
+## 22.1.0 - 2024-05-20
+### Added
+* Updated to Edge and Edgedriver 125 [#2132](https://github.com/sitespeedio/browsertime/pull/2132).
+
+### Fixed
+* Updated to Selenium Webdriver 4.21.0 [#2131](https://github.com/sitespeedio/browsertime/pull/2131).
+* Trying to remove new Chrome popup [#2130](https://github.com/sitespeedio/browsertime/pull/2130).
+
+
+## 22.0.0 - 2024-05-16
+
+### Breaking
+
+There's a breaking change for Firefox if you add your own request header or if you use scripting and want to clear the browser in your script:
+
+* Removed the [Browsertime extension](https://github.com/sitespeedio/browsertime-extension). In the old days the extension helped Chrome and Firefox to add cookies, requestheaders, clear caches and more. However all that functionality has been implemented in CDP for Chrome and most functionality using Bidi webdriver for Firefox. At the moment we drop two things for Firefox: Add request header and clear the cache inside of scripting. We hope both soon is supported in Bidi [#2124](https://github.com/sitespeedio/browsertime/pull/2124).
+
+* The ff-test-bidi-har-export is now the default (and only) way to get a HAR file from Firefox. It's faster than the old HAR exporter and works on both desktop and mobile. It's also is implemented using Bidi so when other browsers also support bidi they can also export a HAR [#2123](https://github.com/sitespeedio/browsertime/pull/2123).
+
+### Added
+* Updated the Docker container to use Chrome 125 and Firefox 126 and Edge 124 [#2125](https://github.com/sitespeedio/browsertime/pull/2125) and [#2128](https://github.com/sitespeedio/browsertime/pull/2128).
+
 ## 21.7.1 - 2024-04-03
 ### Fixed
 * Bug fix: If you test a URL that failed, we got an error that didn't produce the browsertime.json [#2120](https://github.com/sitespeedio/browsertime/pull/2120).
-* Updated to Seleniuym webdriver 4.20.0 [#2121](https://github.com/sitespeedio/browsertime/pull/2121).
+* Updated to Selenium webdriver 4.20.0 [#2121](https://github.com/sitespeedio/browsertime/pull/2121).
 
 ## 21.7.0 - 2024-04-03
 ### Added
