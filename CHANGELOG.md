@@ -1,5 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 22.2.0 - 2024-05-24
+### Added
+* New command: Mouse single click on a element with a specific id `commands.mouse.singleClick.byId(id)` and `commands.mouse.singleClick.byIdAndWait(id)` [#2135](https://github.com/sitespeedio/browsertime/pull/2135).
+* New command: `commands.wait.byIdAndVisible(id, maxTime)` - wait for an element with id to become visible [#2137](https://github.com/sitespeedio/browsertime/pull/2137).
+
+### Fixed
+* Make sure errors are correctly logged if you cannot add text to element [#2136](https://github.com/sitespeedio/browsertime/pull/2136).
+
 ## 22.1.0 - 2024-05-20
 ### Added
 * Updated to Edge and Edgedriver 125 [#2132](https://github.com/sitespeedio/browsertime/pull/2132).
