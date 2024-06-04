@@ -1,5 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Added
+* Add the ability to gather power usage measurements on Android from USB power meters, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#2134](https://github.com/sitespeedio/browsertime/pull/2134).
+* Add support to visualmetrics to identify key frames matching the given colors, thank you [aosmond](https://github.com/aosmond) for PR [#2119](https://github.com/sitespeedio/browsertime/pull/2119).
+
+### Fixed
+* Removed DOMContentFlushed for Firefox thank you [florinbilt](https://github.com/florinbilt) for PR [#2138](https://github.com/sitespeedio/browsertime/pull/2138).
+
 ## 22.2.0 - 2024-05-24
 ### Added
 * New command: Mouse single click on a element with a specific id `commands.mouse.singleClick.byId(id)` and `commands.mouse.singleClick.byIdAndWait(id)` [#2135](https://github.com/sitespeedio/browsertime/pull/2135).
