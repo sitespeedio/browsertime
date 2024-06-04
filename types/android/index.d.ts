@@ -66,5 +66,10 @@ export class Android {
         'full-wifi': number;
         total: number;
     }>;
+    measureUsbPowerUsage(startTime: any, endTime: any): Promise<{
+        powerUsage: any;
+        baselineUsage: number;
+    }>;
+    getUsbPowerUsageProfile(index: any, url: any, result: any, options: any, storageManager: any): Promise<void>;
 }
 //# sourceMappingURL=index.d.ts.map
