@@ -123,21 +123,34 @@ async function run(urls, options) {
         );
       }
 
-      if (options.enableProfileRun) {
-        log.info('Make one extra run to collect trace information');
+      if (options.enableProfileRun || options.enableVideoRun) {
+        log.info('Make one extra run to collect trace/video information');
         options.iterations = 1;
-        if (options.browser === 'firefox') {
-          options.firefox.geckoProfiler = true;
-        } else if (options.browser === 'chrome') {
-          options.chrome.timeline = true;
-          options.cpu = true;
-          options.chrome.enableTraceScreenshots = true;
-          options.chrome.traceCategory = [
-            'disabled-by-default-v8.cpu_profiler'
-          ];
+        if (options.enableProfileRun) {
+          if (options.browser === 'firefox') {
+            options.firefox.geckoProfiler = true;
+          } else if (options.browser === 'chrome') {
+            options.chrome.timeline = true;
+            options.cpu = true;
+            options.chrome.enableTraceScreenshots = true;
+            options.chrome.traceCategory = [
+              'disabled-by-default-v8.cpu_profiler'
+            ];
+          }
         }
-        options.video = false;
-        options.visualMetrics = false;
+        if (options.enableVideoRun) {
+          if (options.video === true) {
+            log.error(
+              'You can only configure video run if you do not collect any video'
+            );
+            // This is a hack to not get an error
+            options.video = false;
+            options.visualMetrics = false;
+          } else {
+            options.video = true;
+            options.visualMetrics = false;
+          }
+        }
         const traceEngine = new Engine(options);
         await traceEngine.start();
         await traceEngine.runMultiple(urls, scriptsByCategory);
