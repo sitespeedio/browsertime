@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 22.3.0 - 2024-06-06
+### Added
+* Use `--enableVideoRun` to get one extra run with a video and visual metrics [#2139](https://github.com/sitespeedio/browsertime/pull/2139)
+
 ## 22.3.0 - 2024-06-04
 ### Added
 * Add the ability to gather power usage measurements on Android from USB power meters, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#2134](https://github.com/sitespeedio/browsertime/pull/2134).
