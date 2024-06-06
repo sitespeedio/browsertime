@@ -148,7 +148,7 @@ async function run(urls, options) {
             options.visualMetrics = false;
           } else {
             options.video = true;
-            options.visualMetrics = false;
+            options.visualMetrics = true;
           }
         }
         const traceEngine = new Engine(options);
