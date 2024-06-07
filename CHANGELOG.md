@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 22.3.1 - 2024-06-07
+### Fixed
+* Make sure the engine is stopped before the extra video/profile run [#2140](https://github.com/sitespeedio/browsertime/pull/2140).
+
 ## 22.3.0 - 2024-06-06
 ### Added
 * Use `--enableVideoRun` to get one extra run with a video and visual metrics [#2139](https://github.com/sitespeedio/browsertime/pull/2139)
