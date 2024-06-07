@@ -123,40 +123,6 @@ async function run(urls, options) {
         );
       }
 
-      if (options.enableProfileRun || options.enableVideoRun) {
-        log.info('Make one extra run to collect trace/video information');
-        options.iterations = 1;
-        if (options.enableProfileRun) {
-          if (options.browser === 'firefox') {
-            options.firefox.geckoProfiler = true;
-          } else if (options.browser === 'chrome') {
-            options.chrome.timeline = true;
-            options.cpu = true;
-            options.chrome.enableTraceScreenshots = true;
-            options.chrome.traceCategory = [
-              'disabled-by-default-v8.cpu_profiler'
-            ];
-          }
-        }
-        if (options.enableVideoRun) {
-          if (options.video === true) {
-            log.error(
-              'You can only configure video run if you do not collect any video'
-            );
-            // This is a hack to not get an error
-            options.video = false;
-            options.visualMetrics = false;
-          } else {
-            options.video = true;
-            options.visualMetrics = true;
-          }
-        }
-        const traceEngine = new Engine(options);
-        await traceEngine.start();
-        await traceEngine.runMultiple(urls, scriptsByCategory);
-        await traceEngine.stop();
-      }
-
       await Promise.all(saveOperations);
 
       const resultDirectory = relative(process.cwd(), storageManager.directory);
@@ -185,6 +151,41 @@ async function run(urls, options) {
         log.error('Error stopping Browsertime!', error);
         process.exitCode = 1;
       }
+    }
+
+    if (options.enableProfileRun || options.enableVideoRun) {
+      log.info('Make one extra run to collect trace/video information');
+      options.iterations = 1;
+      if (options.enableProfileRun) {
+        if (options.browser === 'firefox') {
+          options.firefox.geckoProfiler = true;
+        } else if (options.browser === 'chrome') {
+          options.chrome.timeline = true;
+          options.cpu = true;
+          options.chrome.enableTraceScreenshots = true;
+          options.chrome.traceCategory = [
+            'disabled-by-default-v8.cpu_profiler'
+          ];
+        }
+      }
+      if (options.enableVideoRun) {
+        if (options.video === true) {
+          log.error(
+            'You can only configure video run if you do not collect any video'
+          );
+          // This is a hack to not get an error
+          options.video = false;
+          options.visualMetrics = false;
+        } else {
+          options.video = true;
+          options.visualMetrics = true;
+        }
+      }
+      const traceEngine = new Engine(options);
+      await traceEngine.start();
+      await traceEngine.runMultiple(urls, scriptsByCategory);
+      await traceEngine.stop();
+      log.info('Extra run finished');
     }
   } catch (error) {
     log.error('Error running browsertime', error);
