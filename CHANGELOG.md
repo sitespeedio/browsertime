@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 22.4.0 - 2024-06-14
 ### Added
 * Updated the Docker container to include Chrome 126 and Firefox 127. Chromedriver has been updated to 126 [#2141](https://github.com/sitespeedio/browsertime/pull/2141).
 
