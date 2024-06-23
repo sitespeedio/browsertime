@@ -1,5 +1,25 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 22.5.0 - 2024-06-14
+### Added
+* Updated the Docker container to include Chrome 126 and Firefox 127. Chromedriver has been updated to 126 [#2141](https://github.com/sitespeedio/browsertime/pull/2141).
+
+## 22.4.1 - 2024-06-07
+### Fixed
+* Make sure the engine is stopped before the extra video/profile run [#2140](https://github.com/sitespeedio/browsertime/pull/2140).
+
+## 22.4.0 - 2024-06-06
+### Added
+* Use `--enableVideoRun` to get one extra run with a video and visual metrics [#2139](https://github.com/sitespeedio/browsertime/pull/2139)
+
+## 22.3.0 - 2024-06-04
+### Added
+* Add the ability to gather power usage measurements on Android from USB power meters, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#2134](https://github.com/sitespeedio/browsertime/pull/2134).
+* Add support to visualmetrics to identify key frames matching the given colors, thank you [aosmond](https://github.com/aosmond) for PR [#2119](https://github.com/sitespeedio/browsertime/pull/2119).
+
+### Fixed
+* Removed DOMContentFlushed for Firefox thank you [florinbilt](https://github.com/florinbilt) for PR [#2138](https://github.com/sitespeedio/browsertime/pull/2138).
+
 ## 22.2.0 - 2024-05-24
 ### Added
 * New command: Mouse single click on a element with a specific id `commands.mouse.singleClick.byId(id)` and `commands.mouse.singleClick.byIdAndWait(id)` [#2135](https://github.com/sitespeedio/browsertime/pull/2135).

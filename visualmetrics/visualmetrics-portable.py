@@ -1104,7 +1104,7 @@ def calculate_histograms(directory, histograms_file, force):
                     m = re.search(match, frame)
                     if m is not None:
                         frame_time = int(m.groupdict().get("ms"))
-                        histogram = calculate_image_histogram(frame)
+                        histogram, total, dropped = calculate_image_histogram(frame)
                         gc.collect()
                         if histogram is not None:
                             histograms.append(
@@ -1112,6 +1112,8 @@ def calculate_histograms(directory, histograms_file, force):
                                     "time": frame_time,
                                     "file": os.path.basename(frame),
                                     "histogram": histogram,
+                                    "total_pixels": total,
+                                    "dropped_pixels": dropped,
                                 }
                             )
                 if os.path.isfile(histograms_file):
@@ -1130,12 +1132,14 @@ def calculate_histograms(directory, histograms_file, force):
 
 def calculate_image_histogram(file):
     logging.debug("Calculating histogram for " + file)
+    dropped = 0
     try:
         from PIL import Image
 
         im = Image.open(file)
         width, height = im.size
-        colors = im.getcolors(width * height)
+        total = width * height
+        colors = im.getcolors(total)
         histogram = {
             "r": [0 for i in range(256)],
             "g": [0 for i in range(256)],
@@ -1151,13 +1155,16 @@ def calculate_image_histogram(file):
                     histogram["r"][pixel[0]] += count
                     histogram["g"][pixel[1]] += count
                     histogram["b"][pixel[2]] += count
+                else:
+                    dropped += 1
             except Exception:
                 pass
         colors = None
     except Exception:
+        total = 0
         histogram = None
         logging.exception("Error calculating histogram for " + file)
-    return histogram
+    return histogram, total, dropped
 
 
 ##########################################################################
@@ -1212,6 +1219,7 @@ def calculate_visual_metrics(
     dirs,
     progress_file,
     hero_elements_file,
+    key_colors,
 ):
     metrics = None
     histograms = load_histograms(histograms_file, start, end)
@@ -1225,6 +1233,7 @@ def calculate_visual_metrics(
                 f = open(progress_file, "w")
             json.dump(progress, f)
             f.close()
+        key_color_frames = calculate_key_color_frames(histograms, key_colors)
         if len(histograms) > 1:
             metrics = [
                 {"name": "First Visual Change", "value": histograms[1]["time"]},
@@ -1315,6 +1324,20 @@ def calculate_visual_metrics(
                 metrics.append({"name": "Perceptual Speed Index", "value": 0})
             if contentful:
                 metrics.append({"name": "Contentful Speed Index", "value": 0})
+        if key_color_frames:
+            keysum = ""
+            for key in key_color_frames:
+                if len(keysum):
+                    keysum += ", "
+                framesum = ""
+                for frame in key_color_frames[key]:
+                    if len(framesum):
+                        framesum += " "
+                    framesum += "{0:d}-{1:d}".format(
+                        frame["start_time"], frame["end_time"]
+                    )
+                keysum += "{0}=[{1}]".format(key, framesum)
+            metrics.append({"name": "Key Color Frames", "value": keysum})
         prog = ""
         for p in progress:
             if len(prog):
@@ -1344,6 +1367,79 @@ def load_histograms(histograms_file, start, end):
         else:
             histograms = original
     return histograms
+
+
+def is_key_color_frame(histogram, key_color):
+    # The fraction is measured against the entire image, not just the sampled
+    # pixels. This helps avoid matching frames with only a few pixels that
+    # happen to be in the acceptable range.
+    total_fraction = histogram["total_pixels"] * key_color["fraction"]
+    if total_fraction < histogram["total_pixels"] - histogram["dropped_pixels"]:
+        for channel in ["r", "g", "b"]:
+            # Find the acceptable range around the target channel value
+            max_channel = len(histogram["histogram"][channel])
+            low = min(max_channel - 1, max(0, key_color[channel + "_low"]))
+            high = min(max_channel, max(1, key_color[channel + "_high"] + 1))
+            target_total = 0
+            for i in histogram["histogram"][channel][low:high]:
+                target_total += i
+            if target_total < total_fraction:
+                return False
+    return True
+
+
+def calculate_key_color_frames(histograms, key_colors):
+    if not key_colors:
+        return {}
+
+    key_color_frames = {}
+    for key in key_colors:
+        key_color_frames[key] = []
+
+    current = None
+    current_key = None
+    total = 0
+    matched = 0
+    buckets = 256
+    channels = ["r", "g", "b"]
+    histograms = histograms.copy()
+
+    while len(histograms) > 0:
+        histogram = histograms.pop(0)
+        matching_key = None
+        for key in key_colors:
+            if is_key_color_frame(histogram, key_colors[key]):
+                matching_key = key
+                break
+
+        if matching_key is None:
+            continue
+
+        last_histogram = histogram
+        frame_count = 1
+        while len(histograms) > 0:
+            last_histogram = histograms[0]
+            if is_key_color_frame(last_histogram, key_colors[matching_key]):
+                frame_count += 1
+                histograms.pop(0)
+            else:
+                break
+
+        logging.debug(
+            "{0:d}ms to {1:d}ms - Matched key color frame {2}".format(
+                histogram["time"], last_histogram["time"], matching_key
+            )
+        )
+
+        key_color_frames[matching_key].append(
+            {
+                "frame_count": frame_count,
+                "start_time": histogram["time"],
+                "end_time": last_histogram["time"],
+            }
+        )
+
+    return key_color_frames
 
 
 def calculate_visual_progress(histograms):
@@ -1761,6 +1857,24 @@ def main():
         help="Remove orange-colored frames from the beginning of the video.",
     )
     parser.add_argument(
+        "--keycolor",
+        action="append",
+        nargs=8,
+        metavar=(
+            "key",
+            "red_low",
+            "red_high",
+            "green_low",
+            "green_high",
+            "blue_low",
+            "blue_high",
+            "fraction",
+        ),
+        help="Identify frames that match the given channel (0-255) low and "
+        "high. Fraction is the percentage of the pixels per channel that "
+        "must be in the given range (0-1).",
+    )
+    parser.add_argument(
         "-p",
         "--viewport",
         action="store_true",
@@ -1916,6 +2030,19 @@ def main():
                     options.full,
                 )
 
+            key_colors = {}
+            if options.keycolor:
+                for key_params in options.keycolor:
+                    key_colors[key_params[0]] = {
+                        "r_low": int(key_params[1]),
+                        "r_high": int(key_params[2]),
+                        "g_low": int(key_params[3]),
+                        "g_high": int(key_params[4]),
+                        "b_low": int(key_params[5]),
+                        "b_high": int(key_params[6]),
+                        "fraction": float(key_params[7]),
+                    }
+
             # Calculate the histograms and visual metrics
             calculate_histograms(directory, histogram_file, options.force)
             metrics = calculate_visual_metrics(
@@ -1927,6 +2054,7 @@ def main():
                 directory,
                 options.progress,
                 options.herodata,
+                key_colors,
             )
 
             if options.screenshot is not None:
