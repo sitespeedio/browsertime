@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 22.5.2 - 2024-06-24
+### Fixed
+* Updated Selenium dependencies [#2146](https://github.com/sitespeedio/browsertime/pull/2146).
+
 ## 22.5.1 - 2024-06-24
 ### Fixed
 * Fixed exporting to make IntelliSense/Code completion work again [#2145](https://github.com/sitespeedio/browsertime/pull/2145).
