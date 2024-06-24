@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 22.5.1 - 2024-06-24
+### Fixe
+* Fixed exporting to make InteliSense/Code completion work again [#2145](https://github.com/sitespeedio/browsertime/pull/2145).
+
 ## 22.5.0 - 2024-06-14
 ### Added
 * Updated the Docker container to include Chrome 126 and Firefox 127. Chromedriver has been updated to 126 [#2141](https://github.com/sitespeedio/browsertime/pull/2141).
