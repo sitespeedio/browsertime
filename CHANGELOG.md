@@ -1,8 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
 ## 22.5.1 - 2024-06-24
-### Fixe
-* Fixed exporting to make InteliSense/Code completion work again [#2145](https://github.com/sitespeedio/browsertime/pull/2145).
+### Fixed
+* Fixed exporting to make IntelliSense/Code completion work again [#2145](https://github.com/sitespeedio/browsertime/pull/2145).
 
 ## 22.5.0 - 2024-06-14
 ### Added
