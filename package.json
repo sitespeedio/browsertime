@@ -1,7 +1,7 @@
 {
   "name": "browsertime",
   "description": "Get performance metrics from your web page using Browsertime.",
-  "version": "22.5.1",
+  "version": "22.5.2",
   "bin": "./bin/browsertime.js",
   "type": "module",
   "types": "./types/scripting.d.ts",
@@ -13,7 +13,7 @@
     "@sitespeed.io/geckodriver": "0.34.0",
     "@sitespeed.io/throttle": "5.0.0",
     "@sitespeed.io/tracium": "0.3.3",
-    "btoa": "1.2.1", 
+    "btoa": "1.2.1",
     "chrome-har": "0.13.2",
     "chrome-remote-interface": "0.33.0",
     "dayjs": "1.11.10",
