@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 22.5.3 - 2024-06-25
+### Fixed
+* Another fix to make IntelliSense/Code completion work again [#2147](https://github.com/sitespeedio/browsertime/pull/2147).
+
 ## 22.5.2 - 2024-06-24
 ### Fixed
 * Updated Selenium dependencies [#2146](https://github.com/sitespeedio/browsertime/pull/2146).
