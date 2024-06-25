@@ -71,7 +71,12 @@
     "vendor",
     "types"
   ],
-  "exports": "./index.js",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "types": "./types/scripting.d.ts"
+    }
+  },
   "scripts": {
     "test": "ava",
     "start-server": "serve test/data/html/",
