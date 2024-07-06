@@ -1,6 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 22.5.3 - 2024-06-25
+## 22.4.4 - 2024-07-06
+### Fixed
+* Update to Chrome-HAR 0.13.3 [#2148](https://github.com/sitespeedio/browsertime/pull/2148).
+* Update Chrome remore interface [#2149](https://github.com/sitespeedio/browsertime/pull/2149).
+* Update execa, dayjs and get-port [#2153](https://github.com/sitespeedio/browsertime/pull/2153).
+* Update developer dependencies [#2154](https://github.com/sitespeedio/browsertime/pull/2154), [#2152](https://github.com/sitespeedio/browsertime/pull/2152), [#2151](https://github.com/sitespeedio/browsertime/pull/2151) and [#2150](https://github.com/sitespeedio/browsertime/pull/2150).
+
+## 22.4.3 - 2024-06-25
 ### Fixed
 * Another fix to make IntelliSense/Code completion work again [#2147](https://github.com/sitespeedio/browsertime/pull/2147).
 
