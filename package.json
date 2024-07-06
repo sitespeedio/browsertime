@@ -15,7 +15,7 @@
     "@sitespeed.io/tracium": "0.3.3",
     "btoa": "1.2.1",
     "chrome-har": "0.13.3",
-    "chrome-remote-interface": "0.33.0",
+    "chrome-remote-interface": "0.33.2",
     "dayjs": "1.11.10",
     "execa": "8.0.1",
     "fast-stats": "0.0.6",
