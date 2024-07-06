@@ -1,5 +1,4 @@
 import test from 'ava';
-import { resolve } from 'node:path';
 import {
   findAndParseScripts,
   allScriptCategories,
@@ -9,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const TEST_SCRIPTS_FOLDER = resolve(
+const TEST_SCRIPTS_FOLDER = path.resolve(
   __dirname,
   '..',
   'data',
