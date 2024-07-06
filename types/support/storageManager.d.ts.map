@@ -1,1 +1,1 @@
-{"version":3,"file":"storageManager.d.ts","sourceRoot":"","sources":["../../lib/support/storageManager.js"],"names":[],"mappings":"AAmDA;IACE;;;OAKC;IAJC,gBAEyD;IACzD,wBAA0C;IAG5C,iCAGC;IAED,kDAIC;IAED,iCAEC;IAED,kEASC;IAED,sEAQC;IAED,+DAcC;IAED,sEAmBC;IAED,wBAEC;CACF"}
+{"version":3,"file":"storageManager.d.ts","sourceRoot":"","sources":["../../lib/support/storageManager.js"],"names":[],"mappings":"AAmDA;IACE;;;OAKC;IAJC,gBAE6D;IAC7D,wBAA0C;IAG5C,iCAGC;IAED,kDAIC;IAED,iCAEC;IAED,kEASC;IAED,sEAQC;IAED,+DAcC;IAED,sEAmBC;IAED,wBAEC;CACF"}

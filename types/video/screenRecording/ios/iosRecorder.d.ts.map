@@ -1,1 +1,1 @@
-{"version":3,"file":"iosRecorder.d.ts","sourceRoot":"","sources":["../../../../lib/video/screenRecording/ios/iosRecorder.js"],"names":[],"mappings":"AAeA;IAQE;;OAMC;IAbD,wCAKC;IAJC,aAAsB;IACtB,UAAqC;IACrC,iBAAyC;IACzC,iBAAwC;IAW1C,uBAqBC;IAlBC,6DAQC;IAYH,0EAaC;CACF"}
+{"version":3,"file":"iosRecorder.d.ts","sourceRoot":"","sources":["../../../../lib/video/screenRecording/ios/iosRecorder.js"],"names":[],"mappings":"AAcA;IAQE;;OAMC;IAbD,wCAKC;IAJC,aAAsB;IACtB,UAAqC;IACrC,iBAA8C;IAC9C,iBAA6C;IAW/C,uBAqBC;IAlBC;;OAQC;IAYH;;QAaC;CACF"}

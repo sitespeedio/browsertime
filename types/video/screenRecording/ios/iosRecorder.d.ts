@@ -8,7 +8,11 @@ export class IOSRecorder {
     tmpVideo: string;
     tmpSound: string;
     start(): Promise<void>;
-    qvhProcessProcess: import("execa").ExecaChildProcess<string>;
-    stop(destination: any): Promise<import("execa").ExecaReturnValue<string>>;
+    qvhProcessProcess: import("execa").ResultPromise<{
+        shell: true;
+    }>;
+    stop(destination: any): Promise<import("execa").Result<{
+        shell: true;
+    }>>;
 }
 //# sourceMappingURL=iosRecorder.d.ts.map

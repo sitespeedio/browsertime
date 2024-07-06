@@ -41,7 +41,7 @@ export class Context {
      * Storage manager to save things to disk.
      * @type {import('../../support/storageManager.js').StorageManager}
      */
-    storageManager: import('../../support/storageManager.js').StorageManager;
+    storageManager: import("../../support/storageManager.js").StorageManager;
     /**
      * @type {Object}
      */
@@ -82,6 +82,6 @@ export type Logger = {
      */
     critical: (arg0: string) => void;
 };
-export type WebDriverClass = typeof import('selenium-webdriver');
-export type WebDriverInstance = import('selenium-webdriver').WebDriver;
+export type WebDriverClass = typeof import("selenium-webdriver");
+export type WebDriverInstance = import("selenium-webdriver").WebDriver;
 //# sourceMappingURL=context.d.ts.map
