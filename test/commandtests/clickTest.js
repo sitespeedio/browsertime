@@ -1,6 +1,5 @@
 import test from 'ava';
 const { before, after, serial } = test;
-import { resolve } from 'node:path';
 import { getEngine } from '../util/engine.js';
 import { startServer, stopServer } from '../util/httpserver.js';
 import { fileURLToPath } from 'node:url';
@@ -12,7 +11,7 @@ const timeout = 20_000;
 let engine;
 
 function getPath(file) {
-  return resolve(__dirname, '..', 'data', 'commandscripts', file);
+  return path.resolve(__dirname, '..', 'data', 'commandscripts', file);
 }
 
 before('Setup the HTTP server', () => {

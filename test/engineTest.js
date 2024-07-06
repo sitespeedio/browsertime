@@ -1,6 +1,5 @@
 import test from 'ava';
 const { before, after, serial, afterEach } = test;
-import { resolve } from 'node:path';
 const timeout = 20_000;
 import { startServer, stopServer } from './util/httpserver.js';
 import { getEngine } from './util/engine.js';
@@ -143,7 +142,7 @@ serial(`Load multiple URLs`, async t => {
 });
 
 function loadTaskFile(file) {
-  return require(resolve(__dirname, 'data', 'prepostscripts', file));
+  return require(path.resolve(__dirname, 'data', 'prepostscripts', file));
 }
 
 serial(`Use pre/post scripts`, async t => {

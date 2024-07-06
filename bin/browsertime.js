@@ -4,7 +4,7 @@ import get from 'lodash.get';
 import set from 'lodash.set';
 import intel from 'intel';
 import { existsSync, mkdirSync } from 'node:fs';
-import { resolve, relative } from 'node:path';
+import path from 'node:path';
 import { Engine } from '../lib/core/engine/index.js';
 import {
   findAndParseScripts,
@@ -25,7 +25,7 @@ async function parseUserScripts(scripts) {
   if (!Array.isArray(scripts)) scripts = [scripts];
   const results = {};
   for (const script of scripts) {
-    const code = await findAndParseScripts(resolve(script), 'custom');
+    const code = await findAndParseScripts(path.resolve(script), 'custom');
     merge(results, code);
   }
   return results;
@@ -125,7 +125,10 @@ async function run(urls, options) {
 
       await Promise.all(saveOperations);
 
-      const resultDirectory = relative(process.cwd(), storageManager.directory);
+      const resultDirectory = path.relative(
+        process.cwd(),
+        storageManager.directory
+      );
 
       // check for errors
       // If we have set the exit code in scripts, respect that

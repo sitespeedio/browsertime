@@ -1,12 +1,11 @@
 import test from 'ava';
-import { resolve } from 'node:path';
 import { filterAllowlisted } from '../../lib/support/userTiming.js';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const timingsFile = resolve(__dirname, '..', 'data', 'timings.json');
+const timingsFile = path.resolve(__dirname, '..', 'data', 'timings.json');
 
 test(`Filter white listed user timings`, async t => {
   const userTimings = JSON.parse(readFileSync(timingsFile, 'utf8')).timings
