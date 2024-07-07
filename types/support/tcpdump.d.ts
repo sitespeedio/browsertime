@@ -4,9 +4,7 @@ export class TCPDump {
     options: any;
     start(iteration: any): Promise<void>;
     tcpdumpProcess: import("execa").ResultPromise<{}>;
-    stop(): Promise<import("execa").Result<{
-        reject: false;
-    }>>;
+    stop(): Promise<void>;
     mv(url: any, iteration: any): Promise<void>;
 }
 //# sourceMappingURL=tcpdump.d.ts.map
