@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 22.5.5 - 2024-07-07
+### Fixed
+* Fix stopping --tcpdump [#2155](https://github.com/sitespeedio/browsertime/pull/2155).
+
 ## 22.5.4 - 2024-07-06
 ### Fixed
 * Update to Chrome-HAR 0.13.3 [#2148](https://github.com/sitespeedio/browsertime/pull/2148).
