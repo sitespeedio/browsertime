@@ -1,27 +1,27 @@
 {
   "name": "browsertime",
   "description": "Get performance metrics from your web page using Browsertime.",
-  "version": "22.5.0",
+  "version": "22.5.5",
   "bin": "./bin/browsertime.js",
   "type": "module",
   "types": "./types/scripting.d.ts",
   "dependencies": {
     "@cypress/xvfb": "1.2.4",
     "@devicefarmer/adbkit": "3.2.6",
-    "@sitespeed.io/chromedriver": "126.0.6478-55",
+    "@sitespeed.io/chromedriver": "126.0.6478-55 ",
     "@sitespeed.io/edgedriver": "125.0.2535-47",
     "@sitespeed.io/geckodriver": "0.34.0",
     "@sitespeed.io/throttle": "5.0.0",
     "@sitespeed.io/tracium": "0.3.3",
     "btoa": "1.2.1",
-    "chrome-har": "0.13.2",
-    "chrome-remote-interface": "0.33.0",
-    "dayjs": "1.11.10",
-    "execa": "8.0.1",
+    "chrome-har": "0.13.5",
+    "chrome-remote-interface": "0.33.2",
+    "dayjs": "1.11.11",
+    "execa": "9.3.0",
     "fast-stats": "0.0.6",
     "ff-test-bidi-har-export": "0.0.13",
     "find-up": "7.0.0",
-    "get-port": "7.0.0",
+    "get-port": "7.1.0",
     "hasbin": "1.2.3",
     "intel": "1.2.0",
     "lodash.get": "4.4.2",
@@ -30,7 +30,7 @@
     "lodash.merge": "4.6.2",
     "lodash.pick": "4.4.0",
     "lodash.set": "4.3.2",
-    "selenium-webdriver": "4.21.0",
+    "selenium-webdriver": "4.22.0",
     "usb-power-profiling": "^1.2.0",
     "yargs": "17.7.2"
   },
@@ -38,18 +38,18 @@
     "jimp": "0.22.12"
   },
   "devDependencies": {
-    "@types/selenium-webdriver": "4.1.22",
-    "ava": "6.1.2",
-    "clean-jsdoc-theme": "4.2.17",
-    "eslint": "8.57.0",
+    "@types/selenium-webdriver": "4.1.24",
+    "ava": "6.1.3",
+    "clean-jsdoc-theme": "4.3.0",
+    "eslint": "9.6.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-prettier": "5.1.3",
-    "eslint-plugin-unicorn": "51.0.1",
-    "jsdoc": "4.0.2",
-    "prettier": "3.2.5",
-    "serve": "14.2.1",
+    "eslint-plugin-unicorn": "54.0.0",
+    "jsdoc": "4.0.3",
+    "prettier": "3.3.2",
+    "serve": "14.2.3",
     "serve-handler": "6.1.5",
-    "typescript": "5.4.2"
+    "typescript": "5.5.3"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -71,7 +71,12 @@
     "vendor",
     "types"
   ],
-  "exports": "./index.js",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "types": "./types/scripting.d.ts"
+    }
+  },
   "scripts": {
     "test": "ava",
     "start-server": "serve test/data/html/",

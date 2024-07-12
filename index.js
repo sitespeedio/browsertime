@@ -14,3 +14,6 @@ export const browserScripts = {
 
 export { Engine as BrowsertimeEngine } from './lib/core/engine/index.js';
 export { configure as configureLogging } from './lib/support/logging.js';
+
+export { Commands as BrowsertimeCommands } from './lib/core/engine/commands.js';
+export { Context as BrowsertimeContext } from './lib/core/engine/context.js';

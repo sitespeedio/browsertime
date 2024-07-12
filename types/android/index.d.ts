@@ -32,10 +32,7 @@ export class Android {
     }>;
     pullNetLog(destination: any): Promise<any>;
     addDevtoolsFw(): Promise<any>;
-    removeDevtoolsFw(): Promise<({
-        all?: string;
-        isCanceled: boolean;
-    } & import("execa").ExecaReturnBase<string>)[]>;
+    removeDevtoolsFw(): Promise<(import("execa/types/return/result.js").CommonResult<false, {}> & import("execa/types/return/result.js").OmitErrorIfReject<unknown>)[]>;
     startVideo(): Promise<any>;
     ping(address: any): Promise<boolean>;
     clickPowerButton(): Promise<any>;
