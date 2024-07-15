@@ -1,5 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 22.6.0 - 2024-07-15
+### Added
+* Updated to Firefox 128 and Edge 126 in the Docker container [#2158](https://github.com/sitespeedio/browsertime/pull/2158).
+* Add request header using Bidi for Firefox (needs Firefox 128 or later) [#2108](https://github.com/sitespeedio/browsertime/pull/2108).
+
+### Fixed
+* Updated to Chrome HAR 0.13.5 [#2157](https://github.com/sitespeedio/browsertime/pull/2157)
+
 ## 22.5.5 - 2024-07-07
 ### Fixed
 * Fix stopping --tcpdump [#2155](https://github.com/sitespeedio/browsertime/pull/2155).
