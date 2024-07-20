@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+### Fixed
+* Updated to Selenium 4.23.0 [#2161](https://github.com/sitespeedio/browsertime/pull/2161).
+* Add extra check if the HAR file page misses an URL [#2160](https://github.com/sitespeedio/browsertime/pull/2160).
+
 ## 22.6.0 - 2024-07-15
 ### Added
 * Updated to Firefox 128 and Edge 126 in the Docker container [#2158](https://github.com/sitespeedio/browsertime/pull/2158).
