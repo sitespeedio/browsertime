@@ -1,6 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 22.7.0 - 2024-07-25
+### Added
+* Updated to Chrome and Chromedriover 127 [#2164](https://github.com/sitespeedio/browsertime/pull/2164).
+
 ### Fixed
 * Updated to Selenium 4.23.0 [#2161](https://github.com/sitespeedio/browsertime/pull/2161).
 * Add extra check if the HAR file page misses an URL [#2160](https://github.com/sitespeedio/browsertime/pull/2160).
