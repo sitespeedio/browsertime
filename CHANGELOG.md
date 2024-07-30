@@ -1,5 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 22.8.0 - 2024-07-30
+### Added
+* Edgedriver 126 [#2166](https://github.com/sitespeedio/browsertime/pull/2166)
+
+### Fixed
+* Disable search engine choice screen on startup for Chrome 127+ [#2168](https://github.com/sitespeedio/browsertime/pull/2168)
+* Update dev dependencies [#2167](https://github.com/sitespeedio/browsertime/pull/2167)
+
 ## 22.7.0 - 2024-07-25
 ### Added
 * Updated to Chrome and Chromedriover 127 [#2164](https://github.com/sitespeedio/browsertime/pull/2164).
