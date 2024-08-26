@@ -1,5 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 22.9.0 - 2024-08-26
+### Added
+* Geckodriver 0.35.0 [#2170](https://github.com/sitespeedio/browsertime/pull/2170)
+### Fixed
+* Stopping gnirehtet throwed errors [#2172](https://github.com/sitespeedio/browsertime/pull/2171).
+* Updated to Throttle 5.0.1 that have nicer ifb0 handling [#2172](https://github.com/sitespeedio/browsertime/pull/2172)
+
 ## 22.8.0 - 2024-07-30
 ### Added
 * Edgedriver 126 [#2166](https://github.com/sitespeedio/browsertime/pull/2166)
