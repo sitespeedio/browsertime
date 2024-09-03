@@ -1,5 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 22.10.0 - 2024-09-03
+### Added
+* Chromedriver 128 [#2175](https://github.com/sitespeedio/browsertime/pull/2175)
+* Chrome 128, Firefox 129, Edge 127 [#2173](https://github.com/sitespeedio/browsertime/pull/2173)
+### Fixed
+* Updated dependencies: usb-profiling, fast-stats, webdriver, execa, dayjs [#2174](https://github.com/sitespeedio/browsertime/pull/2174).
+
 ## 22.9.0 - 2024-08-26
 ### Added
 * Geckodriver 0.35.0 [#2170](https://github.com/sitespeedio/browsertime/pull/2170)
