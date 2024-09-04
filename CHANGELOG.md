@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+
+## 22.10.1 - 2024-09-04
+### Fixed
+* Upgraded Bidi HAR to 0.0.14 that filters out data:text URLs thar is picked up in Firefox 130 [#2177](https://github.com/sitespeedio/browsertime/pull/2177).
+
 ## 22.10.0 - 2024-09-03
 ### Added
 * Chromedriver 128 [#2175](https://github.com/sitespeedio/browsertime/pull/2175)
