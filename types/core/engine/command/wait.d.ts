@@ -33,7 +33,7 @@ export class Wait {
      * @returns {Promise<void>} A promise that resolves when the element is found or the time times out.
      * @throws {Error} Throws an error if the element is not found within the specified time.
      */
-    byIdAndVisible(id: string, maxTime: number): Promise<void>;
+    byIdAndVisible(id: string, maxTime?: number): Promise<void>;
     /**
      * Waits for an element located by XPath to appear within a maximum time.
      *
