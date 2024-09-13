@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 22.10.2 - 2024-09-13
+### Fixed
+* Fix for wait.byIdAndVisible command [#2179](https://github.com/sitespeedio/browsertime/pull/2179).
 
 ## 22.10.1 - 2024-09-04
 ### Fixed
