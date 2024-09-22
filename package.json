@@ -19,7 +19,7 @@
     "dayjs": "1.11.13",
     "execa": "9.3.1",
     "fast-stats": "0.0.7",
-    "ff-test-bidi-har-export": "0.0.14",
+    "ff-test-bidi-har-export": "0.0.15",
     "find-up": "7.0.0",
     "get-port": "7.1.0",
     "hasbin": "1.2.3",
@@ -30,7 +30,7 @@
     "lodash.merge": "4.6.2",
     "lodash.pick": "4.4.0",
     "lodash.set": "4.3.2",
-    "selenium-webdriver": "4.24.0",
+    "selenium-webdriver": "4.25.0",
     "usb-power-profiling": "1.4.0",
     "yargs": "17.7.2"
   },
