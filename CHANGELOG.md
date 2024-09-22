@@ -1,5 +1,15 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 23.0.0 - UNRELEASED
+
+### Breaking
+* Disable camel case configuration that comes automatically with yargs [#2182](https://github.com/sitespeedio/browsertime/pull/2182). This is a breaking change ONLY if you didn't follow our doecumentation/help and used internal YARGS configuration names for our CLI configuration.
+
+### Fixed
+* Updated to Selenium 4.25.0 [#2185](https://github.com/sitespeedio/browsertime/pull/2185).
+* Use HAR export 0.0.15 for upcoming changes in Firefox [#2184](https://github.com/sitespeedio/browsertime/pull/2184).
+* Fixes the internal configuration object for android. The old solution created an array with objects instead of just keys on the object.[#2183](https://github.com/sitespeedio/browsertime/pull/2183).
+
 ## 22.10.2 - 2024-09-13
 ### Fixed
 * Fix for wait.byIdAndVisible command [#2179](https://github.com/sitespeedio/browsertime/pull/2179).
