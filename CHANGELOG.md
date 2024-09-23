@@ -1,9 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 23.0.0 - UNRELEASED
+## 23.0.0 - 2024-09-23
 
 ### Breaking
 * Disable camel case configuration that comes automatically with yargs [#2182](https://github.com/sitespeedio/browsertime/pull/2182). This is a breaking change ONLY if you didn't follow our doecumentation/help and used internal YARGS configuration names for our CLI configuration.
+
+### Added
+* Updated Docker container with Chrome 129, Firefox 130. New Chromedriver [#2181](https://github.com/sitespeedio/browsertime/pull/2181).
 
 ### Fixed
 * Updated to Selenium 4.25.0 [#2185](https://github.com/sitespeedio/browsertime/pull/2185).
