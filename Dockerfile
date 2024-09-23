@@ -9,7 +9,7 @@ ENV BROWSERTIME_DOCKER true
 COPY docker/webpagereplay/$TARGETPLATFORM/wpr /usr/local/bin/
 COPY docker/webpagereplay/wpr_cert.pem /webpagereplay/certs/
 COPY docker/webpagereplay/wpr_key.pem /webpagereplay/certs/
-COPY docker/webpagereplay/deterministic.js /webpagereplay/scripts/determinsistic.js
+COPY docker/webpagereplay/deterministic.js /webpagereplay/scripts/deterministic.js
 COPY docker/webpagereplay/LICENSE /webpagereplay/
 
 RUN sudo apt-get update && DEBIAN_FRONTEND=noninteractive sudo apt-get install libnss3-tools \
