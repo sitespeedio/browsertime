@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 23.1.0 - UNRELEASED 
+### Added
+* Log if you use a profile template for Firefox [#2186](https://github.com/sitespeedio/browsertime/pull/2186).
+
 ## 23.0.0 - 2024-09-23
 
 ### Breaking
