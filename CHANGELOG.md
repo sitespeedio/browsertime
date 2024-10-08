@@ -1,8 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 23.1.0 - UNRELEASED 
+## 23.1.0 - 2024-10-08
 ### Added
 * Log if you use a profile template for Firefox [#2186](https://github.com/sitespeedio/browsertime/pull/2186).
+* Update to Firefox 131 and Edge 129 in the Docker container [#2188](https://github.com/sitespeedio/browsertime/pull/2188).
+
+### Fixed
+* Updated to Chrome-HAR [#2187](https://github.com/sitespeedio/browsertime/pull/2187).
 
 ## 23.0.0 - 2024-09-23
 
