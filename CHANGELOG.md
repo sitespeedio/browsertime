@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 23.1.2 - 2024-10-11
+### Fixed
+* Updated Chrome HAR to 1.0.1 [#2191](https://github.com/sitespeedio/browsertime/pull/2191).
+
 ## 23.1.1 - 2024-10-08
 ### Fixed
 * Updated to har export 0.0.16 for Firefox that fixes the HAR timing problem in [#2189](https://github.com/sitespeedio/browsertime/issues/2189) [#2190](https://github.com/sitespeedio/browsertime/pull/2190).
