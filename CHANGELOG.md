@@ -1,5 +1,14 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 23.2.0 - 2024-10-20
+### Added
+* Updated to Chrome and Chromedriver 130 [#2192](https://github.com/sitespeedio/browsertime/pull/2192)
+* The Chrome in the ARM container is bumped from 107 to 130 [#2194](https://github.com/sitespeedio/browsertime/pull/2194).
+ 
+### Fixed
+* New Geckodriver install that fixes running on ARM in the Docker container [#2193](https://github.com/sitespeedio/browsertime/pull/2193).
+
+
 ## 23.1.2 - 2024-10-11
 ### Fixed
 * Updated Chrome HAR to 1.0.1 [#2191](https://github.com/sitespeedio/browsertime/pull/2191).
