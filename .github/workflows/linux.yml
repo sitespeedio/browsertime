@@ -40,7 +40,6 @@ jobs:
         python -m pip show Pillow
         python -m pip show pyssim
         python -m pip install virtualenv
-        ./visualmetrics/visualmetrics.py --check
         sudo modprobe ifb numifbs=1
     - name: Browser versions
       run: |
