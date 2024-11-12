@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 23.3.0 - UNRELEASED
+### Added
+* Updated to Chrome and Chromedriver 131 [#2209](https://github.com/sitespeedio/browsertime/pull/2203)
+
 ## 23.2.0 - 2024-10-20
 ### Added
 * Updated to Chrome and Chromedriver 130 [#2192](https://github.com/sitespeedio/browsertime/pull/2192)
@@ -2821,7 +2825,7 @@ We have worked a lot to make Browsertime 3.0 the best version so far. Read the [
 * We have removed the use of Bluebird Promises and now uses async/await and native Promises.
 * In some cases we leaked Bluebird promises, this is changed to native promises.
 * Running the engine took a promise that eventually became the scripts. Now you need to run with the scripts directly (no promises) to simplify the flow.
-
+3
 ## Added
 
 * We updated the browsers in the Docker container to Chrome 66 and latest Firefox 61 beta.
