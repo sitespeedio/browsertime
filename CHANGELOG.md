@@ -1,8 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 23.3.0 - UNRELEASED
+## 23.3.0 - 2024-11-12
 ### Added
 * Updated to Chrome and Chromedriver 131 [#2209](https://github.com/sitespeedio/browsertime/pull/2203)
+### Fixed
+* Updated to ff-test-bidi-har-export to 0.0.17[#2204](https://github.com/sitespeedio/browsertime/pull/2204)
 
 ## 23.2.0 - 2024-10-20
 ### Added
