@@ -1,8 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 23.3.0 - 2024-11-13
+## 23.3.2 - 2024-11-21
 ### Fixed
-* Disable security warning in Firefxo 132 [#2208](https://github.com/sitespeedio/browsertime/pull/2208) that fixes [#2207](https://github.com/sitespeedio/browsertime/issues/2207).
+* Disable some calls back to home from Firefox [#2212](https://github.com/sitespeedio/browsertime/pull/2212).
+
+## 23.3.1 - 2024-11-13
+### Fixed
+* Disable security warning in Firefox 132 [#2208](https://github.com/sitespeedio/browsertime/pull/2208) that fixes [#2207](https://github.com/sitespeedio/browsertime/issues/2207).
 
 ## 23.3.0 - 2024-11-12
 ### Added
