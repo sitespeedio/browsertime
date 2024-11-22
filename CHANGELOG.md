@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 23.4.0 - UNRELEASED
+## 23.4.0 -  2024-11-22
 
 ### Added
 * Collect more information about the largest contentful paint [#2206](https://github.com/sitespeedio/browsertime/pull/2206)
