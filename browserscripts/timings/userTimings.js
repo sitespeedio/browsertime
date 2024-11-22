@@ -8,10 +8,14 @@
     );
 
     for (const mark of myMarks) {
-      marks.push({
-        name: mark.name,
-        startTime: mark.startTime
-      });
+      if (mark.detail && mark.detail.devtools) {
+        continue;
+      } else {
+        marks.push({
+          name: mark.name,
+          startTime: mark.startTime
+        });
+      }
     }
 
     const myMeasures = Array.prototype.slice.call(
@@ -19,11 +23,15 @@
     );
 
     for (const measure of myMeasures) {
-      measures.push({
-        name: measure.name,
-        duration: measure.duration,
-        startTime: measure.startTime
-      });
+      if (measure.detail && measure.detail.devtools) {
+        continue;
+      } else {
+        measures.push({
+          name: measure.name,
+          duration: measure.duration,
+          startTime: measure.startTime
+        });
+      }
     }
   }
 
