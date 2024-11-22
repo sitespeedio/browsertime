@@ -162,6 +162,7 @@ async function run(urls, options) {
       if (options.enableProfileRun) {
         if (options.browser === 'firefox') {
           options.firefox.geckoProfiler = true;
+          options.firefox.collectMozLog = true;
         } else if (options.browser === 'chrome') {
           options.chrome.timeline = true;
           options.cpu = true;
