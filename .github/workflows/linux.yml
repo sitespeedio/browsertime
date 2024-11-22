@@ -98,3 +98,7 @@ jobs:
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/scripting/common.js --cjs
     - name: Run test with scripting.js
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/scripting/module.js
+    - name: Test extra profile run and visual metrics Chrome
+      run: ./bin/browsertime.js -b chrome http://127.0.0.1:3000/simple/ -n 1  --video --visualMetrics --visualElements --viewPort 1000x600 --xvfb  --enableProfileRun
+    - name: Test extra profile run and visual metrics Firefox
+      run: ./bin/browsertime.js -b firefox http://127.0.0.1:3000/simple/ -n 1  --video --visualMetrics --visualElements --viewPort 1000x600 --xvfb  --enableProfileRun    
