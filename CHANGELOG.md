@@ -1,5 +1,16 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 23.4.0 - UNRELEASED
+
+### Added
+* Collect more information about the largest contentful paint [#2206](https://github.com/sitespeedio/browsertime/pull/2206)
+* Add extra timings and new custom timeline to the Chrome timeline [#2217](https://github.com/sitespeedio/browsertime/pull/2217). Inspired by [
+Andy Davies](https://github.com/andydavies) cool [https://github.com/andydavies/perf-timeline-to-devtools-profile](https://github.com/andydavies/perf-timeline-to-devtools-profile).
+
+### Fixed
+* More configuration tuning for Firefox [#2216](https://github.com/sitespeedio/browsertime/pull/2216).
+
+
 ## 23.3.3 - 2024-11-22
 ### Fixed
 * Disable search suggestion requests for Firefox [#2215](https://github.com/sitespeedio/browsertime/pull/2215)
