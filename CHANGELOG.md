@@ -1,10 +1,24 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 23.3.3 - 2024-11-22
+### Fixed
+* Disable search suggestion requests for Firefox [#2215](https://github.com/sitespeedio/browsertime/pull/2215)
+* Fix for including HTTP requests in the Firefox profile [#2214](https://github.com/sitespeedio/browsertime/pull/2214).
+* Fix when running --enabkleProfileRun and get visual metrics. It used to generate an error log, this fixes that [#2213](https://github.com/sitespeedio/browsertime/pull/2213).
+
+## 23.3.2 - 2024-11-21
+### Fixed
+* Disable some calls back to home from Firefox [#2212](https://github.com/sitespeedio/browsertime/pull/2212).
+
+## 23.3.1 - 2024-11-13
+### Fixed
+* Disable security warning in Firefox 132 [#2208](https://github.com/sitespeedio/browsertime/pull/2208) that fixes [#2207](https://github.com/sitespeedio/browsertime/issues/2207).
+
 ## 23.3.0 - 2024-11-12
 ### Added
 * Updated to Chrome and Chromedriver 131 [#2209](https://github.com/sitespeedio/browsertime/pull/2203)
 ### Fixed
-* Updated to ff-test-bidi-har-export to 0.0.17[#2204](https://github.com/sitespeedio/browsertime/pull/2204)
+* Updated to ff-test-bidi-har-export to 0.0.17 [#2204](https://github.com/sitespeedio/browsertime/pull/2204)
 
 ## 23.2.0 - 2024-10-20
 ### Added
