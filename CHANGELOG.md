@@ -1,5 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 23.3.3 - 2024-11-22
+### Fixed
+* Disable search suggestion requests for Firefox [#2215](https://github.com/sitespeedio/browsertime/pull/2215)
+* Fix for including HTTP requests in the Firefox profile [#2214](https://github.com/sitespeedio/browsertime/pull/2214).
+* Fix when running --enabkleProfileRun and get visual metrics. It used to generate an error log, this fixes that [#2213](https://github.com/sitespeedio/browsertime/pull/2213).
+
 ## 23.3.2 - 2024-11-21
 ### Fixed
 * Disable some calls back to home from Firefox [#2212](https://github.com/sitespeedio/browsertime/pull/2212).
