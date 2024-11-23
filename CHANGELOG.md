@@ -2,7 +2,7 @@
 
 ## 23.4.1 -  2024-11-23
 ### Fixed
-* Cleanuo of the extra timings that is added to the timeline for Chrome [#2218](https://github.com/sitespeedio/browsertime/pull/2218)
+* Cleanup of the extra timings that is added to the timeline for Chrome [#2218](https://github.com/sitespeedio/browsertime/pull/2218)
 
 ## 23.4.0 -  2024-11-22
 
