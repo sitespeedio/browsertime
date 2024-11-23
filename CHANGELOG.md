@@ -19,7 +19,7 @@ Andy Davies](https://github.com/andydavies) cool [https://github.com/andydavies/
 ### Fixed
 * Disable search suggestion requests for Firefox [#2215](https://github.com/sitespeedio/browsertime/pull/2215)
 * Fix for including HTTP requests in the Firefox profile [#2214](https://github.com/sitespeedio/browsertime/pull/2214).
-* Fix when running --enabkleProfileRun and get visual metrics. It used to generate an error log, this fixes that [#2213](https://github.com/sitespeedio/browsertime/pull/2213).
+* Fix when running --enableProfileRun and get visual metrics. It used to generate an error log, this fixes that [#2213](https://github.com/sitespeedio/browsertime/pull/2213).
 
 ## 23.3.2 - 2024-11-21
 ### Fixed
