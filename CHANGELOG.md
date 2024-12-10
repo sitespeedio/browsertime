@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 23.4.2 -  2024-12-10
+### Fixed
+* Improve how we compute the power consumption numbers from the Firefox Profiler output PR by [Nazım Can Altınova](https://github.com/canova) [#2220](https://github.com/sitespeedio/browsertime/pull/2220)
+
 ## 23.4.1 -  2024-11-23
 ### Fixed
 * Cleanup of the extra timings that is added to the timeline for Chrome [#2218](https://github.com/sitespeedio/browsertime/pull/2218)
