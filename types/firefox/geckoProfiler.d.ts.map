@@ -1,1 +1,1 @@
-{"version":3,"file":"geckoProfiler.d.ts","sourceRoot":"","sources":["../../lib/firefox/geckoProfiler.js"],"names":[],"mappings":"AAmDA;IACE,4DAKC;IAJC,YAAoB;IACpB,oBAAoC;IACpC,mBAAoC;IACpC,aAAsB;IAGxB,sBA2FC;IAED,uDAuGC;IAED,oBAAgB;CACjB"}
+{"version":3,"file":"geckoProfiler.d.ts","sourceRoot":"","sources":["../../lib/firefox/geckoProfiler.js"],"names":[],"mappings":"AA8FA;IACE,4DAKC;IAJC,YAAoB;IACpB,oBAAoC;IACpC,mBAAoC;IACpC,aAAsB;IAGxB,sBA2FC;IAED,uDAkGC;IAED,oBAAgB;CACjB"}
