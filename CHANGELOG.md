@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 23.4.3 -  2024-12-11
+### Fixed
+* Update to USB power profiling 1.5.0 [#2221](https://github.com/sitespeedio/browsertime/pull/2221).
+
 ## 23.4.2 -  2024-12-10
 ### Fixed
 * Improve how we compute the power consumption numbers from the Firefox Profiler output PR by [Nazım Can Altınova](https://github.com/canova) [#2220](https://github.com/sitespeedio/browsertime/pull/2220)
