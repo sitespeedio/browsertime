@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 23.4.4 -  2024-12-18
+### Fixed
+* A more robust gnirehtet check when you run your Android test [#2223](https://github.com/sitespeedio/browsertime/pull/2223).
+
 ## 23.4.3 -  2024-12-11
 ### Fixed
 * Update to USB power profiling 1.5.0 [#2221](https://github.com/sitespeedio/browsertime/pull/2221).
