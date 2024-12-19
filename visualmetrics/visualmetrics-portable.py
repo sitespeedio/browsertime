@@ -622,7 +622,7 @@ def find_image_viewport(file, is_mobile):
             # On mobile we need to ignore the top ~10 pixels because
             # there is a visible progress bar there on some browsers.
             viewport["y"] += 10
-            viewport["height"] -= 10
+            viewport["height"] -= 14
 
     except Exception:
         viewport = None
