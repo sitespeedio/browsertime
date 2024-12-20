@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 23.4.4 -  2024-12-20
+## 23.4.5 -  2024-12-20
 ### Fixed
 * Change bottom margin from 10 to 14 pixel when recoring a video on mobile, se bug [#2224](https://github.com/sitespeedio/browsertime/issues/2224) and PR [#2225](https://github.com/sitespeedio/browsertime/pull/2225).
 
