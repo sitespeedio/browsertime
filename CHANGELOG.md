@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 23.4.6 -  2024-12-23
+## 23.5.0 -  2024-12-23
 ### Added
 * Added `--userTimingBlockList` [#2227](https://github.com/sitespeedio/browsertime/pull/2227).
 
