@@ -1,5 +1,18 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 23.4.6 -  2024-12-23
+### Added
+* Added `--userTimingBlockList` [#2227](https://github.com/sitespeedio/browsertime/pull/2227).
+
+### Fixed
+* Updated to webdriver 4.28 [#2226](https://github.com/sitespeedio/browsertime/pull/2226).
+* Updated dev dependencies [#2228](https://github.com/sitespeedio/browsertime/pull/2228).
+* Fix so the check for gnirehtet always use --android.gnirehtet to fix problens setting it in sitespeed.io [#2229](https://github.com/sitespeedio/browsertime/pull/2229).
+* Update to execa 9.5.2 [#2231](https://github.com/sitespeedio/browsertime/pull/2231).
+* Update to adbkit 3.3.8 [#2232](https://github.com/sitespeedio/browsertime/pull/2232).
+* Fix so you cannot use gnirehtet with webpagereplay [#2230](https://github.com/sitespeedio/browsertime/pull/2230).
+
+
 ## 23.4.5 -  2024-12-20
 ### Fixed
 * Change bottom margin from 10 to 14 pixel when recoring a video on mobile, se bug [#2224](https://github.com/sitespeedio/browsertime/issues/2224) and PR [#2225](https://github.com/sitespeedio/browsertime/pull/2225).
