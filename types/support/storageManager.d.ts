@@ -1,6 +1,5 @@
 export class StorageManager {
     constructor(url: any, { resultDir, prettyPrint }?: {
-        resultDir: any;
         prettyPrint?: boolean;
     });
     baseDir: string;
