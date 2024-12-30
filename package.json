@@ -25,7 +25,6 @@
     "lodash.groupby": "4.6.0",
     "lodash.isempty": "4.4.0",
     "lodash.merge": "4.6.2",
-    "lodash.pick": "4.4.0",
     "lodash.set": "4.3.2",
     "selenium-webdriver": "4.27.0",
     "usb-power-profiling": "1.5.0",
