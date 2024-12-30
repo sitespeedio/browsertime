@@ -22,7 +22,6 @@
     "get-port": "7.1.0",
     "intel": "1.2.0",
     "lodash.get": "4.4.2",
-    "lodash.groupby": "4.6.0",
     "lodash.isempty": "4.4.0",
     "lodash.merge": "4.6.2",
     "lodash.set": "4.3.2",
