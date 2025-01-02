@@ -1,5 +1,18 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 23.6.0 -  UNRELEASED
+### Fixed
+* Replace dependencies with local implementation:
+  * Replace btoa [#2233](https://github.com/sitespeedio/browsertime/pull/2233).
+  * Replace hasbin [#2234](https://github.com/sitespeedio/browsertime/pull/2234).
+  * Replace DayJS [#2235](https://github.com/sitespeedio/browsertime/pull/2235).
+  * Replace lodash.pick [#2237](https://github.com/sitespeedio/browsertime/pull/2237).
+  * Replace lodash.groupBy [#2238](https://github.com/sitespeedio/browsertime/pull/2238).
+  * Replace find-up [#2240](https://github.com/sitespeedio/browsertime/pull/2240)
+* Fix Docker file ENV to follow the new standard [#2239](https://github.com/sitespeedio/browsertime/pull/2239).
+* Edgedriver 131 [#2236](https://github.com/sitespeedio/browsertime/pull/2236).
+
+
 ## 23.5.0 -  2024-12-23
 ### Added
 * Added `--userTimingBlockList` [#2227](https://github.com/sitespeedio/browsertime/pull/2227).
