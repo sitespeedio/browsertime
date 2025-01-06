@@ -10,6 +10,9 @@
   * Replace lodash.groupBy [#2238](https://github.com/sitespeedio/browsertime/pull/2238).
   * Replace find-up [#2240](https://github.com/sitespeedio/browsertime/pull/2240).
   * Replace lodash.isEmpty [#2241](https://github.com/sitespeedio/browsertime/pull/2241).
+  * Replace get-port [#2242](https://github.com/sitespeedio/browsertime/pull/2242).
+  * Replace jimp with jimp custom [#2243](https://github.com/sitespeedio/browsertime/pull/2243).
+  * Replace @cypress/xvfb [#2245](https://github.com/sitespeedio/browsertime/pull/2245).
 * Fix Docker file ENV to follow the new standard [#2239](https://github.com/sitespeedio/browsertime/pull/2239).
 * Edgedriver 131 [#2236](https://github.com/sitespeedio/browsertime/pull/2236).
 
