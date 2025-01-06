@@ -6,7 +6,6 @@
   "type": "module",
   "types": "./types/scripting.d.ts",
   "dependencies": {
-    "@cypress/xvfb": "1.2.4",
     "@devicefarmer/adbkit": "3.3.8",
     "@sitespeed.io/chromedriver": "131.0.6778-69",
     "@sitespeed.io/edgedriver": "131.0.2903-112",
