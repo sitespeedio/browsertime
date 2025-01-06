@@ -2,7 +2,7 @@
 import merge from 'lodash.merge';
 import get from 'lodash.get';
 import set from 'lodash.set';
-import intel from 'intel';
+import { getLogger } from '@sitespeed.io/log';
 import { existsSync, mkdirSync } from 'node:fs';
 import path from 'node:path';
 import { Engine } from '../lib/core/engine/index.js';
@@ -17,7 +17,7 @@ import { StorageManager } from '../lib/support/storageManager.js';
 import { loadScript } from '../lib/support/engineUtils.js';
 import { isAndroidConfigured } from '../lib/android/index.js';
 
-const log = intel.getLogger('browsertime');
+const log = getLogger('browsertime');
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
 const delay = ms => new Promise(response => setTimeout(response, ms));
 
@@ -193,6 +193,7 @@ async function run(urls, options) {
     }
   } catch (error) {
     log.error('Error running browsertime', error);
+    console.log(error);
     process.exitCode = 1;
   } finally {
     process.exit();
