@@ -27,7 +27,11 @@
     "yargs": "17.7.2"
   },
   "optionalDependencies": {
-    "jimp": "0.22.12"
+    "@jimp/custom": "0.22.12",
+    "@jimp/png": "0.22.12",
+    "@jimp/jpeg": "0.22.12",
+    "@jimp/plugin-resize": "0.22.12",
+    "@jimp/plugin-scale": "0.22.12"
   },
   "devDependencies": {
     "@types/selenium-webdriver": "4.1.25",
