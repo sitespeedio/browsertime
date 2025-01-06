@@ -13,6 +13,7 @@
   * Replace get-port [#2242](https://github.com/sitespeedio/browsertime/pull/2242).
   * Replace jimp with jimp custom [#2243](https://github.com/sitespeedio/browsertime/pull/2243).
   * Replace @cypress/xvfb [#2245](https://github.com/sitespeedio/browsertime/pull/2245).
+  * Replace intel (log) with sitespeed.io/log [#2246](https://github.com/sitespeedio/browsertime/pull/2246).
 * Fix Docker file ENV to follow the new standard [#2239](https://github.com/sitespeedio/browsertime/pull/2239).
 * Edgedriver 131 [#2236](https://github.com/sitespeedio/browsertime/pull/2236).
 
