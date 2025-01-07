@@ -7,4 +7,5 @@ export function readFile(fileName: any): Promise<Buffer>;
 export function removeDirAndFiles(dirName: any): Promise<void>;
 export function removeByType(dir: any, type: any): Promise<void>;
 export function findFiles(dir: any, filter: any): Promise<string[]>;
+export function findUpSync(filenames: any, startDir?: string): string;
 //# sourceMappingURL=fileUtil.d.ts.map
