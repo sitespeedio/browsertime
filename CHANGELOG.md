@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 24.0.0 -  UNRELEASED
+## 24.0.0-alpha.1 - 2025-01-07
 ### Fixed
 * Replace dependencies with local implementation:
   * Replace btoa [#2233](https://github.com/sitespeedio/browsertime/pull/2233).
