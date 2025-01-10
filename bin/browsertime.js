@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import merge from 'lodash.merge';
 import get from 'lodash.get';
-import set from 'lodash.set';
 import { getLogger } from '@sitespeed.io/log';
 import { existsSync, mkdirSync } from 'node:fs';
 import path from 'node:path';
@@ -15,6 +14,7 @@ import { configure } from '../lib/support/logging.js';
 import { parseCommandLine } from '../lib/support/cli.js';
 import { StorageManager } from '../lib/support/storageManager.js';
 import { loadScript } from '../lib/support/engineUtils.js';
+import { setProperty } from '../lib/support/util.js';
 import { isAndroidConfigured } from '../lib/android/index.js';
 
 const log = getLogger('browsertime');
@@ -47,21 +47,21 @@ async function preWarmServer(urls, options) {
   const safariDeviceUDID = get(options, 'safari.deviceUDID ');
 
   if (isAndroidConfigured(options) && options.browser === 'chrome') {
-    set(preWarmOptions, 'chrome.android.package', 'com.android.chrome');
+    setProperty(preWarmOptions, 'chrome.android.package', 'com.android.chrome');
   }
   if (chromeDevice) {
-    set(preWarmOptions, 'chrome.android.deviceSerial', chromeDevice);
+    setProperty(preWarmOptions, 'chrome.android.deviceSerial', chromeDevice);
   } else if (firefoxDevice) {
-    set(preWarmOptions, 'firefox.android.deviceSerial', firefoxDevice);
+    setProperty(preWarmOptions, 'firefox.android.deviceSerial', firefoxDevice);
   }
 
   if (safariIos) {
-    set(preWarmOptions, 'safari.ios', true);
+    setProperty(preWarmOptions, 'safari.ios', true);
     if (safariDeviceName) {
-      set(preWarmOptions, 'safari.deviceName', safariDeviceName);
+      setProperty(preWarmOptions, 'safari.deviceName', safariDeviceName);
     }
     if (safariDeviceUDID) {
-      set(preWarmOptions, 'safari.deviceUDID', safariDeviceUDID);
+      setProperty(preWarmOptions, 'safari.deviceUDID', safariDeviceUDID);
     }
   }
 
