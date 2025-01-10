@@ -1,6 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 24.0.0-alpha.1 - 2025-01-07
+## 24.0.0-alpha.3 - 2025-01-10
+
+### Changed
+* Moved usb-power-profiling to be an optional package [#2249](https://github.com/sitespeedio/browsertime/pull/2249).
+
+### Added
+* Edgedriver 131 [#2236](https://github.com/sitespeedio/browsertime/pull/2236).
+
 ### Fixed
 * Replace dependencies with local implementation:
   * Replace btoa [#2233](https://github.com/sitespeedio/browsertime/pull/2233).
@@ -15,7 +22,6 @@
   * Replace @cypress/xvfb [#2245](https://github.com/sitespeedio/browsertime/pull/2245).
   * Replace intel (log) with sitespeed.io/log [#2246](https://github.com/sitespeedio/browsertime/pull/2246).
 * Fix Docker file ENV to follow the new standard [#2239](https://github.com/sitespeedio/browsertime/pull/2239).
-* Edgedriver 131 [#2236](https://github.com/sitespeedio/browsertime/pull/2236).
 
 
 ## 23.5.0 -  2024-12-23
