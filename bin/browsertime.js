@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 import merge from 'lodash.merge';
-import get from 'lodash.get';
 import { getLogger } from '@sitespeed.io/log';
 import { existsSync, mkdirSync } from 'node:fs';
 import path from 'node:path';
@@ -14,7 +13,7 @@ import { configure } from '../lib/support/logging.js';
 import { parseCommandLine } from '../lib/support/cli.js';
 import { StorageManager } from '../lib/support/storageManager.js';
 import { loadScript } from '../lib/support/engineUtils.js';
-import { setProperty } from '../lib/support/util.js';
+import { setProperty, getProperty } from '../lib/support/util.js';
 import { isAndroidConfigured } from '../lib/android/index.js';
 
 const log = getLogger('browsertime');
@@ -40,11 +39,11 @@ async function preWarmServer(urls, options) {
     docker: options.docker,
     headless: options.headless
   };
-  const chromeDevice = get(options, 'chrome.android.deviceSerial');
-  const firefoxDevice = get(options, 'firefox.android.deviceSerial');
-  const safariIos = get(options, 'safari.ios');
-  const safariDeviceName = get(options, 'safari.deviceName');
-  const safariDeviceUDID = get(options, 'safari.deviceUDID ');
+  const chromeDevice = getProperty(options, 'chrome.android.deviceSerial');
+  const firefoxDevice = getProperty(options, 'firefox.android.deviceSerial');
+  const safariIos = getProperty(options, 'safari.ios');
+  const safariDeviceName = getProperty(options, 'safari.deviceName');
+  const safariDeviceUDID = getProperty(options, 'safari.deviceUDID ');
 
   if (isAndroidConfigured(options) && options.browser === 'chrome') {
     setProperty(preWarmOptions, 'chrome.android.package', 'com.android.chrome');
