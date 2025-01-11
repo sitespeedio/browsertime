@@ -2,6 +2,10 @@
 
 ## 24.0.0-alpha.3 - 2025-01-10
 
+The 24.0.0 release remove a lot of dependencies. Since we implemented Browsertime the first time, there are many things that are easy to do in modern NodeJS. Those things have now been implemented in Browsertime.
+
+This release would work exactly as before, the only thing that changed is that usb-power-profiling is a optional dependency. That means that if you install using `--omit=optional` that dependency is not installed.
+
 ### Changed
 * Moved usb-power-profiling to be an optional package [#2249](https://github.com/sitespeedio/browsertime/pull/2249).
 
