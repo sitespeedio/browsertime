@@ -25,6 +25,8 @@ This release would work exactly as before, the only thing that changed is that u
   * Replace jimp with jimp custom [#2243](https://github.com/sitespeedio/browsertime/pull/2243).
   * Replace @cypress/xvfb [#2245](https://github.com/sitespeedio/browsertime/pull/2245).
   * Replace intel (log) with sitespeed.io/log [#2246](https://github.com/sitespeedio/browsertime/pull/2246).
+  * Replace lodash.set [#2250](https://github.com/sitespeedio/browsertime/pull/2250).
+  * Replace lodash.get [#2251](https://github.com/sitespeedio/browsertime/pull/2251).
 * Fix Docker file ENV to follow the new standard [#2239](https://github.com/sitespeedio/browsertime/pull/2239).
 
 
