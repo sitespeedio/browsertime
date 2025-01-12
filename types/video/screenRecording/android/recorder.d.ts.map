@@ -1,1 +1,1 @@
-{"version":3,"file":"recorder.d.ts","sourceRoot":"","sources":["../../../../lib/video/screenRecording/android/recorder.js"],"names":[],"mappings":"AAUA;IACE,0BAIC;IAHC,cAAsE;IACtE,eAAiE;IACjE,aAAsB;IAGxB,sBAGC;IAFC,iBAAwC;IAI1C,qCAgBC;CACF;wBAlCuB,2BAA2B"}
+{"version":3,"file":"recorder.d.ts","sourceRoot":"","sources":["../../../../lib/video/screenRecording/android/recorder.js"],"names":[],"mappings":"AAWA;IACE,0BAQC;IAPC,cAIC;IACD,eAAyE;IACzE,aAAsB;IAGxB,sBAGC;IAFC,iBAAwC;IAI1C,qCAgBC;CACF;wBAxCuB,2BAA2B"}

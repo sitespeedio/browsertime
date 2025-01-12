@@ -7,4 +7,10 @@ export function adjustVisualProgressTimestamps(visualProgress: any, profilerStar
 export function localTime(): string;
 export function pick(obj: any, keys: any): {};
 export function isEmpty(value: any): boolean;
+export function setProperty(object: any, path: any, value: any): void;
+/**
+ * A replacement for lodash.get(object, path, [defaultValue]).
+ *
+ */
+export function getProperty(object: any, path: any, defaultValue: any): any;
 //# sourceMappingURL=util.d.ts.map
