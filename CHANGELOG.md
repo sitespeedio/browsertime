@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 24.0.0-alpha.3 - 2025-01-10
+## 24.0.0-alpha.4 - 2025-01-20
 
 The 24.0.0 release remove a lot of dependencies. Since we implemented Browsertime the first time, there are many things that are easy to do in modern NodeJS. Those things have now been implemented in Browsertime.
 
@@ -10,7 +10,9 @@ This release would work exactly as before, the only thing that changed is that u
 * Moved usb-power-profiling to be an optional package [#2249](https://github.com/sitespeedio/browsertime/pull/2249).
 
 ### Added
-* Edgedriver 131 [#2236](https://github.com/sitespeedio/browsertime/pull/2236).
+* Edgedriver 132 [#2236](https://github.com/sitespeedio/browsertime/pull/2254).
+* Chromedriver 132 [#2236](https://github.com/sitespeedio/browsertime/pull/2253).
+* Chrome and Edge 132, Firefox 134 in the Docker container + NodeJS 22 [#2255](https://github.com/sitespeedio/browsertime/pull/2255).
 
 ### Fixed
 * Replace dependencies with local implementation:
