@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 24.0.1 - 2025-01-21
+### Fixed
+*  If Jimp is missing when storing an image, log and write the file as PNG [#2257](https://github.com/sitespeedio/browsertime/pull/2257).
+
 ## 24.0.0 - 2025-01-20
 
 The 24.0.0 release remove a lot of dependencies. Since we implemented Browsertime the first time, there are many things that are easy to do in modern NodeJS. Those things have now been implemented in Browsertime.
