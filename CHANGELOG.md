@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 24.1.0 - UNRELEASED
+### Fixed
+* Upgraded to use Webdriver 4.28.1 [#2258](https://github.com/sitespeedio/browsertime/pull/2258).
+
 ## 24.0.1 - 2025-01-21
 ### Fixed
 *  If Jimp is missing when storing an image, log and write the file as PNG [#2257](https://github.com/sitespeedio/browsertime/pull/2257).
