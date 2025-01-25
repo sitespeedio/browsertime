@@ -1,6 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
 ## 24.1.0 - UNRELEASED
+
+### Added
+* Include Chrome/Firefox configuration in the browser section of the result JSON [#2259](https://github.com/sitespeedio/browsertime/pull/2259)
+
 ### Fixed
 * Upgraded to use Webdriver 4.28.1 [#2258](https://github.com/sitespeedio/browsertime/pull/2258).
 
