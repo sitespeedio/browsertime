@@ -19,7 +19,7 @@
     "fast-stats": "0.0.7",
     "ff-test-bidi-har-export": "0.0.17",
     "lodash.merge": "4.6.2",
-    "selenium-webdriver": "4.27.0",
+    "selenium-webdriver": "4.28.1",
     "yargs": "17.7.2"
   },
   "optionalDependencies": {
