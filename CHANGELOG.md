@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 24.1.0 - UNRELEASED
+## 24.1.0 -  2025-01-27
 
 ### Added
 * Include Chrome/Firefox configuration in the browser section of the result JSON [#2259](https://github.com/sitespeedio/browsertime/pull/2259)
