@@ -10,7 +10,7 @@
     "@sitespeed.io/chromedriver": "132.0.6834-83",
     "@sitespeed.io/edgedriver": "132.0.2957-115",
     "@sitespeed.io/geckodriver": "0.35.0-1",
-    "@sitespeed.io/log": "0.2.4",
+    "@sitespeed.io/log": "0.2.5",
     "@sitespeed.io/throttle": "5.0.1",
     "@sitespeed.io/tracium": "0.3.3",
     "chrome-har": "1.0.1",
