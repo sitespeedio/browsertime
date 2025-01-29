@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 24.1.1 -  2025-01-29
+### Fixed
+* Update to sitespeedio/log 0.2.6 [#2260](https://github.com/sitespeedio/browsertime/pull/2260).
+
 ## 24.1.0 -  2025-01-27
 
 ### Added
