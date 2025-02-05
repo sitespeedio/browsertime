@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 24.2.0 -  2025-02-05
+### Added
+* Updated Chromedriver and Chromne to 133 and Firefox to 135 [#2261](https://github.com/sitespeedio/browsertime/pull/2261) and [#2262](https://github.com/sitespeedio/browsertime/pull/2262).
+
 ## 24.1.1 -  2025-01-29
 ### Fixed
 * Update to sitespeedio/log 0.2.6 [#2260](https://github.com/sitespeedio/browsertime/pull/2260).
