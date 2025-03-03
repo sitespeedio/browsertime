@@ -1,6 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 24.2.0 -  2025-02-05
+## 24.3.0 - 2025-03-03
+### Added
+* Add support for manually setting the log level using `--logLevel` [#2264](https://github.com/sitespeedio/browsertime/pull/2264).2264
+
+## 24.2.0 - 2025-02-05
 ### Added
 * Updated Chromedriver and Chromne to 133 and Firefox to 135 [#2261](https://github.com/sitespeedio/browsertime/pull/2261) and [#2262](https://github.com/sitespeedio/browsertime/pull/2262).
 
