@@ -25,8 +25,8 @@ export class Actions {
      * @returns {SeleniumActions} The current Selenium Actions builder object for chaining browser actions.
      *  @example
      * // Example of using the actions builder to perform a drag-and-drop operation:
-     * const elementToDrag = await commands.action.getElementByCss('.draggable');
-     * const dropTarget = await commands.action.getElementByCss('.drop-target');
+     * const elementToDrag = await commands.element.getByCss('.draggable');
+     * const dropTarget = await commands.element.getByCss('.drop-target');
      * await commands.action.getAction()
      *   .dragAndDrop(elementToDrag, dropTarget)
      *   .perform();

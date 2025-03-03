@@ -174,8 +174,9 @@ export class Measure {
     stop(testedStartUrl: string): Promise<any>;
     /**
      * Adds a custom metric to the current measurement result.
-     * This method should be called after a measurement has started and before it has stopped.
-     *
+     * The metric will be attached to the latest tested page, meaming
+     * you need to have measured a URL and stopped the measurement before
+     * you add the metric.
      * @param {string} name - The name of the metric.
      * @param {*} value - The value of the metric.
      * @throws {Error} Throws an error if called before a measurement cycle has started.
@@ -184,7 +185,9 @@ export class Measure {
     /**
      * Adds multiple custom metrics to the current measurement result.
      * This method accepts an object containing multiple key-value pairs representing different metrics.
-     * Similar to `add`, it should be used within an active measurement cycle.
+     * The metric will be attached to the latest tested page, meaming
+     * you need to have measured a URL and stopped the measurement before
+     * you add the metric.
      *
      * @param {Object} object - An object containing key-value pairs of metrics to add.
      * @throws {Error} Throws an error if called before a measurement cycle has started.
