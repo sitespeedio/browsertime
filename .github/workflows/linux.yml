@@ -34,7 +34,7 @@ jobs:
         sudo snap install ffmpeg
         sudo snap alias ffmpeg.ffprobe ffprobe
         python -m pip install --upgrade --user pip
-        python -m pip install --upgrade --user setuptools
+        python -m pip install --upgrade --user setuptools==70.0.0
         python -m pip install --user pyssim OpenCV-Python Numpy
         python -m pip --version
         python -m pip show Pillow
