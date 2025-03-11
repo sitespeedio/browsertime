@@ -1,5 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 24.4.0 - 2025-03-11
+### Added
+* Edgedriver 134 [#2269](https://github.com/sitespeedio/browsertime/pull/2269).
+* Chromedriver 134, updated chrome-remote-interfaces and webdriver [#2266](https://github.com/sitespeedio/browsertime/pull/2266)
+
+### Fixed
+* Fix how to get server timings (from main request) as reported on Slack [#2268](https://github.com/sitespeedio/browsertime/pull/2268).
+
 ## 24.3.0 - 2025-03-03
 ### Added
 * Add support for manually setting the log level using `--logLevel` [#2264](https://github.com/sitespeedio/browsertime/pull/2264).2264
