@@ -9,7 +9,7 @@
     "@devicefarmer/adbkit": "3.3.8",
     "@sitespeed.io/chromedriver": "134.0.6998-35",
     "@sitespeed.io/edgedriver": "134.0.3124-51",
-    "@sitespeed.io/geckodriver": "0.35.0-1",
+    "@sitespeed.io/geckodriver": "0.36.0",
     "@sitespeed.io/log": "0.2.6",
     "@sitespeed.io/throttle": "5.0.1",
     "@sitespeed.io/tracium": "0.3.3",
