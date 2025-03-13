@@ -1,5 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 24.5.0 - 2025-03-13
+### Added
+* Updated to Geckodriver 0.36.0 [#2270](https://github.com/sitespeedio/browsertime/pull/2270).
+
+### Fixed
+* Fix running tests on Safari on iOS that has been broken by some refactoring [#2271](https://github.com/sitespeedio/browsertime/pull/2271).
+
+
 ## 24.4.0 - 2025-03-11
 ### Added
 * Edgedriver 134 [#2269](https://github.com/sitespeedio/browsertime/pull/2269).
