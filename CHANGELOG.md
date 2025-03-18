@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 24.5.1 - 2025-03-18
+### Fixed
+* Bugfix for `--userTimingBlockList` [#2272](https://github.com/sitespeedio/browsertime/pull/2272).
+
 ## 24.5.0 - 2025-03-13
 ### Added
 * Updated to Geckodriver 0.36.0 [#2270](https://github.com/sitespeedio/browsertime/pull/2270).
