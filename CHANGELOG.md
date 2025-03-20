@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 24.5.2 - 2025-03-20
+### Fixed
+* Bugfix for the missing FCP delta with TTFB [#2273](https://github.com/sitespeedio/browsertime/pull/2273).
+
 ## 24.5.1 - 2025-03-18
 ### Fixed
 * Bugfix for `--userTimingBlockList` [#2272](https://github.com/sitespeedio/browsertime/pull/2272).
