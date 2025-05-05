@@ -1,5 +1,11 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 24.6.0 - 2025-05-05
+### Added
+* Updated the Docker container to use Chrome 136.0, Firefox 138 and Edge 135.0 [#2277](https://github.com/sitespeedio/browsertime/pull/2277).
+### Fixed
+* PreURL and pageCompleteCheckNetworkIdle didn't work together as reported in [sitespeed.io #4509](https://github.com/sitespeedio/sitespeed.io/issues/4509). Fixed in [#2278](https://github.com/sitespeedio/browsertime/pull/2278).
+
 ## 24.5.3 - 2025-04-30
 ### Fixed
 * Fix for running privileged script in Firefox 138 [#2274](https://github.com/sitespeedio/browsertime/pull/2274).
