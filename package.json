@@ -8,7 +8,7 @@
   "dependencies": {
     "@devicefarmer/adbkit": "3.3.8",
     "@sitespeed.io/chromedriver": "136.0.7103-92",
-    "@sitespeed.io/edgedriver": "134.0.3124-51",
+    "@sitespeed.io/edgedriver": "136.0.3240-64",
     "@sitespeed.io/geckodriver": "0.36.0",
     "@sitespeed.io/log": "0.2.6",
     "@sitespeed.io/throttle": "5.0.1",
