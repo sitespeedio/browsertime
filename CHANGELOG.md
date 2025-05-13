@@ -1,5 +1,14 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 24.7.0 - 2025-05-13
+### Added
+* Added Edge and Edgedriver 136 [#2282](https://github.com/sitespeedio/browsertime/pull/2282).
+* Add commands to start/stop and collect PerfStats performance counters for Firefox, thank you [Denis Palmeiro](https://github.com/dpalmeiro) for PR [#2279](https://github.com/sitespeedio/browsertime/pull/2279).
+
+### Fixed
+* Selenium 4.32.0 [#2281](https://github.com/sitespeedio/browsertime/pull/2281).
+* Chromedriver 136 [#2280](https://github.com/sitespeedio/browsertime/pull/2280).
+
 ## 24.6.0 - 2025-05-05
 ### Added
 * Updated the Docker container to use Chrome 136.0, Firefox 138 and Edge 135.0 [#2277](https://github.com/sitespeedio/browsertime/pull/2277).
