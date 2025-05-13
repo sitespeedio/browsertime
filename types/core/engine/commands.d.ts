@@ -5,6 +5,7 @@
 export class Commands {
     constructor(browser: any, engineDelegate: any, index: any, result: any, storageManager: any, pageCompleteCheck: any, context: any, videos: any, screenshotManager: any, scriptsByCategory: any, asyncScriptsByCategory: any, postURLScripts: any, options: any);
     profiler: GeckoProfilerCommand;
+    perfStats: PerfStatsInterface;
     /**
      * Manages Chrome trace functionality, enabling custom profiling and trace collection in Chrome.
      * @type {ChromeTrace}
@@ -144,6 +145,7 @@ export class Commands {
     element: Element;
 }
 import { GeckoProfiler as GeckoProfilerCommand } from './command/geckoProfiler.js';
+import { PerfStatsInterface } from './command/perfStats.js';
 import { ChromeTrace } from './command/chromeTrace.js';
 import { Click } from './command/click.js';
 import { Scroll } from './command/scroll.js';
