@@ -45,6 +45,16 @@ export class Wait {
      */
     byXpath(xpath: string, maxTime: number): Promise<void>;
     /**
+     * Waits for an element located by XPath to appear and visible within a maximum time.
+     *
+     * @async
+     * @param {string} xpath - The XPath of the element to wait for.
+     * @param {number} maxTime - Maximum time to wait in milliseconds.
+     * @returns {Promise<void>} A promise that resolves when the element is found or the time times out.
+     * @throws {Error} Throws an error if the element is not found within the specified time.
+     */
+    byXpathAndVisible(xpath: string, maxTime?: number): Promise<void>;
+    /**
      * Waits for an element located by a CSS selector to appear within a maximum time.
      *
      * @async
