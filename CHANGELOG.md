@@ -3,7 +3,12 @@
 ## 24.8.0 - UNRELEASED
 ### Added
 * Updated to Chrome/Chromedriver 137 and Firefox 139 in the Docker container [#2284](https://github.com/sitespeedio/browsertime/pull/2284).
+* Updated to Edge/Edgedriver 137 in the Docker container [#2289](https://github.com/sitespeedio/browsertime/pull/2289).
 * New command: `wait.byXpathAndVisible(...)` - thank you [Pavel Bairov](https://github.com/Amerousful) for PR [#2286](https://github.com/sitespeedio/browsertime/pull/2286).
+*  New command: `wait.bySelectorAndVisible(...)` PR [#2288](https://github.com/sitespeedio/browsertime/pull/2288).
+
+### Fixed
+* Updated dependencies: selenium, usb-power-profiling, execa and dev dependencies [#2290](https://github.com/sitespeedio/browsertime/pull/2290), [#2291](https://github.com/sitespeedio/browsertime/pull/2291), [#2294](https://github.com/sitespeedio/browsertime/pull/2294) and [#2295](https://github.com/sitespeedio/browsertime/pull/2295).
 
 ## 24.7.0 - 2025-05-13
 ### Added
