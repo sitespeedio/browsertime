@@ -1,4 +1,4 @@
-name: Linux browsers
+name: Linux browsers Chrome
 on:
   push:
     branches:
@@ -15,10 +15,6 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '20.x'
-    - name: Install Firefox
-      uses: browser-actions/setup-firefox@latest
-      #with:
-      #  firefox-version: '94.0'
     - name: Install latest Chrome
       run: |
         wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
@@ -44,30 +40,19 @@ jobs:
     - name: Browser versions
       run: |
         google-chrome --version
-        firefox --version
     - name: Start local HTTP server
       run: (npm run start-server&)
     # - run: VTENV_OPTS="-p python3" make test
-    - name: Test Firefox with throttle
-      run: ./bin/browsertime.js -b firefox -n 1 http://127.0.0.1:3000/simple/ --connectivity.profile cable --connectivity.engine throttle --xvfb --firefox.collectMozLog
     - name: Test Chrome with CPU throttle and preURL
       run: ./bin/browsertime.js -b chrome --skipHar -n 1 --preURL http://127.0.0.1:3000/simple/ -r header:value --chrome.CPUThrottlingRate 2 --chrome.cdp.performance --xvfb --chrome.enableChromeDriverLog --chrome.collectConsoleLog http://127.0.0.1:3000/dimple/
     - name: Test pre/post scripts
       run: ./bin/browsertime.js -b chrome test/data/navigationscript/measure.cjs -n 1 --preScript test/data/prepostscripts/preSample.cjs --postScript test/data/prepostscripts/postSample.cjs --xvfb
     - name: Test navigation and page complete check inactivity
       run: ./bin/browsertime.js -b chrome test/data/navigationscript/navigateAndStartInTwoSteps.cjs -n 1 --pageCompleteCheckInactivity --timeToSettle 1000 --xvfb
-    - name: Test multi pages
-      run: ./bin/browsertime.js -b firefox test/data/navigationscript/multi.cjs http://127.0.0.1:3000/search/ -n 1 --xvfb
     - name: Test multi pages with video and visual metrics
       run: ./bin/browsertime.js -b chrome test/data/navigationscript/multi.cjs -n 3 --chrome.timeline --video --visualMetrics --visualElements --viewPort 1000x600 --xvfb
-    - name: Test Firefox Geckoprofiler
-      run: ./bin/browsertime.js -b firefox --firefox.geckoProfiler -n 1 http://127.0.0.1:3000/simple/ --xvfb
-    - name: Test Firefox with scripting
-      run: ./bin/browsertime.js -b firefox test/data/commandscripts/unified.cjs --xvfb
     - name: Test Chrome with emulated mobile
       run: ./bin/browsertime.js -b chrome --chrome.mobileEmulation.deviceName 'iPhone 6' http://127.0.0.1:3000/simple/ --xvfb
-    - name: Test Firefox with web driver nagivation
-      run: ./bin/browsertime.js -b firefox -n 1 http://127.0.0.1:3000/simple/ --webdriverPageload --xvfb
     - name: Test Chrome with web driver nagivation
       run: ./bin/browsertime.js -b chrome -n 1 http://127.0.0.1:3000/simple/ --webdriverPageload --xvfb
     - name: Test navigate to the same URL twice
@@ -78,16 +63,12 @@ jobs:
       run: ./bin/browsertime.js -b chrome http://127.0.0.1:3000/simple/ --urlAlias my_url --xvfb
     - name: Test using alias for multiple URLs
       run: ./bin/browsertime.js -b chrome http://127.0.0.1:3000/simple/ http://127.0.0.1:3000/dimple/ --urlAlias startPage --urlAlias documentation --xvfb  
-    - name: Test collecting Firefox perf statistics
-      run: ./bin/browsertime.js -b firefox --firefox.perfStats --xvfb http://127.0.0.1:3000/simple/
     - name: Run test with pre-test functionality
       run: ./bin/browsertime.js -b chrome --preWarmServer --xvfb http://127.0.0.1:3000/simple/
     - name: Run test with screenshots
       run: ./bin/browsertime.js -b chrome --screenshotLCP --screenshotLS --xvfb http://127.0.0.1:3000/simple/
     - name: Run test with check network idle in Chrome
       run: ./bin/browsertime.js -b chrome --pageCompleteCheckNetworkIdle --xvfb http://127.0.0.1:3000/simple/
-    - name: Run test with check network idle in Firefox
-      run: ./bin/browsertime.js -b firefox --pageCompleteCheckNetworkIdle --xvfb http://127.0.0.1:3000/simple/
     - name: Run test with tcp dump
       run: ./bin/browsertime.js -b chrome --xvfb http://127.0.0.1:3000/simple/ -n 1 --tcpdump
     - name: Run test with scripting.mjs
@@ -100,5 +81,3 @@ jobs:
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/scripting/module.js
     - name: Test extra profile run Chrome
       run: ./bin/browsertime.js -b chrome http://127.0.0.1:3000/simple/ -n 1 --viewPort 1000x600 --xvfb  --enableProfileRun
-    - name: Test extra profile run Firefox
-      run: ./bin/browsertime.js -b firefox http://127.0.0.1:3000/simple/ -n 1 --viewPort 1000x600 --xvfb  --enableProfileRun    
