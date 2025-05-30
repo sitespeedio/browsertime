@@ -1715,7 +1715,7 @@ def calculate_visual_metrics(
                     json.dump(hero_data, hero_f_out)
                     hero_f_out.close()
             else:
-                logging.warn(
+                logging.warning(
                     "Hero elements file is not valid: " + str(hero_elements_file)
                 )
         else:
@@ -2320,7 +2320,7 @@ def main():
         default=False,
         help="Multiple videos are combined, separated by orange frames."
         "In this mode only the extraction is done and analysis "
-        "needs to be run separetely on each directory. Numbered "
+        "needs to be run separately on each directory. Numbered "
         "directories will be created for each video under the output "
         "directory.",
     )
@@ -2348,7 +2348,7 @@ def main():
         "--viewportretries",
         type=int,
         default=5,
-        help="Number of times to attempt to obtain a viewport. Analagous to the "
+        help="Number of times to attempt to obtain a viewport. Analogous to the "
         "number of frames to try to find a viewport with. By default, up to the "
         "first 5 frames are used.",
     )
