@@ -28,7 +28,7 @@
     "@jimp/jpeg": "0.22.12",
     "@jimp/plugin-resize": "0.22.12",
     "@jimp/plugin-scale": "0.22.12",
-    "usb-power-profiling": "1.5.0"
+    "usb-power-profiling": "1.6.0"
   },
   "devDependencies": {
     "@types/selenium-webdriver": "4.1.25",
