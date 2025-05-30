@@ -15,7 +15,7 @@
     "@sitespeed.io/tracium": "0.3.3",
     "chrome-har": "1.0.1",
     "chrome-remote-interface": "0.33.3",
-    "execa": "9.5.2",
+    "execa": "9.6.0",
     "fast-stats": "0.0.7",
     "ff-test-bidi-har-export": "0.0.17",
     "lodash.merge": "4.6.2",
