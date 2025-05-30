@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 24.8.0 - UNRELEASED
+### Added
+* Updated to Chrome/Chromedriver 137 and Firefox 139 in the Docker container [#2284](https://github.com/sitespeedio/browsertime/pull/2284).
+* New command: `wait.byXpathAndVisible(...)` - thank you [Pavel Bairov](https://github.com/Amerousful) for PR [#2286](https://github.com/sitespeedio/browsertime/pull/2286).
+
 ## 24.7.0 - 2025-05-13
 ### Added
 * Added Edge and Edgedriver 136 [#2282](https://github.com/sitespeedio/browsertime/pull/2282).
