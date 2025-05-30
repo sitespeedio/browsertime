@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 24.8.0 - UNRELEASED
+## 24.8.0 - 2025-05-30
 ### Added
 * Updated to Chrome/Chromedriver 137 and Firefox 139 in the Docker container [#2284](https://github.com/sitespeedio/browsertime/pull/2284).
 * Updated to Edge/Edgedriver 137 in the Docker container [#2289](https://github.com/sitespeedio/browsertime/pull/2289).
