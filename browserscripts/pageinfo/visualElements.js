@@ -91,7 +91,7 @@
     for (const nameAndSelector of customArray) {
       const parts = nameAndSelector.split(':');
       const type = parts[0];
-      const selector = parts[1];
+      const selector = nameAndSelector.slice(nameAndSelector.indexOf(':') + 1);
       const element = document.body.querySelector(selector);
       try {
         if (isElementPartlyInViewportAndVisible(element)) {
