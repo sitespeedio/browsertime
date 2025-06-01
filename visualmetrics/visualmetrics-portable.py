@@ -193,12 +193,12 @@ def blank_frame(file, color="white"):
 def edges_im(img):
     """Find the edges of the given image.
 
-    First, we apply a gaussian filter using a kernal of radius=13,
+    First, we apply a gaussian filter using a kernel of radius=13,
     and sigma=1 to a grayscale version of the image. Then we apply
     CED to find the edges.
 
     We calculate the hysterisis thresholds for the CED using the min and max
-    vaues of the blurred image. We use 10% as the lower threshold,
+    values of the blurred image. We use 10% as the lower threshold,
     and 30% as the upper threshold.
     """
     try:
@@ -1310,7 +1310,7 @@ def calculate_visual_metrics(
                     json.dump(hero_data, hero_f_out)
                     hero_f_out.close()
             else:
-                logging.warn(
+                logging.warning(
                     "Hero elements file is not valid: " + str(hero_elements_file)
                 )
         else:
@@ -1460,7 +1460,7 @@ def calculate_frame_progress(histogram, start, final):
     This method finds the visually-complete progress by taking a sum of
     all the differences in the histogram between the current frame, and the
     final frame. The initial/first frame is used to remove values that are
-    consitent between the first, and final frame (i.e. it's a baseline).
+    consistent between the first, and final frame (i.e. it's a baseline).
 
     Note that this method should not be using a slop/fuzz because we aren't
     looking at individual pixel intensities which is where the fuzz can be
@@ -1885,7 +1885,7 @@ def main():
         "--viewportretries",
         type=int,
         default=5,
-        help="Number of times to attempt to obtain a viewport. Analagous to the "
+        help="Number of times to attempt to obtain a viewport. Analogous to the "
         "number of frames to try to find a viewport with. By default, up to the "
         "first 5 frames are used.",
     )
