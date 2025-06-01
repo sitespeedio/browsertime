@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 24.8.1 - 2025-06-01
+### Fixed
+* [Visual Elements] Fix split for selector to include full value with ':'` - thank you [Pavel Bairov](https://github.com/Amerousful) for PR [#2298](https://github.com/sitespeedio/browsertime/pull/2298).
+
 ## 24.8.0 - 2025-05-30
 ### Added
 * Updated to Chrome/Chromedriver 137 and Firefox 139 in the Docker container [#2284](https://github.com/sitespeedio/browsertime/pull/2284).
