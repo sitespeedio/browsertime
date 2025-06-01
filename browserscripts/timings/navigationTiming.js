@@ -1,7 +1,6 @@
 (function() {
   let t = window.performance.getEntriesByType('navigation')[0];
   const d = 0;
-  if (t) {
     return {
       connectStart: Number(t.connectStart.toFixed(d)),
       domComplete: Number(t.domComplete.toFixed(d)),
@@ -27,40 +26,4 @@
       unloadEventStart: Number(t.unloadEventStart.toFixed(d)),
       workerStart: Number(t.workerStart.toFixed(d))
     };
-  } else {
-    // For Safari
-    t = window.performance.timing;
-    return {
-      navigationStart: 0,
-      unloadEventStart:
-        t.unloadEventStart > 0
-          ? t.unloadEventStart - t.navigationStart
-          : undefined,
-      unloadEventEnd:
-        t.unloadEventEnd > 0 ? t.unloadEventEnd - t.navigationStart : undefined,
-      redirectStart:
-        t.redirectStart > 0 ? t.redirectStart - t.navigationStart : undefined,
-      redirectEnd:
-        t.redirectEnd > 0 ? t.redirectEnd - t.navigationStart : undefined,
-      fetchStart: t.fetchStart - t.navigationStart,
-      domainLookupStart: t.domainLookupStart - t.navigationStart,
-      domainLookupEnd: t.domainLookupEnd - t.navigationStart,
-      connectStart: t.connectStart - t.navigationStart,
-      connectEnd: t.connectEnd - t.navigationStart,
-      secureConnectionStart: t.secureConnectionStart
-        ? t.secureConnectionStart - t.navigationStart
-        : undefined,
-      requestStart: t.requestStart - t.navigationStart,
-      responseStart: t.responseStart - t.navigationStart,
-      responseEnd: t.responseEnd - t.navigationStart,
-      domLoading: t.domLoading - t.navigationStart,
-      domInteractive: t.domInteractive - t.navigationStart,
-      domContentLoadedEventStart:
-        t.domContentLoadedEventStart - t.navigationStart,
-      domContentLoadedEventEnd: t.domContentLoadedEventEnd - t.navigationStart,
-      domComplete: t.domComplete - t.navigationStart,
-      loadEventStart: t.loadEventStart - t.navigationStart,
-      loadEventEnd: t.loadEventEnd - t.navigationStart
-    };
-  }
 })();
