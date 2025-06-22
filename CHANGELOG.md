@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 24.8.2 - 2025-06-22
+### Fixed
+*  Fix for serverTiming - thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#2301](https://github.com/sitespeedio/browsertime/pull/2301)
+
 ## 24.8.1 - 2025-06-01
 ### Fixed
 * [Visual Elements] Fix split for selector to include full value with ':'` - thank you [Pavel Bairov](https://github.com/Amerousful) for PR [#2298](https://github.com/sitespeedio/browsertime/pull/2298).
