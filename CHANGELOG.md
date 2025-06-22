@@ -2,7 +2,10 @@
 
 ## 24.8.2 - 2025-06-22
 ### Fixed
-*  Fix for serverTiming - thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#2301](https://github.com/sitespeedio/browsertime/pull/2301)
+*  Fix for serverTiming - thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#2301](https://github.com/sitespeedio/browsertime/pull/2301).
+* Cleanup how we get the navigation timing metrics [#2300](https://github.com/sitespeedio/browsertime/pull/2300).
+* Fix depercation warnings in visual metrics. Thank you [Emmanuel Ferdman](https://github.com/emmanuel-ferdman) for PR [#2297](https://github.com/sitespeedio/browsertime/pull/2297).
+
 
 ## 24.8.1 - 2025-06-01
 ### Fixed
