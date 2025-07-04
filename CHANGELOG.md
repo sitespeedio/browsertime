@@ -1,5 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 24.9.0 - 2025-06-30
+### Added
+* Update Docker container to use Chrome/edge 138, Firefox 140. Add Edgedriver and Chromedrinver 138 [#2303](https://github.com/sitespeedio/browsertime/pull/2303).
+
+### Fixed
+* Update Selenium webdriver to 4.34.0 [#2304](https://github.com/sitespeedio/browsertime/pull/2304).
+* Add extra try/catch if main document timings is missing when generating the HAR [#2302](https://github.com/sitespeedio/browsertime/pull/2302).
+
 ## 24.8.2 - 2025-06-22
 ### Fixed
 *  Fix for serverTiming - thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#2301](https://github.com/sitespeedio/browsertime/pull/2301).
@@ -188,7 +196,7 @@ Andy Davies](https://github.com/andydavies) cool [https://github.com/andydavies/
 ### Added
 * Updated to Chrome and Chromedriver 130 [#2192](https://github.com/sitespeedio/browsertime/pull/2192)
 * The Chrome in the ARM container is bumped from 107 to 130 [#2194](https://github.com/sitespeedio/browsertime/pull/2194).
- 
+
 ### Fixed
 * New Geckodriver install that fixes running on ARM in the Docker container [#2193](https://github.com/sitespeedio/browsertime/pull/2193).
 
@@ -388,7 +396,7 @@ There's a breaking change for Firefox if you add your own request header or if y
 
 ## 21.5.0 - 2024-03-12
 ### Added
-* Firefox: 
+* Firefox:
   * Move injectJS functionality to Bidi [#2088](https://github.com/sitespeedio/browsertime/pull/2088). This makes it possible to inject JS in Firefox on mobile.
   * Expose Bidi in commands [#2091](https://github.com/sitespeedio/browsertime/pull/2091). You can now use webdriver bidi direct in your commands.
 ### Fixed
@@ -426,7 +434,7 @@ There's a breaking change for Firefox if you add your own request header or if y
 *  Set correct viewports for the following emulated mobiles for Chrome: iPhone 14 Pro Max [#2070](https://github.com/sitespeedio/browsertime/pull/2070).
 * Update adbkit to 3.2.6 [#2069](https://github.com/sitespeedio/browsertime/pull/2069).
 * Selenium 4.17.0 [#2068](https://github.com/sitespeedio/browsertime/pull/2068).
-* There was a missing await when getting the tcpdump [#2075](https://github.com/sitespeedio/browsertime/pull/2075) 
+* There was a missing await when getting the tcpdump [#2075](https://github.com/sitespeedio/browsertime/pull/2075)
 * Remove all trace level logs (and do debug instead) since trace added unnecessary stacktraces to the log [#2074](https://github.com/sitespeedio/browsertime/pull/2074).
 
 ## 21.1.0 - 2024-01-24
@@ -473,7 +481,7 @@ The new version uses JSDoc to generate documentation for scripting and make it p
 * Firefox 121 in the Docker container.g
 
 ## 19.3.1 - 2023-12-18
-### Fixed 
+### Fixed
 * Ensure that visual metrics python script is included in the release.
 
 ## 19.3.0 - 2023-12-18
@@ -520,7 +528,7 @@ The new version uses JSDoc to generate documentation for scripting and make it p
 * Updated all dependencies to latest versions: ADB kit 3.2.5 [#2017](https://github.com/sitespeedio/browsertime/pull/2017), execa, dayjs, get-port and Chromedriver [#2015](https://github.com/sitespeedio/browsertime/pull/2015).
 
 ## 17.19.0 - 2023-11-03
-### Added 
+### Added
 * Updated to Chrome, Firefox and Edge 119 in the Docker container [#2010](https://github.com/sitespeedio/browsertime/pull/2010).
 * Updated to Edgedriver 119.
 
@@ -536,7 +544,7 @@ The new version uses JSDoc to generate documentation for scripting and make it p
 ### Added
 * Updated to Chromedriver 119 [#2003](https://github.com/sitespeedio/browsertime/pull/2003). 119 works with both Chrome 118 and 119 so it fixes [#1197](https://github.com/sitespeedio/browsertime/issues/1997).
 * Add support for network idle method to know when to end a test that uses network logs. Uses Bidi for Firefox and CDP for Chrome to listen on network events to know when to end a test. By default 5 seconds idle network time ends a tests (you could have network responses that hasn't arrived yet) [#1960](https://github.com/sitespeedio/browsertime/pull/1960). Potentially this can help SPA users or users where the page uses iframes. You can try it out by adding `--pageCompleteCheckNetworkIdle` yo your command line. This is still some work in progress but feel free to try ut out.
-* The resources script now collects number of resources served from the browser cashe for browser that supports that through the resource timing API [#1998](https://github.com/sitespeedio/browsertime/pull/1998)  
+* The resources script now collects number of resources served from the browser cashe for browser that supports that through the resource timing API [#1998](https://github.com/sitespeedio/browsertime/pull/1998)
 
 ### Fixed
 * Make sure timer always is cleared. There was case of where we do a rase beteween a promise and a timeout where the timeout timer wasn't cleared/removed [#2005](https://github.com/sitespeedio/browsertime/pull/2005).
@@ -554,7 +562,7 @@ The new version uses JSDoc to generate documentation for scripting and make it p
 ### Added
 * Firefox 117 and Edge 116 in the Docker container.
 
-### Fixed 
+### Fixed
 * Updated the BiDi HAR exporter for Firefox to version 0.0.12. This version will not work with Firefox 116 so if you use the BiDi HAR exporter you need to upgrade to Firefox 117.
 
 ## 17.15.0 - 2023-08-16
@@ -653,10 +661,10 @@ The new version uses JSDoc to generate documentation for scripting and make it p
 
 ## 17.8.1 - 2023-04-12
 ### Fixed
-* Upgraded to Firefox HAR 0.0.10 [#1939](https://github.com/sitespeedio/browsertime/pull/1939). 
+* Upgraded to Firefox HAR 0.0.10 [#1939](https://github.com/sitespeedio/browsertime/pull/1939).
 ## 17.8.0 - 2023-04-11
 ### Fixed
-* Upgraded to Firefox HAR 0.0.8 [#1937](https://github.com/sitespeedio/browsertime/pull/1937). 
+* Upgraded to Firefox HAR 0.0.8 [#1937](https://github.com/sitespeedio/browsertime/pull/1937).
 
 ### Added
 * Upgraded to Firefox 112 in the Docker container.
@@ -701,7 +709,7 @@ The new version uses JSDoc to generate documentation for scripting and make it p
 * Bumped Geckodriver to 0.32.2 and Edgedriver to 111.
 
 ## 17.2.0 - 2023-03-14
-### Added 
+### Added
 * Updated Chrome, Chromedriver, Edge and Firefox to 111.
 
 ## 17.1.1 - 2023-03-04
@@ -724,7 +732,7 @@ The project was transitioned to a [pure ESM package](https://gist.github.com/sin
 
 
 #### CLI users
-If you are a command line user and use scripting, you will need to do a change to your scripts or add a extra configuration. 
+If you are a command line user and use scripting, you will need to do a change to your scripts or add a extra configuration.
 
 The new browsertime version treat all JavaScript files that ends with *.js* as ESM modules, that means your old script files will not work out of the box. There's a couple of fixes for that:
 
@@ -744,7 +752,7 @@ export default async function (context, commands) {
 }
 ```
 
-If you have more complicated scripts, follow the [ESM package guide](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c). 
+If you have more complicated scripts, follow the [ESM package guide](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
 
 This is the best fix and will woirk 100% of the time.
 
@@ -752,7 +760,7 @@ This is the best fix and will woirk 100% of the time.
 
 **Another quick fix alternative**: As a last alternative add `--cjs` as a parameter to your test. That way the scripting file will be treated as a commonjs file. This is a hack, so to make sure it works, the user that runs Browsertime need to have write privileges to the folder where you have your scripting files. Browsertime will create a package.json file on the same levels as yoru script file. If you already have a package.json there, it will be overwritten.
 
-#### Non cli users 
+#### Non cli users
 If you import Browsertime in NodeJS we changed how you do your import.
 
 If you use ES modules you can import Browsertime like this:
@@ -777,7 +785,7 @@ If you run Browsertime direct using NodeJs (and not using Docker) you need to in
 python -m pip install --user OpenCV-Python Numpy
 ```
 
-This is pretty cool because it makes dependencies easier to install on all platforms + the script has also been cleaned up so its easier for us to maintain. 
+This is pretty cool because it makes dependencies easier to install on all platforms + the script has also been cleaned up so its easier for us to maintain.
 
 ### Added
 * Selenium 4.8.
@@ -876,7 +884,7 @@ This is pretty cool because it makes dependencies easier to install on all platf
 * Fixed `--preWarmServer` so it works with `--headless`, Docker and specific Android or iOS device [#1815](https://github.com/sitespeedio/browsertime/pull/1815).
 ## 16.11.0 - 2022-06-28
 
-### Added 
+### Added
 * Firefox 102 and Edge 103 in the Docker container.
 * Use Edgedriver 103 [#1812](https://github.com/sitespeedio/browsertime/pull/1812)
 ### Fixed
@@ -902,7 +910,7 @@ This is pretty cool because it makes dependencies easier to install on all platf
 * Collect number of CPU longtasks before largest contentful paint [#1806](https://github.com/sitespeedio/browsertime/pull/1806).
 
 ### Fixed
-* Instead of throwing errors and exit the tests if the page hasn't finished loading after 5 minutes, we now gracefully ends the test after 2 minutes (you can change that time with `--maxLoadTime`). That makes more sense than just throwing errors [#1810](https://github.com/sitespeedio/browsertime/pull/1810). 
+* Instead of throwing errors and exit the tests if the page hasn't finished loading after 5 minutes, we now gracefully ends the test after 2 minutes (you can change that time with `--maxLoadTime`). That makes more sense than just throwing errors [#1810](https://github.com/sitespeedio/browsertime/pull/1810).
 ##  16.8.1 - 2022-06-09
 ### Fixed
 * Fix for getting the MOZ log, thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1802](https://github.com/sitespeedio/browsertime/pull/1802).
@@ -938,7 +946,7 @@ This is pretty cool because it makes dependencies easier to install on all platf
 * Only get LCP in Visual Metrics if the LCP API gives us a element [#1786](https://github.com/sitespeedio/browsertime/pull/1786).
 ## 16.3.0 - 2022-05-07
 ### Added
-* If you use `--visualElements` and the browser supports the Largest Contentful API, we also record 
+* If you use `--visualElements` and the browser supports the Largest Contentful API, we also record
 the LCP from the video. This will help the Chrome team and other browser teams to get it right (see [https://bugs.chromium.org/p/chromium/issues/detail?id=1291502](https://bugs.chromium.org/p/chromium/issues/detail?id=1291502)) [#1782](https://github.com/sitespeedio/browsertime/pull/1782).
 
 ## 16.2.2 - 2022-05-06
@@ -975,7 +983,7 @@ the LCP from the video. This will help the Chrome team and other browser teams t
 ### Changed
 * When I introduced flushing of the DNS per run I missed that it makes you need to run sudo to do it (Mac/Linux). That sucks so instead of being able to disable the flushing `--disableDNSFlush` you now enables it with `--flushDNS` [#1752](https://github.com/sitespeedio/browsertime/pull/1752).
 
-### Added 
+### Added
 * Firefox 99 in the Docker container
 * Edge and Edgedriver 100
 
@@ -1001,7 +1009,7 @@ the LCP from the video. This will help the Chrome team and other browser teams t
 * Added more view ports for emulated mobile in Chrome [#1736](https://github.com/sitespeedio/browsertime/pull/1736).
 ## 15.1.1 - 2022-02-24
 ### Fixed
-* Updated Chromedriver dependency that fixes installation on M1 and [some send keys issues](https://chromedriver.storage.googleapis.com/98.0.4758.102/notes.txt). 
+* Updated Chromedriver dependency that fixes installation on M1 and [some send keys issues](https://chromedriver.storage.googleapis.com/98.0.4758.102/notes.txt).
 ## 15.1.0 - 2022-02-24
 ### Added
 * Collect timings from main document. The result includes a field named mainDocumentTimings and contains blocked, dns, connect, send, wait, receive, ssl as long as you get a HAR file from the browser [#1735](https://github.com/sitespeedio/browsertime/pull/1735).
@@ -1050,7 +1058,7 @@ the LCP from the video. This will help the Chrome team and other browser teams t
 
 ## 14.19.0 - 2022-02-02
 
-### Added 
+### Added
 * Chrome and Chromedriver 98 [#1704](https://github.com/sitespeedio/browsertime/pull/1704).
 
 ### Fixed
@@ -1082,10 +1090,10 @@ the LCP from the video. This will help the Chrome team and other browser teams t
 * New click by name command `click.byName(name)` [#1697](https://github.com/sitespeedio/browsertime/pull/1697).
 
 ### Fixed
-* Remove the top 10 rows of the image to handle progress bars on some mobile browser recordings. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1687](https://github.com/sitespeedio/browsertime/pull/1687). 
+* Remove the top 10 rows of the image to handle progress bars on some mobile browser recordings. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1687](https://github.com/sitespeedio/browsertime/pull/1687).
 
 ##  14.16.0 - 2022-01-14
-### Added 
+### Added
 * Upgraded Geckodriver downloader that downloads a pre-built Geckodriver on Raspberry Pis.
 
 ## 14.15.0 - 2022-01-12
@@ -1128,7 +1136,7 @@ the LCP from the video. This will help the Chrome team and other browser teams t
 ### Fixed
 * Use the viewport to determine if more cropping is needed in visual metrics. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1680](https://github.com/sitespeedio/browsertime/pull/1680).
 ### Added
-* Updated to Selenium 4.1.0 [#1679](https://github.com/sitespeedio/browsertime/pull/1679) 
+* Updated to Selenium 4.1.0 [#1679](https://github.com/sitespeedio/browsertime/pull/1679)
 
 ## 14.10.2 - 2021-11-20
 ### Fixed
@@ -1137,7 +1145,7 @@ the LCP from the video. This will help the Chrome team and other browser teams t
 ## 14.10.1 - 2021-11-19
 ### Fixed
 * Disabled the automatic Chrome/Chromedriver version check in Chromedriver [#1676](https://github.com/sitespeedio/browsertime/pull/1676).
-* Loop until we find a frame with a good viewport or until we run out of retries for Visual Metrics. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1668](https://github.com/sitespeedio/browsertime/pull/1668). 
+* Loop until we find a frame with a good viewport or until we run out of retries for Visual Metrics. Thank you [Gregory Mierzwinski](https://github.com/gmierz) for PR [#1668](https://github.com/sitespeedio/browsertime/pull/1668).
 
 ## 14.10.0 - 2021-11-16
 ### Added
@@ -1181,7 +1189,7 @@ the LCP from the video. This will help the Chrome team and other browser teams t
 * Log Firefox preference and Chrome args on debug level [#1654](https://github.com/sitespeedio/browsertime/pull/1654)
 ## 14.5.0 - 2021-09-30
 ### Added
-* Added CSS selector support for mouse commands [#1645](https://github.com/sitespeedio/browsertime/pull/1645) 
+* Added CSS selector support for mouse commands [#1645](https://github.com/sitespeedio/browsertime/pull/1645)
 
 ### Fixed
 * Internal refactoring of the mouse command [#1646](https://github.com/sitespeedio/browsertime/pull/1646) and [#1647](https://github.com/sitespeedio/browsertime/pull/1647).
@@ -1289,7 +1297,7 @@ romedriver 94 and Chrome 94 in the Docker container [#1643](https://github.com/s
 ##  12.9.1 - 2021-06-09
 ### Fixed
 * Finally a fix for driving Safari on iOS. Start/stop the Safaridriver manually, see [#1596](https://github.com/sitespeedio/browsertime/pull/1596). Video on iOS is broken though, see if we can find a fix for that too.
-* Upgrade to use Selenium-4.0.0-beta.4 [#1592](https://github.com/sitespeedio/browsertime/pull/1592) and updated throttle, dayjs, execa and chrome-remote-interface to run latest versions [#1594](https://github.com/sitespeedio/browsertime/pull/1594). 
+* Upgrade to use Selenium-4.0.0-beta.4 [#1592](https://github.com/sitespeedio/browsertime/pull/1592) and updated throttle, dayjs, execa and chrome-remote-interface to run latest versions [#1594](https://github.com/sitespeedio/browsertime/pull/1594).
 ##  12.9.0 - 2021-06-04
 
 ### Added
@@ -1391,9 +1399,9 @@ A special thanks to [Inderpartap Singh Cheema](https://github.com/inderpartap), 
 * New metrics: Delta between TTFB and First Contentful Paint, Largest Contentful paint and First visual change [#1528](https://github.com/sitespeedio/browsertime/pull/1528). You can use this if you have unstable TTFB and want to alert on front end metrics. Lets see when other also implement this :)
 * Made it easier for people to get Google Web Vitals. We copy that data under the googleWebVitals namespace in the result JSON [#1521](https://github.com/sitespeedio/browsertime/pull/1521).
 * Added TTFB as a single metric [#1522](https://github.com/sitespeedio/browsertime/pull/1522).
-* New stop watch command [#1512](https://github.com/sitespeedio/browsertime/pull/1512). Measure time by: 
-  ```const timer = commands.stopWatch.get('my_timer'); 
-     timer.start(); 
+* New stop watch command [#1512](https://github.com/sitespeedio/browsertime/pull/1512). Measure time by:
+  ```const timer = commands.stopWatch.get('my_timer');
+     timer.start();
      // Do something
      // Stop the timer and add the result to the last tested URL
      timer.stopAndAdd();
@@ -1454,8 +1462,8 @@ A special thanks to [Inderpartap Singh Cheema](https://github.com/inderpartap), 
 
 ## 11.2.0 - 2021-01-24
 ### Added
-* Make it possible to listen to CDP events in scripting [#1473](https://github.com/sitespeedio/browsertime/pull/1473). There's a new command in scripting (for browsers that supports it): ```commands.cdp.on```. Here's an example to pickup all responses for a page : 
-``` 
+* Make it possible to listen to CDP events in scripting [#1473](https://github.com/sitespeedio/browsertime/pull/1473). There's a new command in scripting (for browsers that supports it): ```commands.cdp.on```. Here's an example to pickup all responses for a page :
+```
     const responses = [];
     await commands.cdp.on('Network.responseReceived', params => {
      responses.push(params);
@@ -1465,7 +1473,7 @@ A special thanks to [Inderpartap Singh Cheema](https://github.com/inderpartap), 
 ```
 ## 11.1.2 - 2021-01-20
 ### Fixed
-* The last release didn't fix the problem when browsertime do not collect metrics. 
+* The last release didn't fix the problem when browsertime do not collect metrics.
 ## 11.1.1 - 2021-01-20
 ### Fixed
 * Added a guard if we do not collect any metrics [#1472](https://github.com/sitespeedio/browsertime/pull/1472).
@@ -1484,7 +1492,7 @@ A special thanks to [Inderpartap Singh Cheema](https://github.com/inderpartap), 
 * Setting path to Edge was broken, use `--edge.binaryPath` to point out the path to your Edge binary [#1461](https://github.com/sitespeedio/browsertime/pull/1461).
 ## 11.0.0 - 2020-12-18
 ### Changed
-* Record and keep the browser full screen (including URL bar) [#1435](https://github.com/sitespeedio/browsertime/pull/1435). All metrics should stay the same with this change but the video and the code will be easier :) When we implemented video a long time ago we wanted to cut out the URL bar but it made it harder to keep the video to look ok on different OS. 
+* Record and keep the browser full screen (including URL bar) [#1435](https://github.com/sitespeedio/browsertime/pull/1435). All metrics should stay the same with this change but the video and the code will be easier :) When we implemented video a long time ago we wanted to cut out the URL bar but it made it harder to keep the video to look ok on different OS.
 * Say goodbye to RUM Speed Index [#1439](https://github.com/sitespeedio/browsertime/pull/1439).
 * Domain name on disk now uses underscore instead of dots in the name [#1445](https://github.com/sitespeedio/browsertime/pull/1445).
 * Click the Android power button at the start of each test (instead of the home button [#1447](https://github.com/sitespeedio/browsertime/pull/1447).
@@ -1500,7 +1508,7 @@ A special thanks to [Inderpartap Singh Cheema](https://github.com/inderpartap), 
 * Add support using alias from CLI and use alias as folder name on disk [#1443](https://github.com/sitespeedio/browsertime/pull/1443).
 * New option to store a more flat structure on disk converting the path part of the URL to one folder `--storeURLsAsFlatPageOnDisk`[#1450](https://github.com/sitespeedio/browsertime/pull/1450)
 * Updated to Selenium 4.0.0-alpha.8 [#1451](https://github.com/sitespeedio/browsertime/pull/1451).
-* Updated to Firefox 84 in the Docker container. 
+* Updated to Firefox 84 in the Docker container.
 * Updated to Edgedriver 87
 * Added Edge in the Docker container [#1458](https://github.com/sitespeedio/browsertime/pull/1458).
 
@@ -1512,12 +1520,12 @@ A special thanks to [Inderpartap Singh Cheema](https://github.com/inderpartap), 
 ### Fixed
 * The browsertime.json always included Firefox appConstants and the geckoprofiler JSON missed out on Visual Metrics, fixed in [#1434](https://github.com/sitespeedio/browsertime/pull/1434).
 ## 10.8.0 - 2020-11-18
-### Added 
+### Added
 * Updated to Firefox 83 in the Docker container.
 * Updated Chrome and Chromedriver to 87.
 ##  10.7.0 - 2020-11-16
 ### Added
-* Add page generator tag to the HAR file [#1430](https://github.com/sitespeedio/browsertime/pull/1430) 
+* Add page generator tag to the HAR file [#1430](https://github.com/sitespeedio/browsertime/pull/1430)
 
 ### Fixed
 * Reverted to Geckodrover 0.27.0 since 0.28.0 cannot start Firefox on Android [#1431](https://github.com/sitespeedio/browsertime/pull/1431).
@@ -1586,7 +1594,7 @@ A special thanks to [Inderpartap Singh Cheema](https://github.com/inderpartap), 
 ## 10.1.0 - 2020-09-22
 
 ### Added
-* Extra love for running tests in Android: Press the home button at the start of a test, verify that the phone state is "device" before starting to test (no need to run tests on offline devices) and 
+* Extra love for running tests in Android: Press the home button at the start of a test, verify that the phone state is "device" before starting to test (no need to run tests on offline devices) and
 added possibility to verify the internet connection on the device through ping (enable with `--androidVerifyNetwork`) [#1386](https://github.com/sitespeedio/browsertime/pull/1386).
 
 ### Fixed
@@ -1613,7 +1621,7 @@ The new 10.0 release mostly include technical changes that will make it easier f
 ### Tech
 * Making a better structure for each browser, so its more understandable when you can run browser specific code. The old browser delegate (now only browser name) has the newly named functions:
 * beforeBrowserStart
-* afterBrowserStart 
+* afterBrowserStart
 * beforeStartIteration
 * beforeEachURL
 * afterPageCompleteCheck
@@ -1622,7 +1630,7 @@ The new 10.0 release mostly include technical changes that will make it easier f
 * getHARs
 * beforeBrowserStop
 
-This makes it easier to make sure when to collect metrics, stop trace logs and do whatever you need. Implemented in [#1348](https://github.com/sitespeedio/browsertime/pull/1348) and [#1367](https://github.com/sitespeedio/browsertime/pull/1367). 
+This makes it easier to make sure when to collect metrics, stop trace logs and do whatever you need. Implemented in [#1348](https://github.com/sitespeedio/browsertime/pull/1348) and [#1367](https://github.com/sitespeedio/browsertime/pull/1367).
 
 * New structure for browser, trying to decrease line of code per file and making it easier to navigate the code and prepare for adding support for other browser drivers than Selenium [#1354](https://github.com/sitespeedio/browsertime/pull/1354) [#1355](https://github.com/sitespeedio/browsertime/pull/1355) [#1356](https://github.com/sitespeedio/browsertime/pull/1356).
 
@@ -1726,7 +1734,7 @@ This makes it easier to make sure when to collect metrics, stop trace logs and d
 
 ## 8.12.1 - 2020-05-19
 ### Fixed
-* Fixed so metrics in the CLI always shows two decimals [#1282](https://github.com/sitespeedio/browsertime/pull/1282). 
+* Fixed so metrics in the CLI always shows two decimals [#1282](https://github.com/sitespeedio/browsertime/pull/1282).
 * Adopt the rename of layout-instability-api to CLS and remove report in percentage since it do not make sense [#1283](https://github.com/sitespeedio/browsertime/pull/1283) and [#1284](https://github.com/sitespeedio/browsertime/pull/1284).
 
 ## 8.12.0 - 2020-05-12
@@ -1822,7 +1830,7 @@ All work in [#1234](https://github.com/sitespeedio/browsertime/pull/1234) and [#
 ## 8.3.0 - 2020-03-20
 ### Added
 * Upgraded from selenium-4.0.0-alpha.5 to selenium-4.0.0-alpha.7 [#1221](https://github.com/sitespeedio/browsertime/pull/1221).
-* Added supported for unified scripts Thank you [Tarek Ziade](https://github.com/tarekziade) for the PR [#1220](https://github.com/sitespeedio/browsertime/pull/1220). Checkout [#1216](https://github.com/sitespeedio/browsertime/issues/1216) for more info. 
+* Added supported for unified scripts Thank you [Tarek Ziade](https://github.com/tarekziade) for the PR [#1220](https://github.com/sitespeedio/browsertime/pull/1220). Checkout [#1216](https://github.com/sitespeedio/browsertime/issues/1216) for more info.
 
 ### Fixed
 * Running Chrome in emulated mobile mode sometimes picked up Chromes info bar as First Visual Change. The default bottom margin was changed from 10 pixels to 16 pixels [#1224](https://github.com/sitespeedio/browsertime/pull/1224).
@@ -1874,7 +1882,7 @@ All work in [#1234](https://github.com/sitespeedio/browsertime/pull/1234) and [#
 
 Woho Browsertime 8.0.0 is here!
 
-There's a lot of new things in 8.0.0. First: A big THANK YOU to all the people at Mozilla that have contributed with all the new stuff: 
+There's a lot of new things in 8.0.0. First: A big THANK YOU to all the people at Mozilla that have contributed with all the new stuff:
 * [Nick Alexander](https://github.com/ncalexan)
 * [Denis Palmeiro](https://github.com/dpalmeiro)
 * [Sean Feng](https://github.com/sefeng211)
@@ -1884,7 +1892,7 @@ There's a lot of new things in 8.0.0. First: A big THANK YOU to all the people a
 * [Tarek Ziade](https://github.com/tarekziade)
 * [Gregory Mierzwinski](https://github.com/gmierz)
 
-Major new things: 
+Major new things:
 * You can collect CPU profiles from Firefox with `--firefox.geckoProfiler` and view them at https://profiler.firefox.com !
 * You can run Firefox on Android!
 * Now the window recorder for Firefox works great. That means you can record a video of the loading of your page without using FFMPEG. Add `--firefox.windowRecorder` and `-video`to your run.
@@ -1908,7 +1916,7 @@ Lets go through all the new things. There's a couple things that changes:
     * Start Firefox with a new profile cloned from a directory. Use this to pre-populate databases with
     certificateY, tracking protectionlists etc  `--firefox.profileTemplate`.
     * Fixes so `--firefox.windowRecorder` works better (use it to record a video of the screen).
-    * You can now choose the Activity hosting the Chrome WebView on Android using `--chrome.android.activity`. You can also name the process of the Activity hosting the WebView using `--chrome.android.process`.  
+    * You can now choose the Activity hosting the Chrome WebView on Android using `--chrome.android.activity`. You can also name the process of the Activity hosting the WebView using `--chrome.android.process`.
 * Move visualmetrics.py to a python package [#1148](https://github.com/sitespeedio/browsertime/pull/1148) - thank you [Tarek Ziade](https://github.com/tarekziade)!
 * Run Safari on iOS with just `-b safari --ios` [#1141](https://github.com/sitespeedio/browsertime/pull/1141)
 * Enable verbose Chromedriver logging with `--chrome.enableVerboseChromeDriverLog` [#1152](https://github.com/sitespeedio/browsertime/pull/1152)
@@ -1930,9 +1938,9 @@ Lets go through all the new things. There's a couple things that changes:
 
 ### Fixed
 * Ignore certificate errors by default when we record with WPR [#1150](https://github.com/sitespeedio/browsertime/pull/1150)
-* If Visual Metrics failed, the original error wasn't there in the log. Fixed by [#1149](https://github.com/sitespeedio/browsertime/pull/1149) 
+* If Visual Metrics failed, the original error wasn't there in the log. Fixed by [#1149](https://github.com/sitespeedio/browsertime/pull/1149)
 * Fix so the devtools port is added only one time on Android [#1145](https://github.com/sitespeedio/browsertime/pull/1145)
-* If Visual Metrics fails, let produce an error that ends up in the JSON [#1147](https://github.com/sitespeedio/browsertime/pull/1147) 
+* If Visual Metrics fails, let produce an error that ends up in the JSON [#1147](https://github.com/sitespeedio/browsertime/pull/1147)
 * Cleanup WPR code to use default page complete check [#1143](https://github.com/sitespeedio/browsertime/pull/1143)
 * CDP bug when scripting, fixed in [#1153](https://github.com/sitespeedio/browsertime/pull/1153)
 * If navigation never happens, make sure we log what's going on and fail hard by throwing an error [#1130](https://github.com/sitespeedio/browsertime/pull/1130).
