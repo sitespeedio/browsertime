@@ -26,7 +26,7 @@
     "@jimp/custom": "0.22.12",
     "@jimp/png": "0.22.12",
     "@jimp/jpeg": "0.22.12",
-    "@jimp/plugin-resize": "0.22.12",
+    "@jimp/plugin-resize": "1.6.0",
     "@jimp/plugin-scale": "0.22.12",
     "usb-power-profiling": "1.6.0"
   },
