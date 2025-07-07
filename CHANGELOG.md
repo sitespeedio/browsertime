@@ -3,7 +3,8 @@
 ## 25.0.0 - UNRELEASED
 
 ### Breaking
-* You need to use NodeJS 20 or later for Browsertime to work.
+* Support NodeJS 20 or later for Browsertime [#2307](https://github.com/sitespeedio/browsertime/pull/2307)
+* Removed the old and outdated VisualMetrics [#2306](https://github.com/sitespeedio/browsertime/pull/2306). `--visualMetricsPortable` is removed and the "new" version is always used.
 
 ### Added
 * Updated to Yargs 18.0.0 [#2305](https://github.com/sitespeedio/browsertime/pull/2305).
