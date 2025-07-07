@@ -56,7 +56,6 @@
     "browserscripts",
     "browsersupport",
     "visualmetrics/visualmetrics-portable.py",
-    "visualmetrics/visualmetrics.py",
     "browsertime.png",
     "index.js",
     "lib",
