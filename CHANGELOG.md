@@ -1,5 +1,14 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 25.0.0 - UNRELEASED
+
+### Breaking
+* You need to use NodeJS 20 or later for Browsertime to work.
+
+### Added
+* Updated to Yargs 18.0.0 [#2305](https://github.com/sitespeedio/browsertime/pull/2305).
+
+
 ## 24.9.0 - 2025-06-30
 ### Added
 * Update Docker container to use Chrome/edge 138, Firefox 140. Add Edgedriver and Chromedrinver 138 [#2303](https://github.com/sitespeedio/browsertime/pull/2303).
