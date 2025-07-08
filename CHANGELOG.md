@@ -9,6 +9,8 @@
 ### Added
 * Updated to Yargs 18.0.0 [#2305](https://github.com/sitespeedio/browsertime/pull/2305).
 
+### Fixed
+* Updated dev dependencies [#2308](https://github.com/sitespeedio/browsertime/pull/2308) and [#2309](https://github.com/sitespeedio/browsertime/pull/2309).
 
 ## 24.9.0 - 2025-06-30
 ### Added
