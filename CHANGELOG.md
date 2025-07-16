@@ -11,6 +11,7 @@
 
 ### Fixed
 * Updated dev dependencies [#2308](https://github.com/sitespeedio/browsertime/pull/2308) and [#2309](https://github.com/sitespeedio/browsertime/pull/2309).
+* Updated Edge dependency so it uses the new Microsoft domain for downloading [#2312](https://github.com/sitespeedio/browsertime/pull/2312).
 
 ## 24.9.0 - 2025-06-30
 ### Added
