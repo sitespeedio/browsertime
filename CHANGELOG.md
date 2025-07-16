@@ -1,6 +1,6 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 25.0.0 - UNRELEASED
+## 25.0.0 - 2025-07-16
 
 ### Breaking
 * Support NodeJS 20 or later for Browsertime [#2307](https://github.com/sitespeedio/browsertime/pull/2307)
