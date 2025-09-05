@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 25.1.0 - 2025-09-05
+### Added
+* Updated to Chrome/Chromedriver 140, Firefox 142 [#2318](https://github.com/sitespeedio/browsertime/pull/2318).
+* Selenium webdriver 4.35.0 [#2317](https://github.com/sitespeedio/browsertime/pull/2317).
+
 ## 25.0.0 - 2025-07-16
 
 ### Breaking
