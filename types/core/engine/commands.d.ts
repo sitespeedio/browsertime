@@ -4,6 +4,16 @@
  */
 export class Commands {
     constructor(browser: any, engineDelegate: any, index: any, result: any, storageManager: any, pageCompleteCheck: any, context: any, videos: any, screenshotManager: any, scriptsByCategory: any, asyncScriptsByCategory: any, postURLScripts: any, options: any);
+    /**
+     * Provides functionality to collect perfetto traces.
+     * @type {PerfettoTrace}
+     */
+    perfetto: PerfettoTrace;
+    /**
+     * Provides functionality to collect simpleperf profiles.
+     * @type {SimplePerfProfiler}
+     */
+    simpleperf: SimplePerfProfiler;
     profiler: GeckoProfilerCommand;
     perfStats: PerfStatsInterface;
     /**
@@ -144,6 +154,8 @@ export class Commands {
      */
     element: Element;
 }
+import { PerfettoTrace } from './command/perfetto.js';
+import { SimplePerfProfiler } from './command/simpleperf.js';
 import { GeckoProfiler as GeckoProfilerCommand } from './command/geckoProfiler.js';
 import { PerfStatsInterface } from './command/perfStats.js';
 import { ChromeTrace } from './command/chromeTrace.js';
