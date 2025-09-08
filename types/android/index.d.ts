@@ -15,6 +15,7 @@ export class Android {
     _runAsRootAndGet(command: any): Promise<any>;
     _runAsRoot(command: any): Promise<boolean>;
     _downloadFile(sourcePath: any, destinationPath: any): Promise<any>;
+    _uploadFile(sourcePath: any, destinationPath: any): Promise<any>;
     _downloadDir(sourcePath: any, destinationPath: any): Promise<void>;
     getFullPathOnSdCard(path: any): string;
     mkDirOnSdCard(dirName: any): Promise<any>;
