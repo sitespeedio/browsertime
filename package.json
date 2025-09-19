@@ -40,7 +40,7 @@
     "eslint-plugin-unicorn": "59.0.1",
     "jsdoc": "4.0.4",
     "prettier": "3.6.2",
-    "serve": "14.2.4",
+    "serve": "14.2.5",
     "serve-handler": "6.1.6",
     "typescript": "5.7.2"
   },
