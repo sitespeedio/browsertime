@@ -1,9 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 25.1.0 - 2025-10-12
+## 25.2.0 - 2025-10-12
 ### Added
 * Updated to Chrome/Chromedriver/Edge/Edgedriver 141, Firefox 143 [#2325](https://github.com/sitespeedio/browsertime/pull/2325) and [#2323](https://github.com/sitespeedio/browsertime/pull/2323).
 * Updated webdriver and bidi-har [#2322](https://github.com/sitespeedio/browsertime/pull/2322).
+* Added simpleperf and perfetto support for Android, thank you [Abhishek Nimalan](https://github.com/animalan) for PR  [#2315](https://github.com/sitespeedio/browsertime/pull/2315).
 
 ## 25.1.0 - 2025-09-05
 ### Added
