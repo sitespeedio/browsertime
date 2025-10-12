@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 25.1.0 - 2025-10-12
+### Added
+* Updated to Chrome/Chromedriver/Edge/Edgedriver 141, Firefox 143 [#2325](https://github.com/sitespeedio/browsertime/pull/2325) and [#2323](https://github.com/sitespeedio/browsertime/pull/2323).
+* Updated webdriver and bidi-har [#2322](https://github.com/sitespeedio/browsertime/pull/2322).
+
 ## 25.1.0 - 2025-09-05
 ### Added
 * Updated to Chrome/Chromedriver 140, Firefox 142 [#2318](https://github.com/sitespeedio/browsertime/pull/2318).
