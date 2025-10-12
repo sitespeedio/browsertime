@@ -1,1 +1,1 @@
-{"version":3,"file":"perfStats.d.ts","sourceRoot":"","sources":["../../lib/firefox/perfStats.js"],"names":[],"mappings":"AAGA;IACE,yBAEC;IADC,YAAoB;IAGtB,sCAIC;IAED,qBAIC;IAED,uBAuCC;CACF"}
+{"version":3,"file":"perfStats.d.ts","sourceRoot":"","sources":["../../lib/firefox/perfStats.js"],"names":[],"mappings":"AAGA;IACE,yBAEC;IADC,YAAoB;IAGtB,mCA8BC;IAED,qBAcC;IAED,uBAuCC;CACF"}
