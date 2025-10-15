@@ -37,7 +37,7 @@
     "eslint": "9.37.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prettier": "5.5.4",
-    "eslint-plugin-unicorn": "59.0.1",
+    "eslint-plugin-unicorn": "61.0.2",
     "jsdoc": "4.0.5",
     "prettier": "3.6.2",
     "serve": "14.2.5",
