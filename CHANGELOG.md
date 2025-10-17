@@ -1,5 +1,14 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 25.3.0 - 2025-10-17
+### Added
+* Make it possible to strip cookie and auth headers in the HAR file for Firefox [#2329](https://github.com/sitespeedio/browsertime/pull/2329) and Chrome [#2330](https://github.com/sitespeedio/browsertime/pull/2330). Use `--cleanSensitiveHeaders` to remove a [couple of headers](https://github.com/sitespeedio/browsertime/blob/main/lib/support/har/index.js#L11-L24). 
+* Firefox 144 [#2331](https://github.com/sitespeedio/browsertime/pull/2331).
+
+### Fixed
+* Updated developer dependencies [#2326](https://github.com/sitespeedio/browsertime/pull/2326) and [#2327](https://github.com/sitespeedio/browsertime/pull/2327).
+* Updated log dependency [#2328](https://github.com/sitespeedio/b23272327rowsertime/pull/2328)
+
 ## 25.2.0 - 2025-10-12
 ### Added
 * Updated to Chrome/Chromedriver/Edge/Edgedriver 141, Firefox 143 [#2325](https://github.com/sitespeedio/browsertime/pull/2325) and [#2323](https://github.com/sitespeedio/browsertime/pull/2323).
