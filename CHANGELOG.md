@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 25.3.1 - 2025-10-24
+### Fixed
+* Better handling of closing XVFB [#2332](https://github.com/sitespeedio/browsertime/pull/2332).
+* Firefox: Disable quicksuggest [#2333](https://github.com/sitespeedio/browsertime/pull/2333).
+
 ## 25.3.0 - 2025-10-17
 ### Added
 * Make it possible to strip cookie and auth headers in the HAR file for Firefox [#2329](https://github.com/sitespeedio/browsertime/pull/2329) and Chrome [#2330](https://github.com/sitespeedio/browsertime/pull/2330). Use `--cleanSensitiveHeaders` to remove a [couple of headers](https://github.com/sitespeedio/browsertime/blob/main/lib/support/har/index.js#L11-L24). 
