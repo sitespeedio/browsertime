@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 25.4.0 - 2025-11-02
+### Added
+* Chrome and Chromedriver 142 [#2335](https://github.com/sitespeedio/browsertime/pull/2335).
+
 ## 25.3.1 - 2025-10-24
 ### Fixed
 * Better handling of closing XVFB [#2332](https://github.com/sitespeedio/browsertime/pull/2332).
