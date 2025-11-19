@@ -1,18 +1,31 @@
 #!/bin/bash
 set -e
 
+# write files owned by the user who runs the container
+# if your volume is mounted at /browsertime, use it as CWD
+[[ -d /browsertime && "$PWD" = "/" ]] && cd /browsertime
+
+UID=$(stat -c '%u' . 2>/dev/null || echo 0)
+GID=$(stat -c '%g' . 2>/dev/null || echo 0)
+
+run_as_host() {
+  if [[ "$UID" -ne 0 && "$GID" -ne 0 ]]; then
+    HOME=/tmp chroot --skip-chdir --userspec="+${UID}:+${GID}" / "$@"
+  else
+    HOME=/tmp "$@"
+  fi
+}
+
 # See https://github.com/SeleniumHQ/docker-selenium/issues/87
 export DBUS_SESSION_BUS_ADDRESS=/dev/null
 
 # All browsers do not exist in all architectures.
 if [[ `which google-chrome` ]]; then
    google-chrome --version
-elif [[ `which chromium-browser` ]]; then
-   chromium-browser --version
 fi
 
 if [[ `which firefox` ]]; then
-   firefox --version
+  firefox --version 2>/dev/null
 fi
 
 if [[ `which microsoft-edge` ]]; then
@@ -38,20 +51,12 @@ else
   WPR_HTTPS_PORT=${WPR_HTTPS_PORT:-443}
 fi
 
-WORKDIR_UID=$(stat -c "%u" .)
-WORKDIR_GID=$(stat -c "%g" .)
-
-# Create user with the same UID and GID as the owner of the working directory, which will be used
-# to execute node. This is partly for security and partly so output files won't be owned by root.
-groupadd --non-unique --gid $WORKDIR_GID browsertime
-useradd --non-unique --uid $WORKDIR_UID --gid $WORKDIR_GID --home-dir /tmp browsertime
-
 # Need to explictly override the HOME directory to prevent dconf errors like:
 # (firefox:2003): dconf-CRITICAL **: 00:31:23.379: unable to create directory '/root/.cache/dconf': Permission denied.  dconf will not work properly.
 export HOME=/tmp
 
 function execNode(){
-   chroot --skip-chdir --userspec='browsertime:browsertime' / node "$@"
+   run_as_host node "$@"
 }
 
 # Here's a hack for fixing the problem with Chrome not starting in time
