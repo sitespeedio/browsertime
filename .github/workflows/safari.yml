@@ -37,7 +37,7 @@ jobs:
     #- name: Check display
      # run: system_profiler SPDisplaysDataType |grep Resolution
     - name: Check ffmpeg
-      run: fmpeg -version
+      run: ffmpeg -version
     - name: List all simulators
       run: xcrun xctrace list devices
     #- name: Start local HTTP server
