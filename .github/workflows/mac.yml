@@ -8,7 +8,7 @@ on:
     - main
 jobs:
   build:
-    runs-on: macos-13
+    runs-on: macos-15-intel
     timeout-minutes: 30
     steps:
     - uses: actions/checkout@v4
@@ -21,17 +21,16 @@ jobs:
     - name: Install python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.11' 
+        python-version: '3.11'
     - name: Install dependencies
       run: |
         brew update
         brew install google-chrome
         brew install --cask firefox
         brew install --cask microsoft-edge
-    - name: Test Chrome 
+    - name: Test Chrome
       run: ./bin/browsertime.js -b chrome -n 1 https://www.sitespeed.io/
     - name: Test Firefox
       run: ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io/
     - name: Test Edge
       run: ./bin/browsertime.js -b edge -n 1 https://www.sitespeed.io/
-  
