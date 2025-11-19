@@ -32,11 +32,12 @@ jobs:
         python -m pip --version
         python -m pip show Pillow
         python -m pip show pyssim
-    - name: Checks
-      run: |
-        sudo safaridriver --enable
-        system_profiler SPDisplaysDataType |grep Resolution
-        ffmpeg -version
+    - name: Check Safaridriver
+      run: sudo safaridriver --enable
+    - name: Check display
+      run: system_profiler SPDisplaysDataType |grep Resolution
+    - name: Check ffmpeg
+      run: fmpeg -version
     - name: List all simulators
       run: xcrun xctrace list devices
     #- name: Start local HTTP server
