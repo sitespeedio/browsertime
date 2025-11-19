@@ -34,8 +34,8 @@ jobs:
         python -m pip show pyssim
     - name: Check Safaridriver
       run: sudo safaridriver --enable
-    - name: Check display
-      run: system_profiler SPDisplaysDataType |grep Resolution
+    #- name: Check display
+     # run: system_profiler SPDisplaysDataType |grep Resolution
     - name: Check ffmpeg
       run: fmpeg -version
     - name: List all simulators
