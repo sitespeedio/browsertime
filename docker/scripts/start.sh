@@ -5,12 +5,12 @@ set -e
 # if your volume is mounted at /browsertime, use it as CWD
 [[ -d /browsertime && "$PWD" = "/" ]] && cd /browsertime
 
-UID=$(stat -c '%u' . 2>/dev/null || echo 0)
-GID=$(stat -c '%g' . 2>/dev/null || echo 0)
+uid=$(stat -c '%u' . 2>/dev/null || echo 0)
+gid=$(stat -c '%g' . 2>/dev/null || echo 0)
 
 run_as_host() {
-  if [[ "$UID" -ne 0 && "$GID" -ne 0 ]]; then
-    HOME=/tmp chroot --skip-chdir --userspec="+${UID}:+${GID}" / "$@"
+  if [[ "$uid" -ne 0 && "$gid" -ne 0 ]]; then
+    HOME=/tmp chroot --skip-chdir --userspec="+${uid}:+${gid}" / "$@"
   else
     HOME=/tmp "$@"
   fi
