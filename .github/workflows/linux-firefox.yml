@@ -14,7 +14,7 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '22.x'
+        node-version: '24.x'
     - name: Install Firefox
       uses: browser-actions/setup-firefox@latest
       #with:
@@ -55,4 +55,4 @@ jobs:
     - name: Run test with check network idle in Firefox
       run: ./bin/browsertime.js -b firefox --pageCompleteCheckNetworkIdle --xvfb http://127.0.0.1:3000/simple/
     - name: Test extra profile run Firefox
-      run: ./bin/browsertime.js -b firefox http://127.0.0.1:3000/simple/ -n 1 --viewPort 1000x600 --xvfb  --enableProfileRun    
+      run: ./bin/browsertime.js -b firefox http://127.0.0.1:3000/simple/ -n 1 --viewPort 1000x600 --xvfb  --enableProfileRun
