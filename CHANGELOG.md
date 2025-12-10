@@ -1,5 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 26.0.1- 2025-12-10
+### Fixed
+* Remove extra console.log entry :)
+
 ## 26.0.0 - 2025-12-10
 ### Breaking
 * We removed support for setting the compression level for png screenshots, see the added section why.
