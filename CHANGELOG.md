@@ -1,5 +1,12 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 26.0.0 - 2025-12-10
+### Breaking
+* We removed support for setting the compression level for png screenshots, see the added section why.
+
+### Added
+* Upgrade to support NodeJS 24 without warnings, include NodeJS 24 in the Docker container, and base the Docker container on Ubuntu 24.04. To make this work I needed to upgrade the Jimp library and then we lost the settings for png screenshots `--screenshotParams.png.compressionLevel`   [#2342](https://github.com/sitespeedio/browsertime/pull/2342).
+
 ## 25.4.0 - 2025-11-02
 ### Added
 * Chrome and Chromedriver 142 [#2335](https://github.com/sitespeedio/browsertime/pull/2335).
@@ -11,7 +18,7 @@
 
 ## 25.3.0 - 2025-10-17
 ### Added
-* Make it possible to strip cookie and auth headers in the HAR file for Firefox [#2329](https://github.com/sitespeedio/browsertime/pull/2329) and Chrome [#2330](https://github.com/sitespeedio/browsertime/pull/2330). Use `--cleanSensitiveHeaders` to remove a [couple of headers](https://github.com/sitespeedio/browsertime/blob/main/lib/support/har/index.js#L11-L24). 
+* Make it possible to strip cookie and auth headers in the HAR file for Firefox [#2329](https://github.com/sitespeedio/browsertime/pull/2329) and Chrome [#2330](https://github.com/sitespeedio/browsertime/pull/2330). Use `--cleanSensitiveHeaders` to remove a [couple of headers](https://github.com/sitespeedio/browsertime/blob/main/lib/support/har/index.js#L11-L24).
 * Firefox 144 [#2331](https://github.com/sitespeedio/browsertime/pull/2331).
 
 ### Fixed
