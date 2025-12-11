@@ -3,7 +3,7 @@
 ## 26.1.0- 2025-12-11
 ### Added
 * Firefox 146 in the Docker container [#2351](https://github.com/sitespeedio/browsertime/pull/2351).
-* Chrone 143 in the Docker container [#2350](https://github.com/sitespeedio/browsertime/pull/2350).
+* Chrome 143 in the Docker container [#2350](https://github.com/sitespeedio/browsertime/pull/2350).
 
 ### Fixed
 * Make sure the user in the Docker container has the correct user rights [#2349](https://github.com/sitespeedio/browsertime/pull/2349).
