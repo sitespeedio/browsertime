@@ -27,7 +27,8 @@ export class SimplePerfProfiler {
      * @returns {Promise<void>} A promise that resolves when simpleperf has started profiling.
      * @throws {Error} Throws an error if app_profiler.py fails to execute.
      */
-    start(profilerOptions?: string, dirName?: string): Promise<void>;
+    start(profilerOptions?: any[], recordOptions?: string, dirName?: string): Promise<void>;
+    profilerOptions: any[];
     dataDir: any;
     simpleperfProcess: import("execa").ResultPromise<{}>;
     /**
