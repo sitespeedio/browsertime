@@ -1,5 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 26.2.0 - 2025-12-18
+### Added
+* Updated Chromedriver and Edgedriver to 143 [#2354](https://github.com/sitespeedio/browsertime/pull/2354) and[#2355](https://github.com/sitespeedio/browsertime/pull/2355).
+* Updated webdriver to 4.39.0 [#2356](https://github.com/sitespeedio/browsertime/pull/2356).
+
+### Fixed
+* Try to tune the XVFB handling to make it safer that xvfb is always stopped [#2353](https://github.com/sitespeedio/browsertime/pull/2353).
+
 ## 26.1.0- 2025-12-11
 ### Added
 * Firefox 146 in the Docker container [#2351](https://github.com/sitespeedio/browsertime/pull/2351).
