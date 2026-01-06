@@ -1,5 +1,61 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 26.2.0 - 2025-12-18
+### Added
+* Updated Chromedriver and Edgedriver to 143 [#2354](https://github.com/sitespeedio/browsertime/pull/2354) and[#2355](https://github.com/sitespeedio/browsertime/pull/2355).
+* Updated webdriver to 4.39.0 [#2356](https://github.com/sitespeedio/browsertime/pull/2356).
+
+### Fixed
+* Try to tune the XVFB handling to make it safer that xvfb is always stopped [#2353](https://github.com/sitespeedio/browsertime/pull/2353).
+
+## 26.1.0- 2025-12-11
+### Added
+* Firefox 146 in the Docker container [#2351](https://github.com/sitespeedio/browsertime/pull/2351).
+* Chrome 143 in the Docker container [#2350](https://github.com/sitespeedio/browsertime/pull/2350).
+
+### Fixed
+* Make sure the user in the Docker container has the correct user rights [#2349](https://github.com/sitespeedio/browsertime/pull/2349).
+
+## 26.0.1- 2025-12-10
+### Fixed
+* Remove extra console.log entry :)
+
+## 26.0.0 - 2025-12-10
+### Breaking
+* We removed support for setting the compression level for png screenshots, see the added section why.
+
+### Added
+* Upgrade to support NodeJS 24 without warnings, include NodeJS 24 in the Docker container, and base the Docker container on Ubuntu 24.04. To make this work I needed to upgrade the Jimp library and then we lost the settings for png screenshots `--screenshotParams.png.compressionLevel`   [#2342](https://github.com/sitespeedio/browsertime/pull/2342).
+
+## 25.4.0 - 2025-11-02
+### Added
+* Chrome and Chromedriver 142 [#2335](https://github.com/sitespeedio/browsertime/pull/2335).
+
+## 25.3.1 - 2025-10-24
+### Fixed
+* Better handling of closing XVFB [#2332](https://github.com/sitespeedio/browsertime/pull/2332).
+* Firefox: Disable quicksuggest [#2333](https://github.com/sitespeedio/browsertime/pull/2333).
+
+## 25.3.0 - 2025-10-17
+### Added
+* Make it possible to strip cookie and auth headers in the HAR file for Firefox [#2329](https://github.com/sitespeedio/browsertime/pull/2329) and Chrome [#2330](https://github.com/sitespeedio/browsertime/pull/2330). Use `--cleanSensitiveHeaders` to remove a [couple of headers](https://github.com/sitespeedio/browsertime/blob/main/lib/support/har/index.js#L11-L24).
+* Firefox 144 [#2331](https://github.com/sitespeedio/browsertime/pull/2331).
+
+### Fixed
+* Updated developer dependencies [#2326](https://github.com/sitespeedio/browsertime/pull/2326) and [#2327](https://github.com/sitespeedio/browsertime/pull/2327).
+* Updated log dependency [#2328](https://github.com/sitespeedio/b23272327rowsertime/pull/2328)
+
+## 25.2.0 - 2025-10-12
+### Added
+* Updated to Chrome/Chromedriver/Edge/Edgedriver 141, Firefox 143 [#2325](https://github.com/sitespeedio/browsertime/pull/2325) and [#2323](https://github.com/sitespeedio/browsertime/pull/2323).
+* Updated webdriver and bidi-har [#2322](https://github.com/sitespeedio/browsertime/pull/2322).
+* Added simpleperf and perfetto support for Android, thank you [Abhishek Nimalan](https://github.com/animalan) for PR  [#2315](https://github.com/sitespeedio/browsertime/pull/2315).
+
+## 25.1.0 - 2025-09-05
+### Added
+* Updated to Chrome/Chromedriver 140, Firefox 142 [#2318](https://github.com/sitespeedio/browsertime/pull/2318).
+* Selenium webdriver 4.35.0 [#2317](https://github.com/sitespeedio/browsertime/pull/2317).
+
 ## 25.0.0 - 2025-07-16
 
 ### Breaking

@@ -8,6 +8,34 @@ If you want help out, that's great! Check the issue list and see if there's some
  - Make sure you have added the tests needed for your change
  - Run all the tests to make sure you haven't broken anything else (it happens to the best!)
 
+### AI-Assisted changes
+
+When using AI tools like ChatGPT to assist with development, please a) disclose it in your commits and pull requests.
+
+#### Commits
+
+When writing a commit message for a change that was assisted by an AI, please add the `AI-assisted-by:` trailer to the commit message body.
+
+**Example:**
+
+```
+Add Cumulative Layout Shift metric to the summary page
+
+Add the Cumulative Layout Shift (CLS) introduced by Google on
+the summary page. Show both median and p75.
+
+AI-assisted-by: ChatGPT
+```
+
+#### Pull Requests
+
+When creating a pull request that includes AI-assisted work, please mention it in the pull request description.
+
+**Example:**
+
+> This pull request implements Cumulative Layout Shift with assistance from ChatGPT.
+
+
 ## Add a defect
 First, check the defect/bug list https://github.com/sitespeedio/browsertime/issues?q=is%3Aissue+is%3Aopen+label%3Abug to make sure that it hasn't been filed yet.
 

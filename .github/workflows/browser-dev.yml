@@ -14,7 +14,7 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '22.x'
+        node-version: '24.x'
     - name: Install Firefox latest dev edition
       uses: browser-actions/setup-firefox@latest
       with:
@@ -45,4 +45,4 @@ jobs:
     - name: Test Chrome dev
       run: ./bin/browsertime.js -b chrome -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle --xvfb --chrome.binaryPath $(which chrome)
     - name: Test Firefox dev
-      run: ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle --xvfb 
+      run: ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle --xvfb
