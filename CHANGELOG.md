@@ -1,12 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 26.3.0 - UNRELEASED
+## 26.3.0 - 2026-01-09
 
 ### Added
 * Get response bodies in the HAR for Firefox. Thank you [Julian Descottes](https://github.com/juliandescottes) and the rest of the Mozilla team that made this possible in bidi-har-export. Added in [#2359](https://github.com/sitespeedio/browsertime/pull/2359). The Firefox HAR has missed this functionality since we did the switch to bidi-har.
 
 ### Fixed
 * Restructure server timings so the timing name does not get lost for InfluxDB/Graphite. Thank you [Tim Oldenburg](https://github.com/TimOldenburg) for PR [#2358](https://github.com/sitespeedio/browsertime/pull/2358).
+* Add Simpleperf app_profiler options and use `--android.simpleperf`. Thank you [Abhishek Nimalan](https://github.com/animalan) for PR [#2352](https://github.com/sitespeedio/browsertime/pull/2352)
 
 ## 26.2.0 - 2025-12-18
 ### Added
