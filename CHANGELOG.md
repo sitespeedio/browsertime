@@ -1,5 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 26.3.0 - UNRELEASED
+
+### Added
+* Get response bodies in the HAR for Firefox. Thank you [Julian Descottes](https://github.com/juliandescottes) and the rest of the Mozilla team that made this possible in bidi-har-export. Added in [#2359](https://github.com/sitespeedio/browsertime/pull/2359). The Firefox HAR has missed this functionality since we did the switch to bidi-har.
+
+### Fixed
+* Restructure server timings so the timing name does not get lost for InfluxDB/Graphite. Thank you [Tim Oldenburg](https://github.com/TimOldenburg) for PR [#2358](https://github.com/sitespeedio/browsertime/pull/2358).
+
 ## 26.2.0 - 2025-12-18
 ### Added
 * Updated Chromedriver and Edgedriver to 143 [#2354](https://github.com/sitespeedio/browsertime/pull/2354) and[#2355](https://github.com/sitespeedio/browsertime/pull/2355).
