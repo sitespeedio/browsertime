@@ -1,9 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 26.3.2 - 2026-01-24
+### Fixed
+* Hello the new and fixed bidi-har 0.0.22 that fixes the response body [#2361](https://github.com/sitespeedio/browsertime/pull/2361).
+
+
 ## 26.3.1 - 2026-01-11
 ### Fixed
-* Reverting back to bidi-har 0.0.18. There where error/failures either in bidi har or in combination with browsertime in the latest release [#2360](https://github.com/sitespeedio/browsertime/pull/2360)
-
+* Reverting back to bidi-har 0.0.18. There where error/failures either in bidi har or in combination with browsertime in the latest release [#2360](https://github.com/sitespeedio/browsertime/pull/2360).
 
 ## 26.3.0 - 2026-01-09
 
