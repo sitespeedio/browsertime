@@ -17,7 +17,7 @@
     "chrome-remote-interface": "0.33.3",
     "execa": "9.6.0",
     "fast-stats": "0.0.7",
-    "ff-test-bidi-har-export": "0.0.18",
+    "ff-test-bidi-har-export": "0.0.22",
     "lodash.merge": "4.6.2",
     "selenium-webdriver": "4.39.0",
     "yargs": "18.0.0"
