@@ -21,7 +21,7 @@ jobs:
       with:
         python-version: '3.12'
     - name: Install FFMPEG
-      run: brew install ffmpeg
+      run: brew install ffmpeg@7 && brew link ffmpeg@7
     - name: Install browsertime
       run: npm ci
     - name: Install Python dependencies
