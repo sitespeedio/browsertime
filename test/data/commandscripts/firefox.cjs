@@ -3,7 +3,7 @@ module.exports = async function (context, commands) {
   const params = {
     method: 'script.addPreloadScript',
     params: {
-      functionDeclaration: 'function(){alert("hepp");}'
+      functionDeclaration: 'function(){window.__preloadScriptRan=true;}'
     }
   };
 
