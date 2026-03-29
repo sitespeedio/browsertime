@@ -1,18 +1,24 @@
 #!/usr/bin/env python3
 """
-Regression tests for visualmetrics-portable-next.py.
+Regression tests for the visual metrics Python script used by browsertime.
 
-Runs the visual metrics script on pre-recorded videos and asserts the output
-matches known expected values (golden metrics). This catches regressions where
-code changes accidentally alter metric calculations.
+Ensures that changes to visualmetrics-portable-next.py do not accidentally
+alter the calculated metrics (Speed Index, Perceptual Speed Index, etc.).
+Each test runs the script on a pre-recorded browser video and asserts
+that every metric exactly matches a known golden value.
 
-Videos are recorded from real websites using browsertime and stored in test_videos/.
-Expected metrics are in test_videos/expected_metrics.json.
+The test videos are recorded from real websites using browsertime across
+different configurations:
+  - Desktop Chrome and Firefox (macOS screen recording)
+  - Desktop with cable-throttled network (5/1 Mbps, 28ms RTT)
+  - Android device (Samsung A51, screen recording via adb)
+
+Golden values are stored in test_videos/expected_metrics.json and should
+be regenerated with --generate whenever metrics change intentionally.
 
 Usage:
     python test_visual_metrics_regression.py          # Run all tests
     python test_visual_metrics_regression.py -v       # Verbose output
-    python test_visual_metrics_regression.py -k google # Run only tests matching 'google'
 
 To regenerate expected metrics after intentional changes:
     python test_visual_metrics_regression.py --generate
@@ -30,8 +36,8 @@ SCRIPT = os.path.join(HERE, "visualmetrics-portable-next.py")
 EXPECTED_FILE = os.path.join(VIDEO_DIR, "expected_metrics.json")
 PYTHON = os.environ.get("PYTHON", sys.executable)
 
-# Arguments matching what browsertime uses in production
-# (from lib/video/postprocessing/visualmetrics/visualMetrics.js)
+# Same arguments that browsertime passes to the script in production
+# (see lib/video/postprocessing/visualmetrics/visualMetrics.js)
 SCRIPT_ARGS = [
     "--orange",
     "--force",
@@ -46,7 +52,7 @@ SCRIPT_ARGS = [
     "-vvv",
 ]
 
-# All metrics that the script outputs
+# Every metric the script outputs that we verify
 ALL_METRICS = [
     "FirstVisualChange",
     "LastVisualChange",
@@ -153,7 +159,7 @@ def make_test(video_name):
 
 
 class TestVisualMetricsRegression(unittest.TestCase):
-    """Verify visual metrics output matches expected golden values."""
+    """Run the visual metrics script on each video and compare against golden values."""
 
     _expected = None
 
@@ -169,9 +175,10 @@ class TestVisualMetricsRegression(unittest.TestCase):
         cls._expected = load_expected()
 
 
-# Videos recorded from real sites
+# Each video is named {site}_{browser}[_{variant}].mp4
+# Recorded with: browsertime -n 1 --video --visualMetrics false <url>
 VIDEOS = [
-    # Desktop - Chrome
+    # Desktop Chrome (macOS)
     "google_chrome",
     "youtube_chrome",
     "wikipedia_chrome",
@@ -179,24 +186,24 @@ VIDEOS = [
     "reddit_chrome",
     "aftonbladet_chrome",
     "dn_chrome",
-    # Desktop - Firefox
+    # Desktop Firefox (macOS)
     "github_firefox",
     "apple_firefox",
     "bing_firefox",
     "duckduckgo_firefox",
     "bbc_firefox",
     "cnet_firefox",
-    # Desktop - Cable throttled
+    # Desktop with cable throttle (5/1 Mbps, 28ms RTT)
     "aftonbladet_chrome_cable",
     "dn_chrome_cable",
     "cnet_firefox_cable",
-    # Android - Samsung A51
+    # Android Chrome (Samsung A51)
     "wikipedia_android",
     "aftonbladet_android",
     "sitespeed_android",
 ]
 
-# Generate a test method per video
+# One test method per video — each runs the script and asserts all metrics match
 for _video in VIDEOS:
     setattr(TestVisualMetricsRegression, f"test_{_video}", make_test(_video))
 
