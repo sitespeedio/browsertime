@@ -2,7 +2,7 @@
 """
 Regression tests for the visual metrics Python script used by browsertime.
 
-Ensures that changes to visualmetrics-portable-next.py do not accidentally
+Ensures that changes to visualmetrics-portable.py do not accidentally
 alter the calculated metrics (Speed Index, Perceptual Speed Index, etc.).
 Each test runs the script on a pre-recorded browser video and asserts
 that every metric exactly matches a known golden value.
@@ -32,7 +32,7 @@ import unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 VIDEO_DIR = os.path.join(HERE, "test_videos")
-SCRIPT = os.path.join(HERE, "visualmetrics-portable-next.py")
+SCRIPT = os.path.join(HERE, "visualmetrics-portable.py")
 EXPECTED_FILE = os.path.join(VIDEO_DIR, "expected_metrics.json")
 PYTHON = os.environ.get("PYTHON", sys.executable)
 
