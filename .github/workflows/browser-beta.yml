@@ -10,17 +10,17 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
     - name: Use Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
       with:
         node-version: '24.x'
     - name: Install Firefox beta
-      uses: browser-actions/setup-firefox@latest
+      uses: browser-actions/setup-firefox@fcf821c621167805dd63a29662bd7cb5676c81a8 # latest
       with:
         firefox-version: 'latest-beta'
     - name: Install Chrome beta
-      uses: browser-actions/setup-chrome@latest
+      uses: browser-actions/setup-chrome@4f8e94349a351df0f048634f25fec36c3c91eded # latest
       with:
         chrome-version: beta
     - name: Install Browsertime

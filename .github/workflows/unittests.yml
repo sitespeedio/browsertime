@@ -15,9 +15,9 @@ jobs:
         browser: ['chrome', 'firefox']
         node-version: [22.x, 24.x,]
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install latest Chrome
@@ -28,7 +28,9 @@ jobs:
         sudo apt-get --only-upgrade install google-chrome-stable
         google-chrome --version
     - name: Install Firefox
-      uses: browser-actions/setup-firefox@latest
+      uses: browser-actions/setup-firefox@fcf821c621167805dd63a29662bd7cb5676c81a8 # latest
+      with:
+        firefox-version: '149.0'
     - name: Install Browsertime
       run: npm ci
     - name: Run unit tests
