@@ -13,7 +13,32 @@ jobs:
     - name: Harden Runner
       uses: step-security/harden-runner@5ef0c079ce82195b2a36a210272d6b661572d83e # v2.14.2
       with:
-        egress-policy: audit
+        egress-policy: block
+        allowed-endpoints: >
+          accounts.google.com:443
+          android.clients.google.com:443
+          api.snapcraft.io:443
+          azure.archive.ubuntu.com:80
+          canonical-bos01.cdn.snapcraftcontent.com:443
+          canonical-lgw01.cdn.snapcraftcontent.com:443
+          clients2.google.com:80
+          dl-ssl.google.com:443
+          dl.google.com:80
+          esm.ubuntu.com:443
+          files.pythonhosted.org:443
+          github.com:443
+          motd.ubuntu.com:443
+          msedgedriver.microsoft.com:443
+          mtalk.google.com:5228
+          nodejs.org:443
+          packages.microsoft.com:443
+          pypi.org:443
+          registry.npmjs.org:443
+          release-assets.githubusercontent.com:443
+          results-receiver.actions.githubusercontent.com:443
+          storage.googleapis.com:443
+          www.google.com:443
+          www.sitespeed.io:443
     - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
     - name: Use Node.js
       uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
