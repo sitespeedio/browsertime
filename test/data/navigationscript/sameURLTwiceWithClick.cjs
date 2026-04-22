@@ -7,6 +7,10 @@ module.exports = async function (context, commands) {
   await commands.js.run(
     'for (let node of document.body.childNodes) { if (node.style) node.style.display = "none";}'
   );
+  // Make the link visible so the Actions API click can interact with it
+  await commands.js.run(
+    "document.querySelector(\"a[href='/simple/']\").parentElement.style.display = '';"
+  );
   // Start measurning
   await commands.measure.start();
   // Click on the link for /simple/ and wait on navigation to happen
