@@ -36,6 +36,7 @@ jobs:
       uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
       with:
         node-version: '24.x'
+        cache: 'npm'
     - name: Install Firefox
       uses: browser-actions/setup-firefox@fcf821c621167805dd63a29662bd7cb5676c81a8 # latest
       with:
