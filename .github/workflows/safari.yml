@@ -27,17 +27,15 @@ jobs:
         python-version: '3.12'
         cache: 'pip'
     - name: Install FFMPEG
+      env:
+        HOMEBREW_NO_AUTO_UPDATE: 1
       run: brew install ffmpeg@7 && brew link ffmpeg@7
     - name: Install browsertime
       run: npm ci
     - name: Install Python dependencies
       run: |
-        python -m pip install --upgrade --user pip
-        python -m pip install --upgrade --user setuptools
+        python -m pip install --upgrade --user pip setuptools
         python -m pip install --user pyssim OpenCV-Python Numpy
-        python -m pip --version
-        python -m pip show Pillow
-        python -m pip show pyssim
     - name: Check Safaridriver
       run: sudo safaridriver --enable
     #- name: Check display
