@@ -91,6 +91,14 @@ jobs:
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/scripting/common.js --cjs
     - name: Run test with scripting.js
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/scripting/module.js
+    - name: Run test with scripting.mts
+      run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/scripting/module.mts
+    - name: Run test with scripting.cts
+      run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/scripting/common.cts
+    - name: Run test with scripting.ts
+      run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/scripting/common.ts --cjs
+    - name: Run test with scripting.ts
+      run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/scripting/module.ts
     - name: Test extra profile run Chrome
       run: ./bin/browsertime.js -b chrome http://127.0.0.1:3000/simple/ -n 1 --viewPort 1000x600 --xvfb  --enableProfileRun
   video:
