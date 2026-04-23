@@ -22,7 +22,7 @@ jobs:
     - name: Install Browsertime
       run: npm ci
     - name: Install ffmpeg
-      uses: FedericoCarboni/setup-ffmpeg@36c6454b81a2c57bbe6571e2ee5b2571c6feaad0 # v3
+      uses: FedericoCarboni/setup-ffmpeg@37062fbf7149fc5578d6c57e08aed62458b375d6 # v3.1
       with:
         ffmpeg-version: release
     - name: Set up Python
