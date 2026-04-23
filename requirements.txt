@@ -1,0 +1,3 @@
+pyssim
+OpenCV-Python
+Numpy
