@@ -44,6 +44,7 @@ jobs:
       uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
       with:
         node-version: '24.x'
+        cache: 'npm'
     - name: Install latest Chrome
       run: |
         wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
