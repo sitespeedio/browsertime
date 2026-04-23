@@ -20,10 +20,12 @@ jobs:
       uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
       with:
         node-version: '24.x'
+        cache: 'npm'
     - name: Use Pyhton
       uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
       with:
         python-version: '3.12'
+        cache: 'pip'
     - name: Install browsertime
       run: npm ci
     - name: Install Python dependencies
