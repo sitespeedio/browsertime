@@ -55,10 +55,10 @@ export default async function (context, commands) {
   await commands.measure.start(
     'https://dashboard.sitespeed.io/d/000000044/page-timing-metrics?orgId=1','pageTimingMetricsDefault'
   );
-  await commands.click.byClassName('gf-timepicker-nav-btn');
+  await commands.click('class:gf-timepicker-nav-btn');
   await commands.wait.byTime(1000);
   await commands.measure.start('pageTimingMetrics30Days');
-  await commands.click.byLinkTextAndWait('Last 30 days');
+  await commands.click('link:Last 30 days', { waitForNavigation: true });
   await commands.measure.stop();
 };
 ~~~

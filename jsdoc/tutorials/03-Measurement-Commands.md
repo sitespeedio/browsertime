@@ -32,9 +32,24 @@ export default async function (context, commands) {
   await commands.navigate('https://www.sitespeed.io');
 
   await commands.measure.start('Documentation');
-  // Using a xxxAndWait command will make the page wait for a navigation
-  await commands.click.byLinkTextAndWait('Documentation');
+  await commands.click('link:Documentation', { waitForNavigation: true });
   return commands.measure.stop();
+}
+```
+
+### Click and measure shortcut
+
+For the common pattern of start/click/stop, you can use `clickAndMeasure`:
+
+```javascript
+/**
+ * @param {import('browsertime').BrowsertimeContext} context
+ * @param {import('browsertime').BrowsertimeCommands} commands
+ */
+export default async function (context, commands) {
+  await commands.navigate('https://www.sitespeed.io');
+  // This is equivalent to measure.start + click.bySelectorAndWait + measure.stop
+  return commands.measure.clickAndMeasure('Documentation', 'a[href="/documentation/"]');
 }
 ```
 
@@ -119,7 +134,7 @@ Here's an example on how to do that:
 export default async function (context, commands) {
   await commands.measure.start('https://react.dev');
   await commands.measure.start('Learn');
-  await commands.mouse.singleClick.byLinkTextAndWait('Learn');
+  await commands.click('link:Learn', { waitForNavigation: true });
   return commands.measure.stop();
 }
 ```
