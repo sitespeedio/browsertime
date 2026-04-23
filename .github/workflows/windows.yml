@@ -22,11 +22,9 @@ jobs:
     - name: Install Browsertime
       run: npm ci
     - name: Install ffmpeg
-      run: |
-        curl -L -o ffmpeg.zip https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-7.1-essentials_build.zip
-        7z x ffmpeg.zip -oC:\ffmpeg
-        echo C:\ffmpeg\ffmpeg-7.1-essentials_build\bin>> %GITHUB_PATH%
-      shell: cmd
+      uses: AnimMouse/setup-ffmpeg@ae28d57dabbb148eff63170b6bf7f2b60062cbae # v1.2.3
+      with:
+        version: '7.1'
     - name: Set up Python
       uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
       with:
