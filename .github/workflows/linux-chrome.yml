@@ -140,15 +140,17 @@ jobs:
         google-chrome --version
     - name: Install Browsertime
       run: npm ci
+    - name: Set up Python
+      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
+      with:
+        python-version: '3.12'
+        cache: 'pip'
     - name: Install dependencies
       run: |
         sudo apt-get install net-tools -y
         sudo snap install ffmpeg
         sudo snap alias ffmpeg.ffprobe ffprobe
-        python -m pip install --upgrade --user pip
-        python -m pip install --upgrade --user setuptools==70.0.0
-        python -m pip install --user pyssim OpenCV-Python Numpy
-        python -m pip install virtualenv
+        python -m pip install --upgrade pip setuptools==70.0.0 pyssim OpenCV-Python Numpy virtualenv
         sudo modprobe ifb numifbs=1
     - name: Start local HTTP server
       run: (npm run start-server&)
