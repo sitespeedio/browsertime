@@ -22,20 +22,18 @@ jobs:
         cache: 'npm'
     - name: Install Browsertime
       run: npm ci
-    - name: Install dependencies
+    - name: Install ffmpeg
+      uses: AnimMouse/setup-ffmpeg@ae28d57dabbb148eff63170b6bf7f2b60062cbae # v1.2.3
+      with:
+        version: '7.1'
+    - name: Set up Python
+      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
+      with:
+        python-version: '3.12'
+    - name: Install Python dependencies
       run: |
-        choco install ffmpeg
-        choco outdated
-        choco install python
-        choco install microsoft-edge
-        choco install googlechrome
-        choco install firefox
-        python -m pip install --upgrade --user pip
-        python -m pip install --upgrade --user setuptools
-        python -m pip install --user pyssim OpenCV-Python Numpy
-        python -m pip --version
-        python -m pip show Pillow
-        python -m pip show pyssim
+        python -m pip install --upgrade pip setuptools
+        python -m pip install pyssim OpenCV-Python Numpy
       shell: cmd
     - name: Start local HTTP server
       run: (npm run start-server&)
