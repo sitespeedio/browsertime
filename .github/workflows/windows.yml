@@ -22,17 +22,11 @@ jobs:
     - name: Install Browsertime
       run: npm ci
     - name: Install ffmpeg
-      uses: FedericoCarboni/setup-ffmpeg@37062fbf7149fc5578d6c57e08aed62458b375d6 # v3.1
-      with:
-        ffmpeg-version: release
-    - name: Configure fontconfig for ffmpeg drawtext
       run: |
-        mkdir -p /c/fontconfig
-        echo '<?xml version="1.0"?>' > /c/fontconfig/fonts.conf
-        echo '<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">' >> /c/fontconfig/fonts.conf
-        echo '<fontconfig><dir>C:\Windows\Fonts</dir></fontconfig>' >> /c/fontconfig/fonts.conf
-        echo "FONTCONFIG_FILE=C:\fontconfig\fonts.conf" >> $GITHUB_ENV
-      shell: bash
+        curl -L -o ffmpeg.zip https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-7.1-essentials_build.zip
+        7z x ffmpeg.zip -oC:\ffmpeg
+        echo C:\ffmpeg\ffmpeg-7.1-essentials_build\bin>> %GITHUB_PATH%
+      shell: cmd
     - name: Set up Python
       uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
       with:
