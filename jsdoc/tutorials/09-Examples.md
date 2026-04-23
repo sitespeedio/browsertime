@@ -1,5 +1,7 @@
 Here are some examples on how you can use the scripting capabilities.
 
+> **Note:** Some examples below use the older `commands.click.byIdAndWait()` and `commands.addText.byId()` style. The recommended approach is to use `commands.click(selector, { wait: true })` and `commands.type(selector, text)` instead. The `AndWait` methods are deprecated. See the [interaction tutorial](tutorial-04-Interact-with-the-page.html) for details.
+
 ### Measure multiple pages
 
 Test multiple pages in a script:
