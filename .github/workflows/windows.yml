@@ -21,20 +21,18 @@ jobs:
         node-version: '24.x'
     - name: Install Browsertime
       run: npm ci
-    - name: Install dependencies
+    - name: Install ffmpeg
+      uses: FedericoCarboni/setup-ffmpeg@36c6454b81a2c57bbe6571e2ee5b2571c6feaad0 # v3
+      with:
+        ffmpeg-version: release
+    - name: Set up Python
+      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
+      with:
+        python-version: '3.12'
+    - name: Install Python dependencies
       run: |
-        choco install ffmpeg
-        choco outdated
-        choco install python
-        choco install microsoft-edge
-        choco install googlechrome
-        choco install firefox
-        python -m pip install --upgrade --user pip
-        python -m pip install --upgrade --user setuptools
-        python -m pip install --user pyssim OpenCV-Python Numpy
-        python -m pip --version
-        python -m pip show Pillow
-        python -m pip show pyssim
+        python -m pip install --upgrade pip setuptools
+        python -m pip install pyssim OpenCV-Python Numpy
       shell: cmd
     - name: Start local HTTP server
       run: (npm run start-server&)
