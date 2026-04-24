@@ -99,6 +99,10 @@ jobs:
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/scripting/common.ts --cjs
     - name: Run test with scripting.ts
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/scripting/module.ts
+    - name: Test unified click commands
+      run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/commandscripts/clickBackAndForth.cjs
+    - name: Test unified misc commands
+      run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/commandscripts/misc.cjs
     - name: Test extra profile run Chrome
       run: ./bin/browsertime.js -b chrome http://127.0.0.1:3000/simple/ -n 1 --viewPort 1000x600 --xvfb  --enableProfileRun
   video:

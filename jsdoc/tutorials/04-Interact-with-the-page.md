@@ -156,7 +156,31 @@ If it does not find the element, it will throw an error with the current page UR
 You can find all the [click commands here](Click.html).
 
 ## Wait
-There are a couple of [wait commands](Wait.html) that makes it easier to wait. Either you can wait on a specific id to appear, for x amount of milliseconds or for a page to finish loading.
+You can wait for elements using the unified selector syntax:
+
+```javascript
+// Wait for an element to appear (default 6 seconds)
+await commands.wait('#my-element');
+
+// Custom timeout
+await commands.wait('#my-element', { timeout: 10000 });
+
+// Wait for the element to be visible
+await commands.wait('id:content', { timeout: 5000, visible: true });
+```
+
+You can also wait for time, page load, or a JavaScript condition:
+
+```javascript
+// Wait for a fixed time
+await commands.wait.byTime(2000);
+
+// Wait for the page to finish loading
+await commands.wait.byPageToComplete();
+
+// Wait for a JavaScript condition to be true
+await commands.wait.byCondition('document.querySelector(".loaded") !== null', 5000);
+```
 
 ## Mouse
 The mouse command will perform various mouse events using the Seleniums Action API.
@@ -199,28 +223,43 @@ export default async function (context, commands) {
 
 ## Type text
 
-The easiest way to type text into an input element is using `commands.type(selector, text)`:
+The easiest way to type text into an input element is using `commands.type(selector, text)` or `commands.addText(selector, text)`:
 
 ```javascript
 await commands.type('#search-input', 'my search query');
 await commands.type('.email-field', 'user@example.com');
+
+// addText works the same way with the unified selector syntax
+await commands.addText('id:username', 'admin');
+await commands.addText('name:email', 'user@example.com');
 ```
 
-The parameter order is selector first, then text — matching the convention used by most frameworks.
-
-### Add text (legacy)
-You can also use the `addText` command. The element needs to be visible. You can also send pressable keys as Unicode PUA ([PrivateUser Area](https://en.wikipedia.org/wiki/Private_Use_Areas)) format.
-
-The [add text command](AddText.html).
+The parameter order is selector first, then text. You can also send pressable keys as Unicode PUA ([PrivateUser Area](https://en.wikipedia.org/wiki/Private_Use_Areas)) format.
 
 ## Switch
 You can switch to frames/windows or tabs using the the [switch commands](Switch.html).
 
 ## Set
-Using the [set commands](Set.html) you can set values to HTML elements.
+Set properties on elements using the unified selector syntax:
+
+```javascript
+// Set the value of a form field (default property is 'value')
+await commands.set('#price', '99.99');
+await commands.set('id:title', 'New Title');
+
+// Set innerText or innerHTML
+await commands.set('#heading', 'Hello World', 'innerText');
+await commands.set('#content', '<p>Updated</p>', 'innerHTML');
+```
 
 ## Select
-You can use the [select command](Select.html) for selecting an option in a drop-down field.
+Select an option in a dropdown using the unified selector syntax:
+
+```javascript
+await commands.select('#country', 'SE');
+await commands.select('id:language', 'en');
+await commands.select('name:currency', 'USD');
+```
 
 ## Alert boxes
 If you need to click on an alert box, the best way is to use Selenium directly. Here's an example on how to accept an alert box.
