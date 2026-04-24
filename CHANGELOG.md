@@ -7,11 +7,13 @@
 * Click commands now use the Selenium Actions API for real OS-level mouse events instead of JavaScript `.click()`. Elements must be visible and interactable. If you need to click a hidden element, use `commands.js.run()` instead [#2381](https://github.com/sitespeedio/browsertime/pull/2381).
 
 ### Added
-* Added unified selector syntax: `commands.click('#btn')`, `commands.click('id:myId')`, `commands.click('text:Submit', { waitForNavigation: true })`. Supports prefixes: `id:`, `xpath:`, `text:`, `link:`, `name:`, `class:` — CSS selector is the default. The `AndWait` methods are deprecated in favour of `{ waitForNavigation: true }` [#2390](https://github.com/sitespeedio/browsertime/pull/2390).
-* Added `commands.type(selector, text)` as a shorthand for `addText.bySelector(text, selector)` with a more conventional parameter order [#2387](https://github.com/sitespeedio/browsertime/pull/2387).
-* Added `commands.find(selector, options)` helper that combines element lookup with optional waiting and visibility checks. Uses the configured `--timeouts.elementWait` as default timeout [#2386](https://github.com/sitespeedio/browsertime/pull/2386).
+* Unified selector syntax for all interaction commands. You can now call `commands.click('#btn')`, `commands.addText('#input', 'text')`, `commands.wait('#el', { timeout: 5000 })`, `commands.select('#dropdown', 'value')`, and `commands.set('#field', 'value')` directly. Supports prefixes: `id:`, `xpath:`, `text:`, `link:`, `name:`, `class:` — CSS selector is the default [#2390](https://github.com/sitespeedio/browsertime/pull/2390) [#2408](https://github.com/sitespeedio/browsertime/pull/2408).
+* The `AndWait` methods are deprecated in favour of `{ waitForNavigation: true }` [#2390](https://github.com/sitespeedio/browsertime/pull/2390) [#2396](https://github.com/sitespeedio/browsertime/pull/2396).
+* Navigation methods (back, forward, refresh) now support `{ waitForNavigation: true }` for consistency [#2408](https://github.com/sitespeedio/browsertime/pull/2408).
+* Added `commands.type(selector, text)` as a shorthand for `addText` with a more conventional parameter order [#2387](https://github.com/sitespeedio/browsertime/pull/2387).
+* Added `commands.find(selector, options)` helper that combines element lookup with optional waiting and visibility checks [#2386](https://github.com/sitespeedio/browsertime/pull/2386).
 * Added `commands.measure.clickAndMeasure(alias, selector)` shortcut for the common measure.start/click/measure.stop pattern [#2382](https://github.com/sitespeedio/browsertime/pull/2382).
-* Added `commands.click.byText(text)` and `byTextAndWait(text)` to click any element by visible text, not just links [#2384](https://github.com/sitespeedio/browsertime/pull/2384).
+* Added `commands.click.byText(text)` to click any element by visible text, not just links [#2384](https://github.com/sitespeedio/browsertime/pull/2384).
 * Added `--timeouts.elementWait` option for auto-waiting on elements before interaction [#2383](https://github.com/sitespeedio/browsertime/pull/2383).
 * Added support for TypeScript scripts (.ts, .mts, .cts) using Node.js native type stripping (requires Node.js 22.18.0+) [#2363](https://github.com/sitespeedio/browsertime/pull/2363).
 * Firefox 149 in the Docker container [#2375](https://github.com/sitespeedio/browsertime/pull/2375).
@@ -21,9 +23,9 @@
 * Fixed Firefox network idle timeout when no network events arrive. Timestamps were initialized as undefined causing the idle check to never trigger [#2394](https://github.com/sitespeedio/browsertime/pull/2394).
 * Fixed intermittent crash when setting orange background before document.body exists on Edge/Windows [#2393](https://github.com/sitespeedio/browsertime/pull/2393).
 * Element interaction error messages now include the current page URL for easier debugging [#2385](https://github.com/sitespeedio/browsertime/pull/2385).
+* Added `actions.clear()` after `perform()` in all mouse commands to prevent pointer/key state leaking between actions [#2406](https://github.com/sitespeedio/browsertime/pull/2406).
 * Added clear error message when loading TypeScript scripts on Node.js older than 22.18.0 [#2404](https://github.com/sitespeedio/browsertime/pull/2404).
 * Disabled the "You can zoom in and out" popup on Android [#2378](https://github.com/sitespeedio/browsertime/pull/2378).
-* Added `actions.clear()` after `perform()` in all mouse commands (singleClick, doubleClick, contextClick, clickAndHold) to prevent pointer/key state leaking between actions [#2407](https://github.com/sitespeedio/browsertime/pull/2407).
 
 ## 26.3.2 - 2026-01-24
 ### Fixed
