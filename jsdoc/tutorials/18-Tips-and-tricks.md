@@ -44,7 +44,7 @@ export default async function (context, commands) {
     // Start measurning
     await commands.measure.start();
     // Click on the link and wait on navigation to happen
-    await commands.click.bySelectorAndWait('body > nav > div > div > div > ul > li:nth-child(2) > a');
+    await commands.click('body > nav > div > div > div > ul > li:nth-child(2) > a', { waitForNavigation: true });
     return commands.measure.stop();
 };
 ```
@@ -98,8 +98,7 @@ If you want to have different flows depending on a element exists you can do som
 
 ```javascript
 ...
-const exists = await commands.js.run('return (document.getElementById("nonExistsingID") != null) ');
-if (exists) {
+if (await commands.exists('id:nonExistingID')) {
     // The element with that id exists
 } else {
     // There's no element with that id
@@ -127,7 +126,7 @@ export default async function (context, commands) {
   await commands.navigate('https://<myspecialpage>');
   // Then you need to wait on a specific element or event. In this case
   // we wait for a id to appear but you could also run your custom JS
-  await commands.wait.byId('my-id', 20000);
+  await commands.wait('id:my-id', { timeout: 20000 });
   // And then when you know that page has loaded stop the measurement
   // = stop the video, collect metrics etc
   return commands.measure.stop();
