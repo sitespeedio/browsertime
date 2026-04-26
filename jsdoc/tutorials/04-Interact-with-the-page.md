@@ -261,6 +261,28 @@ await commands.select('id:language', 'en');
 await commands.select('name:currency', 'USD');
 ```
 
+## Cookies
+
+Manage browser cookies — useful for login flows, consent banners, and A/B testing:
+
+```javascript
+// Set a cookie
+await commands.cookie.set('session', 'abc123');
+await commands.cookie.set('consent', 'true', { path: '/', secure: true });
+
+// Get a cookie
+const session = await commands.cookie.get('session');
+
+// Get all cookies
+const all = await commands.cookie.getAll();
+
+// Delete a specific cookie
+await commands.cookie.delete('session');
+
+// Delete all cookies
+await commands.cookie.deleteAll();
+```
+
 ## Convenience methods
 
 ### Get text, value, and visibility
@@ -308,6 +330,58 @@ await commands.fill({
   '#password': 'secret',
   'id:email': 'user@example.com'
 });
+```
+
+### Check and uncheck
+
+Toggle checkboxes and radio buttons. Only clicks if the state needs to change:
+
+```javascript
+await commands.check('#agree-terms');
+await commands.uncheck('id:newsletter');
+
+// Verify the state
+const checked = await commands.isChecked('#agree-terms');
+```
+
+### Hover
+
+Hover over an element (triggers mouseover/hover CSS states):
+
+```javascript
+await commands.hover('#menu-item');
+await commands.hover('id:tooltip-trigger');
+```
+
+### Press keyboard keys
+
+Send keyboard key presses like Enter, Tab, Escape:
+
+```javascript
+await commands.press('Enter');
+await commands.press('Tab');
+await commands.press('Escape');
+```
+
+### Get element attributes and state
+
+```javascript
+// Get any attribute
+const href = await commands.getAttribute('#my-link', 'href');
+const dataId = await commands.getAttribute('id:item', 'data-id');
+
+// Check if enabled/disabled
+const enabled = await commands.isEnabled('#submit-btn');
+
+// Check checkbox/radio state
+const checked = await commands.isChecked('#agree-terms');
+```
+
+### Get page information
+
+```javascript
+const title = await commands.getTitle();
+const url = await commands.getUrl();
 ```
 
 ## Alert boxes
