@@ -157,6 +157,8 @@ jobs:
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/commandscripts/clickBackAndForth.cjs
     - name: Test unified misc commands
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/commandscripts/misc.cjs
+    - name: Test new convenience commands
+      run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/commandscripts/newCommands.cjs
     - name: Test extra profile run Chrome
       run: ./bin/browsertime.js -b chrome http://127.0.0.1:3000/simple/ -n 1 --viewPort 1000x600 --xvfb  --enableProfileRun
   video:

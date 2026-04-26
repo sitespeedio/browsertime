@@ -73,7 +73,7 @@ export default async function (context, commands) {
   await commands.measure.start('my_trip');
   try {
     // do something that can break
-    await commands.mouse.singleClick.byLinkTextAndWait('Next page');
+    await commands.mouse.singleClick('link:Next page', { waitForNavigation: true });
     await commands.measure.stop();
   } catch(error) {
     await commands.measure.stopAsError('Could not click the next page link');

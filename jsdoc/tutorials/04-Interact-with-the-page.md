@@ -261,6 +261,55 @@ await commands.select('id:language', 'en');
 await commands.select('name:currency', 'USD');
 ```
 
+## Convenience methods
+
+### Get text, value, and visibility
+
+```javascript
+// Get the visible text of an element
+const heading = await commands.getText('#main-heading');
+const price = await commands.getText('id:product-price');
+
+// Get the value of a form element
+const email = await commands.getValue('#email-input');
+
+// Check if an element is visible
+const hasError = await commands.isVisible('#error-message');
+```
+
+### Check if element exists
+
+Check if an element exists without throwing an error:
+
+```javascript
+if (await commands.exists('#cookie-banner')) {
+  await commands.click('#accept-cookies');
+}
+
+// With a timeout — wait up to 2 seconds for it to appear
+if (await commands.exists('#loading-spinner', { timeout: 2000 })) {
+  await commands.wait('#content', { visible: true });
+}
+```
+
+### Clear form fields
+
+```javascript
+await commands.clear('#search-input');
+```
+
+### Fill multiple form fields
+
+Fill multiple fields at once using an object:
+
+```javascript
+await commands.fill({
+  '#username': 'admin',
+  '#password': 'secret',
+  'id:email': 'user@example.com'
+});
+```
+
 ## Alert boxes
 If you need to click on an alert box, the best way is to use Selenium directly. Here's an example on how to accept an alert box.
 

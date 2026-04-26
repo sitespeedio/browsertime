@@ -14,7 +14,7 @@ export default async function (context, commands) {
 
   try {
     await commands.measure.start('Documentation_page');
-    await commands.click.byLinkTextAndWait('Documentationsssss');
+    await commands.click('link:Documentationsssss', { waitForNavigation: true });
     return commands.measure.stop();
     
   } catch (e) {
@@ -36,7 +36,7 @@ export default async function (context, commands) {
   // ...
   try {
     // Click on a link
-    await commands.click.byLinkTextAndWait('Checkout');
+    await commands.click('link:Checkout', { waitForNavigation: true });
   } catch (e) {
     // Oh no, the content team has changed the name of the link!
      commands.error('The link named Checkout do not exist on the page');
