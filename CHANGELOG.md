@@ -21,6 +21,10 @@
 * Added `commands.clear(selector)` to clear form element content [#2413](https://github.com/sitespeedio/browsertime/pull/2413).
 * Added `commands.fill({ selector: text, ... })` for filling multiple form fields at once [#2414](https://github.com/sitespeedio/browsertime/pull/2414).
 * Added unified selector syntax to mouse commands: `commands.mouse.singleClick(selector)`, `commands.mouse.doubleClick(selector)`, `commands.mouse.contextClick(selector)`, `commands.mouse.moveTo(selector)` [#2415](https://github.com/sitespeedio/browsertime/pull/2415).
+* Added `commands.cookie` for managing browser cookies: `get`, `getAll`, `set`, `delete`, `deleteAll` [#2420](https://github.com/sitespeedio/browsertime/pull/2420).
+* Added `commands.getAttribute(selector, name)`, `commands.isEnabled(selector)`, and `commands.isChecked(selector)` for element state queries [#2421](https://github.com/sitespeedio/browsertime/pull/2421).
+* Added `commands.hover(selector)` as alias for mouse.moveTo, `commands.press(key)` for keyboard input, `commands.getTitle()` and `commands.getUrl()` for page info [#2422](https://github.com/sitespeedio/browsertime/pull/2422).
+* Added `commands.check(selector)` and `commands.uncheck(selector)` for checkbox/radio interactions [#2423](https://github.com/sitespeedio/browsertime/pull/2423).
 * Firefox 149 in the Docker container [#2375](https://github.com/sitespeedio/browsertime/pull/2375).
 
 ### Fixed

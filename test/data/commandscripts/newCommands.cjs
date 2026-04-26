@@ -78,4 +78,49 @@ module.exports = async function (context, commands) {
   if (!element) {
     throw new Error('Expected find to return an element');
   }
+
+  // Test getAttribute
+  const placeholder = await commands.getAttribute('#clickable', 'placeholder');
+  if (placeholder !== 'Clickable') {
+    throw new Error(`Expected placeholder 'Clickable' but got '${placeholder}'`);
+  }
+
+  // Test isEnabled
+  const enabled = await commands.isEnabled('#clickable');
+  if (!enabled) {
+    throw new Error('Expected input to be enabled');
+  }
+
+  // Test hover
+  await commands.hover('a[href="/dimple/"]');
+
+  // Test press (type something then press a key)
+  await commands.clear('#clickable');
+  await commands.type('#clickable', 'test');
+  await commands.press('Backspace');
+
+  // Test getTitle
+  const title = await commands.getTitle();
+  if (!title.includes('simple')) {
+    throw new Error(`Expected title to contain 'simple' but got '${title}'`);
+  }
+
+  // Test getUrl
+  const url = await commands.getUrl();
+  if (!url.includes('127.0.0.1')) {
+    throw new Error(`Expected url to contain '127.0.0.1' but got '${url}'`);
+  }
+
+  // Test cookie commands
+  await commands.cookie.deleteAll();
+  await commands.cookie.set('test_cookie', 'browsertime');
+  const cookie = await commands.cookie.get('test_cookie');
+  if (!cookie || cookie.value !== 'browsertime') {
+    throw new Error('Cookie set/get failed');
+  }
+  await commands.cookie.delete('test_cookie');
+  const deleted = await commands.cookie.get('test_cookie');
+  if (deleted) {
+    throw new Error('Cookie delete failed');
+  }
 };
