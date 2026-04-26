@@ -165,4 +165,20 @@ module.exports = async function (context, commands) {
   // Test clickAndMeasure
   await commands.navigate('http://127.0.0.1:3000/simple/');
   await commands.measure.clickAndMeasure('dimple', 'a[href="/dimple/"]');
+
+  // Test mouse unified selectors
+  await commands.navigate('http://127.0.0.1:3000/simple/');
+  await commands.mouse.singleClick('a[href="/dimple/"]');
+  await commands.wait.byTime(500);
+  await commands.navigate('http://127.0.0.1:3000/simple/');
+  await commands.mouse.doubleClick('#clickable');
+  await commands.mouse.contextClick('#clickable');
+
+  // Test wait.byPageToComplete
+  await commands.navigate('http://127.0.0.1:3000/simple/');
+  await commands.wait.byPageToComplete();
+
+  // Test scroll commands
+  await commands.scroll.toBottom(20);
+  await commands.scroll.byPixels(0, -200);
 };

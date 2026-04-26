@@ -167,6 +167,8 @@ jobs:
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/commandscripts/stopWatch.cjs
     - name: Test measure with alias
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/commandscripts/measureAlias.cjs
+    - name: Test scroll commands
+      run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/commandscripts/scrollToBottom.cjs
     - name: Test extra profile run Chrome
       run: ./bin/browsertime.js -b chrome http://127.0.0.1:3000/simple/ -n 1 --viewPort 1000x600 --xvfb  --enableProfileRun
   video:
