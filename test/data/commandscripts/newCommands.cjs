@@ -123,4 +123,26 @@ module.exports = async function (context, commands) {
   if (deleted) {
     throw new Error('Cookie delete failed');
   }
+
+  // Test scrollIntoView
+  await commands.scrollIntoView('h1');
+
+  // Test waitForUrl (we're already on the simple page)
+  await commands.waitForUrl('simple', { timeout: 3000 });
+
+  // Test select and select.byText on the search page
+  await commands.navigate('http://127.0.0.1:3000/search/');
+  await commands.select('#search-category', 'blog');
+  const selectValue = await commands.getValue('#search-category');
+  if (selectValue !== 'blog') {
+    throw new Error(`Expected select value 'blog' but got '${selectValue}'`);
+  }
+
+  await commands.select.byText('#search-category', 'API Reference');
+  const selectValueAfterByText = await commands.getValue('#search-category');
+  if (selectValueAfterByText !== 'api') {
+    throw new Error(
+      `Expected select value 'api' after byText but got '${selectValueAfterByText}'`
+    );
+  }
 };
