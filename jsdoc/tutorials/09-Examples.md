@@ -1,7 +1,5 @@
 Here are some examples on how you can use the scripting capabilities.
 
-> **Note:** Some examples below use the older `commands.click.byIdAndWait()` and `commands.addText.byId()` style. The recommended approach is to use `commands.click(selector, { wait: true })` and `commands.type(selector, text)` instead. The `AndWait` methods are deprecated. See the [interaction tutorial](tutorial-04-Interact-with-the-page.html) for details.
-
 ### Measure multiple pages
 
 Test multiple pages in a script:
@@ -85,8 +83,8 @@ export default async function (context, commands) {
 
   try {
     // Add text into an input field, finding the field by id
-    await commands.addText.byId('login', 'wpName1');
-    await commands.addText.byId('password', 'wpPassword1');
+    await commands.type('id:wpName1', 'login');
+    await commands.type('id:wpPassword1', 'password');
 
     // Start the measurement and give it the alias login
     // The alias will be used when the metrics is sent to
@@ -95,7 +93,7 @@ export default async function (context, commands) {
 
     // Find the submit button and click it and wait for the
     // page complete check to finish on the next loaded URL
-    await commands.click.byIdAndWait('wpLoginAttempt');
+    await commands.click('id:wpLoginAttempt', { waitForNavigation: true });
     // Stop and collect the metrics
     return commands.measure.stop();
   } catch (e) {
@@ -128,8 +126,8 @@ export default async function (context, commands) {
   // way, and the error will be re-thrown so you can act on it.
   try {
     // Add text into an input field, finding the field by id
-    await commands.addText.byId('login', 'wpName1');
-    await commands.addText.byId('password', 'wpPassword1');
+    await commands.type('id:wpName1', 'login');
+    await commands.type('id:wpPassword1', 'password');
 
     // Start the measurement before we click on the
     // submit button. Sitespeed.io will start the video recording
@@ -137,7 +135,7 @@ export default async function (context, commands) {
     await commands.measure.start('login');
     // Find the sumbit button and click it and then wait
     // for the pageCompleteCheck to finish
-    await commands.click.byIdAndWait('wpLoginAttempt');
+    await commands.click('id:wpLoginAttempt', { waitForNavigation: true });
     // Stop and collect the measurement before the next page we want to measure
     await commands.measure.stop();
     // Measure the Barack Obama page as a logged in user
@@ -173,12 +171,12 @@ export default async function (context, commands) {
   );
 
   try {
-    await commands.addText.byId('login', 'wpName1');
-    await commands.addText.byId('password', 'wpPassword1');
+    await commands.type('id:wpName1', 'login');
+    await commands.type('id:wpPassword1', 'password');
     // Click on the submit button with id wpLoginAttempt
-    await commands.click.byIdAndWait('wpLoginAttempt');
+    await commands.click('id:wpLoginAttempt', { waitForNavigation: true });
     // wait on a specific id to appear on the page after you logged in
-    return commands.wait.byId('pt-userpage', 10000);
+    return commands.wait('id:pt-userpage', { timeout: 10000 });
   } catch (e) {
     // We try/catch so we will catch if the the input fields can't be found
     // The error is automatically logged in Browsertime and re-thrown here
@@ -209,26 +207,26 @@ export default async function (context, commands) {
   );
   try {
     // Find the sign in button and click it
-    await commands.click.byId('sign_in_button');
+    await commands.click('id:sign_in_button');
     // Wait some time for the page to open a new login frame
     await commands.wait.byTime(2000);
     // Switch to the login frame
     await commands.switch.toFrame('loginFrame');
     // Find the username fields by xpath (just as an example)
-    await commands.addText.byXpath(
-      'peter@example.org',
-      '//*[@id="userName"]'
+    await commands.type(
+      'xpath://*[@id="userName"]',
+      'peter@example.org'
     );
     // Click on the next button
-    await commands.click.byId('verifyUserButton');
+    await commands.click('id:verifyUserButton');
     // Wait for the GUI to display the password field so we can select it
     await commands.wait.byTime(2000);
     // Wait for the actual password field
-    await commands.wait.byId('password', 5000);
+    await commands.wait('id:password', { timeout: 5000 });
     // Fill in the password
-    await commands.addText.byId('dejh8Ghgs6ga(1217)', 'password');
+    await commands.type('id:password', 'dejh8Ghgs6ga(1217)');
     // Click the submit button
-    await commands.click.byId('btnSubmit');
+    await commands.click('id:btnSubmit');
     // In your implementation it is probably better to wait for an id
     await commands.wait.byTime(5000);
     // Measure the next page as a logged in user
@@ -336,7 +334,7 @@ export default async function (context, commands) {
   await commands.measure.start('https://shop.example.org/prodcucs/theproduct');
 
   // Add the item to your cart
-  await commands.click.bySelector('.add-to-cart');
+  await commands.click('.add-to-cart');
 
   // Go to the cart (and measure it)
   await commands.measure.start('https://shop.example.org/cart/');
@@ -347,14 +345,14 @@ export default async function (context, commands) {
   // want an complex example
   await commands.js.run('for (let node of document.body.childNodes) { if (node.style) node.style.display = "none";}');
   await commands.measure.start('CheckoutAsGuest');
-  await commands.click.bySelectorAndWait('.checkout-as-guest');
+  await commands.click('.checkout-as-guest', { waitForNavigation: true });
   // Make sure to stop measuring and collect the metrics for the CheckoutAsGuest step
   await commands.measure.stop();
 
   // Finish your checkout
   await commands.js.run('document.body.style.display = "none"');
   await commands.measure.start('FinishCheckout');
-  await commands.click.bySelectorAndWait('.checkout-finish');
+  await commands.click('.checkout-finish', { waitForNavigation: true });
   // And collect metrics for the FinishCheckout step
   return commands.measure.stop();
   // In a real web shop you probably can't finish the last step or you can return the item
