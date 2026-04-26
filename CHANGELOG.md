@@ -16,6 +16,11 @@
 * Added `commands.click.byText(text)` to click any element by visible text, not just links [#2384](https://github.com/sitespeedio/browsertime/pull/2384).
 * Added `--timeouts.elementWait` option for auto-waiting on elements before interaction [#2383](https://github.com/sitespeedio/browsertime/pull/2383).
 * Added support for TypeScript scripts (.ts, .mts, .cts) using Node.js native type stripping (requires Node.js 22.18.0+) [#2363](https://github.com/sitespeedio/browsertime/pull/2363).
+* Added `commands.getText(selector)`, `commands.getValue(selector)`, and `commands.isVisible(selector)` convenience methods [#2411](https://github.com/sitespeedio/browsertime/pull/2411).
+* Added `commands.exists(selector, { timeout })` for checking element presence without throwing [#2412](https://github.com/sitespeedio/browsertime/pull/2412).
+* Added `commands.clear(selector)` to clear form element content [#2413](https://github.com/sitespeedio/browsertime/pull/2413).
+* Added `commands.fill({ selector: text, ... })` for filling multiple form fields at once [#2414](https://github.com/sitespeedio/browsertime/pull/2414).
+* Added unified selector syntax to mouse commands: `commands.mouse.singleClick(selector)`, `commands.mouse.doubleClick(selector)`, `commands.mouse.contextClick(selector)`, `commands.mouse.moveTo(selector)` [#2415](https://github.com/sitespeedio/browsertime/pull/2415).
 * Firefox 149 in the Docker container [#2375](https://github.com/sitespeedio/browsertime/pull/2375).
 
 ### Fixed
@@ -24,6 +29,7 @@
 * Fixed intermittent crash when setting orange background before document.body exists on Edge/Windows [#2393](https://github.com/sitespeedio/browsertime/pull/2393).
 * Element interaction error messages now include the current page URL for easier debugging [#2385](https://github.com/sitespeedio/browsertime/pull/2385).
 * Added `actions.clear()` after `perform()` in all mouse commands to prevent pointer/key state leaking between actions [#2406](https://github.com/sitespeedio/browsertime/pull/2406).
+* Standardized error handling in all command `run()` methods using `executeCommand` with URL context. Fixed typo in select.deselectById and removed dead code in wait [#2410](https://github.com/sitespeedio/browsertime/pull/2410).
 * Added clear error message when loading TypeScript scripts on Node.js older than 22.18.0 [#2404](https://github.com/sitespeedio/browsertime/pull/2404).
 * Disabled the "You can zoom in and out" popup on Android [#2378](https://github.com/sitespeedio/browsertime/pull/2378).
 
