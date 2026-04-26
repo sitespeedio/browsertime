@@ -79,6 +79,8 @@ jobs:
       run: ./bin/browsertime.js -b chrome http://127.0.0.1:3000/simple/ http://127.0.0.1:3000/dimple/ --urlAlias startPage --urlAlias documentation --xvfb
     - name: Run test with pre-test functionality
       run: ./bin/browsertime.js -b chrome --preWarmServer --xvfb http://127.0.0.1:3000/simple/
+    - name: Test Chrome CDP and trace commands
+      run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/commandscripts/chrome.cjs
   scripting:
     runs-on: ubuntu-22.04
     steps:
@@ -159,6 +161,12 @@ jobs:
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/commandscripts/misc.cjs
     - name: Test new convenience commands
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/commandscripts/newCommands.cjs
+    - name: Test Selenium Actions API
+      run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/commandscripts/actions.cjs
+    - name: Test stopWatch commands
+      run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/commandscripts/stopWatch.cjs
+    - name: Test measure with alias
+      run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/commandscripts/measureAlias.cjs
     - name: Test extra profile run Chrome
       run: ./bin/browsertime.js -b chrome http://127.0.0.1:3000/simple/ -n 1 --viewPort 1000x600 --xvfb  --enableProfileRun
   video:

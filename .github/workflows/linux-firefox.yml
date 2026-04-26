@@ -77,3 +77,5 @@ jobs:
       run: ./bin/browsertime.js -b firefox --pageCompleteCheckNetworkIdle --xvfb http://127.0.0.1:3000/simple/
     - name: Test extra profile run Firefox
       run: ./bin/browsertime.js -b firefox http://127.0.0.1:3000/simple/ -n 1 --viewPort 1000x600 --xvfb  --enableProfileRun
+    - name: Test Firefox BiDi and profiler commands
+      run: ./bin/browsertime.js -b firefox test/data/commandscripts/firefox.cjs -n 1 --xvfb
