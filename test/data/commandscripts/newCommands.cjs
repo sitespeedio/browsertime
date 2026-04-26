@@ -145,4 +145,24 @@ module.exports = async function (context, commands) {
       `Expected select value 'api' after byText but got '${selectValueAfterByText}'`
     );
   }
+
+  // Test check/uncheck/isChecked
+  const isCheckedBefore = await commands.isChecked('#exact-match');
+  if (isCheckedBefore) {
+    throw new Error('Expected checkbox to be unchecked initially');
+  }
+  await commands.check('#exact-match');
+  const isCheckedAfter = await commands.isChecked('#exact-match');
+  if (!isCheckedAfter) {
+    throw new Error('Expected checkbox to be checked after check()');
+  }
+  await commands.uncheck('#exact-match');
+  const isCheckedFinal = await commands.isChecked('#exact-match');
+  if (isCheckedFinal) {
+    throw new Error('Expected checkbox to be unchecked after uncheck()');
+  }
+
+  // Test clickAndMeasure
+  await commands.navigate('http://127.0.0.1:3000/simple/');
+  await commands.measure.clickAndMeasure('dimple', 'a[href="/dimple/"]');
 };
