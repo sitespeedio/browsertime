@@ -25,6 +25,9 @@
 * Added `commands.getAttribute(selector, name)`, `commands.isEnabled(selector)`, and `commands.isChecked(selector)` for element state queries [#2421](https://github.com/sitespeedio/browsertime/pull/2421).
 * Added `commands.hover(selector)` as alias for mouse.moveTo, `commands.press(key)` for keyboard input, `commands.getTitle()` and `commands.getUrl()` for page info [#2422](https://github.com/sitespeedio/browsertime/pull/2422).
 * Added `commands.check(selector)` and `commands.uncheck(selector)` for checkbox/radio interactions [#2423](https://github.com/sitespeedio/browsertime/pull/2423).
+* Added `commands.scrollIntoView(selector)` to scroll elements into the viewport [#2425](https://github.com/sitespeedio/browsertime/pull/2425).
+* Added `commands.select.byText(selector, text)` to select dropdown options by visible text [#2426](https://github.com/sitespeedio/browsertime/pull/2426).
+* Added `commands.waitForUrl(pattern, { timeout })` to wait for URL changes after navigation [#2427](https://github.com/sitespeedio/browsertime/pull/2427).
 * Firefox 149 in the Docker container [#2375](https://github.com/sitespeedio/browsertime/pull/2375).
 
 ### Fixed

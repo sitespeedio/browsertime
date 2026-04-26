@@ -182,6 +182,15 @@ await commands.wait.byPageToComplete();
 await commands.wait.byCondition('document.querySelector(".loaded") !== null', 5000);
 ```
 
+### Wait for URL
+
+Wait until the browser URL contains a specific string — useful after form submissions, login redirects, or SPA navigation:
+
+```javascript
+await commands.waitForUrl('dashboard');
+await commands.waitForUrl('/account', { timeout: 10000 });
+```
+
 ## Mouse
 The mouse command will perform various mouse events using the Seleniums Action API.
 
@@ -219,6 +228,13 @@ export default async function (context, commands) {
   await  commands.scroll.toBottom(delayTime);
   return commands.measure.stop();
 };
+```
+
+You can also scroll a specific element into view:
+
+```javascript
+await commands.scrollIntoView('#comments-section');
+await commands.scrollIntoView('id:footer');
 ```
 
 ## Type text
@@ -259,6 +275,13 @@ Select an option in a dropdown using the unified selector syntax:
 await commands.select('#country', 'SE');
 await commands.select('id:language', 'en');
 await commands.select('name:currency', 'USD');
+```
+
+You can also select by visible text instead of value:
+
+```javascript
+await commands.select.byText('#country', 'Sweden');
+await commands.select.byText('id:language', 'English');
 ```
 
 ## Cookies
