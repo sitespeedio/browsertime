@@ -28,6 +28,7 @@
 * Added `commands.scrollIntoView(selector)` to scroll elements into the viewport [#2425](https://github.com/sitespeedio/browsertime/pull/2425).
 * Added `commands.select.byText(selector, text)` to select dropdown options by visible text [#2426](https://github.com/sitespeedio/browsertime/pull/2426).
 * Added `commands.waitForUrl(pattern, { timeout })` to wait for URL changes after navigation [#2427](https://github.com/sitespeedio/browsertime/pull/2427).
+* Added video recording and visual metrics for Safari on iOS over USB. A native helper captures the device's screen via CoreMediaIO and pipes frames to ffmpeg. Before running with `--video`, wake the device into screen-capture mode by opening QuickTime Player → New Movie Recording → selecting the iPhone, then leave the recording window open for the test session [#2432](https://github.com/sitespeedio/browsertime/pull/2432).
 * Firefox 149 in the Docker container [#2375](https://github.com/sitespeedio/browsertime/pull/2375).
 
 ### Fixed
