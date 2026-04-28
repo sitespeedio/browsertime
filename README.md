@@ -157,7 +157,7 @@ The default video will include a timer and showing when the metrics happens, but
 
 
 ## Browser Support
-Browsertime supports Firefox, Chrome, and Edge (Chromium version) on desktop and Safari on Mac OS. On Android we support Chrome and Firefox. Safari on iOS has limited support: there's no HAR file and no visual metrics. You can also use the Safari simulator on Mac OS.
+Browsertime supports Firefox, Chrome, and Edge (Chromium version) on desktop and Safari on Mac OS. On Android we support Chrome and Firefox. Safari on iOS supports HAR (via `ios_webkit_debug_proxy`) and video / visual metrics (via screen capture over USB). You can also use the Safari simulator on Mac OS.
 
 ## How does it work
 Browsertime uses Selenium NodeJS to drive the browser. It starts the browser, load a URL, executes configurable Javascripts to collect metrics, collect a HAR file.
