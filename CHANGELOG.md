@@ -28,11 +28,12 @@
 * Added `commands.scrollIntoView(selector)` to scroll elements into the viewport [#2425](https://github.com/sitespeedio/browsertime/pull/2425).
 * Added `commands.select.byText(selector, text)` to select dropdown options by visible text [#2426](https://github.com/sitespeedio/browsertime/pull/2426).
 * Added `commands.waitForUrl(pattern, { timeout })` to wait for URL changes after navigation [#2427](https://github.com/sitespeedio/browsertime/pull/2427).
-* Added video recording and visual metrics for Safari on iOS over USB. A native helper captures the device's screen via CoreMediaIO and pipes frames to ffmpeg. Before running with `--video`, wake the device into screen-capture mode by opening QuickTime Player → New Movie Recording → selecting the iPhone, then leave the recording window open for the test session [#2432](https://github.com/sitespeedio/browsertime/pull/2432).
+* Added video recording and visual metrics for Safari on iOS over USB. A native helper captures the device's screen via CoreMediaIO and pipes frames to ffmpeg. The device is woken into screen-capture mode automatically — no manual QuickTime step required [#2432](https://github.com/sitespeedio/browsertime/pull/2432) [#2436](https://github.com/sitespeedio/browsertime/pull/2436).
 * Added HAR capture for Safari on iOS via `ios_webkit_debug_proxy`. Browsertime starts and stops `iwdp` automatically and exits with a clear error if it isn't installed (`brew install ios-webkit-debug-proxy`). New `--safari.includeResponseBodies` CLI option. macOS Safari is unaffected [#2431](https://github.com/sitespeedio/browsertime/pull/2431).
 * Firefox 149 in the Docker container [#2375](https://github.com/sitespeedio/browsertime/pull/2375).
 
 ### Fixed
+* Fixed `drawtext` failing on ffmpeg 8 by quoting font paths and forwarding ffmpeg stderr so font/filter errors are visible [#2435](https://github.com/sitespeedio/browsertime/pull/2435).
 * Fixed Firefox network idle timeout on repeated iterations. The WebSocket message listener was never removed between iterations, causing the inflight counter to go negative [#2391](https://github.com/sitespeedio/browsertime/pull/2391).
 * Fixed Firefox network idle timeout when no network events arrive. Timestamps were initialized as undefined causing the idle check to never trigger [#2394](https://github.com/sitespeedio/browsertime/pull/2394).
 * Fixed intermittent crash when setting orange background before document.body exists on Edge/Windows [#2393](https://github.com/sitespeedio/browsertime/pull/2393).
