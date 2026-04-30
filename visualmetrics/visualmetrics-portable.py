@@ -460,11 +460,14 @@ def extract_frames(video, directory, full_resolution, viewport):
             os.path.join(dir_escaped, "img-%d.png"),
         ]
         logging.debug(" ".join(command))
-        lines = []
 
-        proc = subprocess.Popen(command, stderr=subprocess.PIPE, encoding="UTF-8")
-        while proc.poll() is None:
-            lines.extend(iter(proc.stderr.readline, ""))
+        # Use subprocess.run so the full stderr stream is read after the
+        # process exits. The previous Popen + poll loop stopped reading once
+        # poll() returned, dropping any buffered tail; with `-v debug` ffmpeg
+        # also writes enough to fill the OS pipe buffer and could deadlock
+        # blocked on write while we waited on poll().
+        result = subprocess.run(command, stderr=subprocess.PIPE, encoding="UTF-8")
+        lines = result.stderr.splitlines()
 
         pattern = re.compile(r"keep pts:[0-9]+ pts_time:(?P<timecode>[0-9\.]+)")
         frame_count = 0
@@ -492,11 +495,8 @@ def find_recording_platform(video):
     command = ["ffprobe", video]
     logging.debug(command)
 
-    lines = []
-    proc = subprocess.Popen(command, stderr=subprocess.PIPE, encoding="UTF-8")
-
-    while proc.poll() is None:
-        lines.extend(iter(proc.stderr.readline, ""))
+    result = subprocess.run(command, stderr=subprocess.PIPE, encoding="UTF-8")
+    lines = result.stderr.splitlines()
 
     is_mobile = False
     matcher = re.compile(".*com\.android\.version.*")
