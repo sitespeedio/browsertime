@@ -36,12 +36,12 @@ import gzip
 import json
 import logging
 import math
-import os
 import re
 import sys
 import shutil
 import subprocess
 import tempfile
+from pathlib import Path
 
 
 GZIP_TEXT = "wt"
@@ -254,8 +254,9 @@ def build_edge_video(video_path, viewport):
     """
     logging.debug("Creating edge video for {0}".format(video_path))
 
-    output_dir, video_name = os.path.split(video_path)
-    video_name, _ = os.path.splitext(video_name)
+    _video_path = Path(video_path)
+    output_dir = str(_video_path.parent)
+    video_name = _video_path.stem
 
     try:
         import cv2
@@ -287,14 +288,14 @@ def build_edge_video(video_path, viewport):
 
         out_size = edge_video[-1].shape
         out_edges = cv2.VideoWriter(
-            os.path.join(output_dir, video_name + "-edges.mp4"),
+            str(Path(output_dir) / (video_name + "-edges.mp4")),
             cv2.VideoWriter_fourcc(*"MP4V"),
             frame_count,
             (out_size[1], out_size[0]),
             1,
         )
         out_edges_overlay = cv2.VideoWriter(
-            os.path.join(output_dir, video_name + "-edges-overlay.mp4"),
+            str(Path(output_dir) / (video_name + "-edges-overlay.mp4")),
             cv2.VideoWriter_fourcc(*"MP4V"),
             frame_count,
             (out_size[1], out_size[0]),
@@ -376,21 +377,21 @@ def video_to_frames(
 ):
     """Extract the video frames"""
     global client_viewport
-    first_frame = os.path.join(directory, "ms_000000")
+    first_frame = str(Path(directory) / "ms_000000")
     if (
-        not os.path.isfile(first_frame + ".png")
-        and not os.path.isfile(first_frame + ".jpg")
+        not Path(first_frame + ".png").is_file()
+        and not Path(first_frame + ".jpg").is_file()
     ) or force:
-        if os.path.isfile(video):
-            video = os.path.realpath(video)
+        if Path(video).is_file():
+            video = str(Path(video).resolve())
             logging.info("Processing frames from video " + video + " to " + directory)
             is_mobile = find_recording_platform(video)
-            if os.path.isdir(directory):
+            if Path(directory).is_dir():
                 shutil.rmtree(directory, True)
-            if not os.path.isdir(directory):
-                os.mkdir(directory, 0o755)
-            if os.path.isdir(directory):
-                directory = os.path.realpath(directory)
+            if not Path(directory).is_dir():
+                Path(directory).mkdir(mode=0o755)
+            if Path(directory).is_dir():
+                directory = str(Path(directory).resolve())
                 viewport, cropped = find_video_viewport(
                     video,
                     directory,
@@ -457,14 +458,17 @@ def extract_frames(video, directory, full_resolution, viewport):
             "0",
             "-vf",
             crop + scale + decimate + "=0:64:640:0.001",
-            os.path.join(dir_escaped, "img-%d.png"),
+            str(Path(dir_escaped) / "img-%d.png"),
         ]
         logging.debug(" ".join(command))
-        lines = []
 
-        proc = subprocess.Popen(command, stderr=subprocess.PIPE, encoding="UTF-8")
-        while proc.poll() is None:
-            lines.extend(iter(proc.stderr.readline, ""))
+        # Use subprocess.run so the full stderr stream is read after the
+        # process exits. The previous Popen + poll loop stopped reading once
+        # poll() returned, dropping any buffered tail; with `-v debug` ffmpeg
+        # also writes enough to fill the OS pipe buffer and could deadlock
+        # blocked on write while we waited on poll().
+        result = subprocess.run(command, stderr=subprocess.PIPE, encoding="UTF-8")
+        lines = result.stderr.splitlines()
 
         pattern = re.compile(r"keep pts:[0-9]+ pts_time:(?P<timecode>[0-9\.]+)")
         frame_count = 0
@@ -475,10 +479,10 @@ def extract_frames(video, directory, full_resolution, viewport):
                 frame_time = int(
                     math.floor(float(match.groupdict().get("timecode")) * 1000)
                 )
-                src = os.path.join(directory, "img-{0:d}.png".format(frame_count))
-                dest = os.path.join(directory, "video-{0:06d}.png".format(frame_time))
+                src = str(Path(directory) / "img-{0:d}.png".format(frame_count))
+                dest = str(Path(directory) / "video-{0:06d}.png".format(frame_time))
                 logging.debug("Renaming " + src + " to " + dest)
-                os.rename(src, dest)
+                Path(src).rename(dest)
                 ret = True
     return ret
 
@@ -492,11 +496,8 @@ def find_recording_platform(video):
     command = ["ffprobe", video]
     logging.debug(command)
 
-    lines = []
-    proc = subprocess.Popen(command, stderr=subprocess.PIPE, encoding="UTF-8")
-
-    while proc.poll() is None:
-        lines.extend(iter(proc.stderr.readline, ""))
+    result = subprocess.run(command, stderr=subprocess.PIPE, encoding="UTF-8")
+    lines = result.stderr.splitlines()
 
     is_mobile = False
     matcher = re.compile(".*com\.android\.version.*")
@@ -509,7 +510,7 @@ def find_recording_platform(video):
 
 def remove_frames_before_orange(directory, orange_file):
     """Remove stray frames from the start of the video"""
-    frames = sorted(glob.glob(os.path.join(directory, "video-*.png")))
+    frames = sorted(glob.glob(str(Path(directory) / "video-*.png")))
     if len(frames):
         # go through the first 20 frames and remove any that come before the first orange frame.
         # iOS video capture starts with a blank white frame and then flips to
@@ -530,24 +531,24 @@ def remove_frames_before_orange(directory, orange_file):
         if found_orange and len(remove_frames):
             for frame in remove_frames:
                 logging.debug("Removing pre-orange frame %s", frame)
-                os.remove(frame)
+                Path(frame).unlink()
 
 
 def remove_orange_frames(directory, orange_file):
     """Remove orange frames from the beginning of the video"""
-    frames = sorted(glob.glob(os.path.join(directory, "video-*.png")))
+    frames = sorted(glob.glob(str(Path(directory) / "video-*.png")))
     if len(frames):
         logging.debug("Scanning for orange frames...")
         for frame in frames:
             if is_color_frame(frame, orange_file):
                 logging.debug("Removing Orange frame: %s", frame)
-                os.remove(frame)
+                Path(frame).unlink()
             else:
                 break
         for frame in reversed(frames):
             if is_color_frame(frame, orange_file):
                 logging.debug("Removing orange frame %s from the end", frame)
-                os.remove(frame)
+                Path(frame).unlink()
             else:
                 break
 
@@ -672,9 +673,9 @@ def find_video_viewport(
 
             logging.debug("Using frame " + str(retries))
 
-            frame = os.path.join(directory, "viewport.png")
-            if os.path.isfile(frame):
-                os.remove(frame)
+            frame = str(Path(directory) / "viewport.png")
+            if Path(frame).is_file():
+                Path(frame).unlink()
 
             command = ["ffmpeg", "-i", video]
 
@@ -684,7 +685,7 @@ def find_video_viewport(
             command.extend(["-frames:v", "1", frame])
             subprocess.check_output(command)
 
-            if os.path.isfile(frame):
+            if Path(frame).is_file():
                 with Image.open(frame) as im:
                     width, height = im.size
                     logging.debug("%s is %dx%d", frame, width, height)
@@ -693,7 +694,7 @@ def find_video_viewport(
                 else:
                     viewport = {"x": 0, "y": 0, "width": width, "height": height}
 
-                os.remove(frame)
+                Path(frame).unlink()
 
         if viewport is not None and viewport != {
             "x": 0,
@@ -711,7 +712,7 @@ def find_video_viewport(
 
 def adjust_frame_times(directory):
     offset = None
-    frames = sorted(glob.glob(os.path.join(directory, "video-*.png")))
+    frames = sorted(glob.glob(str(Path(directory) / "video-*.png")))
     # Special hack to the the video start
     # Let us tune this in the future to skip using a global
     global videoRecordingStart
@@ -726,8 +727,8 @@ def adjust_frame_times(directory):
                     videoRecordingStart = frame_time
                     offset = frame_time
                 new_time = frame_time - offset
-                dest = os.path.join(directory, "ms_{0:06d}.png".format(new_time))
-                os.rename(frame, dest)
+                dest = str(Path(directory) / "ms_{0:06d}.png".format(new_time))
+                Path(frame).rename(dest)
 
 
 def find_render_start(directory, orange_file, cropped, is_mobile):
@@ -738,7 +739,7 @@ def find_render_start(directory, orange_file, cropped, is_mobile):
             or options.viewport is not None
             or (options.renderignore > 0 and options.renderignore <= 100)
         ):
-            files = sorted(glob.glob(os.path.join(directory, "video-*.png")))
+            files = sorted(glob.glob(str(Path(directory) / "video-*.png")))
             count = len(files)
             if count > 1:
                 from PIL import Image
@@ -797,12 +798,12 @@ def find_render_start(directory, orange_file, cropped, is_mobile):
                 for i in range(1, count):
                     if frames_match(first, files[i], 10, 0, crop, mask):
                         logging.debug("Removing pre-render frame %s", files[i])
-                        os.remove(files[i])
+                        Path(files[i]).unlink()
                     elif orange_file is not None and is_color_frame(
                         files[i], orange_file
                     ):
                         logging.debug("Removing orange frame %s", files[i])
-                        os.remove(files[i])
+                        Path(files[i]).unlink()
                     else:
                         break
     except BaseException:
@@ -813,7 +814,7 @@ def eliminate_duplicate_frames(directory, cropped, is_mobile):
     logging.debug("Eliminating Duplicate Frames...")
     global client_viewport
     try:
-        files = sorted(glob.glob(os.path.join(directory, "ms_*.png")))
+        files = sorted(glob.glob(str(Path(directory) / "ms_*.png")))
         if len(files) > 1:
             from PIL import Image
 
@@ -867,14 +868,14 @@ def eliminate_duplicate_frames(directory, cropped, is_mobile):
                             files[i]
                         )
                     )
-                    os.remove(files[i])
+                    Path(files[i]).unlink()
                 else:
                     break
 
             # Do another pass looking for the last frame but with an allowance for up
             # to a 15% difference in individual pixels to deal with noise
             # around text.
-            files = sorted(glob.glob(os.path.join(directory, "ms_*.png")))
+            files = sorted(glob.glob(str(Path(directory) / "ms_*.png")))
             count = len(files)
             duplicates = []
             if count > 2:
@@ -891,7 +892,7 @@ def eliminate_duplicate_frames(directory, cropped, is_mobile):
                                     previous_frame
                                 )
                             )
-                            os.remove(previous_frame)
+                            Path(previous_frame).unlink()
                         previous_frame = files[i]
                     else:
                         break
@@ -899,7 +900,7 @@ def eliminate_duplicate_frames(directory, cropped, is_mobile):
                 logging.debug(
                     "Removing duplicate frame {0} from the end".format(duplicate)
                 )
-                os.remove(duplicate)
+                Path(duplicate).unlink()
 
     except BaseException:
         logging.exception("Error processing frames for duplicates")
@@ -910,7 +911,7 @@ def crop_viewport(directory):
         try:
             from PIL import Image
 
-            files = sorted(glob.glob(os.path.join(directory, "ms_*.png")))
+            files = sorted(glob.glob(str(Path(directory) / "ms_*.png")))
             count = len(files)
             if count > 0:
                 for i in range(count):
@@ -950,15 +951,15 @@ def get_decimate_filter():
 
 
 def clean_directory(directory):
-    files = glob.glob(os.path.join(directory, "*.png"))
+    files = glob.glob(str(Path(directory) / "*.png"))
     for file in files:
-        os.remove(file)
-    files = glob.glob(os.path.join(directory, "*.jpg"))
+        Path(file).unlink()
+    files = glob.glob(str(Path(directory) / "*.jpg"))
     for file in files:
-        os.remove(file)
-    files = glob.glob(os.path.join(directory, "*.json"))
+        Path(file).unlink()
+    files = glob.glob(str(Path(directory) / "*.json"))
     for file in files:
-        os.remove(file)
+        Path(file).unlink()
 
 
 def is_color_frame(file, color_file):
@@ -967,7 +968,7 @@ def is_color_frame(file, color_file):
     if file in frame_cache and color_file in frame_cache[file]:
         return bool(frame_cache[file][color_file])
     match = False
-    if os.path.isfile(color_file):
+    if Path(color_file).is_file():
         try:
             from PIL import Image
 
@@ -1087,18 +1088,18 @@ def generate_orange_png(orange_file):
 
 def calculate_histograms(directory, histograms_file, force):
     logging.debug("Calculating image histograms")
-    if not os.path.isfile(histograms_file) or force:
+    if not Path(histograms_file).is_file() or force:
         try:
             extension = None
-            directory = os.path.realpath(directory)
-            first_frame = os.path.join(directory, "ms_000000")
-            if os.path.isfile(first_frame + ".png"):
+            directory = str(Path(directory).resolve())
+            first_frame = str(Path(directory) / "ms_000000")
+            if Path(first_frame + ".png").is_file():
                 extension = ".png"
-            elif os.path.isfile(first_frame + ".jpg"):
+            elif Path(first_frame + ".jpg").is_file():
                 extension = ".jpg"
             if extension is not None:
                 histograms = []
-                frames = sorted(glob.glob(os.path.join(directory, "ms_*" + extension)))
+                frames = sorted(glob.glob(str(Path(directory) / ("ms_*" + extension))))
                 match = re.compile(r"ms_(?P<ms>[0-9]+)\.")
                 for frame in frames:
                     m = re.search(match, frame)
@@ -1110,14 +1111,14 @@ def calculate_histograms(directory, histograms_file, force):
                             histograms.append(
                                 {
                                     "time": frame_time,
-                                    "file": os.path.basename(frame),
+                                    "file": Path(frame).name,
                                     "histogram": histogram,
                                     "total_pixels": total,
                                     "dropped_pixels": dropped,
                                 }
                             )
-                if os.path.isfile(histograms_file):
-                    os.remove(histograms_file)
+                if Path(histograms_file).is_file():
+                    Path(histograms_file).unlink()
                 f = gzip.open(histograms_file, GZIP_TEXT)
                 json.dump(histograms, f)
                 f.close()
@@ -1173,8 +1174,8 @@ def calculate_image_histogram(file):
 
 
 def save_screenshot(directory, dest, quality):
-    directory = os.path.realpath(directory)
-    files = sorted(glob.glob(os.path.join(directory, "ms_*.png")))
+    directory = str(Path(directory).resolve())
+    files = sorted(glob.glob(str(Path(directory) / "ms_*.png")))
     if files is not None and len(files) >= 1:
         src = files[-1]
         if dest[-4:] == ".jpg":
@@ -1190,17 +1191,16 @@ def save_screenshot(directory, dest, quality):
 
 def convert_to_jpeg(directory, quality):
     logging.debug("Converting video frames to JPEG")
-    directory = os.path.realpath(directory)
-    pattern = os.path.join(directory, "ms_*.png")
+    directory = str(Path(directory).resolve())
+    pattern = str(Path(directory) / "ms_*.png")
 
     files = sorted(glob.glob(pattern))
     for file in files:
-        _, filename = os.path.split(file)
-        filen, ext = os.path.splitext(filename)
+        filen = Path(file).stem
         convert_img_to_jpeg(
-            file, os.path.join(directory, filen + ".jpg"), quality=quality
+            file, str(Path(directory) / (filen + ".jpg")), quality=quality
         )
-        os.remove(file)
+        Path(file).unlink()
 
     logging.debug("Done converting video frames to JPEG")
 
@@ -1226,8 +1226,7 @@ def calculate_visual_metrics(
     if histograms is not None and len(histograms) > 0:
         progress = calculate_visual_progress(histograms)
         if progress and progress_file is not None:
-            file_name, ext = os.path.splitext(progress_file)
-            if ext.lower() == ".gz":
+            if Path(progress_file).suffix.lower() == ".gz":
                 f = gzip.open(progress_file, GZIP_TEXT, 7)
             else:
                 f = open(progress_file, "w")
@@ -1263,7 +1262,7 @@ def calculate_visual_metrics(
                         },
                     )
                 )
-            if hero_elements_file is not None and os.path.isfile(hero_elements_file):
+            if hero_elements_file is not None and Path(hero_elements_file).is_file():
                 logging.debug("Calculating hero element times")
                 hero_data = None
                 hero_f_in = gzip.open(hero_elements_file, GZIP_READ_TEXT)
@@ -1350,7 +1349,7 @@ def calculate_visual_metrics(
 
 def load_histograms(histograms_file, start, end):
     histograms = None
-    if os.path.isfile(histograms_file):
+    if Path(histograms_file).is_file():
         f = gzip.open(histograms_file)
         original = json.load(f)
         f.close()
@@ -1448,7 +1447,7 @@ def calculate_visual_progress(histograms):
     last = histograms[-1]["histogram"]
     for index, histogram in enumerate(histograms):
         p = calculate_frame_progress(histogram["histogram"], first, last)
-        file_name, ext = os.path.splitext(histogram["file"])
+        file_name = Path(histogram["file"]).stem
         progress.append({"time": histogram["time"], "file": file_name, "progress": p})
         logging.debug("{0:d}ms - {1:d}% Complete".format(histogram["time"], int(p)))
     return progress
@@ -1519,12 +1518,12 @@ def calculate_contentful_speed_index(progress, directory):
     try:
         from PIL import Image
 
-        dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
+        dir = str(Path(__file__).resolve().parent / directory)
         content = []
         maxContent = 0
         for p in progress[1:]:
             # Full Path of the Current Frame
-            current_frame = os.path.join(dir, "ms_{0:06d}.png".format(p["time"]))
+            current_frame = str(Path(dir) / "ms_{0:06d}.png".format(p["time"]))
             logging.debug("contentfulSpeedIndex: Current frame is %s" % current_frame)
 
             value = 0
@@ -1568,9 +1567,9 @@ def calculate_perceptual_speed_index(progress, directory):
     from ssim import compute_ssim
 
     x = len(progress)
-    dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
-    first_paint_frame = os.path.join(dir, "ms_{0:06d}.png".format(progress[1]["time"]))
-    target_frame = os.path.join(dir, "ms_{0:06d}.png".format(progress[x - 1]["time"]))
+    dir = str(Path(__file__).resolve().parent / directory)
+    first_paint_frame = str(Path(dir) / "ms_{0:06d}.png".format(progress[1]["time"]))
+    target_frame = str(Path(dir) / "ms_{0:06d}.png".format(progress[x - 1]["time"]))
     ssim_1 = compute_ssim(first_paint_frame, target_frame)
     per_si = float(progress[1]["time"])
     last_ms = progress[1]["time"]
@@ -1582,7 +1581,7 @@ def calculate_perceptual_speed_index(progress, directory):
         elapsed = p["time"] - last_ms
         # print '*******elapsed %f'%elapsed
         # Full Path of the Current Frame
-        current_frame = os.path.join(dir, "ms_{0:06d}.png".format(p["time"]))
+        current_frame = str(Path(dir) / "ms_{0:06d}.png".format(p["time"]))
         logging.debug("Current Image is %s" % current_frame)
         # Takes full path of PNG frames to compute SSIM value
         per_si += elapsed * (1.0 - ssim)
@@ -1602,14 +1601,14 @@ def calculate_perceptual_speed_index(progress, directory):
 
 def calculate_hero_time(progress, directory, hero, viewport):
     try:
-        dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), directory)
+        dir = str(Path(__file__).resolve().parent / directory)
         n = len(progress)
-        target_frame = os.path.join(dir, "ms_{0:06d}".format(progress[n - 1]["time"]))
+        target_frame = str(Path(dir) / "ms_{0:06d}".format(progress[n - 1]["time"]))
 
         extension = None
-        if os.path.isfile(target_frame + ".png"):
+        if Path(target_frame + ".png").is_file():
             extension = ".png"
-        elif os.path.isfile(target_frame + ".jpg"):
+        elif Path(target_frame + ".jpg").is_file():
             extension = ".jpg"
         if extension is not None:
             hero_width = int(hero["width"])
@@ -1642,10 +1641,7 @@ def calculate_hero_time(progress, directory, hero, viewport):
             )
 
             # Apply the mask to the target frame to create the reference frame
-            target_mask_path = os.path.join(
-                dir,
-                "hero_{0}_ms_{1:06d}.png".format(hero["name"], progress[n - 1]["time"]),
-            )
+            target_mask_path = str(Path(dir) / "hero_{0}_ms_{1:06d}.png".format(hero["name"], progress[n - 1]["time"]))
 
             def __apply_hero_mask(cur_frame):
                 """Helper method for re-applying the same mask."""
@@ -1658,8 +1654,8 @@ def calculate_hero_time(progress, directory, hero, viewport):
             target_mask.save(target_mask_path)
 
             def cleanup():
-                if os.path.isfile(target_mask_path):
-                    os.remove(target_mask_path)
+                if Path(target_mask_path).is_file():
+                    Path(target_mask_path).unlink()
 
             # Allow for small differences like scrollbars and overlaid UI elements
             # by applying a 10% fuzz and allowing for up to 2% of the pixels to be
@@ -1668,16 +1664,14 @@ def calculate_hero_time(progress, directory, hero, viewport):
             max_pixel_diff = math.ceil(hero_width * hero_height * 0.02)
 
             for p in progress:
-                current_frame = os.path.join(dir, "ms_{0:06d}".format(p["time"]))
+                current_frame = str(Path(dir) / "ms_{0:06d}".format(p["time"]))
                 extension = None
-                if os.path.isfile(current_frame + ".png"):
+                if Path(current_frame + ".png").is_file():
                     extension = ".png"
-                elif os.path.isfile(current_frame + ".jpg"):
+                elif Path(current_frame + ".jpg").is_file():
                     extension = ".jpg"
                 if extension is not None:
-                    current_mask_path = os.path.join(
-                        dir, "hero_{0}_ms_{1:06d}.png".format(hero["name"], p["time"])
-                    )
+                    current_mask_path = str(Path(dir) / "hero_{0}_ms_{1:06d}.png".format(hero["name"], p["time"]))
 
                     current_mask = __apply_hero_mask(current_frame + extension)
                     current_mask.save(current_mask_path)
@@ -1692,7 +1686,7 @@ def calculate_hero_time(progress, directory, hero, viewport):
                     )
 
                     # Remove each mask after using it
-                    os.remove(current_mask_path)
+                    Path(current_mask_path).unlink()
 
                     if match:
                         # Clean up masks as soon as a match is found
@@ -1975,7 +1969,7 @@ def main():
     directory = temp_dir
     if options.dir is not None:
         directory = options.dir
-    histogram_file = os.path.join(temp_dir, "histograms.json.gz")
+    histogram_file = str(Path(temp_dir) / "histograms.json.gz")
 
     # Set up logging
     log_level = logging.CRITICAL
@@ -2012,11 +2006,9 @@ def main():
             if options.video:
                 orange_file = None
                 if options.orange:
-                    orange_file = os.path.join(
-                        os.path.dirname(os.path.realpath(__file__)), "orange.png"
-                    )
-                    if not os.path.isfile(orange_file):
-                        orange_file = os.path.join(colors_temp_dir, "orange.png")
+                    orange_file = str(Path(__file__).resolve().parent / "orange.png")
+                    if not Path(orange_file).is_file():
+                        orange_file = str(Path(colors_temp_dir) / "orange.png")
                         generate_orange_png(orange_file)
                 video_to_frames(
                     options.video,
