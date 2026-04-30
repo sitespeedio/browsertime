@@ -2,6 +2,17 @@
 
 ## UNRELEASED
 
+### Highlights
+
+This release is a big push on the scripting API and on real-device testing.
+
+* **Unified selector syntax across commands.** All interaction commands now accept selectors directly (`commands.click('#btn')`, `commands.addText('#input', 'text')`, etc.) with optional `id:`/`xpath:`/`text:`/`link:`/`name:`/`class:` prefixes. The old `AndWait` family is deprecated in favour of `{ waitForNavigation: true }`.
+* **A much bigger convenience-command surface.** New `type`, `find`, `getText`, `getValue`, `isVisible`, `exists`, `clear`, `fill`, `getAttribute`, `isEnabled`, `isChecked`, `hover`, `press`, `getTitle`, `getUrl`, `check`, `uncheck`, `scrollIntoView`, `select.byText`, `waitForUrl`, `clickAndMeasure`, `click.byText`, plus a full `cookie` command.
+* **Chrome soft navigations.** SPA route changes (React, Next.js, Vue, Turbo) now produce a HAR page and the standard FCP/LCP/CLS/INP metrics, using Chrome's PerformanceObserver soft-navigation entry type.
+* **Safari on iOS over USB.** HAR via `ios_webkit_debug_proxy`, plus video recording and visual metrics via a CoreMediaIO screen-capture helper — no manual QuickTime step.
+* **TypeScript navigation scripts** are now supported on Node.js 22.18.0+ via native type stripping.
+* **Breaking:** clicks use real OS-level mouse events (Selenium Actions API) and elements auto-wait up to 6 seconds by default. Set `--timeouts.elementWait 0` to restore the old behavior.
+
 ### Breaking
 * Changed default `--timeouts.elementWait` from 0 to 6000ms. All element commands (click, addText) now auto-wait up to 6 seconds for elements to appear. Set `--timeouts.elementWait 0` to restore the old behavior [#2389](https://github.com/sitespeedio/browsertime/pull/2389).
 * Click commands now use the Selenium Actions API for real OS-level mouse events instead of JavaScript `.click()`. Elements must be visible and interactable. If you need to click a hidden element, use `commands.js.run()` instead [#2381](https://github.com/sitespeedio/browsertime/pull/2381).
@@ -30,9 +41,12 @@
 * Added `commands.waitForUrl(pattern, { timeout })` to wait for URL changes after navigation [#2427](https://github.com/sitespeedio/browsertime/pull/2427).
 * Added video recording and visual metrics for Safari on iOS over USB. A native helper captures the device's screen via CoreMediaIO and pipes frames to ffmpeg. The device is woken into screen-capture mode automatically — no manual QuickTime step required [#2432](https://github.com/sitespeedio/browsertime/pull/2432) [#2436](https://github.com/sitespeedio/browsertime/pull/2436).
 * Added HAR capture for Safari on iOS via `ios_webkit_debug_proxy`. Browsertime starts and stops `iwdp` automatically and exits with a clear error if it isn't installed (`brew install ios-webkit-debug-proxy`). New `--safari.includeResponseBodies` CLI option. macOS Safari is unaffected [#2431](https://github.com/sitespeedio/browsertime/pull/2431).
+* Added soft navigation support for Chrome. Single-page app route changes (React, Next.js, Vue, Turbo) now produce a HAR page and the standard FCP/LCP/CLS/INP metrics, using Chrome's PerformanceObserver soft-navigation entry type to confirm user interaction + URL change + visible paint [#2438](https://github.com/sitespeedio/browsertime/pull/2438).
+* Updated dependencies to latest compatible versions: chrome-har 1.2.1, selenium-webdriver 4.43.0, execa 9.6.1, jimp 1.6.1 [#2437](https://github.com/sitespeedio/browsertime/pull/2437).
 * Firefox 149 in the Docker container [#2375](https://github.com/sitespeedio/browsertime/pull/2375).
 
 ### Fixed
+* Pin the iOS Safari tab being measured so unrelated open tabs cannot clobber the active inspector target. The WebDriver tab is navigated to a sentinel URL and identified by it before iWDP messages are processed, otherwise an unrelated `Target.targetCreated` event could leave the HAR empty [#2440](https://github.com/sitespeedio/browsertime/pull/2440).
 * Fixed `drawtext` failing on ffmpeg 8 by quoting font paths and forwarding ffmpeg stderr so font/filter errors are visible [#2435](https://github.com/sitespeedio/browsertime/pull/2435).
 * Fixed Firefox network idle timeout on repeated iterations. The WebSocket message listener was never removed between iterations, causing the inflight counter to go negative [#2391](https://github.com/sitespeedio/browsertime/pull/2391).
 * Fixed Firefox network idle timeout when no network events arrive. Timestamps were initialized as undefined causing the idle check to never trigger [#2394](https://github.com/sitespeedio/browsertime/pull/2394).
