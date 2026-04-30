@@ -1564,39 +1564,47 @@ def calculate_contentful_speed_index(progress, directory):
 
 
 def calculate_perceptual_speed_index(progress, directory):
-    from ssim import compute_ssim
+    # Match the behaviour of calculate_contentful_speed_index: any failure
+    # here (missing frame, SSIM library error, etc.) must not propagate up
+    # to calculate_visual_metrics, where it would discard SpeedIndex / FCP /
+    # the rest of the metrics for this iteration.
+    try:
+        from ssim import compute_ssim
 
-    x = len(progress)
-    dir = str(Path(__file__).resolve().parent / directory)
-    first_paint_frame = str(Path(dir) / "ms_{0:06d}.png".format(progress[1]["time"]))
-    target_frame = str(Path(dir) / "ms_{0:06d}.png".format(progress[x - 1]["time"]))
-    ssim_1 = compute_ssim(first_paint_frame, target_frame)
-    per_si = float(progress[1]["time"])
-    last_ms = progress[1]["time"]
-    # Full Path of the Target Frame
-    logging.debug("Target image for perSI is %s" % target_frame)
-    ssim = ssim_1
-    completeness_value = []
-    for p in progress[1:]:
-        elapsed = p["time"] - last_ms
-        # print '*******elapsed %f'%elapsed
-        # Full Path of the Current Frame
-        current_frame = str(Path(dir) / "ms_{0:06d}.png".format(p["time"]))
-        logging.debug("Current Image is %s" % current_frame)
-        # Takes full path of PNG frames to compute SSIM value
-        per_si += elapsed * (1.0 - ssim)
-        ssim = compute_ssim(current_frame, target_frame)
-        gc.collect()
-        last_ms = p["time"]
-        completeness_value.append((p["time"], int(per_si)))
+        x = len(progress)
+        dir = str(Path(__file__).resolve().parent / directory)
+        first_paint_frame = str(Path(dir) / "ms_{0:06d}.png".format(progress[1]["time"]))
+        target_frame = str(Path(dir) / "ms_{0:06d}.png".format(progress[x - 1]["time"]))
+        ssim_1 = compute_ssim(first_paint_frame, target_frame)
+        per_si = float(progress[1]["time"])
+        last_ms = progress[1]["time"]
+        # Full Path of the Target Frame
+        logging.debug("Target image for perSI is %s" % target_frame)
+        ssim = ssim_1
+        completeness_value = []
+        for p in progress[1:]:
+            elapsed = p["time"] - last_ms
+            # print '*******elapsed %f'%elapsed
+            # Full Path of the Current Frame
+            current_frame = str(Path(dir) / "ms_{0:06d}.png".format(p["time"]))
+            logging.debug("Current Image is %s" % current_frame)
+            # Takes full path of PNG frames to compute SSIM value
+            per_si += elapsed * (1.0 - ssim)
+            ssim = compute_ssim(current_frame, target_frame)
+            gc.collect()
+            last_ms = p["time"]
+            completeness_value.append((p["time"], int(per_si)))
 
-    per_si = int(per_si)
-    raw_progress_value = ["0=0"]
-    for timestamp, percent in completeness_value:
-        p = int(100 * float(percent) / float(per_si))
-        raw_progress_value.append("%d=%d" % (timestamp, p))
+        per_si = int(per_si)
+        raw_progress_value = ["0=0"]
+        for timestamp, percent in completeness_value:
+            p = int(100 * float(percent) / float(per_si))
+            raw_progress_value.append("%d=%d" % (timestamp, p))
 
-    return per_si, ", ".join(raw_progress_value)
+        return per_si, ", ".join(raw_progress_value)
+    except Exception as e:
+        logging.exception(e)
+        return None, None
 
 
 def calculate_hero_time(progress, directory, hero, viewport):
