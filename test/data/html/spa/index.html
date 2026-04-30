@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>SPA home</title>
+  </head>
+  <body>
+    <h1 id="title">Home</h1>
+    <p>This page changes its URL via history.pushState when you click the
+      button. Combined with the user click and the new content painted into
+      the page, Chrome treats the transition as a soft navigation.</p>
+    <button id="goto-page-2">Go to page 2</button>
+    <script>
+      document.getElementById('goto-page-2').addEventListener('click', function () {
+        history.pushState({}, '', '/spa/page-2');
+        // Trigger a real network request so chrome-har keeps the page
+        // (chrome-har drops HAR pages that have no entries).
+        fetch('/spa/page-2-data.json?ts=' + Date.now()).catch(function () {});
+        var content = document.createElement('div');
+        content.id = 'page-2-content';
+        content.style.fontSize = '32px';
+        content.style.padding = '40px';
+        content.textContent = 'Welcome to page 2 — fresh content rendered after the soft navigation.';
+        document.body.appendChild(content);
+        document.getElementById('title').textContent = 'Page 2';
+      });
+    </script>
+  </body>
+</html>

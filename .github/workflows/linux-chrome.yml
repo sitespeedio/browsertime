@@ -171,6 +171,17 @@ jobs:
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/commandscripts/scrollToBottom.cjs
     - name: Test extra profile run Chrome
       run: ./bin/browsertime.js -b chrome http://127.0.0.1:3000/simple/ -n 1 --viewPort 1000x600 --xvfb  --enableProfileRun
+    - name: Test Chrome soft navigation detection
+      run: |
+        ./bin/browsertime.js -b chrome -n 1 --xvfb --spa --resultDir /tmp/soft-nav test/data/commandscripts/softNavigation.cjs
+        echo "--- soft navigation entry ---"
+        jq '.[0].browserScripts[0].timings.softNavigations[0]' /tmp/soft-nav/browsertime.json
+        echo "--- HAR page ---"
+        jq '.log.pages[0] | {title, _url, _softNavigation}' /tmp/soft-nav/browsertime.har
+        jq -e '.[0].browserScripts[0].timings.softNavigations | length > 0' /tmp/soft-nav/browsertime.json
+        jq -e '.[0].browserScripts[0].timings.softNavigations[0].name | endswith("/spa/page-2")' /tmp/soft-nav/browsertime.json
+        jq -e '.log.pages[0]._softNavigation == true' /tmp/soft-nav/browsertime.har
+        jq -e '.log.pages[0]._url | endswith("/spa/page-2")' /tmp/soft-nav/browsertime.har
   video:
     runs-on: ubuntu-22.04
     steps:
