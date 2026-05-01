@@ -38,8 +38,11 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get install net-tools -y
-        sudo snap install ffmpeg
-        sudo snap alias ffmpeg.ffprobe ffprobe
+        # Static ffmpeg from johnvansickle.com — replaces `snap install ffmpeg`,
+        # which has been flaky against the snap store from CI runners.
+        curl -fsSL https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz | sudo tar -xJ -C /opt/
+        sudo ln -sf /opt/ffmpeg-*-amd64-static/ffmpeg /usr/local/bin/ffmpeg
+        sudo ln -sf /opt/ffmpeg-*-amd64-static/ffprobe /usr/local/bin/ffprobe
         python -m pip install --upgrade pip setuptools==70.0.0 pyssim OpenCV-Python Numpy virtualenv
         sudo modprobe ifb numifbs=1
     - name: Browser versions
