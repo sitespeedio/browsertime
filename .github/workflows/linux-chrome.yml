@@ -17,10 +17,8 @@ jobs:
         allowed-endpoints: >
           accounts.google.com:443
           android.clients.google.com:443
-          api.snapcraft.io:443
           azure.archive.ubuntu.com:80
-          canonical-bos01.cdn.snapcraftcontent.com:443
-          canonical-lgw01.cdn.snapcraftcontent.com:443
+          johnvansickle.com:443
           clients2.google.com:80
           dl-ssl.google.com:443
           dl.google.com:80
@@ -91,10 +89,8 @@ jobs:
         allowed-endpoints: >
           accounts.google.com:443
           android.clients.google.com:443
-          api.snapcraft.io:443
           azure.archive.ubuntu.com:80
-          canonical-bos01.cdn.snapcraftcontent.com:443
-          canonical-lgw01.cdn.snapcraftcontent.com:443
+          johnvansickle.com:443
           clients2.google.com:80
           dl-ssl.google.com:443
           dl.google.com:80
@@ -192,10 +188,8 @@ jobs:
         allowed-endpoints: >
           accounts.google.com:443
           android.clients.google.com:443
-          api.snapcraft.io:443
           azure.archive.ubuntu.com:80
-          canonical-bos01.cdn.snapcraftcontent.com:443
-          canonical-lgw01.cdn.snapcraftcontent.com:443
+          johnvansickle.com:443
           clients2.google.com:80
           dl-ssl.google.com:443
           dl.google.com:80
@@ -237,8 +231,12 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get install net-tools -y
-        sudo snap install ffmpeg
-        sudo snap alias ffmpeg.ffprobe ffprobe
+        # Static ffmpeg from johnvansickle.com — replaces `snap install ffmpeg`,
+        # which fails under harden-runner because api.snapcraft.io IP-rotates
+        # and the iptables egress block pins to the IP resolved at job start.
+        curl -fsSL https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz | sudo tar -xJ -C /opt/
+        sudo ln -sf /opt/ffmpeg-*-amd64-static/ffmpeg /usr/local/bin/ffmpeg
+        sudo ln -sf /opt/ffmpeg-*-amd64-static/ffprobe /usr/local/bin/ffprobe
         python -m pip install --upgrade pip setuptools==70.0.0 pyssim OpenCV-Python Numpy virtualenv
         sudo modprobe ifb numifbs=1
     - name: Start local HTTP server
