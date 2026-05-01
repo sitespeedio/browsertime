@@ -6,7 +6,21 @@
  * @hideconstructor
  */
 export class Measure {
-    constructor(browser: any, index: any, pageCompleteCheck: any, result: any, engineDelegate: any, storageManager: any, videos: any, scriptsByCategory: any, asyncScriptsByCategory: any, postURLScripts: any, context: any, screenshotManager: any, options: any);
+    constructor({ browser, index, pageCompleteCheck, result, engineDelegate, storageManager, videos, scriptsByCategory, asyncScriptsByCategory, postURLScripts, context, screenshotManager, options }: {
+        browser: any;
+        index: any;
+        pageCompleteCheck: any;
+        result: any;
+        engineDelegate: any;
+        storageManager: any;
+        videos: any;
+        scriptsByCategory: any;
+        asyncScriptsByCategory: any;
+        postURLScripts: any;
+        context: any;
+        screenshotManager: any;
+        options: any;
+    });
     /**
      * @private
      */
@@ -34,19 +48,7 @@ export class Measure {
     /**
      * @private
      */
-    private screenshotManager;
-    /**
-     * @private
-     */
     private storageManager;
-    /**
-     * @private
-     */
-    private recordVideo;
-    /**
-     * @private
-     */
-    private videos;
     /**
      * @private
      */
@@ -86,26 +88,11 @@ export class Measure {
     /**
      * @private
      */
-    private ANDROID_DELAY_TIME;
+    private measureVideo;
     /**
      * @private
      */
-    private IOS_DELAY_TIME;
-    /**
-     * @private
-     */
-    private DESKTOP_DELAY_TIME;
-    /**
-     * Have a consistent way of starting the video
-     * @private
-     */
-    private _startVideo;
-    video: Video;
-    /**
-     * Have a consistent way of starting stopping the video
-     * @private
-     */
-    private _stopVideo;
+    private screenshots;
     /**
      * Have a consistent way of adding an error
      * @private
@@ -162,6 +149,23 @@ export class Measure {
      */
     stopAsError(errorMessage: string): Promise<any>;
     /**
+     * @private
+     */
+    private setClick;
+    _click: any;
+    /**
+     * Starts a measurement, clicks on an element matching the given CSS selector,
+     * waits for the page complete check, and stops the measurement. This is
+     * a shortcut for the common pattern of measure.start/click/measure.stop.
+     *
+     * @async
+     * @param {string} alias - The friendly name for this measurement.
+     * @param {string} selector - The CSS selector of the element to click.
+     * @returns {Promise} A promise that resolves with the collected metrics data.
+     * @throws {Error} Throws an error if the element is not found or the measurement fails.
+     */
+    clickAndMeasure(alias: string, selector: string): Promise<any>;
+    /**
      * Stops the measurement process, collects metrics, and handles any post-measurement tasks.
      * It finalizes the URL being tested, manages any URL-specific metadata, stops any ongoing video recordings,
      * and initiates the data collection process.
@@ -194,10 +198,32 @@ export class Measure {
      */
     addObject(object: any): void;
     /**
-     *
      * @private
      */
-    private collect;
+    private _resolveAlias;
+    /**
+     * @private
+     */
+    private _attachVideoMetadata;
+    /**
+     * @private
+     */
+    private _collectBrowserScripts;
+    /**
+     * @private
+     */
+    private _filterUserTimings;
+    /**
+     * @private
+     */
+    private _collectAndroidProcessTime;
+    /**
+     * @private
+     */
+    private _runPostURLScripts;
+    /**
+     * @private
+     */
+    private _collect;
 }
-import { Video } from '../../../video/video.js';
 //# sourceMappingURL=measure.d.ts.map

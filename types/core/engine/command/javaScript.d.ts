@@ -15,6 +15,10 @@ export class JavaScript {
      */
     private pageCompleteCheck;
     /**
+     * @private
+     */
+    private _andWait;
+    /**
      * Executes a JavaScript script.
      *
      * @async

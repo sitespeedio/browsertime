@@ -5,7 +5,11 @@
  * @hideconstructor
  */
 export class MouseMove {
-    constructor(browser: any);
+    constructor(browser: any, options: any);
+    /**
+     * @private
+     */
+    private browser;
     /**
      * @private
      */
@@ -15,6 +19,24 @@ export class MouseMove {
      */
     private actions;
     /**
+     * @private
+     */
+    private options;
+    /**
+     * @private
+     */
+    private _waitForElement;
+    /**
+     * Moves the mouse cursor to an element using a unified selector string.
+     *
+     * @async
+     * @param {string} selector - The selector string. CSS by default, or use a prefix.
+     * @returns {Promise<void>}
+     * @throws {Error} Throws an error if the element is not found.
+     */
+    run(selector: string): Promise<void>;
+    /**
+     * @private
      * Moves the mouse cursor to an element that matches a given XPath selector.
      *
      * @async
@@ -22,8 +44,9 @@ export class MouseMove {
      * @returns {Promise<void>} A promise that resolves when the mouse has moved to the element.
      * @throws {Error} Throws an error if the element is not found.
      */
-    byXpath(xpath: string): Promise<void>;
+    private byXpath;
     /**
+     * @private
      * Moves the mouse cursor to an element that matches a given CSS selector.
      *
      * @async
@@ -31,8 +54,9 @@ export class MouseMove {
      * @returns {Promise<void>} A promise that resolves when the mouse has moved to the element.
      * @throws {Error} Throws an error if the element is not found.
      */
-    bySelector(selector: string): Promise<void>;
+    private bySelector;
     /**
+     * @private
      * Moves the mouse cursor to a specific position on the screen.
      *
      * @async
@@ -41,8 +65,9 @@ export class MouseMove {
      * @returns {Promise<void>} A promise that resolves when the mouse has moved to the specified position.
      * @throws {Error} Throws an error if the action cannot be performed.
      */
-    toPosition(xPos: number, yPos: number): Promise<void>;
+    private toPosition;
     /**
+     * @private
      * Moves the mouse cursor by an offset from its current position.
      *
      * @async
@@ -51,6 +76,6 @@ export class MouseMove {
      * @returns {Promise<void>} A promise that resolves when the mouse has moved by the specified offset.
      * @throws {Error} Throws an error if the action cannot be performed.
      */
-    byOffset(xOffset: number, yOffset: number): Promise<void>;
+    private byOffset;
 }
 //# sourceMappingURL=mouseMove.d.ts.map

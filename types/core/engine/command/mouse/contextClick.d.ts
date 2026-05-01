@@ -5,7 +5,11 @@
  * @hideconstructor
  */
 export class ContextClick {
-    constructor(browser: any);
+    constructor(browser: any, options: any);
+    /**
+     * @private
+     */
+    private browser;
     /**
      * @private
      */
@@ -15,6 +19,24 @@ export class ContextClick {
      */
     private actions;
     /**
+     * @private
+     */
+    private options;
+    /**
+     * @private
+     */
+    private _waitForElement;
+    /**
+     * Performs a context click (right-click) on an element using a unified selector string.
+     *
+     * @async
+     * @param {string} selector - The selector string. CSS by default, or use a prefix.
+     * @returns {Promise<void>}
+     * @throws {Error} Throws an error if the element is not found.
+     */
+    run(selector: string): Promise<void>;
+    /**
+     * @private
      * Performs a context click (right-click) on an element that matches a given XPath selector.
      *
      * @async
@@ -22,8 +44,9 @@ export class ContextClick {
      * @returns {Promise<void>} A promise that resolves when the context click action is performed.
      * @throws {Error} Throws an error if the element is not found.
      */
-    byXpath(xpath: string): Promise<void>;
+    private byXpath;
     /**
+     * @private
      * Performs a context click (right-click) on an element that matches a given CSS selector.
      *
      * @async
@@ -31,14 +54,15 @@ export class ContextClick {
      * @returns {Promise<void>} A promise that resolves when the context click action is performed.
      * @throws {Error} Throws an error if the element is not found.
      */
-    bySelector(selector: string): Promise<void>;
+    private bySelector;
     /**
+     * @private
      * Performs a context click (right-click) at the current cursor position.
      *
      * @async
      * @returns {Promise<void>} A promise that resolves when the context click action is performed.
      * @throws {Error} Throws an error if the context click action cannot be performed.
      */
-    atCursor(): Promise<void>;
+    private atCursor;
 }
 //# sourceMappingURL=contextClick.d.ts.map

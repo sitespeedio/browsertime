@@ -4,11 +4,15 @@
  * @hideconstructor
  */
 export class Element {
-    constructor(browser: any);
+    constructor(browser: any, options: any);
     /**
      * @private
      */
     private driver;
+    /**
+     * @private
+     */
+    private options;
     /**
      * Finds an element by its CSS selector.
      *
@@ -44,6 +48,20 @@ export class Element {
      * @returns {Promise<WebElement>} A promise that resolves to the WebElement found.
      */
     getByName(name: string): Promise<WebElement>;
+    /**
+     * Finds an element using a CSS selector, with optional waiting and visibility check.
+     *
+     * @param {string} selector - The CSS selector of the element.
+     * @param {Object} [options] - Options for finding the element.
+     * @param {number} [options.timeout] - Maximum time in milliseconds to wait for the element. Defaults to the configured --timeouts.elementWait value.
+     * @param {boolean} [options.visible=false] - If true, waits for the element to be visible, not just present.
+     * @returns {Promise<WebElement>} A promise that resolves to the WebElement found.
+     * @throws {Error} Throws an error if the element is not found within the timeout.
+     */
+    find(selector: string, options?: {
+        timeout?: number;
+        visible?: boolean;
+    }): Promise<WebElement>;
 }
 import { WebElement } from 'selenium-webdriver';
 //# sourceMappingURL=element.d.ts.map

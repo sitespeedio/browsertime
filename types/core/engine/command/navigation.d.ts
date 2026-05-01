@@ -19,7 +19,7 @@ export class Navigation {
      *
      * @async
      * @example await commands.navigation.back();
-     * @param {Object} [options] - Additional options for navigation. Set {wait:true} to wait for the page complete check to run.
+     * @param {Object} [options] - Additional options for navigation. Set {waitForNavigation:true} to wait for the page complete check to run.
      * @returns {Promise<void>} A promise that resolves when the navigation action is completed.
      * @throws {Error} Throws an error if navigation fails.
      */
@@ -29,7 +29,7 @@ export class Navigation {
      *
      * @async
      * @example await commands.navigation.forward();
-     * @param {Object} [options] - Additional options for navigation. Set {wait:true} to wait for the page complete check to run.
+     * @param {Object} [options] - Additional options for navigation. Set {waitForNavigation:true} to wait for the page complete check to run.
      * @returns {Promise<void>} A promise that resolves when the navigation action is completed.
      * @throws {Error} Throws an error if navigation fails.
      */
@@ -39,7 +39,7 @@ export class Navigation {
      *
      * @async
      * @example await commands.navigation.refresh();
-     * @param {Object} [options] - Additional options for refresh action. Set {wait:true} to wait for the page complete check to run.
+     * @param {Object} [options] - Additional options for refresh action. Set {waitForNavigation:true} to wait for the page complete check to run.
      * @returns {Promise<void>} A promise that resolves when the page has been refreshed.
      * @throws {Error} Throws an error if refreshing the page fails.
      */

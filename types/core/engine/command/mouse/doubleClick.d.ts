@@ -5,7 +5,7 @@
  * @hideconstructor
  */
 export class DoubleClick {
-    constructor(browser: any, pageCompleteCheck: any);
+    constructor(browser: any, pageCompleteCheck: any, options: any);
     /**
      * @private
      */
@@ -19,6 +19,24 @@ export class DoubleClick {
      */
     private pageCompleteCheck;
     /**
+     * @private
+     */
+    private options;
+    /**
+     * @private
+     */
+    private _waitForElement;
+    /**
+     * Performs a double click on an element using a unified selector string.
+     *
+     * @async
+     * @param {string} selector - The selector string. CSS by default, or use a prefix.
+     * @returns {Promise<void>}
+     * @throws {Error} Throws an error if the element is not found.
+     */
+    run(selector: string): Promise<void>;
+    /**
+     * @private
      * Performs a mouse double-click on an element matching a given XPath selector.
      *
      * @async
@@ -27,8 +45,9 @@ export class DoubleClick {
      * @returns {Promise<void>} A promise that resolves when the double-click action is performed.
      * @throws {Error} Throws an error if the element is not found.
      */
-    byXpath(xpath: string, options?: any): Promise<void>;
+    private byXpath;
     /**
+     * @private
      * Performs a mouse double-click on an element matching a given CSS selector.
      *
      * @async
@@ -37,8 +56,9 @@ export class DoubleClick {
      * @returns {Promise<void>} A promise that resolves when the double-click action is performed.
      * @throws {Error} Throws an error if the element is not found.
      */
-    bySelector(selector: string, options?: any): Promise<void>;
+    private bySelector;
     /**
+     * @private
      * Performs a mouse double-click at the current cursor position.
      *
      * @async
@@ -46,6 +66,6 @@ export class DoubleClick {
      * @returns {Promise<void>} A promise that resolves when the double-click occurs.
      * @throws {Error} Throws an error if the double-click action cannot be performed.
      */
-    atCursor(options?: any): Promise<void>;
+    private atCursor;
 }
 //# sourceMappingURL=doubleClick.d.ts.map

@@ -5,7 +5,7 @@
  * @class
  */
 export class SingleClick {
-    constructor(browser: any, pageCompleteCheck: any);
+    constructor(browser: any, pageCompleteCheck: any, options: any);
     /**
      * @private
      */
@@ -19,6 +19,32 @@ export class SingleClick {
      */
     private pageCompleteCheck;
     /**
+     * @private
+     */
+    private options;
+    /**
+     * @private
+     */
+    private _waitForElement;
+    /**
+     * Performs a single click on an element using a unified selector string.
+     *
+     * @async
+     * @param {string} selector - The selector string. CSS by default, or use a prefix.
+     * @param {Object} [options] - Options for the click action.
+     * @param {boolean} [options.waitForNavigation=false] - If true, waits for page complete check.
+     * @returns {Promise<void>}
+     * @throws {Error} Throws an error if the element is not found.
+     */
+    run(selector: string, options?: {
+        waitForNavigation?: boolean;
+    }): Promise<void>;
+    /**
+     * @private
+     */
+    private _andWait;
+    /**
+     * @private
      * Performs a single mouse click on an element matching a given XPath selector.
      *
      * @async
@@ -27,8 +53,9 @@ export class SingleClick {
      * @returns {Promise<void>} A promise that resolves when the single click action is performed.
      * @throws {Error} Throws an error if the element is not found.
      */
-    byXpath(xpath: string, options?: any): Promise<void>;
+    private byXpath;
     /**
+     * @private
      * Performs a single mouse click on an element matching a given XPath selector and wait for page complete check.
      *
      * @async
@@ -36,8 +63,9 @@ export class SingleClick {
      * @returns {Promise<void>} A promise that resolves when the single click action is performed.
      * @throws {Error} Throws an error if the element is not found.
      */
-    byXpathAndWait(xpath: string): Promise<void>;
+    private byXpathAndWait;
     /**
+     * @private
      * Performs a single mouse click on an element matching a given CSS selector.
      *
      * @async
@@ -46,8 +74,9 @@ export class SingleClick {
      * @returns {Promise<void>} A promise that resolves when the single click action is performed.
      * @throws {Error} Throws an error if the element is not found.
      */
-    bySelector(selector: string, options?: any): Promise<void>;
+    private bySelector;
     /**
+     * @private
      * Performs a single mouse click on an element matching a given CSS selector and waits on the page complete check.
      *
      * @async
@@ -55,8 +84,9 @@ export class SingleClick {
      * @returns {Promise<void>} A promise that resolves when the single click action is performed.
      * @throws {Error} Throws an error if the element is not found.
      */
-    bySelectorAndWait(selector: string): Promise<void>;
+    private bySelectorAndWait;
     /**
+     * @private
      * Performs a single mouse click at the current cursor position.
      *
      * @async
@@ -64,8 +94,9 @@ export class SingleClick {
      * @returns {Promise<void>} A promise that resolves when the single click occurs.
      * @throws {Error} Throws an error if the single click action cannot be performed.
      */
-    atCursor(options?: any): Promise<void>;
+    private atCursor;
     /**
+     * @private
      * Performs a single mouse click at the current cursor position and waits on the
      * page complete check.
      *
@@ -73,8 +104,9 @@ export class SingleClick {
      * @returns {Promise<void>} A promise that resolves when the single click occurs.
      * @throws {Error} Throws an error if the single click action cannot be performed.
      */
-    atCursorAndWait(): Promise<void>;
+    private atCursorAndWait;
     /**
+     * @private
      * Clicks on a link whose visible text matches the given string.
      *
      * @async
@@ -82,8 +114,9 @@ export class SingleClick {
      * @returns {Promise<void>} A promise that resolves when the click action is performed.
      * @throws {Error} Throws an error if the link is not found.
      */
-    byLinkText(text: string): Promise<void>;
+    private byLinkText;
     /**
+     * @private
      * Clicks on a link whose visible text matches the given string and waits on the opage complete check.
      *
      * @async
@@ -91,8 +124,9 @@ export class SingleClick {
      * @returns {Promise<void>} A promise that resolves when the click action is performed.
      * @throws {Error} Throws an error if the link is not found.
      */
-    byLinkTextAndWait(text: string): Promise<void>;
+    private byLinkTextAndWait;
     /**
+     * @private
      * Clicks on a link whose visible text contains the given substring.
      *
      * @async
@@ -100,8 +134,9 @@ export class SingleClick {
      * @returns {Promise<void>} A promise that resolves when the click action is performed.
      * @throws {Error} Throws an error if the link is not found.
      */
-    byPartialLinkText(text: string): Promise<void>;
+    private byPartialLinkText;
     /**
+     * @private
      * Clicks on a link whose visible text contains the given substring and waits on the
      * page complete check.
      *
@@ -110,8 +145,9 @@ export class SingleClick {
      * @returns {Promise<void>} A promise that resolves when the click action is performed.
      * @throws {Error} Throws an error if the link is not found.
      */
-    byPartialLinkTextAndWait(text: string): Promise<void>;
+    private byPartialLinkTextAndWait;
     /**
+     * @private
      * Clicks on a element with a specific id.
      *
      * @async
@@ -119,8 +155,9 @@ export class SingleClick {
      * @returns {Promise<void>} A promise that resolves when the click action is performed.
      * @throws {Error} Throws an error if the id is not found.
      */
-    byId(id: string): Promise<void>;
+    private byId;
     /**
+     * @private
      * Clicks on a element with a specific id and wait on the page complete check
      *
      * @async
@@ -128,6 +165,6 @@ export class SingleClick {
      * @returns {Promise<void>} A promise that resolves when the page has completed.
      * @throws {Error} Throws an error if the id is not found.
      */
-    byIdAndWait(id: string): Promise<void>;
+    private byIdAndWait;
 }
 //# sourceMappingURL=singleClick.d.ts.map

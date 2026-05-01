@@ -7,7 +7,7 @@ export class Video {
     options: any;
     storageManager: any;
     tmpDir: any;
-    recorder: import("./screenRecording/android/recorder.js").AndroidRecorder | import("./screenRecording/desktop/desktopRecorder.js").DesktopRecorder | import("./screenRecording/firefox/firefoxWindowRecorder.js").FirefoxWindowRecorder | import("./screenRecording/iosSimulator/recorder.js").IOSSimulatorRecorder | import("./screenRecording/ios/iosRecorder.js").IOSRecorder;
+    recorder: import("./screenRecording/android/recorder.js").AndroidRecorder | import("./screenRecording/desktop/desktopRecorder.js").DesktopRecorder | import("./screenRecording/firefox/firefoxWindowRecorder.js").FirefoxWindowRecorder | import("./screenRecording/iosSimulator/recorder.js").IOSSimulatorRecorder | import("./screenRecording/ios/iosDeviceRecorder.js").IOSDeviceRecorder;
     isRecording: boolean;
     setupDirs(index: any, url: any): Promise<void>;
     index: any;
