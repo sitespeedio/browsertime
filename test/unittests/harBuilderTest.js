@@ -204,3 +204,109 @@ test('Gracefully handle missing cpu and visual metrics', t => {
     }
   });
 });
+
+test('Add long-task ranges to pageTimings', t => {
+  const totalResults = [
+    {
+      googleWebVitals: {},
+      visualMetrics: [],
+      info: { url: 'https://example.com' },
+      cpu: [{}],
+      browserScripts: [
+        {
+          timings: {},
+          pageinfo: {
+            longTask: [
+              { startTime: 100, duration: 80 },
+              { startTime: 250, duration: 60 }
+            ]
+          }
+        }
+      ]
+    }
+  ];
+  har.log.pages[0].pageTimings = {};
+  addExtraFieldsToHar(totalResults, har, { iterations: 1 });
+  t.deepEqual(har.log.pages[0].pageTimings._longTasks, [
+    [100, 180],
+    [250, 310]
+  ]);
+});
+
+test('Add user-timing marks and measures to pageTimings', t => {
+  const totalResults = [
+    {
+      googleWebVitals: {},
+      visualMetrics: [],
+      info: { url: 'https://example.com' },
+      cpu: [{}],
+      browserScripts: [
+        {
+          timings: {
+            userTimings: {
+              marks: [
+                { name: 'app-init', startTime: 50 },
+                { name: 'app-ready', startTime: 250 }
+              ],
+              measures: [
+                { name: 'init-to-ready', startTime: 50, duration: 200 }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ];
+  har.log.pages[0].pageTimings = {};
+  addExtraFieldsToHar(totalResults, har, { iterations: 1 });
+  t.deepEqual(har.log.pages[0].pageTimings._userTimings, {
+    'app-init': 50,
+    'app-ready': 250,
+    'init-to-ready': 50
+  });
+});
+
+test('Emit empty `_longTasks` when instrumented but no tasks observed', t => {
+  // Tri-state presence contract used by downstream waterfall viewers:
+  // an empty array means "instrumented, observed none" — distinct from
+  // a missing field, which signals "this producer can't instrument".
+  const totalResults = [
+    {
+      googleWebVitals: {},
+      visualMetrics: [],
+      info: { url: 'https://example.com' },
+      cpu: [{}],
+      browserScripts: [
+        {
+          timings: { userTimings: { marks: [], measures: [] } },
+          pageinfo: { longTask: [] }
+        }
+      ]
+    }
+  ];
+  har.log.pages[0].pageTimings = {};
+  addExtraFieldsToHar(totalResults, har, { iterations: 1 });
+  t.deepEqual(har.log.pages[0].pageTimings._longTasks, []);
+  t.is(har.log.pages[0].pageTimings._userTimings, undefined);
+});
+
+test('Omit `_longTasks` entirely when pageinfo has no longTask field', t => {
+  // Field absent = parser couldn't instrument — distinct from `[]`.
+  const totalResults = [
+    {
+      googleWebVitals: {},
+      visualMetrics: [],
+      info: { url: 'https://example.com' },
+      cpu: [{}],
+      browserScripts: [
+        {
+          timings: {},
+          pageinfo: {}
+        }
+      ]
+    }
+  ];
+  har.log.pages[0].pageTimings = {};
+  addExtraFieldsToHar(totalResults, har, { iterations: 1 });
+  t.is(har.log.pages[0].pageTimings._longTasks, undefined);
+});
