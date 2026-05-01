@@ -266,7 +266,10 @@ test('Add user-timing marks and measures to pageTimings', t => {
   });
 });
 
-test('Skip long-task and user-timing extensions when empty', t => {
+test('Emit empty `_longTasks` when instrumented but no tasks observed', t => {
+  // Tri-state presence contract used by downstream waterfall viewers:
+  // an empty array means "instrumented, observed none" — distinct from
+  // a missing field, which signals "this producer can't instrument".
   const totalResults = [
     {
       googleWebVitals: {},
@@ -283,6 +286,27 @@ test('Skip long-task and user-timing extensions when empty', t => {
   ];
   har.log.pages[0].pageTimings = {};
   addExtraFieldsToHar(totalResults, har, { iterations: 1 });
-  t.is(har.log.pages[0].pageTimings._longTasks, undefined);
+  t.deepEqual(har.log.pages[0].pageTimings._longTasks, []);
   t.is(har.log.pages[0].pageTimings._userTimings, undefined);
+});
+
+test('Omit `_longTasks` entirely when pageinfo has no longTask field', t => {
+  // Field absent = parser couldn't instrument — distinct from `[]`.
+  const totalResults = [
+    {
+      googleWebVitals: {},
+      visualMetrics: [],
+      info: { url: 'https://example.com' },
+      cpu: [{}],
+      browserScripts: [
+        {
+          timings: {},
+          pageinfo: {}
+        }
+      ]
+    }
+  ];
+  har.log.pages[0].pageTimings = {};
+  addExtraFieldsToHar(totalResults, har, { iterations: 1 });
+  t.is(har.log.pages[0].pageTimings._longTasks, undefined);
 });
