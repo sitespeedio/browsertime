@@ -44,6 +44,10 @@ This release is a big push on the scripting API and on real-device testing.
 * Added soft navigation support for Chrome. Single-page app route changes (React, Next.js, Vue, Turbo) now produce a HAR page and the standard FCP/LCP/CLS/INP metrics, using Chrome's PerformanceObserver soft-navigation entry type to confirm user interaction + URL change + visible paint [#2438](https://github.com/sitespeedio/browsertime/pull/2438).
 * Updated dependencies to latest compatible versions: chrome-har 1.2.1, selenium-webdriver 4.43.0, execa 9.6.1, jimp 1.6.1 [#2437](https://github.com/sitespeedio/browsertime/pull/2437).
 * Firefox 149 in the Docker container [#2375](https://github.com/sitespeedio/browsertime/pull/2375).
+* Record the full Chrome/Edge configuration browsertime applied to the browser (args, preferences, mobile emulation, binary path, extensions count) under `info.browser` in the result JSON, not just what the user passed via `--chrome.args` [#2447](https://github.com/sitespeedio/browsertime/pull/2447).
+* Record Firefox preferences and the resolved binary path under `info.browser` in the result JSON [#2448](https://github.com/sitespeedio/browsertime/pull/2448).
+* Write long-task ranges and user-timing marks/measures into the HAR under `pages[].pageTimings` as `_longTasks` (array of `[startMs, endMs]` tuples) and `_userTimings` (object keyed by entry name → startTime), so downstream waterfall viewers can show what the browser was doing between requests [#2449](https://github.com/sitespeedio/browsertime/pull/2449).
+* Added modern device profiles to the mobile emulation device list [#2446](https://github.com/sitespeedio/browsertime/pull/2446).
 
 ### Fixed
 * Pin the iOS Safari tab being measured so unrelated open tabs cannot clobber the active inspector target. The WebDriver tab is navigated to a sentinel URL and identified by it before iWDP messages are processed, otherwise an unrelated `Target.targetCreated` event could leave the HAR empty [#2440](https://github.com/sitespeedio/browsertime/pull/2440).
@@ -56,6 +60,11 @@ This release is a big push on the scripting API and on real-device testing.
 * Standardized error handling in all command `run()` methods using `executeCommand` with URL context. Fixed typo in select.deselectById and removed dead code in wait [#2410](https://github.com/sitespeedio/browsertime/pull/2410).
 * Added clear error message when loading TypeScript scripts on Node.js older than 22.18.0 [#2404](https://github.com/sitespeedio/browsertime/pull/2404).
 * Disabled the "You can zoom in and out" popup on Android [#2378](https://github.com/sitespeedio/browsertime/pull/2378).
+* Warn when `--viewPort` is set with a width below 500px on desktop Chrome. Chrome enforces a hard ~500px minimum window width and silently clamps narrower requests, but browsertime kept recording the filmstrip and video at the requested size, leaving captures cropped. The warning points users at mobile emulation, which lays out at the requested size while the OS window stays desktop-sized [#2445](https://github.com/sitespeedio/browsertime/pull/2445).
+* Stop a perceptual SSIM failure from discarding every other visual metric for the iteration. `calculate_perceptual_speed_index` now returns `(None, None)` on internal errors instead of letting the exception propagate up through `calculate_visual_metrics`, so SpeedIndex, FCP, LCP and the rest still flow through when SSIM can't run [#2444](https://github.com/sitespeedio/browsertime/pull/2444).
+* Drain ffmpeg/ffprobe stderr after the process exits in `visualmetrics-portable.py`. The previous Popen+poll loop dropped output buffered between the last read and exit — silently losing `keep pts:` lines and therefore filmstrip frames — and could deadlock when ffmpeg's debug output filled the OS pipe buffer [#2443](https://github.com/sitespeedio/browsertime/pull/2443).
+* Converted `visualmetrics-portable.py` path handling to `pathlib` for consistent cross-platform behaviour [#2442](https://github.com/sitespeedio/browsertime/pull/2442).
+* Fixed snap-related Chrome/Firefox installation steps in CI workflows [#2450](https://github.com/sitespeedio/browsertime/pull/2450).
 
 ## 26.3.2 - 2026-01-24
 ### Fixed
