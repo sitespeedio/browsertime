@@ -20,7 +20,11 @@ jobs:
           api.snapcraft.io:443
           azure.archive.ubuntu.com:80
           canonical-bos01.cdn.snapcraftcontent.com:443
+          canonical-fra01.cdn.snapcraftcontent.com:443
+          canonical-gru01.cdn.snapcraftcontent.com:443
+          canonical-iad01.cdn.snapcraftcontent.com:443
           canonical-lgw01.cdn.snapcraftcontent.com:443
+          canonical-tpe01.cdn.snapcraftcontent.com:443
           clients2.google.com:80
           dl-ssl.google.com:443
           dl.google.com:80
@@ -94,7 +98,11 @@ jobs:
           api.snapcraft.io:443
           azure.archive.ubuntu.com:80
           canonical-bos01.cdn.snapcraftcontent.com:443
+          canonical-fra01.cdn.snapcraftcontent.com:443
+          canonical-gru01.cdn.snapcraftcontent.com:443
+          canonical-iad01.cdn.snapcraftcontent.com:443
           canonical-lgw01.cdn.snapcraftcontent.com:443
+          canonical-tpe01.cdn.snapcraftcontent.com:443
           clients2.google.com:80
           dl-ssl.google.com:443
           dl.google.com:80
@@ -195,7 +203,11 @@ jobs:
           api.snapcraft.io:443
           azure.archive.ubuntu.com:80
           canonical-bos01.cdn.snapcraftcontent.com:443
+          canonical-fra01.cdn.snapcraftcontent.com:443
+          canonical-gru01.cdn.snapcraftcontent.com:443
+          canonical-iad01.cdn.snapcraftcontent.com:443
           canonical-lgw01.cdn.snapcraftcontent.com:443
+          canonical-tpe01.cdn.snapcraftcontent.com:443
           clients2.google.com:80
           dl-ssl.google.com:443
           dl.google.com:80

@@ -18,7 +18,11 @@ jobs:
           api.snapcraft.io:443
           archive.mozilla.org:443
           canonical-bos01.cdn.snapcraftcontent.com:443
+          canonical-fra01.cdn.snapcraftcontent.com:443
+          canonical-gru01.cdn.snapcraftcontent.com:443
+          canonical-iad01.cdn.snapcraftcontent.com:443
           canonical-lgw01.cdn.snapcraftcontent.com:443
+          canonical-tpe01.cdn.snapcraftcontent.com:443
           content-signature-2.cdn.mozilla.net:443
           files.pythonhosted.org:443
           firefox-settings-attachments.cdn.mozilla.net:443
