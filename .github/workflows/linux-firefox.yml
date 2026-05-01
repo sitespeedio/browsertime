@@ -15,14 +15,8 @@ jobs:
       with:
         egress-policy: block
         allowed-endpoints: >
-          api.snapcraft.io:443
           archive.mozilla.org:443
-          canonical-bos01.cdn.snapcraftcontent.com:443
-          canonical-fra01.cdn.snapcraftcontent.com:443
-          canonical-gru01.cdn.snapcraftcontent.com:443
-          canonical-iad01.cdn.snapcraftcontent.com:443
-          canonical-lgw01.cdn.snapcraftcontent.com:443
-          canonical-tpe01.cdn.snapcraftcontent.com:443
+          johnvansickle.com:443
           content-signature-2.cdn.mozilla.net:443
           files.pythonhosted.org:443
           firefox-settings-attachments.cdn.mozilla.net:443
@@ -55,8 +49,12 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get install net-tools -y
-        sudo snap install ffmpeg
-        sudo snap alias ffmpeg.ffprobe ffprobe
+        # Static ffmpeg from johnvansickle.com — replaces `snap install ffmpeg`,
+        # which fails under harden-runner because api.snapcraft.io IP-rotates
+        # and the iptables egress block pins to the IP resolved at job start.
+        curl -fsSL https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz | sudo tar -xJ -C /opt/
+        sudo ln -sf /opt/ffmpeg-*-amd64-static/ffmpeg /usr/local/bin/ffmpeg
+        sudo ln -sf /opt/ffmpeg-*-amd64-static/ffprobe /usr/local/bin/ffprobe
         python -m pip install --upgrade pip setuptools==70.0.0 pyssim OpenCV-Python Numpy virtualenv
         sudo modprobe ifb numifbs=1
     - name: Browser versions
