@@ -1,17 +1,17 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## UNRELEASED
+## 27.0.0 - 2026-05-01
 
 ### Highlights
 
-This release is a big push on the scripting API and on real-device testing.
+This release is a big push on the scripting API and on iOS real-device testing. All old scripting commands will work but we have new and improveed
+syntax that you can use if you follow our documentation. This release also tries to support the upcoming Chrome soft navigations.
 
 * **Unified selector syntax across commands.** All interaction commands now accept selectors directly (`commands.click('#btn')`, `commands.addText('#input', 'text')`, etc.) with optional `id:`/`xpath:`/`text:`/`link:`/`name:`/`class:` prefixes. The old `AndWait` family is deprecated in favour of `{ waitForNavigation: true }`.
 * **A much bigger convenience-command surface.** New `type`, `find`, `getText`, `getValue`, `isVisible`, `exists`, `clear`, `fill`, `getAttribute`, `isEnabled`, `isChecked`, `hover`, `press`, `getTitle`, `getUrl`, `check`, `uncheck`, `scrollIntoView`, `select.byText`, `waitForUrl`, `clickAndMeasure`, `click.byText`, plus a full `cookie` command.
 * **Chrome soft navigations.** SPA route changes (React, Next.js, Vue, Turbo) now produce a HAR page and the standard FCP/LCP/CLS/INP metrics, using Chrome's PerformanceObserver soft-navigation entry type.
-* **Safari on iOS over USB.** HAR via `ios_webkit_debug_proxy`, plus video recording and visual metrics via a CoreMediaIO screen-capture helper — no manual QuickTime step.
+* **Safari on iOS over USB.** HAR via `ios_webkit_debug_proxy`, plus video recording and visual metrics via a CoreMediaIO screen-capture helper.
 * **TypeScript navigation scripts** are now supported on Node.js 22.18.0+ via native type stripping.
-* **Breaking:** clicks use real OS-level mouse events (Selenium Actions API) and elements auto-wait up to 6 seconds by default. Set `--timeouts.elementWait 0` to restore the old behavior.
 
 ### Breaking
 * Changed default `--timeouts.elementWait` from 0 to 6000ms. All element commands (click, addText) now auto-wait up to 6 seconds for elements to appear. Set `--timeouts.elementWait 0` to restore the old behavior [#2389](https://github.com/sitespeedio/browsertime/pull/2389).
@@ -64,7 +64,6 @@ This release is a big push on the scripting API and on real-device testing.
 * Stop a perceptual SSIM failure from discarding every other visual metric for the iteration. `calculate_perceptual_speed_index` now returns `(None, None)` on internal errors instead of letting the exception propagate up through `calculate_visual_metrics`, so SpeedIndex, FCP, LCP and the rest still flow through when SSIM can't run [#2444](https://github.com/sitespeedio/browsertime/pull/2444).
 * Drain ffmpeg/ffprobe stderr after the process exits in `visualmetrics-portable.py`. The previous Popen+poll loop dropped output buffered between the last read and exit — silently losing `keep pts:` lines and therefore filmstrip frames — and could deadlock when ffmpeg's debug output filled the OS pipe buffer [#2443](https://github.com/sitespeedio/browsertime/pull/2443).
 * Converted `visualmetrics-portable.py` path handling to `pathlib` for consistent cross-platform behaviour [#2442](https://github.com/sitespeedio/browsertime/pull/2442).
-* Fixed snap-related Chrome/Firefox installation steps in CI workflows [#2450](https://github.com/sitespeedio/browsertime/pull/2450).
 
 ## 26.3.2 - 2026-01-24
 ### Fixed
