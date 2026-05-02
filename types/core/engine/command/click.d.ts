@@ -1,8 +1,8 @@
 /**
  * Provides functionality to perform click actions on elements in a web page using various selectors.
- * Uses the Selenium Actions API to generate real OS-level mouse events, which means
- * the element must be visible and interactable. If you need to click a hidden element,
- * use {@link JavaScript#run commands.js.run} to trigger a JavaScript click instead.
+ * Tries the Selenium Actions API first to generate real OS-level mouse events; if the element is
+ * not interactable (commonly because the page hides content before clicking — a recommended
+ * pattern for visual-metric scripts), falls back to a JavaScript click so the script keeps working.
  *
  * @class
  * @hideconstructor
