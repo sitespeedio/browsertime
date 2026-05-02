@@ -85,3 +85,13 @@ serial('Measure urls after multiple clicks', async t => {
     'Could not verify we got a HAR from the browser'
   );
 });
+
+serial('Click falls back to JS when the element is hidden', async t => {
+  // The script asserts internally that the click fired (document.title flipped
+  // to 'clicked') and throws otherwise. A successful run is itself the proof
+  // that the JS-click fallback ran — no need to fish through browserScripts.
+  await t.notThrowsAsync(
+    engine.runMultiple([getPath('hiddenClick.cjs')]),
+    'JS-click fallback should fire the click handler when the element has display:none'
+  );
+});
