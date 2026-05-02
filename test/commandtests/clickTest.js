@@ -85,3 +85,18 @@ serial('Measure urls after multiple clicks', async t => {
     'Could not verify we got a HAR from the browser'
   );
 });
+
+serial('Click falls back to JS when the element is hidden', async t => {
+  // The script asserts internally that the click fired (document.title flipped
+  // to 'clicked') and throws otherwise — so a successful run is itself the
+  // proof that the JS-click fallback ran. We verify the run produced a HAR
+  // entry for the navigated page to make sure the script reached completion.
+  const result = await engine.runMultiple([getPath('hiddenClick.cjs')], {
+    scripts: { uri: 'document.documentURI' }
+  });
+  t.is(
+    result.har.log.entries[0].request.url,
+    'http://127.0.0.1:3000/hidden/',
+    'JS-click fallback should keep the script running through measure.stop'
+  );
+});

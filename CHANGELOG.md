@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## Unreleased
+
+### Fixed
+* `commands.click` now falls back to a JavaScript click when the Actions API can't reach the element. Hidden elements have a zero-size bounding box, so the Actions API click that became the default in [#2381](https://github.com/sitespeedio/browsertime/pull/2381) silently moved the pointer to (0,0) and clicked nothing instead of triggering the handler. The click command now pre-checks `isDisplayed()` and uses a JS click when the element isn't displayed, and otherwise catches any Actions API failure and retries with a JS click. Each fallback is logged at info level so it's visible without `--verbose`. Restores the documented "hide everything before clicking" pattern used by visual-metric scripts.
+
 ## 27.0.0 - 2026-05-01
 
 ### Highlights
