@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## Unreleased
+
+### Fixed
+* SPA scripts no longer drop a HAR page when Chrome's soft-navigation `PerformanceObserver` entry doesn't fire. [#2438](https://github.com/sitespeedio/browsertime/pull/2438) gated HAR-page creation on Chrome detecting all three soft-navigation criteria (interaction + URL change + visible paint within a short window), but real SPAs like Grafana sometimes paint too late and Chrome never emits the entry — chrome-har then sees only `Network.*` events for that measurement and emits zero pages, breaking downstream per-iteration page indexing in sitespeed.io. When the measurement was started without a URL (`commands.measure.start(alias)` form) and no soft-nav entry was detected, fall back to a synthetic page anchored at the current `location.href` so each `measure.start` produces exactly one HAR page.
+
 ## 27.0.1 - 2026-05-02
 
 ### Fixed
