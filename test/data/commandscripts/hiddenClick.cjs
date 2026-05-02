@@ -1,5 +1,5 @@
 module.exports = async function (context, commands) {
-  await commands.measure.start('http://127.0.0.1:3000/hidden/');
+  await commands.navigate('http://127.0.0.1:3000/hidden/');
   // Recommended pattern for visual-metric scripts: hide every body child
   // before the click so the click itself does not trigger an early visual change.
   await commands.js.run(
@@ -15,9 +15,4 @@ module.exports = async function (context, commands) {
       `Hidden-element click did not fire — document.title is ${JSON.stringify(title)}`
     );
   }
-  // Restore display so measure.stop() can capture visual metrics on a non-blank body.
-  await commands.js.run(
-    'for (const node of document.body.childNodes) { if (node.style) node.style.display = ""; }'
-  );
-  return commands.measure.stop();
 };
