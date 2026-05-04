@@ -11,7 +11,7 @@ rm -fR browsertime-results
 # Genereate types
 npm run tsc
 
-np $* --no-yarn
+np $* 
 
 bin/browsertime.js --help > ../sitespeed.io/docs/documentation/browsertime/configuration/config.md
 
