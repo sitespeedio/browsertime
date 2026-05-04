@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+
+## 27.0.3 - 2026-05-04
+### Fixed
+* Fix so INP only is calculated on interactions with an id [#2456](https://github.com/sitespeedio/browsertime/pull/2456).
+
 ## 27.0.2 - 2026-05-02
 
 ### Fixed
