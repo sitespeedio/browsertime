@@ -106,6 +106,13 @@
   const longestInteractionList = [];
   const longestInteractionMap = {};
   for (let entry of entries) {
+    // web-vitals only counts entries the browser tagged as part of a
+    // discrete interaction; bare events like a `pointerover` fired by
+    // a stationary OS cursor get interactionId === 0 and must be
+    // skipped. Without this guard automated runs report a synthetic
+    // INP whenever the cursor happens to be over content as it paints.
+    // See https://github.com/GoogleChrome/web-vitals/blob/main/src/lib/interactions.ts
+    if (!entry.interactionId) continue;
     var minLongestInteraction =
       longestInteractionList[longestInteractionList.length - 1];
     var existingInteraction = longestInteractionMap[entry.interactionId];
