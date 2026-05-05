@@ -1,5 +1,8 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 27.0.4 - 2026-05-05
+### Fixed
+* Fix Safari iOS video time scale [#2457](https://github.com/sitespeedio/browsertime/pull/2457). This make the video and Safari metric match.
 
 ## 27.0.3 - 2026-05-04
 ### Fixed
