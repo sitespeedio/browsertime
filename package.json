@@ -1,7 +1,7 @@
 {
   "name": "browsertime",
   "description": "Get performance metrics from your web page using Browsertime.",
-  "version": "27.0.3",
+  "version": "27.0.4",
   "bin": "./bin/browsertime.js",
   "type": "module",
   "types": "./types/scripting.d.ts",
