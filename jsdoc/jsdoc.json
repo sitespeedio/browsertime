@@ -23,7 +23,7 @@
       "title": "sitespeed.io scripting",
       "default_theme": "light",
       "base_url": "https://www.sitespeed.io/documentation/sitespeed.io/scripting/",
-      "footer": "© <a href='https://www.sitespeed.io'>sitespeed.io</a> 2024",
+      "footer": "© <a href='https://www.sitespeed.io'>sitespeed.io</a> 2026",
       "create_style": "article ul { list-style: disc }",
       "sections": ["Tutorials", "Classes"],
       "favicon": "https://www.sitespeed.io/img/ico/sitespeed.io-144.png",
