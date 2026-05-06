@@ -310,3 +310,13 @@ test('Omit `_longTasks` entirely when pageinfo has no longTask field', t => {
   addExtraFieldsToHar(totalResults, har, { iterations: 1 });
   t.is(har.log.pages[0].pageTimings._longTasks, undefined);
 });
+
+test('Tag the first entry of each page with `_documentURL`', t => {
+  // Cross-origin tinting in waterfall-tools reads `entries[0]._documentURL`
+  // to decide which request labels are third-party — without this, the
+  // viewer falls back to a no-op (every request looks same-origin).
+  const totalResults = totalResultsBase;
+  har.log.pages[0].pageTimings = {};
+  addExtraFieldsToHar(totalResults, har, { iterations: 1 });
+  t.is(har.log.entries[0]._documentURL, 'https://example.com');
+});
