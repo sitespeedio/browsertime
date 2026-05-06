@@ -1,5 +1,15 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 27.1.0 - 2026-05-06
+
+### Added
+* Three new analyses on `result.cpu` derived from the same Chrome `trace.json` that's already collected when `--cpu` is on. `scriptCosts` produces the per-URL parse / compile / execute / total breakdown that Lighthouse's bootup-time audit shows, sorted by total descending. `forcedReflows` walks the main-thread task tree for `Layout` / `UpdateLayoutTree` events nested inside JS-driven tasks (`EventDispatch`, `FunctionCall`, `TimerFire`, `FireAnimationFrame`, …) — every match is a synchronous reflow caused by JavaScript reading a layout-triggering property mid-handler, reported with the script that triggered it. `nonCompositedAnimations` surfaces `Animation` events whose `compositeFailed` bitmask is non-zero, returning the unsupported properties (`top`, `box-shadow`, `filter`, …) so consumers can see what to swap for the GPU-friendly equivalent. Each new analysis is wrapped in its own try / catch so a bug in one can't poison the existing `categories` / `events` / `urls` payload [#PR1](https://github.com/sitespeedio/browsertime/pull/PR1).
+
+### Fixed
+* Replace the unmaintained `@sitespeed.io/tracium` dependency (extracted from Lighthouse circa 2017, last release 0.3.3) with an in-tree ESM port at `lib/chrome/trace/`. The algorithm is a 1:1 port; output of `computeMainThreadTasks` is byte-equivalent for any trace, so existing `result.cpu.{categories,events,urls}` consumers see no change. Pulling the parser inline lets new analyses ship at Browsertime's release cadence without a second `npm publish` step in between [#PR1](https://github.com/sitespeedio/browsertime/pull/PR1).
+* Modernise the trace-event classifier. The original list only knew about ~30 event names, so on busy 2026-era pages roughly half the trace fell through to "other" — on a sample cnet run that meant 1.3 s of "other" hiding `RunTask`, `v8.run`, `IntersectionObserverController::computeIntersections`, `PrePaint`, `Commit`, `Layerize`, `v8.callFunction`, `V8.DeserializeContext` and friends. The expanded list draws from modern Lighthouse + the WebPageTest-derived map in waterfall-tools + direct sampling of real traces, and a new `groupForEvent()` lookup adds `V8.GC*` prefix matching so future V8 GC phases auto-classify [#PR1](https://github.com/sitespeedio/browsertime/pull/PR1).
+* Bump `chrome-har` to 1.3.0 to pick up the new `_renderBlocking` field on each entry, lifting Chrome's CDP `renderBlockingStatus` (Chrome 108+) so downstream HAR consumers can see which resources blocked first paint without inferring it from the trace.
+
 ## 27.0.4 - 2026-05-05
 ### Fixed
 * Fix Safari iOS video time scale [#2457](https://github.com/sitespeedio/browsertime/pull/2457). This make the video and Safari metric match.
