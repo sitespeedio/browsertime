@@ -15,7 +15,6 @@
     }
   },
   "opts": {
-    "tutorials": "./jsdoc/tutorials/",
     "destination": "../sitespeed.io/docs/documentation/sitespeed.io/scripting/",
     "template": "node_modules/clean-jsdoc-theme",
     "theme_opts": {
@@ -25,7 +24,7 @@
       "base_url": "https://www.sitespeed.io/documentation/sitespeed.io/scripting/",
       "footer": "© <a href='https://www.sitespeed.io'>sitespeed.io</a> 2026",
       "create_style": "article ul { list-style: disc }",
-      "sections": ["Tutorials", "Classes"],
+      "sections": ["Classes"],
       "favicon": "https://www.sitespeed.io/img/ico/sitespeed.io-144.png",
       "menu": [
         {
