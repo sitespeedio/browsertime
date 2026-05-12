@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 27.2.0 - 2026-05-12
+
+### Added
+* Surface the page-level `recalculateStyle` summary (beforeFCP / beforeLCP element counts + durations) on the first HAR page as `_renderBlocking.recalculateStyle`. The per-request `_renderBlocking` map already projected onto each entry stays where it is — the page-level summary is what powers the "Elements that needed recalculate style before FCP" view and was previously only reachable via `browsertime.json` [#2466](https://github.com/sitespeedio/browsertime/pull/2466).
+
 ## 27.1.0 - 2026-05-06
 
 ### Added
