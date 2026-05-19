@@ -10,7 +10,7 @@
     "@sitespeed.io/chromedriver": "143.0.7499",
     "@sitespeed.io/edgedriver": "143.0.3650",
     "@sitespeed.io/geckodriver": "0.36.0",
-    "@sitespeed.io/log": "1.0.0",
+    "@sitespeed.io/log": "2.0.0",
     "@sitespeed.io/throttle": "6.0.0",
     "chrome-har": "1.3.1",
     "chrome-remote-interface": "0.33.3",
