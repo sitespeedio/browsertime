@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import merge from 'lodash.merge';
 import { getLogger } from '@sitespeed.io/log';
 import { existsSync, mkdirSync } from 'node:fs';
 import path from 'node:path';
@@ -13,6 +12,7 @@ import { configure } from '../lib/support/logging.js';
 import { parseCommandLine } from '../lib/support/cli.js';
 import { StorageManager } from '../lib/support/storageManager.js';
 import { loadScript } from '../lib/support/engineUtils.js';
+import { merge } from '../lib/support/util.js';
 import { setProperty, getProperty } from '../lib/support/util.js';
 import { isAndroidConfigured } from '../lib/android/index.js';
 

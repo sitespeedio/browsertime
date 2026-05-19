@@ -1,5 +1,5 @@
 import { Engine } from '../../lib/core/engine/index.js';
-import merge from 'lodash.merge';
+import { merge } from '../../lib/support/util.js';
 
 export function getEngine(options) {
   const defaultOptions = {
