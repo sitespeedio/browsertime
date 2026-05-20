@@ -17,6 +17,7 @@ jobs:
         allowed-endpoints: >
           accounts.google.com:443
           android.clients.google.com:443
+          api.github.com:443
           azure.archive.ubuntu.com:80
           clients2.google.com:80
           dl-ssl.google.com:443
@@ -88,6 +89,7 @@ jobs:
         allowed-endpoints: >
           accounts.google.com:443
           android.clients.google.com:443
+          api.github.com:443
           azure.archive.ubuntu.com:80
           clients2.google.com:80
           dl-ssl.google.com:443
@@ -186,6 +188,7 @@ jobs:
         allowed-endpoints: >
           accounts.google.com:443
           android.clients.google.com:443
+          api.github.com:443
           azure.archive.ubuntu.com:80
           clients2.google.com:80
           dl-ssl.google.com:443

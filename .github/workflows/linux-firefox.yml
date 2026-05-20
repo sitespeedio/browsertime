@@ -15,6 +15,7 @@ jobs:
       with:
         egress-policy: block
         allowed-endpoints: >
+          api.github.com:443
           archive.mozilla.org:443
           content-signature-2.cdn.mozilla.net:443
           files.pythonhosted.org:443
