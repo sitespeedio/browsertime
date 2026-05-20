@@ -30,6 +30,10 @@ jobs:
         chrome-version: beta
     - name: Install Browsertime
       run: npm ci
+    - name: Install ffmpeg
+      uses: AnimMouse/setup-ffmpeg@ae28d57dabbb148eff63170b6bf7f2b60062cbae # v1.2.3
+      with:
+        version: '7.1'
     - name: Set up Python
       uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
       with:
@@ -38,11 +42,6 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get install net-tools -y
-        # Static ffmpeg from johnvansickle.com — replaces `snap install ffmpeg`,
-        # which has been flaky against the snap store from CI runners.
-        curl -fsSL https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz | sudo tar -xJ -C /opt/
-        sudo ln -sf /opt/ffmpeg-*-amd64-static/ffmpeg /usr/local/bin/ffmpeg
-        sudo ln -sf /opt/ffmpeg-*-amd64-static/ffprobe /usr/local/bin/ffprobe
         python -m pip install --upgrade pip setuptools==70.0.0 pyssim virtualenv
         sudo modprobe ifb numifbs=1
     - name: Browser versions
