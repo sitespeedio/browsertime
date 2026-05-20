@@ -44,8 +44,11 @@ export default [
       'no-mixed-spaces-and-tabs': 'off',
       'no-unexpected-multiline': 'off',
       'no-return-await': 'error',
+      'no-useless-assignment': 'off',
+      'preserve-caught-error': 'off',
       'require-atomic-updates': 'off',
       'unicorn/filename-case': 'off',
+      'unicorn/no-immediate-mutation': 'off',
       'unicorn/prevent-abbreviations': 'off'
     }
   }
