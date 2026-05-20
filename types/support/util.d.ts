@@ -13,4 +13,9 @@ export function setProperty(object: any, path: any, value: any): void;
  *
  */
 export function getProperty(object: any, path: any, defaultValue: any): any;
+/**
+ * A replacement for lodash.merge(target, ...sources).
+ *
+ */
+export function merge(target: any, ...sources: any[]): any;
 //# sourceMappingURL=util.d.ts.map

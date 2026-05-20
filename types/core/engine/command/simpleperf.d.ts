@@ -30,7 +30,7 @@ export class SimplePerfProfiler {
     start(profilerOptions?: any[], recordOptions?: string, dirName?: string): Promise<void>;
     profilerOptions: any[];
     dataDir: any;
-    simpleperfProcess: import("execa").ResultPromise<{}>;
+    simpleperfProcess: any;
     /**
      * Stop Simpleperf profiling.
      *

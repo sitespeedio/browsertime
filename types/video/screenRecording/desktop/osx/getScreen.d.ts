@@ -1,2 +1,2 @@
-export function getScreenOnOSX(): Promise<string>;
+export function getScreenOnOSX(): Promise<any>;
 //# sourceMappingURL=getScreen.d.ts.map

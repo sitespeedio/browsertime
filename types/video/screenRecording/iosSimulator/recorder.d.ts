@@ -3,11 +3,7 @@ export class IOSSimulatorRecorder {
     options: any;
     tmpVideo: string;
     start(): Promise<void>;
-    xcrunProcess: import("execa").ResultPromise<{
-        shell: true;
-    }>;
-    stop(destination: any): Promise<import("execa").Result<{
-        shell: true;
-    }>>;
+    xcrunProcess: any;
+    stop(destination: any): Promise<any>;
 }
 //# sourceMappingURL=recorder.d.ts.map
