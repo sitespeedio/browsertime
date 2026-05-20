@@ -144,10 +144,10 @@ export class Measure {
      *
      * @async
      * @param {string} errorMessage - The message about the error. This will end up on the HTML report for sitespeed.io so give it a good message so you know what's gone wrong.
-     * @returns {Promise} A promise that resolves when the stop process has completed.
+     * @returns {Promise<void>} A promise that resolves when the stop process has completed.
      * @since 21.2.0
      */
-    stopAsError(errorMessage: string): Promise<any>;
+    stopAsError(errorMessage: string): Promise<void>;
     /**
      * @private
      */
@@ -161,10 +161,10 @@ export class Measure {
      * @async
      * @param {string} alias - The friendly name for this measurement.
      * @param {string} selector - The CSS selector of the element to click.
-     * @returns {Promise} A promise that resolves with the collected metrics data.
+     * @returns {Promise<unknown>} A promise that resolves with the collected metrics data.
      * @throws {Error} Throws an error if the element is not found or the measurement fails.
      */
-    clickAndMeasure(alias: string, selector: string): Promise<any>;
+    clickAndMeasure(alias: string, selector: string): Promise<unknown>;
     /**
      * Stops the measurement process, collects metrics, and handles any post-measurement tasks.
      * It finalizes the URL being tested, manages any URL-specific metadata, stops any ongoing video recordings,
@@ -173,9 +173,9 @@ export class Measure {
      * @async
      * @param {string} testedStartUrl - The URL that was initially tested. If not provided, it will be obtained from the browser.
      * @throws {Error} Throws an error if there are issues in stopping the measurement or collecting data.
-     * @returns {Promise} A promise that resolves with the collected metrics data.
+     * @returns {Promise<unknown>} A promise that resolves with the collected metrics data.
      */
-    stop(testedStartUrl: string): Promise<any>;
+    stop(testedStartUrl: string): Promise<unknown>;
     /**
      * Adds a custom metric to the current measurement result.
      * The metric will be attached to the latest tested page, meaming
