@@ -20,14 +20,14 @@ export class Context {
     constructor(options: any, result: any, log: any, storageManager: any, index: any, webdriver: any, instantiatedDriver: any);
     /**
      * This is the yargs object you get from the cli. If you add --my.id you can get that using options.my.id.
-     * @type {Object}
+     * @type {Record<string, any>}
      */
-    options: any;
+    options: Record<string, any>;
     /**
      * Here the result from each run is stored.
-     * @type {Object}
+     * @type {Record<string, any>}
      */
-    result: any;
+    result: Record<string, any>;
     /**
      * @type {Logger}
      */
@@ -43,17 +43,18 @@ export class Context {
      */
     storageManager: import("../../support/storageManager.js").StorageManager;
     /**
-     * @type {Object}
+     * Scratch space shared between commands within a single iteration.
+     * @type {Record<string, any>}
      */
-    taskData: any;
+    taskData: Record<string, any>;
     /**
      * Get raw Selenium functionality.
      * @see https://www.selenium.dev/selenium/docs/api/javascript/module/selenium-webdriver/index.html
      * @type {{webdriver: WebDriverClass, driver: WebDriverInstance}}
      */
     selenium: {
-        webdriver: typeof import("selenium-webdriver");
-        driver: import("selenium-webdriver").WebDriver;
+        webdriver: WebDriverClass;
+        driver: WebDriverInstance;
     };
 }
 export type Logger = {
