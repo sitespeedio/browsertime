@@ -1,8 +1,8 @@
-export { Context as BrowsertimeContext } from './core/engine/context';
-export { Commands as BrowsertimeCommands } from './core/engine/commands';
+import type { Context } from './types/core/engine/context.js';
+import type { Commands } from './types/core/engine/commands.js';
 
-import { Context as BrowsertimeContext } from './core/engine/context';
-import { Commands as BrowsertimeCommands } from './core/engine/commands';
+export { Context as BrowsertimeContext } from './types/core/engine/context.js';
+export { Commands as BrowsertimeCommands } from './types/core/engine/commands.js';
 
 /**
  * Signature of a Browsertime user script. Annotate the default export of
@@ -16,6 +16,6 @@ import { Commands as BrowsertimeCommands } from './core/engine/commands';
  * }
  */
 export type BrowsertimeScript = (
-  context: BrowsertimeContext,
-  commands: BrowsertimeCommands
+  context: Context,
+  commands: Commands
 ) => Promise<unknown>;

@@ -4,7 +4,7 @@
   "version": "27.2.0",
   "bin": "./bin/browsertime.js",
   "type": "module",
-  "types": "./types/scripting.d.ts",
+  "types": "./scripting.d.ts",
   "dependencies": {
     "@devicefarmer/adbkit": "3.3.8",
     "@sitespeed.io/chromedriver": "148.0.7778",
@@ -55,13 +55,14 @@
     "index.js",
     "lib",
     "package.json",
+    "scripting.d.ts",
     "vendor",
     "types"
   ],
   "exports": {
     ".": {
-      "import": "./index.js",
-      "types": "./types/scripting.d.ts"
+      "types": "./scripting.d.ts",
+      "import": "./index.js"
     }
   },
   "scripts": {
@@ -72,7 +73,7 @@
     "lint:fix": "eslint . --fix",
     "tsc": "tsc",
     "jsdoc": "jsdoc --configure jsdoc/jsdoc.json",
-    "prepublishOnly": "npm run lint && npm run tsc"
+    "prepublishOnly": "npm run lint && npm run tsc && npx -y publint"
   },
   "author": "Peter Hedenskog",
   "contributors": [
