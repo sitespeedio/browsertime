@@ -89,12 +89,12 @@ export class Commands {
      * Navigates to a specified URL and handles additional setup for a page visit.
      * @async
      * @example await commands.navigate('https://www.example.org');
-     * @type {Function}
      * @param {string} url - The URL to navigate to.
      * @throws {Error} Throws an error if navigation or setup fails.
      * @returns {Promise<void>} A promise that resolves when the navigation and setup are
+     * @type {(url: string) => Promise<void>}
      */
-    navigate: Function;
+    navigate: (url: string) => Promise<void>;
     /**
      *  Provides functionality to control browser navigation such as back, forward, and refresh actions.
      * @type {Navigation}
@@ -104,16 +104,16 @@ export class Commands {
      * Add a text that will be an error attached to the current page.
      * @example await commands.error('My error message');
      * @param {string} message - The error message.
-     * @type {Function}
+     * @type {(message: string) => void}
      */
-    error: Function;
+    error: (message: string) => void;
     /**
      * Mark this run as an failure. Add a message that explains the failure.
      * @example await commands.markAsFailure('My failure message');
      * @param {string} message - The message attached as a failure
-     * @type {Function}
+     * @type {(message: string) => void}
      */
-    markAsFailure: Function;
+    markAsFailure: (message: string) => void;
     /**
      * Executes JavaScript in the browser context.
      * @type {JavaScript}
@@ -215,9 +215,8 @@ export class Commands {
      * @param {string} text - The text to type into the element.
      * @returns {Promise<void>} A promise that resolves when the text has been added.
      * @throws {Error} Throws an error if the element is not found.
-     * @type {Function}
      */
-    type: Function;
+    type: (selector: string, text: string) => Promise<void>;
     element: Element;
     /**
      * Finds an element using a CSS selector, with optional waiting and visibility check.
@@ -229,9 +228,12 @@ export class Commands {
      * @param {boolean} [options.visible=false] - If true, waits for the element to be visible.
      * @returns {Promise<WebElement>} A promise that resolves to the WebElement found.
      * @throws {Error} Throws an error if the element is not found.
-     * @type {Function}
+     * @type {(selector: string, options?: { timeout?: number, visible?: boolean }) => Promise<import('selenium-webdriver').WebElement>}
      */
-    find: Function;
+    find: (selector: string, options?: {
+        timeout?: number;
+        visible?: boolean;
+    }) => Promise<import("selenium-webdriver").WebElement>;
     /**
      * Checks if an element matching the selector exists in the DOM.
      * Unlike find(), this does not throw if the element is not found.
@@ -244,9 +246,10 @@ export class Commands {
      * @param {Object} [existsOptions] - Options.
      * @param {number} [existsOptions.timeout=0] - Maximum time to wait for the element. Default 0 (no wait).
      * @returns {Promise<boolean>} True if the element exists.
-     * @type {Function}
      */
-    exists: Function;
+    exists: (selector: string, existsOptions?: {
+        timeout?: number;
+    }) => Promise<boolean>;
     /**
      * Gets the visible text of an element matching the selector.
      * @async
@@ -255,9 +258,8 @@ export class Commands {
      * @param {string} selector - The CSS selector or prefixed selector.
      * @returns {Promise<string>} The visible text content.
      * @throws {Error} Throws an error if the element is not found.
-     * @type {Function}
      */
-    getText: Function;
+    getText: (selector: string) => Promise<string>;
     /**
      * Gets the value of a form element matching the selector.
      * @async
@@ -266,9 +268,8 @@ export class Commands {
      * @param {string} selector - The CSS selector or prefixed selector.
      * @returns {Promise<string>} The element's value.
      * @throws {Error} Throws an error if the element is not found.
-     * @type {Function}
      */
-    getValue: Function;
+    getValue: (selector: string) => Promise<string>;
     /**
      * Checks if an element matching the selector is visible/displayed.
      * @async
@@ -276,9 +277,8 @@ export class Commands {
      * @param {string} selector - The CSS selector or prefixed selector.
      * @returns {Promise<boolean>} True if the element is visible.
      * @throws {Error} Throws an error if the element is not found.
-     * @type {Function}
      */
-    isVisible: Function;
+    isVisible: (selector: string) => Promise<boolean>;
     /**
      * Gets an attribute value of an element matching the selector.
      * @async
@@ -288,9 +288,8 @@ export class Commands {
      * @param {string} attribute - The attribute name.
      * @returns {Promise<string>} The attribute value.
      * @throws {Error} Throws an error if the element is not found.
-     * @type {Function}
      */
-    getAttribute: Function;
+    getAttribute: (selector: string, attribute: string) => Promise<string>;
     /**
      * Checks if a form element matching the selector is enabled.
      * @async
@@ -298,9 +297,8 @@ export class Commands {
      * @param {string} selector - The CSS selector or prefixed selector.
      * @returns {Promise<boolean>} True if the element is enabled.
      * @throws {Error} Throws an error if the element is not found.
-     * @type {Function}
      */
-    isEnabled: Function;
+    isEnabled: (selector: string) => Promise<boolean>;
     /**
      * Checks if a checkbox or radio button is selected/checked.
      * @async
@@ -308,9 +306,8 @@ export class Commands {
      * @param {string} selector - The CSS selector or prefixed selector.
      * @returns {Promise<boolean>} True if the element is checked/selected.
      * @throws {Error} Throws an error if the element is not found.
-     * @type {Function}
      */
-    isChecked: Function;
+    isChecked: (selector: string) => Promise<boolean>;
     /**
      * Clears the content of a form element matching the selector.
      * @async
@@ -319,9 +316,8 @@ export class Commands {
      * @param {string} selector - The CSS selector or prefixed selector.
      * @returns {Promise<void>} A promise that resolves when the element is cleared.
      * @throws {Error} Throws an error if the element is not found.
-     * @type {Function}
      */
-    clear: Function;
+    clear: (selector: string) => Promise<void>;
     /**
      * Fills multiple form fields at once. Each key is a selector, each value is the text to type.
      * @async
@@ -334,9 +330,10 @@ export class Commands {
      * @param {Object<string, string>} fields - An object mapping selectors to values.
      * @returns {Promise<void>} A promise that resolves when all fields are filled.
      * @throws {Error} Throws an error if any element is not found.
-     * @type {Function}
      */
-    fill: Function;
+    fill: (fields: {
+        [x: string]: string;
+    }) => Promise<void>;
     /**
      * Hovers over an element matching the selector. This is a convenience
      * alias for commands.mouse.moveTo(selector).
@@ -346,9 +343,8 @@ export class Commands {
      * @param {string} selector - The CSS selector or prefixed selector.
      * @returns {Promise<void>}
      * @throws {Error} Throws an error if the element is not found.
-     * @type {Function}
      */
-    hover: Function;
+    hover: (selector: string) => Promise<void>;
     /**
      * Presses a keyboard key. Use key names like 'Enter', 'Tab', 'Escape',
      * 'Backspace', 'ArrowUp', 'ArrowDown', etc.
@@ -358,25 +354,22 @@ export class Commands {
      * @example await commands.press('Escape');
      * @param {string} key - The key name to press (e.g. 'Enter', 'Tab', 'Escape').
      * @returns {Promise<void>}
-     * @type {Function}
      */
-    press: Function;
+    press: (key: string) => Promise<void>;
     /**
      * Gets the title of the current page.
      * @async
      * @example const title = await commands.getTitle();
      * @returns {Promise<string>} The page title.
-     * @type {Function}
      */
-    getTitle: Function;
+    getTitle: () => Promise<string>;
     /**
      * Gets the URL of the current page.
      * @async
      * @example const url = await commands.getUrl();
      * @returns {Promise<string>} The current URL.
-     * @type {Function}
      */
-    getUrl: Function;
+    getUrl: () => Promise<string>;
     /**
      * Checks a checkbox or radio button. Does nothing if already checked.
      * @async
@@ -385,9 +378,8 @@ export class Commands {
      * @param {string} selector - The CSS selector or prefixed selector.
      * @returns {Promise<void>}
      * @throws {Error} Throws an error if the element is not found.
-     * @type {Function}
      */
-    check: Function;
+    check: (selector: string) => Promise<void>;
     /**
      * Unchecks a checkbox. Does nothing if already unchecked.
      * @async
@@ -396,9 +388,8 @@ export class Commands {
      * @param {string} selector - The CSS selector or prefixed selector.
      * @returns {Promise<void>}
      * @throws {Error} Throws an error if the element is not found.
-     * @type {Function}
      */
-    uncheck: Function;
+    uncheck: (selector: string) => Promise<void>;
     /**
      * Scrolls the page so that the element matching the selector is visible in the viewport.
      * @async
@@ -407,9 +398,8 @@ export class Commands {
      * @param {string} selector - The CSS selector or prefixed selector.
      * @returns {Promise<void>}
      * @throws {Error} Throws an error if the element is not found.
-     * @type {Function}
      */
-    scrollIntoView: Function;
+    scrollIntoView: (selector: string) => Promise<void>;
     /**
      * Waits until the browser's current URL contains the given string.
      * Useful after form submissions, login redirects, or SPA navigation.
@@ -421,9 +411,10 @@ export class Commands {
      * @param {number} [urlOptions.timeout=10000] - Maximum time to wait in milliseconds.
      * @returns {Promise<void>}
      * @throws {Error} Throws an error if the URL does not match within the timeout.
-     * @type {Function}
      */
-    waitForUrl: Function;
+    waitForUrl: (pattern: string, urlOptions?: {
+        timeout?: number;
+    }) => Promise<void>;
 }
 import { PerfettoTrace } from './command/perfetto.js';
 import { SimplePerfProfiler } from './command/simpleperf.js';
