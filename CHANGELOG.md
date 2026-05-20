@@ -1,5 +1,16 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 27.3.0 - 2026-05-20
+
+### Added
+* `browsertime --help` is now navigable by topic. The default view shows a short curated list of common options plus the available topic names. `browsertime --help <topic>` shows just that topic, and `browsertime --help-all` reproduces the historical full dump for scripts and power users. The old single-screen dump of every option from all 13 topic groups was overwhelming for new users and slow to skim; the topic-filtered view follows the curl/ffmpeg pattern [#2467](https://github.com/sitespeedio/browsertime/pull/2467).
+
+### Fixed
+* TypeScript types and IntelliSense for navigation scripts are tightened across the script-facing surface. A new `BrowsertimeScript` type alias lets scripts annotate their default export and get both `context` and `commands` typed in one line. The high-level command helpers (`navigate`, `find`, `getText`, `fill`, `hover`, `press`, `getTitle`, `waitForUrl`, …) now surface their JSDoc parameter and return types in IntelliSense instead of being typed as `Function`, and `commands.find` resolves to a real `WebElement` so chained calls get completion from selenium-webdriver [#2476](https://github.com/sitespeedio/browsertime/pull/2476). `context.options`, `context.result`, and `context.taskData` are typed as `Record<string, any>` so editors offer completion on `context.options.` etc. [#2478](https://github.com/sitespeedio/browsertime/pull/2478). `commands.mouse` is now a proper shape (selector typed as `string`, `singleClick`'s options surface `waitForNavigation`) instead of an anonymous object literal, and `measure.stop` / `measure.clickAndMeasure` / `measure.stopAsError` return types are explicit (`Promise<void>` / `Promise<unknown>`) instead of `Promise<any>` [#2479](https://github.com/sitespeedio/browsertime/pull/2479).
+* How Browsertime publishes its TypeScript types is now safer. `scripting.d.ts` moved to the repo root next to `package.json` so it can't be clobbered by a future `tsc` outDir change, the `types` condition comes first under `exports` to match TypeScript's documented resolution rules, and `publint` runs as part of `prepublishOnly` so common package.json mistakes fail before a release goes out [#2477](https://github.com/sitespeedio/browsertime/pull/2477).
+* Replaced the direct `lodash.merge` dependency with a small in-tree `merge()` helper in `lib/support/util.js`. The helper matches lodash's actual semantics for the cases Browsertime relies on — arrays merged by index, `undefined` source values skipped unless the key is missing on the target, `Date`/`RegExp`/class instances passed by reference, prototype-pollution keys rejected — which finishes the lodash unbundling the same way sitespeed.io did [#2468](https://github.com/sitespeedio/browsertime/pull/2468).
+* Bumped dependencies: `chrome-har` 1.3.1 [#2469](https://github.com/sitespeedio/browsertime/pull/2469), `chrome-remote-interface` and `selenium-webdriver` [#2475](https://github.com/sitespeedio/browsertime/pull/2475), `@sitespeed.io/log` 2.0 [#2471](https://github.com/sitespeedio/browsertime/pull/2471), `chromedriver` / `edgedriver` / `geckodriver` [#2472](https://github.com/sitespeedio/browsertime/pull/2472).
+
 ## 27.2.0 - 2026-05-12
 
 ### Added
