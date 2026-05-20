@@ -182,11 +182,23 @@ export class Commands {
      *  @type {Debug}
      */
     debug: Debug;
+    /**
+     * Interact with the page using the mouse.
+     * @type {{
+     *   moveTo: (selector: string) => Promise<void>,
+     *   singleClick: (selector: string, mouseOptions?: { waitForNavigation?: boolean }) => Promise<void>,
+     *   doubleClick: (selector: string) => Promise<void>,
+     *   contextClick: (selector: string) => Promise<void>,
+     *   clickAndHold: ClickAndHold
+     * }}
+     */
     mouse: {
-        moveTo: (selector: any) => Promise<void>;
-        singleClick: (selector: any, mouseOptions: any) => Promise<any>;
-        doubleClick: (selector: any) => Promise<void>;
-        contextClick: (selector: any) => Promise<void>;
+        moveTo: (selector: string) => Promise<void>;
+        singleClick: (selector: string, mouseOptions?: {
+            waitForNavigation?: boolean;
+        }) => Promise<void>;
+        doubleClick: (selector: string) => Promise<void>;
+        contextClick: (selector: string) => Promise<void>;
         clickAndHold: ClickAndHold;
     };
     /**
