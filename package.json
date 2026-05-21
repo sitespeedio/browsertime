@@ -24,6 +24,14 @@
     "jimp": "1.6.1",
     "usb-power-profiling": "1.6.0"
   },
+  "peerDependencies": {
+    "playwright-core": ">=1.40.0"
+  },
+  "peerDependenciesMeta": {
+    "playwright-core": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@eslint/js": "10.0.1",
     "@types/selenium-webdriver": "4.35.5",
@@ -34,6 +42,7 @@
     "eslint-plugin-prettier": "5.5.5",
     "eslint-plugin-unicorn": "64.0.0",
     "jsdoc": "4.0.5",
+    "playwright-core": "^1.49.0",
     "prettier": "3.8.3",
     "serve": "14.2.6",
     "serve-handler": "6.1.7",

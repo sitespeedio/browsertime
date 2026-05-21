@@ -9,7 +9,7 @@ export class StorageManager {
     rm(filename: any): Promise<void>;
     writeData(filename: any, data: any, subdir: any): Promise<string>;
     writeJson(filename: any, json: any, shouldGzip: any): Promise<string>;
-    readData(filename: any, subdir: any): Promise<string | Buffer>;
+    readData(filename: any, subdir: any): Promise<string | NonSharedBuffer>;
     gzip(inputFile: any, outputFile: any, removeInput: any): Promise<any>;
     get directory(): string;
 }

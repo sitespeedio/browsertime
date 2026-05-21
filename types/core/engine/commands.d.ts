@@ -172,6 +172,13 @@ export class Commands {
      */
     bidi: Bidi;
     /**
+     * Use Playwright as a scripting API against the running browser. Chrome and
+     * Edge only — connects over the existing CDP port. Requires the optional
+     * `playwright-core` dependency.
+     * @type {Playwright}
+     */
+    playwright: Playwright;
+    /**
      * Provides commands for interacting with an Android device.
      * @type {AndroidCommand}
      */
@@ -445,6 +452,7 @@ import { Meta } from './command/meta.js';
 import { Screenshot } from './command/screenshot.js';
 import { ChromeDevelopmentToolsProtocol } from './command/chromeDevToolsProtocol.js';
 import { Bidi } from './command/bidi.js';
+import { Playwright } from './command/playwright.js';
 import { AndroidCommand } from './command/android.js';
 import { Debug } from './command/debug.js';
 import { ClickAndHold } from './command/mouse/index.js';

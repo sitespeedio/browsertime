@@ -1,2 +1,2 @@
-export function getSPDisplaysDataType(): Promise<any>;
+export function getSPDisplaysDataType(): Promise<string>;
 //# sourceMappingURL=getSPDisplaysDataType.d.ts.map

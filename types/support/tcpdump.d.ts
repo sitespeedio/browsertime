@@ -3,7 +3,7 @@ export class TCPDump {
     baseDir: any;
     options: any;
     start(iteration: any): Promise<void>;
-    tcpdumpProcess: any;
+    tcpdumpProcess: import("execa").ResultPromise<{}>;
     stop(): Promise<void>;
     mv(url: any, iteration: any): Promise<void>;
 }

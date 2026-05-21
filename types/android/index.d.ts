@@ -33,7 +33,7 @@ export class Android {
     }>;
     pullNetLog(destination: any): Promise<any>;
     addDevtoolsFw(): Promise<any>;
-    removeDevtoolsFw(): Promise<any>;
+    removeDevtoolsFw(): Promise<(import("execa/types/return/result.js").CommonResult<false, {}> & import("execa/types/return/result.js").OmitErrorIfReject<unknown>)[]>;
     startVideo(): Promise<any>;
     ping(address: any): Promise<boolean>;
     clickPowerButton(): Promise<any>;
@@ -41,7 +41,7 @@ export class Android {
     closeAppNotRespondingPopup(): Promise<any>;
     pressHomeButton(): Promise<any>;
     stopVideo(): Promise<any>;
-    getPhoneState(): Promise<any>;
+    getPhoneState(): Promise<string>;
     pullVideo(destinationPath: any): Promise<any>;
     removeVideo(): Promise<any>;
     pidof(packageName: any): Promise<any>;
