@@ -46,6 +46,15 @@ jobs:
       run: xcrun xctrace list devices
     - name: Start local HTTP server
       run: (npm run start-server&)
+    - name: Safari environment diagnostics
+      run: |
+        sw_vers
+        echo "---"
+        /usr/bin/safaridriver --version
+        echo "---"
+        mdls -name kMDItemVersion /Applications/Safari.app || true
+        echo "---"
+        pgrep -lf safaridriver || echo "no safaridriver process"
     - name: Test Safari without video
       run: ./bin/browsertime.js -b safari -n 1 http://127.0.0.1:3000/simple/
     - name: Test Safari with video and Visual Metrics
