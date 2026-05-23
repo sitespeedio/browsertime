@@ -167,6 +167,15 @@ jobs:
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/commandscripts/scrollToBottom.cjs
     - name: Test extra profile run Chrome
       run: ./bin/browsertime.js -b chrome http://127.0.0.1:3000/simple/ -n 1 --viewPort 1000x600 --xvfb  --enableProfileRun
+    - name: Test Chrome JS/CSS coverage
+      run: |
+        ./bin/browsertime.js -b chrome -n 1 --xvfb --skipHar --chrome.coverage --resultDir /tmp/coverage http://127.0.0.1:3000/simple/
+        echo "--- coverage block ---"
+        jq '.[0].coverage' /tmp/coverage/browsertime.json
+        jq -e '(.[0].coverage.js | type) == "array" and (.[0].coverage.js | length) > 0' /tmp/coverage/browsertime.json
+        jq -e '(.[0].coverage.css | type) == "array" and (.[0].coverage.css | length) > 0' /tmp/coverage/browsertime.json
+        jq -e '.[0].coverage.js[0] | has("totalBytes") and has("usedBytes") and has("unusedBytes") and has("unusedPercent") and has("files")' /tmp/coverage/browsertime.json
+        jq -e '.[0].coverage.css[0] | has("totalBytes") and has("usedBytes") and has("unusedBytes") and has("unusedPercent") and has("files")' /tmp/coverage/browsertime.json
     - name: Test Chrome soft navigation detection
       run: |
         ./bin/browsertime.js -b chrome -n 1 --xvfb --spa --resultDir /tmp/soft-nav test/data/commandscripts/softNavigation.cjs
