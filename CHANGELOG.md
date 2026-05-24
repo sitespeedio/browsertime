@@ -1,5 +1,14 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 27.4.0 - 2026-05-24
+
+### Added
+* JS/CSS coverage collection for Chrome. `--chrome.coverage` turns it on for every iteration for users who want the data and accept that detailed V8 coverage deoptimizes scripts and will skew their timing metrics. `--enableProfileRun` also turns coverage on for Chrome alongside the existing trace, so users who want coverage without affecting their timings can lean on the same extra-iteration pattern they already use for tracing — the result is merged back into the main `browsertime.json` so consumers like sitespeed.io see the data in the same place they read every other metric. Each entry has a per-file breakdown (`url`, `totalBytes`, `usedBytes`, `unusedBytes`, `unusedPercent`) [#2480](https://github.com/sitespeedio/browsertime/pull/2480).
+
+### Fixed
+* HAR post-processing no longer throws when a page has no matching entries. Occasionally a HAR contains a page whose `pageref` has no entries — typically a navigation that didn't produce any requests, or an extension-injected page. `getDocumentRequests` and `getFinalURL` dereferenced `shift()` / `pop()` without a guard, and `getMainDocumentTimings` wrapped its entire per-page loop in a single try/catch so one bad page wiped out the main-document timings for every other page in the same HAR. Downstream this surfaced as a noisy triplet of warnings followed by an empty coach-data payload in sitespeed.io. The three crash points are now guarded and unresolvable pages are skipped [#2483](https://github.com/sitespeedio/browsertime/pull/2483).
+* Bumped `geckodriver` to a version with native ARM-64 support [#2482](https://github.com/sitespeedio/browsertime/pull/2482).
+
 ## 27.3.0 - 2026-05-20
 
 ### Added
