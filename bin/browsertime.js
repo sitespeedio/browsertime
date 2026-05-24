@@ -95,12 +95,16 @@ async function run(urls, options) {
       scriptsByCategory = merge(scriptsByCategory, userScripts);
     }
 
+    let result;
+    let storageManager;
+    let jsonName;
+
     try {
       if (options.preWarmServer) {
         await preWarmServer(urls, options);
       }
       await engine.start();
-      const result = await engine.runMultiple(urls, scriptsByCategory);
+      result = await engine.runMultiple(urls, scriptsByCategory);
       let saveOperations = [];
 
       // TODO setup by name
@@ -109,9 +113,9 @@ async function run(urls, options) {
       if (Array.isArray(firstUrl)) {
         firstUrl = firstUrl[0];
       }
-      const storageManager = new StorageManager(firstUrl, options);
+      storageManager = new StorageManager(firstUrl, options);
       const harName = options.har ?? 'browsertime';
-      const jsonName = options.output ?? 'browsertime';
+      jsonName = options.output ?? 'browsertime';
 
       saveOperations.push(storageManager.writeJson(jsonName + '.json', result));
 
@@ -169,6 +173,7 @@ async function run(urls, options) {
           options.chrome.traceCategory = [
             'disabled-by-default-v8.cpu_profiler'
           ];
+          options.chrome.coverage = true;
         }
       }
       if (options.enableVideoRun) {
@@ -186,9 +191,30 @@ async function run(urls, options) {
       }
       const traceEngine = new Engine(options);
       await traceEngine.start();
-      await traceEngine.runMultiple(urls, scriptsByCategory);
+      const profileResult = await traceEngine.runMultiple(
+        urls,
+        scriptsByCategory
+      );
       await traceEngine.stop();
       log.info('Extra run finished');
+
+      // Fill the main JSON's coverage from the profile run only when
+      // the main iterations didn't collect any (--enableProfileRun
+      // without --chrome.coverage). Otherwise the main run's
+      // per-iteration samples are what the user asked for.
+      let mergedCoverage = false;
+      for (const [i, pr] of profileResult.entries()) {
+        const main = result[i];
+        if (!main || !pr.coverage) continue;
+        if (main.coverage.js.length > 0 || main.coverage.css.length > 0) {
+          continue;
+        }
+        main.coverage = pr.coverage;
+        mergedCoverage = true;
+      }
+      if (mergedCoverage) {
+        await storageManager.writeJson(jsonName + '.json', result);
+      }
     }
   } catch (error) {
     log.error('Error running browsertime', error);
