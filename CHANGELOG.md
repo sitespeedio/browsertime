@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 27.4.1 - 2026-05-25
+
+### Fixed
+* `--chrome.coverage` no longer reports "0 B unused" for functions that executed at least once. The JS used-bytes calculation took the union of every V8 range with count > 0, but V8 returns nested ranges — an outer range over the whole function body and inner ranges over sub-blocks. If a function ran at all, its outer range already covered the whole body and the inner count == 0 ranges (the actual dead branches) got absorbed into the union and contributed nothing. On modern bundles where module-evaluation top-level code runs for almost every function, the per-script unused-% collapsed to roughly zero across the board, leaving sitespeed.io rendering a "0 B unused" column on pages that obviously ship plenty of dead code. The calculation now walks the ranges as nested intervals, painting the innermost range's count at every byte (the same definition Chrome DevTools' Coverage panel uses), so dead branches inside executed functions show up correctly. CSS rule-usage tracking returns flat, non-overlapping ranges and is unchanged [#2484](https://github.com/sitespeedio/browsertime/pull/2484).
+
 ## 27.4.0 - 2026-05-24
 
 ### Added
