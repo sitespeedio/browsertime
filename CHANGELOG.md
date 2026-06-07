@@ -1,5 +1,14 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 27.5.0 - 2026-06-07
+
+### Added
+* Bumped `chromedriver` and `edgedriver` to 149 [#2487](https://github.com/sitespeedio/browsertime/pull/2487).
+* Updated the Docker image to Chrome 149 / Firefox 151 / Edge 149 [#2486](https://github.com/sitespeedio/browsertime/pull/2486) [#2488](https://github.com/sitespeedio/browsertime/pull/2488).
+
+### Fixed
+* Navigation-script failures now include the URL being tested and the iteration number in the error message, so failure logs and `markAsFailure` output point at the offending page without cross-referencing the surrounding log lines [#2489](https://github.com/sitespeedio/browsertime/pull/2489).
+
 ## 27.4.1 - 2026-05-25
 
 ### Fixed
