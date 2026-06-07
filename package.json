@@ -7,8 +7,8 @@
   "types": "./scripting.d.ts",
   "dependencies": {
     "@devicefarmer/adbkit": "3.3.8",
-    "@sitespeed.io/chromedriver": "148.0.7778",
-    "@sitespeed.io/edgedriver": "148.0.3967",
+    "@sitespeed.io/chromedriver": "149.0.7827",
+    "@sitespeed.io/edgedriver": "149.0.4022",
     "@sitespeed.io/geckodriver": "0.36.2",
     "@sitespeed.io/log": "2.0.0",
     "@sitespeed.io/throttle": "6.0.0",
