@@ -1,0 +1,142 @@
+name: Release
+
+# Triggered manually. There's intentionally no automatic trigger on push or
+# schedule — a release is an explicit human decision.
+#
+# The release flow mirrors the one in sitespeedio/sitespeed.io:
+#   1. Lint and test the working tree of main.
+#   2. Run `npm version <type>`, which writes a "<X.Y.Z>" commit and a
+#      "v<X.Y.Z>" tag locally on the runner (no push yet).
+#   3. Regenerate the TypeScript declaration files (`scripting.d.ts`,
+#      `types/**/*.d.ts`) and commit them as a "new release" commit if
+#      anything changed. `prepublishOnly` regenerates them again during
+#      publish so the tarball matches the committed types.
+#   4. Generate SBOMs (SPDX + CycloneDX) from the resolved dependency tree.
+#   5. `npm publish --provenance` using the workflow's OIDC token. The
+#      published tarball carries a Sigstore provenance attestation that
+#      cryptographically binds the package on npmjs.com to this exact
+#      workflow run.
+#   6. Only after npm publish succeeded, push the version commit, the
+#      "new release" commit and the tag back to main. Up to this point
+#      a failure leaves nothing on the remote, so the run can be retried
+#      cleanly.
+#   7. Create a GitHub Release with the SBOMs attached.
+#   8. Dispatch `building-docker.yml` against the new tag. `GITHUB_TOKEN`
+#      can't trigger push/tag-based workflows (GitHub anti-loop guard),
+#      so without this step the tag push from step 6 would land on the
+#      remote but the Docker image build would never fire. workflow_dispatch
+#      is the one event `GITHUB_TOKEN` is allowed to raise, hence the
+#      explicit dispatch.
+#
+# Prerequisite: the browsertime npm package must be configured on npmjs.com
+# under Trusted Publishing to trust this workflow (sitespeedio/browsertime,
+# workflow filename release.yml). Without that, the publish step fails
+# with a 401 and the release aborts cleanly.
+
+on:
+  workflow_dispatch:
+    inputs:
+      releaseType:
+        description: "Release type (semver)"
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+permissions:
+  contents: write   # push the version + regen commits and the tag back to main
+  id-token: write   # OIDC token used by `npm publish --provenance`
+  actions: write    # `gh workflow run` against building-docker.yml in the dispatch step
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+
+      - name: Checkout main
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
+        with:
+          node-version: "24.x"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm test
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Bump version (local commit + tag, no push)
+        id: bump
+        run: |
+          npm version "${{ inputs.releaseType }}" -m "%s"
+          VERSION="$(node -p "require('./package.json').version")"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Regenerate TypeScript declarations
+        run: npm run tsc
+
+      - name: Commit regenerated declarations
+        run: |
+          if git diff --quiet; then
+            echo "No regenerated declarations to commit"
+          else
+            git add -A
+            git commit -m "new release"
+          fi
+
+      - name: Generate SBOMs (SPDX and CycloneDX)
+        run: |
+          npm sbom --sbom-format=spdx > sbom.spdx.json
+          npm sbom --sbom-format=cyclonedx > sbom.cdx.json
+
+      - name: Publish to npm with provenance
+        run: npm publish --provenance --access public
+
+      - name: Push commit(s) and tag to main
+        run: |
+          git push origin HEAD:main
+          git push origin "${{ steps.bump.outputs.tag }}"
+
+      - name: Create GitHub Release with SBOMs attached
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ steps.bump.outputs.tag }}" \
+            --title "${{ steps.bump.outputs.version }}" \
+            --generate-notes \
+            sbom.spdx.json \
+            sbom.cdx.json
+
+      # See workflow header comment — GITHUB_TOKEN can't trigger push/tag
+      # workflows, so building-docker.yml has to be kicked off explicitly.
+      # No `|| true`: a silent dispatch failure is the worst outcome (npm
+      # published, no Docker image), so let the release step fail loudly
+      # if the dispatch errors.
+      - name: Dispatch downstream workflows
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run building-docker.yml --ref "${{ steps.bump.outputs.tag }}"
