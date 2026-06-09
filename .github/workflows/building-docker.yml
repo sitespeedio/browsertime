@@ -3,6 +3,11 @@ on:
   push:
     tags:
       - 'v*.*.*'
+  # release.yml dispatches this workflow after pushing the tag, because
+  # GITHUB_TOKEN-pushed tags don't trigger push/tag workflows on their own
+  # (GitHub anti-loop guard). workflow_dispatch is the one event
+  # GITHUB_TOKEN can raise.
+  workflow_dispatch:
 jobs:
   docker:
     runs-on: ubuntu-22.04
