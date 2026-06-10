@@ -10,11 +10,11 @@ If you want help out, that's great! Check the issue list and see if there's some
 
 ### AI-Assisted changes
 
-When using AI tools like ChatGPT to assist with development, please a) disclose it in your commits and pull requests.
+When using AI tools like Claude, ChatGPT, or any other LLM to assist with development, please disclose it in your commits and in the pull request description.
 
 #### Commits
 
-When writing a commit message for a change that was assisted by an AI, please add the `AI-assisted-by:` trailer to the commit message body.
+Add a `Co-authored-by:` trailer to the commit message body naming the model. GitHub recognises the trailer and credits the model alongside the human author, which keeps the disclosure visible on every commit page without relying on a custom convention. Use a sensible model identifier in the name part and the vendor's published noreply address. Multiple `Co-authored-by:` lines are allowed if more than one model contributed.
 
 **Example:**
 
@@ -24,7 +24,7 @@ Add Cumulative Layout Shift metric to the summary page
 Add the Cumulative Layout Shift (CLS) introduced by Google on
 the summary page. Show both median and p75.
 
-AI-assisted-by: ChatGPT
+Co-authored-by: Claude Opus 4.7 <noreply@anthropic.com>
 ```
 
 #### Pull Requests
@@ -33,7 +33,7 @@ When creating a pull request that includes AI-assisted work, please mention it i
 
 **Example:**
 
-> This pull request implements Cumulative Layout Shift with assistance from ChatGPT.
+> This pull request implements Cumulative Layout Shift with assistance from Claude.
 
 
 ## Add a defect
