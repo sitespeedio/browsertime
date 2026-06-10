@@ -92,7 +92,7 @@
     "url": "https://github.com/sitespeedio/browsertime.git"
   },
   "homepage": "https://www.sitespeed.io/documentation/browsertime/",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "ava": {
     "files": [
       "test/**/*",
