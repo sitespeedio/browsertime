@@ -13,7 +13,11 @@ jobs:
     - name: Harden Runner
       uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
       with:
-        egress-policy: block
+        # Temporarily audit instead of block: the block agent holds the
+        # ingress qdisc slot on eth0, so the throttle connectivity test
+        # fails with "Exclusivity flag on, cannot modify". Restore block
+        # once the coexistence fix in sitespeedio/throttle is released.
+        egress-policy: audit
         allowed-endpoints: >
           api.github.com:443
           archive.mozilla.org:443
