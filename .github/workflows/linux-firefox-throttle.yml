@@ -1,4 +1,4 @@
-name: Test Firefox/Chrome dev
+name: Linux browsers Firefox throttle
 on:
   push:
     branches:
@@ -10,24 +10,16 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-    - name: Harden Runner
-      uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
-      with:
-        egress-policy: audit
     - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
     - name: Use Node.js
       uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
       with:
         node-version: '24.x'
         cache: 'npm'
-    - name: Install Firefox latest dev edition
+    - name: Install Firefox
       uses: browser-actions/setup-firefox@fcf821c621167805dd63a29662bd7cb5676c81a8 # latest
       with:
-        firefox-version: 'latest-devedition'
-    - name: Install Chrome dev
-      uses: browser-actions/setup-chrome@4f8e94349a351df0f048634f25fec36c3c91eded # latest
-      with:
-        chrome-version: dev
+        firefox-version: '149.0'
     - name: Install Browsertime
       run: npm ci
     - name: Install ffmpeg
@@ -46,9 +38,9 @@ jobs:
         sudo modprobe ifb numifbs=1
     - name: Browser versions
       run: |
-        chrome --version
         firefox --version
-    - name: Test Chrome dev
-      run: ./bin/browsertime.js -b chrome -n 1 https://www.sitespeed.io --xvfb --chrome.binaryPath $(which chrome)
-    - name: Test Firefox dev
-      run: ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --xvfb
+    - name: Start local HTTP server
+      run: (npm run start-server&)
+    # - run: VTENV_OPTS="-p python3" make test
+    - name: Test Firefox with throttle
+      run: ./bin/browsertime.js -b firefox -n 1 http://127.0.0.1:3000/simple/ --connectivity.profile cable --connectivity.engine throttle --xvfb

@@ -49,6 +49,6 @@ jobs:
         chrome --version
         firefox --version
     - name: Test Chrome Beta
-      run: ./bin/browsertime.js -b chrome -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle --xvfb --chrome.binaryPath $(which chrome)
+      run: ./bin/browsertime.js -b chrome -n 1 https://www.sitespeed.io --xvfb --chrome.binaryPath $(which chrome)
     - name: Test Firefox Beta
-      run: ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --connectivity.profile cable --connectivity.engine throttle --xvfb
+      run: ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io --xvfb

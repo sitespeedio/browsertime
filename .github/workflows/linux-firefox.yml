@@ -61,8 +61,8 @@ jobs:
     - name: Start local HTTP server
       run: (npm run start-server&)
     # - run: VTENV_OPTS="-p python3" make test
-    - name: Test Firefox with throttle
-      run: ./bin/browsertime.js -b firefox -n 1 http://127.0.0.1:3000/simple/ --connectivity.profile cable --connectivity.engine throttle --xvfb --firefox.collectMozLog
+    - name: Test Firefox with collectMozLog
+      run: ./bin/browsertime.js -b firefox -n 1 http://127.0.0.1:3000/simple/ --xvfb --firefox.collectMozLog
     - name: Test multi pages
       run: ./bin/browsertime.js -b firefox test/data/navigationscript/multi.cjs http://127.0.0.1:3000/search/ -n 1 --xvfb
     - name: Test Firefox Geckoprofiler
