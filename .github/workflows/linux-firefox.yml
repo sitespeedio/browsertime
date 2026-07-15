@@ -13,11 +13,7 @@ jobs:
     - name: Harden Runner
       uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
       with:
-        # Temporarily audit instead of block: the block agent holds the
-        # ingress qdisc slot on eth0, so the throttle connectivity test
-        # fails with "Exclusivity flag on, cannot modify". Restore block
-        # once the coexistence fix in sitespeedio/throttle is released.
-        egress-policy: audit
+        egress-policy: block
         allowed-endpoints: >
           api.github.com:443
           archive.mozilla.org:443
@@ -64,6 +60,12 @@ jobs:
         firefox --version
     - name: Start local HTTP server
       run: (npm run start-server&)
+    # Diagnostic for the "Exclusivity flag on" throttle failure: show what
+    # already occupies the ingress qdisc slot on the default interface.
+    - name: Show qdiscs
+      run: |
+        sudo tc qdisc show
+        sudo tc filter show dev eth0 ingress || true
     # - run: VTENV_OPTS="-p python3" make test
     - name: Test Firefox with throttle
       run: ./bin/browsertime.js -b firefox -n 1 http://127.0.0.1:3000/simple/ --connectivity.profile cable --connectivity.engine throttle --xvfb --firefox.collectMozLog
