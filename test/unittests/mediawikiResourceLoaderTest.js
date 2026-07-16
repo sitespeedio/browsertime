@@ -3,7 +3,8 @@ import { paintJsCoverage } from '../../lib/chrome/coverage.js';
 import {
   isResourceLoaderBundle,
   labelForUrl,
-  resourceLoaderModuleCoverage
+  resourceLoaderModuleCoverage,
+  resourceLoaderLocationResolver
 } from '../../lib/chrome/mediawikiResourceLoader.js';
 
 const preamble = '/* preamble */\n';
@@ -210,5 +211,67 @@ test('delimiter inside a string literal mid-line is not a module', t => {
   t.deepEqual(
     modules.map(m => m.name),
     ['module.one']
+  );
+});
+
+// Location resolver: maps a 1-based line/column (as carried by Chrome
+// trace events) to the owning module. The fixture bundle:
+//   line 1: /* preamble */
+//   line 2: mw.loader.impl(...["multi.line@ml001",function(){
+//   line 3: function inner(){}
+//   line 4: }];});
+//   line 5: mw.loader.impl(...["module.two@def34",function(){}];});
+//   line 6: mw.loader.state({"module.two":"ready"});
+const multiLineModule =
+  'mw.loader.impl(function(){return["multi.line@ml001",function(){\n' +
+  'function inner(){}\n' +
+  '}];});\n';
+const trailer = 'mw.loader.state({"module.two":"ready"});';
+const resolverBundle = preamble + multiLineModule + moduleTwo + trailer;
+
+test('resolver maps line/column positions to the owning module', t => {
+  const resolver = resourceLoaderLocationResolver(resolverBundle);
+
+  // Preamble positions are not attributable to a module.
+  t.is(resolver.resolve(1, 1), undefined);
+  // Last byte of the preamble line (its newline).
+  t.is(resolver.resolve(1, preamble.length), undefined);
+  // First byte of the first module.
+  t.deepEqual(resolver.resolve(2, 1), { name: 'multi.line', version: 'ml001' });
+  // A line in the middle of a multi-line module.
+  t.deepEqual(resolver.resolve(3, 10), {
+    name: 'multi.line',
+    version: 'ml001'
+  });
+  // Last byte of the first module (the newline ending line 4).
+  t.deepEqual(resolver.resolve(4, 7), { name: 'multi.line', version: 'ml001' });
+  // First byte of the next module.
+  t.deepEqual(resolver.resolve(5, 1), { name: 'module.two', version: 'def34' });
+  // Trailing bundle content belongs to the last module.
+  t.deepEqual(resolver.resolve(6, 5), { name: 'module.two', version: 'def34' });
+  // Very last byte of the source.
+  t.deepEqual(resolver.resolve(6, trailer.length), {
+    name: 'module.two',
+    version: 'def34'
+  });
+});
+
+test('resolver returns undefined for out-of-range positions', t => {
+  const resolver = resourceLoaderLocationResolver(resolverBundle);
+
+  // One past the last byte of the source.
+  t.is(resolver.resolve(6, trailer.length + 1), undefined);
+  // 0-based input would be a caller bug — column 0 on a module's first
+  // line lands on the previous line's newline, line 0 has no line.
+  t.is(resolver.resolve(2, 0), undefined);
+  t.is(resolver.resolve(0, 1), undefined);
+  t.is(resolver.resolve(7, 1), undefined);
+  t.is(resolver.resolve(-1, 5), undefined);
+});
+
+test('source without delimiters has no resolver', t => {
+  t.is(
+    resourceLoaderLocationResolver('var a = 1;\nconsole.log(a);'),
+    undefined
   );
 });
