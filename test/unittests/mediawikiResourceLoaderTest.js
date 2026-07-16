@@ -2,6 +2,7 @@ import test from 'ava';
 import { paintJsCoverage } from '../../lib/chrome/coverage.js';
 import {
   isResourceLoaderBundle,
+  labelForUrl,
   resourceLoaderModuleCoverage
 } from '../../lib/chrome/mediawikiResourceLoader.js';
 
@@ -114,6 +115,91 @@ test('bundle without a preamble gets no preamble bucket', t => {
 test('source without delimiters returns no modules', t => {
   const source = 'var a = 1; console.log(a);';
   t.is(resourceLoaderModuleCoverage(source, allUsed(source.length)), undefined);
+});
+
+const loadPhp = 'https://en.wikipedia.org/w/load.php';
+
+test('labels the startup request', t => {
+  t.is(
+    labelForUrl(`${loadPhp}?lang=en&modules=startup&only=scripts&raw=1`),
+    'load.php[startup]'
+  );
+});
+
+test('labels the top-queue styles batch', t => {
+  t.is(
+    labelForUrl(
+      `${loadPhp}?lang=en&modules=ext.cite.styles%7Cskins.vector.styles&only=styles&skin=vector-2022`
+    ),
+    'load.php[styles]'
+  );
+});
+
+test('labels a single-module styles request with the module name', t => {
+  t.is(
+    labelForUrl(`${loadPhp}?lang=en&modules=site.styles&only=styles`),
+    'load.php[styles:site.styles]'
+  );
+});
+
+test('labels the big general bundle', t => {
+  t.is(
+    labelForUrl(
+      `${loadPhp}?lang=en&modules=ext.centralNotice.startUp%2CchoiceData%7Cext.echo.centralauth%7Cmediawiki.page.ready&skin=vector-2022&version=1u4qz`
+    ),
+    'load.php[scripts]'
+  );
+});
+
+test('version, lang and skin parameters never affect the label', t => {
+  const before = labelForUrl(
+    `${loadPhp}?lang=en&modules=jquery%7Cmediawiki.base&only=scripts&skin=vector-2022&version=aaaaa`
+  );
+  const after = labelForUrl(
+    `${loadPhp}?lang=sv&modules=jquery%7Cmediawiki.base&only=scripts&skin=minerva&version=bbbbb`
+  );
+  t.is(before, after);
+  t.is(before, 'load.php[scripts:jquery]');
+});
+
+test('raw script batches are disambiguated from the general bundle', t => {
+  const base = labelForUrl(
+    `${loadPhp}?lang=en&modules=jquery%7Cmediawiki.base&only=scripts`
+  );
+  const general = labelForUrl(
+    `${loadPhp}?lang=en&modules=jquery%7Cmediawiki.base&skin=vector-2022`
+  );
+  t.is(base, 'load.php[scripts:jquery]');
+  t.is(general, 'load.php[scripts]');
+  t.not(base, general);
+});
+
+test('expands packed module lists when picking the first sorted name', t => {
+  t.is(
+    labelForUrl(
+      `${loadPhp}?modules=mediawiki.util%2Cbase%7Cext.popups.main&only=scripts`
+    ),
+    'load.php[scripts:ext.popups.main]'
+  );
+});
+
+test('single-module script request is labeled with the module name', t => {
+  t.is(
+    labelForUrl(`${loadPhp}?modules=ext.popups.main&skin=vector-2022`),
+    'load.php[scripts:ext.popups.main]'
+  );
+});
+
+test('non-ResourceLoader URLs get no label', t => {
+  t.is(labelForUrl('https://example.com/a.js'), undefined);
+  t.is(labelForUrl('https://example.com/load.php/other'), undefined);
+  t.is(
+    labelForUrl('https://example.com/download.php?modules=startup'),
+    undefined
+  );
+  t.is(labelForUrl('unknown'), undefined);
+  t.is(labelForUrl(''), undefined);
+  t.is(labelForUrl(), undefined);
 });
 
 test('delimiter inside a string literal mid-line is not a module', t => {
