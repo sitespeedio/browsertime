@@ -1,6 +1,9 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
-## 27.5.0 - 2026-06-07
+## Unreleased
+
+### Added
+* The `renderBlocking.recalculateStyle` summary (Chrome only) now includes `count` — the number of Recalculate Style events behind the existing element and duration totals — plus `maxElements` and `maxDurationInMillis` for the single largest event, both before FCP and before LCP. The totals alone can't distinguish one massive invalidation that cascades through most of the DOM (fix: narrow the selector/class-toggle scope) from thousands of small forced recalcs caused by JS interleaving style writes and layout reads (fix: batch reads and writes). The count tells you which regime you're in, and the max values show whether one monster event dominates the total. The fields land in `browsertime.json`, the statistics summary, and the `_renderBlocking.recalculateStyle` page summary in the HAR.
 
 ### Added
 * Bumped `chromedriver` and `edgedriver` to 149 [#2487](https://github.com/sitespeedio/browsertime/pull/2487).
