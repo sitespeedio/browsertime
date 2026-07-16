@@ -2,6 +2,7 @@ import test from 'ava';
 import { paintJsCoverage } from '../../lib/chrome/coverage.js';
 import {
   isResourceLoaderBundle,
+  labelForStyleAttributes,
   labelForUrl,
   resourceLoaderModuleCoverage,
   resourceLoaderLocationResolver
@@ -212,6 +213,56 @@ test('delimiter inside a string literal mid-line is not a module', t => {
     modules.map(m => m.name),
     ['module.one']
   );
+});
+
+test('TemplateStyles dedup key labels an inline stylesheet', t => {
+  t.is(
+    labelForStyleAttributes([
+      'data-mw-deduplicate',
+      'TemplateStyles:r981673959'
+    ]),
+    'TemplateStyles:r981673959'
+  );
+});
+
+test('suffixed TemplateStyles keys keep the full value as label', t => {
+  t.is(
+    labelForStyleAttributes([
+      'data-mw-deduplicate',
+      'TemplateStyles:r1349637415/mw-parser-output/.tmulti'
+    ]),
+    'TemplateStyles:r1349637415/mw-parser-output/.tmulti'
+  );
+});
+
+test('dedup key is found among other attributes', t => {
+  t.is(
+    labelForStyleAttributes([
+      'typeof',
+      'mw:Extension/templatestyles',
+      'data-mw-deduplicate',
+      'TemplateStyles:r1043282317',
+      'about',
+      '#mwt42'
+    ]),
+    'TemplateStyles:r1043282317'
+  );
+});
+
+test('non-TemplateStyles attributes get no style label', t => {
+  t.is(labelForStyleAttributes([]), undefined);
+  t.is(labelForStyleAttributes(['class', 'my-style']), undefined);
+  t.is(labelForStyleAttributes(['data-mw-deduplicate', 'other:r1']), undefined);
+  t.is(
+    labelForStyleAttributes(['data-mw-deduplicate', 'TemplateStyles:rabc']),
+    undefined
+  );
+  t.is(
+    labelForStyleAttributes(['data-mw-deduplicate', 'TemplateStyles:r123x']),
+    undefined
+  );
+  t.is(labelForStyleAttributes(), undefined);
+  t.is(labelForStyleAttributes('TemplateStyles:r1'), undefined);
 });
 
 // Location resolver: maps a 1-based line/column (as carried by Chrome
