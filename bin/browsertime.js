@@ -85,6 +85,15 @@ async function run(urls, options) {
       }
     }
 
+    // To the CLI, enableProfileRun means "make one extra profile run",
+    // but inside the engine it means "this run IS the profile run"
+    // (extra-run trace naming, suppressed result log line). Keep it
+    // away from the measured runs and hand it back to the extra
+    // engine below, so measured traces keep their trace-N.json names
+    // and the profile trace cannot overwrite the first iteration's.
+    const makeProfileRun = options.enableProfileRun;
+    options.enableProfileRun = false;
+
     let engine = new Engine(options);
 
     const scriptCategories = await allScriptCategories();
@@ -159,10 +168,11 @@ async function run(urls, options) {
       }
     }
 
-    if (options.enableProfileRun || options.enableVideoRun) {
+    if (makeProfileRun || options.enableVideoRun) {
       log.info('Make one extra run to collect trace/video information');
       options.iterations = 1;
-      if (options.enableProfileRun) {
+      if (makeProfileRun) {
+        options.enableProfileRun = true;
         if (options.browser === 'firefox') {
           options.firefox.geckoProfiler = true;
           options.firefox.collectMozLog = true;
