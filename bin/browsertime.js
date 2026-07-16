@@ -202,14 +202,24 @@ async function run(urls, options) {
       // the main iterations didn't collect any (--enableProfileRun
       // without --chrome.coverage). Otherwise the main run's
       // per-iteration samples are what the user asked for.
+      // The profile run is a single side iteration, so its sample is
+      // published as one object marked with source instead of a
+      // one-element array pretending to be keyed by iteration.
       let mergedCoverage = false;
       for (const [i, pr] of profileResult.entries()) {
         const main = result[i];
         if (!main || !pr.coverage) continue;
+        if (pr.coverage.js.length === 0 && pr.coverage.css.length === 0) {
+          continue;
+        }
         if (main.coverage.js.length > 0 || main.coverage.css.length > 0) {
           continue;
         }
-        main.coverage = pr.coverage;
+        main.coverage = {
+          source: 'profileRun',
+          js: pr.coverage.js[0],
+          css: pr.coverage.css[0]
+        };
         mergedCoverage = true;
       }
       if (mergedCoverage) {
