@@ -16,4 +16,6 @@ export function computeMainThreadTasks(trace: any, options?: {
 export { computeScriptCosts } from "./script-costs.js";
 export { computeForcedReflows } from "./forced-reflows.js";
 export { computeNonCompositedAnimations } from "./non-composited-animations.js";
+export { computeBlockingTime } from "./blocking-time.js";
+export { computeDomainBreakdown } from "./domain-breakdown.js";
 //# sourceMappingURL=index.d.ts.map
