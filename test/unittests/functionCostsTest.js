@@ -163,6 +163,41 @@ test('aggregates self and total time per function across chunks', t => {
   t.is(inner.column, 5);
 });
 
+test('breaks an orchestrator total down by callee', t => {
+  const costs = computeFunctionCosts(syntheticTrace());
+
+  // outer's non-self time all went to inner (4.7 ms inclusive);
+  // inner called nothing so it gets no callees key.
+  const outer = costs.find(c => c.functionName === 'outer');
+  t.deepEqual(outer.callees, [
+    { functionName: 'inner', url: PLAIN_URL, value: 4.7 }
+  ]);
+  t.false('callees' in costs.find(c => c.functionName === 'inner'));
+});
+
+test('resolves callees inside bundles to their module', t => {
+  const bundles = new Map([
+    [BUNDLE_URL, resourceLoaderLocationResolver(bundleSource)]
+  ]);
+  const trace = syntheticTrace();
+  // Point inner at the bundle (module.two on 0-based line 2) so the
+  // callee resolution path is exercised.
+  for (const event of trace.traceEvents) {
+    for (const node of event.args?.data?.cpuProfile?.nodes || []) {
+      if (node.callFrame.functionName === 'inner') {
+        node.callFrame.url = BUNDLE_URL;
+        node.callFrame.lineNumber = 2;
+        node.callFrame.columnNumber = 0;
+      }
+    }
+  }
+  const costs = computeFunctionCosts(trace, bundles);
+  const outer = costs.find(c => c.functionName === 'outer');
+  t.deepEqual(outer.callees, [
+    { functionName: 'inner', url: BUNDLE_URL, module: 'module.two', value: 4.7 }
+  ]);
+});
+
 test('resolves bundle frames to the owning module', t => {
   const bundles = new Map([
     [BUNDLE_URL, resourceLoaderLocationResolver(bundleSource)]
