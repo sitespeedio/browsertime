@@ -29,6 +29,11 @@
       info.scripts = [];
       for (let script of entry.scripts) {
         const s = {};
+        // startTime + duration make per-script attribution possible:
+        // without them a frame's blocking can only be credited to
+        // every script that ran in it.
+        s.startTime = script.startTime;
+        s.duration = script.duration;
         s.forcedStyleAndLayoutDuration = script.forcedStyleAndLayoutDuration;
         s.invoker = script.invoker;
         s.invokerType = script.invokerType;
