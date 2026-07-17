@@ -128,12 +128,12 @@ test('labels the startup request', t => {
   );
 });
 
-test('labels the top-queue styles batch', t => {
+test('labels the top-queue styles batch with its first module', t => {
   t.is(
     labelForUrl(
       `${loadPhp}?lang=en&modules=ext.cite.styles%7Cskins.vector.styles&only=styles&skin=vector-2022`
     ),
-    'load.php[styles]'
+    'load.php[styles:ext.cite.styles]'
   );
 });
 
@@ -144,12 +144,12 @@ test('labels a single-module styles request with the module name', t => {
   );
 });
 
-test('labels the big general bundle', t => {
+test('labels the big general bundle with its first module', t => {
   t.is(
     labelForUrl(
       `${loadPhp}?lang=en&modules=ext.centralNotice.startUp%2CchoiceData%7Cext.echo.centralauth%7Cmediawiki.page.ready&skin=vector-2022&version=1u4qz`
     ),
-    'load.php[scripts]'
+    'load.php[scripts:ext.centralNotice.choiceData]'
   );
 });
 
@@ -164,16 +164,18 @@ test('version, lang and skin parameters never affect the label', t => {
   t.is(before, 'load.php[scripts:jquery]');
 });
 
-test('raw script batches are disambiguated from the general bundle', t => {
-  const base = labelForUrl(
-    `${loadPhp}?lang=en&modules=jquery%7Cmediawiki.base&only=scripts`
+// Pages lazy-load several general batches (no `only=`) over time, so
+// a shared bare label would collide as soon as there is more than one.
+test('several general batches get distinct labels', t => {
+  const bigBundle = labelForUrl(
+    `${loadPhp}?lang=en&modules=ext.centralNotice.display%2CgeoIP%7Cmediawiki.page.ready&skin=vector-2022`
   );
-  const general = labelForUrl(
-    `${loadPhp}?lang=en&modules=jquery%7Cmediawiki.base&skin=vector-2022`
+  const lazyBatch = labelForUrl(
+    `${loadPhp}?lang=en&modules=ext.cite.referencePreviews%7Cext.math.popup%7Cext.popups.main&skin=vector-2022`
   );
-  t.is(base, 'load.php[scripts:jquery]');
-  t.is(general, 'load.php[scripts]');
-  t.not(base, general);
+  t.is(bigBundle, 'load.php[scripts:ext.centralNotice.display]');
+  t.is(lazyBatch, 'load.php[scripts:ext.cite.referencePreviews]');
+  t.not(bigBundle, lazyBatch);
 });
 
 test('expands packed module lists when picking the first sorted name', t => {
