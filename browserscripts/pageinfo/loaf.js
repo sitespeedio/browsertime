@@ -39,6 +39,11 @@
         // every script that ran in it.
         s.startTime = script.startTime;
         s.duration = script.duration;
+        // executionStart - startTime is queue/compile delay before the
+        // script ran; pauseDuration separates "computed the whole time"
+        // from "sat in a sync pause" (alert, sync XHR).
+        s.executionStart = script.executionStart;
+        s.pauseDuration = script.pauseDuration;
         s.forcedStyleAndLayoutDuration = script.forcedStyleAndLayoutDuration;
         s.invoker = script.invoker;
         s.invokerType = script.invokerType;
