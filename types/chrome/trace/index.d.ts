@@ -18,6 +18,9 @@ export { computeForcedReflows } from "./forced-reflows.js";
 export { computeNonCompositedAnimations } from "./non-composited-animations.js";
 export { computeFrameStability } from "./frame-stability.js";
 export { computeFunctionCosts } from "./function-costs.js";
+export { computeStyleInvalidations } from "./style-invalidations.js";
+export { computeSelectorStats } from "./selector-stats.js";
+export { computeTimerCosts } from "./timer-costs.js";
 export { computeBlockingTime } from "./blocking-time.js";
 export { computeDomainBreakdown } from "./domain-breakdown.js";
 //# sourceMappingURL=index.d.ts.map
