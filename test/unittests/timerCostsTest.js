@@ -101,6 +101,19 @@ test('joins timer installs with the cost of firing them', t => {
       recurringInstalls: 1
     }
   ]);
+  // The individual timer, identified by its install site.
+  t.deepEqual(result.sites, [
+    {
+      url: SCRIPT_URL,
+      timeout: 0,
+      recurring: true,
+      installs: 1,
+      fires: 1,
+      fireTime: 25,
+      line: 1,
+      column: 1
+    }
+  ]);
 });
 
 test('returns undefined when the trace has no timer events', t => {
