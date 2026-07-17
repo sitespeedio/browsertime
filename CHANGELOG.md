@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Added
+* `cpu.nonCompositedAnimations` entries now include `failureReasons` — the `compositeFailed` bitmask decoded to human-readable strings via Blink's FailureReason enum (Chrome only). Chrome often omits `unsupportedProperties`, leaving consumers with "an animation failed" and a bare number; the decoded reasons say why, and the why decides the action ("animation has no visible change" is benign, "unsupported CSS property" is a fix).
 * Per-function JS cost from the V8 sampling profiler (Chrome only): runs with the `disabled-by-default-v8.cpu_profiler` trace category (which `--enableProfileRun` already enables) now get `cpu.functionCosts` — the top functions by main-thread self time with total time and source position — so consumers can show *which function* is slow instead of stopping at "this script used 300 ms". Functions inside concatenated bundles (MediaWiki ResourceLoader) are attributed to the owning module, e.g. `scrollToActiveSection` → `skins.vector.js`.
 
 ### Added
