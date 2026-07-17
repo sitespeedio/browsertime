@@ -1,5 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 28.1.0 - 2026-07-17
+
+### Added
+* Long Animation Frames (`pageinfo.loaf`) now ship every per-script field the LoAF API exposes (`startTime`, `duration`, `executionStart`, `pauseDuration`) plus `startTime` and `firstUIEventTimestamp` per frame — enough to attribute blocking time to individual scripts, place each frame on the page timeline and spot frames where an input was waiting [#2522](https://github.com/sitespeedio/browsertime/pull/2522) [#2523](https://github.com/sitespeedio/browsertime/pull/2523) [#2526](https://github.com/sitespeedio/browsertime/pull/2526).
+* New `pageinfo.loafSummary` key (`totalFrames`, `totalBlockingDuration`, `totalDuration`): `pageinfo.loaf` only ships the 10 frames with the most blocking, so totals computed from it understate busy pages [#2524](https://github.com/sitespeedio/browsertime/pull/2524).
+* LoAF script URLs get the same ResourceLoader `label`s as `cpu.urls` (`load.php[startup]` and friends) [#2525](https://github.com/sitespeedio/browsertime/pull/2525).
+* Multi-module `load.php` batches are labeled with their first module name — pages lazy-load several general batches, so the bare `load.php[scripts]` label collided as soon as there was more than one [#2527](https://github.com/sitespeedio/browsertime/pull/2527).
+
 ## 28.0.0 - 2026-07-17
 
 ### Breaking
