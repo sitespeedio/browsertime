@@ -180,8 +180,12 @@ async function run(urls, options) {
           options.chrome.timeline = true;
           options.cpu = true;
           options.chrome.enableTraceScreenshots = true;
+          // v8.cpu_profiler feeds cpu.functionCosts; blink.debug
+          // emits SelectorStats for cpu.selectorStats. Both add
+          // overhead, which is fine here — this run is not measured.
           options.chrome.traceCategory = [
-            'disabled-by-default-v8.cpu_profiler'
+            'disabled-by-default-v8.cpu_profiler',
+            'disabled-by-default-blink.debug'
           ];
           options.chrome.coverage = true;
         }
