@@ -3,6 +3,9 @@
 ## Unreleased
 
 ### Added
+* Per-function JS cost from the V8 sampling profiler (Chrome only): runs with the `disabled-by-default-v8.cpu_profiler` trace category (which `--enableProfileRun` already enables) now get `cpu.functionCosts` — the top functions by main-thread self time with total time and source position — so consumers can show *which function* is slow instead of stopping at "this script used 300 ms". Functions inside concatenated bundles (MediaWiki ResourceLoader) are attributed to the owning module, e.g. `scrollToActiveSection` → `skins.vector.js`.
+
+### Added
 * The `renderBlocking.recalculateStyle` summary (Chrome only) now includes `count` — the number of Recalculate Style events behind the existing element and duration totals — plus `maxElements` and `maxDurationInMillis` for the single largest event, both before FCP and before LCP. The totals alone can't distinguish one massive invalidation that cascades through most of the DOM (fix: narrow the selector/class-toggle scope) from thousands of small forced recalcs caused by JS interleaving style writes and layout reads (fix: batch reads and writes). The count tells you which regime you're in, and the max values show whether one monster event dominates the total. The fields land in `browsertime.json`, the statistics summary, and the `_renderBlocking.recalculateStyle` page summary in the HAR.
 
 ### Added
