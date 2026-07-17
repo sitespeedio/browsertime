@@ -17,6 +17,11 @@
     // re-package
     for (let entry of longestBlockingLoAFs) {
       const info = {};
+      // startTime places the frame on the page timeline (before or
+      // after FCP/LCP/load); firstUIEventTimestamp > 0 means an input
+      // was waiting while this frame blocked — the INP connection.
+      info.startTime = entry.startTime;
+      info.firstUIEventTimestamp = entry.firstUIEventTimestamp;
       info.blockingDuration = entry.blockingDuration;
       info.duration = entry.duration;
       info.styleAndLayoutStart = entry.styleAndLayoutStart;
@@ -29,6 +34,11 @@
       info.scripts = [];
       for (let script of entry.scripts) {
         const s = {};
+        // startTime + duration make per-script attribution possible:
+        // without them a frame's blocking can only be credited to
+        // every script that ran in it.
+        s.startTime = script.startTime;
+        s.duration = script.duration;
         s.forcedStyleAndLayoutDuration = script.forcedStyleAndLayoutDuration;
         s.invoker = script.invoker;
         s.invokerType = script.invokerType;
