@@ -95,3 +95,114 @@ test('returns undefined when the trace has no invalidation events', t => {
     undefined
   );
 });
+
+const beforePaint = data => ({ name: data.name, ts: 100, args: { data } });
+const afterPaint = data => ({ name: data.name, ts: 900, args: { data } });
+
+test('splits counts on first paint when the trace has the FCP event', t => {
+  const result = computeStyleInvalidations({
+    traceEvents: [
+      { name: 'firstContentfulPaint', ts: 500 },
+      beforePaint({
+        name: 'LayoutInvalidationTracking',
+        reason: 'Added to layout'
+      }),
+      beforePaint({
+        name: 'StyleRecalcInvalidationTracking',
+        reason: 'Node was inserted into tree'
+      }),
+      afterPaint({
+        name: 'StyleRecalcInvalidationTracking',
+        reason: 'Style rule change',
+        stackTrace: [{ url: SCRIPT_URL }]
+      }),
+      afterPaint({
+        name: 'StyleRecalcInvalidationTracking',
+        reason: 'Style rule change'
+      }),
+      afterPaint({
+        name: 'ScheduleStyleInvalidationTracking',
+        changedClass: 'menu-open'
+      })
+    ]
+  });
+
+  t.is(result.styleRecalcs, 3);
+  t.is(result.styleRecalcsAfterFirstPaint, 2);
+  t.is(result.layoutInvalidations, 1);
+  t.is(result.layoutInvalidationsAfterFirstPaint, 0);
+  t.deepEqual(result.recalcReasons, [
+    { reason: 'Style rule change', count: 2, afterFirstPaint: 2 },
+    { reason: 'Node was inserted into tree', count: 1, afterFirstPaint: 0 }
+  ]);
+  t.deepEqual(result.layoutReasons, [
+    { reason: 'Added to layout', count: 1, afterFirstPaint: 0 }
+  ]);
+  t.deepEqual(result.triggers, [
+    { kind: 'class', name: 'menu-open', count: 1, afterFirstPaint: 1 }
+  ]);
+  t.deepEqual(result.sources, [
+    { url: SCRIPT_URL, count: 1, afterFirstPaint: 1 }
+  ]);
+});
+
+test('leaves the afterFirstPaint fields out without an FCP event', t => {
+  const result = computeStyleInvalidations({
+    traceEvents: [
+      {
+        name: 'StyleRecalcInvalidationTracking',
+        ts: 1,
+        args: { data: { reason: 'Style rule change' } }
+      }
+    ]
+  });
+  t.is(result.styleRecalcsAfterFirstPaint, undefined);
+  t.deepEqual(result.recalcReasons, [
+    { reason: 'Style rule change', count: 1 }
+  ]);
+});
+
+const eventAt = (ts, data) => ({ name: data.name, ts, args: { data } });
+
+test('adds the largest-paint window when the trace has LCP candidates', t => {
+  const result = computeStyleInvalidations({
+    traceEvents: [
+      { name: 'firstContentfulPaint', ts: 500 },
+      // The final candidate wins, like getLargestContentfulPaintEvent.
+      { name: 'largestContentfulPaint::Candidate', ts: 600 },
+      { name: 'largestContentfulPaint::Candidate', ts: 1000 },
+      eventAt(100, {
+        name: 'StyleRecalcInvalidationTracking',
+        reason: 'Node was inserted into tree'
+      }),
+      // Between the paints: after FCP, not after LCP — the bucket that
+      // delayed the largest paint.
+      eventAt(800, {
+        name: 'StyleRecalcInvalidationTracking',
+        reason: 'Style rule change'
+      }),
+      eventAt(1200, {
+        name: 'StyleRecalcInvalidationTracking',
+        reason: 'Style rule change'
+      })
+    ]
+  });
+
+  t.is(result.styleRecalcs, 3);
+  t.is(result.styleRecalcsAfterFirstPaint, 2);
+  t.is(result.styleRecalcsAfterLargestContentfulPaint, 1);
+  t.deepEqual(result.recalcReasons, [
+    {
+      reason: 'Style rule change',
+      count: 2,
+      afterFirstPaint: 2,
+      afterLargestContentfulPaint: 1
+    },
+    {
+      reason: 'Node was inserted into tree',
+      count: 1,
+      afterFirstPaint: 0,
+      afterLargestContentfulPaint: 0
+    }
+  ]);
+});
