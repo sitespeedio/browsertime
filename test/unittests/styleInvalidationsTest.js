@@ -161,3 +161,48 @@ test('leaves the afterFirstPaint fields out without an FCP event', t => {
     { reason: 'Style rule change', count: 1 }
   ]);
 });
+
+const eventAt = (ts, data) => ({ name: data.name, ts, args: { data } });
+
+test('adds the largest-paint window when the trace has LCP candidates', t => {
+  const result = computeStyleInvalidations({
+    traceEvents: [
+      { name: 'firstContentfulPaint', ts: 500 },
+      // The final candidate wins, like getLargestContentfulPaintEvent.
+      { name: 'largestContentfulPaint::Candidate', ts: 600 },
+      { name: 'largestContentfulPaint::Candidate', ts: 1000 },
+      eventAt(100, {
+        name: 'StyleRecalcInvalidationTracking',
+        reason: 'Node was inserted into tree'
+      }),
+      // Between the paints: after FCP, not after LCP — the bucket that
+      // delayed the largest paint.
+      eventAt(800, {
+        name: 'StyleRecalcInvalidationTracking',
+        reason: 'Style rule change'
+      }),
+      eventAt(1200, {
+        name: 'StyleRecalcInvalidationTracking',
+        reason: 'Style rule change'
+      })
+    ]
+  });
+
+  t.is(result.styleRecalcs, 3);
+  t.is(result.styleRecalcsAfterFirstPaint, 2);
+  t.is(result.styleRecalcsAfterLargestContentfulPaint, 1);
+  t.deepEqual(result.recalcReasons, [
+    {
+      reason: 'Style rule change',
+      count: 2,
+      afterFirstPaint: 2,
+      afterLargestContentfulPaint: 1
+    },
+    {
+      reason: 'Node was inserted into tree',
+      count: 1,
+      afterFirstPaint: 0,
+      afterLargestContentfulPaint: 0
+    }
+  ]);
+});
