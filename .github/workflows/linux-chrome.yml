@@ -250,6 +250,10 @@ jobs:
       run: (npm run start-server&)
     - name: Test multi pages with video and visual metrics
       run: ./bin/browsertime.js -b chrome test/data/navigationscript/multi.cjs -n 3 --chrome.timeline --video --visualMetrics --visualElements --viewPort 1000x600 --xvfb
+    - name: Test video and visual metrics with noise tolerance
+      run: |
+        ./bin/browsertime.js -b chrome -n 1 --video --visualMetrics --videoParams.noiseTolerance 0.05 --resultDir /tmp/noise-tolerance --xvfb http://127.0.0.1:3000/simple/
+        jq -e '.[0].visualMetrics[0].LastVisualChange' /tmp/noise-tolerance/browsertime.json
     - name: Test navigation and page complete check inactivity
       run: ./bin/browsertime.js -b chrome test/data/navigationscript/navigateAndStartInTwoSteps.cjs -n 1 --pageCompleteCheckInactivity --timeToSettle 1000 --xvfb
     - name: Run test with check network idle in Chrome
