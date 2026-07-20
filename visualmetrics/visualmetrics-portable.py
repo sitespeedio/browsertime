@@ -409,16 +409,14 @@ def video_to_frames(
                 gc.collect()
                 if extract_frames(video, directory, full_resolution, viewport):
                     client_viewport = None
-                    directories = [directory]
-                    for dir in directories:
-                        if orange_file is not None:
-                            remove_frames_before_orange(dir, orange_file)
-                            remove_orange_frames(dir, orange_file)
-                        find_render_start(dir, orange_file, cropped, is_mobile)
-                        adjust_frame_times(dir)
-                        eliminate_duplicate_frames(dir, cropped, is_mobile)
-                        crop_viewport(dir)
-                        gc.collect()
+                    if orange_file is not None:
+                        remove_frames_before_orange(directory, orange_file)
+                        remove_orange_frames(directory, orange_file)
+                    find_render_start(directory, orange_file, cropped, is_mobile)
+                    adjust_frame_times(directory)
+                    eliminate_duplicate_frames(directory, cropped, is_mobile)
+                    crop_viewport(directory)
+                    gc.collect()
                 else:
                     logging.critical("Error extracting the video frames from %s", video)
             else:
@@ -500,7 +498,7 @@ def find_recording_platform(video):
     lines = result.stderr.splitlines()
 
     is_mobile = False
-    matcher = re.compile(".*com\.android\.version.*")
+    matcher = re.compile(r".*com\.android\.version.*")
     for line in lines:
         if matcher.search(line):
             is_mobile = True
@@ -975,18 +973,6 @@ def get_decimate_filter():
         logging.critical("Error checking ffmpeg filters for decimate")
         decimate = None
     return decimate
-
-
-def clean_directory(directory):
-    files = glob.glob(str(Path(directory) / "*.png"))
-    for file in files:
-        Path(file).unlink()
-    files = glob.glob(str(Path(directory) / "*.jpg"))
-    for file in files:
-        Path(file).unlink()
-    files = glob.glob(str(Path(directory) / "*.json"))
-    for file in files:
-        Path(file).unlink()
 
 
 def is_color_frame(file, color_file):
@@ -1476,12 +1462,6 @@ def calculate_key_color_frames(histograms, key_colors):
     for key in key_colors:
         key_color_frames[key] = []
 
-    current = None
-    current_key = None
-    total = 0
-    matched = 0
-    buckets = 256
-    channels = ["r", "g", "b"]
     histograms = histograms.copy()
 
     while len(histograms) > 0:
@@ -1567,17 +1547,6 @@ def calculate_frame_progress(histogram, start, final):
     return math.floor(progress * 100)
 
 
-def find_visually_complete(progress):
-    time = 0
-    for p in progress:
-        if int(p["progress"]) == 100:
-            time = p["time"]
-            break
-        elif time == 0:
-            time = p["time"]
-    return time
-
-
 def calculate_speed_index(progress):
     si = 0
     last_ms = progress[0]["time"]
@@ -1591,11 +1560,6 @@ def calculate_speed_index(progress):
 
 
 def calculate_contentful_speed_index(progress, directory):
-    # convert output comes out with lines that have this format:
-    # <pixel count>: <rgb color> #<hex color> <gray color>
-    # This is CLI dependant and very fragile
-    matcher = re.compile(r"(\d+?):")
-
     try:
         from PIL import Image
 
@@ -1846,19 +1810,6 @@ def check_config():
     return ok
 
 
-def check_process(command, output):
-    ok = False
-    try:
-        out = subprocess.check_output(
-            command, stderr=subprocess.STDOUT, shell=True, encoding="UTF-8"
-        )
-        if out.find(output) > -1:
-            ok = True
-    except BaseException:
-        ok = False
-    return ok
-
-
 ##########################################################################
 #   Main Entry Point
 ##########################################################################
@@ -1901,9 +1852,6 @@ def main():
         "--dir",
         help="Directory of video frames "
         "(as input if exists or as output if a video file is specified).",
-    )
-    parser.add_argument(
-        "--render", help="Render the video frames to the given mp4 video file."
     )
     parser.add_argument(
         "--screenshot",
