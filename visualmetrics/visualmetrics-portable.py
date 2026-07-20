@@ -1189,6 +1189,60 @@ def save_screenshot(directory, dest, quality):
 ##########################################################################
 
 
+def create_frame_diffs(directory):
+    """Write a diff image next to every filmstrip frame and return the
+    changed-pixel counts.
+
+    For each adjacent pair of kept frames, diff_<ms>.png shows the
+    current frame dimmed toward white with every changed pixel painted
+    red — precomputed here because the report's lightbox cannot read
+    pixels when opened from file:// (tainted canvas), and this is where
+    the frames and Pillow already are. The per-pixel threshold (sum of
+    channel deltas > 30) matches the report's canvas fallback, so both
+    paths show the same picture. PNG on purpose: mostly-white plus
+    sparse red compresses better than JPEG and keeps the marks crisp.
+
+    Runs before convert_to_jpeg (which only globs ms_*.png) while the
+    frames are still lossless PNG.
+    """
+    diffs = []
+    try:
+        import numpy as np
+        from PIL import Image
+
+        files = sorted(glob.glob(str(Path(directory) / "ms_*.png")))
+        for previous_file, current_file in zip(files, files[1:]):
+            with Image.open(previous_file) as previous_image, Image.open(
+                current_file
+            ) as current_image:
+                previous = np.array(previous_image.convert("RGB"), dtype=int)
+                current = np.array(current_image.convert("RGB"), dtype=int)
+            if previous.shape != current.shape:
+                continue
+            delta = np.abs(previous - current).sum(axis=2)
+            changed = delta > 30
+            out = 255 - (255 - current) * 0.2
+            out[changed] = [224, 28, 60]
+            stem = Path(current_file).stem
+            diff_name = "diff_" + stem[3:] + ".png"
+            Image.fromarray(out.astype(np.uint8)).save(
+                str(Path(directory) / diff_name)
+            )
+            changed_pixels = int(changed.sum())
+            diffs.append(
+                {
+                    "time": int(stem[3:]),
+                    "changedPixels": changed_pixels,
+                    "changedShare": round(
+                        changed_pixels / changed.size * 100, 2
+                    ),
+                }
+            )
+    except BaseException:
+        logging.exception("Error creating frame diffs")
+    return diffs
+
+
 def convert_to_jpeg(directory, quality):
     logging.debug("Converting video frames to JPEG")
     directory = str(Path(directory).resolve())
@@ -1927,6 +1981,16 @@ def main():
         "the first rendered frame (useful for Opera mini).",
     )
     parser.add_argument(
+        "--framediff",
+        action="store_true",
+        default=False,
+        help="Write a diff image next to every filmstrip frame (the "
+        "frame dimmed with every pixel changed since the previous frame "
+        "painted red) and report the changed-pixel counts as a Frame "
+        "Diffs metric. Lets report UIs show exact diffs without pixel "
+        "access.",
+    )
+    parser.add_argument(
         "-k",
         "--perceptual",
         action="store_true",
@@ -2056,6 +2120,11 @@ def main():
                 options.herodata,
                 key_colors,
             )
+
+            if options.framediff and options.dir is not None and metrics is not None:
+                framediffs = create_frame_diffs(directory)
+                if framediffs:
+                    metrics.append({"name": "Frame Diffs", "value": framediffs})
 
             if options.screenshot is not None:
                 quality = 30
