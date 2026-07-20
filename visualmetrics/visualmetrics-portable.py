@@ -1801,7 +1801,14 @@ def calculate_hero_time(progress, directory, hero, viewport):
 ##########################################################################
 
 
-def check_config():
+def check_config(need_opencv=False, need_ssim=False):
+    """Check dependencies.
+
+    OpenCV is only used by --contentful/--contentful-video and pyssim
+    only by --perceptual, so their absence is fatal only when those
+    options are in play — everything else needs just ffmpeg, Numpy and
+    Pillow.
+    """
     ok = True
 
     if get_decimate_filter() is not None:
@@ -1825,14 +1832,6 @@ def check_config():
         ok = False
 
     try:
-        import cv2
-
-        logging.debug("OpenCV-Python found")
-    except BaseException:
-        print("OpenCV-Python: FAIL")
-        ok = False
-
-    try:
         from PIL import Image, ImageCms, ImageDraw, ImageOps  # noqa
 
         logging.debug("Pillow found")
@@ -1841,12 +1840,32 @@ def check_config():
         ok = False
 
     try:
+        import cv2
+
+        logging.debug("OpenCV-Python found")
+    except BaseException:
+        if need_opencv:
+            print("OpenCV-Python: FAIL")
+            ok = False
+        else:
+            # Not print: in --json runs stdout must stay pure JSON.
+            logging.info(
+                "OpenCV-Python is not installed (only needed for --contentful)"
+            )
+
+    try:
         from ssim import compute_ssim  # noqa
 
         logging.debug("SSIM found")
     except BaseException:
-        print("SSIM: FAIL")
-        ok = False
+        if need_ssim:
+            print("SSIM: FAIL")
+            ok = False
+        else:
+            # Not print: in --json runs stdout must stay pure JSON.
+            logging.info(
+                "SSIM is not installed (only needed for --perceptual)"
+            )
 
     return ok
 
@@ -2098,7 +2117,10 @@ def main():
             # Run a quick check to make sure all requirements exist,
             # otherwise failures might be silent due to how this code is
             # structured.
-            ok = check_config()
+            ok = check_config(
+                need_opencv=options.contentful or options.contentful_video,
+                need_ssim=options.perceptual,
+            )
             if not ok:
                 raise Exception("Please install requirements before running.")
 
