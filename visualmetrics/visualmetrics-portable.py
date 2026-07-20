@@ -902,6 +902,33 @@ def eliminate_duplicate_frames(directory, cropped, is_mobile):
                 )
                 Path(duplicate).unlink()
 
+            # With a noise tolerance set, do a last pass over the remaining
+            # frames and drop every frame that differs from the previously
+            # kept frame by no more than the allowance. Browsers can
+            # re-rasterize the whole page long after it is visually done,
+            # leaving invisible sub-pixel noise on glyph edges spread over
+            # hundreds of pixels on a page-sized frame; the passes above
+            # allow only a handful of differing pixels, so that noise counts
+            # as a visual change and pollutes Last Visual Change, the visual
+            # progress curve, Speed Index and VisualComplete85/95/99.
+            # Comparing against the last KEPT frame (not the deleted
+            # neighbour) keeps slow real changes: once the accumulated
+            # difference crosses the allowance the frame is kept and becomes
+            # the new reference.
+            if options.noisetolerance > 0:
+                max_differences = max(
+                    5, int(width * height * options.noisetolerance / 100)
+                )
+                files = sorted(glob.glob(str(Path(directory) / "ms_*.png")))
+                if len(files) > 2:
+                    kept = files[0]
+                    for file in files[1:]:
+                        if frames_match(kept, file, 15, max_differences, crop, None):
+                            logging.debug("Removing noise frame {0}".format(file))
+                            Path(file).unlink()
+                        else:
+                            kept = file
+
     except BaseException:
         logging.exception("Error processing frames for duplicates")
 
@@ -1989,6 +2016,17 @@ def main():
         "painted red) and report the changed-pixel counts as a Frame "
         "Diffs metric. Lets report UIs show exact diffs without pixel "
         "access.",
+    )
+    parser.add_argument(
+        "--noisetolerance",
+        type=float,
+        default=0,
+        help="Percentage (0-100) of the compared area that is allowed to "
+        "differ between frames when eliminating duplicate frames. Use it "
+        "to keep invisible sub-pixel browser rendering noise from "
+        "inflating Last Visual Change, Speed Index and the visual "
+        "progress curve. 0 (default) keeps the fixed allowance of 5 "
+        "pixels.",
     )
     parser.add_argument(
         "-k",
