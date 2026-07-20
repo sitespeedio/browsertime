@@ -1,3 +1,6 @@
+Numpy
+Pillow
+# Optional: pyssim is only needed for --visualMetricsPerceptual and
+# OpenCV-Python only for --visualMetricsContentful.
 pyssim
 OpenCV-Python
-Numpy
