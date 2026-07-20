@@ -93,10 +93,6 @@ class TestVisualMetrics(unittest.TestCase):
         value, _ = vm.calculate_perceptual_speed_index(self.progress, "test_data")
         self.assertEqual(value, 947)
 
-    @unittest.skipUnless(
-        hasattr(vm, "create_frame_diffs"),
-        "create_frame_diffs is not in this branch yet",
-    )
     def test_create_frame_diffs(self):
         frames_dir = Path(self.tmp) / "framediffs"
         frames_dir.mkdir()
@@ -104,7 +100,7 @@ class TestVisualMetrics(unittest.TestCase):
         for frame in frames:
             shutil.copy(frame, frames_dir)
 
-        diffs = vm.create_frame_diffs(str(frames_dir))
+        diffs, instability = vm.create_frame_diffs(str(frames_dir))
 
         self.assertEqual(len(diffs), len(frames) - 1)
         expected_times = [int(frame.stem[3:]) for frame in frames[1:]]
@@ -117,6 +113,16 @@ class TestVisualMetrics(unittest.TestCase):
             self.assertLessEqual(diff["changedShare"], 100)
         # The first frame has no predecessor, so no diff for it.
         self.assertFalse((frames_dir / "diff_000000.png").is_file())
+
+        self.assertTrue((frames_dir / "instability.png").is_file())
+        self.assertGreater(instability["changedPixels"], 0)
+        self.assertGreater(instability["changedShare"], 0)
+        self.assertLessEqual(instability["changedShare"], 100)
+        self.assertGreaterEqual(
+            instability["changedPixels"], instability["repeatedlyChangedPixels"]
+        )
+        self.assertGreaterEqual(instability["maxChanges"], 1)
+        self.assertLessEqual(instability["maxChanges"], len(frames) - 1)
 
 
 if __name__ == "__main__":

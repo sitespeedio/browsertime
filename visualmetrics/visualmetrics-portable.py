@@ -1231,13 +1231,26 @@ def create_frame_diffs(directory):
 
     Runs before convert_to_jpeg (which only globs ms_*.png) while the
     frames are still lossless PNG.
+
+    The same loop also counts how many times each pixel changed across
+    the whole run and writes instability.png: the final frame ghosted
+    toward white with every changed pixel tinted from amber (changed
+    once) to deep red (changed 10 or more times). The color scale is
+    fixed, not normalized per run, so heatmaps from two runs are
+    comparable side by side. A page that paints once and stays put is
+    all amber; text that re-rasterizes over and over shows up as red
+    speckle. The summary counts are returned next to the per-frame
+    diffs, with "repeatedly" meaning 5 or more changes.
     """
     diffs = []
+    instability = None
     try:
         import numpy as np
         from PIL import Image
 
         files = sorted(glob.glob(str(Path(directory) / "ms_*.png")))
+        counts = None
+        final = None
         for previous_file, current_file in zip(files, files[1:]):
             with Image.open(previous_file) as previous_image, Image.open(
                 current_file
@@ -1248,6 +1261,11 @@ def create_frame_diffs(directory):
                 continue
             delta = np.abs(previous - current).sum(axis=2)
             changed = delta > 30
+            if counts is None:
+                counts = np.zeros(changed.shape, dtype=int)
+            if counts.shape == changed.shape:
+                counts += changed
+                final = current
             out = 255 - (255 - current) * 0.2
             out[changed] = [224, 28, 60]
             stem = Path(current_file).stem
@@ -1265,9 +1283,32 @@ def create_frame_diffs(directory):
                     ),
                 }
             )
+        if counts is not None and final is not None:
+            cap = 10
+            heat = np.sqrt(np.minimum(counts, cap) / cap)
+            amber = np.array([255.0, 196.0, 60.0])
+            red = np.array([201.0, 16.0, 46.0])
+            color = amber + (red - amber) * heat[:, :, None]
+            alpha = np.where(counts > 0, 0.35 + 0.65 * heat, 0)[:, :, None]
+            ghost = 255 - (255 - final) * 0.15
+            heatmap = ghost * (1 - alpha) + color * alpha
+            Image.fromarray(heatmap.astype(np.uint8)).save(
+                str(Path(directory) / "instability.png")
+            )
+            changed_ever = int((counts > 0).sum())
+            changed_repeatedly = int((counts >= 5).sum())
+            instability = {
+                "changedPixels": changed_ever,
+                "changedShare": round(changed_ever / counts.size * 100, 2),
+                "repeatedlyChangedPixels": changed_repeatedly,
+                "repeatedlyChangedShare": round(
+                    changed_repeatedly / counts.size * 100, 2
+                ),
+                "maxChanges": int(counts.max()),
+            }
     except BaseException:
         logging.exception("Error creating frame diffs")
-    return diffs
+    return diffs, instability
 
 
 def convert_to_jpeg(directory, quality):
@@ -2160,9 +2201,13 @@ def main():
             )
 
             if options.framediff and options.dir is not None and metrics is not None:
-                framediffs = create_frame_diffs(directory)
+                framediffs, instability = create_frame_diffs(directory)
                 if framediffs:
                     metrics.append({"name": "Frame Diffs", "value": framediffs})
+                if instability:
+                    metrics.append(
+                        {"name": "Frame Instability", "value": instability}
+                    )
 
             if options.screenshot is not None:
                 quality = 30
