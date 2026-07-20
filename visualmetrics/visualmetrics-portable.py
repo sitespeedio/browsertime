@@ -66,13 +66,17 @@ def compare(img1, img2, fuzz=0.10):
         img1_data = np.array(img1)
         img2_data = np.array(img2)
 
-        inds = np.argwhere(
+        # count_nonzero instead of len(argwhere(...)): the count is all
+        # we need and argwhere materializes an index array of every
+        # matching pixel, which is most of the frame on every call in
+        # the duplicate-elimination hot path.
+        close = (
             np.isclose(img1_data[:, :, 0], img2_data[:, :, 0], atol=fuzz * 255)
             & np.isclose(img1_data[:, :, 1], img2_data[:, :, 1], atol=fuzz * 255)
             & np.isclose(img1_data[:, :, 2], img2_data[:, :, 2], atol=fuzz * 255)
         )
 
-        return (img1_data.shape[0] * img1_data.shape[1]) - len(inds)
+        return (img1_data.shape[0] * img1_data.shape[1]) - int(np.count_nonzero(close))
     except BaseException as e:
         logging.exception(e)
         return None
