@@ -1,5 +1,22 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 28.2.0 - 2026-07-20
+
+### Added
+* New `videoParams.noiseTolerance`: a percentage of a frame's pixels that is allowed to differ before duplicate-frame elimination still treats the frame as unchanged. Browsers re-rasterize a visually-done page long after it settles, leaving invisible sub-pixel noise on glyph edges that the default handful-of-pixels tolerance counts as real change, inflating Last Visual Change, VisualComplete95/99 and Speed Index. Off by default [#2528](https://github.com/sitespeedio/browsertime/pull/2528).
+* New `videoParams.filmstripDiff` frame diffs: writes `diff_<ms>.png` next to each filmstrip frame (the frame dimmed with every changed pixel painted red, using the same per-pixel threshold report UIs use at runtime) plus a Frame Diffs metric. Report UIs cannot read frame pixels from `file://` results, so an exact "what changed in this frame" view was impossible exactly where people debug local results. Off by default [#2531](https://github.com/sitespeedio/browsertime/pull/2531).
+* Visual instability heatmap: the same `videoParams.filmstripDiff` run now also writes one `instability.png` showing how many times each pixel changed across the video (amber for changed once, deep red for ten or more), plus a Frame Instability summary in the JSON. Answers "which parts of the page keep changing", so invisible re-rasterization noise can be told apart from a genuinely restless element [#2533](https://github.com/sitespeedio/browsertime/pull/2533).
+* `cpu.styleInvalidations` (Chrome only) now splits every reason, trigger and source at first paint: new `afterFirstPaint` counts and `styleRecalcsAfterFirstPaint` / `layoutInvalidationsAfterFirstPaint` totals separate building the page from churn on a page the user is already looking at. The fields only exist when the trace carried the FCP event, so absent means unknown rather than zero [#2530](https://github.com/sitespeedio/browsertime/pull/2530).
+
+### Fixed
+* Visual metrics no longer require OpenCV and pyssim unless the metrics that need them are requested: OpenCV is only used by `--contentful` and pyssim only by `--perceptual`, so a default install now runs on just ffmpeg, Numpy and Pillow. The Docker image keeps installing everything so both metrics keep working there [#2535](https://github.com/sitespeedio/browsertime/pull/2535).
+* `VisualComplete99` is now reset when the page repaints backward. Two copy-paste typos reset `VisualComplete95` twice and never reset `VisualComplete99`, so on a page that reaches 100%, repaints backward and then recovers, `VisualComplete99` could report a time earlier than `VisualComplete95` (99% complete before 95%, which cannot happen) [#2537](https://github.com/sitespeedio/browsertime/pull/2537).
+
+### Tech
+* `compare()`, the hot path of frame processing, now counts differing pixels with `count_nonzero` on the boolean mask instead of materializing an index array of every matching pixel on every call. Byte-identical metrics on a real recording [#2536](https://github.com/sitespeedio/browsertime/pull/2536).
+* Removed dead code from visual metrics: the unreachable ImageMagick-based `visualmetrics.py`, an advertised-but-unimplemented `--render` option, uncalled functions and leftover regexes in the portable script, plus a regex escape that printed a `SyntaxWarning` on Python 3.12+. No behaviour change [#2534](https://github.com/sitespeedio/browsertime/pull/2534).
+* Added CI test coverage for the Speed Index, visual progress and visual change math in `visualmetrics-portable.py`, running the shipped script against the repo's test frames with the computed values pinned. A dedicated GitHub Action runs the suite in under a second [#2532](https://github.com/sitespeedio/browsertime/pull/2532).
+
 ## 28.1.0 - 2026-07-17
 
 ### Added
