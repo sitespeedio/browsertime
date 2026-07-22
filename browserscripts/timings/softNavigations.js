@@ -69,13 +69,18 @@
   }
 
   // LCP value
+  // Chromium 151+ (web-vitals v6) exposes the largest paint as a method that
+  // returns an interaction-contentful-paint entry; older experimental builds
+  // exposed it as a property (number or entry). Support both.
   var lcp = 0;
-  if (entry.largestInteractionContentfulPaint) {
-    lcp = typeof entry.largestInteractionContentfulPaint === 'number'
-      ? entry.largestInteractionContentfulPaint
-      : entry.largestInteractionContentfulPaint.renderTime ||
-        entry.largestInteractionContentfulPaint.loadTime ||
-        entry.largestInteractionContentfulPaint.startTime || 0;
+  var icp = typeof entry.getLargestInteractionContentfulPaint === 'function'
+    ? entry.getLargestInteractionContentfulPaint()
+    : entry.largestInteractionContentfulPaint;
+  if (typeof icp === 'number') {
+    lcp = icp;
+  } else if (icp) {
+    var paint = icp.largestContentfulPaint || icp;
+    lcp = paint.renderTime || paint.loadTime || paint.startTime || 0;
   }
 
   return [{
