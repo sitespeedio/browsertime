@@ -670,6 +670,9 @@ def find_video_viewport(
                         "Could not calculate a viewport after %s tries.",
                         viewport_retries,
                     )
+                    # Fall back to no crop instead of cropping every frame
+                    # to the last known-too-small candidate.
+                    viewport = None
                     break
                 logging.info("Failed to find a good viewport. Retrying...")
 
