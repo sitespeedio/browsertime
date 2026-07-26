@@ -10,6 +10,7 @@
       button. Combined with the user click and the new content painted into
       the page, Chrome treats the transition as a soft navigation.</p>
     <button id="goto-page-2">Go to page 2</button>
+    <button id="goto-page-3">Go to page 3 (no request)</button>
     <script>
       document.getElementById('goto-page-2').addEventListener('click', function () {
         history.pushState({}, '', '/spa/page-2');
@@ -23,6 +24,19 @@
         content.textContent = 'Welcome to page 2 — fresh content rendered after the soft navigation.';
         document.body.appendChild(content);
         document.getElementById('title').textContent = 'Page 2';
+      });
+      // A soft navigation rendered entirely from memory: no fetch, no
+      // resource entries. Used to test that Browsertime can measure SPA
+      // navigations that make zero requests.
+      document.getElementById('goto-page-3').addEventListener('click', function () {
+        history.pushState({}, '', '/spa/page-3');
+        var content = document.createElement('div');
+        content.id = 'page-3-content';
+        content.style.fontSize = '32px';
+        content.style.padding = '40px';
+        content.textContent = 'Welcome to page 3, rendered without any network request.';
+        document.body.appendChild(content);
+        document.getElementById('title').textContent = 'Page 3';
       });
     </script>
   </body>
