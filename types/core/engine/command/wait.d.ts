@@ -18,68 +18,62 @@ export class Wait {
      * Waits for an element with a specific ID to be located within a maximum time.
      *
      * @async
-     * @private
      * @param {string} id - The ID of the element to wait for.
      * @param {number} maxTime - Maximum time to wait in milliseconds.
      * @returns {Promise<void>} A promise that resolves when the element is found or the time times out.
      * @throws {Error} Throws an error if the element is not found within the specified time.
      */
-    private byId;
+    byId(id: string, maxTime: number): Promise<void>;
     /**
      * Waits for an element with a specific ID to be located and visible within a maximum time.
      *
      * @async
-     * @private
      * @param {string} id - The ID of the element to wait for.
      * @param {number} maxTime - Maximum time to wait in milliseconds.
      * @returns {Promise<void>} A promise that resolves when the element is found or the time times out.
      * @throws {Error} Throws an error if the element is not found within the specified time.
      */
-    private byIdAndVisible;
+    byIdAndVisible(id: string, maxTime?: number): Promise<void>;
     /**
      * Waits for an element located by XPath to appear within a maximum time.
      *
      * @async
-     * @private
      * @param {string} xpath - The XPath of the element to wait for.
      * @param {number} maxTime - Maximum time to wait in milliseconds.
      * @returns {Promise<void>} A promise that resolves when the element is found or the time times out.
      * @throws {Error} Throws an error if the element is not found within the specified time.
      */
-    private byXpath;
+    byXpath(xpath: string, maxTime: number): Promise<void>;
     /**
      * Waits for an element located by XPath to appear and visible within a maximum time.
      *
      * @async
-     * @private
      * @param {string} xpath - The XPath of the element to wait for.
      * @param {number} maxTime - Maximum time to wait in milliseconds.
      * @returns {Promise<void>} A promise that resolves when the element is found or the time times out.
      * @throws {Error} Throws an error if the element is not found within the specified time.
      */
-    private byXpathAndVisible;
+    byXpathAndVisible(xpath: string, maxTime?: number): Promise<void>;
     /**
      * Waits for an element located by a CSS selector to appear within a maximum time.
      *
      * @async
-     * @private
      * @param {string} selector - The CSS selector of the element to wait for.
      * @param {number} maxTime - Maximum time to wait in milliseconds.
      * @returns {Promise<void>} A promise that resolves when the element is found or the time times out.
      * @throws {Error} Throws an error if the element is not found within the specified time.
      */
-    private bySelector;
+    bySelector(selector: string, maxTime: number): Promise<void>;
     /**
      * Waits for an element located by a CSS selector to be visible within a maximum time.
      *
      * @async
-     * @private
      * @param {string} selector - The CSS selector of the element to wait for.
      * @param {number} maxTime - Maximum time to wait in milliseconds.
      * @returns {Promise<void>} A promise that resolves when the element is found or the time times out.
      * @throws {Error} Throws an error if the element is not found within the specified time.
      */
-    private bySelectorAndVisible;
+    bySelectorAndVisible(selector: string, maxTime?: number): Promise<void>;
     /**
      * Waits for a specified amount of time.
      *
