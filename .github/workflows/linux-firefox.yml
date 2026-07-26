@@ -79,3 +79,14 @@ jobs:
       run: ./bin/browsertime.js -b firefox http://127.0.0.1:3000/simple/ -n 1 --viewPort 1000x600 --xvfb  --enableProfileRun
     - name: Test Firefox BiDi and profiler commands
       run: ./bin/browsertime.js -b firefox test/data/commandscripts/firefox.cjs -n 1 --xvfb
+    - name: Test Firefox SPA user journey over multiple routes
+      run: |
+        ./bin/browsertime.js -b firefox -n 1 --xvfb --spa --resultDir /tmp/spa-journey test/data/commandscripts/spaJourney.cjs
+        echo "--- measured pages ---"
+        jq '[.[] | {url: .info.url, alias: .info.alias}]' /tmp/spa-journey/browsertime.json
+        jq -e '. | length == 3' /tmp/spa-journey/browsertime.json
+        jq -e '.[0].info.url | endswith("/spa/products")' /tmp/spa-journey/browsertime.json
+        jq -e '.[1].info.url | endswith("/spa/about")' /tmp/spa-journey/browsertime.json
+        jq -e '.[2].info.url | endswith("/spa/gallery")' /tmp/spa-journey/browsertime.json
+        # Firefox has no soft navigation API, so no per-route entries are expected
+        jq -e '.[0].browserScripts[0].timings.softNavigations == null' /tmp/spa-journey/browsertime.json
