@@ -105,6 +105,7 @@
   const MAX_INTERACTIONS_TO_CONSIDER = 10;
   const longestInteractionList = [];
   const longestInteractionMap = {};
+  const seenInteractionIds = new Set();
   for (let entry of entries) {
     // web-vitals only counts entries the browser tagged as part of a
     // discrete interaction; bare events like a `pointerover` fired by
@@ -113,6 +114,7 @@
     // INP whenever the cursor happens to be over content as it paints.
     // See https://github.com/GoogleChrome/web-vitals/blob/main/src/lib/interactions.ts
     if (!entry.interactionId) continue;
+    seenInteractionIds.add(entry.interactionId);
     var minLongestInteraction =
       longestInteractionList[longestInteractionList.length - 1];
     var existingInteraction = longestInteractionMap[entry.interactionId];
@@ -147,7 +149,18 @@
     }
   }
 
-  const inp = longestInteractionList[longestInteractionList.length - 1];
+  // The list is sorted longest first and web-vitals reports the p98
+  // interaction, index floor(interactionCount / 50), so with fewer
+  // than 50 interactions INP is the longest one.
+  const interactionCount =
+    performance.interactionCount || seenInteractionIds.size;
+  const inp =
+    longestInteractionList[
+      Math.min(
+        longestInteractionList.length - 1,
+        Math.floor(interactionCount / 50)
+      )
+    ];
   if (inp) {
     const cleanedEntries = [];
 

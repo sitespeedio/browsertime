@@ -64,7 +64,11 @@
         longestList.splice(MAX_INTERACTIONS).forEach(function (i) { delete longestMap[i.id]; });
       }
     }
-    var inpEntry = longestList[longestList.length - 1];
+    // The list is sorted longest first and web-vitals reports the p98
+    // interaction, index floor(interactionCount / 50), so with fewer
+    // than 50 interactions INP is the longest one.
+    var interactionCount = new Set(events.map(function (e) { return e.interactionId; })).size;
+    var inpEntry = longestList[Math.min(longestList.length - 1, Math.floor(interactionCount / 50))];
     inp = inpEntry ? inpEntry.latency : 0;
   }
 
