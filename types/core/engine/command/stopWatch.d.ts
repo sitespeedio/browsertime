@@ -15,6 +15,10 @@ export class StopWatch {
      */
     private measure;
     /**
+     * @private
+     */
+    private startTime;
+    /**
      * Starts the stopwatch.
      */
     start(): void;
@@ -24,6 +28,7 @@ export class StopWatch {
      * @returns {number} The measured time in milliseconds.
      */
     stopAndAdd(): number;
+    stopTime: number;
     /**
      * Stops the stopwatch.
      * @returns {number} The measured time in milliseconds.
