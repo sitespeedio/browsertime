@@ -16,6 +16,7 @@ export class MeasureVideo {
     start(numberOfMeasuredPages: any, index: any): Promise<any>;
     video: Video;
     stop(url: any): Promise<void>;
+    stopAsError(): Promise<void>;
     getRecordingMetadata(): {
         recordingStartTime: number;
         timeToFirstFrame: number;
