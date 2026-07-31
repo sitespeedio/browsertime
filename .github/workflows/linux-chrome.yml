@@ -198,6 +198,51 @@ jobs:
         jq -e '.[0].browserScripts[0].timings.softNavigations[0].name | endswith("/spa/page-3")' /tmp/soft-nav-no-request/browsertime.json
         jq -e '.log.pages[0]._softNavigation == true' /tmp/soft-nav-no-request/browsertime.har
         jq -e '.log.pages[0]._url | endswith("/spa/page-3")' /tmp/soft-nav-no-request/browsertime.har
+    - name: Test Chrome SPA user journey over multiple routes
+      run: |
+        ./bin/browsertime.js -b chrome -n 1 --xvfb --spa --resultDir /tmp/spa-journey test/data/commandscripts/spaJourney.cjs
+        echo "--- measured pages ---"
+        jq '[.[] | {url: .info.url, alias: .info.alias}]' /tmp/spa-journey/browsertime.json
+        echo "--- HAR pages ---"
+        jq '.log.pages | map({id, _url, _softNavigation})' /tmp/spa-journey/browsertime.har
+        jq -e '. | length == 3' /tmp/spa-journey/browsertime.json
+        jq -e '.[0].browserScripts[0].timings.softNavigations[0].name | endswith("/spa/products")' /tmp/spa-journey/browsertime.json
+        jq -e '.[1].browserScripts[0].timings.softNavigations[0].name | endswith("/spa/about")' /tmp/spa-journey/browsertime.json
+        jq -e '.[2].browserScripts[0].timings.softNavigations[0].name | endswith("/spa/gallery")' /tmp/spa-journey/browsertime.json
+        jq -e '.log.pages | length == 3' /tmp/spa-journey/browsertime.har
+        jq -e '[.log.pages[] | select(._softNavigation == true)] | length == 3' /tmp/spa-journey/browsertime.har
+        jq -e '(.log.pages[0].id) as $p | [.log.entries[] | select(.pageref == $p and (.request.url | contains("products.json")))] | length == 1' /tmp/spa-journey/browsertime.har
+        jq -e '(.log.pages[2].id) as $p | [.log.entries[] | select(.pageref == $p and (.request.url | contains("pirate.png")))] | length == 1' /tmp/spa-journey/browsertime.har
+    - name: Test Chrome SPA user journey mixing soft and hard navigations
+      run: |
+        ./bin/browsertime.js -b chrome -n 1 --xvfb --spa --resultDir /tmp/spa-mixed test/data/commandscripts/spaMixedJourney.cjs
+        echo "--- measured pages ---"
+        jq '[.[] | {url: .info.url, alias: .info.alias}]' /tmp/spa-mixed/browsertime.json
+        echo "--- HAR pages ---"
+        jq '.log.pages | map({id, _url, _softNavigation})' /tmp/spa-mixed/browsertime.har
+        jq -e '. | length == 3' /tmp/spa-mixed/browsertime.json
+        jq -e '.[0].browserScripts[0].timings.softNavigations[0].name | endswith("/spa/about")' /tmp/spa-mixed/browsertime.json
+        jq -e '.[1].info.url | endswith("/simple/")' /tmp/spa-mixed/browsertime.json
+        jq -e '.[1].browserScripts[0].timings.softNavigations == null' /tmp/spa-mixed/browsertime.json
+        jq -e '.[2].browserScripts[0].timings.softNavigations[0].name | endswith("/spa/products")' /tmp/spa-mixed/browsertime.json
+        jq -e '.log.pages | length == 3' /tmp/spa-mixed/browsertime.har
+        jq -e '.log.pages[0]._softNavigation == true' /tmp/spa-mixed/browsertime.har
+        jq -e '.log.pages[1]._softNavigation == null' /tmp/spa-mixed/browsertime.har
+        jq -e '(.log.pages[1].id) as $p | [.log.entries[] | select(.pageref == $p)] | length > 0' /tmp/spa-mixed/browsertime.har
+    - name: Test Chrome SPA user journey without any requests
+      run: |
+        ./bin/browsertime.js -b chrome -n 1 --xvfb --spa --resultDir /tmp/spa-no-request test/data/commandscripts/spaNoRequestJourney.cjs
+        echo "--- measured pages ---"
+        jq '[.[] | {url: .info.url, alias: .info.alias}]' /tmp/spa-no-request/browsertime.json
+        echo "--- HAR pages ---"
+        jq '.log.pages | map({id, _url, _softNavigation})' /tmp/spa-no-request/browsertime.har
+        jq -e '. | length == 2' /tmp/spa-no-request/browsertime.json
+        jq -e '.[0].browserScripts[0].timings.softNavigations | length == 1' /tmp/spa-no-request/browsertime.json
+        jq -e '.[1].browserScripts[0].timings.softNavigations | length == 1' /tmp/spa-no-request/browsertime.json
+        jq -e '.[0].browserScripts[0].timings.softNavigations[0].name | endswith("/spa/about")' /tmp/spa-no-request/browsertime.json
+        jq -e '.[1].browserScripts[0].timings.softNavigations[0].name | endswith("/spa/")' /tmp/spa-no-request/browsertime.json
+        jq -e '[.log.pages[] | select(._softNavigation == true)] | length == 2' /tmp/spa-no-request/browsertime.har
+        jq -e '.log.entries | length == 0' /tmp/spa-no-request/browsertime.har
   video:
     runs-on: ubuntu-22.04
     steps:

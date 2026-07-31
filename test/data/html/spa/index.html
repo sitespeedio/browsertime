@@ -3,15 +3,95 @@
   <head>
     <meta charset="utf-8" />
     <title>SPA home</title>
+    <style>
+      nav a {
+        margin-right: 16px;
+        font-size: 20px;
+      }
+      #view {
+        font-size: 32px;
+        padding: 40px;
+      }
+    </style>
   </head>
   <body>
     <h1 id="title">Home</h1>
-    <p>This page changes its URL via history.pushState when you click the
-      button. Combined with the user click and the new content painted into
-      the page, Chrome treats the transition as a soft navigation.</p>
+    <nav>
+      <a id="nav-home" href="/spa/">Home</a>
+      <a id="nav-products" href="/spa/products">Products</a>
+      <a id="nav-about" href="/spa/about">About</a>
+      <a id="nav-gallery" href="/spa/gallery">Gallery</a>
+    </nav>
+    <div id="view">
+      <p>This page changes its URL via history.pushState when you click a
+      link or button. Combined with the user click and the new content painted
+      into the page, Chrome treats the transition as a soft navigation.</p>
+    </div>
     <button id="goto-page-2">Go to page 2</button>
     <button id="goto-page-3">Go to page 3 (no request)</button>
     <script>
+      var view = document.getElementById('view');
+      var title = document.getElementById('title');
+
+      var routes = {
+        '/spa/': function () {
+          title.textContent = 'Home';
+          view.textContent =
+            'Welcome home, rendered from memory without any network request.';
+        },
+        // A route that needs a network request before it can render.
+        '/spa/products': function () {
+          title.textContent = 'Products';
+          fetch('/spa/products.json?ts=' + Date.now())
+            .then(function (response) {
+              return response.json();
+            })
+            .then(function (products) {
+              var list = document.createElement('ul');
+              for (var i = 0; i < products.length; i++) {
+                var item = document.createElement('li');
+                item.textContent =
+                  products[i].name + ' costs ' + products[i].price;
+                list.appendChild(item);
+              }
+              view.textContent = '';
+              view.appendChild(list);
+            });
+        },
+        '/spa/about': function () {
+          title.textContent = 'About';
+          view.textContent =
+            'About us, rendered from memory without any network request.';
+        },
+        // A route that loads an image, so the request shows up as a
+        // resource entry instead of a fetch.
+        '/spa/gallery': function () {
+          title.textContent = 'Gallery';
+          var image = new Image();
+          image.src = '/img/pirate.png?ts=' + Date.now();
+          image.width = 400;
+          view.textContent = '';
+          view.appendChild(image);
+        }
+      };
+
+      function render(path) {
+        (routes[path] || routes['/spa/'])();
+      }
+
+      document.querySelector('nav').addEventListener('click', function (event) {
+        var path = event.target.getAttribute('href');
+        if (!routes[path]) return;
+        event.preventDefault();
+        history.pushState({}, '', path);
+        render(path);
+      });
+
+      // Re-render when the user goes back or forward in history.
+      window.addEventListener('popstate', function () {
+        render(location.pathname);
+      });
+
       document.getElementById('goto-page-2').addEventListener('click', function () {
         history.pushState({}, '', '/spa/page-2');
         // Trigger a real network request so chrome-har keeps the page
