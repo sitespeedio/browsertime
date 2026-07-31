@@ -1,5 +1,34 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 28.3.0 - 2026-07-31
+
+### Added
+* New `cpuPerformance` field in `browserScripts.browser` (Chrome 152+): the browser's own coarse device rating (1 to 4) from `navigator.cpuPerformance`. Helps explain why the same page measures differently on different machines [#2540](https://github.com/sitespeedio/browsertime/pull/2540).
+* SPA route changes that make no requests are now measured: the page-complete check finishes on quiet time instead of waiting out the whole timeout, and the HAR page is no longer lost. Closes #2001 [#2550](https://github.com/sitespeedio/browsertime/pull/2550).
+
+### Fixed
+* INP is now the slowest (p98) interaction, like web-vitals reports it. With more than one interaction the fastest was picked, so a journey with 500 ms and 150 ms clicks reported 150 [#2556](https://github.com/sitespeedio/browsertime/pull/2556).
+* Chrome's built-in list of disabled features was accidentally replaced by a later duplicated switch, so default runs kept Translate and other phone-home features enabled. User-supplied feature flags are now merged with the built-in list [#2557](https://github.com/sitespeedio/browsertime/pull/2557).
+* Firefox `--block` and `--appendToUserAgent` were silently ignored unless `--requestheader` was also set [#2542](https://github.com/sitespeedio/browsertime/pull/2542).
+* Soft-navigation LCP works again on Chromium 151+, where the API changed; older versions keep working [#2538](https://github.com/sitespeedio/browsertime/pull/2538).
+* Edge runs using `--proxy.*` crashed on a broken import [#2543](https://github.com/sitespeedio/browsertime/pull/2543).
+* A timeout in the page complete check escalated to a failed URL instead of logging and continuing to measure as documented [#2544](https://github.com/sitespeedio/browsertime/pull/2544).
+* One video failing visual-metrics analysis gave all later pages in the iteration metrics from the wrong video and failed the whole iteration [#2545](https://github.com/sitespeedio/browsertime/pull/2545).
+* Request header values containing a colon (like Referer URLs) were truncated at the first colon [#2546](https://github.com/sitespeedio/browsertime/pull/2546).
+* Installs without the optional jimp dependency saved every screenshot twice [#2547](https://github.com/sitespeedio/browsertime/pull/2547).
+* Recorded videos are now actually removed from Android devices; a doubled file path made cleanup silently fail on every run [#2548](https://github.com/sitespeedio/browsertime/pull/2548).
+* The documented `commands.wait` byId, byXpath and bySelector commands are visible to TypeScript users again. Closes #2495 [#2549](https://github.com/sitespeedio/browsertime/pull/2549).
+* Navigations with no network activity (cached pages, SPA routes) waited out the full timeout in the network idle check instead of finishing on idle time. Leftover CDP listeners are also cleaned up [#2552](https://github.com/sitespeedio/browsertime/pull/2552).
+* Firefox log and gecko profile post-processing was not awaited, so results could be handed over mid-write and a failure crashed the process [#2553](https://github.com/sitespeedio/browsertime/pull/2553).
+* When no viewport could be detected, the video was cropped to a sliver and produced garbage visual metrics; it is now analysed uncropped instead [#2554](https://github.com/sitespeedio/browsertime/pull/2554).
+* Scripts measuring more than one page per iteration got `_renderBlocking` and `_isLCP` annotations on the wrong HAR page [#2551](https://github.com/sitespeedio/browsertime/pull/2551).
+* `--android` swallowed the argument after it, so `browsertime --android url` dropped the URL and `--android false` still enabled Android [#2560](https://github.com/sitespeedio/browsertime/pull/2560).
+* With `--chrome.timeline`, one page load failing mid-trace made every remaining iteration fail [#2558](https://github.com/sitespeedio/browsertime/pull/2558).
+* The scripting stopWatch only worked as a single-use timer: `watch.start()` always threw, and so did stopping the same watch twice. Both work now [#2559](https://github.com/sitespeedio/browsertime/pull/2559).
+
+### Tech
+* CI now runs multi-step SPA user journeys (routes with and without requests, mixed soft and hard navigations, plus Firefox) to protect the HAR page pairing and per-step soft navigation metrics [#2561](https://github.com/sitespeedio/browsertime/pull/2561).
+
 ## 28.2.0 - 2026-07-20
 
 ### Added
