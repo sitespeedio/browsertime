@@ -291,7 +291,7 @@ jobs:
     - name: Install ffmpeg
       uses: AnimMouse/setup-ffmpeg@ae28d57dabbb148eff63170b6bf7f2b60062cbae # v1.2.3
       with:
-        version: '7.1'
+        version: '8.1'
     - name: Set up Python
       uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
       with:
