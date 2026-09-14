@@ -6,7 +6,6 @@
   "type": "module",
   "types": "./scripting.d.ts",
   "dependencies": {
-    "@devicefarmer/adbkit": "3.3.8",
     "@sitespeed.io/chromedriver": "149.0.7827",
     "@sitespeed.io/edgedriver": "149.0.4022",
     "@sitespeed.io/geckodriver": "0.36.2",
