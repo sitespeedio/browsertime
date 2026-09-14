@@ -35,7 +35,8 @@ jobs:
         brew upgrade --cask --greedy google-chrome firefox microsoft-edge
         "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --version
     - name: Test Chrome
-      run: ./bin/browsertime.js -b chrome -n 1 https://www.sitespeed.io/
+      # Chromedriver prefers Chrome for Testing from the runner image, so point to the installed Chrome
+      run: ./bin/browsertime.js -b chrome -n 1 --chrome.binaryPath "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" https://www.sitespeed.io/
     - name: Test Firefox
       run: ./bin/browsertime.js -b firefox -n 1 https://www.sitespeed.io/
     - name: Test Edge
