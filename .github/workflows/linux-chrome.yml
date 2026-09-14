@@ -64,7 +64,7 @@ jobs:
     - name: Test pre/post scripts
       run: ./bin/browsertime.js -b chrome test/data/navigationscript/measure.cjs -n 1 --preScript test/data/prepostscripts/preSample.cjs --postScript test/data/prepostscripts/postSample.cjs --xvfb
     - name: Test Chrome with emulated mobile
-      run: ./bin/browsertime.js -b chrome --chrome.mobileEmulation.deviceName 'iPhone 6' http://127.0.0.1:3000/simple/ --xvfb
+      run: ./bin/browsertime.js -b chrome --chrome.mobileEmulation.deviceName 'iPhone 12 Pro' http://127.0.0.1:3000/simple/ --xvfb
     - name: Test Chrome with web driver nagivation
       run: ./bin/browsertime.js -b chrome -n 1 http://127.0.0.1:3000/simple/ --webdriverPageload --xvfb
     - name: Test navigate to the same URL twice
