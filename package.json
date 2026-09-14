@@ -35,7 +35,6 @@
     "eslint-plugin-unicorn": "64.0.0",
     "jsdoc": "4.0.5",
     "prettier": "3.8.3",
-    "serve": "14.2.6",
     "serve-handler": "6.1.7",
     "typescript": "5.9.3"
   },
@@ -67,8 +66,8 @@
   },
   "scripts": {
     "test": "ava",
-    "start-server": "serve test/data/html/",
-    "stop-server": "sudo pkill serve",
+    "start-server": "node test/util/serve.js",
+    "stop-server": "pkill -f test/util/serve.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "tsc": "tsc",
