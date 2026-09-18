@@ -3,7 +3,9 @@ const { serial } = test;
 import {
   addCreator,
   mergeHars,
-  addExtraFieldsToHar
+  addExtraFieldsToHar,
+  getEmptyHAR,
+  getFullyLoaded
 } from '../../lib/support/har/index.js';
 
 let har;
@@ -309,6 +311,25 @@ test('Omit `_longTasks` entirely when pageinfo has no longTask field', t => {
   har.log.pages[0].pageTimings = {};
   addExtraFieldsToHar(totalResults, har, { iterations: 1 });
   t.is(har.log.pages[0].pageTimings._longTasks, undefined);
+});
+
+test('Skip pages without entries when getting fully loaded', t => {
+  // A failing iteration adds an empty HAR (without _url) that
+  // should not end up as a page without an URL in the result
+  har.log.pages[0]._url = 'https://example.com';
+  har.log.pages[0].startedDateTime = '2026-08-09T06:46:00.000Z';
+  har.log.entries[0].startedDateTime = '2026-08-09T06:46:00.100Z';
+  har.log.entries[0].time = 200;
+
+  const merged = mergeHars([
+    har,
+    getEmptyHAR('https://example.com', 'Firefox')
+  ]);
+  const fullyLoaded = getFullyLoaded(merged);
+
+  t.is(fullyLoaded.length, 1);
+  t.is(fullyLoaded[0].url, 'https://example.com');
+  t.is(fullyLoaded[0].fullyLoaded, 300);
 });
 
 test('Tag the first entry of each page with `_documentURL`', t => {
