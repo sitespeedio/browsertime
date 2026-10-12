@@ -1,5 +1,16 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 28.3.1 - 2026-10-12
+
+### Fixed
+* WebPageReplay runs sent plain HTTP requests to the real internet instead of the replay server. The `--host-resolver-rules` value carried literal quotes, and Chrome drops any rule it cannot parse, so the port 80 mapping was silently lost. Pages with `http://` resources measured with WebPageReplay can change now that those requests are replayed. The same quotes made Chrome skip the first and last host of the built-in phone-home block list on runs without WebPageReplay [#2572](https://github.com/sitespeedio/browsertime/pull/2572).
+* The built-in phone-home hosts are blocked without opening a connection. They were mapped to 127.0.0.1, so Chrome still connected locally: a local server on that port received Chrome's background requests, and under WebPageReplay the recorder forwarded them to the real host. Now the name lookup fails inside Chrome (`^NOTFOUND`) [#2573](https://github.com/sitespeedio/browsertime/pull/2573).
+* Chrome no longer keeps a push messaging connection to `mtalk.google.com` open during tests. It opened on every browser start, even with `--disable-background-networking`, and with WebPageReplay it went to the real internet on port 5228 while the page was measured [#2574](https://github.com/sitespeedio/browsertime/pull/2574).
+* Chrome's network time check (`http://clients2.google.com/time/1/current`) is disabled. It ran on every browser start, outside the page under test [#2575](https://github.com/sitespeedio/browsertime/pull/2575).
+* Updated the Docker image to Chrome 153 / Firefox 155 / Edge 153 [#2569](https://github.com/sitespeedio/browsertime/pull/2569).
+* Bumped `chromedriver` and `edgedriver` to 153 and `geckodriver` to 0.37.1 [#2567](https://github.com/sitespeedio/browsertime/pull/2567) [#2568](https://github.com/sitespeedio/browsertime/pull/2568). Chrome 153 removed the old iPhone 4 to iPhone X entries from its device list, so `--chrome.mobileEmulation.deviceName 'iPhone 6'` now fails with "must be a valid device". The help text now suggests `iPhone 12 Pro`.
+* Dropped the `serve` dev dependency. The test suite already had a static file server, and `serve` added about 90 packages to every contributor and CI install [#2564](https://github.com/sitespeedio/browsertime/pull/2564).
+
 ## 28.3.0 - 2026-07-31
 
 ### Added
