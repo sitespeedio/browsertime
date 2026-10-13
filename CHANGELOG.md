@@ -1,5 +1,13 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 28.4.0 - 2026-10-13
+
+### Added
+* On Linux, you can set a download limit with `--connectivity.throttle.localhost`, for example for WebPageReplay tests: `--connectivity.engine throttle --connectivity.throttle.localhost --connectivity.rtt 100 --connectivity.down 5000`. The limit is for all loopback traffic. A ready-made profile (like `--connectivity.profile 3g`) together with `--connectivity.throttle.localhost` now also uses the download limit of the profile [#2577](https://github.com/sitespeedio/browsertime/pull/2577).
+
+### Fixed
+* Updated to Throttle 6.2.0. On Linux, `--connectivity.throttle.localhost` now sets the loopback MTU to 1500, like a real network. With the old MTU (65536), WebPageReplay metrics were a full round trip apart from run to run. Localhost metrics can change (become lower and more stable) after you upgrade [#2576](https://github.com/sitespeedio/browsertime/pull/2576) [#2577](https://github.com/sitespeedio/browsertime/pull/2577).
+
 ## 28.3.1 - 2026-10-12
 
 ### Fixed
