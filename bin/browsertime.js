@@ -43,7 +43,7 @@ async function preWarmServer(urls, options) {
   const firefoxDevice = getProperty(options, 'firefox.android.deviceSerial');
   const safariIos = getProperty(options, 'safari.ios');
   const safariDeviceName = getProperty(options, 'safari.deviceName');
-  const safariDeviceUDID = getProperty(options, 'safari.deviceUDID ');
+  const safariDeviceUDID = getProperty(options, 'safari.deviceUDID');
 
   if (isAndroidConfigured(options) && options.browser === 'chrome') {
     setProperty(preWarmOptions, 'chrome.android.package', 'com.android.chrome');
