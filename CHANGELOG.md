@@ -1,5 +1,17 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 28.5.0 - 2026-10-23
+
+### Added
+* Updated the Docker image to Chrome 156 / Firefox 158 / Edge 156 and bumped `chromedriver` and `edgedriver` to 156 [#2583](https://github.com/sitespeedio/browsertime/pull/2583) [#2585](https://github.com/sitespeedio/browsertime/pull/2585).
+
+### Fixed
+* Updated WebPageReplay in the Docker image to the latest version from its new repository, together with its new inject script. The replay server prepares the injected HTML once when the archive loads, not on every request. The inject script also gives every page the same `navigator.connection` and `navigator.onLine` values, so pages that adapt to the connection behave the same in every run. Replayed metrics can change after you upgrade [#2578](https://github.com/sitespeedio/browsertime/pull/2578).
+* The URL under test is now escaped in the navigation script. A URL with a quote, a backslash or a line break broke navigation, and a crafted URL could run its own script in the page [#2582](https://github.com/sitespeedio/browsertime/pull/2582).
+* Loading a `.js` script as CommonJS overwrote and then deleted an existing `package.json` in the folder of the script. Browsertime now only creates and removes its own temporary file [#2579](https://github.com/sitespeedio/browsertime/pull/2579).
+* The browser was not stopped after a failed iteration when Browsertime ran without connectivity settings, for example when used as a library [#2580](https://github.com/sitespeedio/browsertime/pull/2580).
+* The pre-warm run on iOS now uses the device set with `--safari.deviceUDID`. Before, with several devices or simulators, it could run on a different device than the test [#2581](https://github.com/sitespeedio/browsertime/pull/2581).
+
 ## 28.4.0 - 2026-10-13
 
 ### Added
