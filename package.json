@@ -17,8 +17,8 @@
     "execa": "9.6.1",
     "fast-stats": "0.0.7",
     "ff-test-bidi-har-export": "0.0.22",
-    "selenium-webdriver": "4.44.0",
-    "yargs": "18.0.0"
+    "selenium-webdriver": "4.51.0",
+    "yargs": "18.2.0"
   },
   "optionalDependencies": {
     "jimp": "1.6.1",
