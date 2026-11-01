@@ -1,6 +1,6 @@
 FROM sitespeedio/webbrowsers:chrome-156.0-firefox-158.0-edge-156.0-c
 
-ARG TARGETPLATFORM=linux/amd64
+ARG TARGETPLATFORM
 
 ENV BROWSERTIME_XVFB=true
 ENV BROWSERTIME_CONNECTIVITY__ENGINE=external
