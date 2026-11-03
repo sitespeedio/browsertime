@@ -24,6 +24,11 @@
     "jimp": "1.6.1",
     "usb-power-profiling": "1.6.0"
   },
+  "allowScripts": {
+    "@serialport/bindings-cpp": false,
+    "node-hid": false,
+    "usb": false
+  },
   "devDependencies": {
     "@eslint/js": "10.0.1",
     "@types/selenium-webdriver": "4.35.5",
