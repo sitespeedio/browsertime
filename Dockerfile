@@ -28,6 +28,13 @@ VOLUME /browsertime
 
 COPY package.* /usr/src/app/
 RUN npm install --production
+# The driver packages have no install script. Install the drivers now, so that a test does not download them.
+# On ARM64, Chromedriver is in the base image and Edge is not available.
+RUN node node_modules/@sitespeed.io/geckodriver/install.js && \
+  if [ "$(uname -m)" = "x86_64" ]; then \
+    node node_modules/@sitespeed.io/chromedriver/install.js && \
+    node node_modules/@sitespeed.io/edgedriver/install.js; \
+  fi
 COPY . /usr/src/app
 
 ## This is to avoid click the OK button
