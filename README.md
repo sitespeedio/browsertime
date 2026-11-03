@@ -1,11 +1,22 @@
 # Browsertime
-![Run Docker](https://github.com/sitespeedio/browsertime/actions/workflows/docker.yml/badge.svg?branch=main)
-![Unit tests](https://github.com/sitespeedio/browsertime/actions/workflows/unittests.yml/badge.svg?branch=main)
-![Windows Edge](https://github.com/sitespeedio/browsertime/actions/workflows/windows.yml/badge.svg?branch=main)
-![OSX Safari](https://github.com/sitespeedio/browsertime/actions/workflows/safari.yml/badge.svg?branch=main)
-![Linux browsers](https://github.com/sitespeedio/browsertime/actions/workflows/linux.yml/badge.svg?branch=main)
-[![Downloads][downloads-image]][downloads-url]
-[![Downloads total][downloads-total-image]][downloads-url]
+[![Unit tests](https://github.com/sitespeedio/browsertime/actions/workflows/unittests.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/unittests.yml)
+[![Lint](https://github.com/sitespeedio/browsertime/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/lint.yml)
+[![Linux Chrome](https://github.com/sitespeedio/browsertime/actions/workflows/linux-chrome.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/linux-chrome.yml)
+[![Linux Firefox](https://github.com/sitespeedio/browsertime/actions/workflows/linux-firefox.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/linux-firefox.yml)
+[![Windows](https://github.com/sitespeedio/browsertime/actions/workflows/windows.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/windows.yml)
+[![OSX Chrome, Firefox and Edge](https://github.com/sitespeedio/browsertime/actions/workflows/mac.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/mac.yml)
+[![OSX Safari](https://github.com/sitespeedio/browsertime/actions/workflows/safari.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/safari.yml)
+[![OSX Safari Mac M1](https://github.com/sitespeedio/browsertime/actions/workflows/mac-m1.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/mac-m1.yml)
+[![Docker](https://github.com/sitespeedio/browsertime/actions/workflows/docker.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/docker.yml)
+[![Visual metrics](https://github.com/sitespeedio/browsertime/actions/workflows/visualmetrics.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/visualmetrics.yml)
+[![Browser beta](https://github.com/sitespeedio/browsertime/actions/workflows/browser-beta.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/browser-beta.yml)
+[![Browser dev](https://github.com/sitespeedio/browsertime/actions/workflows/browser-dev.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/browser-dev.yml)
+
+[![npm][npm-image]][npm-url]
+[![Downloads][downloads-image]][npm-url]
+[![Downloads total][downloads-total-image]][npm-url]
+[![Docker pulls][docker-image]][docker-url]
+[![License][license-image]][license-url]
 [![Stars][stars-image]][stars-url]
 
 [Documentation](https://www.sitespeed.io/documentation/browsertime/) | [Changelog](https://github.com/sitespeedio/browsertime/blob/main/CHANGELOG.md)
@@ -195,10 +206,13 @@ We're excited to have you in our community and look forward to your contribution
 ## License
 [Apache License version 2.0](LICENSE).
 
-[travis-image]: https://img.shields.io/travis/sitespeedio/browsertime.svg?style=flat-square
-[travis-url]: https://travis-ci.org/sitespeedio/browsertime
-[stars-url]: https://github.com/tobli/sitespeedio/stargazers
-[stars-image]: https://img.shields.io/github/stars/sitespeedio/browsertime.svg?style=flat-square
-[downloads-total-image]: https://img.shields.io/npm/dt/browsertime.svg?style=flat-square
+[npm-image]: https://img.shields.io/npm/v/browsertime.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/browsertime
 [downloads-image]: https://img.shields.io/npm/dm/browsertime.svg?style=flat-square
-[downloads-url]: https://npmjs.org/package/browsertime
+[downloads-total-image]: https://img.shields.io/npm/dt/browsertime.svg?style=flat-square
+[docker-image]: https://img.shields.io/docker/pulls/sitespeedio/browsertime.svg?style=flat-square
+[docker-url]: https://hub.docker.com/r/sitespeedio/browsertime
+[license-image]: https://img.shields.io/npm/l/browsertime.svg?style=flat-square
+[license-url]: https://github.com/sitespeedio/browsertime/blob/main/LICENSE
+[stars-image]: https://img.shields.io/github/stars/sitespeedio/browsertime.svg?style=flat-square
+[stars-url]: https://github.com/sitespeedio/browsertime/stargazers
