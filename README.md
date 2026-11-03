@@ -1,16 +1,16 @@
 # Browsertime
-[![Unit tests](https://github.com/sitespeedio/browsertime/actions/workflows/unittests.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/unittests.yml)
-[![Lint](https://github.com/sitespeedio/browsertime/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/lint.yml)
-[![Linux Chrome](https://github.com/sitespeedio/browsertime/actions/workflows/linux-chrome.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/linux-chrome.yml)
-[![Linux Firefox](https://github.com/sitespeedio/browsertime/actions/workflows/linux-firefox.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/linux-firefox.yml)
-[![Windows](https://github.com/sitespeedio/browsertime/actions/workflows/windows.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/windows.yml)
-[![OSX Chrome, Firefox and Edge](https://github.com/sitespeedio/browsertime/actions/workflows/mac.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/mac.yml)
-[![OSX Safari](https://github.com/sitespeedio/browsertime/actions/workflows/safari.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/safari.yml)
-[![OSX Safari Mac M1](https://github.com/sitespeedio/browsertime/actions/workflows/mac-m1.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/mac-m1.yml)
-[![Docker](https://github.com/sitespeedio/browsertime/actions/workflows/docker.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/docker.yml)
-[![Visual metrics](https://github.com/sitespeedio/browsertime/actions/workflows/visualmetrics.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/visualmetrics.yml)
-[![Browser beta](https://github.com/sitespeedio/browsertime/actions/workflows/browser-beta.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/browser-beta.yml)
-[![Browser dev](https://github.com/sitespeedio/browsertime/actions/workflows/browser-dev.yml/badge.svg?branch=main)](https://github.com/sitespeedio/browsertime/actions/workflows/browser-dev.yml)
+[![unit tests](https://img.shields.io/github/actions/workflow/status/sitespeedio/browsertime/unittests.yml?branch=main&label=unit%20tests&style=flat-square)](https://github.com/sitespeedio/browsertime/actions/workflows/unittests.yml)
+[![lint](https://img.shields.io/github/actions/workflow/status/sitespeedio/browsertime/lint.yml?branch=main&label=lint&style=flat-square)](https://github.com/sitespeedio/browsertime/actions/workflows/lint.yml)
+[![linux chrome](https://img.shields.io/github/actions/workflow/status/sitespeedio/browsertime/linux-chrome.yml?branch=main&label=linux%20chrome&style=flat-square)](https://github.com/sitespeedio/browsertime/actions/workflows/linux-chrome.yml)
+[![linux firefox](https://img.shields.io/github/actions/workflow/status/sitespeedio/browsertime/linux-firefox.yml?branch=main&label=linux%20firefox&style=flat-square)](https://github.com/sitespeedio/browsertime/actions/workflows/linux-firefox.yml)
+[![windows](https://img.shields.io/github/actions/workflow/status/sitespeedio/browsertime/windows.yml?branch=main&label=windows&style=flat-square)](https://github.com/sitespeedio/browsertime/actions/workflows/windows.yml)
+[![mac](https://img.shields.io/github/actions/workflow/status/sitespeedio/browsertime/mac.yml?branch=main&label=mac&style=flat-square)](https://github.com/sitespeedio/browsertime/actions/workflows/mac.yml)
+[![safari](https://img.shields.io/github/actions/workflow/status/sitespeedio/browsertime/safari.yml?branch=main&label=safari&style=flat-square)](https://github.com/sitespeedio/browsertime/actions/workflows/safari.yml)
+[![safari m1](https://img.shields.io/github/actions/workflow/status/sitespeedio/browsertime/mac-m1.yml?branch=main&label=safari%20m1&style=flat-square)](https://github.com/sitespeedio/browsertime/actions/workflows/mac-m1.yml)
+[![docker](https://img.shields.io/github/actions/workflow/status/sitespeedio/browsertime/docker.yml?branch=main&label=docker&style=flat-square)](https://github.com/sitespeedio/browsertime/actions/workflows/docker.yml)
+[![visual metrics](https://img.shields.io/github/actions/workflow/status/sitespeedio/browsertime/visualmetrics.yml?branch=main&label=visual%20metrics&style=flat-square)](https://github.com/sitespeedio/browsertime/actions/workflows/visualmetrics.yml)
+[![beta](https://img.shields.io/github/actions/workflow/status/sitespeedio/browsertime/browser-beta.yml?branch=main&label=beta&style=flat-square)](https://github.com/sitespeedio/browsertime/actions/workflows/browser-beta.yml)
+[![dev](https://img.shields.io/github/actions/workflow/status/sitespeedio/browsertime/browser-dev.yml?branch=main&label=dev&style=flat-square)](https://github.com/sitespeedio/browsertime/actions/workflows/browser-dev.yml)
 
 [![npm][npm-image]][npm-url]
 [![Downloads][downloads-image]][npm-url]
@@ -44,7 +44,7 @@ Browsertime is a powerful, open-source Node.js tool designed for engineers who a
 5. [Browser Support](#browser-support)
 6. [How does it work](#how-does-it-work)
 7. [Contributing](#contributing)
-9. [Community and Support](#community-and-support)
+8. [Community and Support](#community-and-support)
 9. [License](#license)
 
 ## Key Features
@@ -56,7 +56,6 @@ Browsertime is a powerful, open-source Node.js tool designed for engineers who a
 - **Scripting Capabilities:** Customize your tests and user interactions with JavaScript scripting, enabling advanced scenarios and detailed analysis.
 
 - **Docker Support:** Easily integrate Browsertime into your CI/CD pipelines and containerized environments with Docker support.
-##
 
 ## Installation
 
@@ -100,8 +99,18 @@ browsertime --browser firefox https://www.example.com
 ```
 
 #### Custom metrics
+Put the JavaScript that collects your metric in a file, for example `myMetric.js`:
+
+```javascript
+(function () {
+  return window.myApp.customMetric;
+})();
+```
+
+Then add the file with `--script`. The value is in the `custom` category in the result JSON. You can also give a folder, then each `.js` file in it becomes a metric and the folder name is the category:
+
 ```shell
-browsertime --script "return {'myMetric': window.myApp.customMetric}" https://www.example.com
+browsertime --script myMetric.js https://www.example.com
 ```
 
 For a full list of options, run <code>$ browsertime --help</code> and you can see the configuration options.
@@ -116,7 +125,7 @@ If you need a more complicated test scenario, you can define your own (Selenium)
 We have a full section in the documentation about [scripting](https://www.sitespeed.io/documentation/sitespeed.io/scripting/).
 
 #### Test on your mobile device
-Browsertime supports Chrome and Firefox on Android: Collecting SpeedIndex, HAR and video! 
+Browsertime supports Chrome, Firefox and Edge on Android: Collecting SpeedIndex, HAR and video!
 
 You need to [install adb](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#desktop) and [prepare your phone](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#on-your-phone) before you start.
 
@@ -127,7 +136,7 @@ $ browsertime --chrome.android.package com.android.chrome https://www.sitespeed.
 </pre>
 
 #### Using WebPageReplay
-Our Docker container now includes [WebPageReplay](https://github.com/catapult-project/catapult/blob/main/web_page_replay_go/README.md).
+Our Docker container includes [WebPageReplay](https://chromium.googlesource.com/webpagereplay/).
 
 WebPageReplay will let you replay your page locally (getting rid of server latency) and makes it easier to find front end regressions.
 
@@ -139,41 +148,41 @@ It works like this:
 5. Browsertime access the URL so many times you choose
 6. WebPageReplay in replay mode is closed down
 
-You can change latency by setting a Docker environment variable. Use REPLAY to turn on the reply functionality.
+You can change latency by setting a Docker environment variable. Use REPLAY to turn on the replay functionality.
 
 Default browser is Chrome:
 
 ```
-docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:20.0.0 https://en.wikipedia.org/wiki/Barack_Obama
+docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime https://en.wikipedia.org/wiki/Barack_Obama
 ```
 
 Use Firefox:
 
 ```shell
-docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime:20.0.0 -b firefox -n 11 --firefox.acceptInsecureCerts true https://en.wikipedia.org/wiki/Barack_Obama
+docker run --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime -b firefox -n 11 --firefox.acceptInsecureCerts true https://en.wikipedia.org/wiki/Barack_Obama
 ```
 
 And Chrome on your Android phone. This will only work on Linux because you need to be able to mount the usb port in Docker:
 
 ```shell
-docker run --privileged -v /dev/bus/usb:/dev/bus/usb -e START_ADB_SERVER=true --cap-add=NET_ADMIN --rm -v “$(pwd)“:/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime https://en.m.wikipedia.org/wiki/Barack_Obama --android --chrome.args ignore-certificate-errors-spki-list=PhrPvGIaAMmd29hj8BCZOq096yj7uMpRNHpn5PDxI6I= -n 11 --chrome.args user-data-dir=/data/tmp/chrome
+docker run --privileged -v /dev/bus/usb:/dev/bus/usb -e START_ADB_SERVER=true --cap-add=NET_ADMIN --rm -v "$(pwd)":/browsertime -e REPLAY=true -e LATENCY=100 sitespeedio/browsertime https://en.m.wikipedia.org/wiki/Barack_Obama --android --chrome.args ignore-certificate-errors-spki-list=PhrPvGIaAMmd29hj8BCZOq096yj7uMpRNHpn5PDxI6I= -n 11 --chrome.args user-data-dir=/data/tmp/chrome
 ```
 
 #### Speed Index and video
-It's easiest to run [our ready made Docker container](https://hub.docker.com/r/sitespeedio/browsertime/) to be able to record a video and calculate SpeedIndex because then you get all dependencies needed for free to run [VisualMetrics](https://github.com/WPO-Foundation/visualmetrics).
+It's easiest to run [our ready made Docker container](https://hub.docker.com/r/sitespeedio/browsertime/), because it has all the dependencies and records a video and calculates Visual Metrics by default. Without Docker, add `--video --visualMetrics` and install FFmpeg and Python 3 with the packages in [requirements.txt](requirements.txt) (Numpy and Pillow, and OpenCV-Python only for `--visualMetricsContentful`). The Visual Metrics script is based on [VisualMetrics](https://github.com/WPO-Foundation/visualmetrics) from WebPageTest.
 
-The default video will include a timer and showing when the metrics happens, but you can turn that off using <code>--video.addTimer false</code>.
+The default video will include a timer and showing when the metrics happens, but you can turn that off using <code>--videoParams.addTimer false</code>.
 
 <img src="https://raw.githubusercontent.com/sitespeedio/sitespeed.io/main/docs/img/video-example.gif">
 
 
 ## Browser Support
-Browsertime supports Firefox, Chrome, and Edge (Chromium version) on desktop and Safari on Mac OS. On Android we support Chrome and Firefox. Safari on iOS supports HAR (via `ios_webkit_debug_proxy`) and video / visual metrics (via screen capture over USB). You can also use the Safari simulator on Mac OS.
+Browsertime supports Firefox, Chrome, and Edge (Chromium version) on desktop and Safari on Mac OS. On Android we support Chrome, Firefox and Edge. Safari on iOS supports HAR (via `ios_webkit_debug_proxy`) and video / visual metrics (via screen capture over USB). You can also use the Safari simulator on Mac OS.
 
 ## How does it work
-Browsertime uses Selenium NodeJS to drive the browser. It starts the browser, load a URL, executes configurable Javascripts to collect metrics, collect a HAR file.
+Browsertime uses Selenium NodeJS to drive the browser. It starts the browser, loads a URL, executes configurable JavaScripts to collect metrics and collects a HAR file.
 
-To get the HAR from Firefox we use the [HAR Export Trigger](https://github.com/firebug/har-export-trigger) and Chrome we use [Chrome-HAR](https://github.com/sitespeedio/chrome-har) to parse the timeline log and generate the HAR file.
+To get the HAR from Firefox we use [bidi-har-export](https://github.com/firefox-devtools/bidi-har-export), which creates the HAR from WebDriver BiDi network events. For Chrome and Edge we use [Chrome-HAR](https://github.com/sitespeedio/chrome-har) to create the HAR from the Chrome DevTools Protocol network events. Safari on iOS also uses Chrome-HAR, with the events from the WebKit inspector protocol. Desktop Safari does not give a HAR.
 
 ## Contributing
 
