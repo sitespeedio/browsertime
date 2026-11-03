@@ -1,5 +1,22 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## UNRELEASED
+
+### Added
+* `--firefox.env` is now shown in the help. You use it to set extra environment variables for Firefox. It was hidden while old Geckodriver versions did not support it. Thanks [Abhishek Nimalan](https://github.com/animalan) for the PR [#2492](https://github.com/sitespeedio/browsertime/pull/2492).
+* Updated to selenium-webdriver 4.51.0 and yargs 18.2.0 [#2584](https://github.com/sitespeedio/browsertime/pull/2584).
+
+### Fixed
+* Total Blocking Time is now measured per soft navigation. The document stays the same during a soft navigation, so the long tasks from earlier routes were also counted. TBT grew with every step of a user journey, and later pages failed budgets because of the work of earlier pages. Long tasks now use only the measured soft navigation, the same way CLS already did. TBT for soft navigations can be lower after you upgrade [#2586](https://github.com/sitespeedio/browsertime/pull/2586).
+* Loading a `.js` or `.ts` user script failed on Windows with `ERR_UNSUPPORTED_ESM_URL_SCHEME`. The script is now loaded through a file URL. Thanks [FurkanKra](https://github.com/FurkanKra) for the PR [#2570](https://github.com/sitespeedio/browsertime/pull/2570).
+* A failed iteration (for example when the BiDi connection to Firefox stopped) logged "There is an page without an URL in the HAR". The empty placeholder page for the failed run is now skipped when fully loaded is calculated [#2563](https://github.com/sitespeedio/browsertime/pull/2563).
+* Each Chrome or Edge run left about 2.5 MB in the system temp folder, because Selenium stopped Chromedriver before it removed the temporary profile. When you ran many tests on the same machine or in the same container, the disk filled up. Chromedriver and the browser now get their own temp folder for each run, and Browsertime deletes it when the browser stops [#2587](https://github.com/sitespeedio/browsertime/pull/2587).
+* With `--chrome.enableChromeDriverLog` (or `-vv`), a script with more than one measurement crashed the run and no result was written. The driver log is now gzipped once per iteration after the driver has stopped, so you get the full log for each iteration. Edge now also finds its own `edgedriver.log` [#2588](https://github.com/sitespeedio/browsertime/pull/2588).
+* Updated to Chrome HAR 2.0.0. It removes the tough-cookie dependency and fixes cookie expiry dates, headers after redirects, duplicated headers and extra pages from iframes. The URLs in the HAR are now exactly the URLs that Chrome sent (before, characters like `|` and `{` were escaped), so HAR files can differ a little after you upgrade [#2591](https://github.com/sitespeedio/browsertime/pull/2591).
+* The ARM64 Docker image had the AMD64 WebPageReplay binary, which only ran with emulation. It now gets the ARM64 binary [#2590](https://github.com/sitespeedio/browsertime/pull/2590).
+* npm warned about the native build scripts of the optional USB power profiling dependencies on every install, and npm 12 blocks them. The scripts are now denied: the modules ship prebuilt binaries, so power profiling keeps working [#2592](https://github.com/sitespeedio/browsertime/pull/2592).
+* Installing Browsertime no longer runs the install scripts of the driver packages, so the install does not run code from a dependency or need access to the driver download hosts. Browsertime now downloads Chromedriver, Edgedriver or Geckodriver the first time it needs it. The Docker image still has the drivers installed when it is built [#2595](https://github.com/sitespeedio/browsertime/pull/2595).
+
 ## 28.5.0 - 2026-10-23
 
 ### Added
