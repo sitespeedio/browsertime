@@ -198,7 +198,7 @@ Join our community! Whether you need help, want to share your experience, or dis
 - **Slack**: Connect with fellow users and the development team on [Slack](https://join.slack.com/t/sitespeedio/shared_invite/zt-296jzr7qs-d6DId2KpEnMPJSQ8_R~WFw).
 - **GitHub Issues**: For technical questions, feature requests, and bug reports, use our [GitHub issues](https://github.com/sitespeedio/browsertime/issues).
 - **RSS/Changelog**: Latest releases and information can always be found in our [RSS feed](https://github.com/sitespeedio/browsertime/releases.atom) and in our [changelog](https://github.com/sitespeedio/browsertime/blob/main/CHANGELOG.md).
-- **Mastodon**: Follow us on Mastodon [https://fosstodon.org/@sitespeedio](https://fosstodon.org/@sitespeedio).
+
 
 We're excited to have you in our community and look forward to your contributions and interactions!
 
