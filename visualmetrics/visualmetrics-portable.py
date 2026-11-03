@@ -1656,14 +1656,51 @@ def calculate_contentful_speed_index(progress, directory):
         return None, None
 
 
+def compute_ssim(image1, image2):
+    """Calculate the SSIM between two image files of the same size."""
+    import numpy as np
+    from PIL import Image, ImageOps
+
+    # Use the same values and the same Gaussian kernel as pyssim, so that the
+    # metric does not change.
+    width = 11
+    kernel = np.arange(width, dtype=float) - width / 2
+    kernel = np.exp(-0.5 * kernel**2 / 1.5**2)
+    kernel /= kernel.sum()
+    c_1 = (0.01 * 255) ** 2
+    c_2 = (0.03 * 255) ** 2
+
+    def blur(img):
+        # Filter the rows, then the columns. The edge mode is the same as the
+        # "reflect" mode of scipy.ndimage.
+        for _ in range(2):
+            padded = np.pad(img, ((width // 2, width // 2), (0, 0)), mode="symmetric")
+            img = sum(w * padded[i : i + img.shape[0]] for i, w in enumerate(kernel)).T
+        return img
+
+    def gray(file):
+        with Image.open(file) as im:
+            return np.asarray(ImageOps.grayscale(im), dtype=float)
+
+    gray_1 = gray(image1)
+    gray_2 = gray(image2)
+    mu_1 = blur(gray_1)
+    mu_2 = blur(gray_2)
+    sigma_1 = blur(gray_1**2) - mu_1**2
+    sigma_2 = blur(gray_2**2) - mu_2**2
+    sigma_12 = blur(gray_1 * gray_2) - mu_1 * mu_2
+    ssim_map = ((2 * mu_1 * mu_2 + c_1) * (2 * sigma_12 + c_2)) / (
+        (mu_1**2 + mu_2**2 + c_1) * (sigma_1 + sigma_2 + c_2)
+    )
+    return np.average(ssim_map)
+
+
 def calculate_perceptual_speed_index(progress, directory):
     # Match the behaviour of calculate_contentful_speed_index: any failure
     # here (missing frame, SSIM library error, etc.) must not propagate up
     # to calculate_visual_metrics, where it would discard SpeedIndex / FCP /
     # the rest of the metrics for this iteration.
     try:
-        from ssim import compute_ssim
-
         x = len(progress)
         dir = str(Path(__file__).resolve().parent / directory)
         first_paint_frame = str(Path(dir) / "ms_{0:06d}.png".format(progress[1]["time"]))
@@ -1808,13 +1845,12 @@ def calculate_hero_time(progress, directory, hero, viewport):
 ##########################################################################
 
 
-def check_config(need_opencv=False, need_ssim=False):
+def check_config(need_opencv=False):
     """Check dependencies.
 
-    OpenCV is only used by --contentful/--contentful-video and pyssim
-    only by --perceptual, so their absence is fatal only when those
-    options are in play — everything else needs just ffmpeg, Numpy and
-    Pillow.
+    OpenCV is only used by --contentful/--contentful-video, so its
+    absence is fatal only when those options are in play — everything
+    else needs just ffmpeg, Numpy and Pillow.
     """
     ok = True
 
@@ -1860,20 +1896,6 @@ def check_config(need_opencv=False, need_ssim=False):
                 "OpenCV-Python is not installed (only needed for --contentful)"
             )
 
-    try:
-        from ssim import compute_ssim  # noqa
-
-        logging.debug("SSIM found")
-    except BaseException:
-        if need_ssim:
-            print("SSIM: FAIL")
-            ok = False
-        else:
-            # Not print: in --json runs stdout must stay pure JSON.
-            logging.info(
-                "SSIM is not installed (only needed for --perceptual)"
-            )
-
     return ok
 
 
@@ -1897,7 +1919,7 @@ def main():
         "--check",
         action="store_true",
         default=False,
-        help="Check dependencies (ffmpeg, Numpy, OpenCV-Python, PIL, SSIM).",
+        help="Check dependencies (ffmpeg, Numpy, OpenCV-Python, PIL).",
     )
     parser.add_argument(
         "-v",
@@ -2126,7 +2148,6 @@ def main():
             # structured.
             ok = check_config(
                 need_opencv=options.contentful or options.contentful_video,
-                need_ssim=options.perceptual,
             )
             if not ok:
                 raise Exception("Please install requirements before running.")

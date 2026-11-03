@@ -20,6 +20,6 @@ jobs:
       with:
         python-version: '3.12'
     - name: Install visual metrics dependencies
-      run: python -m pip install --upgrade pip setuptools==70.0.0 pyssim OpenCV-Python Numpy
+      run: python -m pip install --upgrade pip setuptools==70.0.0 Pillow OpenCV-Python Numpy
     - name: Run visual metrics tests
       run: python -m unittest discover -s visualmetrics -v

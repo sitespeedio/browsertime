@@ -88,7 +88,6 @@ class TestVisualMetrics(unittest.TestCase):
         value, _ = vm.calculate_contentful_speed_index(self.progress, "test_data")
         self.assertEqual(value, 1079)
 
-    @unittest.skipUnless(_importable("ssim"), "pyssim is not installed")
     def test_perceptual_speed_index(self):
         value, _ = vm.calculate_perceptual_speed_index(self.progress, "test_data")
         self.assertEqual(value, 947)
