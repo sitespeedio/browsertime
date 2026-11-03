@@ -53,7 +53,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get install net-tools -y
-        python -m pip install --upgrade pip setuptools==70.0.0 pyssim OpenCV-Python Numpy virtualenv
+        python -m pip install --upgrade pip setuptools==70.0.0 Pillow OpenCV-Python Numpy virtualenv
         sudo modprobe ifb numifbs=1
     - name: Browser versions
       run: |

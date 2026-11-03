@@ -32,10 +32,9 @@ jobs:
       run: |
         python -m pip install --upgrade --user pip
         python -m pip install --upgrade --user setuptools
-        python -m pip install --user pyssim OpenCV-Python Numpy
+        python -m pip install --user Pillow OpenCV-Python Numpy
         python -m pip --version
         python -m pip show Pillow
-        python -m pip show pyssim
     #- name: Check resolution
     #  run: system_profiler SPDisplaysDataType |grep Resolution
     - name: Enable Safaridriver

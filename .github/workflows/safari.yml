@@ -35,7 +35,7 @@ jobs:
     - name: Install Python dependencies
       run: |
         python -m pip install --upgrade --user pip setuptools
-        python -m pip install --user pyssim OpenCV-Python Numpy
+        python -m pip install --user Pillow OpenCV-Python Numpy
     - name: Check Safaridriver
       run: sudo safaridriver --enable
     #- name: Check display
