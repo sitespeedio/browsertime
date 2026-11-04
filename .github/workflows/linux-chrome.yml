@@ -81,6 +81,7 @@ jobs:
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/commandscripts/chrome.cjs
   scripting:
     runs-on: ubuntu-22.04
+    timeout-minutes: 15
     steps:
     - name: Harden Runner
       uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
@@ -151,6 +152,76 @@ jobs:
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/scripting/common.ts --cjs
     - name: Run test with scripting.ts
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/scripting/module.ts
+    - name: Test extra profile run Chrome
+      run: ./bin/browsertime.js -b chrome http://127.0.0.1:3000/simple/ -n 1 --viewPort 1000x600 --xvfb  --enableProfileRun
+    - name: Test Chrome JS/CSS coverage
+      run: |
+        ./bin/browsertime.js -b chrome -n 1 --xvfb --skipHar --chrome.coverage --resultDir /tmp/coverage http://127.0.0.1:3000/simple/
+        echo "--- coverage block ---"
+        jq '.[0].coverage' /tmp/coverage/browsertime.json
+        jq -e '(.[0].coverage.js | type) == "array" and (.[0].coverage.js | length) > 0' /tmp/coverage/browsertime.json
+        jq -e '(.[0].coverage.css | type) == "array" and (.[0].coverage.css | length) > 0' /tmp/coverage/browsertime.json
+        jq -e '.[0].coverage.js[0] | has("totalBytes") and has("usedBytes") and has("unusedBytes") and has("unusedPercent") and has("files")' /tmp/coverage/browsertime.json
+        jq -e '.[0].coverage.css[0] | has("totalBytes") and has("usedBytes") and has("unusedBytes") and has("unusedPercent") and has("files")' /tmp/coverage/browsertime.json
+    - name: Show memory, disk and browser processes
+      if: always()
+      run: |
+        free -m
+        df -h /
+        pgrep -a -f "chrom|Xvfb|tcpdump" || echo "No browser processes left"
+  commands:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+    - name: Harden Runner
+      uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+      with:
+        egress-policy: block
+        allowed-endpoints: >
+          accounts.google.com:443
+          android.clients.google.com:443
+          api.github.com:443
+          azure.archive.ubuntu.com:80
+          clients2.google.com:80
+          dl-ssl.google.com:443
+          dl.google.com:80
+          esm.ubuntu.com:443
+          files.pythonhosted.org:443
+          github.com:443
+          motd.ubuntu.com:443
+          msedgedriver.microsoft.com:443
+          mtalk.google.com:5228
+          nodejs.org:443
+          packages.microsoft.com:443
+          pypi.org:443
+          registry.npmjs.org:443
+          release-assets.githubusercontent.com:443
+          results-receiver.actions.githubusercontent.com:443
+          storage.googleapis.com:443
+          www.google.com:443
+          www.sitespeed.io:443
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+    - name: Use Node.js
+      uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
+      with:
+        node-version: '24.x'
+        cache: 'npm'
+    - name: Install latest Chrome
+      run: |
+        wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+        sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+        sudo apt-get update
+        sudo apt-get --only-upgrade install google-chrome-stable
+        google-chrome --version
+    - name: Install Browsertime
+      run: npm ci
+    - name: Install dependencies
+      run: |
+        sudo apt-get install net-tools -y
+        python -m pip install virtualenv
+        sudo modprobe ifb numifbs=1
+    - name: Start local HTTP server
+      run: (npm run start-server&)
     - name: Test unified click commands
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/commandscripts/clickBackAndForth.cjs
     - name: Test unified misc commands
@@ -165,17 +236,65 @@ jobs:
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/commandscripts/measureAlias.cjs
     - name: Test scroll commands
       run: ./bin/browsertime.js -b chrome -n 1 --xvfb test/data/commandscripts/scrollToBottom.cjs
-    - name: Test extra profile run Chrome
-      run: ./bin/browsertime.js -b chrome http://127.0.0.1:3000/simple/ -n 1 --viewPort 1000x600 --xvfb  --enableProfileRun
-    - name: Test Chrome JS/CSS coverage
+    - name: Show memory, disk and browser processes
+      if: always()
       run: |
-        ./bin/browsertime.js -b chrome -n 1 --xvfb --skipHar --chrome.coverage --resultDir /tmp/coverage http://127.0.0.1:3000/simple/
-        echo "--- coverage block ---"
-        jq '.[0].coverage' /tmp/coverage/browsertime.json
-        jq -e '(.[0].coverage.js | type) == "array" and (.[0].coverage.js | length) > 0' /tmp/coverage/browsertime.json
-        jq -e '(.[0].coverage.css | type) == "array" and (.[0].coverage.css | length) > 0' /tmp/coverage/browsertime.json
-        jq -e '.[0].coverage.js[0] | has("totalBytes") and has("usedBytes") and has("unusedBytes") and has("unusedPercent") and has("files")' /tmp/coverage/browsertime.json
-        jq -e '.[0].coverage.css[0] | has("totalBytes") and has("usedBytes") and has("unusedBytes") and has("unusedPercent") and has("files")' /tmp/coverage/browsertime.json
+        free -m
+        df -h /
+        pgrep -a -f "chrom|Xvfb|tcpdump" || echo "No browser processes left"
+  spa:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+    - name: Harden Runner
+      uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+      with:
+        egress-policy: block
+        allowed-endpoints: >
+          accounts.google.com:443
+          android.clients.google.com:443
+          api.github.com:443
+          azure.archive.ubuntu.com:80
+          clients2.google.com:80
+          dl-ssl.google.com:443
+          dl.google.com:80
+          esm.ubuntu.com:443
+          files.pythonhosted.org:443
+          github.com:443
+          motd.ubuntu.com:443
+          msedgedriver.microsoft.com:443
+          mtalk.google.com:5228
+          nodejs.org:443
+          packages.microsoft.com:443
+          pypi.org:443
+          registry.npmjs.org:443
+          release-assets.githubusercontent.com:443
+          results-receiver.actions.githubusercontent.com:443
+          storage.googleapis.com:443
+          www.google.com:443
+          www.sitespeed.io:443
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+    - name: Use Node.js
+      uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
+      with:
+        node-version: '24.x'
+        cache: 'npm'
+    - name: Install latest Chrome
+      run: |
+        wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+        sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+        sudo apt-get update
+        sudo apt-get --only-upgrade install google-chrome-stable
+        google-chrome --version
+    - name: Install Browsertime
+      run: npm ci
+    - name: Install dependencies
+      run: |
+        sudo apt-get install net-tools -y
+        python -m pip install virtualenv
+        sudo modprobe ifb numifbs=1
+    - name: Start local HTTP server
+      run: (npm run start-server&)
     - name: Test Chrome soft navigation detection
       run: |
         ./bin/browsertime.js -b chrome -n 1 --xvfb --spa --resultDir /tmp/soft-nav test/data/commandscripts/softNavigation.cjs
@@ -243,6 +362,12 @@ jobs:
         jq -e '.[1].browserScripts[0].timings.softNavigations[0].name | endswith("/spa/")' /tmp/spa-no-request/browsertime.json
         jq -e '[.log.pages[] | select(._softNavigation == true)] | length == 2' /tmp/spa-no-request/browsertime.har
         jq -e '.log.entries | length == 0' /tmp/spa-no-request/browsertime.har
+    - name: Show memory, disk and browser processes
+      if: always()
+      run: |
+        free -m
+        df -h /
+        pgrep -a -f "chrom|Xvfb|tcpdump" || echo "No browser processes left"
   video:
     runs-on: ubuntu-22.04
     steps:
