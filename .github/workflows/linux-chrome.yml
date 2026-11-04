@@ -9,6 +9,7 @@ on:
 jobs:
   basic:
     runs-on: ubuntu-22.04
+    timeout-minutes: 15
     steps:
     - name: Harden Runner
       uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
@@ -370,6 +371,7 @@ jobs:
         pgrep -a -f "chrom|Xvfb|tcpdump" || echo "No browser processes left"
   video:
     runs-on: ubuntu-22.04
+    timeout-minutes: 15
     steps:
     - name: Harden Runner
       uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
