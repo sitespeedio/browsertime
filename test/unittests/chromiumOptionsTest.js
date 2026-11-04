@@ -32,3 +32,32 @@ test('Default phone home host resolver rules have no quotes', t => {
   t.false(rules.includes('"'));
   t.true(rules.startsWith('--host-resolver-rules=MAP '));
 });
+
+function mobileEmulation(browserOptions) {
+  let emulation;
+  const seleniumOptions = {
+    addArguments: () => {},
+    setUserPreferences: () => {},
+    setPerfLoggingPrefs: () => {},
+    excludeSwitches: () => {},
+    setMobileEmulation: config => (emulation = config)
+  };
+  setupChromiumOptions(seleniumOptions, browserOptions, {}, '/tmp');
+  return emulation;
+}
+
+// Chromedriver ignores width, height and pixelRatio outside deviceMetrics.
+test('Mobile emulation width and height are sent as deviceMetrics', t => {
+  t.deepEqual(
+    mobileEmulation({
+      mobileEmulation: { width: 360, height: 640, pixelRatio: 2 }
+    }),
+    { deviceMetrics: { width: 360, height: 640, pixelRatio: 2 } }
+  );
+});
+
+test('Mobile emulation device name is sent unchanged', t => {
+  t.deepEqual(mobileEmulation({ mobileEmulation: { deviceName: 'Pixel 7' } }), {
+    deviceName: 'Pixel 7'
+  });
+});
