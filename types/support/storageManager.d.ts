@@ -10,7 +10,7 @@ export class StorageManager {
     writeData(filename: any, data: any, subdir: any): Promise<string>;
     writeJson(filename: any, json: any, shouldGzip: any): Promise<string>;
     readData(filename: any, subdir: any): Promise<string | Buffer>;
-    gzip(inputFile: any, outputFile: any, removeInput: any): Promise<any>;
+    gzip(inputFile: any, outputFile: any, removeInput: any): Promise<void>;
     get directory(): string;
 }
 //# sourceMappingURL=storageManager.d.ts.map
