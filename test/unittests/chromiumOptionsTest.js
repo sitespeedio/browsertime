@@ -118,3 +118,39 @@ test('The netlog goes to the phone on Android', t => {
     '--log-net-log=/tmp/result/chromeNetlog.json'
   );
 });
+
+function androidOptions(androidPackage) {
+  const seleniumOptions = {
+    options_: {},
+    addArguments: () => {},
+    setUserPreferences: () => {},
+    setPerfLoggingPrefs: () => {},
+    excludeSwitches: () => {},
+    androidPackage(name) {
+      this.options_.androidPackage = name;
+    },
+    androidActivity(name) {
+      this.options_.androidActivity = name;
+    },
+    androidChrome: () => {},
+    androidDeviceSerial: () => {}
+  };
+  setupChromiumOptions(
+    seleniumOptions,
+    { android: { package: androidPackage } },
+    {},
+    '/tmp'
+  );
+  return seleniumOptions.options_;
+}
+
+// Chromedriver only finds the DevTools socket of Chrome by itself.
+test('Samsung Internet gets the socket and exec name for Chromedriver', t => {
+  t.like(androidOptions('com.sec.android.app.sbrowser'), {
+    androidActivity: '.SBrowserLauncherActivity',
+    androidExecName: 'terrace',
+    androidDeviceSocket: 'Terrace_devtools_remote',
+    androidKeepAppDataDir: true
+  });
+  t.is(androidOptions('com.android.chrome').androidDeviceSocket, undefined);
+});
