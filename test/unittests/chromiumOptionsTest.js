@@ -61,3 +61,28 @@ test('Mobile emulation device name is sent unchanged', t => {
     deviceName: 'Pixel 7'
   });
 });
+
+function chromeArgs(browserOptions) {
+  const args = [];
+  const seleniumOptions = {
+    addArguments: arg => args.push(...[arg].flat()),
+    setUserPreferences: () => {},
+    setPerfLoggingPrefs: () => {},
+    excludeSwitches: () => {},
+    androidPackage: () => {},
+    androidChrome: () => {},
+    androidDeviceSerial: () => {}
+  };
+  setupChromiumOptions(seleniumOptions, browserOptions, {}, '/tmp');
+  return args;
+}
+
+// Without it Chrome on Android shows a command-line flags snackbar during the test.
+test('Android Chrome gets --enable-test-intents, desktop does not', t => {
+  t.true(
+    chromeArgs({ android: { package: 'com.android.chrome' } }).includes(
+      '--enable-test-intents'
+    )
+  );
+  t.false(chromeArgs({}).includes('--enable-test-intents'));
+});
