@@ -86,3 +86,35 @@ test('Android Chrome gets --enable-test-intents, desktop does not', t => {
   );
   t.false(chromeArgs({}).includes('--enable-test-intents'));
 });
+
+function netLogArg(options) {
+  const args = [];
+  const seleniumOptions = {
+    addArguments: arg => args.push(...[arg].flat()),
+    setUserPreferences: () => {},
+    setPerfLoggingPrefs: () => {},
+    excludeSwitches: () => {},
+    androidPackage: () => {},
+    androidChrome: () => {},
+    androidDeviceSerial: () => {}
+  };
+  setupChromiumOptions(
+    seleniumOptions,
+    { ...options.chrome, collectNetLog: true },
+    options,
+    '/tmp/result'
+  );
+  return args.find(arg => arg.startsWith('--log-net-log='));
+}
+
+// Chrome on the phone cannot write to the result folder on the computer.
+test('The netlog goes to the phone on Android', t => {
+  t.is(
+    netLogArg({ android: { enabled: true }, chrome: { android: {} } }),
+    '--log-net-log=/data/local/tmp/chromeNetlog.json'
+  );
+  t.is(
+    netLogArg({ chrome: {} }),
+    '--log-net-log=/tmp/result/chromeNetlog.json'
+  );
+});
