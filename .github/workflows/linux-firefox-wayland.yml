@@ -1,0 +1,91 @@
+name: Linux Firefox Wayland
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+jobs:
+  build:
+    # Firefox on Wayland, with no X server. ffmpeg can only record X, so
+    # these tests use the Firefox window recorder for the video.
+    # See https://github.com/sitespeedio/browsertime/issues/1756
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+    - name: Harden Runner
+      uses: step-security/harden-runner@46b06cea07f9e64621fdf066ba77ac6915163d43 # v2.22.3
+      with:
+        egress-policy: block
+        allowed-endpoints: >
+          api.github.com:443
+          archive.mozilla.org:443
+          azure.archive.ubuntu.com:80
+          content-signature-2.cdn.mozilla.net:443
+          esm.ubuntu.com:443
+          files.pythonhosted.org:443
+          firefox-settings-attachments.cdn.mozilla.net:443
+          firefox.settings.services.mozilla.com:443
+          ftp.mozilla.org:443
+          github.com:443
+          msedgedriver.microsoft.com:443
+          packages.microsoft.com:443
+          pypi.org:443
+          registry.npmjs.org:443
+          release-assets.githubusercontent.com:443
+          results-receiver.actions.githubusercontent.com:443
+          storage.googleapis.com:443
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+    - name: Use Node.js
+      uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
+      with:
+        node-version: '24.x'
+        cache: 'npm'
+    - name: Install Firefox
+      uses: browser-actions/setup-firefox@fcf821c621167805dd63a29662bd7cb5676c81a8 # latest
+      with:
+        firefox-version: '149.0'
+    - name: Install Browsertime
+      run: npm ci
+    - name: Install ffmpeg
+      uses: AnimMouse/setup-ffmpeg@ae28d57dabbb148eff63170b6bf7f2b60062cbae # v1.2.3
+      with:
+        version: '8.1'
+    - name: Set up Python
+      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends sway
+        python -m pip install --upgrade pip setuptools==70.0.0 Pillow OpenCV-Python Numpy virtualenv
+    - name: Start a headless Wayland compositor
+      run: |
+        export XDG_RUNTIME_DIR=/tmp/xdg-runtime
+        mkdir -p -m 700 "$XDG_RUNTIME_DIR"
+        (WLR_BACKENDS=headless WLR_LIBINPUT_NO_DEVICES=1 WLR_RENDERER=pixman sway -c /dev/null > /tmp/sway.log 2>&1 &)
+        for i in $(seq 1 20); do
+          WAYLAND_SOCKET_NAME=$(ls "$XDG_RUNTIME_DIR" | grep -m1 '^wayland-[0-9]*$' || true)
+          [ -n "$WAYLAND_SOCKET_NAME" ] && break
+          sleep 0.5
+        done
+        if [ -z "$WAYLAND_SOCKET_NAME" ]; then cat /tmp/sway.log; exit 1; fi
+        echo "XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" >> "$GITHUB_ENV"
+        echo "WAYLAND_DISPLAY=$WAYLAND_SOCKET_NAME" >> "$GITHUB_ENV"
+        echo "MOZ_ENABLE_WAYLAND=1" >> "$GITHUB_ENV"
+    - name: Browser versions
+      run: |
+        firefox --version
+    - name: Start local HTTP server
+      run: (npm run start-server&)
+    - name: Test Firefox on Wayland with video and visual metrics
+      run: |
+        test -z "$DISPLAY"
+        ./bin/browsertime.js -b firefox -n 1 http://127.0.0.1:3000/simple/ --video --visualMetrics --firefox.windowRecorder --resultDir /tmp/wayland
+        jq -e '.[0].visualMetrics[0].FirstVisualChange > 0' /tmp/wayland/browsertime.json
+        jq -e '.[0].visualMetrics[0].SpeedIndex > 0' /tmp/wayland/browsertime.json
+    - name: Test Firefox on Wayland with scripting
+      run: ./bin/browsertime.js -b firefox test/data/commandscripts/unified.cjs --video --visualMetrics --firefox.windowRecorder
