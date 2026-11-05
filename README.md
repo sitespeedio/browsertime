@@ -136,6 +136,8 @@ If you want to set connectivity you need to use something like [gnirehtet](https
 $ browsertime --chrome.android.package com.android.chrome https://www.sitespeed.io --video --visualMetrics
 </pre>
 
+To test with Samsung Internet, use `--android --chrome.android.package com.sec.android.app.sbrowser`. Samsung Internet shows a welcome screen when its data is removed, so Browsertime keeps its data and clears the cache and cookies before each test instead. Before the first test, open Samsung Internet on the phone and accept the welcome screen. Local storage and service workers are kept between tests. If the phone uses a dark theme, Samsung Internet also shows web pages in dark mode: turn that off in the Samsung Internet settings to test the pages as most users see them.
+
 To check that all Android features work with your phone, run `npm run test:android` in a Browsertime checkout. It tests Chrome and Firefox (use `npm run test:android -- --browser chrome` or `-- --browser firefox` to test only one) and prints which features pass. Add `-- --rooted` to also test `--android.rooted`, which changes the CPU, GPU and kernel settings on the phone until it reboots.
 
 #### Using WebPageReplay
