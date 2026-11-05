@@ -456,8 +456,8 @@ def extract_frames(video, directory, full_resolution, viewport):
             "debug",
             "-i",
             video,
-            "-vsync",
-            "0",
+            "-fps_mode",
+            "passthrough",
             "-vf",
             crop + scale + decimate + "=0:64:640:0.001",
             str(Path(dir_escaped) / "img-%d.png"),
@@ -470,6 +470,14 @@ def extract_frames(video, directory, full_resolution, viewport):
         # also writes enough to fill the OS pipe buffer and could deadlock
         # blocked on write while we waited on poll().
         result = subprocess.run(command, stderr=subprocess.PIPE, encoding="UTF-8")
+        # ffmpeg 9 removed -vsync, ffmpeg before 5.1 only has -vsync.
+        if "Unrecognized option 'fps_mode'" in result.stderr:
+            index = command.index("-fps_mode")
+            command[index : index + 2] = ["-vsync", "0"]
+            logging.debug(" ".join(command))
+            result = subprocess.run(
+                command, stderr=subprocess.PIPE, encoding="UTF-8"
+            )
         lines = result.stderr.splitlines()
 
         pattern = re.compile(r"keep pts:[0-9]+ pts_time:(?P<timecode>[0-9\.]+)")
