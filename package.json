@@ -71,6 +71,7 @@
   },
   "scripts": {
     "test": "ava",
+    "test:android": "node test/util/androidSmokeTest.js",
     "start-server": "node test/util/serve.js",
     "stop-server": "pkill -f test/util/serve.js",
     "lint": "eslint .",

@@ -136,6 +136,8 @@ If you want to set connectivity you need to use something like [gnirehtet](https
 $ browsertime --chrome.android.package com.android.chrome https://www.sitespeed.io --video --visualMetrics
 </pre>
 
+To check that all Android features work with your phone, run `npm run test:android` in a Browsertime checkout. It tests Chrome and Firefox (use `npm run test:android -- --browser chrome` or `-- --browser firefox` to test only one) and prints which features pass. Add `-- --rooted` to also test `--android.rooted`, which changes the CPU, GPU and kernel settings on the phone until it reboots.
+
 #### Using WebPageReplay
 Our Docker container includes [WebPageReplay](https://chromium.googlesource.com/webpagereplay/).
 
