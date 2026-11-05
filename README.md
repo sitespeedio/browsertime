@@ -126,7 +126,7 @@ If you need a more complicated test scenario, you can define your own (Selenium)
 We have a full section in the documentation about [scripting](https://www.sitespeed.io/documentation/sitespeed.io/scripting/).
 
 #### Test on your mobile device
-Browsertime supports Chrome, Firefox and Edge on Android: Collecting SpeedIndex, HAR and video!
+Browsertime supports Chrome, Firefox, Edge and Samsung Internet on Android: Collecting SpeedIndex, HAR and video!
 
 You need to [install adb](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#desktop) and [prepare your phone](https://www.sitespeed.io/documentation/sitespeed.io/mobile-phones/#on-your-phone) before you start.
 
@@ -138,7 +138,7 @@ $ browsertime --chrome.android.package com.android.chrome https://www.sitespeed.
 
 To test with Edge, use `--android -b edge`. To test with Samsung Internet, use `--android --chrome.android.package com.sec.android.app.sbrowser`. Both browsers show welcome screens or dialogs when their data is removed, so Browsertime keeps their data and clears the cache and cookies before each test instead. Before the first test, open the browser on the phone and accept the welcome screen and the dialogs. Local storage and service workers are kept between tests. If the phone uses a dark theme, Samsung Internet also shows web pages in dark mode: turn that off in the Samsung Internet settings to test the pages as most users see them.
 
-To check that all Android features work with your phone, run `npm run test:android` in a Browsertime checkout. It tests Chrome and Firefox (use `npm run test:android -- --browser chrome` or `-- --browser firefox` to test only one) and prints which features pass. Add `-- --rooted` to also test `--android.rooted`, which changes the CPU, GPU and kernel settings on the phone until it reboots.
+To check that all Android features work with your phone, run `npm run test:android` in a Browsertime checkout. It tests Chrome and Firefox (use `npm run test:android -- --browser chrome` or `-- --browser firefox` to test only one) and prints which features pass. Add `--rooted` (for example `npm run test:android -- --rooted`) to also test `--android.rooted`, which changes the CPU, GPU and kernel settings on the phone until it reboots.
 
 #### Using WebPageReplay
 Our Docker container includes [WebPageReplay](https://chromium.googlesource.com/webpagereplay/).
@@ -182,7 +182,7 @@ The default video will include a timer and showing when the metrics happens, but
 
 
 ## Browser Support
-Browsertime supports Firefox, Chrome, and Edge (Chromium version) on desktop and Safari on Mac OS. On Android we support Chrome, Firefox and Edge. Safari on iOS supports HAR (via `ios_webkit_debug_proxy`) and video / visual metrics (via screen capture over USB). You can also use the Safari simulator on Mac OS.
+Browsertime supports Firefox, Chrome, and Edge (Chromium version) on desktop and Safari on Mac OS. On Android we support Chrome, Firefox, Edge and Samsung Internet. Safari on iOS supports HAR (via `ios_webkit_debug_proxy`) and video / visual metrics (via screen capture over USB). You can also use the Safari simulator on Mac OS.
 
 ## How does it work
 Browsertime uses Selenium NodeJS to drive the browser. It starts the browser, loads a URL, executes configurable JavaScripts to collect metrics and collects a HAR file.
