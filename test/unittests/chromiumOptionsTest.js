@@ -145,7 +145,13 @@ function androidOptions(androidPackage) {
 }
 
 // Chromedriver only finds the DevTools socket of Chrome by itself.
-test('Samsung Internet gets the socket and exec name for Chromedriver', t => {
+test('Edge and Samsung Internet get the socket and exec name for Chromedriver', t => {
+  t.like(androidOptions('com.microsoft.emmx'), {
+    androidActivity: 'com.microsoft.ruby.Main',
+    androidExecName: 'edge',
+    androidDeviceSocket: 'chrome_devtools_remote',
+    androidKeepAppDataDir: true
+  });
   t.like(androidOptions('com.sec.android.app.sbrowser'), {
     androidActivity: '.SBrowserLauncherActivity',
     androidExecName: 'terrace',
