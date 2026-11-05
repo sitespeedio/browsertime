@@ -34,3 +34,12 @@ serial('Run stop watch commands', async t => {
   });
   t.true(result[0].extras[0].Measured_page > 0);
 });
+
+serial('Add the stop watch time to the page that is measured', async t => {
+  const result = await engine.runMultiple(
+    [getPath('stopWatchDuringMeasurement.cjs')],
+    {}
+  );
+  t.deepEqual(Object.keys(result[0].extras[0]), ['First_stopwatch']);
+  t.deepEqual(Object.keys(result[1].extras[0]), ['Second_stopwatch']);
+});
