@@ -29,3 +29,17 @@ test('Replace unsafe characters in an alias', t => {
     path.join('pages', 'www_sitespeed_io', 'foo-bar--date-', 'data') + path.sep
   );
 });
+
+test('Store the URL as a short hash', t => {
+  const folder = pathToFolder(`${url}a/very/long/path?with=query`, {
+    storeURLsAsHash: true
+  });
+  t.regex(
+    folder,
+    new RegExp(
+      `^pages\\${path.sep}www_sitespeed_io\\${path.sep}[\\da-f]{8}\\${path.sep}data\\${path.sep}$`,
+      'u'
+    )
+  );
+  t.not(folder, pathToFolder(url, { storeURLsAsHash: true }));
+});
