@@ -137,6 +137,8 @@ const tests = [
       url,
       '-b',
       'firefox',
+      '-n',
+      '1',
       '--video',
       '--visualMetrics',
       '--firefox.windowRecorder'
