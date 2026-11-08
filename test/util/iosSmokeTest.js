@@ -47,6 +47,8 @@ const visualMetrics = (r, runs) =>
   r[0].visualMetrics.every(v => v?.FirstVisualChange > 0);
 
 const tests = [
+  // www.sitespeed.io sends Cross-Origin-Opener-Policy, so Safari moves the
+  // page to a new process when the response arrives.
   {
     name: 'safari-basic',
     args: [url, '-n', '2'],
@@ -55,6 +57,17 @@ const tests = [
         b => b.timings?.paintTiming?.['first-contentful-paint'] > 0
       ),
       HAR: hasFile(dir, /\.har/),
+      'HTML document in HAR': harDocuments(dir).length === 2,
+      TTFB: r[0].browserScripts?.every(b => b.timings?.ttfb > 0)
+    })
+  },
+  {
+    name: 'safari-basic-without-coop',
+    args: ['https://example.com/', '-n', '2'],
+    check: (r, dir) => ({
+      FCP: r[0].browserScripts?.every(
+        b => b.timings?.paintTiming?.['first-contentful-paint'] > 0
+      ),
       'HTML document in HAR': harDocuments(dir).length === 2,
       TTFB: r[0].browserScripts?.every(b => b.timings?.ttfb > 0)
     })
