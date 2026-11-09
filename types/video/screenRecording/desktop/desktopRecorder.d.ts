@@ -1,5 +1,5 @@
 export class DesktopRecorder {
-    constructor(options: any);
+    constructor(options: any, browser: any);
     display: any;
     framerate: any;
     nice: any;

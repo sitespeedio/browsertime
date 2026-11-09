@@ -24,7 +24,8 @@ export class StopWatch {
     start(): void;
     /**
      * Stops the stopwatch and automatically adds the measured time to the
-     * last measured page. Logs an error if no page has been measured.
+     * page you measure now, or if no measurement is running, to the last
+     * measured page. Logs an error if no page has been measured.
      * @returns {number} The measured time in milliseconds.
      */
     stopAndAdd(): number;

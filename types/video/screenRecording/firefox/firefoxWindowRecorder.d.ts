@@ -5,7 +5,7 @@ export class FirefoxWindowRecorder {
     baseDir: any;
     recordingStartTime: any;
     timeToFirstFrame: number;
-    start(): Promise<any>;
+    start(): Promise<void>;
     android: Android;
     stop(destination: any): Promise<void>;
 }

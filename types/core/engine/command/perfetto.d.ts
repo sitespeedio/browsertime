@@ -17,7 +17,7 @@ export class PerfettoTrace {
      */
     private index;
     uploadConfigFile(android: any, config: any): Promise<any>;
-    downloadTrace(): Promise<any>;
+    downloadTrace(): Promise<void>;
     /**
      * Begin Perfetto Trace Collection.
      *

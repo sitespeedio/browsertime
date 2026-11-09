@@ -3,7 +3,7 @@ export class AndroidRecorder {
     waitTime: any;
     framerate: any;
     options: any;
-    start(): Promise<any>;
+    start(): Promise<void>;
     android: Android;
     stop(destination: any): Promise<any>;
 }

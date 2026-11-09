@@ -10,6 +10,6 @@ export class MeasureScreenshots {
     options: any;
     afterPageCompleteCheck(url: any, index: any): Promise<void>;
     layoutShift(url: any, index: any): Promise<void>;
-    largestContentfulPaint(url: any, index: any): Promise<void>;
+    largestContentfulPaint(url: any, index: any, lcp?: {}): Promise<void>;
 }
 //# sourceMappingURL=screenshots.d.ts.map

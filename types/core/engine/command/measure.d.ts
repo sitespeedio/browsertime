@@ -139,6 +139,12 @@ export class Measure {
      */
     start(urlOrAlias: string, optionalAlias?: string): Promise<void>;
     /**
+     * A system dialog or another app in front of the browser can stop the
+     * browser from painting, which gives wrong metrics without any error.
+     * @private
+     */
+    private _verifyBrowserInForeground;
+    /**
      * Stop the current measurement and mark it as a failure. This stop function will not measure anything on a page. This is useful if you need to stop a measurement in a (try) catch and you
      * know something has failed.
      *
@@ -177,10 +183,13 @@ export class Measure {
      */
     stop(testedStartUrl: string): Promise<unknown>;
     /**
+     * @private
+     */
+    private _resultForExtras;
+    /**
      * Adds a custom metric to the current measurement result.
-     * The metric will be attached to the latest tested page, meaming
-     * you need to have measured a URL and stopped the measurement before
-     * you add the metric.
+     * The metric will be attached to the page you measure now, or if no
+     * measurement is running, to the latest tested page.
      * @param {string} name - The name of the metric.
      * @param {*} value - The value of the metric.
      * @throws {Error} Throws an error if called before a measurement cycle has started.
@@ -189,9 +198,8 @@ export class Measure {
     /**
      * Adds multiple custom metrics to the current measurement result.
      * This method accepts an object containing multiple key-value pairs representing different metrics.
-     * The metric will be attached to the latest tested page, meaming
-     * you need to have measured a URL and stopped the measurement before
-     * you add the metric.
+     * The metric will be attached to the page you measure now, or if no
+     * measurement is running, to the latest tested page.
      *
      * @param {Object} object - An object containing key-value pairs of metrics to add.
      * @throws {Error} Throws an error if called before a measurement cycle has started.
