@@ -156,7 +156,7 @@ test('Edge and Samsung Internet get the socket and exec name for Chromedriver', 
     androidActivity: '.SBrowserLauncherActivity',
     androidExecName: 'terrace',
     androidDeviceSocket: 'Terrace_devtools_remote',
-    androidKeepAppDataDir: true
+    androidKeepAppDataDir: undefined
   });
   t.is(androidOptions('com.android.chrome').androidDeviceSocket, undefined);
 });
