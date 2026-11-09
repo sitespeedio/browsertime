@@ -18,3 +18,22 @@ test.serial('Raise the timeouts in debug mode', t => {
     process.argv = argv;
   }
 });
+
+test.serial('Run Samsung Internet with -b samsung on Android', t => {
+  const argv = process.argv;
+  process.argv = [
+    'node',
+    'browsertime.js',
+    '--android',
+    '-b',
+    'samsung',
+    'https://www.sitespeed.io'
+  ];
+  try {
+    const { options } = parseCommandLine();
+    t.is(options.browser, 'chrome');
+    t.is(options.chrome.android.package, 'com.sec.android.app.sbrowser');
+  } finally {
+    process.argv = argv;
+  }
+});
