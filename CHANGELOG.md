@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 29.2.0 - 2026-11-12
+
+### Added
+* Updated the Docker image to Chrome 157 / Firefox 160 / Edge 157 and bumped `chromedriver` and `edgedriver` to 157 [#2655](https://github.com/sitespeedio/browsertime/pull/2655) [#2656](https://github.com/sitespeedio/browsertime/pull/2656).
+
 ## 29.1.0 - 2026-11-09
 
 ### Added
