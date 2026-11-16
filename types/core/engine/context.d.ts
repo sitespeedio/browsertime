@@ -17,7 +17,7 @@
  * @class
  */
 export class Context {
-    constructor(options: any, result: any, log: any, storageManager: any, index: any, webdriver: any, instantiatedDriver: any);
+    constructor(options: any, result: any, log: any, storageManager: any, index: any, webdriver: any, instantiatedDriver: any, url: any);
     /**
      * This is the yargs object you get from the cli. If you add --my.id you can get that using options.my.id.
      * @type {Record<string, any>}
@@ -42,6 +42,12 @@ export class Context {
      * @type {import('../../support/storageManager.js').StorageManager}
      */
     storageManager: import("../../support/storageManager.js").StorageManager;
+    /**
+     * The URL that is tested. It is undefined when you test with a script,
+     * because then the script decides which URLs to test.
+     * @type {string | undefined}
+     */
+    url: string | undefined;
     /**
      * Scratch space shared between commands within a single iteration.
      * @type {Record<string, any>}

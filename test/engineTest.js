@@ -155,6 +155,18 @@ serial(`Use pre/post scripts`, async t => {
   t.pass();
 });
 
+serial(`Give pre/post scripts the tested URL`, async t => {
+  const urls = [];
+  const remember = async context => urls.push(context.url);
+  engine = getEngine({ preScript: [remember], postScript: [remember] });
+  await engine.start();
+  await engine.run('http://127.0.0.1:3000/simple/', {});
+  t.deepEqual(urls, [
+    'http://127.0.0.1:3000/simple/',
+    'http://127.0.0.1:3000/simple/'
+  ]);
+});
+
 serial(`Run inline pageCompleteChecks`, async t => {
   engine = getEngine({
     pageCompleteCheck:
