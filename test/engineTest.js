@@ -197,3 +197,11 @@ serial('Run pageCompleteCheck from file', async t => {
   await engine.run('http://127.0.0.1:3000/simple/', {});
   t.pass();
 });
+
+serial('Stop after the current iteration', async t => {
+  engine = getEngine({ iterations: 3 });
+  await engine.start();
+  engine.stopAfterCurrentIteration();
+  const result = await engine.run('http://127.0.0.1:3000/simple/', {});
+  t.is(result[0].browserScripts.length, 1);
+});
