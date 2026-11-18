@@ -1,5 +1,14 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 29.3.0 - 2026-11-18
+
+### Added
+* A pre or post script now gets the URL that is tested as `context.url`. Before, a script had no way to know which page it ran for, so when it failed you could not log which page had the problem. With scripting the value is undefined, because there your script decides the URLs. Fixes [sitespeed.io #4274](https://github.com/sitespeedio/sitespeed.io/issues/4274) [#2660](https://github.com/sitespeedio/browsertime/pull/2660).
+* Tools that use the engine can now stop a test after the iteration that runs with `stopAfterCurrentIteration()`. Before, the only way to end a long test early was to kill it, and that threw away every iteration that had finished. The remaining iterations are skipped and the result, including the HAR, is built from the iterations that finished. The first iteration always runs, so the result is never empty. sitespeed.io uses this to stop a test on SIGTERM/SIGINT and still make the report ([sitespeed.io #3808](https://github.com/sitespeedio/sitespeed.io/issues/3808)) [#2659](https://github.com/sitespeedio/browsertime/pull/2659).
+
+### Fixed
+* `--firefox.powerConsumption` failed on machines where Firefox has no power counters, for example most virtual machines and containers. The power calculation threw an error, and that also stopped the Gecko profile from being gzipped. Browsertime now logs that there are no power counters and continues, and it does not report 0 Wh as if it was measured [#2661](https://github.com/sitespeedio/browsertime/pull/2661).
+
 ## 29.2.0 - 2026-11-12
 
 ### Added
