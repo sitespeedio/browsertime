@@ -228,3 +228,37 @@ serial('Find a visual element inside an open shadow root', async t => {
   const heroes = result[0].browserScripts[0].pageinfo.visualElements.heroes;
   t.true(heroes.some(hero => hero.name === 'ShadowHeading'));
 });
+
+function readBrowserScript(file) {
+  return readFileSync(
+    path.resolve(__dirname, '..', 'browserscripts', file),
+    'utf8'
+  );
+}
+
+serial('Find visual elements and element timings inside iframes', async t => {
+  engine = getEngine({
+    scriptInput: {
+      visualElements: ['DeepHeading:#deep-heading', 'Clipped:#clipped']
+    }
+  });
+  await engine.start();
+  const result = await engine.run('http://127.0.0.1:3000/iframe/', {
+    pageinfo: {
+      visualElements: readBrowserScript('pageinfo/visualElements.js')
+    },
+    timings: { elementTimings: readBrowserScript('timings/elementTimings.js') }
+  });
+  const scripts = result[0].browserScripts[0];
+  const heroes = scripts.pageinfo.visualElements.heroes;
+  const position = name => {
+    const hero = heroes.find(hero => hero.name === name);
+    return hero && [hero.x, hero.y, hero.width, hero.height];
+  };
+  // The margins and borders of the two iframes move the elements
+  t.deepEqual(position('DeepHeading').slice(0, 2), [138, 78]);
+  t.deepEqual(position('deep-heading').slice(0, 2), [138, 78]);
+  // The inner iframe only shows 50 of the 200 pixels
+  t.deepEqual(position('Clipped'), [488, 178, 50, 20]);
+  t.true(scripts.timings.elementTimings['deep-heading'].renderTime > 0);
+});

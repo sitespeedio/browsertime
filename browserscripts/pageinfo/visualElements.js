@@ -8,9 +8,7 @@
   const areaByType = {};
   const imageTags = [].slice.call(document.body.getElementsByTagName('img'));
   const h1Tags = [].slice.call(document.body.getElementsByTagName('h1'));
-  const elementTimings = [].slice.call(
-    document.querySelectorAll('[elementtiming]')
-  );
+  const elementTimings = querySelectorAllDeep(document, '[elementtiming]');
 
   // When we feed options from the CLI it can be a String or an
   // Array with Strings. Make it easy to treat everything the same.
@@ -24,22 +22,55 @@
     return [arrayLike];
   }
 
-  // querySelector does not look inside shadow roots, so web components
-  // hide their elements. Closed shadow roots cannot be reached.
-  function querySelectorDeep(root, selector) {
-    const element = root.querySelector(selector);
-    if (element) {
-      return element;
-    }
+  // querySelectorAll does not look inside shadow roots or iframes, so web
+  // components and iframes hide their elements. Closed shadow roots and
+  // iframes from another origin cannot be reached.
+  function querySelectorAllDeep(root, selector) {
+    const elements = [].slice.call(root.querySelectorAll(selector));
     for (const host of root.querySelectorAll('*')) {
-      if (host.shadowRoot) {
-        const inShadowRoot = querySelectorDeep(host.shadowRoot, selector);
-        if (inShadowRoot) {
-          return inShadowRoot;
-        }
+      const inside = host.shadowRoot || host.contentDocument;
+      if (inside) {
+        elements.push(...querySelectorAllDeep(inside, selector));
       }
     }
-    return null;
+    return elements;
+  }
+
+  // Visual Metrics needs the position in the top page, but an element in
+  // an iframe has a position in its iframe. Cut the parts that the iframe
+  // does not show and add the position of the iframe content.
+  function getRect(element) {
+    const rect = element.getBoundingClientRect();
+    let left = rect.left;
+    let top = rect.top;
+    let right = rect.right;
+    let bottom = rect.bottom;
+    let view = element.ownerDocument.defaultView;
+    while (view.frameElement) {
+      left = Math.max(left, 0);
+      top = Math.max(top, 0);
+      right = Math.min(right, view.document.documentElement.clientWidth);
+      bottom = Math.min(bottom, view.document.documentElement.clientHeight);
+      const frame = view.frameElement;
+      const frameRect = frame.getBoundingClientRect();
+      view = frame.ownerDocument.defaultView;
+      const style = view.getComputedStyle(frame);
+      const x =
+        frameRect.left + frame.clientLeft + parseFloat(style.paddingLeft);
+      const y = frameRect.top + frame.clientTop + parseFloat(style.paddingTop);
+      left += x;
+      right += x;
+      top += y;
+      bottom += y;
+    }
+    return {
+      left,
+      top,
+      right,
+      bottom,
+      width: Math.max(right - left, 0),
+      height: Math.max(bottom - top, 0)
+    };
   }
 
   function isLargest(type, area) {
@@ -49,18 +80,19 @@
   }
 
   function isElementPartlyInViewportAndVisible(el) {
-    const rect = el.getBoundingClientRect();
+    const rect = getRect(el);
     return !(
       rect.bottom < 0 ||
       rect.right < 0 ||
       rect.left > window.innerWidth ||
       rect.top > window.innerHeight ||
-      rect.height === 0
+      rect.height === 0 ||
+      rect.width === 0
     );
   }
 
   function visibleArea(el) {
-    const rect = el.getBoundingClientRect();
+    const rect = getRect(el);
     const viewportWidth = document.documentElement.clientWidth;
     const viewportHeight = document.documentElement.clientHeight;
 
@@ -87,7 +119,7 @@
       const filename = element.src
         ? element.src.substring(element.src.lastIndexOf('/') + 1)
         : undefined;
-      const rect = element.getBoundingClientRect();
+      const rect = getRect(element);
       const tag = element.cloneNode(false);
 
       elementByType[type] = {
@@ -110,7 +142,7 @@
       const parts = nameAndSelector.split(':');
       const type = parts[0];
       const selector = nameAndSelector.slice(nameAndSelector.indexOf(':') + 1);
-      const element = querySelectorDeep(document.body, selector);
+      const element = querySelectorAllDeep(document.body, selector)[0];
       try {
         if (isElementPartlyInViewportAndVisible(element)) {
           keepLargestElementByType(type, element);
