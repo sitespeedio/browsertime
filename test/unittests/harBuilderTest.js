@@ -5,7 +5,10 @@ import {
   mergeHars,
   addExtraFieldsToHar,
   getEmptyHAR,
-  getFullyLoaded
+  getFullyLoaded,
+  cleanSensitiveData,
+  getHeadersToClean,
+  getMainDocuments
 } from '../../lib/support/har/index.js';
 
 let har;
@@ -340,4 +343,105 @@ test('Tag the first entry of each page with `_documentURL`', t => {
   har.log.pages[0].pageTimings = {};
   addExtraFieldsToHar(totalResults, har, { iterations: 1 });
   t.is(har.log.entries[0]._documentURL, 'https://example.com');
+});
+
+test('Clean sensitive headers and all cookie values', t => {
+  const har = {
+    log: {
+      entries: [
+        {
+          request: {
+            headers: [
+              { name: 'Authorization', value: 'Bearer secret' },
+              { name: 'Cookie', value: 'session=secret; theme=dark' },
+              { name: 'Accept', value: 'text/html' }
+            ],
+            cookies: [{ name: 'session', value: 'secret' }]
+          },
+          response: {
+            headers: [
+              {
+                name: 'set-cookie',
+                value: 'id=secret; Domain=.tracker.com; Path=/\nflag=1; Secure'
+              }
+            ],
+            cookies: [{ name: 'id', value: 'secret' }]
+          }
+        }
+      ]
+    }
+  };
+  cleanSensitiveData(har, getHeadersToClean({ cleanSensitiveHeaders: true }));
+  const entry = har.log.entries[0];
+  t.deepEqual(entry.request.headers, [
+    { name: 'Authorization', value: '[REMOVED]' },
+    { name: 'Cookie', value: 'session=[REMOVED]; theme=[REMOVED]' },
+    { name: 'Accept', value: 'text/html' }
+  ]);
+  t.deepEqual(entry.request.cookies, [{ name: 'session', value: '[REMOVED]' }]);
+  t.deepEqual(entry.response.headers, [
+    {
+      name: 'set-cookie',
+      value: 'id=[REMOVED]; Domain=.tracker.com; Path=/\nflag=[REMOVED]; Secure'
+    }
+  ]);
+  t.deepEqual(entry.response.cookies, [{ name: 'id', value: '[REMOVED]' }]);
+});
+
+test('Do not clean the HAR without an option', t => {
+  t.is(getHeadersToClean({}), undefined);
+});
+
+test('Clean the headers from --sensitiveHeader', t => {
+  const har = {
+    log: {
+      entries: [
+        {
+          request: {
+            headers: [
+              { name: 'X-MyApp-Token', value: 'secret' },
+              { name: 'Authorization', value: 'Bearer secret' },
+              { name: 'Accept', value: 'text/html' }
+            ]
+          }
+        }
+      ]
+    }
+  };
+  cleanSensitiveData(
+    har,
+    getHeadersToClean({ sensitiveHeader: 'x-myapp-token' })
+  );
+  t.deepEqual(har.log.entries[0].request.headers, [
+    { name: 'X-MyApp-Token', value: '[REMOVED]' },
+    { name: 'Authorization', value: '[REMOVED]' },
+    { name: 'Accept', value: 'text/html' }
+  ]);
+});
+
+test('Leave the headers from --sensitiveHeader out of the main document', t => {
+  const har = {
+    log: {
+      pages: [{ id: 'page_1', _url: 'https://www.example.com/' }],
+      entries: [
+        {
+          pageref: 'page_1',
+          _resourceType: 'document',
+          request: { url: 'https://www.example.com/' },
+          response: {
+            status: 200,
+            headers: [
+              { name: 'X-MyApp-Token', value: 'secret' },
+              { name: 'Content-Type', value: 'text/html' }
+            ]
+          }
+        }
+      ]
+    }
+  };
+  const [document] = getMainDocuments(
+    har,
+    getHeadersToClean({ sensitiveHeader: ['X-MyApp-Token'] })
+  );
+  t.deepEqual(document.mainDocument.headers, { 'content-type': 'text/html' });
 });
