@@ -49,8 +49,10 @@
     while (view.frameElement) {
       left = Math.max(left, 0);
       top = Math.max(top, 0);
-      right = Math.min(right, view.document.documentElement.clientWidth);
-      bottom = Math.min(bottom, view.document.documentElement.clientHeight);
+      // In quirks mode the client size of the document element is the size
+      // of the content, not of the iframe, so use the window size.
+      right = Math.min(right, view.innerWidth);
+      bottom = Math.min(bottom, view.innerHeight);
       const frame = view.frameElement;
       const frameRect = frame.getBoundingClientRect();
       view = frame.ownerDocument.defaultView;

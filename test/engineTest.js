@@ -260,5 +260,8 @@ serial('Find visual elements and element timings inside iframes', async t => {
   t.deepEqual(position('deep-heading').slice(0, 2), [138, 78]);
   // The inner iframe only shows 50 of the 200 pixels
   t.deepEqual(position('Clipped'), [488, 178, 50, 20]);
-  t.true(scripts.timings.elementTimings['deep-heading'].renderTime > 0);
+  // Firefox does not support the Element Timing API
+  if (process.env.BROWSER !== 'firefox') {
+    t.true(scripts.timings.elementTimings['deep-heading'].renderTime > 0);
+  }
 });
