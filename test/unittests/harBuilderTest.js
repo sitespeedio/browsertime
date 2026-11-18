@@ -5,7 +5,8 @@ import {
   mergeHars,
   addExtraFieldsToHar,
   getEmptyHAR,
-  getFullyLoaded
+  getFullyLoaded,
+  cleanSensitiveData
 } from '../../lib/support/har/index.js';
 
 let har;
@@ -340,4 +341,47 @@ test('Tag the first entry of each page with `_documentURL`', t => {
   har.log.pages[0].pageTimings = {};
   addExtraFieldsToHar(totalResults, har, { iterations: 1 });
   t.is(har.log.entries[0]._documentURL, 'https://example.com');
+});
+
+test('Clean sensitive headers and all cookie values', t => {
+  const har = {
+    log: {
+      entries: [
+        {
+          request: {
+            headers: [
+              { name: 'Authorization', value: 'Bearer secret' },
+              { name: 'Cookie', value: 'session=secret; theme=dark' },
+              { name: 'Accept', value: 'text/html' }
+            ],
+            cookies: [{ name: 'session', value: 'secret' }]
+          },
+          response: {
+            headers: [
+              {
+                name: 'set-cookie',
+                value: 'id=secret; Domain=.tracker.com; Path=/\nflag=1; Secure'
+              }
+            ],
+            cookies: [{ name: 'id', value: 'secret' }]
+          }
+        }
+      ]
+    }
+  };
+  cleanSensitiveData(har);
+  const entry = har.log.entries[0];
+  t.deepEqual(entry.request.headers, [
+    { name: 'Authorization', value: '[REMOVED]' },
+    { name: 'Cookie', value: 'session=[REMOVED]; theme=[REMOVED]' },
+    { name: 'Accept', value: 'text/html' }
+  ]);
+  t.deepEqual(entry.request.cookies, [{ name: 'session', value: '[REMOVED]' }]);
+  t.deepEqual(entry.response.headers, [
+    {
+      name: 'set-cookie',
+      value: 'id=[REMOVED]; Domain=.tracker.com; Path=/\nflag=[REMOVED]; Secure'
+    }
+  ]);
+  t.deepEqual(entry.response.cookies, [{ name: 'id', value: '[REMOVED]' }]);
 });
