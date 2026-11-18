@@ -6,7 +6,7 @@
   "type": "module",
   "types": "./scripting.d.ts",
   "dependencies": {
-    "@sitespeed.io/chromedriver": "157.0.8103",
+    "@sitespeed.io/chromedriver": "158.0.8127",
     "@sitespeed.io/edgedriver": "157.0.4341",
     "@sitespeed.io/geckodriver": "0.37.2",
     "@sitespeed.io/log": "2.0.0",
