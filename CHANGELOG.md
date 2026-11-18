@@ -1,5 +1,16 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 29.4.0 - 2026-11-18
+
+### Added
+* `--scriptInput.visualElements` selectors now also find elements inside open shadow roots. Pages built with web components keep their elements there, so before you could not get Visual Metrics for those elements. Browsertime only looks in shadow roots when the normal lookup finds nothing, so selectors that worked before give the same result. Closed shadow roots cannot be reached from the page. Fixes [#2653](https://github.com/sitespeedio/browsertime/issues/2653) [#2664](https://github.com/sitespeedio/browsertime/pull/2664).
+* Visual elements and Element Timing now also work inside iframes from the same origin, also nested ones. Before, apps built from iframes got no visual elements and no Element Timing entries from them. An element in an iframe gets its position on the page, and the Element Timing entries get times from when the page started, like the other metrics. Iframes from another origin cannot be reached, because the browser does not allow it. Fixes [#2652](https://github.com/sitespeedio/browsertime/issues/2652) [#2665](https://github.com/sitespeedio/browsertime/pull/2665).
+* Use `--sensitiveHeader` to clean more headers in the HAR file than the ones `--cleanSensitiveHeaders` cleans, for example your own auth header. Add it more than once to clean more headers. It turns on `--cleanSensitiveHeaders` [#2663](https://github.com/sitespeedio/browsertime/pull/2663).
+* Updated the Docker image to Chrome 158 and bumped `chromedriver` to 158 [#2666](https://github.com/sitespeedio/browsertime/pull/2666) [#2667](https://github.com/sitespeedio/browsertime/pull/2667).
+
+### Fixed
+* `--cleanSensitiveHeaders` replaced the whole value of the Cookie and Set-Cookie headers, also the cookie names and the Domain attribute. PageXray and the Coach read them from these headers, so every cookie was counted as first party and the third party cookie advice passed for every page. Now only the cookie values are removed. The cookie lists in the HAR also kept the cookie values, so the secrets were still in the file. Those values are now removed too [#2662](https://github.com/sitespeedio/browsertime/pull/2662).
+
 ## 29.3.0 - 2026-11-18
 
 ### Added
