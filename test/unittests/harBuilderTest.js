@@ -6,7 +6,9 @@ import {
   addExtraFieldsToHar,
   getEmptyHAR,
   getFullyLoaded,
-  cleanSensitiveData
+  cleanSensitiveData,
+  getHeadersToClean,
+  getMainDocuments
 } from '../../lib/support/har/index.js';
 
 let har;
@@ -369,7 +371,7 @@ test('Clean sensitive headers and all cookie values', t => {
       ]
     }
   };
-  cleanSensitiveData(har);
+  cleanSensitiveData(har, getHeadersToClean({ cleanSensitiveHeaders: true }));
   const entry = har.log.entries[0];
   t.deepEqual(entry.request.headers, [
     { name: 'Authorization', value: '[REMOVED]' },
@@ -384,4 +386,62 @@ test('Clean sensitive headers and all cookie values', t => {
     }
   ]);
   t.deepEqual(entry.response.cookies, [{ name: 'id', value: '[REMOVED]' }]);
+});
+
+test('Do not clean the HAR without an option', t => {
+  t.is(getHeadersToClean({}), undefined);
+});
+
+test('Clean the headers from --sensitiveHeader', t => {
+  const har = {
+    log: {
+      entries: [
+        {
+          request: {
+            headers: [
+              { name: 'X-MyApp-Token', value: 'secret' },
+              { name: 'Authorization', value: 'Bearer secret' },
+              { name: 'Accept', value: 'text/html' }
+            ]
+          }
+        }
+      ]
+    }
+  };
+  cleanSensitiveData(
+    har,
+    getHeadersToClean({ sensitiveHeader: 'x-myapp-token' })
+  );
+  t.deepEqual(har.log.entries[0].request.headers, [
+    { name: 'X-MyApp-Token', value: '[REMOVED]' },
+    { name: 'Authorization', value: '[REMOVED]' },
+    { name: 'Accept', value: 'text/html' }
+  ]);
+});
+
+test('Leave the headers from --sensitiveHeader out of the main document', t => {
+  const har = {
+    log: {
+      pages: [{ id: 'page_1', _url: 'https://www.example.com/' }],
+      entries: [
+        {
+          pageref: 'page_1',
+          _resourceType: 'document',
+          request: { url: 'https://www.example.com/' },
+          response: {
+            status: 200,
+            headers: [
+              { name: 'X-MyApp-Token', value: 'secret' },
+              { name: 'Content-Type', value: 'text/html' }
+            ]
+          }
+        }
+      ]
+    }
+  };
+  const [document] = getMainDocuments(
+    har,
+    getHeadersToClean({ sensitiveHeader: ['X-MyApp-Token'] })
+  );
+  t.deepEqual(document.mainDocument.headers, { 'content-type': 'text/html' });
 });
