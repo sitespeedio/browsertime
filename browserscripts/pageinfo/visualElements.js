@@ -24,6 +24,24 @@
     return [arrayLike];
   }
 
+  // querySelector does not look inside shadow roots, so web components
+  // hide their elements. Closed shadow roots cannot be reached.
+  function querySelectorDeep(root, selector) {
+    const element = root.querySelector(selector);
+    if (element) {
+      return element;
+    }
+    for (const host of root.querySelectorAll('*')) {
+      if (host.shadowRoot) {
+        const inShadowRoot = querySelectorDeep(host.shadowRoot, selector);
+        if (inShadowRoot) {
+          return inShadowRoot;
+        }
+      }
+    }
+    return null;
+  }
+
   function isLargest(type, area) {
     if (!areaByType[type]) {
       return true;
@@ -92,7 +110,7 @@
       const parts = nameAndSelector.split(':');
       const type = parts[0];
       const selector = nameAndSelector.slice(nameAndSelector.indexOf(':') + 1);
-      const element = document.body.querySelector(selector);
+      const element = querySelectorDeep(document.body, selector);
       try {
         if (isElementPartlyInViewportAndVisible(element)) {
           keepLargestElementByType(type, element);

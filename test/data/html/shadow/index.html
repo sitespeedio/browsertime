@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>A test page with an open shadow root</title>
+    </head>
+    <body>
+        <div id="host"></div>
+        <script>
+            document
+                .querySelector('#host')
+                .attachShadow({ mode: 'open' }).innerHTML =
+                '<h2 id="shadow-heading">Inside the shadow root</h2>';
+        </script>
+    </body>
+</html>

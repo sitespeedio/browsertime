@@ -5,6 +5,7 @@ import { startServer, stopServer } from './util/httpserver.js';
 import { getEngine } from './util/engine.js';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { readFileSync } from 'node:fs';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
@@ -204,4 +205,26 @@ serial('Stop after the current iteration', async t => {
   engine.stopAfterCurrentIteration();
   const result = await engine.run('http://127.0.0.1:3000/simple/', {});
   t.is(result[0].browserScripts.length, 1);
+});
+
+serial('Find a visual element inside an open shadow root', async t => {
+  engine = getEngine({
+    scriptInput: { visualElements: 'ShadowHeading:#shadow-heading' }
+  });
+  await engine.start();
+  const visualElements = readFileSync(
+    path.resolve(
+      __dirname,
+      '..',
+      'browserscripts',
+      'pageinfo',
+      'visualElements.js'
+    ),
+    'utf8'
+  );
+  const result = await engine.run('http://127.0.0.1:3000/shadow/', {
+    pageinfo: { visualElements }
+  });
+  const heroes = result[0].browserScripts[0].pageinfo.visualElements.heroes;
+  t.true(heroes.some(hero => hero.name === 'ShadowHeading'));
 });
