@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+    <head>
+        <title>A test page where a layout shift moves the LCP element</title>
+    </head>
+    <body>
+        <p id="lcp" style="font-size: 32px">
+            This paragraph is the largest contentful paint. After the page
+            has loaded, a banner without content is added above it and moves
+            the paragraph out of the viewport, like a fundraising banner that
+            pushes the page down.
+        </p>
+        <script>
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    const banner = document.createElement('div');
+                    banner.style.height = '3000px';
+                    document.body.prepend(banner);
+                }, 100);
+            });
+        </script>
+    </body>
+</html>

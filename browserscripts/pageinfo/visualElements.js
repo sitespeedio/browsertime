@@ -177,6 +177,10 @@
     }
   });
 
+  // Visual Metrics uses the position at the end of the test. Tell why an
+  // element is missing, for example when a layout shift moved it out.
+  const skipped = [];
+
   // If the browser support largest contentful paint, get that element as well
   const supported = PerformanceObserver.supportedEntryTypes;
   if (supported && supported.indexOf('largest-contentful-paint') > -1) {
@@ -186,8 +190,19 @@
     if (entries.length > 0) {
       const largestEntry = entries[entries.length - 1];
       // It seems that the API do not alwayas have a elememt
-      if (largestEntry.element && isElementPartlyInViewportAndVisible(largestEntry.element)) {
+      if (!largestEntry.element) {
+        skipped.push({ name: 'LargestContentfulPaint', reason: 'noElement' });
+      } else if (isElementPartlyInViewportAndVisible(largestEntry.element)) {
         keepLargestElementByType('LargestContentfulPaint', largestEntry.element);
+      } else {
+        const rect = getRect(largestEntry.element);
+        skipped.push({
+          name: 'LargestContentfulPaint',
+          reason:
+            rect.width === 0 || rect.height === 0
+              ? 'notVisible'
+              : 'outsideViewport'
+        });
       }
     }
   }
@@ -202,6 +217,7 @@
     // "heroes" :D https://github.com/sitespeedio/logo/blob/main/png/heroes/Pippi-Sitespeed.io.png
     heroes: Object.keys(elementByType).map(function(type) {
       return elementByType[type];
-    })
+    }),
+    skipped
   };
 })(arguments[arguments.length - 1]);

@@ -265,3 +265,32 @@ serial('Find visual elements and element timings inside iframes', async t => {
     t.true(scripts.timings.elementTimings['deep-heading'].renderTime > 0);
   }
 });
+
+serial(
+  'Tell why the LCP element is missing from the visual elements',
+  async t => {
+    // Safari does not support the Largest Contentful Paint API
+    if (process.env.BROWSER === 'safari') {
+      t.pass();
+      return;
+    }
+    // Give the test page time to move the LCP element after the load event
+    engine = getEngine({ pageCompleteWaitTime: 1000 });
+    await engine.start();
+    const visualElements = readBrowserScript('pageinfo/visualElements.js');
+    const visualElementsFor = async url => {
+      const result = await engine.run(url, { pageinfo: { visualElements } });
+      return result[0].browserScripts[0].pageinfo.visualElements;
+    };
+
+    const moved = await visualElementsFor('http://127.0.0.1:3000/lcpmoved/');
+    t.false(moved.heroes.some(hero => hero.name === 'LargestContentfulPaint'));
+    t.deepEqual(moved.skipped, [
+      { name: 'LargestContentfulPaint', reason: 'outsideViewport' }
+    ]);
+
+    const simple = await visualElementsFor('http://127.0.0.1:3000/simple/');
+    t.true(simple.heroes.some(hero => hero.name === 'LargestContentfulPaint'));
+    t.deepEqual(simple.skipped, []);
+  }
+);
