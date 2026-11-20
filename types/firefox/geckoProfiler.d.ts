@@ -1,3 +1,4 @@
+export function computeFullProfilePower(profile: any): any;
 export class GeckoProfiler {
     constructor(runner: any, storageManager: any, options: any);
     runner: any;
