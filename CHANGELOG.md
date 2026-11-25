@@ -1,5 +1,17 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 29.5.0 - 2026-11-25
+
+### Added
+* Safari now reports LCP, FCP and TTFB in `googleWebVitals`, like Chrome and Firefox already do. Before, everything that reads `googleWebVitals` got nothing for Safari: the Graphite keys and dashboards, and the sitespeed.io trend plugin, so it could never compare a Safari test. The values include the corrections Safari already does for TTFB on iOS and for pages that send `Cross-Origin-Opener-Policy` [#2671](https://github.com/sitespeedio/browsertime/pull/2671).
+* On Linux, Browsertime now reads steal time and thermal throttling events from the kernel while the page is measured, stores them for each iteration in `server.cpuStability`, and warns when the CPU was not stable. On cloud machines noisy neighbours and throttling are the usual causes of timings that vary between runs, and the CPU benchmark cannot see them. Now you can tell a slow page from a slow machine [#2673](https://github.com/sitespeedio/browsertime/pull/2673).
+* The visual elements now list the LCP element as skipped, with the reason (`noElement`, `notVisible` or `outsideViewport`), when Visual Metrics cannot measure it. Visual Metrics uses the position of the element at the end of the test, so when a layout shift moved the LCP element out of the viewport, for example a banner that pushes the page down, the visual LCP disappeared from the result and nothing told you why [#2668](https://github.com/sitespeedio/browsertime/pull/2668).
+* You can turn off the Firefox Glean CPU time with `--firefox.cpuTime false`. To get the CPU time, Browsertime flushes and resets the Glean data before each URL, and in user journeys that adds an extra Glean flush to each navigation. It is still on by default. Fixes [#2654](https://github.com/sitespeedio/browsertime/issues/2654) [#2657](https://github.com/sitespeedio/browsertime/pull/2657).
+* Updated the Docker image to Firefox 161 and Edge 158 [#2670](https://github.com/sitespeedio/browsertime/pull/2670) [#2672](https://github.com/sitespeedio/browsertime/pull/2672).
+
+### Fixed
+* The Firefox window recorder video moved every frame to a 40 ms grid, because ffmpeg read the PNG frames at its default 25 fps. That added up to 40 ms of noise to every Visual Metric, and the same page could jump 40 ms between runs. The video now keeps the exact frame times, so Visual Metrics from the window recorder change a little after you upgrade. ffmpeg before 5.1 keeps the old behaviour. Fixes [#2640](https://github.com/sitespeedio/browsertime/issues/2640) [#2669](https://github.com/sitespeedio/browsertime/pull/2669).
+
 ## 29.4.0 - 2026-11-18
 
 ### Added
