@@ -21,8 +21,7 @@ test('Give the steal time and throttle events between two samples', t => {
 test('Give no throttle events when the CPU does not report them', t => {
   const start = { total: 1000, steal: 0, throttleCount: undefined };
   const end = { total: 1000, steal: 0, throttleCount: undefined };
-  t.deepEqual(getCpuStability(start, end), {
-    stealPercent: 0,
-    throttleCount: undefined
-  });
+  const stability = getCpuStability(start, end);
+  t.deepEqual(stability, { stealPercent: 0 });
+  t.false('throttleCount' in stability);
 });
