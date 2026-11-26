@@ -1,5 +1,10 @@
 # Browsertime changelog (we do [semantic versioning](https://semver.org))
 
+## 29.5.1 - 2026-11-26
+
+### Fixed
+* On Linux machines that do not report thermal throttling, Browsertime logged `Unhandled value type undefined found when adding data for server,cpuStability,throttleCount` as an error in every iteration. Most virtual machines and every CPU that is not Intel lack the throttling counters, so almost every cloud test on Linux got the error, and it looked like the test was broken. Now the throttle count is left out when the CPU does not report it. The stored result is the same as before [#2677](https://github.com/sitespeedio/browsertime/pull/2677).
+
 ## 29.5.0 - 2026-11-25
 
 ### Added
